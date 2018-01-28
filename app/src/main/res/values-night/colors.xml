@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="car_body1_inverted">@color/car_body1_dark</color>
+    <color name="cardview_background">@color/cardview_dark_background</color>
+</resources>

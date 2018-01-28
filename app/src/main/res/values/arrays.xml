@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Themes">
+        <item>VW</item>
+        <item>VW GTI</item>
+        <item>VW GTE</item>
+        <item>VW R</item>
+        <item>Seat</item>
+        <item>Seat Cupra</item>
+        <item>Skoda</item>
+        <item>Skoda vRS</item>
+        <item>Audi</item>
+        <item>Clubsport</item>
+    </string-array>
+    <string-array name="pressureUnits">
+        <item>bar</item>
+        <item>psi</item>
+    </string-array>
+
+
+
+
+    <string-array name="ClockDataElementsEntries">
+        <item>Turbo charge pressure (absolute)</item>
+        <item>Turbo charge pressure (relative)</item>
+        <item>Battery voltage</item>
+        <item>Coolant temperature</item>
+        <item>Oil Temperature</item>
+        <item>Gearbox Temperature</item>
+        <item>Speed</item>
+        <item>RPM</item>
+        <item>Lateral G's</item>
+        <item>Longitudinal G's</item>
+        <item>Yaw rate</item>
+        <item>Wheel Angle</item>
+        <item>Accelerator Position</item>
+        <item>Brake Pressure</item>
+        <item>Hybrid power</item>
+        <item>Torque</item>
+        <item>Output Power</item>
+        <item>Fuel Level Primary</item>
+        <item>Fuel Level Secondary</item>
+        <item>Eco Score</item>
+        <item>Eco Score average</item>
+        <item>Test</item>
+
+
+    </string-array>
+
+
+    <string-array name="ClockDataElementsValues">
+        <item>absChargingAirPressure</item>
+        <item>relChargingAirPressure</item>
+        <item>batteryVoltage</item>
+        <item>coolantTemperature</item>
+        <item>oilTemperature</item>
+        <item>gearboxOilTemperature</item>
+        <item>vehicleSpeed</item>
+        <item>engineSpeed</item>
+        <item>lateralAcceleration</item>
+        <item>longitudinalAcceleration</item>
+        <item>yawRate</item>
+        <item>wheelAngle</item>
+        <item>acceleratorPosition</item>
+        <item>brakePressure</item>
+        <item>powermeter</item>
+        <item>currentTorque</item>
+        <item>currentOutputPower</item>
+        <item>tankLevelPrimary</item>
+        <item>tankLevelSecondary</item>
+        <item>EcoHMI_Score_AvgShort</item>
+        <item>EcoHMI_Score_AvgTrip</item>
+        <item>test</item>
+
+    </string-array>
+
+
+    <string-array name="TextDataElementsEntries">
+        <item>Battery voltage</item>
+        <item>Coolant temperature</item>
+        <item>Oil temperature</item>
+        <item>Gearbox oil temperature</item>
+        <item>Outside temperature</item>
+        <item>Output power</item>
+        <item>Output torque</item>
+        <item>RPM</item>
+        <item>Speed</item>
+        <item>Current Gear</item>
+        <item>None</item>
+
+    </string-array>
+
+
+    <string-array name="TextDataElementsValues">
+    <item>batteryVoltage</item>
+    <item>coolantTemperature</item>
+    <item>oilTemperature</item>
+    <item>gearboxOilTemperature</item>
+    <item>outsideTemperature</item>
+    <item>currentOutputPower</item>
+    <item>currentTorque</item>
+    <item>engineSpeed</item>
+    <item>vehicleSpeed</item>
+    <item>currentGear</item>
+    <item>none</item>
+
+    </string-array>
+
+
+</resources>

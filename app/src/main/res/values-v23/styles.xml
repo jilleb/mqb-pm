@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme.Car" parent="@style/CarAppTheme">
+        <item name="android:colorBackgroundFloating">@color/cardview_background</item>
+    </style>
+</resources>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary">#212121
+    </color>
+    <color name="primary_dark">#000000
+    </color>
+    <color name="accent">#484848</color>
+    <color name="red">#77c50101</color>
+    <color name="highspeed">#FF0000</color>
+
+    <color name="yellow">#77FFFF00</color>
+    <color name="blue">#770000FF</color>
+    <color name="green">#7700FF00</color>
+    <color name="white">#77ffffff</color>
+
+
+    <color name="car_primary">@android:color/white</color>
+    <color name="car_accent">@color/car_red_700</color>
+
+    <color name="car_body1_inverted">@color/car_body1_dark</color>
+    <color name="cardview_background">@color/cardview_dark_background</color>
+</resources>

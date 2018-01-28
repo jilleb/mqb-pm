@@ -1,0 +1,48 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+    defaultConfig {
+        applicationId "com.mqbcoding.stats"
+        minSdkVersion 22
+        targetSdkVersion 25
+        versionCode 2
+        versionName "0.12"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+configurations.all {
+    exclude group: 'com.google.guava', module: 'guava-jdk5'
+}
+
+dependencies {
+    compile 'com.github.martoreto:aauto-sdk:v4.7'
+    compile 'com.github.martoreto:aauto-vex-base:v3.1'
+    compile 'com.jjoe64:graphview:4.2.1'
+    compile('com.google.apis:google-api-services-bigquery:v2-rev352-1.22.0') exclude module: 'httpclient'
+    compile 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
+    compile 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
+
+
+    compile 'com.android.support:appcompat-v7:26.1.0'
+    compile 'com.android.support:cardview-v7:26.1.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.github.anastr:speedviewlib:1.1.7'
+    //noinspection GradleDependency
+    compile 'com.google.guava:guava:22.0-android'
+    compile 'com.google.android.gms:play-services-auth:11.4.2'
+    compile 'com.google.android.gms:play-services-identity:11.4.2'
+    compile 'com.android.support:support-v4:26.1.0'
+
+    testCompile 'junit:junit:4.12'
+}
+
+apply plugin: 'com.google.gms.google-services'

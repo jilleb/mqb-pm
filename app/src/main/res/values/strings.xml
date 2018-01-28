@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">Performance Monitor for VAG</string>
+    <string name="car_service_name">Performance Monitor</string>
+
+    <string name="dashboard_title">Performance Monitor</string>
+
+    <string name="temp_format">%.0f℃</string>
+    <string name="volt_format">%.1f V</string>
+
+    <string name="activity_settings_title">Performance Monitor Settings</string>
+    <string name="pref_choose_account_title">Choose account</string>
+    <string name="pref_upload_to_bigquery_title">Upload logs to BigQuery</string>
+    <string name="pref_bigquery_project_id_title">Project ID</string>
+    <string name="pref_bigquery_dataset_title">Dataset name</string>
+    <string name="pref_bigquery_table_title">Table name</string>
+    <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
+    <string name="pref_kick_uploads_title">Upload data now</string>
+    <string name="kick_uploads_nothing_to_do">All uploads already completed.</string>
+    <string name="kick_uploads_done">Uploads sheduled.</string>
+    <string name="pref_bigquery_reupload_last_title">Re-upload last log file</string>
+    <string name="bigquery_reupload_last_failed">Failed to initate re-upload of the last log file.</string>
+    <string name="bigquery_reupload_last_ok">Re-upload scheduled.</string>
+    <string name="oil_notification_title">Oil temperature</string>
+    <string name="oil_notification_text">Engine oil reached the working temperature.</string>
+    <string name="pref_oil_temp_threshold_title">Oil working temperature</string>
+    <string name="pref_oil_temp_monitoring_title">Monitor oil temperature</string>
+    <string name="pref_oil_temp_monitoring_summary">Show notification when engine oil reaches working temperature.</string>
+    <string name="pref_notifications_category_title">Notifications</string>
+    <string name="pref_wheel_state_monitoring_title">Beep at zero steering angle</string>
+    <string name="pref_wheel_state_monitoring_summary">Generates a beep when during reverse-gear maneuvers the steering wheel crosses the zero angle.</string>
+    <string name="pref_logging_category_title">Logging</string>
+    <string name="pref_stats_logging_title">Log car telemetry</string>
+    <string name="pref_stats_logging_summary">Logs folder: %1$s</string>
+    <string name="pref_stats_logging_not_available">Logging not available: %1$s</string>
+    <string name="pref_providers_category_title">Telemetry providers</string>
+    <string name="pref_list_providers_title">List providers</string>
+    <string name="providers">Telemetry providers</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="themedNeedle" format="reference" />
+
+    <attr name="themedCarBackground" format="reference" />
+    <attr name="themedDialBackground" format="reference" />
+    <attr name="themedStopWatchBackground" format="reference" />
+    <attr name="themedNeedleColor" format="reference" />
+
+
+</resources>

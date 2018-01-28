@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/credits"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/extra_card"
+        style="@style/CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/car_card_bottom_margin"
+        android:layout_marginRight="1dp"
+        android:layout_marginTop="@dimen/car_card_margin"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.505">
+
+    </android.support.v7.widget.CardView>
+
+    <TextView
+        android:id="@+id/textStopwatch"
+        style="@style/CarTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
+        android:layout_marginLeft="@dimen/car_standard_margin"
+        android:layout_marginTop="110dp"
+        android:text="This application was made by:"
+        android:textAppearance="@style/CarBody1"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/CarTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Based on the SDK and demo app by:"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="@+id/textStopwatch"
+        app:layout_constraintTop_toBottomOf="@+id/textStopwatch" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Specials thanks to:"
+        android:textAppearance="@style/CarBody1"
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="@+id/textStopwatch"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/CarTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="72dp"
+        android:text="Drive safely."
+        android:textAppearance="@style/CarHeadline1"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/CarTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Chillout"
+        android:textAppearance="@style/CarHeadline1"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textStopwatch" />
+
+    <TextView
+        android:id="@+id/textView5"
+        style="@style/CarTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Martoreto"
+        android:textAppearance="@style/CarHeadline1"
+        android:textColor="@android:color/white"
+        app:layout_constraintRight_toRightOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView2" />
+
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Meich, Emil Borconi + testers"
+        android:textAppearance="@style/CarHeadline2"
+        android:textColor="@android:color/white"
+
+        app:layout_constraintRight_toRightOf="@+id/textView4"
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+
+</android.support.constraint.ConstraintLayout>

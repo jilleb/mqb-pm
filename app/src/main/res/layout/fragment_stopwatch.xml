@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/stopwatch"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.github.anastr.speedviewlib.SpeedView
+        android:id="@+id/dialStopWatch2"
+        style="@style/AppTheme.Car.Speedometer"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/themedStopWatchBackground"
+        android:elevation="0dp"
+        android:padding="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sv_endDegree="630"
+        app:sv_maxSpeed="60"
+        app:sv_markColor="@android:color/transparent"
+        app:sv_indicatorColor="@android:color/transparent"
+        app:sv_minSpeed="0"
+        app:sv_speedBackgroundColor="@android:color/transparent"
+
+        app:sv_speedTextColor="@android:color/transparent"
+        app:sv_speedTextFormat="FLOAT"
+        app:sv_speedTextPosition="CENTER"
+        app:sv_speedTextSize="40dp"
+        app:sv_speedometerColor="@android:color/transparent"
+        app:sv_startDegree="270"
+        app:sv_textColor="@android:color/transparent"
+        app:sv_tickNumber="5"
+        app:sv_trianglesColor="@android:color/white"
+        app:sv_unit=""
+        app:sv_unitTextSize="20sp"
+        app:sv_withEffects="true" />
+
+    <TextView
+        android:id="@+id/textSwTimer2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="80dp"
+        android:text="00:00"
+        android:textAppearance="@style/CarHeadline1"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:typeface="normal"
+        app:layout_constraintEnd_toEndOf="@+id/dialStopWatch2"
+        app:layout_constraintStart_toStartOf="@+id/dialStopWatch2"
+        app:layout_constraintTop_toTopOf="@+id/dialStopWatch2" />
+
+    <TextView
+        android:id="@+id/textSeconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="00"
+        android:textAppearance="@style/CarHeadline1"
+        android:textColor="@android:color/white"
+        android:textSize="64sp"
+        android:typeface="normal"
+        app:layout_constraintBottom_toBottomOf="@+id/dialStopWatch2"
+        app:layout_constraintEnd_toEndOf="@+id/dialStopWatch2"
+        app:layout_constraintStart_toStartOf="@+id/dialStopWatch2"
+        app:layout_constraintTop_toTopOf="@+id/textSwTimer2" />
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/clSwBtns"
+        android:layout_width="wrap_content"
+        android:layout_height="251dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@+id/dialStopWatch2"
+        app:layout_constraintTop_toTopOf="@+id/dialStopWatch2">
+
+        <Button
+            android:id="@+id/imgbtnPause2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/sw_button_selector"
+            android:drawableTop="@drawable/sw_pause"
+            android:visibility="invisible"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/sw_pause" />
+
+        <Button
+            android:id="@+id/imgbtnStart2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:background="@drawable/sw_button_selector"
+            android:drawableTop="@drawable/sw_start"
+            android:elevation="0dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgbtnPause2"
+            app:srcCompat="@drawable/sw_start" />
+
+        <Button
+            android:id="@+id/imgbtnReset2"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/sw_button_selector"
+            android:drawableTop="@drawable/sw_reset"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <Button
+            android:id="@+id/imgbtnSaveLap"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/sw_button_selector"
+            android:drawableTop="@drawable/sw_savelap"
+            app:layout_constraintBottom_toTopOf="@+id/imgbtnReset2"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgbtnStart2" />
+    </android.support.constraint.ConstraintLayout>
+
+
+    <ListView
+        android:id="@+id/listview1"
+        android:layout_width="388dp"
+        android:layout_height="250dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/btn_background"
+        app:layout_constraintBottom_toBottomOf="@+id/dialStopWatch2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dialStopWatch2" />
+
+    <TextView
+        android:id="@+id/textTimer"
+        android:layout_width="257dp"
+        android:layout_height="48dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="00:00:00:000"
+        android:textAlignment="center"
+        android:textAppearance="@style/CarHeadline1"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        android:typeface="monospace"
+        app:layout_constraintEnd_toEndOf="@+id/textSwTimer2"
+        app:layout_constraintStart_toStartOf="@+id/textSwTimer2"
+        app:layout_constraintTop_toBottomOf="@+id/dialStopWatch2" />
+
+
+</android.support.constraint.ConstraintLayout>
