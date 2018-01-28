@@ -12,6 +12,7 @@
         <item>Audi</item>
         <item>Clubsport</item>
     </string-array>
+
     <string-array name="pressureUnits">
         <item>bar</item>
         <item>psi</item>
@@ -38,11 +39,8 @@
         <item>Hybrid power</item>
         <item>Torque</item>
         <item>Output Power</item>
-        <item>Fuel Level Primary</item>
-        <item>Fuel Level Secondary</item>
         <item>Eco Score</item>
         <item>Eco Score average</item>
-        <item>Test</item>
 
 
     </string-array>
@@ -66,16 +64,14 @@
         <item>powermeter</item>
         <item>currentTorque</item>
         <item>currentOutputPower</item>
-        <item>tankLevelPrimary</item>
-        <item>tankLevelSecondary</item>
         <item>EcoHMI_Score_AvgShort</item>
         <item>EcoHMI_Score_AvgTrip</item>
-        <item>test</item>
 
     </string-array>
 
 
     <string-array name="TextDataElementsEntries">
+        <item>None</item>
         <item>Battery voltage</item>
         <item>Coolant temperature</item>
         <item>Oil temperature</item>
@@ -86,24 +82,39 @@
         <item>RPM</item>
         <item>Speed</item>
         <item>Current Gear</item>
-        <item>None</item>
-
+        <item>Lateral G's</item>
+        <item>Longitudinal G's</item>
+        <item>Yaw rate</item>
+        <item>Wheel Angle</item>
+        <item>Accelerator Position</item>
+        <item>Brake Pressure</item>
+        <item>Hybrid power</item>
+        <item>Eco Score</item>
+        <item>Eco Score average</item>
     </string-array>
 
 
     <string-array name="TextDataElementsValues">
-    <item>batteryVoltage</item>
-    <item>coolantTemperature</item>
-    <item>oilTemperature</item>
-    <item>gearboxOilTemperature</item>
-    <item>outsideTemperature</item>
-    <item>currentOutputPower</item>
-    <item>currentTorque</item>
-    <item>engineSpeed</item>
-    <item>vehicleSpeed</item>
-    <item>currentGear</item>
-    <item>none</item>
-
+        <item>none</item>
+        <item>batteryVoltage</item>
+        <item>coolantTemperature</item>
+        <item>oilTemperature</item>
+        <item>gearboxOilTemperature</item>
+        <item>outsideTemperature</item>
+        <item>currentOutputPower</item>
+        <item>currentTorque</item>
+        <item>engineSpeed</item>
+        <item>vehicleSpeed</item>
+        <item>currentGear</item>
+        <item>lateralAcceleration</item>
+        <item>longitudinalAcceleration</item>
+        <item>yawRate</item>
+        <item>wheelAngle</item>
+        <item>acceleratorPosition</item>
+        <item>brakePressure</item>
+        <item>powermeter</item>
+        <item>EcoHMI_Score_AvgShort</item>
+        <item>EcoHMI_Score_AvgTrip</item>
     </string-array>
 
 

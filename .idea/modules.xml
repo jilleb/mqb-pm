@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/mqbstats2.iml" filepath="$PROJECT_DIR$/mqbstats2.iml" />
+      <module fileurl="file://C:\Users\jille\StudioProjects\mqb-pm\app\app.iml" filepath="C:\Users\jille\StudioProjects\mqb-pm\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mqb-pm.iml" filepath="$PROJECT_DIR$/mqb-pm.iml" />
+      <module fileurl="file://C:\Users\jille\StudioProjects\mqb-pm\mqbstats2.iml" filepath="C:\Users\jille\StudioProjects\mqb-pm\mqbstats2.iml" />
     </modules>
   </component>
 </project>

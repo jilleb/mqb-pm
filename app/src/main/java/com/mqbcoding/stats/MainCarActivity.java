@@ -63,54 +63,50 @@ public class MainCarActivity extends CarActivity {
         switch(selectedTheme) {
             case "VW GTI":
                 setTheme(R.style.AppTheme_VolkswagenGTI);
-                Log.d(TAG, "Set theme: " + selectedTheme);
                 break;
             case "VW GTE":
                 setTheme(R.style.AppTheme_VolkswagenGTE);
-                Log.d(TAG, "Set theme: " + selectedTheme);
                 break;
             case "VW":
                 setTheme(R.style.AppTheme_Volkswagen);
-                Log.d(TAG, "Set theme: " + selectedTheme);
                 break;
             case "VW R":
                 setTheme(R.style.AppTheme_VolkswagenR);
-                Log.d(TAG, "Set theme: " + selectedTheme);
                 break;
             case "Seat Cupra":
-                if (secretKey == true){
-                    setTheme(R.style.AppTheme_SeatMQB);
-                } else {
                     setTheme(R.style.AppTheme_SeatCupra);
-                }
-                Log.d(TAG, "Set theme: " + selectedTheme);
+
                 break;
             case "Seat":
                 setTheme(R.style.AppTheme_Seat);
-                Log.d(TAG, "Set theme: " + selectedTheme);
+
+                break;
+            case "Seat MQB Coding":
+                setTheme(R.style.AppTheme_SeatMQB);
+
                 break;
             case "Skoda":
                 setTheme(R.style.AppTheme_Skoda);
-                Log.d(TAG, "Set theme: " + selectedTheme);
+
                 break;
             case "Skoda vRS":
                 setTheme(R.style.AppTheme_SkodavRS);
-                Log.d(TAG, "Set theme: " + selectedTheme);
+
                 break;
             case "Minimalistic":
                 setTheme(R.style.AppTheme_Minimalistic);
-                Log.d(TAG, "Set theme: " + selectedTheme);
+
                 break;
             case "Audi":
                 setTheme(R.style.AppTheme_Audi);
-                Log.d(TAG, "Set theme: " + selectedTheme);
+
                 break;
             case "Clubsport":
                 setTheme(R.style.AppTheme_Clubsport);
-                Log.d(TAG, "Set theme: " + selectedTheme);
                 break;
 
         }
+        Log.d(TAG, "Set theme: " + selectedTheme);
 
         setContentView(R.layout.activity_car_main);
 

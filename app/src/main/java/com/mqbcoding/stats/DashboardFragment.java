@@ -47,6 +47,7 @@ public class DashboardFragment extends CarFragment {
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
     private Speedometer mClockMinLeft, mClockMinCenter, mClockMinRight;
+    private ImageView mImageMaxLeft, mImageMaxCenter, mImageMaxRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
 
@@ -57,6 +58,7 @@ public class DashboardFragment extends CarFragment {
     private float mLeftMax,mCenterMax,mRightMax;
     private float mLeftMin,mCenterMin,mRightMin;
     private int pressureMin, pressureMax;
+
 
 
 
@@ -215,6 +217,9 @@ public class DashboardFragment extends CarFragment {
         mTextMinCenter = rootView.findViewById(R.id.textMinCenter);
         mTextMinRight = rootView.findViewById(R.id.textMinRight);
 
+        mImageMaxLeft = rootView.findViewById(R.id.image_MaxLeft);
+        mImageMaxCenter = rootView.findViewById(R.id.image_MaxCenter);
+        mImageMaxRight = rootView.findViewById(R.id.image_MaxRight);
 
         //-------------------------------------------------------------
         //Give them all the right custom typeface
@@ -243,7 +248,7 @@ public class DashboardFragment extends CarFragment {
         mTextMinRight.setTypeface(typeface);
         mTextMaxRight.setTypeface(typeface);
 
-        // and set the image indicator for the clocks:
+           // and set the image indicator for the clocks:
 
         mBrakeAccel = rootView.findViewById(R.id.brake_accel_view);
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
@@ -313,7 +318,7 @@ public class DashboardFragment extends CarFragment {
 
 
 
-
+//show high visible rays on, according to the setting
         if (raysOn==true){
             mRayLeft.setVisibility(View.VISIBLE);
             mRayCenter.setVisibility(View.VISIBLE);
@@ -324,7 +329,7 @@ public class DashboardFragment extends CarFragment {
             mRayRight .setVisibility(View.INVISIBLE);
         }
 
-
+//show elements for max/min, according to the setting
         if (maxOn==true){
             mClockMaxLeft.setVisibility(View.VISIBLE);
             mClockMaxCenter.setVisibility(View.VISIBLE);
@@ -340,6 +345,10 @@ public class DashboardFragment extends CarFragment {
             mTextMinCenter.setVisibility(View.VISIBLE);
             mTextMinRight.setVisibility(View.VISIBLE);
 
+            mImageMaxLeft.setVisibility(View.VISIBLE);
+            mImageMaxCenter.setVisibility(View.VISIBLE);
+            mImageMaxRight.setVisibility(View.VISIBLE);
+
 
         } else{
             mClockMaxLeft.setVisibility(View.INVISIBLE);
@@ -348,12 +357,17 @@ public class DashboardFragment extends CarFragment {
             mClockMinLeft.setVisibility(View.INVISIBLE);
             mClockMinCenter.setVisibility(View.INVISIBLE);
             mClockMinRight.setVisibility(View.INVISIBLE);
+
             mTextMaxLeft.setVisibility(View.INVISIBLE);
             mTextMaxCenter.setVisibility(View.INVISIBLE);
             mTextMaxRight.setVisibility(View.INVISIBLE);
             mTextMinLeft.setVisibility(View.INVISIBLE);
             mTextMinCenter.setVisibility(View.INVISIBLE);
             mTextMinRight.setVisibility(View.INVISIBLE);
+
+            mImageMaxLeft.setVisibility(View.INVISIBLE);
+            mImageMaxCenter.setVisibility(View.INVISIBLE);
+            mImageMaxRight.setVisibility(View.INVISIBLE);
         }
 
         Log.d(TAG, "Units: " + pressureUnits);
@@ -524,6 +538,7 @@ public class DashboardFragment extends CarFragment {
                 label.setText("");
                 value.setText("");
                 label.setBackgroundResource(0);
+                value.setVisibility(View.INVISIBLE);
                 break;
             case "batteryVoltage":
                 label.setText("");
@@ -543,6 +558,11 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "vehicleSpeed":
                 label.setText("kmh");
+                value.setText("0");
+                label.setBackgroundResource(0);
+                break;
+            case "engineSpeed":
+                label.setText("RPM");
                 value.setText("0");
                 label.setBackgroundResource(0);
                 break;
@@ -570,6 +590,56 @@ public class DashboardFragment extends CarFragment {
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
+                break;
+            case "lateralAcceleration":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
+                break;
+            case "longitudinalAcceleration":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
+                break;
+            case "yawRate":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
+                break;
+            case "wheelAngle":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
+                break;
+            case "acceleratorPosition":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_pedalposition));
+                break;
+            case "brakePressure":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
+                break;
+            case "powermeter":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
+                break;
+            case "EcoHMI_Score_AvgShort":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                break;
+            case "EcoHMI_Score_AvgTrip":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                break;
+
+
+
+
         }
     }
 
@@ -906,88 +976,99 @@ public class DashboardFragment extends CarFragment {
     }
 
     //update the elements
-    private void updateElement(String queryElement, TextView value, TextView label){
-        Float elementValue = (Float) mLastMeasurements.get(queryElement);
+    private void updateElement(String queryElement, TextView value, TextView label) {
 
-        if (elementValue == null) {
-            value.setText("---");
+        if (queryElement == "none") {
+            value.setText("");
         } else {
-            switch (queryElement) {
-                case "none":
-                    break;
-                case "batteryVoltage":
-                    if (elementValue != null) {
-                        value.setText(elementValue.toString() + "V");
-                   }
-                    break;
-                case "coolantTemperature":
-                    String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
-                    if (elementValue != null && tempUnit != null) {
-                        value.setText(elementValue.toString() + tempUnit);
-                    }
-                    break;
-                case "oilTemperature":
-                    String tempUnit2 = (String) mLastMeasurements.get("oilTemperature.unit");
-                    if (elementValue != null && tempUnit2 != null) {
-                        value.setText(elementValue.toString() + tempUnit2);
-                    }
-                    break;
-                case "vehicleSpeed":
-                    String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-                    if (elementValue != null && speedUnit != null) {
-                        value.setText(elementValue.toString());
-                        label.setText(speedUnit);
-                    }
-                    break;
-                case "currentOutputPower":
-                    if (elementValue != null) {
-                        value.setText(elementValue.toString());
-                        }
-                    break;
-                case "currentTorque":
-                    if (elementValue != null) {
-                        value.setText(elementValue.toString());
-                    }
-                    break;
-                case "gearboxOilTemperature":
-                    String tempUnit3 = (String) mLastMeasurements.get("gearboxTemperature.unit");
-                    if (elementValue != null && tempUnit3 != null) {
-                        value.setText(elementValue.toString() + tempUnit3);
-                    }
-                    break;
-                case "outsideTemperature":
-                    String tempUnit4 = (String) mLastMeasurements.get("outsideTemperature.unit");
-                    if (elementValue != null && tempUnit4 != null) {
-                        value.setText(elementValue.toString() + tempUnit4);
-                    }
-                    break;
-                case "currentGear":
-                    Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
-                    Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
-                    String currentGear = (String) mLastMeasurements.get("currentGear");
 
-                    if (parkingBrake != null && parkingBrake) {
-                        currentGear = "P";
-                    } else if (reverseGear != null && reverseGear) {
-                        currentGear = "R";
-                    } else if (currentGear == null){
-                        value.setText("-");
-                    } else if (currentGear == "Gear1"){
-                        value.setText("1");
-                    } else if (currentGear == "Gear2"){
-                        value.setText("2");
-                    } else if (currentGear == "Gear3"){
-                        value.setText("3");
-                    } else if (currentGear == "Gear4"){
-                        value.setText("4");
-                    } else if (currentGear == "Gear5"){
-                        value.setText("5");
-                    } else if (currentGear == "Gear6"){
-                        value.setText("6");
-                    } else if (currentGear == "Gear7"){
-                        value.setText("7");
-                    }
-                    break;
+            Float elementValue = (Float) mLastMeasurements.get(queryElement);
+
+            if (elementValue == null) {
+                value.setText("---");
+            } else {
+                switch (queryElement) {
+                    case "none":
+                        value.setText("");
+                        break;
+                    case "batteryVoltage":
+                        if (elementValue != null) {
+                            value.setText(elementValue.toString() + "V");
+                        }
+                        break;
+                    case "coolantTemperature":
+                        String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
+                        if (elementValue != null && tempUnit != null) {
+                            value.setText(elementValue.toString() + tempUnit);
+                        }
+                        break;
+                    case "oilTemperature":
+                        String tempUnit2 = (String) mLastMeasurements.get("oilTemperature.unit");
+                        if (elementValue != null && tempUnit2 != null) {
+                            value.setText(elementValue.toString() + tempUnit2);
+                        }
+                        break;
+                    case "vehicleSpeed":
+                        String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
+                        if (elementValue != null && speedUnit != null) {
+                            value.setText(elementValue.toString());
+                            label.setText(speedUnit);
+                        }
+                    case "engineSpeed":
+                        if (elementValue != null) {
+                            value.setText(elementValue.toString());
+                        }
+                        break;
+                    case "currentOutputPower":
+                        if (elementValue != null) {
+                            value.setText(elementValue.toString());
+                        }
+                        break;
+                    case "currentTorque":
+                        if (elementValue != null) {
+                            value.setText(elementValue.toString());
+                        }
+                        break;
+                    case "gearboxOilTemperature":
+                        String tempUnit3 = (String) mLastMeasurements.get("gearboxTemperature.unit");
+                        if (elementValue != null && tempUnit3 != null) {
+                            value.setText(elementValue.toString() + tempUnit3);
+                        }
+                        break;
+                    case "outsideTemperature":
+                        String tempUnit4 = (String) mLastMeasurements.get("outsideTemperature.unit");
+                        if (elementValue != null && tempUnit4 != null) {
+                            value.setText(elementValue.toString() + tempUnit4);
+                        }
+                        break;
+                    case "currentGear":
+                        Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
+                        Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
+                        String currentGear = (String) mLastMeasurements.get("currentGear");
+
+                        if (parkingBrake != null && parkingBrake) {
+                            currentGear = "P";
+                        } else if (reverseGear != null && reverseGear) {
+                            currentGear = "R";
+                        } else if (currentGear == null) {
+                            value.setText("-");
+                        } else if (currentGear == "Gear1") {
+                            value.setText("1");
+                        } else if (currentGear == "Gear2") {
+                            value.setText("2");
+                        } else if (currentGear == "Gear3") {
+                            value.setText("3");
+                        } else if (currentGear == "Gear4") {
+                            value.setText("4");
+                        } else if (currentGear == "Gear5") {
+                            value.setText("5");
+                        } else if (currentGear == "Gear6") {
+                            value.setText("6");
+                        } else if (currentGear == "Gear7") {
+                            value.setText("7");
+                        }
+                        break;
+                }
             }
         }
     }
@@ -999,7 +1080,7 @@ public class DashboardFragment extends CarFragment {
             currentmax = possiblemax;
         }
         dial.setSpeedAt(currentmax);
-        textmax.setText("max " + currentmax.toString());
+        textmax.setText(currentmax.toString());
 
 
     }
@@ -1010,7 +1091,7 @@ public class DashboardFragment extends CarFragment {
             currentmin = possiblemin;
         }
         dial.setSpeedAt(currentmin);
-        textmin.setText("min " + currentmin.toString());
+        textmin.setText(currentmin.toString());
     }
 
 
@@ -1031,15 +1112,15 @@ public class DashboardFragment extends CarFragment {
         Handler handler2 = new Handler();
         handler2.postDelayed(new Runnable() {
             public void run() {
-                mClockRight.speedPercentTo(0, 5000);
-                mClockLeft.speedPercentTo(0,5000);
-                mClockCenter.speedPercentTo(0,5000);
-                mRayLeft.speedPercentTo(0,5000);
-                mRayCenter.speedPercentTo(0,5000);
-                mRayRight.speedPercentTo(0,5000);
+                mClockRight.speedPercentTo(0, 3000);
+                mClockLeft.speedPercentTo(0,3000);
+                mClockCenter.speedPercentTo(0,3000);
+                mRayLeft.speedPercentTo(0,3000);
+                mRayCenter.speedPercentTo(0,3000);
+                mRayRight.speedPercentTo(0,3000);
 
             }
-        }, 4500);
+        }, 2500);
 
     }
 
