@@ -101,6 +101,10 @@ public class MainCarActivity extends CarActivity {
                 setTheme(R.style.AppTheme_Audi);
 
                 break;
+            case "Audi RS":
+                setTheme(R.style.AppTheme_AudiRS);
+
+                break;
             case "Clubsport":
                 setTheme(R.style.AppTheme_Clubsport);
                 break;
