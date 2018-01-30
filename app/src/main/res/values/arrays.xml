@@ -131,7 +131,7 @@ todo: Add an optional icon area to the main dash view showing these items?
     clutch
     coastingIsActive
     displayNightDesign
-    driverIsBraking     <-- pretty distracting data, maybe not add it.
+    driverIsBraking     <- pretty distracting data, maybe not add it.
     fuelWarningPrimaryTank
     fuelWarningSecondaryTank
 
