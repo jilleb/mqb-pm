@@ -60,6 +60,7 @@ public class MainCarActivity extends CarActivity {
         Boolean secretKey = sharedPreferences.getBoolean("checkboxSecret", false);
         Boolean experimentalStuff = sharedPreferences.getBoolean("experimentalStuffisActive", false);
 
+
         switch(selectedTheme) {
             case "VW GTI":
                 setTheme(R.style.AppTheme_VolkswagenGTI);
@@ -75,15 +76,12 @@ public class MainCarActivity extends CarActivity {
                 break;
             case "Seat Cupra":
                     setTheme(R.style.AppTheme_SeatCupra);
-
                 break;
             case "Seat":
                 setTheme(R.style.AppTheme_Seat);
-
                 break;
             case "Seat MQB Coding":
                 setTheme(R.style.AppTheme_SeatMQB);
-
                 break;
             case "Skoda":
                 setTheme(R.style.AppTheme_Skoda);
@@ -91,19 +89,12 @@ public class MainCarActivity extends CarActivity {
                 break;
             case "Skoda vRS":
                 setTheme(R.style.AppTheme_SkodavRS);
-
-                break;
-            case "Minimalistic":
-                setTheme(R.style.AppTheme_Minimalistic);
-
                 break;
             case "Audi":
                 setTheme(R.style.AppTheme_Audi);
-
                 break;
             case "Audi RS":
                 setTheme(R.style.AppTheme_AudiRS);
-
                 break;
             case "Clubsport":
                 setTheme(R.style.AppTheme_Clubsport);
@@ -142,14 +133,14 @@ public class MainCarActivity extends CarActivity {
                 .detach(carfragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
-                .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
-                .detach(measurementsfragment)
-                .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
-                .detach(cardatafragment)
-                .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
-                .detach(graphfragment)
-                .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
-                .detach(creditsfragment)
+//                .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
+//                .detach(measurementsfragment)
+//                .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
+//                .detach(cardatafragment)
+//                .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
+//                .detach(graphfragment)
+//                .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
+//                .detach(creditsfragment)
                 .commitNow();
 
 
@@ -167,15 +158,17 @@ public class MainCarActivity extends CarActivity {
                 .setTitle("Home")
                 .setType(MenuItem.Type.ITEM)
                 .build());
-        mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
+     /*   mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
                 .setTitle("Car status")
                 .setType(MenuItem.Type.ITEM)
                 .build());
+                */
+
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle("Stopwatch")
                 .setType(MenuItem.Type.ITEM)
                 .build());
-
+/*
         if (experimentalStuff ==true) {
             mainMenu.addMenuItem(MENU_GRAPH, new MenuItem.Builder()
                     .setTitle("Graphs")
@@ -189,6 +182,7 @@ public class MainCarActivity extends CarActivity {
                     .setType(MenuItem.Type.ITEM)
                     .build());
         }
+        */
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
                 .setTitle("Credits")
                 .setType(MenuItem.Type.ITEM)

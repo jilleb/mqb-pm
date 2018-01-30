@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- List of themes, used in settings -->
     <string-array name="Themes">
         <item>VW</item>
         <item>VW GTI</item>
@@ -10,17 +11,17 @@
         <item>Skoda</item>
         <item>Skoda vRS</item>
         <item>Audi</item>
+        <item>Audi RS</item>
         <item>Clubsport</item>
     </string-array>
 
+    <!-- Pressure units, used in settings-->
     <string-array name="pressureUnits">
         <item>bar</item>
         <item>psi</item>
     </string-array>
 
-
-
-
+    <!-- Names of Entries for clock data settings -->
     <string-array name="ClockDataElementsEntries">
         <item>Turbo charge pressure (absolute)</item>
         <item>Turbo charge pressure (relative)</item>
@@ -45,7 +46,8 @@
 
     </string-array>
 
-
+    <!-- Values/query strings for each of the Entries for clock data settings -->
+    <!-- These NEED TO be aligned with ClockDataElementsEntries!-->
     <string-array name="ClockDataElementsValues">
         <item>absChargingAirPressure</item>
         <item>relChargingAirPressure</item>
@@ -69,7 +71,7 @@
 
     </string-array>
 
-
+    <!-- Names of each of the Entries for dashboard elements settings -->
     <string-array name="TextDataElementsEntries">
         <item>None</item>
         <item>Battery voltage</item>
@@ -93,7 +95,8 @@
         <item>Eco Score average</item>
     </string-array>
 
-
+    <!-- Values/query strings for each of the Entries for dashboard elements settings -->
+    <!-- These NEED TO be aligned with TextDataElementsEntries!-->
     <string-array name="TextDataElementsValues">
         <item>none</item>
         <item>batteryVoltage</item>
@@ -118,4 +121,113 @@
     </string-array>
 
 
-</resources>
+<!--
+The following is a list of all other data elements currently known.
+
+*Booleans*
+todo: Add an optional icon area to the main dash view showing these items?
+    accIsActive
+    acceleratorKickDown
+    clutch
+    coastingIsActive
+    displayNightDesign
+    driverIsBraking     <-- pretty distracting data, maybe not add it.
+    fuelWarningPrimaryTank
+    fuelWarningSecondaryTank
+
+*Text*
+    blinkingState
+    car_vehicleInformation
+    car_vehicleState
+    context_States
+    engineTypes
+    fuelLevelState
+    gearTransmissionMode
+    recommendedGear todo: shift indicator based on this. If recommendedGear < currentGear: shift DOWN! if r > c shift up!
+    vehicleDate
+    vehicleIdenticationNumber
+    vehicleTime
+
+Todo: add one of these and test if the unit actually forwards this data over exlap
+*media-related*
+    mediaBrowser_FollowMode
+    mediaBrowser_ListState
+    mediaBrowser_Path
+    mediaBrowser_PathCurrentTrack
+    media_AvailableSources
+    media_PlayMode
+    media_PlayerState
+    media_Track
+    *radio*
+        radio_AMPresets
+        radio_AMStations
+        radio_AvailableBands
+        radio_DABEnsembles
+        radio_DABPresets
+        radio_DABServiceComponent
+        radio_DABServices
+        radio_FMPresets
+        radio_FMStations
+        radio_FrequencyRanges
+        radio_TA
+        radio_Text
+        radio_Tuner
+    sound_BalanceFader
+    sound_BalanceFaderSetup
+    sound_Volume
+    sound_VolumeSetup
+
+Todo: Clocks or dashboard elements can be made for most of these
+*float*
+    *consumption data*
+        consumptionLongTermGeneral
+        consumptionShortTermGeneral
+        currentConsumptionPrimary
+        currentConsumptionSecondary
+        cycleConsumptionPrimary
+        cycleConsumptionSecondary
+        longTermConsumptionPrimary
+        longTermConsumptionSecondary
+        shortTermConsumptionPrimary
+        shortTermConsumptionSecondary
+    *other dashboard items*
+        maxChargingAirPressure
+        maxOutputPower
+        modCount
+        oilLevel
+        recuperationLevel
+        tankLevelPrimary
+        tankLevelSecondary
+        totalDistance
+
+*navi data*
+    longitude
+    nav_Altitude
+    nav_CurrentPosition
+    nav_GeoPosition
+    nav_GuidanceDestination
+    nav_GuidanceRemaining
+    nav_GuidanceState
+    nav_Heading
+    nav_LastDestinations
+
+*unknown data formats*
+    seatHeater_zone1
+    seatHeater_zone2
+    system_DayNight
+    system_HMISkin
+    system_Language
+    system_ProximityRecognition
+    system_RestrictionMode
+    system_UnitDistance
+    system_activeSource
+
+Todo: read these during initialisation, so the app is set up in the same way as the car
+*units*
+    unitDateFormat
+    unitPressure
+    unitTemperature
+    unitTimeFormat
+
+ -->
+    </resources>

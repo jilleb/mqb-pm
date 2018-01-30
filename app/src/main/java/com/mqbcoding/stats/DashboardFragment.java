@@ -20,20 +20,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
-import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.google.android.apps.auto.sdk.DayNightStyle;
 import com.google.android.apps.auto.sdk.StatusBarController;
-import com.google.common.collect.ImmutableMap;
-
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 public class DashboardFragment extends CarFragment {
@@ -59,9 +54,6 @@ public class DashboardFragment extends CarFragment {
     private float mLeftMin,mCenterMin,mRightMin;
     private int pressureMin, pressureMax;
 
-
-
-
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2,mIconElement3,mIconElement4;
 
@@ -76,25 +68,13 @@ public class DashboardFragment extends CarFragment {
     private TextView mIconClockL, mIconClockC,mIconClockR;
 
 
-    private View.OnClickListener celebrateOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            doCelebrate();
-        }
-    };
-
-
-
     private int mAnimationDuration;
     private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits;
     private Boolean raysOn, maxOn;
-
     public static final float FULL_BRAKE_PRESSURE = 100.0f;
-
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
-
     public DashboardFragment() {
         // Required empty public constructor
     }
@@ -115,7 +95,6 @@ public class DashboardFragment extends CarFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.i(TAG, "onAttach");
-
 
         Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
         getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
@@ -156,17 +135,15 @@ public class DashboardFragment extends CarFragment {
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[] { R.attr.themedNeedle });
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
+
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+
         // build ImageIndicator using the resourceId
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200,200);
 
-
-
-
-
         //-------------------------------------------------------------
-        // find all elements needed
+        //find all elements needed
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
         mClockCenter = rootView.findViewById(R.id.dial_Center);
@@ -176,16 +153,18 @@ public class DashboardFragment extends CarFragment {
         mClockCenter.setIndicator(imageIndicator);
         mClockRight.setIndicator(imageIndicator);
 
-        //max dials
+        //max & min dials
         mClockMaxLeft = rootView.findViewById(R.id.dial_MaxLeft);
         mClockMaxCenter = rootView.findViewById(R.id.dial_MaxCenter);
         mClockMaxRight = rootView.findViewById(R.id.dial_MaxRight);
-        mLeftMax = 0;
-        mCenterMax = 0;
-        mRightMax=0;
         mClockMinLeft = rootView.findViewById(R.id.dial_MinLeft);
         mClockMinCenter = rootView.findViewById(R.id.dial_MinCenter);
         mClockMinRight = rootView.findViewById(R.id.dial_MinRight);
+
+        //set max/min values to 0
+        mLeftMax = 0;
+        mCenterMax = 0;
+        mRightMax=0;
         mLeftMin = 0;
         mCenterMin = 0;
         mRightMin=0;
@@ -194,16 +173,19 @@ public class DashboardFragment extends CarFragment {
         mIconClockL= rootView.findViewById(R.id.icon_ClockLeft);
         mIconClockC = rootView.findViewById(R.id.icon_ClockCenter);
         mIconClockR = rootView.findViewById(R.id.icon_ClockRight);
+
         //ray speedometers for high visibility
         mRayLeft = rootView.findViewById(R.id.rayLeft);
         mRayCenter = rootView.findViewById(R.id.rayCenter);
         mRayRight = rootView.findViewById(R.id.rayRight);
-        //text elements:
+
+        //the 4 additional dashboard "text" elements:
         mValueElement1 = rootView.findViewById(R.id.value_Element1);
         mValueElement2 = rootView.findViewById(R.id.value_Element2);
         mValueElement3 = rootView.findViewById(R.id.value_Element3);
         mValueElement4 = rootView.findViewById(R.id.value_Element4);
-        //labels:
+
+        //labels at these text elements:
         mIconElement1 = rootView.findViewById(R.id.icon_Element1);
         mIconElement2 = rootView.findViewById(R.id.icon_Element2);
         mIconElement3 = rootView.findViewById(R.id.icon_Element3);
@@ -217,6 +199,7 @@ public class DashboardFragment extends CarFragment {
         mTextMinCenter = rootView.findViewById(R.id.textMinCenter);
         mTextMinRight = rootView.findViewById(R.id.textMinRight);
 
+        //minmax backgrounds:
         mImageMaxLeft = rootView.findViewById(R.id.image_MaxLeft);
         mImageMaxCenter = rootView.findViewById(R.id.image_MaxCenter);
         mImageMaxRight = rootView.findViewById(R.id.image_MaxRight);
@@ -232,15 +215,8 @@ public class DashboardFragment extends CarFragment {
         mValueElement2.setTypeface(typeface);
         mValueElement3.setTypeface(typeface);
         mValueElement4.setTypeface(typeface);
-        //maxes
-        mClockMaxLeft.setSpeedTextTypeface(typeface);
-        mClockMaxCenter.setSpeedTextTypeface(typeface);
-        mClockMaxRight.setSpeedTextTypeface(typeface);
 
-        mClockMinLeft.setSpeedTextTypeface(typeface);
-        mClockMinCenter.setSpeedTextTypeface(typeface);
-        mClockMinRight.setSpeedTextTypeface(typeface);
-
+        //max
         mTextMinLeft.setTypeface(typeface);
         mTextMaxLeft.setTypeface(typeface);
         mTextMinCenter.setTypeface(typeface);
@@ -248,32 +224,32 @@ public class DashboardFragment extends CarFragment {
         mTextMinRight.setTypeface(typeface);
         mTextMaxRight.setTypeface(typeface);
 
-           // and set the image indicator for the clocks:
-
+        //additional dashboard elements:
         mBrakeAccel = rootView.findViewById(R.id.brake_accel_view);
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
 
-        //center clock click = celebrate indicators
-        mClockCenter.setOnClickListener(celebrateOnClickListener);
 
+
+        //-------------------------------------------------------------
         //Get shared preferences
-        // get setting, to determine what value needs to be shown
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         pressureUnits   = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
         raysOn          = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
         maxOn           = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
 
+        //determine what data the user wants to have on the 4 data views
         mElement1Query = sharedPreferences.getString("selectedView1", "none");
         mElement2Query = sharedPreferences.getString("selectedView2", "none");
         mElement3Query = sharedPreferences.getString("selectedView3", "none");
         mElement4Query = sharedPreferences.getString("selectedView4", "none");
 
-        mClockLQuery = sharedPreferences.getString("selectedClockLeft", "none");
-        mClockCQuery = sharedPreferences.getString("selectedClockCenter", "none");
-        mClockRQuery = sharedPreferences.getString("selectedClockRight", "none");
+        //determine what data the user wants to have on the 3 clocks.
+        mClockLQuery = sharedPreferences.getString("selectedClockLeft", "batteryVoltage");
+        mClockCQuery = sharedPreferences.getString("selectedClockCenter", "oilTemperature");
+        mClockRQuery = sharedPreferences.getString("selectedClockRight", "engineSpeed");
 
+        //debug logging of each of the chosen elements
         Log.d(TAG, "element 1 selected:" + mElement1Query);
         Log.d(TAG, "element 2 selected:" + mElement2Query);
         Log.d(TAG, "element 3 selected:" + mElement3Query);
@@ -283,16 +259,15 @@ public class DashboardFragment extends CarFragment {
         Log.d(TAG, "clock c selected:" + mClockCQuery);
         Log.d(TAG, "clock r selected:" + mClockRQuery);
 
-        //set up the elements
-        setupElement(mElement1Query, mValueElement1 , mIconElement1);
-        setupElement(mElement2Query, mValueElement2 , mIconElement2);
-        setupElement(mElement3Query, mValueElement3 , mIconElement3);
-        setupElement(mElement4Query, mValueElement4 , mIconElement4);
-
+        //set default min/max pressures. Is this still used? Not sure.
         pressureMin = -2;
         pressureMax = 3;
         pressureFactor = 1;
-        //set pressure dial to the right units
+
+        //set pressure dial to the wanted units
+        //Most bar dials go from -2 to 3 bar.
+        //Most PSI dials go from -30 to 30 psi.
+        //pressurefactor is used to calculate the right value for psi later
         if (pressureUnits == true){
             pressureFactor = 1;
             pressureUnit = "bar";
@@ -304,21 +279,22 @@ public class DashboardFragment extends CarFragment {
             pressureUnit = "psi";
             pressureMin = -30;
             pressureMax= 30;
-
-
         }
 
+        //set up each of the elements with the query and icon that goes with it
+        setupElement(mElement1Query, mValueElement1 , mIconElement1);
+        setupElement(mElement2Query, mValueElement2 , mIconElement2);
+        setupElement(mElement3Query, mValueElement3 , mIconElement3);
+        setupElement(mElement4Query, mValueElement4 , mIconElement4);
 
-
-
-        //setup clocks:
+        //setup clocks, including the max/min clocks and highvis rays and icons:
+        //usage: setupClock(query value, what clock, what icon, which ray, which min clock, which max clock)
+        //could probably be done MUCH more efficient but that's for the future ;)
         setupClock(mClockLQuery, mClockLeft, mIconClockL, mRayLeft, mClockMinLeft, mClockMaxLeft);
         setupClock(mClockCQuery, mClockCenter, mIconClockC, mRayCenter, mClockMinCenter, mClockMaxCenter);
         setupClock(mClockRQuery, mClockRight, mIconClockR, mRayLeft, mClockMinLeft, mClockMaxLeft);
 
-
-
-//show high visible rays on, according to the setting
+        //show high visible rays on, according to the setting
         if (raysOn==true){
             mRayLeft.setVisibility(View.VISIBLE);
             mRayCenter.setVisibility(View.VISIBLE);
@@ -329,8 +305,8 @@ public class DashboardFragment extends CarFragment {
             mRayRight .setVisibility(View.INVISIBLE);
         }
 
-//show elements for max/min, according to the setting
-        if (maxOn==true){
+        //show clocks, texts and backgrounds for max/min, according to the setting
+        if (maxOn==true){   // show all minmax stuff
             mClockMaxLeft.setVisibility(View.VISIBLE);
             mClockMaxCenter.setVisibility(View.VISIBLE);
             mClockMaxRight.setVisibility(View.VISIBLE);
@@ -350,7 +326,7 @@ public class DashboardFragment extends CarFragment {
             mImageMaxRight.setVisibility(View.VISIBLE);
 
 
-        } else{
+        } else{ // don't show any of it
             mClockMaxLeft.setVisibility(View.INVISIBLE);
             mClockMaxCenter.setVisibility(View.INVISIBLE);
             mClockMaxRight.setVisibility(View.INVISIBLE);
@@ -370,8 +346,7 @@ public class DashboardFragment extends CarFragment {
             mImageMaxRight.setVisibility(View.INVISIBLE);
         }
 
-        Log.d(TAG, "Units: " + pressureUnits);
-
+        //update!
         doUpdate();
 
         return rootView;
@@ -399,6 +374,8 @@ public class DashboardFragment extends CarFragment {
     public void onDestroyView() {
         Log.i(TAG, "onDestroyView");
 
+        //put things back to null.
+        //todo: check if this list is complete (probably max/min things are still missing)
         mClockLeft = null;
         mClockCenter = null;
         mClockRight = null;
@@ -422,7 +399,12 @@ public class DashboardFragment extends CarFragment {
         mIconClockL = null;
         mIconClockC = null;
         mIconClockR = null;
-
+        mClockMinLeft = null;
+        mClockMinCenter = null;
+        mClockMinRight = null;
+        mClockMaxLeft = null;
+        mClockMaxCenter = null;
+        mClockMaxRight = null;
 
 
         super.onDestroyView();
@@ -469,27 +451,34 @@ public class DashboardFragment extends CarFragment {
 
     private void doUpdate() {
 
-   //     if (mClockLeft == null) {
-   //         return;
-   //    }
 
+       if (mClockLeft == null) {
+        return;
+       }
+
+       //update each of the clocks
         updateClock(mClockLQuery, mClockLeft, mRayLeft);
         updateClock(mClockCQuery, mClockCenter, mRayCenter);
         updateClock(mClockRQuery, mClockRight, mRayRight);
 
+        //update the max clocks and texts
         updateMax(mLeftMax, mClockLeft, mTextMaxLeft);
         updateMax(mCenterMax, mClockCenter, mTextMaxCenter);
         updateMax(mRightMax, mClockRight, mTextMaxRight);
 
+        //update the min clocks and text
         updateMin(mLeftMin, mClockLeft, mTextMinLeft);
         updateMin(mCenterMin, mClockCenter, mTextMinCenter);
         updateMin(mRightMin, mClockRight, mTextMinRight);
 
+        //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
         updateElement(mElement2Query, mValueElement2, mIconElement2);
         updateElement(mElement3Query, mValueElement3, mIconElement3);
         updateElement(mElement4Query, mValueElement4, mIconElement4);
 
+        //get brakePressure and accelPos, used in other dash views
+        //I might get rid of these, since I've got a selectable view for this now
         Float brakePressure = (Float) mLastMeasurements.get("brakePressure");
         Float accelPos = (Float) mLastMeasurements.get("acceleratorPosition");
 
@@ -506,7 +495,6 @@ public class DashboardFragment extends CarFragment {
         }
 
         // Footer
-
 
         Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
         mWheelState = mWheelStateMonitor == null ? WheelStateMonitor.WheelState.WHEEL_UNKNOWN
@@ -1095,33 +1083,5 @@ public class DashboardFragment extends CarFragment {
     }
 
 
-    private void doCelebrate()
-    {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                mClockRight.speedPercentTo(100,3000);
-        mClockLeft.speedPercentTo(100,3000);
-        mClockCenter.speedPercentTo(100,3000);
-        mRayLeft.speedPercentTo(100,3000);
-        mRayCenter.speedPercentTo(100,3000);
-        mRayRight.speedPercentTo(100,3000);
-            }
-        }, 1);
-
-        Handler handler2 = new Handler();
-        handler2.postDelayed(new Runnable() {
-            public void run() {
-                mClockRight.speedPercentTo(0, 3000);
-                mClockLeft.speedPercentTo(0,3000);
-                mClockCenter.speedPercentTo(0,3000);
-                mRayLeft.speedPercentTo(0,3000);
-                mRayCenter.speedPercentTo(0,3000);
-                mRayRight.speedPercentTo(0,3000);
-
-            }
-        }, 2500);
-
-    }
 
 }
