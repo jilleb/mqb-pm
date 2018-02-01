@@ -42,8 +42,7 @@
         <item>Output Power</item>
         <item>Eco Score</item>
         <item>Eco Score average</item>
-
-
+        <item>Test (random data)</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for clock data settings -->
@@ -68,6 +67,7 @@
         <item>currentOutputPower</item>
         <item>EcoHMI_Score_AvgShort</item>
         <item>EcoHMI_Score_AvgTrip</item>
+        <item>test</item>
 
     </string-array>
 
@@ -93,6 +93,7 @@
         <item>Hybrid power</item>
         <item>Eco Score</item>
         <item>Eco Score average</item>
+        <item>Test (random data)</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for dashboard elements settings -->
@@ -118,6 +119,7 @@
         <item>powermeter</item>
         <item>EcoHMI_Score_AvgShort</item>
         <item>EcoHMI_Score_AvgTrip</item>
+        <item>test</item>
     </string-array>
 
 

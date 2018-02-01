@@ -194,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="105dp"
         android:layout_marginStart="8dp"
-        android:drawableTop="@drawable/distance"
+        android:drawableTop="@drawable/ic_distance"
         android:text="Distance"
         android:textAlignment="textEnd"
         android:textAppearance="@style/CarHeadline1"

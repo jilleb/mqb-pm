@@ -29,7 +29,9 @@ import com.google.android.apps.auto.sdk.DayNightStyle;
 import com.google.android.apps.auto.sdk.StatusBarController;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Random;
 
 public class DashboardFragment extends CarFragment {
     private final String TAG = "DashboardFragment";
@@ -66,6 +68,15 @@ public class DashboardFragment extends CarFragment {
 
     //icons on the clocks
     private TextView mIconClockL, mIconClockC,mIconClockR;
+
+
+    private View.OnClickListener celebrateOnClickListener = new View.OnClickListener() {
+        @Override
+         public void onClick(View v) {
+                        postUpdate();
+                    }
+     };
+
 
 
     private int mAnimationDuration;
@@ -229,6 +240,7 @@ public class DashboardFragment extends CarFragment {
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
 
 
+        mClockCenter.setOnClickListener(celebrateOnClickListener);
 
         //-------------------------------------------------------------
         //Get shared preferences
@@ -292,7 +304,7 @@ public class DashboardFragment extends CarFragment {
         //could probably be done MUCH more efficient but that's for the future ;)
         setupClock(mClockLQuery, mClockLeft, mIconClockL, mRayLeft, mClockMinLeft, mClockMaxLeft);
         setupClock(mClockCQuery, mClockCenter, mIconClockC, mRayCenter, mClockMinCenter, mClockMaxCenter);
-        setupClock(mClockRQuery, mClockRight, mIconClockR, mRayLeft, mClockMinLeft, mClockMaxLeft);
+        setupClock(mClockRQuery, mClockRight, mIconClockR, mRayRight, mClockMinRight, mClockMaxRight);
 
         //show high visible rays on, according to the setting
         if (raysOn==true){
@@ -462,14 +474,14 @@ public class DashboardFragment extends CarFragment {
         updateClock(mClockRQuery, mClockRight, mRayRight);
 
         //update the max clocks and texts
-        updateMax(mLeftMax, mClockLeft, mTextMaxLeft);
-        updateMax(mCenterMax, mClockCenter, mTextMaxCenter);
-        updateMax(mRightMax, mClockRight, mTextMaxRight);
+        updateMax(mLeftMax, mClockLeft, mTextMaxLeft, mClockMaxLeft);
+        updateMax(mCenterMax, mClockCenter, mTextMaxCenter, mClockMaxCenter);
+        updateMax(mRightMax, mClockRight, mTextMaxRight, mClockMaxRight);
 
         //update the min clocks and text
-        updateMin(mLeftMin, mClockLeft, mTextMinLeft);
-        updateMin(mCenterMin, mClockCenter, mTextMinCenter);
-        updateMin(mRightMin, mClockRight, mTextMinRight);
+        updateMin(mLeftMin, mClockLeft, mTextMinLeft, mClockMinLeft);
+        updateMin(mCenterMin, mClockCenter, mTextMinCenter, mClockMinCenter);
+        updateMin(mRightMin, mClockRight, mTextMinRight, mClockMinRight);
 
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
@@ -527,6 +539,11 @@ public class DashboardFragment extends CarFragment {
                 value.setText("");
                 label.setBackgroundResource(0);
                 value.setVisibility(View.INVISIBLE);
+                break;
+            case "test":
+                label.setText("");
+                value.setText("0");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
             case "batteryVoltage":
                 label.setText("");
@@ -642,7 +659,8 @@ public class DashboardFragment extends CarFragment {
             case "test":
                 icon.setText("");
                 clock.setUnit("testing");
-                clock.speedPercentTo(100,10000);
+                clock.setMinMaxSpeed(0,350);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
             case "vehicleSpeed":
@@ -650,6 +668,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("kmh");
                 clock.setMinMaxSpeed(0,350);
                 icon.setBackgroundResource(0);
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "engineSpeed":
                 icon.setText("");
@@ -662,104 +681,120 @@ public class DashboardFragment extends CarFragment {
                 icon.setText("");
                 clock.setUnit("Volt");
                 clock.setMinMaxSpeed(0,15);
-                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
             case "oilTemperature":
                 icon.setText("");
                 clock.setUnit("°C");
                 clock.setMinMaxSpeed(0,150);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "coolantTemperature":
                 icon.setText("");
                 clock.setUnit("°C");
                 clock.setMinMaxSpeed(0,150);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
             case "gearboxOilTemperature":
                 icon.setText("");
                 clock.setUnit("°C");
                 clock.setMinMaxSpeed(0,150);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
             case "absChargingAirPressure":
                 icon.setText("");
                 clock.setUnit(pressureUnit);
                 clock.setMinMaxSpeed(pressureMin,pressureMax);
-                icon.setBackground(getContext().getDrawable(R.drawable.turbo));
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "relChargingAirPressure":
                 icon.setText("");
                 clock.setUnit(pressureUnit);
                 clock.setMinMaxSpeed(pressureMin,pressureMax);
-                icon.setBackground(getContext().getDrawable(R.drawable.turbo));
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "lateralAcceleration":
                 icon.setText("");
                 clock.setUnit("G");
                 clock.setMinMaxSpeed(-2,2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "longitudinalAcceleration":
                 icon.setText("");
                 clock.setUnit("G");
                 clock.setMinMaxSpeed(-2,2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "yawRate":
                 icon.setText("");
                 clock.setUnit("%");
                 clock.setMinMaxSpeed(-1,1);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "wheelAngle":
                 icon.setText("");
                 clock.setUnit("°");
                 clock.setMinMaxSpeed(-45,45);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "EcoHMI_Score_AvgShort":
                 icon.setText("");
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0,100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "EcoHMI_Score_AvgTrip":
                 icon.setText("");
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0,100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "powermeter":
                 icon.setText("");
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0,2000);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "acceleratorPosition":
                 icon.setText("");
                 clock.setUnit("%");
                 clock.setMinMaxSpeed(0,100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_pedalposition));
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "brakePressure":
                 icon.setText("");
                 clock.setUnit("%");
                 clock.setMinMaxSpeed(0,100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "currentTorque":
                 icon.setText("");
                 clock.setUnit("Nm");
                 clock.setMinMaxSpeed(0,500);
                 icon.setBackgroundResource(0);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentOutputPower":
                 icon.setText("");
                 clock.setUnit("Kw");
                 clock.setMinMaxSpeed(0,500);
                 icon.setBackgroundResource(0);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
 
 
@@ -792,22 +827,18 @@ public class DashboardFragment extends CarFragment {
     //update clock with data
     private void updateClock(String query, Speedometer dial, RaySpeedometer visray) {
 
-
         Float clockValue = (Float) mLastMeasurements.get(query);
+        float randomClockVal = randFloat(-50,200);
         speedFactor = 1f;
         pressureFactor = 1f;
 
-        if (clockValue == null) {
-            dial.speedTo(0);
-        } else {
-
-            switch (query) {
-                case "none":
+        switch (query){
+            case "test":
+                dial.speedTo(randomClockVal);
+                break;
+            case "none":
                     break;
-                case "test":
-                    dial.speedTo(15);
 
-                    break;
                 case "vehicleSpeed":
                     String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
                     if (clockValue != null && speedUnit != null) {
@@ -960,26 +991,31 @@ public class DashboardFragment extends CarFragment {
             }
             float temp = dial.getSpeed();
             visray.speedTo(temp);
-        }
+
     }
 
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {
 
-        if (queryElement == "none") {
-            value.setText("");
-        } else {
+        switch (queryElement) {
+            case "none":
+                value.setText("");
+                break;
+            case "test":
+                float randomValue = randFloat(0,100);
+                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), randomValue));
+                break;
+        }
 
             Float elementValue = (Float) mLastMeasurements.get(queryElement);
 
-            if (elementValue == null) {
-                value.setText("---");
-            } else {
-                switch (queryElement) {
+            switch (queryElement) {
                     case "none":
                         value.setText("");
                         break;
+
                     case "batteryVoltage":
+
                         if (elementValue != null) {
                             value.setText(elementValue.toString() + "V");
                         }
@@ -1057,29 +1093,40 @@ public class DashboardFragment extends CarFragment {
                         }
                         break;
                 }
-            }
-        }
+
+
     }
 
 //update the max speed indicator:
-    private void updateMax(Float currentmax, Speedometer dial, TextView textmax){
-        float possiblemax = dial.getSpeed();
-        if (possiblemax > currentmax){
-            currentmax = possiblemax;
+    private void updateMax(Float currentmax, Speedometer dial, TextView textmax, Speedometer maxclock){
+        float currentvalue = dial.getSpeed();
+        float maxvalue = maxclock.getSpeed();
+        if (currentvalue > maxvalue){
+            maxclock.speedTo(currentvalue);
         }
-        dial.setSpeedAt(currentmax);
-        textmax.setText(currentmax.toString());
 
 
+        textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimal_with_zeroes).toString(), maxvalue));
     }
 
-    private void updateMin(Float currentmin, Speedometer dial, TextView textmin){
-        float possiblemin = dial.getSpeed();
-        if (possiblemin > currentmin){
-            currentmin = possiblemin;
+    private void updateMin(Float currentmin, Speedometer dial, TextView textmin, Speedometer minclock){
+        float currentvalue = dial.getSpeed();
+        float minvalue = minclock.getSpeed();
+        if (currentvalue < minvalue){
+            minclock.speedTo(currentvalue);
         }
-        dial.setSpeedAt(currentmin);
-        textmin.setText(currentmin.toString());
+
+        textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimal_with_zeroes).toString(), minvalue));
+    }
+
+    public static float randFloat(float min, float max) {
+
+        Random rand = new Random();
+
+        float result = rand.nextFloat() * (max - min) + min;
+
+        return result;
+
     }
 
 

@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Performance Monitor for VAG</string>
     <string name="car_service_name">Performance Monitor</string>
-
     <string name="dashboard_title">Performance Monitor</string>
 
     <string name="temp_format">%.0f℃</string>
     <string name="volt_format">%.1f V</string>
+
+    <string name="decimal_with_zeroes">%.1f</string>
+
+
 
     <string name="activity_settings_title">Performance Monitor Settings</string>
     <string name="pref_choose_account_title">Choose account</string>

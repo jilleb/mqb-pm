@@ -112,12 +112,10 @@ public class MainCarActivity extends CarActivity {
         //force night mode
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
 
-
-
-
-
-
-
+        //hide all stuff you don't want to see on your screen
+        carUiController.getStatusBarController().hideBatteryLevel();
+        carUiController.getStatusBarController().hideMicButton();
+        carUiController.getStatusBarController().hideConnectivityLevel();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
