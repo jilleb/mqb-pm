@@ -5,6 +5,9 @@ It's made specifically for use with the Volkswagen/Skoda/Seat/Audi MIB2 infotain
 
 
 # Installation instructions:
+
+Download the latest release here: https://github.com/jilleb/mqb-pm/releases
+
 - Make sure Android Auto is in developer mode: Open Android Auto (while not connected to the car), go to About. Tap the "About Android Auto" header 10 times till you see a toast message saying you're a developer. From the right top corner select developer options, scroll down and make sure you check "Unknown sources". This will allow programs from non-Playstore apps to be run on Android Auto. See a picture guide how to enable Developer mode here: https://www.howtogeek.com/271132/how-to-enable-developer-settings-on-android-auto/
 - Install aauto-vex-vag.apk (open source service by Martoreto: https://github.com/martoreto/aauto-vex-vag/) , the service that supplies exlap-communication between Android and the head-unit. Note: this app will not show up in your launcher.
 - Install the Performance Monitor apk
@@ -14,8 +17,7 @@ It's made specifically for use with the Volkswagen/Skoda/Seat/Audi MIB2 infotain
 
 
 # Known issues
-- Black screen of death
-On some cars it doesn't work for unknown reasons. This will not kill your car or headunit. Send me a logcat. 
+- Black screen of death: On some cars it doesn't work for unknown reasons. This will not kill your car or headunit. Send me a logcat. 
 
 - Not starting
 If the app doesn't start, there's probably a bug in the code. This will not kill your car either. Send me a logcat.

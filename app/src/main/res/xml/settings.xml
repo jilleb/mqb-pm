@@ -162,13 +162,5 @@
             android:dependency="uploadToBigquery"
             android:key="kickUploads"
             android:title="@string/pref_kick_uploads_title" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="experimentalStuffisActive"
-            android:summaryOn="You are now using untested, potentially ugly and non-functional features."
-            android:title="Experimental features" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="checkboxSecret" />
     </PreferenceCategory>
 </PreferenceScreen>
