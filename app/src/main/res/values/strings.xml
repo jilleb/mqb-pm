@@ -7,7 +7,7 @@
     <string name="volt_format">%.1f V</string>
 
     <string name="decimals">%.1f</string>
-    <string name="no_decimals">%f</string>
+    <string name="no_decimals">%.0f</string>
 
 
 

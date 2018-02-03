@@ -387,7 +387,7 @@ public class DashboardFragment extends CarFragment {
         Log.i(TAG, "onDestroyView");
 
         //put things back to null.
-        //todo: check if this list is complete (probably max/min things are still missing)
+        //todo: check if this list is complete (probably some things are still missing)
         mClockLeft = null;
         mClockCenter = null;
         mClockRight = null;
@@ -417,7 +417,6 @@ public class DashboardFragment extends CarFragment {
         mClockMaxLeft = null;
         mClockMaxCenter = null;
         mClockMaxRight = null;
-
 
         super.onDestroyView();
     }

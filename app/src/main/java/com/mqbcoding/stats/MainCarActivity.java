@@ -57,9 +57,6 @@ public class MainCarActivity extends CarActivity {
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
-        Boolean secretKey = sharedPreferences.getBoolean("checkboxSecret", false);
-        Boolean experimentalStuff = sharedPreferences.getBoolean("experimentalStuffisActive", false);
-
 
         switch(selectedTheme) {
             case "VW GTI":
@@ -98,6 +95,9 @@ public class MainCarActivity extends CarActivity {
                 break;
             case "Clubsport":
                 setTheme(R.style.AppTheme_Clubsport);
+                break;
+            case "Outrun":
+                setTheme(R.style.AppTheme_Outrun);
                 break;
 
         }
@@ -167,19 +167,17 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 /*
-        if (experimentalStuff ==true) {
             mainMenu.addMenuItem(MENU_GRAPH, new MenuItem.Builder()
                     .setTitle("Graphs")
                     .setType(MenuItem.Type.ITEM)
                     .build());
-        }
 
-        if (experimentalStuff ==true){
+
             mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
                     .setTitle("Measurements(test)")
                     .setType(MenuItem.Type.ITEM)
                     .build());
-        }
+
         */
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
                 .setTitle("Credits")

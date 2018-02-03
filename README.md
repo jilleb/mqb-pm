@@ -28,3 +28,24 @@ Some cars don't provide data to the headunit.
 Some MIB2 firmware versions don't provide data to the exlap channel.
 Not all data elements are available on all cars. If one element doesn't provide data, try an other one.
 Most cars do not report oil and coolant temperatures below 50.
+
+# Currently not working firmware versions:
+**MIB2:**
+VW 0245
+VW 0343
+VW 0613
+VW 0751
+VW 0753
+VW 1156
+
+**RCD330:**
+5406
+
+# Currently confirmed working firmware versions:
+**MIB2:**
+VW 0814
+VW 1187
+Seat 1146
+
+**MIB2.5**
+Seat 1162

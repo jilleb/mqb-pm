@@ -110,10 +110,10 @@
     <style name="AppTheme.Outrun" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/outrun_dial_background</item>
         <item name="themedCarBackground">@drawable/outrun_background_incar</item>
-        <item name="themedNeedle">@drawable/vw_white_needle</item>
+        <item name="themedNeedle">@drawable/outrun_needle</item>
         <item name="sv_markColor">@android:color/white</item>
-        <item name="themedStopWatchBackground">@drawable/vw_stopwatch_background</item>
-        <item name="themedNeedleColor">@color/white</item>
+        <item name="themedStopWatchBackground">@drawable/outrun_dial_background</item>
+        <item name="themedNeedleColor">@color/pink</item>
 
 
 
