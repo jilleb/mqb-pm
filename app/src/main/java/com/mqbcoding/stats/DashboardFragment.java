@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
@@ -27,6 +28,7 @@ import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.google.android.apps.auto.sdk.DayNightStyle;
 import com.google.android.apps.auto.sdk.StatusBarController;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -97,7 +99,6 @@ public class DashboardFragment extends CarFragment {
         sc.hideBatteryLevel();
         sc.showClock();
         sc.hideConnectivityLevel();
-        sc.showMicButton();
         sc.showTitle();
         sc.setTitle(getContext().getString(R.string.dashboard_title));
     }
