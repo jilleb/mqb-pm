@@ -312,6 +312,7 @@ public class DashboardFragment extends CarFragment {
             mRayLeft.setVisibility(View.VISIBLE);
             mRayCenter.setVisibility(View.VISIBLE);
             mRayRight.setVisibility(View.VISIBLE);
+            //maybe also hide the indicator image, which is quite useless when using the rays
         } else{
             mRayLeft.setVisibility(View.INVISIBLE);
             mRayCenter.setVisibility(View.INVISIBLE);
@@ -659,7 +660,7 @@ public class DashboardFragment extends CarFragment {
             case "test":
                 icon.setText("");
                 clock.setUnit("testing");
-                clock.setMinMaxSpeed(0,350);
+                clock.setMinMaxSpeed(-100,200);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
@@ -828,7 +829,7 @@ public class DashboardFragment extends CarFragment {
     private void updateClock(String query, Speedometer dial, RaySpeedometer visray) {
 
         Float clockValue = (Float) mLastMeasurements.get(query);
-        float randomClockVal = randFloat(-50,200);
+        float randomClockVal = randFloat(-100,200);
         speedFactor = 1f;
         pressureFactor = 1f;
 

@@ -38,15 +38,22 @@ Most cars do not report oil and coolant temperatures below 50.
 - VW 0753
 - VW 1156
 
+**MIB2Std 6,5**
+- Seat 0351
+
+
+
 **RCD330:**
 - VW 5406
 
 # Currently confirmed working firmware versions:
+**MIB2Std 8,0**
+- Seat 0462
+
 **MIB2:**
 - VW 0814
 - VW 1187
 - Seat 1146
-
 
 **MIB2.5**
 - Seat 1162

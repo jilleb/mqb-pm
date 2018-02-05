@@ -273,6 +273,8 @@
         app:sv_unitSpeedInterval="3dp"
         app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="20sp"
+        app:sv_withTremble="false"
+
 
         />
 
