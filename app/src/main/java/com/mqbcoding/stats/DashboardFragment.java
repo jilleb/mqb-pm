@@ -832,6 +832,8 @@ public class DashboardFragment extends CarFragment {
     //update clock with data
     private void updateClock(String query, Speedometer dial, RaySpeedometer visray) {
 
+    String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
+
         Float clockValue = (Float) mLastMeasurements.get(query);
         float randomClockVal = randFloat(-100,200);
         speedFactor = 1f;
@@ -886,8 +888,18 @@ public class DashboardFragment extends CarFragment {
                         case "C":
                             dial.setUnit("°C");
                             break;
-
                     }
+
+                    } else if (clockValue != null && tempUnit == null && generalTempUnit != null) {
+                    switch (generalTempUnit) {
+                        case "fahrenheit":
+                            dial.setUnit("°F");
+                            break;
+                        case "celcius":
+                            dial.setUnit("°C");
+                            break;
+                    }
+
                     dial.speedTo(clockValue == null ? 0.0f : clockValue);
                 }
                 break;
@@ -903,6 +915,16 @@ public class DashboardFragment extends CarFragment {
                             break;
 
                     }
+                } else if (clockValue != null && tempUnit2 == null && generalTempUnit != null) {
+                    switch (generalTempUnit) {
+                        case "fahrenheit":
+                            dial.setUnit("°F");
+                            break;
+                        case "celcius":
+                            dial.setUnit("°C");
+                            break;
+                    }
+
                     dial.speedTo(clockValue == null ? 0.0f : clockValue);
                 }
                 break;
@@ -918,6 +940,16 @@ public class DashboardFragment extends CarFragment {
                             break;
 
                     }
+                } else if (clockValue != null && tempUnit3 == null && generalTempUnit != null) {
+                    switch (generalTempUnit) {
+                        case "fahrenheit":
+                            dial.setUnit("°F");
+                            break;
+                        case "celcius":
+                            dial.setUnit("°C");
+                            break;
+                    }
+
                     dial.speedTo(clockValue == null ? 0.0f : clockValue);
                 }
                 break;
@@ -1003,8 +1035,8 @@ public class DashboardFragment extends CarFragment {
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {
 
-        Float elementValue = (Float) mLastMeasurements.get(queryElement);
-
+        String elementValue = (String) mLastMeasurements.get(queryElement);
+        String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
 
         switch (queryElement) {
             case "none":
@@ -1020,59 +1052,88 @@ public class DashboardFragment extends CarFragment {
 
                 if (elementValue != null) {
 
-                    value.setText(elementValue.toString() + "V");
+                    value.setText(elementValue + "V");
                 }
                 break;
             case "coolantTemperature":
                 String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
                 if (elementValue != null && tempUnit != null) {
-                    value.setText(elementValue.toString() + tempUnit);
-                } else if (tempUnit == null){  // to fix bug that US cars don't push the temperature unit :-(
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
-                }
+                    value.setText(elementValue + tempUnit);
+                } else if (elementValue != null && tempUnit == null && generalTempUnit != null) {
+                    switch (generalTempUnit) {
+                        case "fahrenheit":
+                            label.setText("°F");
+                            break;
+                        case "celcius":
+                            label.setText("°C");
+                            break;
+                    }
+                    }
                 break;
             case "oilTemperature":
                 String tempUnit2 = (String) mLastMeasurements.get("oilTemperature.unit");
                 if (elementValue != null && tempUnit2 != null) {
                     value.setText(elementValue.toString() + tempUnit2);
-                } else if (tempUnit2 == null){  // to fix bug that US cars don't push the temperature unit :-(
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
+                } else if (elementValue != null && tempUnit2 == null && generalTempUnit != null) {
+                    switch (generalTempUnit) {
+                        case "fahrenheit":
+                            label.setText("°F");
+                            break;
+                        case "celcius":
+                            label.setText("°C");
+                            break;
+                    }
                 }
                 break;
             case "vehicleSpeed":
                 String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
                 if (elementValue != null && speedUnit != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
+                    value.setText(elementValue);
                     label.setText(speedUnit);
                 }
             case "engineSpeed":
                 if (elementValue != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), elementValue));
+                    value.setText(elementValue);
                 }
                 break;
             case "currentOutputPower":
                 if (elementValue != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
+                    value.setText(elementValue);
                 }
                 break;
             case "currentTorque":
                 if (elementValue != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));                }
+                    value.setText(elementValue);                }
                 break;
             case "gearboxOilTemperature":
                 String tempUnit3 = (String) mLastMeasurements.get("gearboxTemperature.unit");
                 if (elementValue != null && tempUnit3 != null) {
-                    value.setText(elementValue.toString() + tempUnit3);
-                } else if (tempUnit3 == null){  // to fix bug that US cars don't push the temperature unit :-(
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
+                    value.setText(elementValue + tempUnit3);
+                } else if (elementValue != null && tempUnit3 == null && generalTempUnit != null) {
+                    switch (generalTempUnit) {
+                        case "fahrenheit":
+                            label.setText("°F");
+                            break;
+                        case "celcius":
+                            label.setText("°C");
+                            break;
+                    }
                 }
                 break;
             case "outsideTemperature":
                 String tempUnit4 = (String) mLastMeasurements.get("outsideTemperature.unit");
                 if (elementValue != null && tempUnit4 != null) {
-                    value.setText(elementValue.toString() + tempUnit4);
-                } else if (tempUnit4 == null){  // this shouldn't be needed, since US cars push outside temp units, but just to be sure
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
+                    value.setText(elementValue + tempUnit4);
+                } else if (elementValue != null && tempUnit4 == null && generalTempUnit != null) {
+                    switch (generalTempUnit) {
+                        case "fahrenheit":
+                            label.setText("°F");
+                            break;
+                        case "celcius":
+                            label.setText("°C");
+                            break;
+                    }
+
                 }
                 break;
             case "currentGear":
