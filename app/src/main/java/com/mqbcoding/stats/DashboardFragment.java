@@ -464,10 +464,18 @@ public class DashboardFragment extends CarFragment {
 
     private void doUpdate() {
 
-
+        //temporary commented the following part, because I am afraid it might kill updates to the clocks
+/*
         if (mClockLeft == null) {
             return;
         }
+        */
+
+        //update each of the elements:
+        updateElement(mElement1Query, mValueElement1, mIconElement1);
+        updateElement(mElement2Query, mValueElement2, mIconElement2);
+        updateElement(mElement3Query, mValueElement3, mIconElement3);
+        updateElement(mElement4Query, mValueElement4, mIconElement4);
 
         //update each of the clocks
         updateClock(mClockLQuery, mClockLeft, mRayLeft);
@@ -484,11 +492,6 @@ public class DashboardFragment extends CarFragment {
         updateMin(mCenterMin, mClockCenter, mTextMinCenter, mClockMinCenter);
         updateMin(mRightMin, mClockRight, mTextMinRight, mClockMinRight);
 
-        //update each of the elements:
-        updateElement(mElement1Query, mValueElement1, mIconElement1);
-        updateElement(mElement2Query, mValueElement2, mIconElement2);
-        updateElement(mElement3Query, mValueElement3, mIconElement3);
-        updateElement(mElement4Query, mValueElement4, mIconElement4);
 
         //get brakePressure and accelPos, used in other dash views
         //I might get rid of these, since I've got a selectable view for this now
@@ -534,6 +537,12 @@ public class DashboardFragment extends CarFragment {
     // this sets all the labels/values in an initial state, depending on the chosen options
     private void setupElement(String queryElement, TextView value, TextView label){
 
+        //set element label/value to default value first
+        label.setBackgroundResource(0);
+        value.setVisibility(View.VISIBLE);
+        value.setText("");
+        label.setText("");
+
         switch(queryElement) {
             case "none":
                 label.setText("");
@@ -549,7 +558,6 @@ public class DashboardFragment extends CarFragment {
             case "batteryVoltage":
                 label.setText("");
                 value.setText("0.0V");
-
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
             case "coolantTemperature":
@@ -642,10 +650,6 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_eco));
                 break;
-
-
-
-
         }
     }
 
