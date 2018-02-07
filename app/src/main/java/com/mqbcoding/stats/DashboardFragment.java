@@ -974,7 +974,8 @@ public class DashboardFragment extends CarFragment {
 
             case "acceleratorPosition":
                 if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                    float accelPercent = clockValue * 100;
+                    dial.speedTo(clockValue == null ? 0f : accelPercent);
                 }
 
                 break;
