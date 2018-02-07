@@ -1026,12 +1026,16 @@ public class DashboardFragment extends CarFragment {
                 String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
                 if (elementValue != null && tempUnit != null) {
                     value.setText(elementValue.toString() + tempUnit);
+                } else if (tempUnit == null){  // to fix bug that US cars don't push the temperature unit :-(
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
                 }
                 break;
             case "oilTemperature":
                 String tempUnit2 = (String) mLastMeasurements.get("oilTemperature.unit");
                 if (elementValue != null && tempUnit2 != null) {
                     value.setText(elementValue.toString() + tempUnit2);
+                } else if (tempUnit2 == null){  // to fix bug that US cars don't push the temperature unit :-(
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
                 }
                 break;
             case "vehicleSpeed":
@@ -1058,12 +1062,16 @@ public class DashboardFragment extends CarFragment {
                 String tempUnit3 = (String) mLastMeasurements.get("gearboxTemperature.unit");
                 if (elementValue != null && tempUnit3 != null) {
                     value.setText(elementValue.toString() + tempUnit3);
+                } else if (tempUnit3 == null){  // to fix bug that US cars don't push the temperature unit :-(
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
                 }
                 break;
             case "outsideTemperature":
                 String tempUnit4 = (String) mLastMeasurements.get("outsideTemperature.unit");
                 if (elementValue != null && tempUnit4 != null) {
                     value.setText(elementValue.toString() + tempUnit4);
+                } else if (tempUnit4 == null){  // this shouldn't be needed, since US cars push outside temp units, but just to be sure
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), elementValue));
                 }
                 break;
             case "currentGear":
@@ -1099,6 +1107,7 @@ public class DashboardFragment extends CarFragment {
     }
 
     //update the max speed indicator:
+    //todo: remove currentmax from this, since it's no longer used, using the current state of the max-clock for that
     private void updateMax(Float currentmax, Speedometer dial, TextView textmax, Speedometer maxclock){
         float currentvalue = dial.getSpeed();
         float maxvalue = maxclock.getSpeed();
@@ -1109,7 +1118,7 @@ public class DashboardFragment extends CarFragment {
 
         textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), maxvalue));
     }
-
+    //todo: remove currentmin from this, since it's no longer used, using the current state of the min-clock for that
     private void updateMin(Float currentmin, Speedometer dial, TextView textmin, Speedometer minclock){
         float currentvalue = dial.getSpeed();
         float minvalue = minclock.getSpeed();
