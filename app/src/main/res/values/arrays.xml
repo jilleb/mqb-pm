@@ -32,8 +32,8 @@
         <item>Gearbox Temperature</item>
         <item>Speed</item>
         <item>RPM</item>
-        <item>Lateral G's</item>
-        <item>Longitudinal G's</item>
+        <item>Lateral G\'s</item>
+        <item>Longitudinal G\'s</item>
         <item>Yaw rate</item>
         <item>Wheel Angle</item>
         <item>Accelerator Position</item>
@@ -85,8 +85,8 @@
         <item>RPM</item>
         <item>Speed</item>
         <item>Current Gear</item>
-        <item>Lateral G's</item>
-        <item>Longitudinal G's</item>
+        <item>Lateral G\'s</item>
+        <item>Longitudinal G\'s</item>
         <item>Yaw rate</item>
         <item>Wheel Angle</item>
         <item>Accelerator Position</item>
