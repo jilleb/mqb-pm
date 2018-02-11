@@ -18,6 +18,7 @@ Download the latest release here: https://github.com/jilleb/mqb-pm/releases
 
 # Known issues
 - Black screen of death: On some cars it doesn't work for unknown reasons. This will not kill your car or headunit. Send me a logcat. 
+On Huawei and Honor devices this is a common problem, caused by a bug in their ROMs. A workaround to get OEM apps working again is to clear the Android Auto apk cache when this happens. (thanks to nerone-github for the information.)
 
 - Not starting
 If the app doesn't start, there's probably a bug in the code. This will not kill your car either. Send me a logcat.
@@ -78,5 +79,5 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 # Mixed results:
 **MIB2:**
 The following firmwares are working, but for some users they don't.
-- VW 0751*
-- VW 0753*
+- VW 0751
+- VW 0753
