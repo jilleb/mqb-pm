@@ -801,21 +801,34 @@ public class DashboardFragment extends CarFragment {
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
-
-
-
-
-                        /*
-        todo:
-
-        <item>tankLevelPrimary</item>
-        <item>tankLevelSecondary</item>
-
-              */
-
-
-
-
+            case "currentConsumptionPrimary":
+                icon.setText("");
+                clock.setUnit("l/h");
+                clock.setMinMaxSpeed(0,100);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                break;
+            case "currentConsumptionSecondary":
+                icon.setText("");
+                clock.setUnit("l/h");
+                clock.setMinMaxSpeed(0,100);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                break;
+            case "cycleConsumptionPrimary":
+                icon.setText("");
+                clock.setUnit("l/h");
+                clock.setMinMaxSpeed(0,100);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                break;
+            case "cycleConsumptionSecondary":
+                icon.setText("");
+                clock.setUnit("l/h");
+                clock.setMinMaxSpeed(0,100);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                break;
         }
 
         int minimum = clock.getMinSpeed();
@@ -1026,6 +1039,36 @@ public class DashboardFragment extends CarFragment {
                     dial.speedTo(clockValue == null ? 0f : clockValue);
                 }
                 break;
+            case "currentConsumptionPrimary":
+                String consumptionUnit = (String) mLastMeasurements.get("currentConsumptionPrimary.unit");
+                if (clockValue != null && consumptionUnit != null) {
+                    dial.setUnit(consumptionUnit);
+                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                }
+                break;
+            case "currentConsumptionSecondary":
+                String consumption2Unit = (String) mLastMeasurements.get("currentConsumptionSecondary.unit");
+                if (clockValue != null && consumption2Unit != null) {
+                    dial.setUnit(consumption2Unit);
+                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                }
+                break;
+            case "cycleConsumptionPrimary":
+                String cycconsumptionUnit = (String) mLastMeasurements.get("cycleConsumptionPrimary.unit");
+                if (clockValue != null && cycconsumptionUnit != null) {
+                    dial.setUnit(cycconsumptionUnit);
+                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                }
+                break;
+            case "cycleConsumptionSecondary":
+                String cycconsumption2Unit = (String) mLastMeasurements.get("cycleConsumptionSecondary.unit");
+                if (clockValue != null && cycconsumption2Unit != null) {
+                    dial.setUnit(cycconsumption2Unit);
+                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                }
+                break;
+
+
         }
         float temp = dial.getSpeed();
         visray.speedTo(temp);

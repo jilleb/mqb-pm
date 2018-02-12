@@ -43,7 +43,11 @@
         <item>Output Power</item>
         <item>Eco Score</item>
         <item>Eco Score average</item>
-        <item>Test (random data)</item>
+        <item>Current consumption, primary fuel</item>
+        <item>Current consumption, secondary fuel</item>
+        <item>Cycle consumption, primary fuel</item>
+        <item>Cycle consumption, secondary fuel</item>
+        <item>Test (random, does not get data from the car)</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for clock data settings -->
@@ -68,6 +72,10 @@
         <item>currentOutputPower</item>
         <item>EcoHMI_Score_AvgShort</item>
         <item>EcoHMI_Score_AvgTrip</item>
+        <item>currentConsumptionPrimary</item>
+        <item>currentConsumptionSecondary</item>
+        <item>cycleConsumptionPrimary</item>
+        <item>cycleConsumptionSecondary</item>
         <item>test</item>
 
     </string-array>
@@ -185,17 +193,13 @@ Todo: Clocks or dashboard elements can be made for most of these
     *consumption data*
         consumptionLongTermGeneral
         consumptionShortTermGeneral
-        currentConsumptionPrimary
-        currentConsumptionSecondary
-        cycleConsumptionPrimary
-        cycleConsumptionSecondary
         longTermConsumptionPrimary
         longTermConsumptionSecondary
         shortTermConsumptionPrimary
         shortTermConsumptionSecondary
     *other dashboard items*
-        maxChargingAirPressure
-        maxOutputPower
+        maxChargingAirPressure  - use this to determine min/max for charging air pressure max.
+        maxOutputPower      - use this to determine min/max for output clock? Might not be wise, since the output might be higher than the car thinks in some cases
         modCount
         oilLevel
         recuperationLevel
