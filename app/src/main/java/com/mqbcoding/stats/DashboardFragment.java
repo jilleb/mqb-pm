@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -601,6 +602,11 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_outsidetemperature));
                 break;
             case "currentGear":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
+                break;
+            case "recommendedGear":
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
@@ -1205,6 +1211,38 @@ public class DashboardFragment extends CarFragment {
                 } else if (currentGear == "Gear7") {
                     value.setText("7");
                 }
+                break;
+            case "recommendedGear":
+
+                String currentGear2 = (String) mLastMeasurements.get("currentGear");
+
+                if (elementValue == null) {
+                    value.setText("-");
+                } else if (elementValue == "Gear1") {
+                    value.setText("1");
+                } else if (elementValue == "Gear2") {
+                    value.setText("2");
+                } else if (elementValue == "Gear3") {
+                    value.setText("3");
+                } else if (elementValue == "Gear4") {
+                    value.setText("4");
+                } else if (elementValue == "Gear5") {
+                    value.setText("5");
+                } else if (elementValue == "Gear6") {
+                    value.setText("6");
+                } else if (elementValue == "Gear7") {
+                    value.setText("7");
+                }
+
+                //if the currentgear is not equal to recommended gear, highlight the gear in red.
+                if (elementValue != currentGear2) {
+                    value.setTextColor(Color.RED);
+
+                } else {
+                    value.setTextColor(Color.WHITE);
+
+                }
+
                 break;
         }
 

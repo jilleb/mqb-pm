@@ -93,6 +93,7 @@
         <item>RPM</item>
         <item>Speed</item>
         <item>Current Gear</item>
+        <item>Recommended Gear</item>
         <item>Lateral G\'s</item>
         <item>Longitudinal G\'s</item>
         <item>Yaw rate</item>
@@ -119,6 +120,7 @@
         <item>engineSpeed</item>
         <item>vehicleSpeed</item>
         <item>currentGear</item>
+        <item>recommendedGear</item>
         <item>lateralAcceleration</item>
         <item>longitudinalAcceleration</item>
         <item>yawRate</item>
@@ -154,7 +156,6 @@ todo: Add an optional icon area to the main dash view showing these items?
     engineTypes
     fuelLevelState
     gearTransmissionMode
-    recommendedGear todo: shift indicator based on this. If recommendedGear < currentGear: shift DOWN! if r > c shift up!
     vehicleDate
     vehicleIdenticationNumber
     vehicleTime
