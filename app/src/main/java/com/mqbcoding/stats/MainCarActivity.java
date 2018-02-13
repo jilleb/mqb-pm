@@ -137,8 +137,8 @@ public class MainCarActivity extends CarActivity {
 //                .detach(cardatafragment)
 //                .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
 //                .detach(graphfragment)
-//                .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
-//                .detach(creditsfragment)
+                .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
+               .detach(creditsfragment)
                 .commitNow();
 
 
