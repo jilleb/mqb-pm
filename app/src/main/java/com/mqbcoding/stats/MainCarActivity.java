@@ -82,7 +82,9 @@ public class MainCarActivity extends CarActivity {
                 break;
             case "Skoda":
                 setTheme(R.style.AppTheme_Skoda);
-
+                break;
+            case "Skoda ONE":
+                setTheme(R.style.AppTheme_SkodaOneApp);
                 break;
             case "Skoda vRS":
                 setTheme(R.style.AppTheme_SkodavRS);
