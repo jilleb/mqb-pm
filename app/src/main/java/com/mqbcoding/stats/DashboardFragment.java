@@ -654,7 +654,7 @@ public class DashboardFragment extends CarFragment {
             case "EcoHMI_Score_AvgTrip":
                 label.setText("");
                 value.setText("-");
-                label.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                label.setBackground(getContext().getDrawable(R.drawable.ic_ecoavg));
                 break;
         }
     }
@@ -811,28 +811,28 @@ public class DashboardFragment extends CarFragment {
                 icon.setText("");
                 clock.setUnit("l/h");
                 clock.setMinMaxSpeed(0,100);
-                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentConsumptionSecondary":
                 icon.setText("");
                 clock.setUnit("l/h");
                 clock.setMinMaxSpeed(0,100);
-                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "cycleConsumptionPrimary":
                 icon.setText("");
                 clock.setUnit("l/h");
                 clock.setMinMaxSpeed(0,100);
-                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "cycleConsumptionSecondary":
                 icon.setText("");
                 clock.setUnit("l/h");
                 clock.setMinMaxSpeed(0,100);
-                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
         }
@@ -851,7 +851,7 @@ public class DashboardFragment extends CarFragment {
     //update clock with data
     private void updateClock(String query, Speedometer dial, RaySpeedometer visray) {
 
-    String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
+        String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
 
         Float clockValue = (Float) mLastMeasurements.get(query);
         float randomClockVal = randFloat(-100,200);
@@ -909,7 +909,7 @@ public class DashboardFragment extends CarFragment {
                             break;
                     }
 
-                    } else if (clockValue != null && tempUnit == null && generalTempUnit != null) {
+                } else if (clockValue != null && tempUnit == null && generalTempUnit != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             dial.setUnit("°F");
@@ -1117,7 +1117,7 @@ public class DashboardFragment extends CarFragment {
                             label.setText("°C");
                             break;
                     }
-                    }
+                }
                 break;
             case "oilTemperature":
                 String tempUnit2 = (String) mLastMeasurements.get("oilTemperature.unit");

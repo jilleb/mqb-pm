@@ -40,7 +40,7 @@
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedNeedle">@drawable/seat_needle</item>
         <item name="themedStopWatchBackground">@drawable/seat2_stopwatch_background</item>
-        <item name="themedNeedleColor">@color/red</item>
+        <item name="themedNeedleColor">@color/yellow</item>
 
     </style>
 

@@ -50,7 +50,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintStart_toStartOf="@+id/rayCenter"
         app:layout_constraintTop_toTopOf="@+id/rayCenter"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <TextView
         android:id="@+id/icon_ClockLeft"
@@ -71,7 +71,7 @@
         app:layout_constraintEnd_toStartOf="@+id/rayCenter"
         app:layout_constraintStart_toStartOf="@+id/rayLeft"
         app:layout_constraintTop_toTopOf="@+id/rayLeft"
-        app:layout_constraintVertical_bias="0.68" />
+        app:layout_constraintVertical_bias="0.69" />
 
     <TextView
         android:id="@+id/icon_ClockRight"

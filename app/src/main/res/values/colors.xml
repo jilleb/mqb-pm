@@ -8,11 +8,12 @@
     <color name="red">#77c50101</color>
     <color name="highspeed">#FF0000</color>
 
-    <color name="yellow">#77FFFF00</color>
+    <color name="yellow">#77fecc00</color>
     <color name="blue">#770000FF</color>
     <color name="green">#7700FF00</color>
     <color name="white">#77ffffff</color>
     <color name="pink">#77FF69B4</color>
+
 
 
     <color name="car_primary">@android:color/white</color>
