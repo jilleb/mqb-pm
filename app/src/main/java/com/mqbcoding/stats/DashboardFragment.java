@@ -26,6 +26,7 @@ import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
+import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.google.android.apps.auto.sdk.DayNightStyle;
 import com.google.android.apps.auto.sdk.StatusBarController;
@@ -313,7 +314,12 @@ public class DashboardFragment extends CarFragment {
             mRayLeft.setVisibility(View.VISIBLE);
             mRayCenter.setVisibility(View.VISIBLE);
             mRayRight.setVisibility(View.VISIBLE);
-            //maybe also hide the indicator image, which is quite useless when using the rays
+
+            //also hide the needle on the clocks
+            mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
+            mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
+            mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
+
         } else{
             mRayLeft.setVisibility(View.INVISIBLE);
             mRayCenter.setVisibility(View.INVISIBLE);
