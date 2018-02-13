@@ -564,7 +564,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "batteryVoltage":
                 label.setText("");
-                value.setText("0.0V");
+                value.setText("0,0V");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
             case "coolantTemperature":
@@ -652,12 +652,12 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
                 break;
-            case "EcoHMI_Score_AvgShort":
+            case "EcoHMI_Score.AvgShort":
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_eco));
                 break;
-            case "EcoHMI_Score_AvgTrip":
+            case "EcoHMI_Score.AvgTrip":
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_ecoavg));
@@ -764,14 +764,14 @@ public class DashboardFragment extends CarFragment {
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
-            case "EcoHMI_Score_AvgShort":
+            case "EcoHMI_Score.AvgShort":
                 icon.setText("");
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0,100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
-            case "EcoHMI_Score_AvgTrip":
+            case "EcoHMI_Score.AvgTrip":
                 icon.setText("");
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0,100);

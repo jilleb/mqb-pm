@@ -71,8 +71,8 @@
         <item>powermeter</item>
         <item>currentTorque</item>
         <item>currentOutputPower</item>
-        <item>EcoHMI_Score_AvgShort</item>
-        <item>EcoHMI_Score_AvgTrip</item>
+        <item>EcoHMI_Score.AvgShort</item>
+        <item>EcoHMI_Score.AvgTrip</item>
         <item>currentConsumptionPrimary</item>
         <item>currentConsumptionSecondary</item>
         <item>cycleConsumptionPrimary</item>
@@ -241,6 +241,11 @@ Todo: read these during initialisation, so the app is set up in the same way as 
 *lighting*
 Car_ambienceLightColour_ColourHMI
 Car_ambienceLightColour_ColourSRGB      - could be used to have a dynamic theme, based on the current ambient color. maybe make a needle that has variable color or something
+
+recuperationLevel
+torqueDistribution
+refillVolume
+oilLevel
 
  -->
     </resources>
