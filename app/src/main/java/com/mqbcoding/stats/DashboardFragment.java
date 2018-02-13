@@ -242,7 +242,7 @@ public class DashboardFragment extends CarFragment {
         mBrakeAccel = rootView.findViewById(R.id.brake_accel_view);
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
 
-
+        //
         mClockCenter.setOnClickListener(celebrateOnClickListener);
 
         //-------------------------------------------------------------
@@ -1100,7 +1100,6 @@ public class DashboardFragment extends CarFragment {
             case "test":
                 float randomValue = randFloat(0,100);
                 value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), randomValue));
-
                 break;
 
             case "batteryVoltage":
@@ -1238,6 +1237,8 @@ public class DashboardFragment extends CarFragment {
                     value.setText("6");
                 } else if (elementValue == "Gear7") {
                     value.setText("7");
+                } else if (elementValue == "NoRecommendation") {
+                    value.setText("-");
                 }
 
                 //if the currentgear is not equal to recommended gear, highlight the gear in red.
@@ -1248,7 +1249,6 @@ public class DashboardFragment extends CarFragment {
                     value.setTextColor(Color.WHITE);
 
                 }
-
                 break;
         }
 
