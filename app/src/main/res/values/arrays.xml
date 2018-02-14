@@ -129,8 +129,8 @@
         <item>acceleratorPosition</item>
         <item>brakePressure</item>
         <item>powermeter</item>
-        <item>EcoHMI_Score_AvgShort</item>
-        <item>EcoHMI_Score_AvgTrip</item>
+        <item>EcoHMI_Score.AvgShort</item>
+        <item>EcoHMI_Score.AvgTrip</item>
         <item>test</item>
     </string-array>
 
