@@ -1090,7 +1090,7 @@ public class DashboardFragment extends CarFragment {
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {
 
-        String elementValue = (String) mLastMeasurements.get(queryElement);
+     //   String elementValue = (String) mLastMeasurements.get(queryElement); // this causes troubles, since it can't be determined if the output is String or Float, based on the query
         String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
 
         switch (queryElement) {
@@ -1103,91 +1103,107 @@ public class DashboardFragment extends CarFragment {
                 break;
 
             case "batteryVoltage":
-
-                if (elementValue != null) {
-
-                    value.setText(elementValue + "V");
+                Float mBatteryVoltage = (Float) mLastMeasurements.get(queryElement);
+                if (mBatteryVoltage != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mBatteryVoltage + "V"));
                 }
                 break;
             case "coolantTemperature":
+                Float mCoolantTemp = (Float) mLastMeasurements.get(queryElement);
                 String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
-                if (elementValue != null && tempUnit != null) {
-                    value.setText(elementValue + tempUnit);
-                } else if (elementValue != null && tempUnit == null && generalTempUnit != null) {
+                if (mCoolantTemp != null && tempUnit != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + tempUnit));
+                } else if (mCoolantTemp != null && tempUnit == null && generalTempUnit != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
-                            label.setText("°F");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°F"));
                             break;
                         case "celcius":
-                            label.setText("°C");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°C"));
                             break;
                     }
+                } else {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°"));
                 }
                 break;
             case "oilTemperature":
-                String tempUnit2 = (String) mLastMeasurements.get("oilTemperature.unit");
-                if (elementValue != null && tempUnit2 != null) {
-                    value.setText(elementValue.toString() + tempUnit2);
-                } else if (elementValue != null && tempUnit2 == null && generalTempUnit != null) {
+                Float mOilTemp = (Float) mLastMeasurements.get(queryElement);
+                String tempUnit2 = (String) mLastMeasurements.get("coolantTemperature.unit");
+                if (mOilTemp != null && tempUnit2 != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + tempUnit2));
+                } else if (mOilTemp != null && tempUnit2 == null && generalTempUnit != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
-                            label.setText("°F");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°F"));
                             break;
                         case "celcius":
-                            label.setText("°C");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°C"));
                             break;
                     }
+                } else {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°"));
                 }
                 break;
             case "vehicleSpeed":
+                Float mVehicleSpeed = (Float) mLastMeasurements.get(queryElement);
                 String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-                if (elementValue != null && speedUnit != null) {
-                    value.setText(elementValue);
+                if (mVehicleSpeed != null && speedUnit != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mVehicleSpeed));
                     label.setText(speedUnit);
                 }
             case "engineSpeed":
-                if (elementValue != null) {
-                    value.setText(elementValue);
+                Float mEngineSpeed = (Float) mLastMeasurements.get(queryElement);
+                if (mEngineSpeed != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mEngineSpeed));
                 }
                 break;
             case "currentOutputPower":
-                if (elementValue != null) {
-                    value.setText(elementValue);
+                Float mCurrentOutputPower = (Float) mLastMeasurements.get(queryElement);
+                if (mCurrentOutputPower != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentOutputPower));
                 }
                 break;
             case "currentTorque":
-                if (elementValue != null) {
-                    value.setText(elementValue);                }
+                Float mCurrentTorque = (Float) mLastMeasurements.get(queryElement);
+                if (mCurrentTorque != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentTorque));
+                }
                 break;
             case "gearboxOilTemperature":
                 String tempUnit3 = (String) mLastMeasurements.get("gearboxTemperature.unit");
-                if (elementValue != null && tempUnit3 != null) {
-                    value.setText(elementValue + tempUnit3);
-                } else if (elementValue != null && tempUnit3 == null && generalTempUnit != null) {
+                Float mGearboxOilTemp = (Float) mLastMeasurements.get(queryElement);
+                if (mGearboxOilTemp != null && tempUnit3 != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + tempUnit3));
+                } else if (mGearboxOilTemp != null && tempUnit3 == null && generalTempUnit != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
-                            label.setText("°F");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°F"));
                             break;
                         case "celcius":
-                            label.setText("°C");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°C"));
                             break;
                     }
+                } else {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°"));
                 }
                 break;
             case "outsideTemperature":
                 String tempUnit4 = (String) mLastMeasurements.get("outsideTemperature.unit");
-                if (elementValue != null && tempUnit4 != null) {
-                    value.setText(elementValue + tempUnit4);
-                } else if (elementValue != null && tempUnit4 == null && generalTempUnit != null) {
+
+                Float mOutsideTemperature = (Float) mLastMeasurements.get(queryElement);
+                if (mOutsideTemperature != null && tempUnit4 != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + tempUnit4));
+                } else if (mOutsideTemperature != null && tempUnit4 == null && generalTempUnit != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
-                            label.setText("°F");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°F"));
                             break;
                         case "celcius":
-                            label.setText("°C");
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°C"));
                             break;
                     }
-
+                } else {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°"));
                 }
                 break;
             case "currentGear":
@@ -1218,31 +1234,31 @@ public class DashboardFragment extends CarFragment {
                 }
                 break;
             case "recommendedGear":
+                String mRecommendedGear = (String) mLastMeasurements.get("currentGear");
+                String mCurrentGear2 = (String) mLastMeasurements.get("currentGear");
 
-                String currentGear2 = (String) mLastMeasurements.get("currentGear");
-
-                if (elementValue == null) {
+                if (mRecommendedGear == null) {
                     value.setText("-");
-                } else if (elementValue == "Gear1") {
+                } else if (mRecommendedGear == "Gear1") {
                     value.setText("1");
-                } else if (elementValue == "Gear2") {
+                } else if (mRecommendedGear == "Gear2") {
                     value.setText("2");
-                } else if (elementValue == "Gear3") {
+                } else if (mRecommendedGear == "Gear3") {
                     value.setText("3");
-                } else if (elementValue == "Gear4") {
+                } else if (mRecommendedGear == "Gear4") {
                     value.setText("4");
-                } else if (elementValue == "Gear5") {
+                } else if (mRecommendedGear == "Gear5") {
                     value.setText("5");
-                } else if (elementValue == "Gear6") {
+                } else if (mRecommendedGear == "Gear6") {
                     value.setText("6");
-                } else if (elementValue == "Gear7") {
+                } else if (mRecommendedGear == "Gear7") {
                     value.setText("7");
-                } else if (elementValue == "NoRecommendation") {
+                } else if (mRecommendedGear == "NoRecommendation") {
                     value.setText("-");
                 }
 
                 //if the currentgear is not equal to recommended gear, highlight the gear in red.
-                if (elementValue != currentGear2) {
+                if (mRecommendedGear != mCurrentGear2) {
                     value.setTextColor(Color.RED);
 
                 } else {
