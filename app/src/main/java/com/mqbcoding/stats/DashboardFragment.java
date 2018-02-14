@@ -1154,7 +1154,7 @@ public class DashboardFragment extends CarFragment {
             case "engineSpeed":
                 Float mEngineSpeed = (Float) mLastMeasurements.get(queryElement);
                 if (mEngineSpeed != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mEngineSpeed));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mEngineSpeed));
                 }
                 break;
             case "currentOutputPower":
