@@ -244,10 +244,8 @@ Car_ambienceLightColour_ColourSRGB      - could be used to have a dynamic theme,
 
 
 *Other data elements, found om 13/2, still need to be categorized:
-recuperationLevel
 torqueDistribution
 refillVolume
-oilLevel
 hevOperationMode
 
  -->
