@@ -1122,8 +1122,6 @@ public class DashboardFragment extends CarFragment {
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°C"));
                             break;
                     }
-                } else {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°"));
                 }
                 break;
             case "oilTemperature":
@@ -1140,8 +1138,6 @@ public class DashboardFragment extends CarFragment {
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°C"));
                             break;
                     }
-                } else {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°"));
                 }
                 break;
             case "vehicleSpeed":
@@ -1183,8 +1179,6 @@ public class DashboardFragment extends CarFragment {
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°C"));
                             break;
                     }
-                } else {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°"));
                 }
                 break;
             case "outsideTemperature":
@@ -1202,8 +1196,6 @@ public class DashboardFragment extends CarFragment {
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°C"));
                             break;
                     }
-                } else {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°"));
                 }
                 break;
             case "currentGear":
