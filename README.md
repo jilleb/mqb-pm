@@ -13,7 +13,7 @@ Seat theme with high min/max turned on.
 ![Seat theme](https://i.imgur.com/g8J8whV.png)
 
 Skoda ONEapp theme with high min/max turned on.
-![Skoda ONE theme](https://i.imgur.com/0jm310L.png)
+![Skoda ONE theme](https://i.imgur.com/OfO3jpb.png)
 
 Stopwatch/laptimer mode in VW GTI theme:
 ![VW stopwatch](https://i.imgur.com/0jm310L.png)
