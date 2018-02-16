@@ -3,6 +3,21 @@
 This is a performance monitor, based on Martoreto's aa-stats.
 It's made specifically for use with the Volkswagen/Skoda/Seat/Audi MIB2 infotainment units, but it might also work on others, as long as they have Android Auto support.
 
+# Screenshots:
+Some screenshots of the app:
+
+Golf GTI theme with high visibility-dials.
+![VW theme](https://i.imgur.com/dTG3oBq.png)
+
+Seat theme with high min/max turned on.
+![Seat theme](https://i.imgur.com/g8J8whV.png)
+
+Skoda ONEapp theme with high min/max turned on.
+![Skoda ONE theme](https://i.imgur.com/0jm310L.png)
+
+Stopwatch/laptimer mode in VW GTI theme:
+![VW stopwatch](https://i.imgur.com/0jm310L.png)
+
 
 # Installation instructions:
 

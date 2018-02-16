@@ -1141,7 +1141,7 @@ public class DashboardFragment extends CarFragment {
                 }
                 break;
             case "vehicleSpeed":
-                Float mVehicleSpeed = (Float) mLastMeasurements.get(queryElement);
+                Float mVehicleSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
                 String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
                 if (mVehicleSpeed != null && speedUnit != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mVehicleSpeed));
