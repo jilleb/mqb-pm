@@ -22,6 +22,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+//for other sensors
+import android.support.car.Car;
+import android.support.car.CarConnectionCallback;
+import android.support.car.hardware.CarSensorEvent;
+import android.support.car.hardware.CarSensorManager;
+
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
@@ -51,6 +57,7 @@ public class DashboardFragment extends CarFragment {
     private ImageView mImageMaxLeft, mImageMaxCenter, mImageMaxRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
+    private Car mCar;
 
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
@@ -375,6 +382,8 @@ public class DashboardFragment extends CarFragment {
 
     @Override
     public void onStart() {
+        mCar = Car.createCar(getContext(), mCarConnectionCallback);
+        mCar.connect();
         super.onStart();
         Log.i(TAG, "onStart");
     }
@@ -433,8 +442,60 @@ public class DashboardFragment extends CarFragment {
     @Override
     public void onStop() {
         Log.i(TAG, "onStop");
+        try {
+            mCar.disconnect();
+        } catch (Exception e) {
+            Log.w(TAG, "Error disconnecting from car", e);
+        }
+
         super.onStop();
     }
+
+    private final CarConnectionCallback mCarConnectionCallback = new CarConnectionCallback() {
+        @Override
+        public void onConnected(Car car) {
+            try {
+                Log.d(TAG, "Connected to car");
+                CarSensorManager sensorManager = (CarSensorManager) car.getCarManager(Car.SENSOR_SERVICE);
+
+                //Get supported sensor types:
+                int[] supportedSensors = sensorManager.getSupportedSensors();
+                for(int sensorId : supportedSensors){
+                    Log.d(TAG, "Supported sensor id: "+sensorId);
+                    sensorManager.addListener(mSensorsListener, sensorId, CarSensorManager.SENSOR_RATE_NORMAL);
+                }
+            } catch (Exception e) {
+                Log.w(TAG, "Error setting up car connection", e);
+            }
+        }
+
+        @Override
+        public void onDisconnected(Car car) {
+            Log.d(TAG, "Disconnected from car");
+        }
+    };
+
+    private final CarSensorManager.OnSensorChangedListener mSensorsListener = new CarSensorManager.OnSensorChangedListener() {
+        @Override
+        public void onSensorChanged(CarSensorManager sensorManager, CarSensorEvent ev) {
+            switch (ev.sensorType){
+                case CarSensorManager.SENSOR_TYPE_NIGHT:
+                    Log.d(TAG, "isNightMode " + ev.getNightData().isNightMode);
+                    break;
+                case CarSensorManager.SENSOR_TYPE_CAR_SPEED:
+                    Log.d(TAG, "carSpeed " + ev.getCarSpeedData().carSpeed);
+                    break;
+                case CarSensorManager.SENSOR_TYPE_DRIVING_STATUS:
+                    CarSensorEvent.DrivingStatusData ds = ev.getDrivingStatusData();
+                    Log.d(TAG, "videoRestricted: " + ds.isVideoRestricted() + ", fullyRestricted:" + ds.isFullyRestricted());
+                    break;
+                default:
+                    Log.d(TAG, "Unhandled " + ev.sensorType);
+                    //Include it in the switch-case statement
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onDetach() {
@@ -680,6 +741,13 @@ public class DashboardFragment extends CarFragment {
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
+            case "vehicleSpeed_alternative":
+                icon.setText("");
+                clock.setUnit("kmh");
+                clock.setMinMaxSpeed(0,350);
+                icon.setBackgroundResource(0);
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                break;
             case "vehicleSpeed":
                 icon.setText("");
                 clock.setUnit("kmh");
@@ -870,6 +938,11 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "none":
                 break;
+            case "vehicleSpeed_alternative":
+//todo: incorporate a way to get         SENSOR_TYPE_CAR_SPEED,
+
+                break;
+
 
             case "vehicleSpeed":
                 String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");

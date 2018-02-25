@@ -44,6 +44,18 @@
 
     </style>
 
+
+
+    <style name="AppTheme.Cupra" parent="AppTheme.Car">
+        <item name="themedDialBackground">@drawable/cupra_dial_background</item>
+        <item name="themedCarBackground">@drawable/cupra_background_incar</item>
+        <item name="sv_markColor">@android:color/transparent</item>
+        <item name="themedNeedle">@drawable/cupra_needle</item>
+        <item name="themedStopWatchBackground">@drawable/seat2_stopwatch_background</item>
+        <item name="themedNeedleColor">@color/white</item>
+
+    </style>
+
     <style name="AppTheme.SeatMQB" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/seatmqb_dial_background</item>
         <item name="themedCarBackground">@drawable/seat2_background_incar</item>

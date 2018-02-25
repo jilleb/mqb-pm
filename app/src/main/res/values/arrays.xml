@@ -48,6 +48,7 @@
         <item>Current consumption, secondary fuel</item>
         <item>Cycle consumption, primary fuel</item>
         <item>Cycle consumption, secondary fuel</item>
+        <item>Car Speed (different source)</item>
         <item>Test (random, does not get data from the car)</item>
     </string-array>
 
@@ -77,6 +78,7 @@
         <item>currentConsumptionSecondary</item>
         <item>cycleConsumptionPrimary</item>
         <item>cycleConsumptionSecondary</item>
+        <item>vehicleSpeed_alternative</item>
         <item>test</item>
 
     </string-array>
@@ -136,7 +138,26 @@
 
 
 <!--
-The following is a list of all other data elements currently known.
+Todo: add non-exlap data to the app:
+    SENSOR_TYPE_COMPASS,
+        SENSOR_TYPE_CAR_SPEED,
+        SENSOR_TYPE_RPM,
+        SENSOR_TYPE_ODOMETER,
+        SENSOR_TYPE_FUEL_LEVEL,
+        SENSOR_TYPE_PARKING_BRAKE,
+        SENSOR_TYPE_GEAR,
+        SENSOR_TYPE_NIGHT,
+        SENSOR_TYPE_LOCATION,
+        SENSOR_TYPE_DRIVING_STATUS,
+        SENSOR_TYPE_ENVIRONMENT,
+        SENSOR_TYPE_ACCELEROMETER,
+        SENSOR_TYPE_GPS_SATELLITE,
+        SENSOR_TYPE_GYROSCOPE,
+        SENSOR_TYPE_WHEEL_TICK_DISTANCE,
+        SENSOR_TYPE_ABS_ACTIVE,
+        SENSOR_TYPE_TRACTION_CONTROL_ACTIVE
+
+The following is a list of all other exlap data elements currently known.
 
 *Booleans*
 todo: Add an optional icon area to the main dash view showing these items?
