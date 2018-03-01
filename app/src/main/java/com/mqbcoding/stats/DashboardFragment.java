@@ -475,6 +475,7 @@ public class DashboardFragment extends CarFragment {
         }
     };
 
+    //temporary add, to test if regular android auto sensors also show up in some way.
     private final CarSensorManager.OnSensorChangedListener mSensorsListener = new CarSensorManager.OnSensorChangedListener() {
         @Override
         public void onSensorChanged(CarSensorManager sensorManager, CarSensorEvent ev) {

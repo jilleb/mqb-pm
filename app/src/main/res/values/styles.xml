@@ -99,9 +99,15 @@
         <item name="sv_markColor">@android:color/white</item>
         <item name="themedStopWatchBackground">@drawable/vw_stopwatch_background</item>
         <item name="themedNeedleColor">@color/blue</item>
+    </style>
 
-
-
+    <style name="AppTheme.Tesla" parent="AppTheme.Car">
+        <item name="themedDialBackground">@drawable/tesla_dial_background</item>
+        <item name="themedCarBackground">@drawable/tesla_background_incar</item>
+        <item name="themedNeedle">@drawable/tesla_needle</item>
+        <item name="sv_markColor">@android:color/white</item>
+        <item name="themedStopWatchBackground">@drawable/vw_stopwatch_background</item>
+        <item name="themedNeedleColor">@color/aqua</item>
     </style>
 
 

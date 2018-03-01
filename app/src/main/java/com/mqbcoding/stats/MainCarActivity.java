@@ -74,6 +74,12 @@ public class MainCarActivity extends CarActivity {
             case "Seat Cupra":
                     setTheme(R.style.AppTheme_SeatCupra);
                 break;
+            case "Cupra Division":
+                setTheme(R.style.AppTheme_Cupra);
+                break;
+            case "Tesla":
+                setTheme(R.style.AppTheme_Tesla);
+                break;
             case "Seat":
                 setTheme(R.style.AppTheme_Seat);
                 break;
