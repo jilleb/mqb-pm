@@ -80,6 +80,9 @@ public class MainCarActivity extends CarActivity {
             case "Tesla":
                 setTheme(R.style.AppTheme_Tesla);
                 break;
+            case "Back to the 80s":
+                setTheme(R.style.AppTheme_80s);
+                break;
             case "Seat":
                 setTheme(R.style.AppTheme_Seat);
                 break;
