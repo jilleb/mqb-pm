@@ -341,7 +341,7 @@
         app:sv_speedometerWidth="20dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitTextColor="@android:color/transparent"
-            app:sv_withEffects="true"
+        app:sv_withEffects="true"
         app:sv_withTremble="false" />
 
 

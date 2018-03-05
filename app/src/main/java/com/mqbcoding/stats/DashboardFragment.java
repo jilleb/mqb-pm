@@ -34,8 +34,6 @@ import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
-import com.google.android.apps.auto.sdk.DayNightStyle;
-import com.google.android.apps.auto.sdk.StatusBarController;
 
 import java.util.Date;
 import java.util.HashMap;
