@@ -25,6 +25,12 @@
             android:summaryOff="Do not show max/min values"
             android:summaryOn="Show max/min values on clocks"
             android:title="Highest/lowest values" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="showAccelView"
+            android:summaryOff="Indicator is not displayed"
+            android:summaryOn="Indicator is displayed"
+            android:title="Acceleration/brake indicator" />
     </PreferenceCategory>
     <PreferenceCategory
         android:singleLineTitle="false"

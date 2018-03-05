@@ -93,7 +93,7 @@ public class DashboardFragment extends CarFragment {
     private int mAnimationDuration;
     private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits;
-    private Boolean raysOn, maxOn;
+    private Boolean raysOn, maxOn, accelOn;
     public static final float FULL_BRAKE_PRESSURE = 100.0f;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
@@ -259,6 +259,7 @@ public class DashboardFragment extends CarFragment {
         pressureUnits   = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
         raysOn          = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
         maxOn           = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
+        accelOn         = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
 
         //determine what data the user wants to have on the 4 data views
         mElement1Query = sharedPreferences.getString("selectedView1", "none");
@@ -372,6 +373,13 @@ public class DashboardFragment extends CarFragment {
             mImageMaxLeft.setVisibility(View.INVISIBLE);
             mImageMaxCenter.setVisibility(View.INVISIBLE);
             mImageMaxRight.setVisibility(View.INVISIBLE);
+        }
+
+        if (accelOn==true) {
+            mBrakeAccel.setVisibility(View.VISIBLE);
+        }
+            else{
+            mBrakeAccel.setVisibility(View.INVISIBLE);
         }
 
         //update!
