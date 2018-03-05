@@ -935,6 +935,9 @@ public class DashboardFragment extends CarFragment {
     private void updateClock(String query, Speedometer dial, RaySpeedometer visray) {
 
         String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
+        if (generalTempUnit == null){
+            generalTempUnit = "?";
+        }
 
         Float clockValue = (Float) mLastMeasurements.get(query);
         float randomClockVal = randFloat(-100,200);
@@ -1205,6 +1208,9 @@ public class DashboardFragment extends CarFragment {
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°C"));
                             break;
                     }
+                } else if (mCoolantTemp != null && tempUnit == null && generalTempUnit == null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°"));
+
                 }
                 break;
             case "oilTemperature":
@@ -1221,8 +1227,12 @@ public class DashboardFragment extends CarFragment {
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°C"));
                             break;
                     }
+                } else if (mOilTemp != null && tempUnit2 == null && generalTempUnit == null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°"));
+
                 }
-                break;
+
+                    break;
             case "vehicleSpeed":
                 Float mVehicleSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
                 String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
@@ -1261,7 +1271,10 @@ public class DashboardFragment extends CarFragment {
                         case "celcius":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°C"));
                             break;
+
                     }
+                } else if (mGearboxOilTemp != null && tempUnit3 == null && generalTempUnit == null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°"));
                 }
                 break;
             case "outsideTemperature":
@@ -1279,6 +1292,8 @@ public class DashboardFragment extends CarFragment {
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°C"));
                             break;
                     }
+                } else if (mOutsideTemperature != null && tempUnit4 == null && generalTempUnit == null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°"));
                 }
                 break;
             case "currentGear":
