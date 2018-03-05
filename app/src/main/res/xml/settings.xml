@@ -4,7 +4,7 @@
     <PreferenceCategory
         android:singleLineTitle="false"
         android:summary="Apply changes by switching the lights on/off"
-        android:title="@string/settings_appearance">
+        android:title="@string/pref_appearance">
 
         <ListPreference
             android:defaultValue="1"
@@ -12,29 +12,29 @@
             android:entryValues="@array/Themes"
             android:key="selectedTheme"
             android:summary="%s"
-            android:title="@string/settings_theme" />
+            android:title="@string/pref_theme" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="highVisActive"
-            android:summaryOff="Only the needle is displayed"
-            android:summaryOn="A ray is displayed behind the needle"
-            android:title="@string/settings_highvis" />
+            android:summaryOff="@string/pref_highvis_off"
+            android:summaryOn="@string/pref_highvis_on"
+            android:title="@string/pref_highvis" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="maxValuesActive"
-            android:summaryOff="Do not show max/min values"
-            android:summaryOn="Show max/min values on clocks"
-            android:title="@string/settings_highlow" />
+            android:summaryOff="@string/pref_highlow_off"
+            android:summaryOn="@string/pref_highlow_on"
+            android:title="@string/pref_highlow" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="showAccelView"
-            android:summaryOff="Indicator is not displayed"
-            android:summaryOn="Indicator is displayed"
-            android:title="@string/settings_accbrakeindicator" />
+            android:summaryOff="@string/pref_accbrakeindicator_off"
+            android:summaryOn="@string/pref_accbrakeindicator_on"
+            android:title="@string/pref_accbrakeindicator" />
     </PreferenceCategory>
     <PreferenceCategory
         android:singleLineTitle="false"
-        android:title="Data element settings">
+        android:title="@string/pref_dataelementsettings">
 
         <ListPreference
             android:entries="@array/ClockDataElementsEntries"
@@ -42,7 +42,7 @@
             android:icon="@drawable/ic_settings_clockl"
             android:key="selectedClockLeft"
             android:summary="%s"
-            android:title="Left clock" />
+            android:title="@string/pref_leftclock" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
             android:icon="@drawable/ic_settings_clockc"
             android:key="selectedClockCenter"
             android:summary="%s"
-            android:title="Center clock" />
+            android:title="@string/pref_centerclock" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
             android:icon="@drawable/ic_settings_clockr"
             android:key="selectedClockRight"
             android:summary="%s"
-            android:title="Right clock" />
+            android:title="@string/pref_rightclock" />
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/TextDataElementsEntries"
@@ -68,7 +68,7 @@
             android:icon="@drawable/ic_settings_view1"
             android:key="selectedView1"
             android:summary="%s"
-            android:title="View 1" />
+            android:title="@string/pref_view1" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,7 +78,7 @@
             android:icon="@drawable/ic_settings_view2"
             android:key="selectedView2"
             android:summary="%s"
-            android:title="View 2" />
+            android:title="@string/pref_view2" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             android:icon="@drawable/ic_settings_view3"
             android:key="selectedView3"
             android:summary="%s"
-            android:title="View 3" />
+            android:title="@string/pref_view3" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,13 +98,13 @@
             android:icon="@drawable/ic_settings_view4"
             android:key="selectedView4"
             android:summary="%s"
-            android:title="View 4" />
+            android:title="@string/pref_view4" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectPressureUnit"
-            android:summaryOff="psi"
-            android:summaryOn="bar"
-            android:title="Pressure unit" />
+            android:summaryOff="@string/psi"
+            android:summaryOn="@string/bar"
+            android:title="@string/pref_pressureunit" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_notifications_category_title">
         <CheckBoxPreference
