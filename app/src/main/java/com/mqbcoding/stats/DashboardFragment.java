@@ -279,13 +279,13 @@ public class DashboardFragment extends CarFragment {
         //pressurefactor is used to calculate the right value for psi later
         if (pressureUnits){
             pressureFactor = 1;
-            pressureUnit = "bar";
+            pressureUnit = "@string/bar";
             pressureMin = -2;
             pressureMax= 3;
 
         } else {
             pressureFactor = (float) 14.5037738;
-            pressureUnit = "psi";
+            pressureUnit = "@string/psi";
             pressureMin = -30;
             pressureMax= 30;
         }
@@ -609,47 +609,47 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "batteryVoltage":
                 label.setText("");
-                value.setText("0,0V");
+                value.setText("@string/zeroVolt");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
             case "coolantTemperature":
                 label.setText("");
-                value.setText("0,0°C");
+                value.setText("@string/zeroCelcius");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
             case "oilTemperature":
                 label.setText("");
-                value.setText("0,0°C");
+                value.setText("@string/zeroCelcius");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "vehicleSpeed":
-                label.setText("kmh");
+                label.setText("@string/kmh");
                 value.setText("0");
                 label.setBackgroundResource(0);
                 break;
             case "engineSpeed":
-                label.setText("RPM");
+                label.setText("@string/rpm");
                 value.setText("0");
                 label.setBackgroundResource(0);
                 break;
             case "currentOutputPower":
-                label.setText("kW");
+                label.setText("@string/kw");
                 value.setText("0");
                 label.setBackgroundResource(0);
                 break;
             case "currentTorque":
-                label.setText("Nm");
+                label.setText("@string/nm");
                 value.setText("0");
                 label.setBackgroundResource(0);
                 break;
             case "gearboxOilTemperature":
                 label.setText("");
-                value.setText("0,0°C");
+                value.setText("@string/zeroCelcius");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
             case "outsideTemperature":
                 label.setText("");
-                value.setText("0,0°C");
+                value.setText("@string/zeroCelcius");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_outsidetemperature));
                 break;
             case "currentGear":

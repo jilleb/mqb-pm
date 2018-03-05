@@ -4,7 +4,7 @@
     <PreferenceCategory
         android:singleLineTitle="false"
         android:summary="Apply changes by switching the lights on/off"
-        android:title="Appearance">
+        android:title="@string/settings_appearance">
 
         <ListPreference
             android:defaultValue="1"
@@ -12,25 +12,25 @@
             android:entryValues="@array/Themes"
             android:key="selectedTheme"
             android:summary="%s"
-            android:title="Theme" />
+            android:title="@string/settings_theme" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="highVisActive"
             android:summaryOff="Only the needle is displayed"
             android:summaryOn="A ray is displayed behind the needle"
-            android:title="High visibility dials" />
+            android:title="@string/settings_highvis" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="maxValuesActive"
             android:summaryOff="Do not show max/min values"
             android:summaryOn="Show max/min values on clocks"
-            android:title="Highest/lowest values" />
+            android:title="@string/settings_highlow" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="showAccelView"
             android:summaryOff="Indicator is not displayed"
             android:summaryOn="Indicator is displayed"
-            android:title="Acceleration/brake indicator" />
+            android:title="@string/settings_accbrakeindicator" />
     </PreferenceCategory>
     <PreferenceCategory
         android:singleLineTitle="false"

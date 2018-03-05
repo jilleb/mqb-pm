@@ -9,9 +9,23 @@
     <string name="decimals">%.1f</string>
     <string name="no_decimals">%.0f</string>
 
+    <string name="psi">psi</string>
+    <string name="zeroVolt">0,0V</string>
+    <string name="zeroCelcius">0,0°C</string>
+    <string name="kmh">kmh</string>
+    <string name="rpm">RPM</string>
+    <string name="nm">Nm</string>
+    <string name="kw">KW</string>
 
 
     <string name="activity_settings_title">Performance Monitor Settings</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_highvis">High visibility dials</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_appearance">Appearance</string>
+    <string name="settings_appearance">Appearance</string>
+
     <string name="pref_choose_account_title">Choose account</string>
     <string name="pref_upload_to_bigquery_title">Upload logs to BigQuery</string>
     <string name="pref_bigquery_project_id_title">Project ID</string>
@@ -39,4 +53,8 @@
     <string name="pref_providers_category_title">Telemetry providers</string>
     <string name="pref_list_providers_title">List providers</string>
     <string name="providers">Telemetry providers</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_highlow">Highest/lowest values</string>
+    <string name="settings_accbrakeindicator">Acceleration/brake indicator</string>
+
 </resources>
