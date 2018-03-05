@@ -1091,6 +1091,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "wheelAngle":
                 if (clockValue != null) {
+                    clockValue = clockValue * -1; // make it negative, otherwise right = left and vice versa
                     dial.speedTo(clockValue == null ? 0.0f : clockValue);
                 }
                 break;
