@@ -49,7 +49,6 @@ public class DashboardFragment extends CarFragment {
     private CarStatsClient mStatsClient;
     private WheelStateMonitor mWheelStateMonitor;
 
-    private static final float DISABLED_ALPHA = 1.0f;
     private ProgressBar mBrakeAccel;
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
@@ -99,17 +98,6 @@ public class DashboardFragment extends CarFragment {
     private Handler mHandler = new Handler();
     public DashboardFragment() {
         // Required empty public constructor
-    }
-
-    //@Override
-    protected void setupStatusBar(StatusBarController sc) {
-        sc.setDayNightStyle(DayNightStyle.FORCE_NIGHT);
-        sc.showAppHeader();
-        sc.hideBatteryLevel();
-        sc.showClock();
-        sc.hideConnectivityLevel();
-        sc.showTitle();
-        sc.setTitle(getContext().getString(R.string.dashboard_title));
     }
 
     @Override
@@ -291,7 +279,7 @@ public class DashboardFragment extends CarFragment {
         //Most bar dials go from -2 to 3 bar.
         //Most PSI dials go from -30 to 30 psi.
         //pressurefactor is used to calculate the right value for psi later
-        if (pressureUnits == true){
+        if (pressureUnits){
             pressureFactor = 1;
             pressureUnit = "bar";
             pressureMin = -2;
@@ -318,7 +306,7 @@ public class DashboardFragment extends CarFragment {
         setupClock(mClockRQuery, mClockRight, mIconClockR, mRayRight, mClockMinRight, mClockMaxRight);
 
         //show high visible rays on, according to the setting
-        if (raysOn==true){
+        if (raysOn){
             mRayLeft.setVisibility(View.VISIBLE);
             mRayCenter.setVisibility(View.VISIBLE);
             mRayRight.setVisibility(View.VISIBLE);
@@ -335,7 +323,7 @@ public class DashboardFragment extends CarFragment {
         }
 
         //show clocks, texts and backgrounds for max/min, according to the setting
-        if (maxOn==true){   // show all minmax stuff
+        if (maxOn){   // show all minmax stuff
             mClockMaxLeft.setVisibility(View.VISIBLE);
             mClockMaxCenter.setVisibility(View.VISIBLE);
             mClockMaxRight.setVisibility(View.VISIBLE);
@@ -375,7 +363,7 @@ public class DashboardFragment extends CarFragment {
             mImageMaxRight.setVisibility(View.INVISIBLE);
         }
 
-        if (accelOn==true) {
+        if (accelOn) {
             mBrakeAccel.setVisibility(View.VISIBLE);
         }
             else{
@@ -560,14 +548,14 @@ public class DashboardFragment extends CarFragment {
         updateClock(mClockRQuery, mClockRight, mRayRight);
 
         //update the max clocks and texts
-        updateMax(mLeftMax, mClockLeft, mTextMaxLeft, mClockMaxLeft);
-        updateMax(mCenterMax, mClockCenter, mTextMaxCenter, mClockMaxCenter);
-        updateMax(mRightMax, mClockRight, mTextMaxRight, mClockMaxRight);
+        updateMax(mClockLeft, mTextMaxLeft, mClockMaxLeft);
+        updateMax(mClockCenter, mTextMaxCenter, mClockMaxCenter);
+        updateMax(mClockRight, mTextMaxRight, mClockMaxRight);
 
         //update the min clocks and text
-        updateMin(mLeftMin, mClockLeft, mTextMinLeft, mClockMinLeft);
-        updateMin(mCenterMin, mClockCenter, mTextMinCenter, mClockMinCenter);
-        updateMin(mRightMin, mClockRight, mTextMinRight, mClockMinRight);
+        updateMin(mClockLeft, mTextMinLeft, mClockMinLeft);
+        updateMin(mClockCenter, mTextMinCenter, mClockMinCenter);
+        updateMin(mClockRight, mTextMinRight, mClockMinRight);
 
 
         //get brakePressure and accelPos, used in other dash views
@@ -598,17 +586,6 @@ public class DashboardFragment extends CarFragment {
 
         mSteeringWheelAngle.setVisibility(View.INVISIBLE);
 
-    }
-
-    private void animateAlpha(View view, float alpha) {
-        if (view.getAlpha() == alpha) {
-            return;
-        }
-        if (isVisible()) {
-            view.animate().alpha(alpha).setDuration(mAnimationDuration).setListener(null);
-        } else {
-            view.setAlpha(alpha);
-        }
     }
 
     // this sets all the labels/values in an initial state, depending on the chosen options
@@ -1000,13 +977,16 @@ public class DashboardFragment extends CarFragment {
                             break;
                     }
 
-                } else if (clockValue != null && tempUnit == null && generalTempUnit != null) {
+                } else if (clockValue != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             dial.setUnit("°F");
                             break;
                         case "celcius":
                             dial.setUnit("°C");
+                            break;
+                        case "?":
+                            dial.setUnit("°");
                             break;
                     }
 
@@ -1025,13 +1005,16 @@ public class DashboardFragment extends CarFragment {
                             break;
 
                     }
-                } else if (clockValue != null && tempUnit2 == null && generalTempUnit != null) {
+                } else if (clockValue != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             dial.setUnit("°F");
                             break;
                         case "celcius":
                             dial.setUnit("°C");
+                            break;
+                        case "?":
+                            dial.setUnit("°");
                             break;
                     }
 
@@ -1050,13 +1033,16 @@ public class DashboardFragment extends CarFragment {
                             break;
 
                     }
-                } else if (clockValue != null && tempUnit3 == null && generalTempUnit != null) {
+                } else if (clockValue != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             dial.setUnit("°F");
                             break;
                         case "celcius":
                             dial.setUnit("°C");
+                            break;
+                        case "?":
+                            dial.setUnit("°");
                             break;
                     }
 
@@ -1179,6 +1165,10 @@ public class DashboardFragment extends CarFragment {
      //   String elementValue = (String) mLastMeasurements.get(queryElement); // this causes troubles, since it can't be determined if the output is String or Float, based on the query
         String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
 
+        if (generalTempUnit == null){
+            generalTempUnit = "?";
+        }
+
         switch (queryElement) {
             case "none":
                 value.setText("");
@@ -1199,7 +1189,7 @@ public class DashboardFragment extends CarFragment {
                 String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
                 if (mCoolantTemp != null && tempUnit != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + tempUnit));
-                } else if (mCoolantTemp != null && tempUnit == null && generalTempUnit != null) {
+                } else if (mCoolantTemp != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°F"));
@@ -1207,10 +1197,10 @@ public class DashboardFragment extends CarFragment {
                         case "celcius":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°C"));
                             break;
+                        case "?":
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°"));
+                            break;
                     }
-                } else if (mCoolantTemp != null && tempUnit == null && generalTempUnit == null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCoolantTemp + "°"));
-
                 }
                 break;
             case "oilTemperature":
@@ -1218,7 +1208,7 @@ public class DashboardFragment extends CarFragment {
                 String tempUnit2 = (String) mLastMeasurements.get("coolantTemperature.unit");
                 if (mOilTemp != null && tempUnit2 != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + tempUnit2));
-                } else if (mOilTemp != null && tempUnit2 == null && generalTempUnit != null) {
+                } else if (mOilTemp != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°F"));
@@ -1226,10 +1216,10 @@ public class DashboardFragment extends CarFragment {
                         case "celcius":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°C"));
                             break;
+                        case "?":
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°"));
+                            break;
                     }
-                } else if (mOilTemp != null && tempUnit2 == null && generalTempUnit == null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOilTemp + "°"));
-
                 }
 
                     break;
@@ -1263,7 +1253,7 @@ public class DashboardFragment extends CarFragment {
                 Float mGearboxOilTemp = (Float) mLastMeasurements.get(queryElement);
                 if (mGearboxOilTemp != null && tempUnit3 != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + tempUnit3));
-                } else if (mGearboxOilTemp != null && tempUnit3 == null && generalTempUnit != null) {
+                } else if (mGearboxOilTemp != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°F"));
@@ -1271,10 +1261,10 @@ public class DashboardFragment extends CarFragment {
                         case "celcius":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°C"));
                             break;
-
+                        case "?":
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°"));
+                            break;
                     }
-                } else if (mGearboxOilTemp != null && tempUnit3 == null && generalTempUnit == null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mGearboxOilTemp + "°"));
                 }
                 break;
             case "outsideTemperature":
@@ -1283,7 +1273,7 @@ public class DashboardFragment extends CarFragment {
                 Float mOutsideTemperature = (Float) mLastMeasurements.get(queryElement);
                 if (mOutsideTemperature != null && tempUnit4 != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + tempUnit4));
-                } else if (mOutsideTemperature != null && tempUnit4 == null && generalTempUnit != null) {
+                } else if (mOutsideTemperature != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°F"));
@@ -1291,9 +1281,10 @@ public class DashboardFragment extends CarFragment {
                         case "celcius":
                             value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°C"));
                             break;
+                        case "?":
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°"));
+                            break;
                     }
-                } else if (mOutsideTemperature != null && tempUnit4 == null && generalTempUnit == null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature + "°"));
                 }
                 break;
             case "currentGear":
@@ -1302,9 +1293,9 @@ public class DashboardFragment extends CarFragment {
                 String currentGear = (String) mLastMeasurements.get("currentGear");
 
                 if (parkingBrake != null && parkingBrake) {
-                    currentGear = "P";
+                    value.setText("P");
                 } else if (reverseGear != null && reverseGear) {
-                    currentGear = "R";
+                    value.setText("R");
                 } else if (currentGear == null) {
                     value.setText("-");
                 } else if (currentGear == "Gear1") {
@@ -1421,8 +1412,7 @@ public class DashboardFragment extends CarFragment {
     }
 
     //update the max speed indicator:
-    //todo: remove currentmax from this, since it's no longer used, using the current state of the max-clock for that
-    private void updateMax(Float currentmax, Speedometer dial, TextView textmax, Speedometer maxclock){
+    private void updateMax(Speedometer dial, TextView textmax, Speedometer maxclock){
         float currentvalue = dial.getSpeed();
         float maxvalue = maxclock.getSpeed();
         if (currentvalue > maxvalue){
@@ -1432,8 +1422,7 @@ public class DashboardFragment extends CarFragment {
 
         textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), maxvalue));
     }
-    //todo: remove currentmin from this, since it's no longer used, using the current state of the min-clock for that
-    private void updateMin(Float currentmin, Speedometer dial, TextView textmin, Speedometer minclock){
+    private void updateMin(Speedometer dial, TextView textmin, Speedometer minclock){
         float currentvalue = dial.getSpeed();
         float minvalue = minclock.getSpeed();
         if (currentvalue < minvalue){
