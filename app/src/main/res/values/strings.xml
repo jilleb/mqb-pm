@@ -3,8 +3,10 @@
     <string name="car_service_name">Performance Monitor</string>
     <string name="dashboard_title">Performance Monitor</string>
 
-    <string name="temp_format">%.0f℃</string>
-    <string name="volt_format">%.1f V</string>
+    <string name="temp_format">%.0f°</string>
+    <string name="temp_formatF">%.0f°F</string>
+    <string name="temp_formatC">%.0f°C</string>
+    <string name="volt_format">%.1fV</string>
 
     <string name="decimals">%.1f</string>
     <string name="no_decimals">%.0f</string>
@@ -69,6 +71,10 @@
     <string name="pref_highlow_on">Show max/min values on clocks</string>
     <string name="pref_accbrakeindicator_off">Indicator is not displayed</string>
     <string name="pref_accbrakeindicator_on">Indicator is displayed</string>
+    <string name="pref_highlowmarks">Mark high/low values on clocks</string>
+    <string name="pref_highlowmarks_on">A min and max mark is shown on the clocks</string>
+    <string name="pref_highlowmarks_off">A min and max mark is not shown on the clocks</string>
+    <string name="zeroVolta">test</string>
 
 
 </resources>
