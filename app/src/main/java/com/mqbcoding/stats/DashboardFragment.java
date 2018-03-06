@@ -1302,17 +1302,17 @@ public class DashboardFragment extends CarFragment {
 
                 Float mOutsideTemperature = (Float) mLastMeasurements.get(queryElement);
                 if (mOutsideTemperature != null && tempUnit4 != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature));// + tempUnit4));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));// + tempUnit4));
                 } else if (mOutsideTemperature != null) {
                     switch (generalTempUnit) {
                         case "fahrenheit":
-                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature));// + "°F"));
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mOutsideTemperature));// + "°F"));
                             break;
                         case "celcius":
-                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature));// + "°C"));
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mOutsideTemperature));// + "°C"));
                             break;
                         case "?":
-                            value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mOutsideTemperature));// + "°"));
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));// + "°"));
                             break;
                     }
                 }
@@ -1380,39 +1380,39 @@ public class DashboardFragment extends CarFragment {
             case "lateralAcceleration":
                 Float mLateralAcceleration = (Float) mLastMeasurements.get(queryElement);
                 if (mLateralAcceleration != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mLateralAcceleration));// + "G"));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mLateralAcceleration));// + "G"));
                 }
                 break;
             case "longitudinalAcceleration":
                 Float mlongitudinalAcceleration = (Float) mLastMeasurements.get(queryElement);
                 if (mlongitudinalAcceleration != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mlongitudinalAcceleration));// + "G"));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mlongitudinalAcceleration));// + "G"));
                 }
                 break;
             case "yawRate":
                 Float mYawRate = (Float) mLastMeasurements.get(queryElement);
                 if (mYawRate != null) {
                     Float mYawRatePct = mYawRate * 100;
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mYawRatePct));// + "%"));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRatePct));// + "%"));
                 }
                 break;
             case "acceleratorPosition":
                 Float mAcceleratorPosition = (Float) mLastMeasurements.get(queryElement);
                 if (mAcceleratorPosition != null) {
                     Float mYawRatePct = mAcceleratorPosition * 100;
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mYawRatePct));// + "%"));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRatePct));// + "%"));
                 }
                 break;
             case "brakePressure":
                 Float mBrakePressure = (Float) mLastMeasurements.get(queryElement);
                 if (mBrakePressure != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mBrakePressure));// + "%"));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mBrakePressure));// + "%"));
                 }
                 break;
             case "wheelAngle":
                 Float mWheelAngle = (Float) mLastMeasurements.get(queryElement);
                 if (mWheelAngle != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mWheelAngle));// + "°"));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.degrees_format).toString(), mWheelAngle));// + "°"));
                 }
                 break;
             case "powermeter":
