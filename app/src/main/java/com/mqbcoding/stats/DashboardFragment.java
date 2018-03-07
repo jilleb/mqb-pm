@@ -562,7 +562,6 @@ public class DashboardFragment extends CarFragment {
 
 
         //get brakePressure and accelPos, used in other dash views
-        //I might get rid of these, since I've got a selectable view for this now
         Float brakePressure = (Float) mLastMeasurements.get("brakePressure");
         Float accelPos = (Float) mLastMeasurements.get("acceleratorPosition");
 
@@ -1116,7 +1115,7 @@ public class DashboardFragment extends CarFragment {
                 break;
 
             case "batteryVoltage":
-                Float mBatteryVoltage = (Float) mLastMeasurements.get(queryElement);
+                Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
                 if (mBatteryVoltage != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.volt_format).toString(), mBatteryVoltage));// + "V"));
                 }
@@ -1309,14 +1308,14 @@ public class DashboardFragment extends CarFragment {
                 }
                 break;
             case "acceleratorPosition":
-                Float mAcceleratorPosition = (Float) mLastMeasurements.get(queryElement);
+                Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
                 if (mAcceleratorPosition != null) {
                     Float mAccelPosPercent = mAcceleratorPosition * 100;
                     value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mAccelPosPercent));// + "%"));
                 }
                 break;
             case "brakePressure":
-                Float mBrakePressure = (Float) mLastMeasurements.get(queryElement);
+                Float mBrakePressure = (Float) mLastMeasurements.get("brakePressure");
                 if (mBrakePressure != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mBrakePressure));// + "%"));
                 }
