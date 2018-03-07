@@ -78,6 +78,7 @@
     <string name="pref_highlowmarks_on">A min and max mark is shown on the clocks</string>
     <string name="pref_highlowmarks_off">A min and max mark is not shown on the clocks</string>
     <string name="zeroVolta">test</string>
+    <string name="pref_graphitem">Graph</string>
 
 
 </resources>

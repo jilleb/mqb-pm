@@ -107,6 +107,13 @@
             android:key="selectedView4"
             android:summary="%s"
             android:title="@string/pref_view4" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:key="selectedGraphItem"
+            android:summary="%s"
+            android:title="@string/pref_graphitem" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectPressureUnit"

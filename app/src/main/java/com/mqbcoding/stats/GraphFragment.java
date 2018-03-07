@@ -43,15 +43,14 @@ public class GraphFragment extends CarFragment {
     private final String TAG = "GraphFragment";
 
     private CarStatsClient mStatsClient;
-    private TextView mLastSpeedKmh;
     private GraphView mGraph;
     private LineGraphSeries<DataPoint> mSpeedSeries;
     private double graphLastXValue =5d;
-    private SpeedView mSpeedView;
+
+    private String mGraphQuery;
 
     private static final float DISABLED_ALPHA = 0.8f;
 
-    private Speedometer mOilTemp; //used to be mOutputPower
     private int mAnimationDuration;
     private int lastSpeed;
 
@@ -117,25 +116,24 @@ public class GraphFragment extends CarFragment {
         Log.i(TAG, "onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_graph, container, false);
 
+//
 
-        mLastSpeedKmh = rootView.findViewById(R.id.txtGraphCurrentSpeed);
-
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        //determine what data the user wants to have on the 3 clocks.
+        mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");
+        // todo: add code to set min/max for the chosen data element
+        // todo: make sure the title is nice
+        // todo: styling
         mGraph = rootView.findViewById(R.id.graph);
         mSpeedSeries = new LineGraphSeries<>();
         mGraph.addSeries(mSpeedSeries);
         mGraph.getViewport().setXAxisBoundsManual(true);
         mGraph.getViewport().setYAxisBoundsManual(true);
         mGraph.getViewport().setMinX(0);
-        mGraph.getViewport().setMaxX(1000);
+        mGraph.getViewport().setMaxX(120);
         mGraph.getViewport().setMaxY(200);
         mGraph.getViewport().setMinY(0);
-
-        mSpeedView = rootView.findViewById(R.id.speedTest);
-
-        mSpeedView.speedTo(300,60000);
-
-
-
+        mGraph.setTitle(mGraphQuery);
         doUpdate();
 
         return rootView;
@@ -202,10 +200,7 @@ public class GraphFragment extends CarFragment {
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                graphLastXValue += 1d;
-                mSpeedSeries.appendData(new DataPoint(graphLastXValue, lastSpeed), true, 60);
-
-                doUpdate();
+               doUpdate();
 
             }
 
@@ -215,173 +210,25 @@ public class GraphFragment extends CarFragment {
 
     private void doUpdate() {
 
+        float randomClockVal = randFloat(0,200);
         Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-        String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-        if (lastSpeed != null && speedUnit != null) {
-            switch (speedUnit) {
-                case "mph":
-                    lastSpeed *= 1.60934f;
-                    break;
-            }
-            //lastSpeed = mSpeedView.getCurrentIntSpeed();
+        //if (lastSpeed != null){
+            graphLastXValue += 1d;
+            mSpeedSeries.appendData(new DataPoint(graphLastXValue, randomClockVal), true, 120);
 
-
-//        String speedUnit = "kmh";
-
-            //    String speedtext = Integer.toString(lastSpeed);
-            //  mLastSpeedKmh.setText(speedtext + speedUnit);
-
-            // mSpeedSeries.appendData(new DataPoint(graphLastXValue, lastSpeed), true, 10000);
+      //  }
 
             postUpdate();
         }
+
+    public static float randFloat(float min, float max) {
+
+        Random rand = new Random();
+
+        float result = rand.nextFloat() * (max - min) + min;
+
+        return result;
+
     }
-
-
-
-
-
-/*
-        Float oilTemp = (Float) mLastMeasurements.get("oilTemperature");
-        if (oilTemp == null) {
-            mOilTempTxt.setText("----");
-        } else {
-            mOilTempTxt.setText(String.format(Locale.US,
-                    getContext().getText(R.string.temp_format).toString(), oilTemp));
-        }
-
-        //get the oilTemperature unit (degrees C or F)
-        String oilTempUnit = (String) mLastMeasurements.get("oilTemperature_unit");
-        if (oilTempUnit == null) {
-            mOilTemp.setUnit("");
-        }else{
-            mOilTemp.setUnit(oilTempUnit);
-
-        }
-
-        Float currentOilTemp = (Float) mLastMeasurements.get("oilTemperature");
-        if (currentOilTemp == null){
-            mOilTemp.speedTo(0);
-        } else {
-            mOilTemp.speedTo(currentOilTemp == null ? 0.0f : currentOilTemp);
-        }
-        //
-
-
-        Float currentChargingPressure = (Float) mLastMeasurements.get(pressureValueQuery);
-        if (currentChargingPressure == null){
-
-        } else {
-            currentChargingPressure = currentChargingPressure * pressureFactor;
-            mChargingPressure.speedTo(currentChargingPressure == null ? 0.0f : currentChargingPressure);
-        }
-
-
-        Float currentOutputTorque = (Float) mLastMeasurements.get("currentTorque");
-        mOutputTorque.speedTo(currentOutputTorque == null ? 0.0f : currentOutputTorque);
-
-        Float brakePressure = (Float) mLastMeasurements.get("brakePressure");
-        Float accelPos = (Float) mLastMeasurements.get("acceleratorPosition");
-
-        if (brakePressure != null && accelPos != null) {
-            float normalizedBrakePressure = Math.min(Math.max(0.0f, brakePressure / FULL_BRAKE_PRESSURE), 1.0f);
-            boolean isBraking = normalizedBrakePressure > 0;
-            mBrakeAccel.setRotation(isBraking ? 180.0f : 0.0f);
-            //noinspection deprecation
-            mBrakeAccel.setProgressTintList(ColorStateList.valueOf(getContext().getResources()
-                    .getColor(isBraking ? R.color.car_accent: R.color.car_primary)));
-            mBrakeAccel.setProgress((int) ((isBraking ? normalizedBrakePressure : accelPos) * 10000));
-        } else {
-            mBrakeAccel.setProgress(0);
-        }
-
-        // Footer
-
-        Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
-        Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
-        String currentGear = (String) mLastMeasurements.get("currentGear");
-        if (parkingBrake != null && parkingBrake) {
-            currentGear = "Park";
-        } else if (reverseGear != null && reverseGear) {
-            currentGear = "Reverse";
-        }
-        for (ImmutableMap.Entry<String, View> gear : mGearViews.entrySet()) {
-            gear.getValue().setSelected(currentGear != null && currentGear.equals(gear.getKey()));
-        }
-
-        // Right panel
-
-        Float oilTempT = (Float) mLastMeasurements.get("oilTemperature");
-        if (oilTempT == null) {
-            mOilTempTxt.setText("----");
-        } else {
-            mOilTempTxt.setText(String.format(Locale.US,
-                    getContext().getText(R.string.temp_format).toString(), oilTempT));
-        }
-
-        Float gearboxTemp = (Float) mLastMeasurements.get("gearboxOilTemperature");
-        if (gearboxTemp == null) {
-            mGearboxTemp.setText("----");
-        } else {
-            mGearboxTemp.setText(String.format(Locale.US,
-                    getContext().getText(R.string.temp_format).toString(), gearboxTemp));
-        }
-
-        Float batteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
-        if (batteryVoltage == null) {
-            mBatteryVoltage.setText("----");
-        } else {
-            mBatteryVoltage.setText(String.format(Locale.US,
-                    getContext().getText(R.string.volt_format).toString(), batteryVoltage));
-        }
-
-        // Last speed
-
-        Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-        String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-        if (lastSpeed != null && speedUnit != null) {
-            switch (speedUnit) {
-                case "mph":
-                    lastSpeed *= 1.60934f;
-                    break;
-            }
-        }
-        mLastSpeedKmh = lastSpeed;
-
-        // Steering wheel angle
-
-        Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
-        mWheelState = mWheelStateMonitor == null ? WheelStateMonitor.WheelState.WHEEL_UNKNOWN
-                : mWheelStateMonitor.getWheelState();
-        mSteeringWheelAngle.setRotation(currentWheelAngle == null ? 0.0f :
-                Math.min(Math.max(-WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG, -currentWheelAngle),
-                        WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG));
-
-        animateAlpha(mOilTemp, currentOilTemp == null ? DISABLED_ALPHA : 1.0f);
-        animateAlpha(mOutputTorque, currentOutputTorque == null ? DISABLED_ALPHA : 1.0f);
-        animateAlpha(mBrakeAccel, brakePressure == null || accelPos == null ? DISABLED_ALPHA : 1.0f);
-        for (ImmutableMap.Entry<String, View> gear : mGearViews.entrySet()) {
-            animateAlpha(gear.getValue(), currentGear == null ? DISABLED_ALPHA : 1.0f);
-        }
-        animateAlpha(mSteeringWheelAngle, mWheelState == WheelStateMonitor.WheelState.WHEEL_DRIVING
-                || mWheelState == WheelStateMonitor.WheelState.WHEEL_UNKNOWN ? 0.0f : 1.0f);
-        animateAlpha(mChargingPressure, mWheelState != WheelStateMonitor.WheelState.WHEEL_DRIVING
-                && mWheelState != WheelStateMonitor.WheelState.WHEEL_UNKNOWN ? 0.0f :
-                (currentChargingPressure == null ? DISABLED_ALPHA : 1.0f));
-                */
-
-
-
-    private void animateAlpha(View view, float alpha) {
-        if (view.getAlpha() == alpha) {
-            return;
-        }
-        if (isVisible()) {
-            view.animate().alpha(alpha).setDuration(mAnimationDuration).setListener(null);
-        } else {
-            view.setAlpha(alpha);
-        }
-    }
-
 
 }
