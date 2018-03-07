@@ -1129,13 +1129,13 @@ public class DashboardFragment extends CarFragment {
             case "acceleratorPosition":
                 if (clockValue != null) {
                     float accelPercent = clockValue * 100;
-                    dial.speedTo(clockValue == null ? 0f : accelPercent);
+                    dial.speedTo(clockValue == null ? 0.0f : accelPercent);
                 }
 
                 break;
             case "brakePressure":
                 if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
                 }
                 break;
             case "currentTorque":

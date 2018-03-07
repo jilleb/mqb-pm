@@ -3,13 +3,13 @@
     <string name="car_service_name">Performance Monitor</string>
     <string name="dashboard_title">Performance Monitor</string>
 
-    <string name="temp_format">%.1f°</string>
-    <string name="temp_formatF">%.1f°F</string>
-    <string name="temp_formatC">%.1f°C</string>
-    <string name="volt_format">%.1f V</string>
-    <string name="gforce_format">%.1f G</string>
-    <string name="percent_format">%.1f %</string>
-    <string name="degrees_format">%.1f °</string>
+    <string name="temp_format">%.0f°</string>
+    <string name="temp_formatF">%.0f°F</string>
+    <string name="temp_formatC">%.0f°C</string>
+    <string name="volt_format">%.1fV</string>
+    <string name="gforce_format">%.1fG</string>
+    <string name="percent_format">%.1f%</string>
+    <string name="degrees_format">%.1f°</string>
 
     <string name="decimals">%.1f</string>
     <string name="no_decimals">%.0f</string>
@@ -71,7 +71,7 @@
     <string name="pref_highvis_off">Only the needle is displayed</string>
     <string name="pref_highvis_on">A ray is displayed behind the needle</string>
     <string name="pref_highlow_off">Do not show max/min values</string>
-    <string name="pref_highlow_on">Show max/min values on clocks</string>
+    <string name="pref_highlow_on">Show max/min values for each clock</string>
     <string name="pref_accbrakeindicator_off">Indicator is not displayed</string>
     <string name="pref_accbrakeindicator_on">Indicator is displayed</string>
     <string name="pref_highlowmarks">Mark high/low values on clocks</string>
