@@ -969,110 +969,22 @@ public class DashboardFragment extends CarFragment {
                 break;
 
             case "oilTemperature":
-                //String tempUnit = (String) mLastMeasurements.get("oilTemperature.unit");
-                String tempUnit = "?";
-                if (clockValue != null && tempUnit != null) {
-                    switch (tempUnit) {
-                        case "F":
-                            dial.setUnit("°F");
-                            break;
-                        case "C":
-                            dial.setUnit("°C");
-                            break;
-                        case "?":
-                            dial.setUnit("°");
-                            break;
-
-                    }
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-
-                } else if (clockValue != null) {
-                    switch (generalTempUnit) {
-                        case "fahrenheit":
-                            dial.setUnit("°F");
-                            break;
-                        case "celcius":
-                            dial.setUnit("°C");
-                            break;
-                        case "?":
-                            dial.setUnit("°");
-                            break;
-                    }
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-
+                if (clockValue != null) {
+                   dial.speedTo(clockValue == null ? 0.0f : clockValue);
                 }
-
                 break;
             case "coolantTemperature":
-                String tempUnit2 = "C";
-                //String tempUnit2 = (String) mLastMeasurements.get("coolantTemperature.unit");
-                if (clockValue != null && tempUnit2 != null) {
-                    switch (tempUnit2) {
-                        case "F":
-                            dial.setUnit("°F");
-                            break;
-                        case "C":
-                            dial.setUnit("°C");
-                            break;
-                        case "?":
-                            dial.setUnit("°");
-                            break;
-
-
-                    }
+                if (clockValue != null) {
                     dial.speedTo(clockValue == null ? 0.0f : clockValue);
-
-                } else if (clockValue != null) {
-                    switch (generalTempUnit) {
-                        case "fahrenheit":
-                            dial.setUnit("°F");
-                            break;
-                        case "celcius":
-                            dial.setUnit("°C");
-                            break;
-                        case "?":
-                            dial.setUnit("°");
-                            break;
-                    }
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-
                 }
 
                 break;
             case "gearboxTemperature":
-                String tempUnit3 = "C";
-                //String tempUnit3 = (String) mLastMeasurements.get("gearboxTemperature.unit");
-                if (clockValue != null && tempUnit3 != null) {
-                    switch (tempUnit3) {
-                        case "F":
-                            dial.setUnit("°F");
-                            break;
-                        case "C":
-                            dial.setUnit("°C");
-                            break;
-                        case "?":
-                            dial.setUnit("°");
-                            break;
 
-
-                    }
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-
-                } else if (clockValue != null) {
-                    switch (generalTempUnit) {
-                        case "fahrenheit":
-                            dial.setUnit("°F");
-                            break;
-                        case "celcius":
-                            dial.setUnit("°C");
-                            break;
-                        case "?":
-                            dial.setUnit("°");
-                            break;
-                    }
-
+                if (clockValue != null) {
                     dial.speedTo(clockValue == null ? 0.0f : clockValue);
                 }
+
                 break;
 
             case "absChargingAirPressure":
@@ -1399,8 +1311,8 @@ public class DashboardFragment extends CarFragment {
             case "acceleratorPosition":
                 Float mAcceleratorPosition = (Float) mLastMeasurements.get(queryElement);
                 if (mAcceleratorPosition != null) {
-                    Float mYawRatePct = mAcceleratorPosition * 100;
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRatePct));// + "%"));
+                    Float mAccelPosPercent = mAcceleratorPosition * 100;
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mAccelPosPercent));// + "%"));
                 }
                 break;
             case "brakePressure":

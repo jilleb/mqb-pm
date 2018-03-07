@@ -8,7 +8,7 @@
     <string name="temp_formatC">%.0f°C</string>
     <string name="volt_format">%.1fV</string>
     <string name="gforce_format">%.1fG</string>
-    <string name="percent_format">%.1f%</string>
+    <string name="percent_format">%.1f</string>
     <string name="degrees_format">%.1f°</string>
 
     <string name="decimals">%.1f</string>
