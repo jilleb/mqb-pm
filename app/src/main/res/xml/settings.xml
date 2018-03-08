@@ -108,7 +108,6 @@
             android:summary="%s"
             android:title="@string/pref_view4" />
         <ListPreference
-            android:defaultValue="1"
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:key="selectedGraphItem"

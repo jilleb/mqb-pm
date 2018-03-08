@@ -240,7 +240,7 @@ public class MainCarActivity extends CarActivity {
                     switchToFragment(FRAGMENT_MEASUREMENTS);
                     break;
                 case MENU_GRAPH:
-                    switchToFragment(FRAGMENT_GRAPH );
+                    switchToFragment(FRAGMENT_GRAPH);
                     break;
                 case MENU_CREDITS:
                     switchToFragment(FRAGMENT_CREDITS);
