@@ -1303,8 +1303,7 @@ public class DashboardFragment extends CarFragment {
             case "yawRate":
                 Float mYawRate = (Float) mLastMeasurements.get(queryElement);
                 if (mYawRate != null) {
-                    Float mYawRatePct = mYawRate * 100;
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRatePct));// + "%"));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRate));// + "%"));
                 }
                 break;
             case "acceleratorPosition":
