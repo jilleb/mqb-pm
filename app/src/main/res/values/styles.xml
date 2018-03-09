@@ -174,7 +174,7 @@
         <item name="themedCarBackground">@drawable/vw_plaid_background_incar</item>
         <item name="themedNeedle">@drawable/vw3_needle</item>
         <item name="sv_markColor">@android:color/transparent</item>
-        <item name="themedStopWatchBackground">@drawable/vw_stopwatch_background</item>
+        <item name="themedStopWatchBackground">@drawable/clubsport_stopwatch_background</item>
         <item name="themedNeedleColor">@color/red</item>
 
 
