@@ -144,6 +144,8 @@ public class GraphFragment extends CarFragment {
 
         //determine what data the user wants to have on the graph and clock.
         mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");
+        Log.d(TAG, "Graphing element selected:" + mGraphQuery );
+
 
         // todo: add code to set min/max for the chosen data element
         // todo: make sure the title is nice
@@ -158,6 +160,7 @@ public class GraphFragment extends CarFragment {
         mGraph.getViewport().setMaxY(200);
         mGraph.getViewport().setMinY(0);
         mGraph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
+        mGraph.setTitle(mGraphQuery);
 
         mSpeedSeries.setDataWidth(1);
 
@@ -457,22 +460,23 @@ public class GraphFragment extends CarFragment {
     }
 
     private void doUpdate() {
+        if (mGraphQuery != null) {
+            updateClock(mGraphQuery);
+            Float temp = mClockGraph.getSpeed();
+            if (temp != null) {
+                graphLastXValue += 1d;
+                mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 120);
+            }
+            //graphLastXValue += 1d;
 
-        updateClock(mGraphQuery);
+            float randomClockVal = randFloat(0, 200);
+            // Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
+            //if (lastSpeed != null){
+            //graphLastXValue += 1d;
+            //mSpeedSeries.appendData(new DataPoint(graphLastXValue, randomClockVal), true, 120);
+            //  }
 
-        Float temp = mClockGraph.getSpeed();
-        if (temp != null){
-            graphLastXValue += 1d;
-            mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 120);
         }
-        //graphLastXValue += 1d;
-
-        float randomClockVal = randFloat(0,200);
-       // Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-        //if (lastSpeed != null){
-        //graphLastXValue += 1d;
-        //mSpeedSeries.appendData(new DataPoint(graphLastXValue, randomClockVal), true, 120);
-        //  }
 
         postUpdate();
     }
@@ -490,6 +494,10 @@ public class GraphFragment extends CarFragment {
         float randomClockVal = randFloat(-100,200);
         speedFactor = 1f;
         pressureFactor = 1f;
+
+        if (query == null) {
+            query = "test";
+        }
 
         switch (query){
             case "test":
