@@ -199,7 +199,11 @@ public class GraphFragment extends CarFragment {
     }
 
     private void setupClock(String query) {
-            switch(query) {
+
+        if (query == null) {
+            query = "test";
+        }
+        switch(query) {
                 case "none":
                     mClockIcon.setText("");
                     mClockGraph.setUnit("");
