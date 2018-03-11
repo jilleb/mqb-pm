@@ -68,8 +68,8 @@
     <string name="pref_view4">View 4</string>
     <string name="pref_pressureunit">Pressure unit</string>
     <string name="pref_dataelementsettings">Data element settings</string>
-    <string name="pref_highvis_off">Only the needle is displayed</string>
-    <string name="pref_highvis_on">A ray is displayed behind the needle</string>
+    <string name="pref_highvis_off">Display a needle on the clocks</string>
+    <string name="pref_highvis_on">Display a highly visible ray instead of a needle</string>
     <string name="pref_highlow_off">Do not show max/min values</string>
     <string name="pref_highlow_on">Show max/min values for each clock</string>
     <string name="pref_accbrakeindicator_off">Indicator is not displayed</string>
