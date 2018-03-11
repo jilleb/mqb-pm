@@ -17,7 +17,7 @@
     <string name="psi">psi</string>
     <string name="bar">bar</string>
     <string name="zeroVolt">0,0V</string>
-    <string name="zeroCelcius">0,0°C</string>
+    <string name="zeroCelcius">0,0°</string>
     <string name="kmh">kmh</string>
     <string name="rpm">RPM</string>
     <string name="nm">Nm</string>

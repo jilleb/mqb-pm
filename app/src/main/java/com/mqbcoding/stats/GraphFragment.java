@@ -459,7 +459,7 @@ public class GraphFragment extends CarFragment {
 
             }
 
-        }, 500 );
+        }, 1000 );
 
     }
 

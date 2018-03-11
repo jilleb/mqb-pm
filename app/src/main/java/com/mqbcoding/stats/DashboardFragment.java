@@ -759,21 +759,21 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "oilTemperature":
                 icon.setText("");
-                clock.setUnit("°C");
+                clock.setUnit("°");
                 clock.setMinMaxSpeed(0,150);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "coolantTemperature":
                 icon.setText("");
-                clock.setUnit("°C");
+                clock.setUnit("°");
                 clock.setMinMaxSpeed(0,150);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
             case "gearboxOilTemperature":
                 icon.setText("");
-                clock.setUnit("°C");
+                clock.setUnit("°");
                 clock.setMinMaxSpeed(0,150);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
@@ -1123,7 +1123,7 @@ public class DashboardFragment extends CarFragment {
 
             case "coolantTemperature":
                 Float mCoolantTemp = (Float) mLastMeasurements.get(queryElement);
-                String tempUnit = "C";
+                String tempUnit = "?";
                 //String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
                 if (mCoolantTemp != null && tempUnit != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));// + tempUnit));
@@ -1143,7 +1143,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "oilTemperature":
                 Float mOilTemp = (Float) mLastMeasurements.get(queryElement);
-                String tempUnit2 = "C";
+                String tempUnit2 = "?";
                 //String tempUnit2 = (String) mLastMeasurements.get("coolantTemperature.unit");
                 if (mOilTemp != null && tempUnit2 != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOilTemp));// + tempUnit2));
@@ -1188,7 +1188,7 @@ public class DashboardFragment extends CarFragment {
                 }
                 break;
             case "gearboxOilTemperature":
-                String tempUnit3 = "C";
+                String tempUnit3 = "?";
                 //String tempUnit3 = (String) mLastMeasurements.get("gearboxOilTemperature.unit");
                 Float mGearboxOilTemp = (Float) mLastMeasurements.get(queryElement);
                 if (mGearboxOilTemp != null && tempUnit3 != null) {
@@ -1209,7 +1209,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "outsideTemperature":
                 //String tempUnit4 = (String) mLastMeasurements.get("outsideTemperature.unit");
-                String tempUnit4 = "C";
+                String tempUnit4 = "?";
 
                 Float mOutsideTemperature = (Float) mLastMeasurements.get(queryElement);
                 if (mOutsideTemperature != null && tempUnit4 != null) {

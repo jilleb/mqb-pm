@@ -177,13 +177,13 @@ public class MainCarActivity extends CarActivity {
                 .setTitle("Stopwatch")
                 .setType(MenuItem.Type.ITEM)
                 .build());
-
+/*
             mainMenu.addMenuItem(MENU_GRAPH, new MenuItem.Builder()
                     .setTitle("Graphs")
                     .setType(MenuItem.Type.ITEM)
                     .build());
 
-/*
+
             mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
                     .setTitle("Measurements(test)")
                     .setType(MenuItem.Type.ITEM)
