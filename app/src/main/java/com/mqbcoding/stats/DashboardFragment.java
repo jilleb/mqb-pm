@@ -1264,7 +1264,7 @@ public class DashboardFragment extends CarFragment {
                     }
                     break;
                 case "recommendedGear":
-                    String mRecommendedGear = (String) mLastMeasurements.get("currentGear");
+                    String mRecommendedGear = (String) mLastMeasurements.get("recommendedGear");
                     String mCurrentGear2 = (String) mLastMeasurements.get("currentGear");
 
                     if (mRecommendedGear == null) {
