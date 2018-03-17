@@ -552,6 +552,7 @@ public class DashboardFragment extends CarFragment {
         updateElement(mElement4Query, mValueElement4, mIconElement4);
 
         //update each of the clocks and the min/max/ray elements that go with it
+        // query, dial, visray, textmax, textmin, clockmax, clockmin) {
         updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft);
         updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter);
         updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight);
@@ -1089,13 +1090,22 @@ public class DashboardFragment extends CarFragment {
 
 
             }
-            float temp = dial.getSpeed();
-            visray.speedTo(temp);
+            float tempValue = dial.getSpeed();
+            visray.speedTo(tempValue);
 
             //update the max clocks and text
-            updateMax(dial, textmax, clockmax);
-            updateMin(dial, textmin, clockmin);
+            Float maxValue = clockmax.getSpeed();
+            if (tempValue > maxValue){
+                clockmax.setSpeedAt(tempValue);
+                textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
+            }
 
+            Float minValue = clockmin.getSpeed();
+            if (tempValue < minValue){
+                clockmin.setSpeedAt(tempValue);
+                textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
+
+            }
 
         }
     }
@@ -1365,6 +1375,7 @@ public class DashboardFragment extends CarFragment {
         }
         textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), maxvalue));
     }
+
     private void updateMin(Speedometer dial, TextView textmin, Speedometer minclock){
         Float currentvalue = dial.getCurrentSpeed();
         Float minvalue = minclock.getCurrentSpeed();
