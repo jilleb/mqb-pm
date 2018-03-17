@@ -466,7 +466,7 @@ public class GraphFragment extends CarFragment {
     private void doUpdate() {
         if (mGraphQuery != null) {
             updateClock(mGraphQuery);
-            Float temp = mClockGraph.getSpeed();
+            Float temp = mClockGraph.getCurrentSpeed();
             if (temp != null) {
                 graphLastXValue += 1d;
                 mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 120);

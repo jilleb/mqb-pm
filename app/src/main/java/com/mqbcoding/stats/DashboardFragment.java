@@ -33,6 +33,8 @@ import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
+import com.github.anastr.speedviewlib.components.note.Note;
+import com.github.anastr.speedviewlib.components.note.TextNote;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.util.Date;
@@ -483,15 +485,19 @@ public class DashboardFragment extends CarFragment {
                     Log.d(TAG, "isNightMode " + ev.getNightData().isNightMode);
                     break;
                 case CarSensorManager.SENSOR_TYPE_CAR_SPEED:
-                    Log.d(TAG, "carSpeed " + ev.getCarSpeedData().carSpeed);
+                    Log.d(TAG, "carSpeed: " + ev.getCarSpeedData().carSpeed);
                     break;
                 case CarSensorManager.SENSOR_TYPE_DRIVING_STATUS:
                     CarSensorEvent.DrivingStatusData ds = ev.getDrivingStatusData();
                     Log.d(TAG, "videoRestricted: " + ds.isVideoRestricted() + ", fullyRestricted:" + ds.isFullyRestricted());
                     break;
+                case CarSensorManager.SENSOR_TYPE_GEAR:
+                    Log.d(TAG, "Gear: " + ev.getGearData().gear);
+                case CarSensorManager.SENSOR_TYPE_RPM:
+                    Log.d(TAG, "RPM: " + ev.getRpmData().rpm);
                 default:
                     Log.d(TAG, "Unhandled " + ev.sensorType);
-                    //Include it in the switch-case statement
+
                     break;
             }
         }
@@ -545,21 +551,10 @@ public class DashboardFragment extends CarFragment {
         updateElement(mElement3Query, mValueElement3, mIconElement3);
         updateElement(mElement4Query, mValueElement4, mIconElement4);
 
-        //update each of the clocks
-        updateClock(mClockLQuery, mClockLeft, mRayLeft);
-        updateClock(mClockCQuery, mClockCenter, mRayCenter);
-        updateClock(mClockRQuery, mClockRight, mRayRight);
-
-        //update the max clocks and texts
-        updateMax(mClockLeft, mTextMaxLeft, mClockMaxLeft);
-        updateMax(mClockCenter, mTextMaxCenter, mClockMaxCenter);
-        updateMax(mClockRight, mTextMaxRight, mClockMaxRight);
-
-        //update the min clocks and text
-        updateMin(mClockLeft, mTextMinLeft, mClockMinLeft);
-        updateMin(mClockCenter, mTextMinCenter, mClockMinCenter);
-        updateMin(mClockRight, mTextMinRight, mClockMinRight);
-
+        //update each of the clocks and the min/max/ray elements that go with it
+        updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft);
+        updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter);
+        updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight);
 
         //get brakePressure and accelPos, used in other dash views
         Float brakePressure = (Float) mLastMeasurements.get("brakePressure");
@@ -911,7 +906,7 @@ public class DashboardFragment extends CarFragment {
 
 
     //update clock with data
-    private void updateClock(String query, Speedometer dial, RaySpeedometer visray) {
+    private void updateClock(String query, Speedometer dial, RaySpeedometer visray, TextView textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin) {
 
         if (query == null) {
             return;
@@ -1096,6 +1091,11 @@ public class DashboardFragment extends CarFragment {
             }
             float temp = dial.getSpeed();
             visray.speedTo(temp);
+
+            //update the max clocks and text
+            updateMax(dial, textmax, clockmax);
+            updateMin(dial, textmin, clockmin);
+
 
         }
     }
@@ -1357,20 +1357,19 @@ public class DashboardFragment extends CarFragment {
 
     //update the max speed indicator:
     private void updateMax(Speedometer dial, TextView textmax, Speedometer maxclock){
-        float currentvalue = dial.getSpeed();
-        float maxvalue = maxclock.getSpeed();
+
+        Float currentvalue = dial.getCurrentSpeed();
+        Float maxvalue = maxclock.getCurrentSpeed();
         if (currentvalue > maxvalue){
-            maxclock.speedTo(currentvalue);
+            maxclock.setSpeedAt(currentvalue);
         }
-
-
         textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), maxvalue));
     }
     private void updateMin(Speedometer dial, TextView textmin, Speedometer minclock){
-        float currentvalue = dial.getSpeed();
-        float minvalue = minclock.getSpeed();
+        Float currentvalue = dial.getCurrentSpeed();
+        Float minvalue = minclock.getCurrentSpeed();
         if (currentvalue < minvalue){
-            minclock.speedTo(currentvalue);
+            minclock.setSpeedAt(currentvalue);
         }
 
         textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), minvalue));
