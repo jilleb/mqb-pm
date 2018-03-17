@@ -53,10 +53,16 @@ public class MainCarActivity extends CarActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
+
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
+
+
+        String selectedLanguage = sharedPreferences.getString("selectedLanguage", "en");
+        LanguageHelper.changeLocale(this.getResources(), selectedLanguage);
+
 
         switch(selectedTheme) {
             case "VW GTI":
@@ -133,8 +139,8 @@ public class MainCarActivity extends CarActivity {
         //set fragments:
         CarFragment carfragment = new DashboardFragment();
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
-        MeasurementsFragment measurementsfragment = new MeasurementsFragment();
-        CardataFragment cardatafragment = new CardataFragment();
+        //MeasurementsFragment measurementsfragment = new MeasurementsFragment();
+        //CardataFragment cardatafragment = new CardataFragment();
         GraphFragment graphfragment = new GraphFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
         fragmentManager.beginTransaction()
@@ -167,6 +173,7 @@ public class MainCarActivity extends CarActivity {
                 .setTitle("Home")
                 .setType(MenuItem.Type.ITEM)
                 .build());
+
      /*   mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
                 .setTitle("Car status")
                 .setType(MenuItem.Type.ITEM)
@@ -177,13 +184,13 @@ public class MainCarActivity extends CarActivity {
                 .setTitle("Stopwatch")
                 .setType(MenuItem.Type.ITEM)
                 .build());
+
+        mainMenu.addMenuItem(MENU_GRAPH, new MenuItem.Builder()
+                .setTitle("Graphs")
+                .setType(MenuItem.Type.ITEM)
+                .build());
+
 /*
-            mainMenu.addMenuItem(MENU_GRAPH, new MenuItem.Builder()
-                    .setTitle("Graphs")
-                    .setType(MenuItem.Type.ITEM)
-                    .build());
-
-
             mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
                     .setTitle("Measurements(test)")
                     .setType(MenuItem.Type.ITEM)

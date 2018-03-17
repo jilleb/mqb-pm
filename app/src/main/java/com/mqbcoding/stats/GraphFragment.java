@@ -459,8 +459,8 @@ public class GraphFragment extends CarFragment {
 
             }
 
-        }, 1000 );
-
+        }, 5000 );
+        //todo: make delay configurable
     }
 
     private void doUpdate() {

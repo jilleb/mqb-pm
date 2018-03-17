@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">Performance Monitor voor VAG</string>
+    <string name="car_service_name">Performance Monitor</string>
+    <string name="dashboard_title">Performance Monitor</string>
+
+    <string name="temp_format">%.0f°</string>
+    <string name="temp_formatF">%.0f°F</string>
+    <string name="temp_formatC">%.0f°C</string>
+    <string name="volt_format">%.1fV</string>
+    <string name="gforce_format">%.1fG</string>
+    <string name="percent_format">%.1f</string>
+    <string name="degrees_format">%.1f°</string>
+
+    <string name="decimals">%.1f</string>
+    <string name="no_decimals">%.0f</string>
+
+    <string name="psi">psi</string>
+    <string name="bar">bar</string>
+    <string name="zeroVolt">0,0V</string>
+    <string name="zeroCelcius">0,0°</string>
+    <string name="kmh">kmh</string>
+    <string name="rpm">RPM</string>
+    <string name="nm">Nm</string>
+    <string name="kw">KW</string>
+
+
+    <string name="activity_settings_title">Performance Monitor Instellingen</string>
+
+    <string name="pref_appearance">Weergave</string>
+    <string name="pref_highvis">Hoge contrast klokweergave</string>
+    <string name="pref_theme">Thema</string>
+    <string name="pref_highlow">Hoogste/laagste waarden</string>
+    <string name="pref_accbrakeindicator">Optrekken/afremmen weergave</string>
+
+    <string name="pref_choose_account_title">Kies account</string>
+    <string name="pref_upload_to_bigquery_title">Upload logs naar BigQuery</string>
+    <string name="pref_bigquery_project_id_title">Project ID</string>
+    <string name="pref_bigquery_dataset_title">Dataset naam</string>
+    <string name="pref_bigquery_table_title">Table naam</string>
+    <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
+    <string name="pref_kick_uploads_title">Data uploaden</string>
+    <string name="kick_uploads_nothing_to_do">Alle uploads zijn gereed.</string>
+    <string name="kick_uploads_done">Uploads gepland.</string>
+    <string name="pref_bigquery_reupload_last_title">Upload laatste log opnieuw</string>
+    <string name="bigquery_reupload_last_failed">Fout bij het uploaden.</string>
+    <string name="bigquery_reupload_last_ok">Her-upload gepland.</string>
+    <string name="oil_notification_title">Olie temperatuur</string>
+    <string name="oil_notification_text">Motorolie is op temperatuur.</string>
+    <string name="pref_oil_temp_threshold_title">Gewenste olie temperatuur</string>
+    <string name="pref_oil_temp_monitoring_title">Monitor olie temperatuur</string>
+    <string name="pref_oil_temp_monitoring_summary">Show notification when engine oil reaches working temperature.</string>
+    <string name="pref_notifications_category_title">Notificaties</string>
+    <string name="pref_wheel_state_monitoring_title">Piep wanneer het stuur recht staat</string>
+    <string name="pref_wheel_state_monitoring_summary">Piept in de achteruit wanneer het stuur recht staat.</string>
+    <string name="pref_logging_category_title">Logging</string>
+    <string name="pref_stats_logging_title">Log gegevens</string>
+    <string name="pref_stats_logging_summary">Map voor logs: %1$s</string>
+    <string name="pref_stats_logging_not_available">Loggen niet beschikbaar: %1$s</string>
+    <string name="pref_providers_category_title">Gegevensaanbieders </string>
+    <string name="pref_list_providers_title">Lijst met aanbieders</string>
+    <string name="providers">Gegevens aanbieders</string>
+    <string name="pref_leftclock">Klok links</string>
+    <string name="pref_centerclock">Klok midden</string>
+    <string name="pref_rightclock">Klok rechts</string>
+    <string name="pref_view1">Element 1</string>
+    <string name="pref_view2">Element 2</string>
+    <string name="pref_view3">Element 3</string>
+    <string name="pref_view4">Element 4</string>
+    <string name="pref_pressureunit">Druk eenheden</string>
+    <string name="pref_dataelementsettings">Data element instellingen</string>
+    <string name="pref_highvis_off">Toon een wijzer op de klok</string>
+    <string name="pref_highvis_on">Toon een hoog-contrast straal in plaats van een wijzer</string>
+    <string name="pref_highlow_off">Toon geen min/max waarden</string>
+    <string name="pref_highlow_on">Toon min/max waarden voor elke klok</string>
+    <string name="pref_accbrakeindicator_off">Weergave wordt niet getoond</string>
+    <string name="pref_accbrakeindicator_on">Weergave wordt getoond</string>
+    <string name="pref_highlowmarks">Markeer hoogste en laagste waarden op de klokken</string>
+    <string name="pref_highlowmarks_on">De hoogste en laagste waarden worden getoond op de klok</string>
+    <string name="pref_highlowmarks_off">De hoogste en laagste waarden worden niet getoond op de klok</string>
+    <string name="zeroVolta">test</string>
+    <string name="pref_graphitem">Grafiek</string>
+    <string name="languages">Taal</string>
+
+
+</resources>

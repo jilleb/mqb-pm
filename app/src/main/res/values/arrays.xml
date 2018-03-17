@@ -140,6 +140,23 @@
     </string-array>
 
 
+
+    <string-array name="languageEntries">
+        <item>English</item>
+        <item>Nederlands</item>
+        <item>Deutsch</item>
+        <item>ру́сский язы́к</item>
+    </string-array>
+
+
+    <string-array name="languageValues">
+        <item>en</item>
+        <item>nl</item>
+        <item>de</item>
+        <item>ru</item>
+    </string-array>
+
+
 <!--
 Todo: add non-exlap data to the app:
     SENSOR_TYPE_COMPASS,
