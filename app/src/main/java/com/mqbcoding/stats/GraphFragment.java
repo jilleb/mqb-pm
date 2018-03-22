@@ -11,7 +11,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -40,7 +39,7 @@ public class GraphFragment extends CarFragment {
     private CarStatsClient mStatsClient;
     private GraphView mGraph;
     private BarGraphSeries<DataPoint> mSpeedSeries;
-    private double graphLastXValue =5d;
+    private double graphLastXValue = 5d;
     private Speedometer mClockGraph;
     private TextView mClockIcon;
     private String mGraphQuery, mGraphTitle;
@@ -55,10 +54,13 @@ public class GraphFragment extends CarFragment {
 
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
-
-    public GraphFragment() {
-        // Required empty public constructor
-    }
+    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
+        @Override
+        public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
+            mLastMeasurements.putAll(values);
+            postUpdate();
+        }
+    };
 
     /*
     //@Override
@@ -73,6 +75,34 @@ public class GraphFragment extends CarFragment {
         sc.setTitle("Graphs");
     }
     */
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder) iBinder;
+            mStatsClient = carStatsBinder.getStatsClient();
+            mLastMeasurements = mStatsClient.getMergedMeasurements();
+            mStatsClient.registerListener(mCarStatsListener);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mStatsClient.unregisterListener(mCarStatsListener);
+        }
+    };
+
+    public GraphFragment() {
+        // Required empty public constructor
+    }
+
+    public static float randFloat(float min, float max) {
+
+        Random rand = new Random();
+
+        float result = rand.nextFloat() * (max - min) + min;
+
+        return result;
+
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -85,21 +115,6 @@ public class GraphFragment extends CarFragment {
 
         mAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
-
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder)iBinder;
-            mStatsClient = carStatsBinder.getStatsClient();
-            mLastMeasurements = mStatsClient.getMergedMeasurements();
-            mStatsClient.registerListener(mCarStatsListener);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            mStatsClient.unregisterListener(mCarStatsListener);
-        }
-    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -114,12 +129,12 @@ public class GraphFragment extends CarFragment {
         Log.i(TAG, "onCreateView");
 
         View rootView = inflater.inflate(R.layout.fragment_graph, container, false);
-        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[] { R.attr.themedNeedle });
+        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200,200);
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
 
         mClockGraph = rootView.findViewById(R.id.dial_graph);
         mClockGraph.setIndicator(imageIndicator);
@@ -127,15 +142,14 @@ public class GraphFragment extends CarFragment {
         mClockIcon = rootView.findViewById(R.id.icon_GraphClock);
 
 
-
         //Get shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        pressureUnits   = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
-        graphDelay      = Integer.parseInt(sharedPreferences.getString("graphDelay", "1000"));
+        pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
+        graphDelay = Integer.parseInt(sharedPreferences.getString("graphDelay", "1000"));
 
         //determine what data the user wants to have on the graph and clock.
         mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");
-        Log.d(TAG, "Graphing element selected:" + mGraphQuery );
+        Log.d(TAG, "Graphing element selected:" + mGraphQuery);
 
         // todo: add code to set min/max for the chosen data element
         // todo: make sure the title is nice
@@ -155,7 +169,7 @@ public class GraphFragment extends CarFragment {
         mSpeedSeries.setDataWidth(1);
 
 
-       // mSpeedSeries.setBackgroundColor(Color.argb(50, 0, 0, 0));
+        // mSpeedSeries.setBackgroundColor(Color.argb(50, 0, 0, 0));
         mSpeedSeries.setColor(Color.argb(80, 255, 255, 255));
 
 
@@ -167,17 +181,17 @@ public class GraphFragment extends CarFragment {
         //Most bar dials go from -2 to 3 bar.
         //Most PSI dials go from -30 to 30 psi.
         //pressurefactor is used to calculate the right value for psi later
-        if (pressureUnits){
+        if (pressureUnits) {
             pressureFactor = 1;
             pressureUnit = "bar";
             pressureMin = -2;
-            pressureMax= 3;
+            pressureMax = 3;
 
         } else {
             pressureFactor = (float) 14.5037738;
             pressureUnit = "psi";
             pressureMin = -30;
-            pressureMax= 30;
+            pressureMax = 30;
         }
 
         setupClock(mGraphQuery);
@@ -193,192 +207,218 @@ public class GraphFragment extends CarFragment {
         if (query == null) {
             query = "test";
         }
-        switch(query) {
-                case "none":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("");
-                    mClockIcon.setBackgroundResource(0);
-                    mGraph.setTitle("No data selected");
-                    break;
-                case "test":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("testing");
-                    mClockGraph.setMinMaxSpeed(-100,200);
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
-                    mGraph.setTitle("Test data");
-                    break;
-                case "vehicleSpeed_alternative":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("kmh");
-                    mClockGraph.setMinMaxSpeed(0,350);
-                    mClockIcon.setBackgroundResource(0);
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    break;
-                case "vehicleSpeed":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("kmh");
-                    mClockGraph.setMinMaxSpeed(0,350);
-                    mClockIcon.setBackgroundResource(0);
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    break;
-                case "engineSpeed":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("RPM");
-                    mClockGraph.setMinMaxSpeed(0,8000);
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    mClockIcon.setBackgroundResource(0);
-                    break;
-                case "batteryVoltage":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("Volt");
-                    mClockGraph.setMinMaxSpeed(0,15);
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
-                    break;
-                case "oilTemperature":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("°C");
-                    mClockGraph.setMinMaxSpeed(0,150);
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_oil));
-                    break;
-                case "coolantTemperature":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("°C");
-                    mClockGraph.setMinMaxSpeed(0,150);
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_water));
-                    break;
-                case "gearboxOilTemperature":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("°C");
-                    mClockGraph.setMinMaxSpeed(0,150);
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
-                    break;
-                case "absChargingAirPressure":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit(pressureUnit);
-                    mClockGraph.setMinMaxSpeed(pressureMin,pressureMax);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "relChargingAirPressure":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit(pressureUnit);
-                    mClockGraph.setMinMaxSpeed(pressureMin,pressureMax);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "lateralAcceleration":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("G");
-                    mClockGraph.setMinMaxSpeed(-2,2);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "longitudinalAcceleration":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("G");
-                    mClockGraph.setMinMaxSpeed(-2,2);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "yawRate":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("%");
-                    mClockGraph.setMinMaxSpeed(-1,1);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "wheelAngle":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("°");
-                    mClockGraph.setMinMaxSpeed(-45,45);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "EcoHMI_Score.AvgShort":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("");
-                    mClockGraph.setMinMaxSpeed(0,100);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    break;
-                case "EcoHMI_Score.AvgTrip":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("");
-                    mClockGraph.setMinMaxSpeed(0,100);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    break;
-                case "powermeter":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("");
-                    mClockGraph.setMinMaxSpeed(0,2000);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    break;
-                case "acceleratorPosition":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("%");
-                    mClockGraph.setMinMaxSpeed(0,100);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_pedalposition));
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    break;
-                case "brakePressure":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("%");
-                    mClockGraph.setMinMaxSpeed(0,100);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
-                    mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                    break;
-                case "currentTorque":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("Nm");
-                    mClockGraph.setMinMaxSpeed(0,500);
-                    mClockIcon.setBackgroundResource(0);
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "currentOutputPower":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("Kw");
-                    mClockGraph.setMinMaxSpeed(0,500);
-                    mClockIcon.setBackgroundResource(0);
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "currentConsumptionPrimary":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("l/h");
-                    mClockGraph.setMinMaxSpeed(0,100);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "currentConsumptionSecondary":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("l/h");
-                    mClockGraph.setMinMaxSpeed(0,100);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "cycleConsumptionPrimary":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("l/h");
-                    mClockGraph.setMinMaxSpeed(0,100);
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
-                case "cycleConsumptionSecondary":
-                    mClockIcon.setText("");
-                    mClockGraph.setUnit("l/h");
-                    mClockGraph.setMinMaxSpeed(0,100);
+        switch (query) {
+            case "none":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("");
+                mClockIcon.setBackgroundResource(0);
+                mGraph.setTitle("No data selected");
+                break;
+            case "test":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("testing");
+                mClockGraph.setMinMaxSpeed(-100, 200);
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
+                mGraph.setTitle("Test data");
+                break;
+            case "vehicleSpeed_alternative":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("kmh");
+                mClockGraph.setMinMaxSpeed(0, 350);
+                mClockIcon.setBackgroundResource(0);
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mGraph.setTitle("Speed");
+                break;
 
-                    mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
-                    mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                    break;
+            case "vehicleSpeed":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("kmh");
+                mClockGraph.setMinMaxSpeed(0, 350);
+                mClockIcon.setBackgroundResource(0);
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mGraph.setTitle("Speed");
+                break;
+            case "engineSpeed":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("RPM");
+                mClockGraph.setMinMaxSpeed(0, 8000);
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mClockIcon.setBackgroundResource(0);
+                mGraph.setTitle("RPM");
+                break;
+            case "batteryVoltage":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("Volt");
+                mClockGraph.setMinMaxSpeed(0, 15);
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
+                mGraph.setTitle("Battery Voltage");
+                break;
+            case "oilTemperature":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("°C");
+                mClockGraph.setMinMaxSpeed(0, 150);
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_oil));
+                mGraph.setTitle("Oil Temperature");
+                break;
+            case "coolantTemperature":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("°C");
+                mClockGraph.setMinMaxSpeed(0, 150);
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_water));
+                mGraph.setTitle("Coolant Temperature");
+                break;
+            case "gearboxOilTemperature":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("°C");
+                mClockGraph.setMinMaxSpeed(0, 150);
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
+                mGraph.setTitle("Gearbox Oil Temperature");
+                break;
+            case "absChargingAirPressure":
+                mClockIcon.setText("");
+                mClockGraph.setUnit(pressureUnit);
+                mClockGraph.setMinMaxSpeed(pressureMin, pressureMax);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Absolute Charging Pressure");
+                break;
+            case "relChargingAirPressure":
+                mClockIcon.setText("");
+                mClockGraph.setUnit(pressureUnit);
+                mClockGraph.setMinMaxSpeed(pressureMin, pressureMax);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Relative Charging Pressure");
+                break;
+            case "lateralAcceleration":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("G");
+                mClockGraph.setMinMaxSpeed(-2, 2);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Lateral Acceleration");
 
-            }
+                break;
+            case "longitudinalAcceleration":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("G");
+                mClockGraph.setMinMaxSpeed(-2, 2);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Longitudinal Acceleration");
+
+                break;
+            case "yawRate":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("%");
+                mClockGraph.setMinMaxSpeed(-1, 1);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Yaw rate");
+                break;
+            case "wheelAngle":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("°");
+                mClockGraph.setMinMaxSpeed(-45, 45);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Wheel angle");
+                break;
+            case "EcoHMI_Score.AvgShort":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mGraph.setTitle("Eco Score");
+                break;
+            case "EcoHMI_Score.AvgTrip":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mGraph.setTitle("Average Eco score");
+                break;
+            case "powermeter":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("");
+                mClockGraph.setMinMaxSpeed(0, 2000);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mGraph.setTitle("Hybrid power");
+                break;
+            case "acceleratorPosition":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("%");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_pedalposition));
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mGraph.setTitle("Lateral Acceleration");
+                break;
+            case "brakePressure":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("%");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
+                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                mGraph.setTitle("Brake pressure");
+                break;
+            case "currentTorque":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("Nm");
+                mClockGraph.setMinMaxSpeed(0, 500);
+                mClockIcon.setBackgroundResource(0);
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Torque");
+                break;
+            case "currentOutputPower":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("Kw");
+                mClockGraph.setMinMaxSpeed(0, 500);
+                mClockIcon.setBackgroundResource(0);
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Output Power");
+                break;
+            case "currentConsumptionPrimary":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("l/h");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Primary consumption");
+                break;
+            case "currentConsumptionSecondary":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("l/h");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Secondary consumption");
+                break;
+            case "cycleConsumptionPrimary":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("l/h");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Cycle consumption primary");
+                break;
+            case "cycleConsumptionSecondary":
+                mClockIcon.setText("");
+                mClockGraph.setUnit("l/h");
+                mClockGraph.setMinMaxSpeed(0, 100);
+                mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
+                mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                mGraph.setTitle("Cycle consumption secondary");
+                break;
+
+        }
 
         float tempMax = mClockGraph.getMaxSpeed();
         float tempMin = mClockGraph.getMinSpeed();
@@ -409,7 +449,6 @@ public class GraphFragment extends CarFragment {
         Log.i(TAG, "onDestroyView");
 
 
-
         super.onDestroyView();
     }
 
@@ -435,14 +474,6 @@ public class GraphFragment extends CarFragment {
         super.onDestroy();
     }
 
-    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
-        @Override
-        public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
-            mLastMeasurements.putAll(values);
-            postUpdate();
-        }
-    };
-
     private void postUpdate() {
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -451,7 +482,7 @@ public class GraphFragment extends CarFragment {
 
             }
 
-        }, graphDelay );
+        }, graphDelay);
     }
 
     private void doUpdate() {
@@ -480,13 +511,13 @@ public class GraphFragment extends CarFragment {
 
         Speedometer dial = mClockGraph;
         String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
-        if (generalTempUnit == null){
+        if (generalTempUnit == null) {
             generalTempUnit = "?";
         }
 
         Float clockValue = (Float) mLastMeasurements.get(query);
 
-        float randomClockVal = randFloat(-100,200);
+        float randomClockVal = randFloat(-100, 200);
         speedFactor = 1f;
         pressureFactor = 1f;
 
@@ -494,7 +525,7 @@ public class GraphFragment extends CarFragment {
             query = "test";
         }
 
-        switch (query){
+        switch (query) {
             case "test":
                 dial.speedTo(randomClockVal);
                 break;
@@ -655,17 +686,6 @@ public class GraphFragment extends CarFragment {
 
 
         }
-    }
-
-
-    public static float randFloat(float min, float max) {
-
-        Random rand = new Random();
-
-        float result = rand.nextFloat() * (max - min) + min;
-
-        return result;
-
     }
 
 }
