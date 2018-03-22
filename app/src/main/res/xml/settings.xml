@@ -119,6 +119,12 @@
             android:key="selectedGraphItem"
             android:summary="%s"
             android:title="@string/pref_graphitem" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/graphDelayEntries"
+            android:entryValues="@array/graphDelayValues"
+            android:key="graphDelay"
+            android:title="@string/graphDelay" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectPressureUnit"

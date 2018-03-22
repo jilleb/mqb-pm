@@ -80,6 +80,7 @@
     <string name="zeroVolta">test</string>
     <string name="pref_graphitem">Grafiek</string>
     <string name="languages">Taal</string>
+    <string name="graphDelay">Graph Resolution</string>
 
 
 </resources>

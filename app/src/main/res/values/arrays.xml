@@ -157,137 +157,158 @@
     </string-array>
 
 
-<!--
-Todo: add non-exlap data to the app:
-    SENSOR_TYPE_COMPASS,
-        SENSOR_TYPE_CAR_SPEED,
-        SENSOR_TYPE_RPM,
-        SENSOR_TYPE_ODOMETER,
-        SENSOR_TYPE_FUEL_LEVEL,
-        SENSOR_TYPE_PARKING_BRAKE,
-        SENSOR_TYPE_GEAR,
-        SENSOR_TYPE_NIGHT,
-        SENSOR_TYPE_LOCATION,
-        SENSOR_TYPE_DRIVING_STATUS,
-        SENSOR_TYPE_ENVIRONMENT,
-        SENSOR_TYPE_ACCELEROMETER,
-        SENSOR_TYPE_GPS_SATELLITE,
-        SENSOR_TYPE_GYROSCOPE,
-        SENSOR_TYPE_WHEEL_TICK_DISTANCE,
-        SENSOR_TYPE_ABS_ACTIVE,
-        SENSOR_TYPE_TRACTION_CONTROL_ACTIVE
 
-The following is a list of all other exlap data elements currently known.
-
-*Booleans*
-todo: Add an optional icon area to the main dash view showing these items?
-    accIsActive
-    acceleratorKickDown
-    clutch
-    coastingIsActive
-    displayNightDesign
-    driverIsBraking     <- pretty distracting data, maybe not add it.
-    fuelWarningPrimaryTank
-    fuelWarningSecondaryTank
-
-*Text*
-    blinkingState
-    car_vehicleInformation
-    car_vehicleState
-    context_States
-    engineTypes
-    fuelLevelState
-    gearTransmissionMode
-    vehicleDate
-    vehicleIdenticationNumber
-    vehicleTime
-
-Todo: add one of these and test if the unit actually forwards this data over exlap
-*media-related*
-    mediaBrowser_FollowMode
-    mediaBrowser_ListState
-    mediaBrowser_Path
-    mediaBrowser_PathCurrentTrack
-    media_AvailableSources
-    media_PlayMode
-    media_PlayerState
-    media_Track
-    *radio*
-        radio_AMPresets
-        radio_AMStations
-        radio_AvailableBands
-        radio_DABEnsembles
-        radio_DABPresets
-        radio_DABServiceComponent
-        radio_DABServices
-        radio_FMPresets
-        radio_FMStations
-        radio_FrequencyRanges
-        radio_TA
-        radio_Text
-        radio_Tuner
-    sound_BalanceFader
-    sound_BalanceFaderSetup
-    sound_Volume
-    sound_VolumeSetup
-
-Todo: Clocks or dashboard elements can be made for most of these
-*float*
-    *consumption data*
-        consumptionLongTermGeneral
-        consumptionShortTermGeneral
-        longTermConsumptionPrimary
-        longTermConsumptionSecondary
-        shortTermConsumptionPrimary
-        shortTermConsumptionSecondary
-    *other dashboard items*
-        maxChargingAirPressure  - use this to determine min/max for charging air pressure max.
-        maxOutputPower      - use this to determine min/max for output clock? Might not be wise, since the output might be higher than the car thinks in some cases
-        modCount
-        oilLevel
-        recuperationLevel
-        tankLevelPrimary
-        tankLevelSecondary
-        totalDistance
-
-*navi data*
-    longitude
-    nav_Altitude
-    nav_CurrentPosition
-    nav_GeoPosition
-    nav_GuidanceDestination
-    nav_GuidanceRemaining
-    nav_GuidanceState
-    nav_Heading
-    nav_LastDestinations
-
-*unknown data formats*
-    seatHeater_zone1
-    seatHeater_zone2
-    system_DayNight
-    system_HMISkin
-    system_Language
-    system_ProximityRecognition
-    system_RestrictionMode
-    system_UnitDistance
-    system_activeSource
-
-Todo: read these during initialisation, so the app is set up in the same way as the car
-*units*
-    unitDateFormat
-    unitPressure
-    unitTemperature
-    unitTimeFormat
-
-*lighting*
-Car_ambienceLightColour_ColourHMI
-Car_ambienceLightColour_ColourSRGB      - could be used to have a dynamic theme, based on the current ambient color. maybe make a needle that has variable color or something
+    <string-array name="graphDelayEntries">
+        <item>0.1s</item>
+        <item>0.5s</item>
+        <item>1s</item>
+        <item>5s</item>
+        <item>60s</item>
+    </string-array>
 
 
-*Other data elements, found om 13/2, still need to be categorized:
-torqueDistribution
-refillVolume
-hevOperationMode
+    <string-array name="graphDelayValues">
+        <item>100</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>5000</item>
+        <item>60000</item>
+    </string-array>
 
- -->
+
+
+
+    <!--
+    Todo: add non-exlap data to the app:
+        SENSOR_TYPE_COMPASS,
+            SENSOR_TYPE_CAR_SPEED,
+            SENSOR_TYPE_RPM,
+            SENSOR_TYPE_ODOMETER,
+            SENSOR_TYPE_FUEL_LEVEL,
+            SENSOR_TYPE_PARKING_BRAKE,
+            SENSOR_TYPE_GEAR,
+            SENSOR_TYPE_NIGHT,
+            SENSOR_TYPE_LOCATION,
+            SENSOR_TYPE_DRIVING_STATUS,
+            SENSOR_TYPE_ENVIRONMENT,
+            SENSOR_TYPE_ACCELEROMETER,
+            SENSOR_TYPE_GPS_SATELLITE,
+            SENSOR_TYPE_GYROSCOPE,
+            SENSOR_TYPE_WHEEL_TICK_DISTANCE,
+            SENSOR_TYPE_ABS_ACTIVE,
+            SENSOR_TYPE_TRACTION_CONTROL_ACTIVE
+
+    The following is a list of all other exlap data elements currently known.
+
+    *Booleans*
+    todo: Add an optional icon area to the main dash view showing these items?
+        accIsActive
+        acceleratorKickDown
+        clutch
+        coastingIsActive
+        displayNightDesign
+        driverIsBraking     <- pretty distracting data, maybe not add it.
+        fuelWarningPrimaryTank
+        fuelWarningSecondaryTank
+
+    *Text*
+        blinkingState
+        car_vehicleInformation
+        car_vehicleState
+        context_States
+        engineTypes
+        fuelLevelState
+        gearTransmissionMode
+        vehicleDate
+        vehicleIdenticationNumber
+        vehicleTime
+
+    Todo: add one of these and test if the unit actually forwards this data over exlap
+    *media-related*
+        mediaBrowser_FollowMode
+        mediaBrowser_ListState
+        mediaBrowser_Path
+        mediaBrowser_PathCurrentTrack
+        media_AvailableSources
+        media_PlayMode
+        media_PlayerState
+        media_Track
+        *radio*
+            radio_AMPresets
+            radio_AMStations
+            radio_AvailableBands
+            radio_DABEnsembles
+            radio_DABPresets
+            radio_DABServiceComponent
+            radio_DABServices
+            radio_FMPresets
+            radio_FMStations
+            radio_FrequencyRanges
+            radio_TA
+            radio_Text
+            radio_Tuner
+        sound_BalanceFader
+        sound_BalanceFaderSetup
+        sound_Volume
+        sound_VolumeSetup
+
+    Todo: Clocks or dashboard elements can be made for most of these
+    *float*
+        *consumption data*
+            consumptionLongTermGeneral
+            consumptionShortTermGeneral
+            longTermConsumptionPrimary
+            longTermConsumptionSecondary
+            shortTermConsumptionPrimary
+            shortTermConsumptionSecondary
+        *other dashboard items*
+            maxChargingAirPressure  - use this to determine min/max for charging air pressure max.
+            maxOutputPower      - use this to determine min/max for output clock? Might not be wise, since the output might be higher than the car thinks in some cases
+            modCount
+            oilLevel
+            recuperationLevel
+            tankLevelPrimary
+            tankLevelSecondary
+            totalDistance
+
+    *navi data*
+        longitude
+        nav_Altitude
+        nav_CurrentPosition
+        nav_GeoPosition
+        nav_GuidanceDestination
+        nav_GuidanceRemaining
+        nav_GuidanceState
+        nav_Heading
+        nav_LastDestinations
+
+    *unknown data formats*
+        seatHeater_zone1
+        seatHeater_zone2
+        system_DayNight
+        system_HMISkin
+        system_Language
+        system_ProximityRecognition
+        system_RestrictionMode
+        system_UnitDistance
+        system_activeSource
+
+    Todo: read these during initialisation, so the app is set up in the same way as the car
+    *units*
+        unitDateFormat
+        unitPressure
+        unitTemperature
+        unitTimeFormat
+
+    *lighting*
+    Car_ambienceLightColour_ColourHMI
+    Car_ambienceLightColour_ColourSRGB      - could be used to have a dynamic theme, based on the current ambient color. maybe make a needle that has variable color or something
+
+
+    *Other data elements, found om 13/2, still need to be categorized:
+    torqueDistribution
+    refillVolume
+    hevOperationMode
+
+     -->
     </resources>

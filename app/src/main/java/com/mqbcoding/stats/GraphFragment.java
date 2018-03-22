@@ -47,6 +47,7 @@ public class GraphFragment extends CarFragment {
     private int pressureMin, pressureMax;
     private String pressureUnit;
     private float pressureFactor, speedFactor;
+    private int graphDelay;
 
     private int mAnimationDuration;
 
@@ -129,7 +130,7 @@ public class GraphFragment extends CarFragment {
         //Get shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         pressureUnits   = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
-
+        graphDelay      = sharedPreferences.getInt("graphDelay", 1000);
         //determine what data the user wants to have on the graph and clock.
         mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");
         Log.d(TAG, "Graphing element selected:" + mGraphQuery );
@@ -167,13 +168,13 @@ public class GraphFragment extends CarFragment {
         //pressurefactor is used to calculate the right value for psi later
         if (pressureUnits){
             pressureFactor = 1;
-            pressureUnit = "@string/bar";
+            pressureUnit = "bar";
             pressureMin = -2;
             pressureMax= 3;
 
         } else {
             pressureFactor = (float) 14.5037738;
-            pressureUnit = "@string/psi";
+            pressureUnit = "psi";
             pressureMin = -30;
             pressureMax= 30;
         }
@@ -447,8 +448,7 @@ public class GraphFragment extends CarFragment {
 
             }
 
-        }, 5000 );
-        //todo: make delay configurable
+        }, graphDelay );
     }
 
     private void doUpdate() {
