@@ -1,6 +1,5 @@
 package com.mqbcoding.stats;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,16 +52,12 @@ public class MainCarActivity extends CarActivity {
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
 
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
-
-
-        String selectedLanguage = sharedPreferences.getString("selectedLanguage", "en");
-        LanguageHelper.changeLocale(this.getResources(), selectedLanguage);
-
+//        String selectedLanguage = sharedPreferences.getString("selectedLanguage", "en");
+ //       LanguageHelper.changeLocale(this.getResources(), selectedLanguage);
 
         switch(selectedTheme) {
             case "VW GTI":
@@ -130,9 +125,9 @@ public class MainCarActivity extends CarActivity {
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
 
         //hide all stuff you don't want to see on your screen
-        carUiController.getStatusBarController().hideBatteryLevel();
-        carUiController.getStatusBarController().hideMicButton();
-        carUiController.getStatusBarController().hideConnectivityLevel();
+  //      carUiController.getStatusBarController().hideBatteryLevel();
+   //     carUiController.getStatusBarController().hideMicButton();
+    //    carUiController.getStatusBarController().hideConnectivityLevel();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -179,7 +174,6 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
                 */
-
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle("Stopwatch")
                 .setType(MenuItem.Type.ITEM)
@@ -189,7 +183,6 @@ public class MainCarActivity extends CarActivity {
                 .setTitle("Graphs")
                 .setType(MenuItem.Type.ITEM)
                 .build());
-
 /*
             mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
                     .setTitle("Measurements(test)")

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -14,36 +13,23 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
-import com.github.anastr.speedviewlib.ImageLinearGauge;
-import com.github.anastr.speedviewlib.RaySpeedometer;
-import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
-import com.google.android.apps.auto.sdk.DayNightStyle;
-import com.google.android.apps.auto.sdk.StatusBarController;
-import com.google.common.collect.ImmutableMap;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
-
-import org.w3c.dom.Attr;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
@@ -72,6 +58,7 @@ public class GraphFragment extends CarFragment {
         // Required empty public constructor
     }
 
+    /*
     //@Override
     protected void setupStatusBar(StatusBarController sc) {
         sc.setDayNightStyle(DayNightStyle.FORCE_NIGHT);
@@ -83,6 +70,7 @@ public class GraphFragment extends CarFragment {
         sc.showTitle();
         sc.setTitle("Graphs");
     }
+    */
 
     @Override
     public void onAttach(Context context) {
