@@ -4,35 +4,32 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.google.android.apps.auto.sdk.CarActivity;
 import com.google.android.apps.auto.sdk.CarUiController;
 import com.google.android.apps.auto.sdk.DayNightStyle;
 import com.google.android.apps.auto.sdk.MenuController;
-import com.google.android.apps.auto.sdk.StatusBarController;
 import com.google.android.apps.auto.sdk.MenuItem;
-
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+import com.google.android.apps.auto.sdk.StatusBarController;
 
 public class MainCarActivity extends CarActivity {
-    private static final String TAG = "MainCarActivity";
+    static final String MENU_HOME = "home";
 
     //menu stuff//
-
-    static final String MENU_HOME = "home";
     static final String MENU_CARDATA = "cardata";
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
     static final String MENU_MEASUREMENTS = "measurements";
     static final String MENU_GRAPH = "graph";
+    private static final String TAG = "MainCarActivity";
 
 
     // static final String MENU_DEBUG_LOG = "log";
     // static final String MENU_DEBUG_TEST_NOTIFICATION = "test_notification";
-
     private static final String FRAGMENT_CARDATA = "cardata";
     private static final String FRAGMENT_CAR = "dashboard";
     private static final String FRAGMENT_CREDITS = "credits";
@@ -43,10 +40,49 @@ public class MainCarActivity extends CarActivity {
 
     private static final int TEST_NOTIFICATION_ID = 1;
     private String mCurrentFragmentTag;
-    private Handler mHandler = new Handler();
+    private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
+        @Override
+        public void onMenuItemClicked(String name) {
+            switch (name) {
+                case MENU_HOME:
+                    switchToFragment(FRAGMENT_CAR);
+                    break;
+                case MENU_CARDATA:
+                    switchToFragment(FRAGMENT_CARDATA);
+                    break;
+                case MENU_STOPWATCH:
+                    switchToFragment(FRAGMENT_STOPWATCH);
+                    break;
+                case MENU_MEASUREMENTS:
+                    switchToFragment(FRAGMENT_MEASUREMENTS);
+                    break;
+                case MENU_GRAPH:
+                    switchToFragment(FRAGMENT_GRAPH);
+                    break;
+                case MENU_CREDITS:
+                    switchToFragment(FRAGMENT_CREDITS);
+                    break;
+            }
+        }
+
+        @Override
+        public void onEnter() {
+        }
+
+        @Override
+        public void onExit() {
+            updateStatusBarTitle();
+        }
+    };
     //end menu stuff//
-
-
+    private final FragmentManager.FragmentLifecycleCallbacks mFragmentLifecycleCallbacks
+            = new FragmentManager.FragmentLifecycleCallbacks() {
+        @Override
+        public void onFragmentStarted(FragmentManager fm, Fragment f) {
+            updateStatusBarTitle();
+        }
+    };
+    private Handler mHandler = new Handler();
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -57,7 +93,7 @@ public class MainCarActivity extends CarActivity {
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
 
-        switch(selectedTheme) {
+        switch (selectedTheme) {
             case "VW GTI":
                 setTheme(R.style.AppTheme_VolkswagenGTI);
                 break;
@@ -71,7 +107,7 @@ public class MainCarActivity extends CarActivity {
                 setTheme(R.style.AppTheme_VolkswagenR);
                 break;
             case "Seat Cupra":
-                    setTheme(R.style.AppTheme_SeatCupra);
+                setTheme(R.style.AppTheme_SeatCupra);
                 break;
             case "Cupra Division":
                 setTheme(R.style.AppTheme_Cupra);
@@ -116,16 +152,15 @@ public class MainCarActivity extends CarActivity {
         setContentView(R.layout.activity_car_main);
 
 
-
         CarUiController carUiController = getCarUiController();
         carUiController.getStatusBarController().showTitle();
         //force night mode
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
 
         //hide all stuff you don't want to see on your screen
-  //      carUiController.getStatusBarController().hideBatteryLevel();
-   //     carUiController.getStatusBarController().hideMicButton();
-    //    carUiController.getStatusBarController().hideConnectivityLevel();
+        //      carUiController.getStatusBarController().hideBatteryLevel();
+        //     carUiController.getStatusBarController().hideMicButton();
+        //    carUiController.getStatusBarController().hideConnectivityLevel();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -148,7 +183,7 @@ public class MainCarActivity extends CarActivity {
                 .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
                 .detach(graphfragment)
                 .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
-               .detach(creditsfragment)
+                .detach(creditsfragment)
                 .commitNow();
 
 
@@ -194,7 +229,6 @@ public class MainCarActivity extends CarActivity {
                 .build());
 
 
-
 // 1 submenu item
      /*   ListMenuAdapter otherMenu = new ListMenuAdapter();
         otherMenu.setCallbacks(mMenuCallbacks);
@@ -221,41 +255,6 @@ public class MainCarActivity extends CarActivity {
         super.onSaveInstanceState(bundle);
     }
 
-    private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
-        @Override
-        public void onMenuItemClicked(String name) {
-            switch (name) {
-                case MENU_HOME:
-                    switchToFragment(FRAGMENT_CAR);
-                    break;
-                case MENU_CARDATA:
-                    switchToFragment(FRAGMENT_CARDATA);
-                    break;
-                case MENU_STOPWATCH:
-                    switchToFragment(FRAGMENT_STOPWATCH);
-                    break;
-                case MENU_MEASUREMENTS:
-                    switchToFragment(FRAGMENT_MEASUREMENTS);
-                    break;
-                case MENU_GRAPH:
-                    switchToFragment(FRAGMENT_GRAPH);
-                    break;
-                case MENU_CREDITS:
-                    switchToFragment(FRAGMENT_CREDITS);
-                    break;
-            }
-        }
-
-        @Override
-        public void onEnter() {
-        }
-
-        @Override
-        public void onExit() {
-            updateStatusBarTitle();
-        }
-    };
-
     @Override
     public void onStart() {
         super.onStart();
@@ -263,9 +262,6 @@ public class MainCarActivity extends CarActivity {
 
 
     }
-
-
-
 
     private void switchToFragment(String tag) {
         if (tag.equals(mCurrentFragmentTag)) {
@@ -282,14 +278,6 @@ public class MainCarActivity extends CarActivity {
         transaction.commit();
         mCurrentFragmentTag = tag;
     }
-
-    private final FragmentManager.FragmentLifecycleCallbacks mFragmentLifecycleCallbacks
-            = new FragmentManager.FragmentLifecycleCallbacks() {
-        @Override
-        public void onFragmentStarted(FragmentManager fm, Fragment f) {
-            updateStatusBarTitle();
-        }
-    };
 
     private void updateStatusBarTitle() {
         CarFragment fragment = (CarFragment) getSupportFragmentManager().findFragmentByTag(mCurrentFragmentTag);

@@ -22,7 +22,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
@@ -37,11 +36,10 @@ import java.util.Map;
 import java.util.Random;
 
 public class DashboardFragment extends CarFragment {
+    public static final float FULL_BRAKE_PRESSURE = 100.0f;
     private final String TAG = "DashboardFragment";
-
     private CarStatsClient mStatsClient;
     private WheelStateMonitor mWheelStateMonitor;
-
     private ProgressBar mBrakeAccel;
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
@@ -49,47 +47,69 @@ public class DashboardFragment extends CarFragment {
     private ImageView mImageMaxLeft, mImageMaxCenter, mImageMaxRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
-
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
     private String pressureUnit;
     private float pressureFactor, speedFactor;
-    private float mLeftMax,mCenterMax,mRightMax;
-    private float mLeftMin,mCenterMin,mRightMin;
+    private float mLeftMax, mCenterMax, mRightMax;
+    private float mLeftMin, mCenterMin, mRightMin;
     private int pressureMin, pressureMax;
-
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
-    private TextView mIconElement1, mIconElement2,mIconElement3,mIconElement4;
-
+    private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
     //valuesof the data elements. upper left, upper right, lower left, lower right.
-    private TextView mValueElement1, mValueElement2,mValueElement3,mValueElement4;
-
+    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4;
     private TextView mTextMinLeft, mTextMaxLeft;
     private TextView mTextMinCenter, mTextMaxCenter;
     private TextView mTextMinRight, mTextMaxRight;
-
     //icons on the clocks
-    private TextView mIconClockL, mIconClockC,mIconClockR;
-
-
+    private TextView mIconClockL, mIconClockC, mIconClockR;
+    private int mAnimationDuration;
+    private WheelStateMonitor.WheelState mWheelState;
+    private Boolean pressureUnits;
+    private Boolean raysOn, maxOn, accelOn, maxMarksOn;
+    private Map<String, Object> mLastMeasurements = new HashMap<>();
+    private Handler mHandler = new Handler();
     private View.OnClickListener celebrateOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             postUpdate();
         }
     };
+    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
+        @Override
+        public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
+            mLastMeasurements.putAll(values);
+            postUpdate();
+        }
+    };
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder) iBinder;
+            mStatsClient = carStatsBinder.getStatsClient();
+            mWheelStateMonitor = carStatsBinder.getWheelStateMonitor();
+            mLastMeasurements = mStatsClient.getMergedMeasurements();
+            mStatsClient.registerListener(mCarStatsListener);
+        }
 
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mStatsClient.unregisterListener(mCarStatsListener);
+        }
+    };
 
-
-    private int mAnimationDuration;
-    private WheelStateMonitor.WheelState mWheelState;
-    private Boolean pressureUnits;
-    private Boolean raysOn, maxOn, accelOn, maxMarksOn;
-    public static final float FULL_BRAKE_PRESSURE = 100.0f;
-    private Map<String, Object> mLastMeasurements = new HashMap<>();
-    private Handler mHandler = new Handler();
     public DashboardFragment() {
         // Required empty public constructor
+    }
+
+    public static float randFloat(float min, float max) {
+
+        Random rand = new Random();
+
+        float result = rand.nextFloat() * (max - min) + min;
+
+        return result;
+
     }
 
     @Override
@@ -102,22 +122,6 @@ public class DashboardFragment extends CarFragment {
 
         mAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
-
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
-            CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder)iBinder;
-            mStatsClient = carStatsBinder.getStatsClient();
-            mWheelStateMonitor = carStatsBinder.getWheelStateMonitor();
-            mLastMeasurements = mStatsClient.getMergedMeasurements();
-            mStatsClient.registerListener(mCarStatsListener);
-        }
-
-        @Override
-        public void onServiceDisconnected(ComponentName componentName) {
-            mStatsClient.unregisterListener(mCarStatsListener);
-        }
-    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -133,7 +137,7 @@ public class DashboardFragment extends CarFragment {
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         //this is to enable an image as indicator.
-        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[] { R.attr.themedNeedle });
+        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
@@ -141,7 +145,7 @@ public class DashboardFragment extends CarFragment {
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
 
         // build ImageIndicator using the resourceId
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200,200);
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
 
         //-------------------------------------------------------------
         //find all elements needed
@@ -165,13 +169,13 @@ public class DashboardFragment extends CarFragment {
         //set max/min values to 0
         mLeftMax = 0;
         mCenterMax = 0;
-        mRightMax=0;
+        mRightMax = 0;
         mLeftMin = 0;
         mCenterMin = 0;
-        mRightMin=0;
+        mRightMin = 0;
 
         //icons on the clocks
-        mIconClockL= rootView.findViewById(R.id.icon_ClockLeft);
+        mIconClockL = rootView.findViewById(R.id.icon_ClockLeft);
         mIconClockC = rootView.findViewById(R.id.icon_ClockCenter);
         mIconClockR = rootView.findViewById(R.id.icon_ClockRight);
 
@@ -236,11 +240,11 @@ public class DashboardFragment extends CarFragment {
         //Get shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-        pressureUnits   = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
-        raysOn          = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
-        maxOn           = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
-        maxMarksOn      = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
-        accelOn         = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
+        pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
+        raysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
+        maxOn = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
+        maxMarksOn = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
+        accelOn = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
 
 
         //determine what data the user wants to have on the 4 data views
@@ -273,24 +277,24 @@ public class DashboardFragment extends CarFragment {
         //Most bar dials go from -2 to 3 bar.
         //Most PSI dials go from -30 to 30 psi.
         //pressurefactor is used to calculate the right value for psi later
-        if (pressureUnits){
+        if (pressureUnits) {
             pressureFactor = 1;
             pressureUnit = "bar";
             pressureMin = -2;
-            pressureMax= 3;
+            pressureMax = 3;
 
         } else {
             pressureFactor = (float) 14.5037738;
             pressureUnit = "psi";
             pressureMin = -30;
-            pressureMax= 30;
+            pressureMax = 30;
         }
 
         //set up each of the elements with the query and icon that goes with it
-        setupElement(mElement1Query, mValueElement1 , mIconElement1);
-        setupElement(mElement2Query, mValueElement2 , mIconElement2);
-        setupElement(mElement3Query, mValueElement3 , mIconElement3);
-        setupElement(mElement4Query, mValueElement4 , mIconElement4);
+        setupElement(mElement1Query, mValueElement1, mIconElement1);
+        setupElement(mElement2Query, mValueElement2, mIconElement2);
+        setupElement(mElement3Query, mValueElement3, mIconElement3);
+        setupElement(mElement4Query, mValueElement4, mIconElement4);
 
         //setup clocks, including the max/min clocks and highvis rays and icons:
         //usage: setupClock(query value, what clock, what icon, which ray, which min clock, which max clock)
@@ -300,7 +304,7 @@ public class DashboardFragment extends CarFragment {
         setupClock(mClockRQuery, mClockRight, mIconClockR, mRayRight, mClockMinRight, mClockMaxRight);
 
         //show high visible rays on, according to the setting
-        if (raysOn){
+        if (raysOn) {
             mRayLeft.setVisibility(View.VISIBLE);
             mRayCenter.setVisibility(View.VISIBLE);
             mRayRight.setVisibility(View.VISIBLE);
@@ -310,14 +314,14 @@ public class DashboardFragment extends CarFragment {
             mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
             mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
 
-        } else{
+        } else {
             mRayLeft.setVisibility(View.INVISIBLE);
             mRayCenter.setVisibility(View.INVISIBLE);
-            mRayRight .setVisibility(View.INVISIBLE);
+            mRayRight.setVisibility(View.INVISIBLE);
         }
 
         //show texts and backgrounds for max/min, according to the setting
-        if (maxOn){   // show the minmax values
+        if (maxOn) {   // show the minmax values
             mTextMaxLeft.setVisibility(View.VISIBLE);
             mTextMaxCenter.setVisibility(View.VISIBLE);
             mTextMaxRight.setVisibility(View.VISIBLE);
@@ -329,7 +333,7 @@ public class DashboardFragment extends CarFragment {
             mImageMaxLeft.setVisibility(View.VISIBLE);
             mImageMaxCenter.setVisibility(View.VISIBLE);
             mImageMaxRight.setVisibility(View.VISIBLE);
-        } else{ // don't show any of it
+        } else { // don't show any of it
             mTextMaxLeft.setVisibility(View.INVISIBLE);
             mTextMaxCenter.setVisibility(View.INVISIBLE);
             mTextMaxRight.setVisibility(View.INVISIBLE);
@@ -344,7 +348,7 @@ public class DashboardFragment extends CarFragment {
         }
 
         //show clock marks for max/min, according to the setting
-        if (maxMarksOn){ // show the minmax marks
+        if (maxMarksOn) { // show the minmax marks
             mClockMaxLeft.setVisibility(View.VISIBLE);
             mClockMaxCenter.setVisibility(View.VISIBLE);
             mClockMaxRight.setVisibility(View.VISIBLE);
@@ -362,8 +366,7 @@ public class DashboardFragment extends CarFragment {
 
         if (accelOn) {
             mBrakeAccel.setVisibility(View.VISIBLE);
-        }
-            else{
+        } else {
             mBrakeAccel.setVisibility(View.INVISIBLE);
         }
 
@@ -452,14 +455,6 @@ public class DashboardFragment extends CarFragment {
         super.onDestroy();
     }
 
-    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
-        @Override
-        public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
-            mLastMeasurements.putAll(values);
-            postUpdate();
-        }
-    };
-
     private void postUpdate() {
         mHandler.post(new Runnable() {
             @Override
@@ -520,7 +515,7 @@ public class DashboardFragment extends CarFragment {
     }
 
     // this sets all the labels/values in an initial state, depending on the chosen options
-    private void setupElement(String queryElement, TextView value, TextView label){
+    private void setupElement(String queryElement, TextView value, TextView label) {
 
         //set element label/value to default value first
         label.setBackgroundResource(0);
@@ -528,7 +523,7 @@ public class DashboardFragment extends CarFragment {
         value.setText("");
         label.setText("");
 
-        switch(queryElement) {
+        switch (queryElement) {
             case "none":
                 label.setText("");
                 value.setText("");
@@ -643,9 +638,9 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-    private void setupClock(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max){
+    private void setupClock(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
 
-        switch(queryClock) {
+        switch (queryClock) {
             case "none":
                 icon.setText("");
                 clock.setUnit("");
@@ -654,175 +649,175 @@ public class DashboardFragment extends CarFragment {
             case "test":
                 icon.setText("");
                 clock.setUnit("testing");
-                clock.setMinMaxSpeed(-100,200);
+                clock.setMinMaxSpeed(-100, 200);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
             case "vehicleSpeed_alternative":
                 icon.setText("");
                 clock.setUnit("kmh");
-                clock.setMinMaxSpeed(0,350);
+                clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "vehicleSpeed":
                 icon.setText("");
                 clock.setUnit("kmh");
-                clock.setMinMaxSpeed(0,350);
+                clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "engineSpeed":
                 icon.setText("");
                 clock.setUnit("RPM");
-                clock.setMinMaxSpeed(0,8000);
+                clock.setMinMaxSpeed(0, 8000);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 icon.setBackgroundResource(0);
                 break;
             case "batteryVoltage":
                 icon.setText("");
                 clock.setUnit("Volt");
-                clock.setMinMaxSpeed(0,15);
+                clock.setMinMaxSpeed(0, 15);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
             case "oilTemperature":
                 icon.setText("");
                 clock.setUnit("°");
-                clock.setMinMaxSpeed(0,150);
+                clock.setMinMaxSpeed(0, 150);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "coolantTemperature":
                 icon.setText("");
                 clock.setUnit("°");
-                clock.setMinMaxSpeed(0,150);
+                clock.setMinMaxSpeed(0, 150);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
             case "gearboxOilTemperature":
                 icon.setText("");
                 clock.setUnit("°");
-                clock.setMinMaxSpeed(0,150);
+                clock.setMinMaxSpeed(0, 150);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
             case "absChargingAirPressure":
                 icon.setText("");
                 clock.setUnit(pressureUnit);
-                clock.setMinMaxSpeed(pressureMin,pressureMax);
+                clock.setMinMaxSpeed(pressureMin, pressureMax);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "relChargingAirPressure":
                 icon.setText("");
                 clock.setUnit(pressureUnit);
-                clock.setMinMaxSpeed(pressureMin,pressureMax);
+                clock.setMinMaxSpeed(pressureMin, pressureMax);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "lateralAcceleration":
                 icon.setText("");
                 clock.setUnit("G");
-                clock.setMinMaxSpeed(-2,2);
+                clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "longitudinalAcceleration":
                 icon.setText("");
                 clock.setUnit("G");
-                clock.setMinMaxSpeed(-2,2);
+                clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "yawRate":
                 icon.setText("");
                 clock.setUnit("%");
-                clock.setMinMaxSpeed(-1,1);
+                clock.setMinMaxSpeed(-1, 1);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "wheelAngle":
                 icon.setText("");
                 clock.setUnit("°");
-                clock.setMinMaxSpeed(-45,45);
+                clock.setMinMaxSpeed(-45, 45);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "EcoHMI_Score.AvgShort":
                 icon.setText("");
                 clock.setUnit("");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "EcoHMI_Score.AvgTrip":
                 icon.setText("");
                 clock.setUnit("");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "powermeter":
                 icon.setText("");
                 clock.setUnit("");
-                clock.setMinMaxSpeed(0,2000);
+                clock.setMinMaxSpeed(0, 2000);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "acceleratorPosition":
                 icon.setText("");
                 clock.setUnit("%");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_pedalposition));
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "brakePressure":
                 icon.setText("");
                 clock.setUnit("%");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "currentTorque":
                 icon.setText("");
                 clock.setUnit("Nm");
-                clock.setMinMaxSpeed(0,500);
+                clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentOutputPower":
                 icon.setText("");
                 clock.setUnit("Kw");
-                clock.setMinMaxSpeed(0,500);
+                clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentConsumptionPrimary":
                 icon.setText("");
                 clock.setUnit("l/h");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentConsumptionSecondary":
                 icon.setText("");
                 clock.setUnit("l/h");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "cycleConsumptionPrimary":
                 icon.setText("");
                 clock.setUnit("l/h");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "cycleConsumptionSecondary":
                 icon.setText("");
                 clock.setUnit("l/h");
-                clock.setMinMaxSpeed(0,100);
+                clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
@@ -837,7 +832,6 @@ public class DashboardFragment extends CarFragment {
 
 
     }
-
 
     //update clock with data
     private void updateClock(String query, Speedometer dial, RaySpeedometer visray, TextView textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin) {
@@ -1028,13 +1022,13 @@ public class DashboardFragment extends CarFragment {
 
             //update the max clocks and text
             Float maxValue = clockmax.getSpeed();
-            if (tempValue > maxValue){
+            if (tempValue > maxValue) {
                 clockmax.setSpeedAt(tempValue);
                 textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
             }
 
             Float minValue = clockmin.getSpeed();
-            if (tempValue < minValue){
+            if (tempValue < minValue) {
                 clockmin.setSpeedAt(tempValue);
                 textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
 
@@ -1299,36 +1293,25 @@ public class DashboardFragment extends CarFragment {
     }
 
     //update the max speed indicator:
-    private void updateMax(Speedometer dial, TextView textmax, Speedometer maxclock){
+    private void updateMax(Speedometer dial, TextView textmax, Speedometer maxclock) {
 
         Float currentvalue = dial.getCurrentSpeed();
         Float maxvalue = maxclock.getCurrentSpeed();
-        if (currentvalue > maxvalue){
+        if (currentvalue > maxvalue) {
             maxclock.setSpeedAt(currentvalue);
         }
         textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), maxvalue));
     }
 
-    private void updateMin(Speedometer dial, TextView textmin, Speedometer minclock){
+    private void updateMin(Speedometer dial, TextView textmin, Speedometer minclock) {
         Float currentvalue = dial.getCurrentSpeed();
         Float minvalue = minclock.getCurrentSpeed();
-        if (currentvalue < minvalue){
+        if (currentvalue < minvalue) {
             minclock.setSpeedAt(currentvalue);
         }
 
         textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), minvalue));
     }
-
-    public static float randFloat(float min, float max) {
-
-        Random rand = new Random();
-
-        float result = rand.nextFloat() * (max - min) + min;
-
-        return result;
-
-    }
-
 
 
 }

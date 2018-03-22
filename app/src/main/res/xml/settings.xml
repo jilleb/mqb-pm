@@ -118,6 +118,7 @@
             android:entries="@array/graphDelayEntries"
             android:entryValues="@array/graphDelayValues"
             android:key="graphDelay"
+            android:summary="%s"
             android:title="@string/graphDelay" />
         <SwitchPreference
             android:defaultValue="true"
