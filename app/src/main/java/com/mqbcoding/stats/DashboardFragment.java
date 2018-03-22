@@ -22,19 +22,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-//for other sensors
-import android.support.car.Car;
-import android.support.car.CarConnectionCallback;
-import android.support.car.hardware.CarSensorEvent;
-import android.support.car.hardware.CarSensorManager;
 
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
-import com.github.anastr.speedviewlib.components.note.Note;
-import com.github.anastr.speedviewlib.components.note.TextNote;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.util.Date;
@@ -56,7 +49,6 @@ public class DashboardFragment extends CarFragment {
     private ImageView mImageMaxLeft, mImageMaxCenter, mImageMaxRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
-    private Car mCar;
 
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
@@ -383,8 +375,6 @@ public class DashboardFragment extends CarFragment {
 
     @Override
     public void onStart() {
-        mCar = Car.createCar(getContext(), mCarConnectionCallback);
-        mCar.connect();
         super.onStart();
         Log.i(TAG, "onStart");
     }
@@ -443,65 +433,8 @@ public class DashboardFragment extends CarFragment {
     @Override
     public void onStop() {
         Log.i(TAG, "onStop");
-        try {
-            mCar.disconnect();
-        } catch (Exception e) {
-            Log.w(TAG, "Error disconnecting from car", e);
-        }
-
         super.onStop();
     }
-
-    private final CarConnectionCallback mCarConnectionCallback = new CarConnectionCallback() {
-        @Override
-        public void onConnected(Car car) {
-            try {
-                Log.d(TAG, "Connected to car");
-                CarSensorManager sensorManager = (CarSensorManager) car.getCarManager(Car.SENSOR_SERVICE);
-
-                //Get supported sensor types:
-                int[] supportedSensors = sensorManager.getSupportedSensors();
-                for(int sensorId : supportedSensors){
-                    Log.d(TAG, "Supported sensor id: "+sensorId);
-                    sensorManager.addListener(mSensorsListener, sensorId, CarSensorManager.SENSOR_RATE_NORMAL);
-                }
-            } catch (Exception e) {
-                Log.w(TAG, "Error setting up car connection", e);
-            }
-        }
-
-        @Override
-        public void onDisconnected(Car car) {
-            Log.d(TAG, "Disconnected from car");
-        }
-    };
-
-    //temporary add, to test if regular android auto sensors also show up in some way.
-    private final CarSensorManager.OnSensorChangedListener mSensorsListener = new CarSensorManager.OnSensorChangedListener() {
-        @Override
-        public void onSensorChanged(CarSensorManager sensorManager, CarSensorEvent ev) {
-            switch (ev.sensorType){
-                case CarSensorManager.SENSOR_TYPE_NIGHT:
-                    Log.d(TAG, "isNightMode " + ev.getNightData().isNightMode);
-                    break;
-                case CarSensorManager.SENSOR_TYPE_CAR_SPEED:
-                    Log.d(TAG, "carSpeed: " + ev.getCarSpeedData().carSpeed);
-                    break;
-                case CarSensorManager.SENSOR_TYPE_DRIVING_STATUS:
-                    CarSensorEvent.DrivingStatusData ds = ev.getDrivingStatusData();
-                    Log.d(TAG, "videoRestricted: " + ds.isVideoRestricted() + ", fullyRestricted:" + ds.isFullyRestricted());
-                    break;
-                case CarSensorManager.SENSOR_TYPE_GEAR:
-                    Log.d(TAG, "Gear: " + ev.getGearData().gear);
-                case CarSensorManager.SENSOR_TYPE_RPM:
-                    Log.d(TAG, "RPM: " + ev.getRpmData().rpm);
-                default:
-                    Log.d(TAG, "Unhandled " + ev.sensorType);
-
-                    break;
-            }
-        }
-    };
 
     @Override
     public void onDetach() {
