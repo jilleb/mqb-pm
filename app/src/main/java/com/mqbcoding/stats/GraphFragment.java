@@ -42,14 +42,13 @@ public class GraphFragment extends CarFragment {
     private double graphLastXValue = 5d;
     private Speedometer mClockGraph;
     private TextView mClockIcon;
-    private String mGraphQuery, mGraphTitle;
+    private String mGraphQuery;
     private Boolean pressureUnits;
     private int pressureMin, pressureMax;
     private String pressureUnit;
     private float pressureFactor, speedFactor;
     private int graphDelay;
 
-    private int mAnimationDuration;
 
 
     private Map<String, Object> mLastMeasurements = new HashMap<>();
@@ -113,7 +112,6 @@ public class GraphFragment extends CarFragment {
         Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
         getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
-        mAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
 
     @Override

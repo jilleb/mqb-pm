@@ -51,8 +51,6 @@ public class DashboardFragment extends CarFragment {
     private String mClockLQuery, mClockCQuery, mClockRQuery;
     private String pressureUnit;
     private float pressureFactor, speedFactor;
-    private float mLeftMax, mCenterMax, mRightMax;
-    private float mLeftMin, mCenterMin, mRightMin;
     private int pressureMin, pressureMax;
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
@@ -63,7 +61,6 @@ public class DashboardFragment extends CarFragment {
     private TextView mTextMinRight, mTextMaxRight;
     //icons on the clocks
     private TextView mIconClockL, mIconClockC, mIconClockR;
-    private int mAnimationDuration;
     private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits;
     private Boolean raysOn, maxOn, accelOn, maxMarksOn;
@@ -120,7 +117,6 @@ public class DashboardFragment extends CarFragment {
         Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
         getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
-        mAnimationDuration = getResources().getInteger(android.R.integer.config_shortAnimTime);
     }
 
     @Override
@@ -167,12 +163,6 @@ public class DashboardFragment extends CarFragment {
         mClockMinRight = rootView.findViewById(R.id.dial_MinRight);
 
         //set max/min values to 0
-        mLeftMax = 0;
-        mCenterMax = 0;
-        mRightMax = 0;
-        mLeftMin = 0;
-        mCenterMin = 0;
-        mRightMin = 0;
 
         //icons on the clocks
         mIconClockL = rootView.findViewById(R.id.icon_ClockLeft);
