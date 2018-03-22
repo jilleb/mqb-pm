@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -42,7 +43,7 @@ public class GraphFragment extends CarFragment {
     private double graphLastXValue =5d;
     private Speedometer mClockGraph;
     private TextView mClockIcon;
-    private String mGraphQuery;
+    private String mGraphQuery, mGraphTitle;
     private Boolean pressureUnits;
     private int pressureMin, pressureMax;
     private String pressureUnit;
@@ -136,7 +137,6 @@ public class GraphFragment extends CarFragment {
         mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");
         Log.d(TAG, "Graphing element selected:" + mGraphQuery );
 
-
         // todo: add code to set min/max for the chosen data element
         // todo: make sure the title is nice
         // todo: styling
@@ -150,7 +150,7 @@ public class GraphFragment extends CarFragment {
         mGraph.getViewport().setMaxY(200);
         mGraph.getViewport().setMinY(0);
         mGraph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
-        mGraph.setTitle(mGraphQuery);
+
 
         mSpeedSeries.setDataWidth(1);
 
@@ -198,6 +198,7 @@ public class GraphFragment extends CarFragment {
                     mClockIcon.setText("");
                     mClockGraph.setUnit("");
                     mClockIcon.setBackgroundResource(0);
+                    mGraph.setTitle("No data selected");
                     break;
                 case "test":
                     mClockIcon.setText("");
@@ -205,6 +206,7 @@ public class GraphFragment extends CarFragment {
                     mClockGraph.setMinMaxSpeed(-100,200);
                     mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                     mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
+                    mGraph.setTitle("Test data");
                     break;
                 case "vehicleSpeed_alternative":
                     mClockIcon.setText("");
