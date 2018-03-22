@@ -130,7 +130,8 @@ public class GraphFragment extends CarFragment {
         //Get shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         pressureUnits   = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
-        graphDelay      = sharedPreferences.getInt("graphDelay", 1000);
+        graphDelay      = Integer.parseInt(sharedPreferences.getString("graphDelay", "1000"));
+
         //determine what data the user wants to have on the graph and clock.
         mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");
         Log.d(TAG, "Graphing element selected:" + mGraphQuery );

@@ -13,12 +13,6 @@
             android:key="selectedTheme"
             android:summary="%s"
             android:title="@string/pref_theme" />
-        <ListPreference
-            android:defaultValue="1"
-            android:entries="@array/languageEntries"
-            android:entryValues="@array/languageValues"
-            android:key="selectedLanguage"
-            android:title="@string/languages" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="highVisActive"
@@ -120,7 +114,7 @@
             android:summary="%s"
             android:title="@string/pref_graphitem" />
         <ListPreference
-            android:defaultValue="1"
+            android:defaultValue="1000"
             android:entries="@array/graphDelayEntries"
             android:entryValues="@array/graphDelayValues"
             android:key="graphDelay"

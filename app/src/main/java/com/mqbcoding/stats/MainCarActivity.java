@@ -56,8 +56,6 @@ public class MainCarActivity extends CarActivity {
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
-//        String selectedLanguage = sharedPreferences.getString("selectedLanguage", "en");
- //       LanguageHelper.changeLocale(this.getResources(), selectedLanguage);
 
         switch(selectedTheme) {
             case "VW GTI":
