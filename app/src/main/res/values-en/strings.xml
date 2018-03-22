@@ -40,9 +40,9 @@
     <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
     <string name="pref_kick_uploads_title">Upload data now</string>
     <string name="kick_uploads_nothing_to_do">All uploads already completed.</string>
-    <string name="kick_uploads_done">Uploads sheduled.</string>
+    <string name="kick_uploads_done">Uploads scheduled.</string>
     <string name="pref_bigquery_reupload_last_title">Re-upload last log file</string>
-    <string name="bigquery_reupload_last_failed">Failed to initate re-upload of the last log file.</string>
+    <string name="bigquery_reupload_last_failed">Failed to initiate re-upload of the last log file.</string>
     <string name="bigquery_reupload_last_ok">Re-upload scheduled.</string>
     <string name="oil_notification_title">Oil temperature</string>
     <string name="oil_notification_text">Engine oil reached the working temperature.</string>
