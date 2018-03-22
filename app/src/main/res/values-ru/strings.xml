@@ -80,8 +80,8 @@
     <string name="zeroVolta">тест</string>
     <string name="pref_graphitem">График</string>
     <string name="graphDelay">График частота</string>
-
-
+    <string name="g">G</string>
+    <string name="mph">mph</string>
 
 
 </resources>

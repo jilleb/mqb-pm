@@ -652,21 +652,21 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "vehicleSpeed":
                 icon.setText("");
-                clock.setUnit("kmh");
+                clock.setUnit(getContext().getText(R.string.kmh).toString());
                 clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "engineSpeed":
                 icon.setText("");
-                clock.setUnit("RPM");
+                clock.setUnit(getContext().getText(R.string.rpm).toString());
                 clock.setMinMaxSpeed(0, 8000);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 icon.setBackgroundResource(0);
                 break;
             case "batteryVoltage":
                 icon.setText("");
-                clock.setUnit("Volt");
+                clock.setUnit(getContext().getText(R.string.volt).toString());
                 clock.setMinMaxSpeed(0, 15);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
@@ -708,14 +708,14 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "lateralAcceleration":
                 icon.setText("");
-                clock.setUnit("G");
+                clock.setUnit(getContext().getText(R.string.g).toString());
                 clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "longitudinalAcceleration":
                 icon.setText("");
-                clock.setUnit("G");
+                clock.setUnit(getContext().getText(R.string.g).toString());
                 clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -771,14 +771,14 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "currentTorque":
                 icon.setText("");
-                clock.setUnit("Nm");
+                clock.setUnit(getContext().getText(R.string.nm).toString());
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentOutputPower":
                 icon.setText("");
-                clock.setUnit("Kw");
+                clock.setUnit(getContext().getText(R.string.kw).toString());
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);

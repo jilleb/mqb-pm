@@ -222,7 +222,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "vehicleSpeed_alternative":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("kmh");
+                mClockGraph.setUnit(getContext().getText(R.string.kmh).toString());
                 mClockGraph.setMinMaxSpeed(0, 350);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
@@ -231,7 +231,7 @@ public class GraphFragment extends CarFragment {
 
             case "vehicleSpeed":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("kmh");
+                mClockGraph.setUnit(getContext().getText(R.string.kmh).toString());
                 mClockGraph.setMinMaxSpeed(0, 350);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
@@ -239,7 +239,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "engineSpeed":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("RPM");
+                mClockGraph.setUnit(getContext().getText(R.string.rpm).toString());
                 mClockGraph.setMinMaxSpeed(0, 8000);
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 mClockIcon.setBackgroundResource(0);
@@ -247,7 +247,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "batteryVoltage":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("Volt");
+                mClockGraph.setUnit(getContext().getText(R.string.volt).toString());
                 mClockGraph.setMinMaxSpeed(0, 15);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
@@ -295,7 +295,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "lateralAcceleration":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("G");
+                mClockGraph.setUnit(getContext().getText(R.string.g).toString());
                 mClockGraph.setMinMaxSpeed(-2, 2);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -304,7 +304,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "longitudinalAcceleration":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("G");
+                mClockGraph.setUnit(getContext().getText(R.string.g).toString());
                 mClockGraph.setMinMaxSpeed(-2, 2);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -369,7 +369,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "currentTorque":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("Nm");
+                mClockGraph.setUnit(getContext().getText(R.string.nm).toString());
                 mClockGraph.setMinMaxSpeed(0, 500);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -377,7 +377,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "currentOutputPower":
                 mClockIcon.setText("");
-                mClockGraph.setUnit("Kw");
+                mClockGraph.setUnit(getContext().getText(R.string.kw).toString());
                 mClockGraph.setMinMaxSpeed(0, 500);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -535,12 +535,12 @@ public class GraphFragment extends CarFragment {
                     switch (speedUnit) {
                         case "mph":
                             speedFactor = 1.60934f;
-                            dial.setUnit("mph");
+                            dial.setUnit(getContext().getText(R.string.mph).toString());
 
                             break;
                         case "kmh":
                             speedFactor = 1f;
-                            dial.setUnit("kmh");
+                            dial.setUnit(getContext().getText(R.string.kmh).toString());
                             break;
 
                     }

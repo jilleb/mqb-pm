@@ -81,6 +81,8 @@
     <string name="pref_graphitem">Graph</string>
     <string name="languages">Languages</string>
     <string name="graphDelay">Graph Resolution</string>
+    <string name="g">G</string>
+    <string name="mph">mph</string>
 
 
 </resources>
