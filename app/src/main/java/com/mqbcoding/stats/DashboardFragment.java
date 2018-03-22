@@ -283,13 +283,13 @@ public class DashboardFragment extends CarFragment {
         //pressurefactor is used to calculate the right value for psi later
         if (pressureUnits){
             pressureFactor = 1;
-            pressureUnit = "@string/bar";
+            pressureUnit = "bar";
             pressureMin = -2;
             pressureMax= 3;
 
         } else {
             pressureFactor = (float) 14.5037738;
-            pressureUnit = "@string/psi";
+            pressureUnit = "psi";
             pressureMin = -30;
             pressureMax= 30;
         }
