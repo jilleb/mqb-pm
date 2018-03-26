@@ -434,11 +434,27 @@ public class GraphFragment extends CarFragment {
     public void onResume() {
         super.onResume();
         Log.i(TAG, "onActivate");
+
+        mTimer1 = new Runnable() {
+            @Override
+            public void run() {
+
+                Float temp = mClockGraph.getCurrentSpeed();
+                if (temp != null) {
+                    graphLastXValue += 1d;
+                    mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 4000);
+                    mHandler.postDelayed(this, 200);
+                }
+            }
+        };
+        mHandler.postDelayed(mTimer1, 1000);
     }
 
     @Override
     public void onPause() {
         Log.i(TAG, "onDeactivate");
+        mHandler.removeCallbacks(mTimer1);
+
         super.onPause();
     }
 
@@ -487,21 +503,14 @@ public class GraphFragment extends CarFragment {
         if (mGraphQuery != null) {
             updateClock(mGraphQuery);
 
+
+            /*
             mTimer1 = new Runnable() {
                 @Override
                 public void run() {
-                    Float temp = mClockGraph.getCurrentSpeed();
-                    if (temp != null) {
-
-                        graphLastXValue += 1d;
-                        mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 10000);
-                        mHandler.postDelayed(this, 10000);
-                    }
-                }
-            };
             mHandler.postDelayed(mTimer1, 1000);
 
-
+*/
 
 
 
