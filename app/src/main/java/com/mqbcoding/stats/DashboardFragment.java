@@ -390,6 +390,7 @@ public class DashboardFragment extends CarFragment {
 
         //put things back to null.
         //todo: check if this list is complete (probably some things are still missing)
+
         mClockLeft = null;
         mClockCenter = null;
         mClockRight = null;
@@ -419,6 +420,7 @@ public class DashboardFragment extends CarFragment {
         mClockMaxLeft = null;
         mClockMaxCenter = null;
         mClockMaxRight = null;
+
 
         super.onDestroyView();
     }
@@ -456,12 +458,10 @@ public class DashboardFragment extends CarFragment {
 
     private void doUpdate() {
 
-        //temporary commented the following part, because I am afraid it might kill updates to the clocks
-/*
         if (mClockLeft == null) {
             return;
         }
-        */
+
 
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
@@ -479,15 +479,18 @@ public class DashboardFragment extends CarFragment {
         Float brakePressure = (Float) mLastMeasurements.get("brakePressure");
         Float accelPos = (Float) mLastMeasurements.get("acceleratorPosition");
 
-        if (brakePressure != null && accelPos != null) {
+        if (brakePressure != null && accelPos != null && mBrakeAccel != null) {
             float normalizedBrakePressure = Math.min(Math.max(0.0f, brakePressure / FULL_BRAKE_PRESSURE), 1.0f);
             boolean isBraking = normalizedBrakePressure > 0;
-            mBrakeAccel.setRotation(isBraking ? 180.0f : 0.0f);
-            //noinspection deprecation
-            mBrakeAccel.setProgressTintList(ColorStateList.valueOf(getContext().getResources()
-                    .getColor(isBraking ? R.color.car_accent : R.color.car_primary)));
-            mBrakeAccel.setProgress((int) ((isBraking ? normalizedBrakePressure : accelPos) * 10000));
-        } else {
+
+                mBrakeAccel.setRotation(isBraking ? 180.0f : 0.0f);
+
+                //noinspection deprecation
+                mBrakeAccel.setProgressTintList(ColorStateList.valueOf(getContext().getResources()
+                        .getColor(isBraking ? R.color.car_accent : R.color.car_primary)));
+                mBrakeAccel.setProgress((int) ((isBraking ? normalizedBrakePressure : accelPos) * 10000));
+
+        } else if (mBrakeAccel != null)   {
             mBrakeAccel.setProgress(0);
         }
 

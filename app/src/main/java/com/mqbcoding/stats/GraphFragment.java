@@ -48,7 +48,7 @@ public class GraphFragment extends CarFragment {
     private String pressureUnit;
     private float pressureFactor, speedFactor;
     private int graphDelay;
-
+    private Runnable mTimer1;
 
 
     private Map<String, Object> mLastMeasurements = new HashMap<>();
@@ -480,27 +480,66 @@ public class GraphFragment extends CarFragment {
 
             }
 
-        }, graphDelay);
+        }, 1000);
     }
 
     private void doUpdate() {
         if (mGraphQuery != null) {
             updateClock(mGraphQuery);
-            Float temp = mClockGraph.getCurrentSpeed();
-            if (temp != null) {
-                graphLastXValue += 1d;
-                mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 120);
+
+            mTimer1 = new Runnable() {
+                @Override
+                public void run() {
+                    Float temp = mClockGraph.getCurrentSpeed();
+                    if (temp != null) {
+
+                        graphLastXValue += 1d;
+                        mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 10000);
+                        mHandler.postDelayed(this, 10000);
+                    }
+                }
+            };
+            mHandler.postDelayed(mTimer1, 1000);
+
+
+
+
+
+
+
+
+
+          /*
+            mTimer1 = new Runnable() {
+                @Override
+                public void run() {
+                    Float temp = mClockGraph.getCurrentSpeed();
+                    if (temp != null) {
+                        graphLastXValue += 1d;
+
+                        mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 12000);
+
+                    mHandler.postDelayed(mTimer1, graphDelay);
+                }
             }
-            //graphLastXValue += 1d;
 
-            float randomClockVal = randFloat(0, 200);
-            // Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-            //if (lastSpeed != null){
-            //graphLastXValue += 1d;
-            //mSpeedSeries.appendData(new DataPoint(graphLastXValue, randomClockVal), true, 120);
-            //  }
+            */
 
-        }
+
+
+        ;
+        //graphLastXValue += 1d;
+
+//        float randomClockVal = randFloat(0, 200);
+        // Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
+        //if (lastSpeed != null){
+        //graphLastXValue += 1d;
+        //mSpeedSeries.appendData(new DataPoint(graphLastXValue, randomClockVal), true, 120);
+        //  }
+
+    }
+
+
 
         postUpdate();
     }
