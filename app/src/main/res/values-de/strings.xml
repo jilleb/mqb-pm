@@ -1,0 +1,84 @@
+<resources>
+    <string name="app_name">Leistungsmonitor für VAG</string>
+    <string name="car_service_name">Leistungsmonitor</string>
+
+    <string name="temp_format">%.0f°</string>
+    <string name="temp_formatF">%.0f°F</string>
+    <string name="temp_formatC">%.0f°C</string>
+    <string name="volt_format">%.1fV</string>
+    <string name="gforce_format">%.1fG</string>
+    <string name="percent_format">%.1f</string>
+    <string name="degrees_format">%.1f°</string>
+
+    <string name="decimals">%.1f</string>
+    <string name="no_decimals">%.0f</string>
+
+    <string name="psi">psi</string>
+    <string name="bar">bar</string>
+    <string name="zeroVolt">0,0V</string>
+    <string name="zeroCelcius">0,0°</string>
+    <string name="kmh">kmh</string>
+    <string name="rpm">RPM</string>
+    <string name="nm">Nm</string>
+    <string name="kw">KW</string>
+
+
+    <string name="activity_settings_title">Leistungsmonitor Einstellingen</string>
+
+    <string name="pref_appearance">Ansicht</string>
+    <string name="pref_highvis">Instrumente mit hoher Kontrast</string>
+    <string name="pref_theme">Thema</string>
+    <string name="pref_highlow">Höchste/niedrigste Werte</string>
+    <string name="pref_accbrakeindicator">Gasbremsanzeige</string>
+    <string name="pref_choose_account_title">Wähle Konto</string>
+    <string name="pref_upload_to_bigquery_title">Logs hochladen nach BigQuery</string>
+    <string name="pref_bigquery_project_id_title">Projekt ID</string>
+    <string name="pref_bigquery_dataset_title">Dataset Name</string>
+    <string name="pref_bigquery_table_title">Tabellenname</string>
+    <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
+    <string name="pref_kick_uploads_title">Daten hochladen</string>
+    <string name="kick_uploads_nothing_to_do">Alle Uploads sind fertig.</string>
+    <string name="kick_uploads_done">Uploads geplant</string>
+    <string name="pref_bigquery_reupload_last_title">Die letzte Datei erneut hochladen</string>
+    <string name="bigquery_reupload_last_failed">Fehler beim Hochladen.</string>
+    <string name="bigquery_reupload_last_ok">Re-Upload geplant.</string>
+    <string name="oil_notification_title">Öltemperatur</string>
+    <string name="oil_notification_text">Motoröl ist auf Temperatur.</string>
+    <string name="pref_oil_temp_threshold_title">Gewünschte Öltemperatur</string>
+    <string name="pref_oil_temp_monitoring_title">Öltemperatur Überwachen</string>
+    <string name="pref_oil_temp_monitoring_summary">Benachrichtigung anzeigen, wenn das Motoröl Betriebstemperatur erreicht.</string>
+    <string name="pref_notifications_category_title">Benachrichtigungen</string>
+    <string name="pref_wheel_state_monitoring_title">Warnton, wenn das Lenkrad gerade ist</string>
+    <string name="pref_wheel_state_monitoring_summary">Warnton im Rückwärtsgang, wenn die Lenkung gerade ist</string>
+    <string name="pref_logging_category_title">Protokollierung</string>
+    <string name="pref_stats_logging_title">Protokollierung</string>
+    <string name="pref_stats_logging_summary">Ordner für Protokolle: %1$s</string>
+    <string name="pref_stats_logging_not_available">Protokollierung nicht verfügbar: %1$s</string>
+    <string name="pref_providers_category_title">Datenanbieter </string>
+    <string name="pref_list_providers_title">Liste der Anbieter</string>
+    <string name="providers">Datenanbieter</string>
+    <string name="pref_leftclock">Instrument links</string>
+    <string name="pref_centerclock">Instrument mitte</string>
+    <string name="pref_rightclock">Instrument rechts</string>
+    <string name="pref_view1">Element 1</string>
+    <string name="pref_view2">Element 2</string>
+    <string name="pref_view3">Element 3</string>
+    <string name="pref_view4">Element 4</string>
+    <string name="pref_pressureunit">Druckeinheiten</string>
+    <string name="pref_dataelementsettings">Datenelementeinstellungen</string>
+    <string name="pref_highvis_off">Zeigen Sie einen Zeiger auf die Instrumente</string>
+    <string name="pref_highvis_on">Zeige einen kontrastreichen Strahl anstelle eines Zeigers</string>
+    <string name="pref_highlow_off">Keinen Min/Max-Wert </string>
+    <string name="pref_highlow_on">Zeige Min/Max-Wert</string>
+    <string name="pref_accbrakeindicator_off">Die Anzeige wird nicht angezeigt</string>
+    <string name="pref_accbrakeindicator_on">Die Anzeige wird angezeigt</string>
+    <string name="pref_highlowmarks">Markieren die höchste und niedrigste Werte auf die Instrumente</string>
+    <string name="pref_highlowmarks_on">Zeige Min/Max-Wert Markierung</string>
+    <string name="pref_highlowmarks_off">Keine Markierung</string>
+    <string name="pref_graphitem">Diagramm</string>
+    <string name="graphDelay">Grafikfrequenz</string>
+    <string name="g">G</string>
+    <string name="mph">mph</string>
+
+
+</resources>

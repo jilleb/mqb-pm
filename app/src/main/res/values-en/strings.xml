@@ -21,6 +21,7 @@
     <string name="rpm">RPM</string>
     <string name="nm">Nm</string>
     <string name="kw">KW</string>
+    <string name="volt">V</string>
 
 
     <string name="activity_settings_title">Performance Monitor Settings</string>
