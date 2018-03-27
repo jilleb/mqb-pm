@@ -139,7 +139,6 @@ public class GraphFragment extends CarFragment {
         mClockGraph.setSpeedTextTypeface(typeface);
         mClockIcon = rootView.findViewById(R.id.icon_GraphClock);
 
-
         //Get shared preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
@@ -149,27 +148,23 @@ public class GraphFragment extends CarFragment {
         mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");
         Log.d(TAG, "Graphing element selected:" + mGraphQuery);
 
-        // todo: add code to set min/max for the chosen data element
-        // todo: make sure the title is nice
-        // todo: styling
+        //Setup the graph and series
         mGraph = rootView.findViewById(R.id.graph);
         mSpeedSeries = new BarGraphSeries<>();
         mGraph.addSeries(mSpeedSeries);
         mGraph.getViewport().setXAxisBoundsManual(true);
         mGraph.getViewport().setYAxisBoundsManual(true);
         mGraph.getViewport().setMinX(0);
+        // set default max and min, these will be set dynamically later
         mGraph.getViewport().setMaxX(120);
         mGraph.getViewport().setMaxY(200);
         mGraph.getViewport().setMinY(0);
+        //Only show horizontal lines on the grid
         mGraph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
-
-
         mSpeedSeries.setDataWidth(1);
 
-
-        // mSpeedSeries.setBackgroundColor(Color.argb(50, 0, 0, 0));
+        mGraph.getViewport().setBackgroundColor(Color.argb(150, 0,0,0));
         mSpeedSeries.setColor(Color.argb(80, 255, 255, 255));
-
 
         pressureMin = -2;
         pressureMax = 3;
