@@ -443,7 +443,7 @@ public class GraphFragment extends CarFragment {
                 if (temp != null) {
                     graphLastXValue += 1d;
                     mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 4000);
-                    mHandler.postDelayed(this, 200);
+                    mHandler.postDelayed(this, graphDelay);
                 }
             }
         };
@@ -502,54 +502,7 @@ public class GraphFragment extends CarFragment {
     private void doUpdate() {
         if (mGraphQuery != null) {
             updateClock(mGraphQuery);
-
-
-            /*
-            mTimer1 = new Runnable() {
-                @Override
-                public void run() {
-            mHandler.postDelayed(mTimer1, 1000);
-
-*/
-
-
-
-
-
-
-
-          /*
-            mTimer1 = new Runnable() {
-                @Override
-                public void run() {
-                    Float temp = mClockGraph.getCurrentSpeed();
-                    if (temp != null) {
-                        graphLastXValue += 1d;
-
-                        mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 12000);
-
-                    mHandler.postDelayed(mTimer1, graphDelay);
-                }
-            }
-
-            */
-
-
-
-        ;
-        //graphLastXValue += 1d;
-
-//        float randomClockVal = randFloat(0, 200);
-        // Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-        //if (lastSpeed != null){
-        //graphLastXValue += 1d;
-        //mSpeedSeries.appendData(new DataPoint(graphLastXValue, randomClockVal), true, 120);
-        //  }
-
-    }
-
-
-
+        }
         postUpdate();
     }
 
