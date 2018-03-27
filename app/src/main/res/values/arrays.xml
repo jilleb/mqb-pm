@@ -21,10 +21,6 @@
     </string-array>
 
     <!-- Pressure units, used in settings-->
-    <string-array name="pressureUnits">
-        <item>bar</item>
-        <item>psi</item>
-    </string-array>
 
     <!-- Names of Entries for clock data settings -->
     <string-array name="ClockDataElementsEntries">
@@ -138,24 +134,6 @@
         <item>EcoHMI_Score.AvgTrip</item>
         <item>test</item>
     </string-array>
-
-
-
-    <string-array name="languageEntries">
-        <item>English</item>
-        <item>Nederlands</item>
-        <item>Deutsch</item>
-        <item>ру́сский язы́к</item>
-    </string-array>
-
-
-    <string-array name="languageValues">
-        <item>en</item>
-        <item>nl</item>
-        <item>de</item>
-        <item>ru</item>
-    </string-array>
-
 
 
     <string-array name="graphDelayEntries">

@@ -22,6 +22,5 @@
     <color name="car_primary">@android:color/white</color>
     <color name="car_accent">@color/car_red_700</color>
 
-    <color name="car_body1_inverted">@color/car_body1_dark</color>
     <color name="cardview_background">@color/cardview_dark_background</color>
 </resources>

@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Performance Monitor voor VAG</string>
     <string name="car_service_name">Performance Monitor</string>
-    <string name="dashboard_title">Performance Monitor</string>
 
     <string name="temp_format">%.0f°</string>
     <string name="temp_formatF">%.0f°F</string>
@@ -77,9 +76,7 @@
     <string name="pref_highlowmarks">Markeer hoogste en laagste waarden op de klokken</string>
     <string name="pref_highlowmarks_on">De hoogste en laagste waarden worden getoond op de klok</string>
     <string name="pref_highlowmarks_off">De hoogste en laagste waarden worden niet getoond op de klok</string>
-    <string name="zeroVolta">test</string>
     <string name="pref_graphitem">Grafiek</string>
-    <string name="languages">Taal</string>
     <string name="graphDelay">Graph Resolution</string>
     <string name="g">G</string>
     <string name="mph">mph</string>

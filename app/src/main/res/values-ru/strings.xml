@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">Performance Monitor for VAG</string>
     <string name="car_service_name">Performance Monitor</string>
-    <string name="dashboard_title">Performance Monitor</string>
 
     <string name="temp_format">%.0f°</string>
     <string name="temp_formatF">%.0f°F</string>
@@ -77,7 +76,6 @@
     <string name="pref_highlowmarks">Отмечать высокое/низкое знаечения на приборах</string>
     <string name="pref_highlowmarks_on">Высокое/низкое знаечения показано на приборах</string>
     <string name="pref_highlowmarks_off">Высокое/низкое знаечения не показано на приборах</string>
-    <string name="zeroVolta">тест</string>
     <string name="pref_graphitem">График</string>
     <string name="graphDelay">График частота</string>
     <string name="g">G</string>

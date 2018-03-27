@@ -110,6 +110,7 @@
         <ListPreference
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_graph"
             android:key="selectedGraphItem"
             android:summary="%s"
             android:title="@string/pref_graphitem" />

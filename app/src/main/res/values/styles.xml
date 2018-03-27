@@ -81,7 +81,7 @@
     </style>
 
     <style name="AppTheme.VolkswagenR" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background</item>
+        <item name="themedDialBackground">@drawable/vw_dial_background</item>
         <item name="themedCarBackground">@drawable/vw2_background_incar</item>
         <item name="themedNeedle">@drawable/vw_blue_needle</item>
         <item name="sv_markColor">@android:color/white</item>
