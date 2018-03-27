@@ -209,35 +209,8 @@
         <item name="sv_markColor">@android:color/white</item>
         <item name="themedStopWatchBackground">@drawable/skodaone_sw_background</item>
         <item name="themedNeedleColor">@color/green</item>
-
-
     </style>
 
-
-    <style name="AppTheme.Minimalistic" parent="AppTheme.Car">
-        <item name="themedCarBackground">@drawable/minimal_background_incar</item>
-        <item name="themedDialBackground">@drawable/minimal_dial_background</item>
-        <item name="themedNeedle">@drawable/minimal_needle</item>
-        <item name="sv_markColor">@android:color/white</item>
-        <item name="themedStopWatchBackground">@drawable/skoda_stopwatch_background</item>
-        <item name="themedNeedleColor">@color/red</item>
-
-    </style>
-
-
-
-
-    <style name="AppTheme.Car.Gear">
-        <item name="android:textColor">@color/car_body1_inverted</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:background">@android:color/transparent</item>
-        <item name="android:backgroundTint">@color/gear_indicator_background</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_width">32dp</item>
-        <item name="android:layout_height">32dp</item>
-        <item name="android:layout_marginLeft">8dp</item>
-        <item name="android:includeFontPadding">false</item>
-    </style>
 
     <style name="AppTheme.Car.Speedometer">
         <item name="sv_indicatorWidth">8dp</item>

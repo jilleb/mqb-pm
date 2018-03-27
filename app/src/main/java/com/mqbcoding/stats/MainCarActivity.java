@@ -121,7 +121,7 @@ public class MainCarActivity extends CarActivity {
             case "Seat":
                 setTheme(R.style.AppTheme_Seat);
                 break;
-            case "Seat MQB Coding":
+            case "MQB Coding":
                 setTheme(R.style.AppTheme_SeatMQB);
                 break;
             case "Skoda":
