@@ -109,7 +109,7 @@
 
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text='Meich, Emil Borconi, Mikhail Kozlov, "Nerone" '
+        android:text='Meich, Emil Borconi, Mikhail Kozlov, "Nerone", Javier Godoy'
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
