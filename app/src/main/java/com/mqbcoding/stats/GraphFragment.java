@@ -568,7 +568,7 @@ public class GraphFragment extends CarFragment {
                 }
 
                 break;
-            case "gearboxTemperature":
+            case "gearboxOilTemperature":
 
                 if (clockValue != null) {
                     dial.speedTo(clockValue == null ? 0.0f : clockValue);
