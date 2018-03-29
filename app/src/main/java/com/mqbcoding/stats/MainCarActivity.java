@@ -167,7 +167,7 @@ public class MainCarActivity extends CarActivity {
         //set fragments:
         CarFragment carfragment = new DashboardFragment();
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
-        //MeasurementsFragment measurementsfragment = new MeasurementsFragment();
+        MeasurementsFragment measurementsfragment = new MeasurementsFragment();
         //CardataFragment cardatafragment = new CardataFragment();
         GraphFragment graphfragment = new GraphFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
@@ -216,13 +216,13 @@ public class MainCarActivity extends CarActivity {
                 .setTitle("Graphs")
                 .setType(MenuItem.Type.ITEM)
                 .build());
-/*
-            mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
-                    .setTitle("Measurements(test)")
-                    .setType(MenuItem.Type.ITEM)
-                    .build());
 
-        */
+  /*          mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
+                    .setTitle("Measurements(alpha test)")
+                    .setType(MenuItem.Type.ITEM)
+                    .build()); */
+
+
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
                 .setTitle("Credits")
                 .setType(MenuItem.Type.ITEM)
