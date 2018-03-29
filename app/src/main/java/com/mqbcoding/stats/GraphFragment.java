@@ -410,7 +410,6 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 mGraph.setTitle("Cycle consumption secondary");
                 break;
-
         }
 
         float tempMax = mClockGraph.getMaxSpeed();
@@ -523,162 +522,97 @@ public class GraphFragment extends CarFragment {
             case "test":
                 dial.speedTo(randomClockVal);
                 break;
-            case "none":
+            case "none":    // none cannot happen currently
                 break;
-            case "vehicleSpeed":
-                String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-                if (clockValue != null && speedUnit != null) {
-                    switch (speedUnit) {
-                        case "mph":
-                            speedFactor = 1.60934f;
-                            dial.setUnit(getContext().getText(R.string.mph).toString());
-
-                            break;
-                        case "kmh":
-                            speedFactor = 1f;
-                            dial.setUnit(getContext().getText(R.string.kmh).toString());
-                            break;
-
-                    }
-                    clockValue = clockValue * speedFactor;
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-                break;
-
+            // all data that can be put on the clock without further modification
             case "engineSpeed":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
-
-                }
-                break;
             case "batteryVoltage":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-                break;
-
             case "oilTemperature":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-                break;
             case "coolantTemperature":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-
-                break;
             case "gearboxOilTemperature":
-
+            case "lateralAcceleration":
+            case "longitudinalAcceleration":
+            case "yawRate":
+            case "EcoHMI_Score.AvgShort":
+            case "EcoHMI_Score.AvgTrip":
+            case "powermeter":
+            case "brakePressure":
+            case "currentTorque":
+            case "currentOutputPower":
                 if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
+                    dial.speedTo(clockValue);
                 }
-
                 break;
-
+            // pressures
             case "absChargingAirPressure":
-                if (clockValue != null) {
-                    clockValue = clockValue * pressureFactor;
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-                break;
             case "relChargingAirPressure":
                 if (clockValue != null) {
                     clockValue = clockValue * pressureFactor;
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
+                    dial.speedTo(clockValue);
                 }
                 break;
-            case "lateralAcceleration":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-                break;
-            case "longitudinalAcceleration":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-                break;
-            case "yawRate":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
-                }
-
-                break;
+            // specific case for wheel angle, since it needs to be turned around
             case "wheelAngle":
                 if (clockValue != null) {
                     clockValue = clockValue * -1; // make it negative, otherwise right = left and vice versa
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
+                    dial.speedTo(clockValue);
                 }
                 break;
-            case "EcoHMI_Score.AvgShort":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
-                }
-                break;
-            case "EcoHMI_Score.AvgTrip":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
-                }
-
-                break;
-            case "powermeter":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
-                }
-                break;
-
+            // percentages
             case "acceleratorPosition":
                 if (clockValue != null) {
                     float accelPercent = clockValue * 100;
-                    dial.speedTo(clockValue == null ? 0.0f : accelPercent);
-                }
-
-                break;
-            case "brakePressure":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0.0f : clockValue);
+                    dial.speedTo(accelPercent);
                 }
                 break;
-            case "currentTorque":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
-                }
-                break;
-            case "currentOutputPower":
-                if (clockValue != null) {
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
-                }
-                break;
+            // specific consumption data with specific consumption units
+            // todo: maybe it's better to remove setting the unit from updateclock, but do it on setupclock
             case "currentConsumptionPrimary":
                 String consumptionUnit = (String) mLastMeasurements.get("currentConsumptionPrimary.unit");
                 if (clockValue != null && consumptionUnit != null) {
                     dial.setUnit(consumptionUnit);
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                    dial.speedTo(clockValue);
                 }
                 break;
             case "currentConsumptionSecondary":
                 String consumption2Unit = (String) mLastMeasurements.get("currentConsumptionSecondary.unit");
                 if (clockValue != null && consumption2Unit != null) {
                     dial.setUnit(consumption2Unit);
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                    dial.speedTo(clockValue);
                 }
                 break;
             case "cycleConsumptionPrimary":
                 String cycconsumptionUnit = (String) mLastMeasurements.get("cycleConsumptionPrimary.unit");
                 if (clockValue != null && cycconsumptionUnit != null) {
                     dial.setUnit(cycconsumptionUnit);
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                    dial.speedTo(clockValue);
                 }
                 break;
             case "cycleConsumptionSecondary":
                 String cycconsumption2Unit = (String) mLastMeasurements.get("cycleConsumptionSecondary.unit");
                 if (clockValue != null && cycconsumption2Unit != null) {
                     dial.setUnit(cycconsumption2Unit);
-                    dial.speedTo(clockValue == null ? 0f : clockValue);
+                    dial.speedTo(clockValue);
                 }
                 break;
-
-
+            // speed, has specific unit requirements and mph calculation
+            case "vehicleSpeed":
+                String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
+                if (clockValue != null && speedUnit != null) {
+                    switch (speedUnit) {
+                        case "mph":
+                            speedFactor = 1.60934f;
+                            dial.setUnit("mph");
+                            break;
+                        case "kmh":
+                            speedFactor = 1f;
+                            dial.setUnit("kmh");
+                            break;
+                    }
+                    clockValue = clockValue * speedFactor;
+                    dial.speedTo(clockValue);
+                }
+                break;
         }
     }
 
