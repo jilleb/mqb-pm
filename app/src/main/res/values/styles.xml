@@ -60,7 +60,7 @@
         <item name="themedDialBackground">@drawable/seatmqb_dial_background</item>
         <item name="themedCarBackground">@drawable/seat2_background_incar</item>
         <item name="sv_markColor">@android:color/transparent</item>
-        <item name="themedNeedle">@drawable/skoda_needle</item>
+        <item name="themedNeedle">@drawable/seatmqb_needle</item>
         <item name="themedStopWatchBackground">@drawable/seat2_stopwatch_background</item>
         <item name="themedNeedleColor">@color/green</item>
 

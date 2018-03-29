@@ -1,8 +1,5 @@
 package com.mqbcoding.stats;
 
-/**
- * Created by jille on 29-12-2017.
- */
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;

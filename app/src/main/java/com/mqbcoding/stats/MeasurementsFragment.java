@@ -1,11 +1,6 @@
 package com.mqbcoding.stats;
 
-/**
- * Created by jille on 29-12-2017.
- */
 import android.content.Context;
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -18,18 +13,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.util.OnSectionChangeListener;
-import com.github.anastr.speedviewlib.util.OnSpeedChangeListener;
-import com.google.android.apps.auto.sdk.CarActivity;
-import com.google.api.services.bigquery.Bigquery;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class MeasurementsFragment extends CarFragment {

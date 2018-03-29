@@ -36,7 +36,6 @@
     <string name="pref_bigquery_project_id_title">Project ID</string>
     <string name="pref_bigquery_dataset_title">Dataset naam</string>
     <string name="pref_bigquery_table_title">Table naam</string>
-    <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
     <string name="pref_kick_uploads_title">Data uploaden</string>
     <string name="kick_uploads_nothing_to_do">Alle uploads zijn gereed.</string>
     <string name="kick_uploads_done">Uploads gepland.</string>
@@ -80,6 +79,7 @@
     <string name="graphDelay">Graph Resolution</string>
     <string name="g">G</string>
     <string name="mph">mph</string>
+    <string name="volt">V</string>
 
 
 </resources>

@@ -38,7 +38,6 @@
     <string name="pref_bigquery_project_id_title">Nombre del proyecto</string>
     <string name="pref_bigquery_dataset_title">Nombre del dato</string>
     <string name="pref_bigquery_table_title">Nombre de la tabla</string>
-    <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
     <string name="pref_kick_uploads_title">Subir datos</string>
     <string name="kick_uploads_nothing_to_do">Todas las subidas completadas.</string>
     <string name="kick_uploads_done">Subidas programadas.</string>

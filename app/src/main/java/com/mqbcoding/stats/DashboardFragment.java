@@ -33,6 +33,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Random;
 
 public class DashboardFragment extends CarFragment {
@@ -1177,19 +1178,19 @@ public class DashboardFragment extends CarFragment {
                         value.setText("R");
                     } else if (currentGear == null) {
                         value.setText("-");
-                    } else if (currentGear == "Gear1") {
+                    } else if (currentGear.equals("Gear1")) {
                         value.setText("1");
-                    } else if (currentGear == "Gear2") {
+                    } else if (currentGear.equals("Gear2")) {
                         value.setText("2");
-                    } else if (currentGear == "Gear3") {
+                    } else if (currentGear.equals("Gear3")) {
                         value.setText("3");
-                    } else if (currentGear == "Gear4") {
+                    } else if (currentGear.equals("Gear4")) {
                         value.setText("4");
-                    } else if (currentGear == "Gear5") {
+                    } else if (currentGear.equals("Gear5")) {
                         value.setText("5");
-                    } else if (currentGear == "Gear6") {
+                    } else if (currentGear.equals("Gear6")) {
                         value.setText("6");
-                    } else if (currentGear == "Gear7") {
+                    } else if (currentGear.equals("Gear7")) {
                         value.setText("7");
                     }
                     break;
@@ -1199,26 +1200,26 @@ public class DashboardFragment extends CarFragment {
 
                     if (mRecommendedGear == null) {
                         value.setText("-");
-                    } else if (mRecommendedGear == "Gear1") {
+                    } else if (mRecommendedGear.equals("Gear1")) {
                         value.setText("1");
-                    } else if (mRecommendedGear == "Gear2") {
+                    } else if (mRecommendedGear.equals("Gear2")) {
                         value.setText("2");
-                    } else if (mRecommendedGear == "Gear3") {
+                    } else if (mRecommendedGear.equals("Gear3")) {
                         value.setText("3");
-                    } else if (mRecommendedGear == "Gear4") {
+                    } else if (mRecommendedGear.equals("Gear4")) {
                         value.setText("4");
-                    } else if (mRecommendedGear == "Gear5") {
+                    } else if (mRecommendedGear.equals("Gear5")) {
                         value.setText("5");
-                    } else if (mRecommendedGear == "Gear6") {
+                    } else if (mRecommendedGear.equals("Gear6")) {
                         value.setText("6");
-                    } else if (mRecommendedGear == "Gear7") {
+                    } else if (mRecommendedGear.equals("Gear7")) {
                         value.setText("7");
-                    } else if (mRecommendedGear == "NoRecommendation") {
+                    } else if (mRecommendedGear.equals("NoRecommendation")) {
                         value.setText("-");
                     }
 
                     //if the currentgear is not equal to recommended gear, highlight the gear in red.
-                    if (mRecommendedGear != mCurrentGear2) {
+                    if (!mRecommendedGear.equals(mCurrentGear2)) {
                         value.setTextColor(Color.RED);
 
                     } else {
