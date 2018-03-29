@@ -80,6 +80,7 @@ public class DashboardFragment extends CarFragment {
             postUpdate();
         }
     };
+
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -100,14 +101,11 @@ public class DashboardFragment extends CarFragment {
         // Required empty public constructor
     }
 
+    // random, for use in Test value
     public static float randFloat(float min, float max) {
-
         Random rand = new Random();
-
         float result = rand.nextFloat() * (max - min) + min;
-
         return result;
-
     }
 
     @Override
@@ -124,7 +122,6 @@ public class DashboardFragment extends CarFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
-
     }
 
     @Override
@@ -422,7 +419,6 @@ public class DashboardFragment extends CarFragment {
         mClockMaxCenter = null;
         mClockMaxRight = null;
 
-
         super.onDestroyView();
     }
 
@@ -463,7 +459,6 @@ public class DashboardFragment extends CarFragment {
             return;
         }
 
-
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
         updateElement(mElement2Query, mValueElement2, mIconElement2);
@@ -495,15 +490,13 @@ public class DashboardFragment extends CarFragment {
             mBrakeAccel.setProgress(0);
         }
 
-        // Footer
-
+ // wheel angle monitor
         Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
         mWheelState = mWheelStateMonitor == null ? WheelStateMonitor.WheelState.WHEEL_UNKNOWN
                 : mWheelStateMonitor.getWheelState();
         mSteeringWheelAngle.setRotation(currentWheelAngle == null ? 0.0f :
                 Math.min(Math.max(-WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG, -currentWheelAngle),
                         WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG));
-
         mSteeringWheelAngle.setVisibility(View.INVISIBLE);
 
     }
@@ -823,8 +816,6 @@ public class DashboardFragment extends CarFragment {
         min.setMinMaxSpeed(minimum, maximum);
         ray.setMinMaxSpeed(minimum, maximum);
         max.setMinMaxSpeed(minimum, maximum);
-
-
     }
 
     //update clock with data
@@ -849,13 +840,8 @@ public class DashboardFragment extends CarFragment {
                 case "test":
                     dial.speedTo(randomClockVal);
                     break;
-                case "none":
+                case "none":    // none cannot happen currently
                     break;
-                case "vehicleSpeed_alternative":
-//todo: incorporate a way to get         SENSOR_TYPE_CAR_SPEED,
-
-                    break;
-
                 case "vehicleSpeed":
                     String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
                     if (clockValue != null && speedUnit != null) {
@@ -863,7 +849,6 @@ public class DashboardFragment extends CarFragment {
                             case "mph":
                                 speedFactor = 1.60934f;
                                 dial.setUnit("mph");
-
                                 break;
                             case "kmh":
                                 speedFactor = 1f;
@@ -875,11 +860,9 @@ public class DashboardFragment extends CarFragment {
                         dial.speedTo(clockValue == null ? 0.0f : clockValue);
                     }
                     break;
-
                 case "engineSpeed":
                     if (clockValue != null) {
                         dial.speedTo(clockValue == null ? 0f : clockValue);
-
                     }
                     break;
                 case "batteryVoltage":
@@ -897,16 +880,13 @@ public class DashboardFragment extends CarFragment {
                     if (clockValue != null) {
                         dial.speedTo(clockValue == null ? 0.0f : clockValue);
                     }
-
                     break;
                 case "gearboxOilTemperature":
 
                     if (clockValue != null) {
                         dial.speedTo(clockValue == null ? 0.0f : clockValue);
                     }
-
                     break;
-
                 case "absChargingAirPressure":
                     if (clockValue != null) {
                         clockValue = clockValue * pressureFactor;
@@ -933,7 +913,6 @@ public class DashboardFragment extends CarFragment {
                     if (clockValue != null) {
                         dial.speedTo(clockValue == null ? 0.0f : clockValue);
                     }
-
                     break;
                 case "wheelAngle":
                     if (clockValue != null) {
@@ -950,20 +929,17 @@ public class DashboardFragment extends CarFragment {
                     if (clockValue != null) {
                         dial.speedTo(clockValue == null ? 0f : clockValue);
                     }
-
                     break;
                 case "powermeter":
                     if (clockValue != null) {
                         dial.speedTo(clockValue == null ? 0f : clockValue);
                     }
                     break;
-
                 case "acceleratorPosition":
                     if (clockValue != null) {
                         float accelPercent = clockValue * 100;
                         dial.speedTo(clockValue == null ? 0.0f : accelPercent);
                     }
-
                     break;
                 case "brakePressure":
                     if (clockValue != null) {
@@ -1008,8 +984,6 @@ public class DashboardFragment extends CarFragment {
                         dial.speedTo(clockValue == null ? 0f : clockValue);
                     }
                     break;
-
-
             }
             float tempValue = dial.getSpeed();
             visray.speedTo(tempValue);
@@ -1025,9 +999,7 @@ public class DashboardFragment extends CarFragment {
             if (tempValue < minValue) {
                 clockmin.setSpeedAt(tempValue);
                 textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
-
             }
-
         }
     }
 
@@ -1037,7 +1009,6 @@ public class DashboardFragment extends CarFragment {
         if (queryElement == null) {
             return;
         } else {
-            //   String elementValue = (String) mLastMeasurements.get(queryElement); // this causes troubles, since it can't be determined if the output is String or Float, based on the query
             String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
 
             if (generalTempUnit == null) {
@@ -1056,7 +1027,7 @@ public class DashboardFragment extends CarFragment {
                 case "batteryVoltage":
                     Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
                     if (mBatteryVoltage != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.volt_format).toString(), mBatteryVoltage));// + "V"));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.volt_format).toString(), mBatteryVoltage));
                     }
                     break;
 
@@ -1065,17 +1036,17 @@ public class DashboardFragment extends CarFragment {
                     String tempUnit = "?";
                     //String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
                     if (mCoolantTemp != null && tempUnit != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));// + tempUnit));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));
                     } else if (mCoolantTemp != null) {
                         switch (generalTempUnit) {
                             case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mCoolantTemp));// + "°F"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mCoolantTemp));
                                 break;
                             case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mCoolantTemp));// + "°C"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mCoolantTemp));
                                 break;
                             case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));// + "°"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));
                                 break;
                         }
                     }
@@ -1085,21 +1056,20 @@ public class DashboardFragment extends CarFragment {
                     String tempUnit2 = "?";
                     //String tempUnit2 = (String) mLastMeasurements.get("coolantTemperature.unit");
                     if (mOilTemp != null && tempUnit2 != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOilTemp));// + tempUnit2));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOilTemp));
                     } else if (mOilTemp != null) {
                         switch (generalTempUnit) {
                             case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mOilTemp));// + "°F"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mOilTemp));
                                 break;
                             case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mOilTemp));// + "°C"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mOilTemp));
                                 break;
                             case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOilTemp));// + "°"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOilTemp));
                                 break;
                         }
                     }
-
                     break;
                 case "vehicleSpeed":
                     Float mVehicleSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
@@ -1128,41 +1098,39 @@ public class DashboardFragment extends CarFragment {
                     break;
                 case "gearboxOilTemperature":
                     String tempUnit3 = "?";
-                    //String tempUnit3 = (String) mLastMeasurements.get("gearboxOilTemperature.unit");
                     Float mGearboxOilTemp = (Float) mLastMeasurements.get(queryElement);
                     if (mGearboxOilTemp != null && tempUnit3 != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mGearboxOilTemp));// + tempUnit3));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mGearboxOilTemp));
                     } else if (mGearboxOilTemp != null) {
                         switch (generalTempUnit) {
                             case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mGearboxOilTemp));// + "°F"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mGearboxOilTemp));
                                 break;
                             case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mGearboxOilTemp));// + "°C"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mGearboxOilTemp));
                                 break;
                             case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mGearboxOilTemp));// + "°"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mGearboxOilTemp));
                                 break;
                         }
                     }
                     break;
                 case "outsideTemperature":
-                    //String tempUnit4 = (String) mLastMeasurements.get("outsideTemperature.unit");
                     String tempUnit4 = "?";
 
                     Float mOutsideTemperature = (Float) mLastMeasurements.get(queryElement);
                     if (mOutsideTemperature != null && tempUnit4 != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));// + tempUnit4));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));
                     } else if (mOutsideTemperature != null) {
                         switch (generalTempUnit) {
                             case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mOutsideTemperature));// + "°F"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mOutsideTemperature));
                                 break;
                             case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mOutsideTemperature));// + "°C"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mOutsideTemperature));
                                 break;
                             case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));// + "°"));
+                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));
                                 break;
                         }
                     }
@@ -1219,49 +1187,50 @@ public class DashboardFragment extends CarFragment {
                     }
 
                     //if the currentgear is not equal to recommended gear, highlight the gear in red.
-                    if (!mRecommendedGear.equals(mCurrentGear2)) {
-                        value.setTextColor(Color.RED);
-
-                    } else {
-                        value.setTextColor(Color.WHITE);
-
+                    if (mCurrentGear2 != null && mRecommendedGear != null ){
+                        if (!mRecommendedGear.equals(mCurrentGear2)) {
+                            value.setTextColor(Color.RED);
+                        } else {
+                            value.setTextColor(Color.WHITE);
+                        }
                     }
+
                     break;
                 case "lateralAcceleration":
                     Float mLateralAcceleration = (Float) mLastMeasurements.get(queryElement);
                     if (mLateralAcceleration != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mLateralAcceleration));// + "G"));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mLateralAcceleration));
                     }
                     break;
                 case "longitudinalAcceleration":
                     Float mlongitudinalAcceleration = (Float) mLastMeasurements.get(queryElement);
                     if (mlongitudinalAcceleration != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mlongitudinalAcceleration));// + "G"));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mlongitudinalAcceleration));
                     }
                     break;
                 case "yawRate":
                     Float mYawRate = (Float) mLastMeasurements.get(queryElement);
                     if (mYawRate != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRate));// + "%"));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRate));
                     }
                     break;
                 case "acceleratorPosition":
                     Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
                     if (mAcceleratorPosition != null) {
                         Float mAccelPosPercent = mAcceleratorPosition * 100;
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mAccelPosPercent));// + "%"));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mAccelPosPercent));
                     }
                     break;
                 case "brakePressure":
                     Float mBrakePressure = (Float) mLastMeasurements.get("brakePressure");
                     if (mBrakePressure != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mBrakePressure));// + "%"));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mBrakePressure));
                     }
                     break;
                 case "wheelAngle":
                     Float mWheelAngle = (Float) mLastMeasurements.get(queryElement);
                     if (mWheelAngle != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.degrees_format).toString(), mWheelAngle));// + "°"));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.degrees_format).toString(), mWheelAngle));
                     }
                     break;
                 case "powermeter":
@@ -1284,27 +1253,6 @@ public class DashboardFragment extends CarFragment {
                     break;
             }
         }
-    }
-
-    //update the max speed indicator:
-    private void updateMax(Speedometer dial, TextView textmax, Speedometer maxclock) {
-
-        Float currentvalue = dial.getCurrentSpeed();
-        Float maxvalue = maxclock.getCurrentSpeed();
-        if (currentvalue > maxvalue) {
-            maxclock.setSpeedAt(currentvalue);
-        }
-        textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), maxvalue));
-    }
-
-    private void updateMin(Speedometer dial, TextView textmin, Speedometer minclock) {
-        Float currentvalue = dial.getCurrentSpeed();
-        Float minvalue = minclock.getCurrentSpeed();
-        if (currentvalue < minvalue) {
-            minclock.setSpeedAt(currentvalue);
-        }
-
-        textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), minvalue));
     }
 
 
