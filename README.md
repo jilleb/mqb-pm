@@ -32,11 +32,10 @@ Download the latest release here: https://github.com/jilleb/mqb-pm/releases
 
 
 # Known issues
+- App slowing down over time, and restarting. I haven't pinned this down completely yet. 
+
 - Black screen of death: On some cars it doesn't work for unknown reasons. This will not kill your car or headunit. Send me a logcat. 
 On Huawei and Honor devices this is a common problem, caused by a bug in their ROMs. A workaround to get OEM apps working again is to clear the Android Auto apk cache when this happens. (thanks to nerone-github for the information.)
-
-- Not starting
-If the app doesn't start, there's probably a bug in the code. This will not kill your car either. Send me a logcat.
 
 - No data
 If you don't see any data in the app, it can have various reasons:
@@ -57,16 +56,15 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 # What to do when it's not working?
 - Try choosing a different type of data in the settings app. Not all cars have all data available. Reconnect to the car after you've done this.
 - Check if you have applied all rights. Did you open the settings app after installing? Did you install both APK's?
-- Turn off the 4 elements, and only use the 3 clocks. If that works, turn on 1 of the elements. Battery Voltage should always be available when the communication is working.
 - Unplug/replug your phone and try again
-- Tap the center clock if there's no data showing.
-
 
 # Currently not working firmware versions:
 **MIB2:**
 - VW 0245
 - VW 0343
 - VW 0613
+- VW 0617
+- VW 0755
 - VW 1156
 
 **MIB2Std**
