@@ -810,8 +810,8 @@ public class DashboardFragment extends CarFragment {
                 break;
         }
 
-        int minimum = clock.getMinSpeed();
-        int maximum = clock.getMaxSpeed();
+        float minimum = clock.getMinSpeed();
+        float maximum = clock.getMaxSpeed();
 
         min.setMinMaxSpeed(minimum, maximum);
         ray.setMinMaxSpeed(minimum, maximum);
@@ -983,8 +983,6 @@ public class DashboardFragment extends CarFragment {
 
                 case "coolantTemperature":
                     Float mCoolantTemp = (Float) mLastMeasurements.get(queryElement);
-                    String tempUnit = "?";
-                    //String tempUnit = (String) mLastMeasurements.get("coolantTemperature.unit");
                     if (mCoolantTemp != null && tempUnit != null) {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));
                     } else if (mCoolantTemp != null) {

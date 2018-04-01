@@ -48,7 +48,6 @@
         <item>Current consumption, secondary fuel</item>
         <item>Cycle consumption, primary fuel</item>
         <item>Cycle consumption, secondary fuel</item>
-        <item>Car Speed (different source)</item>
         <item>Test (random, does not get data from the car)</item>
     </string-array>
 
@@ -78,7 +77,6 @@
         <item>currentConsumptionSecondary</item>
         <item>cycleConsumptionPrimary</item>
         <item>cycleConsumptionSecondary</item>
-        <item>vehicleSpeed_alternative</item>
         <item>test</item>
 
     </string-array>
