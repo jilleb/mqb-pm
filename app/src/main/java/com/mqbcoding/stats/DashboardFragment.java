@@ -33,7 +33,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 
 public class DashboardFragment extends CarFragment {
@@ -825,11 +824,6 @@ public class DashboardFragment extends CarFragment {
             return;
         } else {
 
-            String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
-            if (generalTempUnit == null) {
-                generalTempUnit = "?";
-            }
-
             Float clockValue = (Float) mLastMeasurements.get(query);
 
             float randomClockVal = randFloat(-100, 200);
@@ -959,12 +953,6 @@ public class DashboardFragment extends CarFragment {
         if (queryElement == null) {
             return;
         } else {
-            String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
-
-            if (generalTempUnit == null) {
-                generalTempUnit = "?";
-            }
-
             switch (queryElement) {
                 case "none":
                     value.setText("");
@@ -973,7 +961,6 @@ public class DashboardFragment extends CarFragment {
                     float randomValue = randFloat(0, 100);
                     value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), randomValue));
                     break;
-
                 case "batteryVoltage":
                     Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
                     if (mBatteryVoltage != null) {
@@ -981,42 +968,14 @@ public class DashboardFragment extends CarFragment {
                     }
                     break;
 
+                    // all temperatures can be handled in the same way, the only difference is the queryElement string
                 case "coolantTemperature":
-                    Float mCoolantTemp = (Float) mLastMeasurements.get(queryElement);
-                    if (mCoolantTemp != null && tempUnit != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));
-                    } else if (mCoolantTemp != null) {
-                        switch (generalTempUnit) {
-                            case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mCoolantTemp));
-                                break;
-                            case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mCoolantTemp));
-                                break;
-                            case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mCoolantTemp));
-                                break;
-                        }
-                    }
-                    break;
                 case "oilTemperature":
-                    Float mOilTemp = (Float) mLastMeasurements.get(queryElement);
-                    String tempUnit2 = "?";
-                    //String tempUnit2 = (String) mLastMeasurements.get("coolantTemperature.unit");
-                    if (mOilTemp != null && tempUnit2 != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOilTemp));
-                    } else if (mOilTemp != null) {
-                        switch (generalTempUnit) {
-                            case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mOilTemp));
-                                break;
-                            case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mOilTemp));
-                                break;
-                            case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOilTemp));
-                                break;
-                        }
+                case "gearboxOilTemperature":
+                case "outsideTemperature":
+                    Float mTemperature = (Float) mLastMeasurements.get(queryElement);
+                    if (mTemperature!= null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mTemperature));
                     }
                     break;
                 case "vehicleSpeed":
@@ -1043,45 +1002,7 @@ public class DashboardFragment extends CarFragment {
                     if (mCurrentTorque != null) {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentTorque));
                     }
-                    break;
-                case "gearboxOilTemperature":
-                    String tempUnit3 = "?";
-                    Float mGearboxOilTemp = (Float) mLastMeasurements.get(queryElement);
-                    if (mGearboxOilTemp != null && tempUnit3 != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mGearboxOilTemp));
-                    } else if (mGearboxOilTemp != null) {
-                        switch (generalTempUnit) {
-                            case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mGearboxOilTemp));
-                                break;
-                            case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mGearboxOilTemp));
-                                break;
-                            case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mGearboxOilTemp));
-                                break;
-                        }
-                    }
-                    break;
-                case "outsideTemperature":
-                    String tempUnit4 = "?";
 
-                    Float mOutsideTemperature = (Float) mLastMeasurements.get(queryElement);
-                    if (mOutsideTemperature != null && tempUnit4 != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));
-                    } else if (mOutsideTemperature != null) {
-                        switch (generalTempUnit) {
-                            case "fahrenheit":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatF).toString(), mOutsideTemperature));
-                                break;
-                            case "celcius":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_formatC).toString(), mOutsideTemperature));
-                                break;
-                            case "?":
-                                value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mOutsideTemperature));
-                                break;
-                        }
-                    }
                     break;
                 case "currentGear":
                     Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
