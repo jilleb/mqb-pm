@@ -634,35 +634,35 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "test":
                 icon.setText("");
-                clock.setUnit("testing");
+                clock.setUnit(getString(R.string.testing));
                 clock.setMinMaxSpeed(-100, 200);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
             case "vehicleSpeed_alternative":
                 icon.setText("");
-                clock.setUnit("kmh");
+                clock.setUnit(getString(R.string.kmh));
                 clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "vehicleSpeed":
                 icon.setText("");
-                clock.setUnit(getContext().getText(R.string.kmh).toString());
+                clock.setUnit(getString(R.string.kmh));
                 clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "engineSpeed":
                 icon.setText("");
-                clock.setUnit(getContext().getText(R.string.rpm).toString());
+                clock.setUnit(getString(R.string.rpm));
                 clock.setMinMaxSpeed(0, 8000);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 icon.setBackgroundResource(0);
                 break;
             case "batteryVoltage":
                 icon.setText("");
-                clock.setUnit(getContext().getText(R.string.volt).toString());
+                clock.setUnit(getString(R.string.volt));
                 clock.setMinMaxSpeed(0, 15);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
@@ -704,14 +704,14 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "lateralAcceleration":
                 icon.setText("");
-                clock.setUnit(getContext().getText(R.string.g).toString());
+                clock.setUnit(getString(R.string.g));
                 clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "longitudinalAcceleration":
                 icon.setText("");
-                clock.setUnit(getContext().getText(R.string.g).toString());
+                clock.setUnit(getString(R.string.g));
                 clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -767,14 +767,14 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "currentTorque":
                 icon.setText("");
-                clock.setUnit(getContext().getText(R.string.nm).toString());
+                clock.setUnit(getString(R.string.nm));
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentOutputPower":
                 icon.setText("");
-                clock.setUnit(getContext().getText(R.string.kw).toString());
+                clock.setUnit(getString(R.string.nm));
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -1052,7 +1052,7 @@ public class DashboardFragment extends CarFragment {
                     } else if (mRecommendedGear.equals("Gear7")) {
                         value.setText("7");
                     } else if (mRecommendedGear.equals("NoRecommendation")) {
-                        value.setText("-");
+                        value.setText(mCurrentGear2);
                     }
 
                     //if the currentgear is not equal to recommended gear, highlight the gear in red.

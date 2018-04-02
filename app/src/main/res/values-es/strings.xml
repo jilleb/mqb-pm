@@ -122,5 +122,6 @@
     <string name="basedon">Basado en el SDK y la app demo de:</string>
     <string name="thanks">Agradecimeientos a:</string>
     <string name="drivesafely">Conduce con seguridad.</string>
+    <string name="testing">testing</string>
 
 </resources>
