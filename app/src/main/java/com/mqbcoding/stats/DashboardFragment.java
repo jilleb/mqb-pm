@@ -665,13 +665,6 @@ public class DashboardFragment extends CarFragment {
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
-            case "vehicleSpeed_alternative":
-                icon.setText("");
-                clock.setUnit(getString(R.string.kmh));
-                clock.setMinMaxSpeed(0, 350);
-                icon.setBackgroundResource(0);
-                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                break;
             case "vehicleSpeed":
                 icon.setText("");
                 clock.setUnit(getString(R.string.kmh));

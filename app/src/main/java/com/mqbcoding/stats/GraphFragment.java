@@ -216,15 +216,6 @@ public class GraphFragment extends CarFragment {
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 mGraph.setTitle(getContext().getString(R.string.test));
                 break;
-            case "vehicleSpeed_alternative":
-                mClockIcon.setText("");
-                mClockGraph.setUnit(getContext().getText(R.string.kmh).toString());
-                mClockGraph.setMinMaxSpeed(0, 350);
-                mClockIcon.setBackgroundResource(0);
-                mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle(getContext().getString(R.string.vehicleSpeed_alternative));
-                break;
-
             case "vehicleSpeed":
                 mClockIcon.setText("");
                 mClockGraph.setUnit(getContext().getText(R.string.kmh).toString());
