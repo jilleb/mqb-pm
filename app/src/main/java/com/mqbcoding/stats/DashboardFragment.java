@@ -107,6 +107,34 @@ public class DashboardFragment extends CarFragment {
         return result;
     }
 
+    public static String convGear(String gear) {
+        
+        String convertedGear = "0";
+        if (gear == null) {
+        convertedGear = "-";
+        } else if (gear.equals("Gear1")) {
+            convertedGear = "1";
+        } else if (gear.equals("Gear2")) {
+            convertedGear = "2";
+        } else if (gear.equals("Gear3")) {
+            convertedGear = "3";
+        } else if (gear.equals("Gear4")) {
+            convertedGear = "4";
+        } else if (gear.equals("Gear5")) {
+            convertedGear = "5";
+        } else if (gear.equals("Gear6")) {
+            convertedGear = "6";
+        } else if (gear.equals("Gear7")) {
+            convertedGear = "7";
+        } else if (gear.equals("Gear8")) {
+            convertedGear = "8";
+        }
+
+        return convertedGear;
+    }
+    
+    
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -571,11 +599,6 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
-            case "recommendedGear":
-                label.setText("");
-                value.setText("-");
-                label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
-                break;
             case "lateralAcceleration":
                 label.setText("");
                 value.setText("-");
@@ -1008,62 +1031,28 @@ public class DashboardFragment extends CarFragment {
                     Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
                     Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
                     String currentGear = (String) mLastMeasurements.get("currentGear");
+                    String recommendedGear = (String) mLastMeasurements.get("recommendedGear");
+                    String gearText="-";
 
                     if (parkingBrake != null && parkingBrake) {
-                        value.setText("P");
+                        value.setTextColor(Color.WHITE);
+                        gearText = "P";
                     } else if (reverseGear != null && reverseGear) {
-                        value.setText("R");
+                        value.setTextColor(Color.WHITE);
+                        gearText = "R";
                     } else if (currentGear == null) {
-                        value.setText("-");
-                    } else if (currentGear.equals("Gear1")) {
-                        value.setText("1");
-                    } else if (currentGear.equals("Gear2")) {
-                        value.setText("2");
-                    } else if (currentGear.equals("Gear3")) {
-                        value.setText("3");
-                    } else if (currentGear.equals("Gear4")) {
-                        value.setText("4");
-                    } else if (currentGear.equals("Gear5")) {
-                        value.setText("5");
-                    } else if (currentGear.equals("Gear6")) {
-                        value.setText("6");
-                    } else if (currentGear.equals("Gear7")) {
-                        value.setText("7");
-                    }
-                    break;
-                case "recommendedGear":
-                    String mRecommendedGear = (String) mLastMeasurements.get("recommendedGear");
-                    String mCurrentGear2 = (String) mLastMeasurements.get("currentGear");
-
-                    if (mRecommendedGear == null) {
-                        value.setText("-");
-                    } else if (mRecommendedGear.equals("Gear1")) {
-                        value.setText("1");
-                    } else if (mRecommendedGear.equals("Gear2")) {
-                        value.setText("2");
-                    } else if (mRecommendedGear.equals("Gear3")) {
-                        value.setText("3");
-                    } else if (mRecommendedGear.equals("Gear4")) {
-                        value.setText("4");
-                    } else if (mRecommendedGear.equals("Gear5")) {
-                        value.setText("5");
-                    } else if (mRecommendedGear.equals("Gear6")) {
-                        value.setText("6");
-                    } else if (mRecommendedGear.equals("Gear7")) {
-                        value.setText("7");
-                    } else if (mRecommendedGear.equals("NoRecommendation")) {
-                        value.setText(mCurrentGear2);
-                    }
-
-                    //if the currentgear is not equal to recommended gear, highlight the gear in red.
-                    if (mCurrentGear2 != null && mRecommendedGear != null ){
-                        if (!mRecommendedGear.equals(mCurrentGear2)) {
-                            value.setTextColor(Color.RED);
-                        } else {
+                        value.setTextColor(Color.WHITE);
+                        gearText = "-";
+                    } else if (currentGear != null && recommendedGear != null) {
+                        if (recommendedGear.equals(currentGear) || recommendedGear.equals("NoRecommendation")) {
                             value.setTextColor(Color.WHITE);
+                            gearText = convGear(currentGear);
+                        } else if (!recommendedGear.equals(currentGear)){
+                            value.setTextColor(Color.RED);
+                            gearText = (convGear(currentGear) + ">" + convGear(recommendedGear));
                         }
                     }
-
+                    value.setText(gearText);
                     break;
                 case "lateralAcceleration":
                     Float mLateralAcceleration = (Float) mLastMeasurements.get(queryElement);
@@ -1124,5 +1113,10 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
+    
+    
+    
+    
+    
 
 }

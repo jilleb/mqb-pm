@@ -96,7 +96,6 @@
         <item>@string/engineSpeed</item>
         <item>@string/vehicleSpeed</item>
         <item>@string/currentGear</item>
-        <item>@string/recommendedGear</item>
         <item>@string/lateralAcceleration</item>
         <item>@string/longitudinalAcceleration</item>
         <item>@string/yawRate</item>
@@ -124,7 +123,6 @@
         <item>engineSpeed</item>
         <item>vehicleSpeed</item>
         <item>currentGear</item>
-        <item>recommendedGear</item>
         <item>lateralAcceleration</item>
         <item>longitudinalAcceleration</item>
         <item>yawRate</item>
