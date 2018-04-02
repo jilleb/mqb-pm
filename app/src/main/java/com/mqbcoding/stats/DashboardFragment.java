@@ -700,6 +700,13 @@ public class DashboardFragment extends CarFragment {
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
+            case "outsideTemperature":
+                icon.setText("");
+                clock.setUnit("°");
+                clock.setMinMaxSpeed(-25, 50);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_outsidetemperature));
+                break;
             case "gearboxOilTemperature":
                 icon.setText("");
                 clock.setUnit("°");
@@ -860,6 +867,7 @@ public class DashboardFragment extends CarFragment {
                 case "batteryVoltage":
                 case "oilTemperature":
                 case "coolantTemperature":
+                case "outsideTemperature":
                 case "gearboxOilTemperature":
                 case "lateralAcceleration":
                 case "longitudinalAcceleration":

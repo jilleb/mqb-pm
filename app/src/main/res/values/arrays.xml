@@ -31,6 +31,7 @@
         <item>@string/coolantTemperature</item>
         <item>@string/oilTemperature</item>
         <item>@string/gearboxOilTemperature</item>
+        <item>@string/outsideTemperature</item>
         <item>@string/vehicleSpeed</item>
         <item>@string/engineSpeed</item>
         <item>@string/lateralAcceleration</item>
@@ -60,6 +61,7 @@
         <item>coolantTemperature</item>
         <item>oilTemperature</item>
         <item>gearboxOilTemperature</item>
+        <item>outsideTemperature</item>
         <item>vehicleSpeed</item>
         <item>engineSpeed</item>
         <item>lateralAcceleration</item>
