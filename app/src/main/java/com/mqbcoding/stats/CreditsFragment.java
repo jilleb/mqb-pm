@@ -25,7 +25,7 @@ public class CreditsFragment extends CarFragment {
         super.onAttach(context);
         Log.i(TAG, "onAttach");
 
-        setTitle("Credits");
+        setTitle(getContext().getString(R.string.activity_credits_title));;
     }
 
     @Override

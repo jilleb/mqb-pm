@@ -17,14 +17,24 @@
     <string name="bar">bar</string>
     <string name="zeroVolt">0,0V</string>
     <string name="zeroCelcius">0,0°</string>
-    <string name="kmh">kmh</string>
+    <string name="kmh">km/h</string>
     <string name="rpm">RPM</string>
     <string name="nm">Nm</string>
     <string name="kw">KW</string>
+    <string name="g">G</string>
+    <string name="mph">mph</string>
+    <string name="volt">V</string>
 
 
     <string name="activity_settings_title">Performance Monitor Instellingen</string>
+    <string name="activity_graph_title">Graphs</string>
+    <string name="activity_credits_title">Credits</string>
+    <string name="activity_stopwatch_title">Stopwatch</string>
+    <string name="activity_main_title">Performance Monitor</string>
+    <string name="activity_carstatus_title">Car status</string>
+    <string name="activity_measurements_title">Measurements (Alpha test)</string>
 
+    <string name="resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
     <string name="pref_appearance">Weergave</string>
     <string name="pref_highvis">Hoge contrast klokweergave</string>
     <string name="pref_theme">Thema</string>
@@ -77,9 +87,40 @@
     <string name="pref_highlowmarks_off">De hoogste en laagste waarden worden niet getoond op de klok</string>
     <string name="pref_graphitem">Grafiek</string>
     <string name="graphDelay">Graph Resolution</string>
-    <string name="g">G</string>
-    <string name="mph">mph</string>
-    <string name="volt">V</string>
 
+    <string name="none">None</string>
+    <string name="absChargingAirPressure">Turbo charge pressure (absolute)</string>
+    <string name="relChargingAirPressure">Turbo charge pressure (relative)</string>
+    <string name="batteryVoltage">Battery voltage</string>
+    <string name="coolantTemperature">Coolant temperature</string>
+    <string name="oilTemperature">Oil temperature</string>
+    <string name="gearboxOilTemperature">Gearbox temperature</string>
+    <string name="outsideTemperature">Outside temperature</string>
+    <string name="vehicleSpeed">Speed</string>
+    <string name="currentGear">Current gear</string>
+    <string name="recommendedGear">Recommended gear</string>
+    <string name="engineSpeed">RPM</string>
+    <string name="lateralAcceleration">Lateral G\'s</string>
+    <string name="longitudinalAcceleration">Longitudinal G\'s</string>
+    <string name="yawRate">Yaw rate</string>
+    <string name="wheelAngle">Wheel angle</string>
+    <string name="acceleratorPosition">Accelerator position</string>
+    <string name="brakePressure">Brake Pressure</string>
+    <string name="powermeter">Hybrid power</string>
+    <string name="currentTorque">Torque</string>
+    <string name="currentOutputPower">Output power</string>
+    <string name="EcoHMI_Score.AvgShort">Eco score</string>
+    <string name="EcoHMI_Score.AvgTrip">Eco score average</string>
+    <string name="currentConsumptionPrimary">Current consumption, primary fuel</string>
+    <string name="currentConsumptionSecondary">Current consumption, secondary fuel</string>
+    <string name="cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
+    <string name="cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
+    <string name="vehicleSpeed_alternative">Car speed (different source)</string>
+    <string name="test">Test (random, does not get data from the car)</string>
+
+    <string name="author">This application was made by:</string>
+    <string name="basedon">Based on the SDK and demo App by:</string>
+    <string name="thanks">Special thanks to:</string>
+    <string name="drivesafely">Drive Safely.</string>
 
 </resources>

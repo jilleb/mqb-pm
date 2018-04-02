@@ -23,25 +23,25 @@ configurations.all {
 }
 
 dependencies {
-    compile 'com.github.martoreto:aauto-sdk:v4.7'
-    compile 'com.github.martoreto:aauto-vex-base:v3.1'
-    compile 'com.jjoe64:graphview:4.2.1'
-    compile('com.google.apis:google-api-services-bigquery:v2-rev352-1.22.0') exclude module: 'httpclient'
-    compile 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
-    compile 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
+    implementation 'com.github.martoreto:aauto-sdk:v4.7'
+    implementation 'com.github.martoreto:aauto-vex-base:v3.1'
+    implementation 'com.jjoe64:graphview:4.2.1'
+    implementation('com.google.apis:google-api-services-bigquery:v2-rev352-1.22.0') exclude module: 'httpclient'
+    implementation 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
+    implementation 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
 
-    compile 'com.android.support:appcompat-v7:27.1.0'
-    compile 'com.android.support:cardview-v7:27.1.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:design:27.1.0'
-    compile 'com.github.anastr:speedviewlib:1.2.0'
+    implementation 'com.android.support:appcompat-v7:27.1.0'
+    implementation 'com.android.support:cardview-v7:27.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:design:27.1.0'
+    implementation 'com.github.anastr:speedviewlib:1.2.0'
     //noinspection GradleDependency
-    compile 'com.google.guava:guava:22.0-android'
-    compile 'com.google.android.gms:play-services-auth:12.0.0'
-    compile 'com.google.android.gms:play-services-identity:12.0.0'
-    compile 'com.android.support:support-v4:27.1.0'
+    implementation 'com.google.guava:guava:22.0-android'
+    implementation 'com.google.android.gms:play-services-auth:12.0.0'
+    implementation 'com.google.android.gms:play-services-identity:12.0.0'
+    implementation 'com.android.support:support-v4:27.1.0'
 
-    testCompile 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.12'
 }
 
 apply plugin: 'com.google.gms.google-services'

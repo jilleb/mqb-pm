@@ -26,7 +26,7 @@
             android:layout_weight="1"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
-            android:text="Apply settings by reconnecting phone to Android Auto." />
+            android:text="@string/resettoapply" />
 
     </android.support.design.widget.AppBarLayout>
 

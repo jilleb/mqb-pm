@@ -25,30 +25,31 @@
 
     <!-- Names of Entries for clock data settings -->
     <string-array name="ClockDataElementsEntries">
-        <item>Turbo charge pressure (absolute)</item>
-        <item>Turbo charge pressure (relative)</item>
-        <item>Battery voltage</item>
-        <item>Coolant temperature</item>
-        <item>Oil Temperature</item>
-        <item>Gearbox Temperature</item>
-        <item>Speed</item>
-        <item>RPM</item>
-        <item>Lateral G\'s</item>
-        <item>Longitudinal G\'s</item>
-        <item>Yaw rate</item>
-        <item>Wheel Angle</item>
-        <item>Accelerator Position</item>
-        <item>Brake Pressure</item>
-        <item>Hybrid power</item>
-        <item>Torque</item>
-        <item>Output Power</item>
-        <item>Eco Score</item>
-        <item>Eco Score average</item>
-        <item>Current consumption, primary fuel</item>
-        <item>Current consumption, secondary fuel</item>
-        <item>Cycle consumption, primary fuel</item>
-        <item>Cycle consumption, secondary fuel</item>
-        <item>Test (random, does not get data from the car)</item>
+        <item>@string/absChargingAirPressure</item>
+        <item>@string/relChargingAirPressure</item>
+        <item>@string/batteryVoltage</item>
+        <item>@string/coolantTemperature</item>
+        <item>@string/oilTemperature</item>
+        <item>@string/gearboxOilTemperature</item>
+        <item>@string/vehicleSpeed</item>
+        <item>@string/engineSpeed</item>
+        <item>@string/lateralAcceleration</item>
+        <item>@string/longitudinalAcceleration</item>
+        <item>@string/yawRate</item>
+        <item>@string/wheelAngle</item>
+        <item>@string/acceleratorPosition</item>
+        <item>@string/brakePressure</item>
+        <item>@string/powermeter</item>
+        <item>@string/currentTorque</item>
+        <item>@string/currentOutputPower</item>
+        <item>@string/EcoHMI_Score.AvgShort</item>
+        <item>@string/EcoHMI_Score.AvgTrip</item>
+        <item>@string/currentConsumptionPrimary</item>
+        <item>@string/currentConsumptionSecondary</item>
+        <item>@string/cycleConsumptionPrimary</item>
+        <item>@string/cycleConsumptionSecondary</item>
+        <item>@string/vehicleSpeed_alternative</item>
+        <item>@string/test</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for clock data settings -->
@@ -77,34 +78,36 @@
         <item>currentConsumptionSecondary</item>
         <item>cycleConsumptionPrimary</item>
         <item>cycleConsumptionSecondary</item>
+        <item>vehicleSpeed_alternative</item>
         <item>test</item>
 
     </string-array>
 
     <!-- Names of each of the Entries for dashboard elements settings -->
     <string-array name="TextDataElementsEntries">
-        <item>None</item>
-        <item>Battery voltage</item>
-        <item>Coolant temperature</item>
-        <item>Oil temperature</item>
-        <item>Gearbox oil temperature</item>
-        <item>Outside temperature</item>
-        <item>Output power</item>
-        <item>Output torque</item>
-        <item>RPM</item>
-        <item>Speed</item>
-        <item>Current Gear</item>
-        <item>Recommended Gear</item>
-        <item>Lateral G\'s</item>
-        <item>Longitudinal G\'s</item>
-        <item>Yaw rate</item>
-        <item>Wheel Angle</item>
-        <item>Accelerator Position</item>
-        <item>Brake Pressure</item>
-        <item>Hybrid power</item>
-        <item>Eco Score</item>
-        <item>Eco Score average</item>
-        <item>Test (random data)</item>
+        <item>@string/none</item>
+        <item>@string/batteryVoltage</item>
+        <item>@string/coolantTemperature</item>
+        <item>@string/oilTemperature</item>
+        <item>@string/gearboxOilTemperature</item>
+        <item>@string/outsideTemperature</item>
+        <item>@string/currentOutputPower</item>
+        <item>@string/currentTorque</item>
+        <item>@string/engineSpeed</item>
+        <item>@string/vehicleSpeed</item>
+        <item>@string/currentGear</item>
+        <item>@string/recommendedGear</item>
+        <item>@string/lateralAcceleration</item>
+        <item>@string/longitudinalAcceleration</item>
+        <item>@string/yawRate</item>
+        <item>@string/wheelAngle</item>
+        <item>@string/acceleratorPosition</item>
+        <item>@string/brakePressure</item>
+        <item>@string/powermeter</item>
+        <item>@string/EcoHMI_Score.AvgShort</item>
+        <item>@string/EcoHMI_Score.AvgTrip</item>
+        <item>@string/test</item>
+
     </string-array>
 
     <!-- Values/query strings for each of the Entries for dashboard elements settings -->

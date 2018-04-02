@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Performance Monitor para VAG</string>
-    <string name="car_service_name">Performance Monitor</string>
+    <string name="car_service_name">Información Sport</string>
 
     <string name="temp_format">%.0f°</string>
     <string name="temp_formatF">%.0f°F</string>
@@ -18,15 +18,23 @@
     <string name="bar">bar</string>
     <string name="zeroVolt">0,0V</string>
     <string name="zeroCelcius">0,0°</string>
-    <string name="kmh">kmh</string>
+    <string name="kmh">km/h</string>
     <string name="rpm">RPM</string>
     <string name="nm">Nm</string>
     <string name="kw">KW</string>
     <string name="volt">V</string>
-
+    <string name="g">G</string>
+    <string name="mph">mph</string>
 
     <string name="activity_settings_title">Ajustes de Performance Monitor</string>
+    <string name="activity_graph_title">Gráficas</string>
+    <string name="activity_credits_title">Créditos</string>
+    <string name="activity_stopwatch_title">Cronómetro</string>
+    <string name="activity_main_title">Información Sport</string>
+    <string name="activity_carstatus_title">Estado del vehículo</string>
+    <string name="activity_measurements_title">Mediciones (Alpha test)</string>
 
+    <string name="resettoapply">Reconecta el telefono a Android Auto para aplicar cambios.</string>
     <string name="pref_appearance">Apariencia</string>
     <string name="pref_highvis">Diales de alta visibilidad</string>
     <string name="pref_theme">Apariencia</string>
@@ -79,8 +87,40 @@
     <string name="pref_highlowmarks_off">No se muesta una marca del valor máximo ni mínimo en el reloj</string>
     <string name="pref_graphitem">Gráfica</string>
     <string name="graphDelay">Resolución de la gráfica</string>
-    <string name="g">G</string>
-    <string name="mph">mph</string>
 
+    <string name="none">Nada</string>
+    <string name="absChargingAirPressure">Carga del turbo (absoluta)</string>
+    <string name="relChargingAirPressure">Carga del turbo (relativa)</string>
+    <string name="batteryVoltage">Voltaje de la batería</string>
+    <string name="coolantTemperature">Temperatura del refrigerante</string>
+    <string name="oilTemperature">Temperatura del aceite</string>
+    <string name="gearboxOilTemperature">Temperatura del aceite de la caja de cambios</string>
+    <string name="outsideTemperature">Temperatura exterior</string>
+    <string name="vehicleSpeed">Velocidad</string>
+    <string name="currentGear">Marcha actual</string>
+    <string name="recommendedGear">Marcha recomendada</string>
+    <string name="engineSpeed">RPM</string>
+    <string name="lateralAcceleration">G\'s laterales</string>
+    <string name="longitudinalAcceleration">G\'s longitudinales</string>
+    <string name="yawRate">Velocidad de guiñada</string>
+    <string name="wheelAngle">Angulo de las ruedas</string>
+    <string name="acceleratorPosition">Posición del acelerador</string>
+    <string name="brakePressure">Presión de frenos</string>
+    <string name="powermeter">Potencia hibrida</string>
+    <string name="currentTorque">Torque</string>
+    <string name="currentOutputPower">Potencia</string>
+    <string name="EcoHMI_Score.AvgShort">Puntuación Eco</string>
+    <string name="EcoHMI_Score.AvgTrip">Media puntuación Eco</string>
+    <string name="currentConsumptionPrimary">Consumo actual, combustible primario</string>
+    <string name="currentConsumptionSecondary">Consumo actual, combustible secundario</string>
+    <string name="cycleConsumptionPrimary">Ciclo de consumo, combustible primario</string>
+    <string name="cycleConsumptionSecondary">Ciclo de consumo, combustible secundario</string>
+    <string name="vehicleSpeed_alternative">Velocidad (diferente fuente)</string>
+    <string name="test">Test (aleoatorio, no obtiene datos del coche)</string>
+
+    <string name="author">Esta aplicación ha sido creada por:</string>
+    <string name="basedon">Basado en el SDK y la app demo de:</string>
+    <string name="thanks">Agradecimeientos a:</string>
+    <string name="drivesafely">Conduce con seguridad.</string>
 
 </resources>

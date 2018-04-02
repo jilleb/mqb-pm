@@ -198,33 +198,33 @@ public class MainCarActivity extends CarActivity {
 
         //set menu
         mainMenu.addMenuItem(MENU_HOME, new MenuItem.Builder()
-                .setTitle("Home")
+                .setTitle(getString(R.string.activity_main_title))
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-     /*   mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
-                .setTitle("Car status")
+    /*    mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
+                .setTitle(getString(R.string.activity_carstatus_title))
                 .setType(MenuItem.Type.ITEM)
-                .build());
-                */
+                .build());*/
+
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
-                .setTitle("Stopwatch")
+                .setTitle(getString(R.string.activity_stopwatch_title))
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
         mainMenu.addMenuItem(MENU_GRAPH, new MenuItem.Builder()
-                .setTitle("Graphs")
+                .setTitle(getString(R.string.activity_graph_title))
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-  /*          mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
-                    .setTitle("Measurements(alpha test)")
+  /*         mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
+                    .setTitle(getString(R.string.activity_measurements_title))
                     .setType(MenuItem.Type.ITEM)
                     .build()); */
 
 
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
-                .setTitle("Credits")
+                .setTitle(getString(R.string.activity_credits_title))
                 .setType(MenuItem.Type.ITEM)
                 .build());
 

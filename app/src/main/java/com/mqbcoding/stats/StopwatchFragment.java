@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
+import com.google.common.base.Stopwatch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -53,9 +55,6 @@ public class StopwatchFragment extends CarFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
-
-
-
     }
 
     @Override
@@ -63,7 +62,7 @@ public class StopwatchFragment extends CarFragment {
         super.onAttach(context);
         Log.i(TAG, "onAttach");
 
-        setTitle("Stopwatch");
+        setTitle(getContext().getString(R.string.activity_stopwatch_title));
     }
 
     @Override

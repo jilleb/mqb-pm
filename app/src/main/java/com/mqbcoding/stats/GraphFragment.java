@@ -119,6 +119,7 @@ public class GraphFragment extends CarFragment {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
 
+        setTitle(getContext().getString(R.string.activity_graph_title));
     }
 
     @Override
@@ -213,7 +214,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(-100, 200);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
-                mGraph.setTitle("Test data");
+                mGraph.setTitle(getContext().getString(R.string.test));
                 break;
             case "vehicleSpeed_alternative":
                 mClockIcon.setText("");
@@ -221,7 +222,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 350);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle("Speed");
+                mGraph.setTitle(getContext().getString(R.string.vehicleSpeed_alternative));
                 break;
 
             case "vehicleSpeed":
@@ -230,7 +231,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 350);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle("Speed");
+                mGraph.setTitle(getContext().getString(R.string.vehicleSpeed));
                 break;
             case "engineSpeed":
                 mClockIcon.setText("");
@@ -238,7 +239,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 8000);
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 mClockIcon.setBackgroundResource(0);
-                mGraph.setTitle("RPM");
+                mGraph.setTitle(getContext().getString(R.string.engineSpeed));
                 break;
             case "batteryVoltage":
                 mClockIcon.setText("");
@@ -246,7 +247,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 15);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
-                mGraph.setTitle("Battery Voltage");
+                mGraph.setTitle(getContext().getString(R.string.batteryVoltage));
                 break;
             case "oilTemperature":
                 mClockIcon.setText("");
@@ -254,7 +255,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 150);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_oil));
-                mGraph.setTitle("Oil Temperature");
+                mGraph.setTitle(getContext().getString(R.string.oilTemperature));
                 break;
             case "coolantTemperature":
                 mClockIcon.setText("");
@@ -262,7 +263,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 150);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_water));
-                mGraph.setTitle("Coolant Temperature");
+                mGraph.setTitle(getContext().getString(R.string.coolantTemperature));
                 break;
             case "gearboxOilTemperature":
                 mClockIcon.setText("");
@@ -270,7 +271,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 150);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
-                mGraph.setTitle("Gearbox Oil Temperature");
+                mGraph.setTitle(getContext().getString(R.string.gearboxOilTemperature));
                 break;
             case "absChargingAirPressure":
                 mClockIcon.setText("");
@@ -278,7 +279,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(pressureMin, pressureMax);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Absolute Charging Pressure");
+                mGraph.setTitle(getContext().getString(R.string.absChargingAirPressure));
                 break;
             case "relChargingAirPressure":
                 mClockIcon.setText("");
@@ -286,7 +287,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(pressureMin, pressureMax);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Relative Charging Pressure");
+                mGraph.setTitle(getContext().getString(R.string.relChargingAirPressure));
                 break;
             case "lateralAcceleration":
                 mClockIcon.setText("");
@@ -294,7 +295,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(-2, 2);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Lateral Acceleration");
+                mGraph.setTitle(getContext().getString(R.string.lateralAcceleration));
 
                 break;
             case "longitudinalAcceleration":
@@ -303,7 +304,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(-2, 2);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Longitudinal Acceleration");
+                mGraph.setTitle(getContext().getString(R.string.longitudinalAcceleration));
 
                 break;
             case "yawRate":
@@ -312,7 +313,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(-1, 1);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Yaw rate");
+                mGraph.setTitle(getContext().getString(R.string.yawRate));
                 break;
             case "wheelAngle":
                 mClockIcon.setText("");
@@ -320,7 +321,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(-45, 45);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Wheel angle");
+                mGraph.setTitle(getContext().getString(R.string.wheelAngle));
                 break;
             case "EcoHMI_Score.AvgShort":
                 mClockIcon.setText("");
@@ -328,7 +329,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle("Eco Score");
+                mGraph.setTitle(getContext().getString(R.string.EcoHMI_Score_AvgShort));
                 break;
             case "EcoHMI_Score.AvgTrip":
                 mClockIcon.setText("");
@@ -336,7 +337,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle("Average Eco score");
+                mGraph.setTitle(getContext().getString(R.string.EcoHMI_Score_AvgTrip));
                 break;
             case "powermeter":
                 mClockIcon.setText("");
@@ -344,7 +345,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 2000);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle("Hybrid power");
+                mGraph.setTitle(getContext().getString(R.string.powermeter));
                 break;
             case "acceleratorPosition":
                 mClockIcon.setText("");
@@ -352,7 +353,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_pedalposition));
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle("Lateral Acceleration");
+                mGraph.setTitle(getContext().getString(R.string.acceleratorPosition));
                 break;
             case "brakePressure":
                 mClockIcon.setText("");
@@ -360,7 +361,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-                mGraph.setTitle("Brake pressure");
+                mGraph.setTitle(getContext().getString(R.string.brakePressure));
                 break;
             case "currentTorque":
                 mClockIcon.setText("");
@@ -368,7 +369,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 500);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Torque");
+                mGraph.setTitle(getContext().getString(R.string.currentTorque));
                 break;
             case "currentOutputPower":
                 mClockIcon.setText("");
@@ -376,7 +377,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 500);
                 mClockIcon.setBackgroundResource(0);
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Output Power");
+                mGraph.setTitle(getContext().getString(R.string.currentOutputPower));
                 break;
             case "currentConsumptionPrimary":
                 mClockIcon.setText("");
@@ -384,7 +385,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Primary consumption");
+                mGraph.setTitle(getContext().getString(R.string.currentConsumptionPrimary));
                 break;
             case "currentConsumptionSecondary":
                 mClockIcon.setText("");
@@ -392,7 +393,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Secondary consumption");
+                mGraph.setTitle(getContext().getString(R.string.currentConsumptionSecondary));
                 break;
             case "cycleConsumptionPrimary":
                 mClockIcon.setText("");
@@ -400,7 +401,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Cycle consumption primary");
+                mGraph.setTitle(getContext().getString(R.string.cycleConsumptionPrimary));
                 break;
             case "cycleConsumptionSecondary":
                 mClockIcon.setText("");
@@ -408,7 +409,7 @@ public class GraphFragment extends CarFragment {
                 mClockGraph.setMinMaxSpeed(0, 100);
                 mClockIcon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 mClockGraph.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-                mGraph.setTitle("Cycle consumption secondary");
+                mGraph.setTitle(getContext().getString(R.string.cycleConsumptionSecondary));
                 break;
         }
 

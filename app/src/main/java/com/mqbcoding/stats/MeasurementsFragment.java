@@ -68,7 +68,7 @@ public class MeasurementsFragment extends CarFragment {
 
 
 
-        setTitle("Measurements");
+        setTitle(getContext().getString(R.string.activity_measurements_title));
     }
 
     @Override
