@@ -445,6 +445,9 @@ public class DashboardFragment extends CarFragment {
         mClockMaxLeft = null;
         mClockMaxCenter = null;
         mClockMaxRight = null;
+        mRayLeft = null;
+        mRayCenter = null;
+        mRayRight = null;
 
         super.onDestroyView();
     }
@@ -1014,19 +1017,16 @@ public class DashboardFragment extends CarFragment {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mEngineSpeed));
                     }
                     break;
-                case "currentOutputPower":
-                    Float mCurrentOutputPower = (Float) mLastMeasurements.get(queryElement);
-                    if (mCurrentOutputPower != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentOutputPower));
-                    }
-                    break;
-                case "currentTorque":
-                    Float mCurrentTorque = (Float) mLastMeasurements.get(queryElement);
-                    if (mCurrentTorque != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentTorque));
-                    }
 
+                    // Decimal values, without any specific modification:
+                case "currentOutputPower":
+                case "currentTorque":
+                    Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
+                    if (mCurrentDecimalValue != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentDecimalValue));
+                    }
                     break;
+
                 case "currentGear":
                     Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
                     Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
@@ -1055,15 +1055,10 @@ public class DashboardFragment extends CarFragment {
                     value.setText(gearText);
                     break;
                 case "lateralAcceleration":
-                    Float mLateralAcceleration = (Float) mLastMeasurements.get(queryElement);
-                    if (mLateralAcceleration != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mLateralAcceleration));
-                    }
-                    break;
                 case "longitudinalAcceleration":
-                    Float mlongitudinalAcceleration = (Float) mLastMeasurements.get(queryElement);
-                    if (mlongitudinalAcceleration != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mlongitudinalAcceleration));
+                    Float mAcceleration = (Float) mLastMeasurements.get(queryElement);
+                    if (mAcceleration != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mAcceleration));
                     }
                     break;
                 case "yawRate":
@@ -1097,16 +1092,13 @@ public class DashboardFragment extends CarFragment {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mPowermeter));
                     }
                     break;
+
+                // eco values
                 case "EcoHMI_Score.AvgShort":
-                    Float mEcoScoreShort = (Float) mLastMeasurements.get(queryElement);
-                    if (mEcoScoreShort != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mEcoScoreShort));
-                    }
-                    break;
                 case "EcoHMI_Score.AvgTrip":
-                    Float mEcoScoreTrip = (Float) mLastMeasurements.get(queryElement);
-                    if (mEcoScoreTrip != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mEcoScoreTrip));
+                    Float mEcoScore = (Float) mLastMeasurements.get(queryElement);
+                    if (mEcoScore != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mEcoScore));
                     }
                     break;
             }
