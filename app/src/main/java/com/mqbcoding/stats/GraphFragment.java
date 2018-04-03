@@ -495,11 +495,6 @@ public class GraphFragment extends CarFragment {
     private void updateClock(String query) {
 
         Speedometer dial = mClockGraph;
-        String generalTempUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
-        if (generalTempUnit == null) {
-            generalTempUnit = "?";
-        }
-
         Float clockValue = (Float) mLastMeasurements.get(query);
 
         float randomClockVal = randFloat(-100, 200);
