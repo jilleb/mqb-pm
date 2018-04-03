@@ -1,4 +1,85 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="testing">testing</string>
+    <string name="app_name">Performance Monitor per VAG</string>
+    <string name="car_service_name">Performance Monitor</string>
+
+    <string name="temp_format">%.0f°</string>
+    <string name="temp_formatF">%.0f°F</string>
+    <string name="temp_formatC">%.0f°C</string>
+    <string name="volt_format">%.1fV</string>
+    <string name="gforce_format">%.1fG</string>
+    <string name="percent_format">%.1f</string>
+    <string name="degrees_format">%.1f°</string>
+
+    <string name="decimals">%.1f</string>
+    <string name="no_decimals">%.0f</string>
+
+    <string name="psi">psi</string>
+    <string name="bar">bar</string>
+    <string name="zeroVolt">0,0V</string>
+    <string name="zeroCelcius">0,0°</string>
+    <string name="kmh">km/h</string>
+    <string name="rpm">RPM</string>
+    <string name="nm">Nm</string>
+    <string name="kw">KW</string>
+    <string name="volt">V</string>
+
+
+    <string name="activity_settings_title">Impostazioni Performance Monitor</string>
+
+    <string name="pref_appearance">Aspetto</string>
+    <string name="pref_highvis">Indicatori ad alta visibilità</string>
+    <string name="pref_theme">Tema</string>
+    <string name="pref_highlow">Valori massimi/minimi</string>
+    <string name="pref_accbrakeindicator">Indicatore acceleratore/freno</string>
+
+    <string name="pref_choose_account_title">Scegli account</string>
+    <string name="pref_upload_to_bigquery_title">Carica log su BigQuery</string>
+    <string name="pref_bigquery_project_id_title">ID progetto</string>
+    <string name="pref_bigquery_dataset_title">Nome database</string>
+    <string name="pref_bigquery_table_title">Nome tabella</string>
+    <string name="pref_kick_uploads_title">Carica dati adesso</string>
+    <string name="kick_uploads_nothing_to_do">Tutti gli upload sono stati completati.</string>
+    <string name="kick_uploads_done">Upload programmato.</string>
+    <string name="pref_bigquery_reupload_last_title">Ricarica l\'ultimo file log</string>
+    <string name="bigquery_reupload_last_failed">Errore nel caricare l\'ultimo file log.</string>
+    <string name="bigquery_reupload_last_ok">Upload ri-programmato.</string>
+    <string name="oil_notification_title">Temperatura olio</string>
+    <string name="oil_notification_text">L\'olio ha raggiunto la temperatura operativa.</string>
+    <string name="pref_oil_temp_threshold_title">Temperatura operativa olio</string>
+    <string name="pref_oil_temp_monitoring_title">Temperatura olio motore</string>
+    <string name="pref_oil_temp_monitoring_summary">Mostra una notifica quando il motore raggiunge la temperatura operativa desiderata.</string>
+    <string name="pref_notifications_category_title">Notifiche</string>
+    <string name="pref_wheel_state_monitoring_title">Beep quando lo sterzo è dritto (angolo zero)</string>
+    <string name="pref_wheel_state_monitoring_summary">Emissione di un avvertimento sonoro quando in retro lo sterzo passa dall\'angolo zero.</string>
+    <string name="pref_logging_category_title">Salvataggio dati (su log)</string>
+    <string name="pref_stats_logging_title">Registra i dati dell'auto su un file log locale</string>
+    <string name="pref_stats_logging_summary">Cartella log: %1$s</string>
+    <string name="pref_stats_logging_not_available">Registrazione dati non eseguibile: %1$s</string>
+    <string name="pref_providers_category_title">Servizi cattura dati dell\'auto</string>
+    <string name="pref_list_providers_title">Lista de servizi</string>
+    <string name="providers">Servizi cattura dati dell\'auto</string>
+    <string name="pref_leftclock">Indicatore sinistro</string>
+    <string name="pref_centerclock">Indicatore centrale</string>
+    <string name="pref_rightclock">Indicatore destro</string>
+    <string name="pref_view1">Vista 1 (in alto a sinistra)</string>
+    <string name="pref_view2">Vista 2 (in alto a destra)</string>
+    <string name="pref_view3">Vista 3  (in basso a sinistra)</string>
+    <string name="pref_view4">Vista 4 (in basso a destra)</string>
+    <string name="pref_pressureunit">Unità di misura pressione</string>
+    <string name="pref_dataelementsettings">Impostazioni indicatori a schermo</string>
+    <string name="pref_highvis_off">Mostra lancetta sull\'indicatore</string>
+    <string name="pref_highvis_on">Mostra un raggio ad alta visibilità invece della lancetta sugli indicatori circolari</string>
+    <string name="pref_highlow_off">Non mostrare i valori massimi/minimi</string>
+    <string name="pref_highlow_on">Mostra i valori massimi/minimi sugli indicatori circolari</string>
+    <string name="pref_accbrakeindicator_off">L\'indicatore non viene mostrato</string>
+    <string name="pref_accbrakeindicator_on">L\'indicatore viene mostrato</string>
+    <string name="pref_highlowmarks">Segna i valori massimi/minimi sugli indicatori circolari</string>
+    <string name="pref_highlowmarks_on">I valori massimi/minimi sono mostrati sugli indicatori circolari</string>
+    <string name="pref_highlowmarks_off">I valori massimi/minimi sono nascoti dagli indicatori circolari</string>
+    <string name="pref_graphitem">Grafico</string>
+    <string name="graphDelay">Risoluzione temporale grafico</string>
+    <string name="g">G</string>
+    <string name="mph">mph</string>
+
+
 </resources>
