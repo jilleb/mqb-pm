@@ -29,7 +29,6 @@
     <string name="pref_bigquery_project_id_title">ID projektu</string>
     <string name="pref_bigquery_dataset_title">Jméno datasetu</string>
     <string name="pref_bigquery_table_title">Tabulka</string>
-    <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
     <string name="pref_kick_uploads_title">Odeslat data</string>
     <string name="kick_uploads_nothing_to_do">Všechna data jsou odeslána.</string>
     <string name="kick_uploads_done">Odeslání dat naplánováno.</string>
@@ -75,4 +74,45 @@
     <string name="g">G</string>
     <string name="mph">mph</string>
     <string name="rpm">ot.</string>
+    <string name="activity_stopwatch_title">Stopwatch</string>
+    <string name="activity_credits_title">Credits</string>
+    <string name="activity_carstatus_title">Status</string>
+    <string name="activity_measurements_title">Measurements</string>
+    <string name="activity_graph_title">Graphs</string>
+
+    <string name="none">None</string>
+    <string name="absChargingAirPressure">Turbo charge pressure (absolute)</string>
+    <string name="relChargingAirPressure">Turbo charge pressure (relative)</string>
+    <string name="batteryVoltage">Battery voltage</string>
+    <string name="coolantTemperature">Coolant temperature</string>
+    <string name="oilTemperature">Oil temperature</string>
+    <string name="gearboxOilTemperature">Gearbox temperature</string>
+    <string name="outsideTemperature">Outside temperature</string>
+    <string name="vehicleSpeed">Speed</string>
+    <string name="currentGear">Current gear</string>
+    <string name="recommendedGear">Recommended gear</string>
+    <string name="engineSpeed">RPM</string>
+    <string name="lateralAcceleration">Lateral G\'s</string>
+    <string name="longitudinalAcceleration">Longitudinal G\'s</string>
+    <string name="yawRate">Yaw rate</string>
+    <string name="wheelAngle">Wheel angle</string>
+    <string name="acceleratorPosition">Accelerator position</string>
+    <string name="brakePressure">Brake Pressure</string>
+    <string name="powermeter">Hybrid power</string>
+    <string name="currentTorque">Torque</string>
+    <string name="currentOutputPower">Output power</string>
+    <string name="EcoHMI_Score.AvgShort">Eco score</string>
+    <string name="EcoHMI_Score.AvgTrip">Eco score average</string>
+    <string name="currentConsumptionPrimary">Current consumption, primary fuel</string>
+    <string name="currentConsumptionSecondary">Current consumption, secondary fuel</string>
+    <string name="cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
+    <string name="cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
+    <string name="vehicleSpeed_alternative">Car speed (different source)</string>
+    <string name="test">Test (random, does not get data from the car)</string>
+
+    <string name="author">This application was made by:</string>
+    <string name="basedon">Based on the SDK and demo App by:</string>
+    <string name="thanks">Special thanks to:</string>
+    <string name="drivesafely">Drive Safely.</string>
+    <string name="testing">testing</string>
 </resources>
