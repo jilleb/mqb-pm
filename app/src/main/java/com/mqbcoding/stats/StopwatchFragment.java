@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.support.annotation.StringRes;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
-import com.google.common.base.Stopwatch;
 
 import java.util.ArrayList;
 import java.util.Arrays;
