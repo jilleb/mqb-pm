@@ -37,8 +37,8 @@
     <string name="resettoapply">Reconecta el telefono a Android Auto para aplicar cambios.</string>
     <string name="pref_appearance">Apariencia</string>
     <string name="pref_highvis">Diales de alta visibilidad</string>
-    <string name="pref_theme">Apariencia</string>
-    <string name="pref_highlow">Valores Máximos y Mínimos</string>
+    <string name="pref_theme">Tema</string>
+    <string name="pref_highlow">Valores máximos/mínimos</string>
     <string name="pref_accbrakeindicator">Indicador de aceleración/frenado</string>
 
     <string name="pref_choose_account_title">Elegir cuenta</string>
@@ -103,7 +103,7 @@
     <string name="lateralAcceleration">G\'s laterales</string>
     <string name="longitudinalAcceleration">G\'s longitudinales</string>
     <string name="yawRate">Velocidad de guiñada</string>
-    <string name="wheelAngle">Angulo de las ruedas</string>
+    <string name="wheelAngle">Ángulo de las ruedas</string>
     <string name="acceleratorPosition">Posición del acelerador</string>
     <string name="brakePressure">Presión de frenos</string>
     <string name="powermeter">Potencia hibrida</string>
@@ -123,6 +123,6 @@
     <string name="thanks">Agradecimeientos a:</string>
     <string name="drivesafely">Conduce con seguridad.</string>
     <string name="testing">testing</string>
-    <string name="pref_font">Font</string>
+    <string name="pref_font">Fuente</string>
 
 </resources>

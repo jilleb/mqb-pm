@@ -195,13 +195,23 @@ engineTypes_secondaryEngine
         super.onDestroy();
     }
 
-    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
-        @Override
-        public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
-            mLastMeasurements.putAll(values);
-            postUpdate();
-        }
-    };
+    private final CarStatsClient.Listener mCarStatsListener;
+
+    {
+        mCarStatsListener = new CarStatsClient.Listener() {
+            @Override
+            public void onSchemaChanged() {
+                onSchemaChanged();
+            }
+
+            @Override
+            public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
+                mLastMeasurements.putAll(values);
+                postUpdate();
+            }
+        };
+    }
+
     private void postUpdate() {
         mHandler.post(new Runnable() {
             @Override

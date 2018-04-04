@@ -24,7 +24,7 @@ configurations.all {
 
 dependencies {
     implementation 'com.github.martoreto:aauto-sdk:v4.7'
-    implementation 'com.github.martoreto:aauto-vex-base:v3.1'
+    implementation 'com.github.martoreto:aauto-vex-base:v4.3'
     implementation 'com.jjoe64:graphview:4.2.1'
     implementation('com.google.apis:google-api-services-bigquery:v2-rev352-1.22.0') exclude module: 'httpclient'
     implementation 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
@@ -37,8 +37,8 @@ dependencies {
     implementation 'com.github.anastr:speedviewlib:1.2.0'
     //noinspection GradleDependency
     implementation 'com.google.guava:guava:22.0-android'
-    implementation 'com.google.android.gms:play-services-auth:12.0.0'
-    implementation 'com.google.android.gms:play-services-identity:12.0.0'
+    implementation 'com.google.android.gms:play-services-auth:12.0.1'
+    implementation 'com.google.android.gms:play-services-identity:12.0.1'
     implementation 'com.android.support:support-v4:27.1.0'
 
     testImplementation 'junit:junit:4.12'
