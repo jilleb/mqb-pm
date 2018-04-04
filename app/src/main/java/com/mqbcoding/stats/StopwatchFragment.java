@@ -1,11 +1,13 @@
 package com.mqbcoding.stats;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +26,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class StopwatchFragment extends CarFragment {
+    private String selectedFont;
     private final String TAG = "StopwatchFragment";
 
     TextView textSwTimer;
@@ -69,8 +72,30 @@ public class StopwatchFragment extends CarFragment {
         Log.i(TAG, "onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_stopwatch, container, false);
 
-//set textview to have a custom digital font:
+//Get shared preferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        selectedFont = sharedPreferences.getString("selectedFont", "segments");
+
+
+        //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+        switch(selectedFont){
+            case "segments":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+                break;
+            case "seat":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "SEAT_MetaStyle_MonoDigit_Regular.ttf");
+                break;
+            case "seat2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "seatKombi_normal.ttf");
+                break;
+            case "vw":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWTextCarUI-Regular.ttf");
+                break;
+            case "vw2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWThesis_MIB_Regular.ttf");
+                break;
+        }
 
 
         textSwTimer= rootView.findViewById(R.id.textSwTimer2);

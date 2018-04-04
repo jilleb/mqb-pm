@@ -45,7 +45,7 @@ public class GraphFragment extends CarFragment {
     private String mGraphQuery;
     private Boolean pressureUnits;
     private int pressureMin, pressureMax;
-    private String pressureUnit;
+    private String pressureUnit, selectedFont;
     private float pressureFactor, speedFactor;
     private int graphDelay;
     private Runnable mTimer1;
@@ -141,7 +141,32 @@ public class GraphFragment extends CarFragment {
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
+        //Get shared preferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
+        graphDelay = Integer.parseInt(sharedPreferences.getString("graphDelay", "1000"));
+        selectedFont = sharedPreferences.getString("selectedFont", "segments");
+
+
+        //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+        switch(selectedFont){
+            case "segments":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+                break;
+            case "seat":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "SEAT_MetaStyle_MonoDigit_Regular.ttf");
+                break;
+            case "seat2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "seatKombi_normal.ttf");
+                break;
+            case "vw":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWTextCarUI-Regular.ttf");
+                break;
+            case "vw2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWThesis_MIB_Regular.ttf");
+                break;
+        }
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
 
         mClockGraph = rootView.findViewById(R.id.dial_graph);
@@ -149,10 +174,6 @@ public class GraphFragment extends CarFragment {
         mClockGraph.setSpeedTextTypeface(typeface);
         mClockIcon = rootView.findViewById(R.id.icon_GraphClock);
 
-        //Get shared preferences
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
-        graphDelay = Integer.parseInt(sharedPreferences.getString("graphDelay", "1000"));
 
         //determine what data the user wants to have on the graph and clock.
         mGraphQuery = sharedPreferences.getString("selectedGraphItem", "vehicleSpeed");

@@ -123,6 +123,13 @@
     <string name="thanks">Special thanks to:</string>
     <string name="drivesafely">Drive Safely.</string>
     <string name="testing">testing</string>
+
     <string name="pref_font">Font</string>
+    <string name="segments">7 segment display</string>
+    <string name="vw">Volkswagen Text CarUI</string>
+    <string name="vw2">Volkswagen Thesis</string>
+    <string name="seat">Seat Metastyle</string>
+    <string name="seat2">Seat Kombi</string>
+
 
 </resources>
