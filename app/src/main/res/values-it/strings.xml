@@ -121,6 +121,7 @@
     <string name="thanks">Ringraziamento speciale a:</string>
     <string name="drivesafely">Guida prudente.</string>
     <string name="testing">prova</string>
+    <string name="pref_font">Font</string>
 
 
 </resources>

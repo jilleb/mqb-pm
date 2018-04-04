@@ -126,5 +126,6 @@
     <string name="thanks">Special thanks to:</string>
     <string name="drivesafely">Drive Safely.</string>
     <string name="testing">testing</string>
+    <string name="pref_font">Font</string>
 
 </resources>

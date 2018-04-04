@@ -49,7 +49,7 @@ public class DashboardFragment extends CarFragment {
     private ImageView mSteeringWheelAngle;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
-    private String pressureUnit;
+    private String pressureUnit, selectedFont;
     private float pressureFactor, speedFactor;
     private int pressureMin, pressureMax;
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
@@ -157,13 +157,45 @@ public class DashboardFragment extends CarFragment {
         Log.i(TAG, "onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
+
+        //Get shared preferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
+        raysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
+        maxOn = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
+        maxMarksOn = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
+        accelOn = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
+        selectedFont = sharedPreferences.getString("selectedFont", "segments");
+
+
+        //set textview to have a custom digital font:
+        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+        switch(selectedFont){
+            case "segments":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+                break;
+            case "seat":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "SEAT_MetaStyle_MonoDigit_Regular.ttf");
+                break;
+            case "seat2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "seatKombi_normal.ttf");
+                break;
+            case "vw":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWTextCarUI-Regular.ttf");
+                break;
+            case "vw2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWThesis_MIB_Regular.ttf");
+                break;
+        }
+
+
         //this is to enable an image as indicator.
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
-        //set textview to have a custom digital font:
-        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+
 
         // build ImageIndicator using the resourceId
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
@@ -250,17 +282,6 @@ public class DashboardFragment extends CarFragment {
 
         //
         mClockCenter.setOnClickListener(celebrateOnClickListener);
-
-        //-------------------------------------------------------------
-        //Get shared preferences
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-
-        pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
-        raysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
-        maxOn = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
-        maxMarksOn = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
-        accelOn = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
-
 
         //determine what data the user wants to have on the 4 data views
         mElement1Query = sharedPreferences.getString("selectedView1", "none");

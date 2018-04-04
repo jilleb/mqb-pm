@@ -123,5 +123,6 @@
     <string name="thanks">Agradecimeientos a:</string>
     <string name="drivesafely">Conduce con seguridad.</string>
     <string name="testing">testing</string>
+    <string name="pref_font">Font</string>
 
 </resources>
