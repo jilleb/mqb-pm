@@ -19,6 +19,7 @@
     <string name="nm">Nm</string>
     <string name="kw">KW</string>
     <string name="activity_settings_title">Nastavení Monitoru výkonu</string>
+    <string name="pref_font">Font</string>
     <string name="pref_appearance">Vzhled</string>
     <string name="pref_highvis">Reflexní číselníky</string>
     <string name="pref_theme">Téma</string>
@@ -74,46 +75,49 @@
     <string name="g">G</string>
     <string name="mph">mph</string>
     <string name="rpm">ot.</string>
-    <string name="activity_stopwatch_title">Stopwatch</string>
-    <string name="activity_credits_title">Credits</string>
-    <string name="activity_carstatus_title">Status</string>
+
+
+    <string name="none">Nepoužito</string>
+    <string name="absChargingAirPressure">Tlak turba (absolutní)</string>
+    <string name="relChargingAirPressure">Tlak turba (relativní)</string>
+    <string name="batteryVoltage">Napětí baterie</string>
+    <string name="coolantTemperature">Teplota chladící kapaliny</string>
+    <string name="oilTemperature">Teplota oleje</string>
+    <string name="gearboxOilTemperature">Teplota převodovky</string>
+    <string name="outsideTemperature">Venkovní teplota</string>
+    <string name="vehicleSpeed">Rychlost</string>
+    <string name="currentGear">Zařazený rychlostní stupeň</string>
+    <string name="recommendedGear">Doporučený rychlostní stupeň</string>
+    <string name="engineSpeed">Otáčky motoru</string>
+    <string name="lateralAcceleration">Příčné přetížení</string>
+    <string name="longitudinalAcceleration">Podélné přetížení</string>
+    <string name="yawRate">Náklon</string>
+    <string name="wheelAngle">Úhel volantu</string>
+    <string name="acceleratorPosition">Poloha plynového pedálu</string>
+    <string name="brakePressure">Tlak na brzdový pedál</string>
+    <string name="powermeter">Hybridní výkon</string>
+    <string name="currentTorque">Kroutící moment</string>
+    <string name="currentOutputPower">Výstupní výkon</string>
+    <string name="EcoHMI_Score.AvgShort">Eko skóre</string>
+    <string name="EcoHMI_Score.AvgTrip">Eko skóre průměr</string>
+    <string name="currentConsumptionPrimary">Aktuální spotřeba, primární palivo</string>
+    <string name="currentConsumptionSecondary">Aktuální spotřeba, sekundární palivo</string>
+    <string name="cycleConsumptionPrimary">Spotřeba od načerpání, primární  palivo</string>
+    <string name="cycleConsumptionSecondary">Spotřeba od načerpání, sekundární  palivo</string>
+    <string name="vehicleSpeed_alternative">Ryclost (jiný zdroj)</string>
+    <string name="test">Test (zobrazí náhodná data,která nepochází z auta)</string>
+
+
+    <string name="author">Aplikaci vytvořil:</string>
+    <string name="basedon">Na základě SDK a demo aplikací od:</string>
+    <string name="thanks">Speciálně děkuji:</string>
+    <string name="drivesafely">Bezpečnou jízdu.</string>
+    <string name="testing">testování</string>
     <string name="activity_measurements_title">Measurements</string>
+    <string name="activity_stopwatch_title">Stopwatch</string>
     <string name="activity_graph_title">Graphs</string>
-
-    <string name="none">None</string>
-    <string name="absChargingAirPressure">Turbo charge pressure (absolute)</string>
-    <string name="relChargingAirPressure">Turbo charge pressure (relative)</string>
-    <string name="batteryVoltage">Battery voltage</string>
-    <string name="coolantTemperature">Coolant temperature</string>
-    <string name="oilTemperature">Oil temperature</string>
-    <string name="gearboxOilTemperature">Gearbox temperature</string>
-    <string name="outsideTemperature">Outside temperature</string>
-    <string name="vehicleSpeed">Speed</string>
-    <string name="currentGear">Current gear</string>
-    <string name="recommendedGear">Recommended gear</string>
-    <string name="engineSpeed">RPM</string>
-    <string name="lateralAcceleration">Lateral G\'s</string>
-    <string name="longitudinalAcceleration">Longitudinal G\'s</string>
-    <string name="yawRate">Yaw rate</string>
-    <string name="wheelAngle">Wheel angle</string>
-    <string name="acceleratorPosition">Accelerator position</string>
-    <string name="brakePressure">Brake Pressure</string>
-    <string name="powermeter">Hybrid power</string>
-    <string name="currentTorque">Torque</string>
-    <string name="currentOutputPower">Output power</string>
-    <string name="EcoHMI_Score.AvgShort">Eco score</string>
-    <string name="EcoHMI_Score.AvgTrip">Eco score average</string>
-    <string name="currentConsumptionPrimary">Current consumption, primary fuel</string>
-    <string name="currentConsumptionSecondary">Current consumption, secondary fuel</string>
-    <string name="cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
-    <string name="cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
-    <string name="vehicleSpeed_alternative">Car speed (different source)</string>
-    <string name="test">Test (random, does not get data from the car)</string>
-
-    <string name="author">This application was made by:</string>
-    <string name="basedon">Based on the SDK and demo App by:</string>
-    <string name="thanks">Special thanks to:</string>
-    <string name="drivesafely">Drive Safely.</string>
-    <string name="testing">testing</string>
-    <string name="pref_font">Font</string>
+    <string name="activity_credits_title">O projektu</string>
+    <string name="activity_main_title">Monitor výkonu</string>
+    <string name="activity_carstatus_title">Info o autě</string>
+    <string name="resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>`
 </resources>
