@@ -32,6 +32,7 @@ Download the latest release here: https://github.com/jilleb/mqb-pm/releases
 
 
 # Known issues
+- Google is actively blocking custom apps for Android Auto. So the app is not working with Android Auto v3.0 (unless you apply the workaround). Its also not working on Google Play Services v12.5.21.
 - App slowing down over time, and restarting. I haven't pinned this down completely yet. 
 
 - Black screen of death: On some cars it doesn't work for unknown reasons. This will not kill your car or headunit. Send me a logcat. 
