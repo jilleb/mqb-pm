@@ -154,11 +154,11 @@
     </string-array>
 
     <string-array name="fontEntries">
-        <item>7 segment display</item>
-        <item>Volkswagen Text CarUI</item>
-        <item>Volkswagen Thesis</item>
-        <item>Seat Metastyle</item>
-        <item>Seat Kombi</item>
+        <item>@string/segments</item>
+        <item>@string/vw</item>
+        <item>@string/vw2</item>
+        <item>@string/seat</item>
+        <item>@string/seat2</item>
     </string-array>
 
 
