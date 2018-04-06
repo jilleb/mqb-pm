@@ -58,11 +58,6 @@ public class GraphFragment extends CarFragment {
     {
         mCarStatsListener = new CarStatsClient.Listener() {
             @Override
-            public void onSchemaChanged() {
-                onSchemaChanged();
-            }
-
-            @Override
             public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
                 mLastMeasurements.putAll(values);
                 postUpdate();

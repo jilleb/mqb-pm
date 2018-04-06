@@ -118,11 +118,6 @@ public class CarStatsLogger implements CarStatsClient.Listener {
         }
     }
 
-    @Override
-    public void onSchemaChanged() {
-
-    }
-
     public static File getLogsDir() throws IOException {
         File logsDir = new File(Environment.getExternalStorageDirectory(), "CarLogs");
         if (!logsDir.exists()) {
