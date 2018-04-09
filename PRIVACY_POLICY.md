@@ -1,5 +1,3 @@
-  Privacy Policy body{font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; padding:1em;}
-
 Privacy Policy
 --------------
 
