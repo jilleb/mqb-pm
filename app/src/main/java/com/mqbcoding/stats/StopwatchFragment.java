@@ -34,7 +34,7 @@ public class StopwatchFragment extends CarFragment {
     TextView textTimer;
 
 
-    Button start, pause, reset, lap;
+    Button btnStart, btnPause, btnReset, btnLap;
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     Handler handler;
     int Seconds, Minutes, MilliSeconds, Laps ;
@@ -101,10 +101,10 @@ public class StopwatchFragment extends CarFragment {
         textSwTimer= rootView.findViewById(R.id.textSwTimer2);
         textSeconds = rootView.findViewById(R.id.textSeconds);
         textTimer = rootView.findViewById(R.id.textTimer);
-        start=rootView.findViewById(R.id.imgbtnSwStart);
-        reset=rootView.findViewById(R.id.imgbtnSwReset);
-        pause=rootView.findViewById(R.id.imgbtnSwPause);
-        lap=rootView.findViewById(R.id.imgbtnSwSaveLap);
+        btnStart=rootView.findViewById(R.id.imgbtnSwStart);
+        btnReset=rootView.findViewById(R.id.imgbtnSwReset);
+        btnPause=rootView.findViewById(R.id.imgbtnSwPause);
+        btnLap=rootView.findViewById(R.id.imgbtnSwSaveLap);
         listView=rootView.findViewById(R.id.listSwLaps);
         Laps = 1;
         mStopwatch = rootView.findViewById(R.id.dialStopWatch);
@@ -140,21 +140,21 @@ public class StopwatchFragment extends CarFragment {
         );
 
         listView.setAdapter(adapter);
-        start.setOnClickListener(new View.OnClickListener(){
+        btnStart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
                 StartTime = SystemClock.uptimeMillis();
                 handler.postDelayed(runnable,0);
-                start.setVisibility(View.INVISIBLE);
-                pause.setVisibility(View.VISIBLE);
-                reset.setVisibility(View.INVISIBLE);
+                btnStart.setVisibility(View.INVISIBLE);
+                btnPause.setVisibility(View.VISIBLE);
+                btnReset.setVisibility(View.INVISIBLE);
             //    reset.setEnabled(false);
-                lap.setVisibility(View.VISIBLE);
+                btnLap.setVisibility(View.VISIBLE);
             }
         });
 
-        pause.setOnClickListener(new View.OnClickListener() {
+        btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -163,14 +163,14 @@ public class StopwatchFragment extends CarFragment {
                 handler.removeCallbacks(runnable);
 
                 //reset.setEnabled(true);
-                reset.setVisibility(View.VISIBLE);
+                btnReset.setVisibility(View.VISIBLE);
 
-                pause.setVisibility(View.INVISIBLE);
-                start.setVisibility(View.VISIBLE);
+                btnPause.setVisibility(View.INVISIBLE);
+                btnStart.setVisibility(View.VISIBLE);
             }
         });
 
-        reset.setOnClickListener(new View.OnClickListener() {
+        btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -195,7 +195,7 @@ public class StopwatchFragment extends CarFragment {
         });
 
 
-        lap.setOnClickListener(new View.OnClickListener() {
+        btnLap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
