@@ -1075,7 +1075,7 @@ public class DashboardFragment extends CarFragment {
                             gearText = convGear(currentGear);
                         } else if (!recommendedGear.equals(currentGear)){
                             value.setTextColor(Color.RED);
-                            gearText = (convGear(currentGear) + ">" + convGear(recommendedGear));
+                            gearText = (convGear(currentGear) + "▶" + convGear(recommendedGear));
                         }
                     }
                     value.setText(gearText);
