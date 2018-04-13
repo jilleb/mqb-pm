@@ -101,13 +101,13 @@ public class StopwatchFragment extends CarFragment {
         textSwTimer= rootView.findViewById(R.id.textSwTimer2);
         textSeconds = rootView.findViewById(R.id.textSeconds);
         textTimer = rootView.findViewById(R.id.textTimer);
-        start=rootView.findViewById(R.id.imgbtnStart2);
-        reset=rootView.findViewById(R.id.imgbtnReset2);
-        pause=rootView.findViewById(R.id.imgbtnPause2);
-        lap=rootView.findViewById(R.id.imgbtnSaveLap);
-        listView=rootView.findViewById(R.id.listview1);
+        start=rootView.findViewById(R.id.imgbtnSwStart);
+        reset=rootView.findViewById(R.id.imgbtnSwReset);
+        pause=rootView.findViewById(R.id.imgbtnSwPause);
+        lap=rootView.findViewById(R.id.imgbtnSwSaveLap);
+        listView=rootView.findViewById(R.id.listSwLaps);
         Laps = 1;
-        mStopwatch = rootView.findViewById(R.id.dialStopWatch2);
+        mStopwatch = rootView.findViewById(R.id.dialStopWatch);
 
         textSwTimer.setTypeface(typeface);
         textSeconds.setTypeface(typeface);

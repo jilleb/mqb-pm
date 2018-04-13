@@ -82,10 +82,10 @@ public class MeasurementsFragment extends CarFragment {
         textDelta= rootView.findViewById(R.id.textDelta);
         textSeconds = rootView.findViewById(R.id.textSeconds2);
         textTimer = rootView.findViewById(R.id.textTimer2);
-        start=rootView.findViewById(R.id.imgbtnStart2);
-        reset=rootView.findViewById(R.id.imgbtnReset2);
-        pause=rootView.findViewById(R.id.imgbtnPause2);
-        pause=rootView.findViewById(R.id.imgbtnPause2);
+        start=rootView.findViewById(R.id.imgbtnSwStart);
+        reset=rootView.findViewById(R.id.imgbtnSwReset);
+        pause=rootView.findViewById(R.id.imgbtnSwPause);
+        pause=rootView.findViewById(R.id.imgbtnSwPause);
         simulate=rootView.findViewById(R.id.btnDriver);
 
         textCurrentspeed=rootView.findViewById(R.id.textCurrentspeed);
@@ -93,7 +93,7 @@ public class MeasurementsFragment extends CarFragment {
         textDistance=rootView.findViewById(R.id.textDistance);
         Laps = 1;
 
-        mStopwatch = rootView.findViewById(R.id.dialStopWatch2);
+        mStopwatch = rootView.findViewById(R.id.dialStopWatch);
         mCurrentSpeed = rootView.findViewById(R.id.dialSpeed);
 
 
