@@ -11,12 +11,14 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
@@ -49,6 +51,7 @@ public class GraphFragment extends CarFragment {
     private float pressureFactor, speedFactor;
     private int graphDelay;
     private Runnable mTimer1;
+    private Button btnStart, btnPause;
 
 
     private Map<String, Object> mLastMeasurements = new HashMap<>();
@@ -65,19 +68,6 @@ public class GraphFragment extends CarFragment {
         };
     }
 
-    /*
-    //@Override
-    protected void setupStatusBar(StatusBarController sc) {
-        sc.setDayNightStyle(DayNightStyle.FORCE_NIGHT);
-        sc.showAppHeader();
-        sc.hideBatteryLevel();
-        sc.showClock();
-        sc.hideConnectivityLevel();
-        sc.showMicButton();
-        sc.showTitle();
-        sc.setTitle("Graphs");
-    }
-    */
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
@@ -168,6 +158,13 @@ public class GraphFragment extends CarFragment {
         mClockGraph.setIndicator(imageIndicator);
         mClockGraph.setSpeedTextTypeface(typeface);
         mClockIcon = rootView.findViewById(R.id.icon_GraphClock);
+        btnStart=rootView.findViewById(R.id.imgbtnGraphStart);
+        btnPause=rootView.findViewById(R.id.imgbtnGraphReset);
+
+        btnStart.setVisibility(View.VISIBLE);
+        btnPause.setVisibility(View.INVISIBLE);
+
+
 
 
         //determine what data the user wants to have on the graph and clock.
@@ -215,8 +212,47 @@ public class GraphFragment extends CarFragment {
 
         setupClock(mGraphQuery);
 
+        btnStart.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view)
+            {
+                btnStart.setVisibility(View.INVISIBLE);
+                btnPause.setVisibility(View.VISIBLE);
 
-        doUpdate();
+                doUpdate();
+
+                mTimer1 = new Runnable() {
+                    @Override
+                    public void run() {
+
+                        Float temp = mClockGraph.getCurrentSpeed();
+                        if (temp != null) {
+                            graphLastXValue += 1d;
+                            mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 1000);
+                            mHandler.postDelayed(this, graphDelay);
+                        }
+                    }
+                };
+                mHandler.postDelayed(mTimer1, 1000);
+            }
+        });
+
+        btnPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                mHandler.removeCallbacks(mTimer1);
+
+                //reset.setEnabled(true);
+                btnStart.setVisibility(View.VISIBLE);
+                btnPause.setVisibility(View.INVISIBLE);
+            }
+        });
+
+
+
+
+       // doUpdate();
 
         return rootView;
     }
@@ -446,19 +482,7 @@ public class GraphFragment extends CarFragment {
         super.onResume();
         Log.i(TAG, "onActivate");
 
-        mTimer1 = new Runnable() {
-            @Override
-            public void run() {
 
-                Float temp = mClockGraph.getCurrentSpeed();
-                if (temp != null) {
-                    graphLastXValue += 1d;
-                    mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 4000);
-                    mHandler.postDelayed(this, graphDelay);
-                }
-            }
-        };
-        mHandler.postDelayed(mTimer1, 1000);
     }
 
     @Override

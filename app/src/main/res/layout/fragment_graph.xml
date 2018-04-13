@@ -6,6 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/imgbtnGraphStart"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/sw_button_selector"
+        android:drawableTop="@drawable/sw_start"
+        android:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="@+id/dial_graph"
+        app:layout_constraintStart_toStartOf="@+id/dial_graph"
+        app:layout_constraintTop_toBottomOf="@+id/dial_graph"
+        app:srcCompat="@drawable/sw_start" />
+
+    <Button
+        android:id="@+id/imgbtnGraphReset"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginEnd="8dp"
+
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/sw_button_selector"
+        android:drawableTop="@drawable/sw_pause"
+        app:layout_constraintEnd_toEndOf="@+id/dial_graph"
+        app:layout_constraintStart_toStartOf="@+id/dial_graph"
+        app:layout_constraintTop_toBottomOf="@+id/dial_graph" />
+
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_graph"
         style="@style/AppTheme.Car.Speedometer"
@@ -14,7 +43,6 @@
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
         android:background="?attr/themedDialBackground"
         android:elevation="0dp"
         android:padding="25dp"
@@ -22,6 +50,7 @@
         app:layout_constraintEnd_toStartOf="@+id/graph"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/graph"
+        app:layout_constraintVertical_bias="0.0"
         app:sv_speedTextPosition="CENTER"
         app:sv_speedTextSize="36dp"
         app:sv_textColor="@android:color/transparent"
