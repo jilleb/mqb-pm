@@ -176,8 +176,8 @@ public class MainCarActivity extends CarActivity {
                 .detach(carfragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
-//                .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
-//                .detach(measurementsfragment)
+                .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
+                .detach(measurementsfragment)
 //                .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
 //                .detach(cardatafragment)
                 .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
@@ -217,10 +217,10 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-  /*         mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
+        mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
                     .setTitle(getString(R.string.activity_measurements_title))
                     .setType(MenuItem.Type.ITEM)
-                    .build()); */
+                    .build());
 
 
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
