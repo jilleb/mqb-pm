@@ -8,7 +8,7 @@
 
 
     <com.github.anastr.speedviewlib.AwesomeSpeedometer
-        android:id="@+id/dialStopWatch"
+        android:id="@+id/dialMeasStopWatch"
         style="@style/AppTheme.Car.Speedometer"
         android:layout_width="250dp"
         android:layout_height="250dp"
@@ -38,49 +38,9 @@
         app:sv_unitTextSize="20sp"
         app:sv_withEffects="true" />
 
-    <com.github.anastr.speedviewlib.SpeedView
-        android:id="@+id/dialSpeed"
-        style="@style/AppTheme.Car.Speedometer"
-        android:layout_width="150dp"
-        android:layout_height="250dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="16dp"
-
-        android:layout_marginTop="8dp"
-        android:background="@drawable/dial_background_empty"
-        android:elevation="0dp"
-        android:padding="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/listRecords"
-        app:layout_constraintLeft_toLeftOf="parent"
-
-        app:layout_constraintTop_toTopOf="@+id/dialStopWatch"
-
-        app:sv_highSpeedColor="@android:color/holo_red_dark"
-        app:sv_indicatorColor="@android:color/white"
-        app:sv_lowSpeedColor="@android:color/holo_green_dark"
-        app:sv_lowSpeedPercent="25"
-        app:sv_maxSpeed="300"
-        app:sv_mediumSpeedColor="@android:color/holo_orange_dark"
-        app:sv_mediumSpeedPercent="50"
-        app:sv_minSpeed="-100"
-        app:sv_speedBackgroundColor="@android:color/transparent"
-        app:sv_speedTextFormat="FLOAT"
-        app:sv_speedTextPosition="CENTER"
-        app:sv_speedTextSize="40dp"
-        app:sv_speedometerColor="@android:color/transparent"
-        app:sv_speedometerWidth="5dp"
-        app:sv_textColor="@android:color/white"
-        app:sv_tickNumber="3"
-        app:sv_unit=""
-        app:sv_unitTextSize="20sp"
-        app:sv_withEffects="true" />
-
-
 
     <TextView
-        android:id="@+id/textSwTimer2"
+        android:id="@+id/textMeasTimer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
@@ -92,12 +52,12 @@
         android:textAppearance="@style/CarHeadline1"
         android:textColor="@android:color/white"
         android:typeface="normal"
-        app:layout_constraintEnd_toEndOf="@+id/dialStopWatch"
-        app:layout_constraintStart_toStartOf="@+id/dialStopWatch"
-        app:layout_constraintTop_toTopOf="@+id/dialStopWatch" />
+        app:layout_constraintEnd_toEndOf="@+id/dialMeasStopWatch"
+        app:layout_constraintStart_toStartOf="@+id/dialMeasStopWatch"
+        app:layout_constraintTop_toTopOf="@+id/dialMeasStopWatch" />
 
     <TextView
-        android:id="@+id/textSeconds2"
+        android:id="@+id/textMeasSeconds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
@@ -108,9 +68,9 @@
         android:textColor="@android:color/white"
         android:textSize="72sp"
         android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="@+id/dialStopWatch"
-        app:layout_constraintEnd_toEndOf="@+id/dialStopWatch"
-        app:layout_constraintStart_toStartOf="@+id/dialStopWatch"
+        app:layout_constraintBottom_toBottomOf="@+id/dialMeasStopWatch"
+        app:layout_constraintEnd_toEndOf="@+id/dialMeasStopWatch"
+        app:layout_constraintStart_toStartOf="@+id/dialMeasStopWatch"
         app:layout_constraintTop_toTopOf="@+id/textSwTimer2" />
 
     <android.support.constraint.ConstraintLayout
@@ -118,11 +78,11 @@
         android:layout_width="wrap_content"
         android:layout_height="251dp"
         android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/dialStopWatch"
-        app:layout_constraintTop_toTopOf="@+id/dialStopWatch">
+        app:layout_constraintStart_toEndOf="@+id/dialMeasStopWatch"
+        app:layout_constraintTop_toTopOf="@+id/dialMeasStopWatch">
 
         <Button
-            android:id="@+id/imgbtnSwPause"
+            android:id="@+id/imgbtnMeasPause"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
@@ -136,7 +96,7 @@
             app:srcCompat="@drawable/sw_pause" />
 
         <Button
-            android:id="@+id/imgbtnSwStart"
+            android:id="@+id/imgbtnMeasStart"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:background="@drawable/sw_button_selector"
@@ -148,7 +108,7 @@
             app:layout_constraintTop_toTopOf="@+id/imgbtnSwPause" />
 
         <Button
-            android:id="@+id/imgbtnSwReset"
+            android:id="@+id/imgbtnMeasReset"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
@@ -164,7 +124,7 @@
 
 
     <TextView
-        android:id="@+id/textTimer2"
+        android:id="@+id/textMeasTimerLong"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -184,9 +144,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginRight="16dp"
         android:background="@drawable/btn_background"
-        app:layout_constraintBottom_toBottomOf="@+id/dialStopWatch"
+        app:layout_constraintBottom_toBottomOf="@+id/dialMeasStopWatch"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dialStopWatch"
+        app:layout_constraintTop_toTopOf="@+id/dialMeasStopWatch"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
@@ -227,20 +187,6 @@
         android:text="simulate"
         app:layout_constraintStart_toStartOf="@+id/textCurrentspeed"
         app:layout_constraintTop_toBottomOf="@+id/clSwBtns" />
-
-    <TextView
-        android:id="@+id/textDelta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/textCurrentspeed"
-        app:layout_constraintEnd_toEndOf="@+id/textDistance"
-        app:layout_constraintStart_toStartOf="@+id/textDistance"
-        app:layout_constraintTop_toBottomOf="@+id/textDistance" />
 
 
 </android.support.constraint.ConstraintLayout>

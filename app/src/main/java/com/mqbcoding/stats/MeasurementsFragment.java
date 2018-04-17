@@ -1,9 +1,13 @@
 package com.mqbcoding.stats;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +19,6 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
-import com.github.anastr.speedviewlib.util.OnSectionChangeListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,26 +26,23 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class MeasurementsFragment extends CarFragment {
+    private String selectedFont;
     private final String TAG = "MeasurementsFragment";
 
-    TextView textSwTimer;
+    TextView textMeasTimer;
     TextView textSeconds;
     TextView textTimer;
-    TextView textCurrentspeed;
-    TextView textDistance;
-    TextView textDelta;
-    Speedometer mCurrentSpeed;
 
 
-    Button start, pause, reset, simulate;
-    long MillisecondTime, StartTime, TimeBuff,PreviousMilliSecondTime,TimeDifference, UpdateTime = 0L ;
+    Button btnStart, btnPause, btnReset;
+    long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     Handler handler;
     int Seconds, Minutes, MilliSeconds, Laps ;
-    long CurrentSpeed, Distance, DistanceDelta;
     long Hours;
     ListView listView ;
     String[] ListElements = new String[] {  };
     private Speedometer mStopwatch;
+
 
     List<String> ListElementsArrayList ;
 
@@ -56,17 +56,12 @@ public class MeasurementsFragment extends CarFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
-
-
-
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.i(TAG, "onAttach");
-
-
 
         setTitle(getContext().getString(R.string.activity_measurements_title));
     }
@@ -77,29 +72,59 @@ public class MeasurementsFragment extends CarFragment {
         Log.i(TAG, "onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_measurements, container, false);
 
+//Get shared preferences
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        selectedFont = sharedPreferences.getString("selectedFont", "segments");
 
-        textSwTimer= rootView.findViewById(R.id.textSwTimer2);
-        textDelta= rootView.findViewById(R.id.textDelta);
-        textSeconds = rootView.findViewById(R.id.textSeconds2);
-        textTimer = rootView.findViewById(R.id.textTimer2);
-        start=rootView.findViewById(R.id.imgbtnSwStart);
-        reset=rootView.findViewById(R.id.imgbtnSwReset);
-        pause=rootView.findViewById(R.id.imgbtnSwPause);
-        pause=rootView.findViewById(R.id.imgbtnSwPause);
-        simulate=rootView.findViewById(R.id.btnDriver);
 
-        textCurrentspeed=rootView.findViewById(R.id.textCurrentspeed);
+        //set textview to have a custom digital font:
+        Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+        switch(selectedFont){
+            case "segments":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
+                break;
+            case "seat":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "SEAT_MetaStyle_MonoDigit_Regular.ttf");
+                break;
+            case "seat2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "seatKombi_normal.ttf");
+                break;
+            case "vw":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWTextCarUI-Regular.ttf");
+                break;
+            case "vw2":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VWThesis_MIB_Regular.ttf");
+                break;
+        }
+
+
+        textMeasTimer= rootView.findViewById(R.id.textMeasTimer);
+        textSeconds = rootView.findViewById(R.id.textMeasSeconds);
+        textTimer = rootView.findViewById(R.id.textMeasTimerLong);
+        btnStart=rootView.findViewById(R.id.imgbtnMeasStart);
+        btnReset=rootView.findViewById(R.id.imgbtnMeasReset);
+        btnPause=rootView.findViewById(R.id.imgbtnMeasPause);
         listView=rootView.findViewById(R.id.listRecords);
-        textDistance=rootView.findViewById(R.id.textDistance);
-        Laps = 1;
+        mStopwatch = rootView.findViewById(R.id.dialMeasStopWatch);
 
-        mStopwatch = rootView.findViewById(R.id.dialStopWatch);
-        mCurrentSpeed = rootView.findViewById(R.id.dialSpeed);
+        textMeasTimer.setTypeface(typeface);
+        textSeconds.setTypeface(typeface);
+        textTimer.setTypeface(typeface);
 
 
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(),R.drawable.needle,200,200);
+
+
+        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[] { R.attr.themedNeedle });
+        int resourceId = typedArray.getResourceId(0, 0);
+        typedArray.recycle();
+
+
+
+        // build ImageIndicator using the resourceId
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200,200);
+
         mStopwatch.setIndicator(imageIndicator);
-
+        mStopwatch.speedPercentTo(100,5000);
 
         handler = new Handler();
 
@@ -109,8 +134,11 @@ public class MeasurementsFragment extends CarFragment {
 
         listView.setAdapter(adapter);
 
+        // here should be something "if speed > 0, start timer"
 
 
+
+    /*
         mCurrentSpeed.setOnSectionChangeListener(new OnSectionChangeListener() {
             @Override
             public void onSectionChangeListener(byte oldSection, byte newSection) {
@@ -122,31 +150,39 @@ public class MeasurementsFragment extends CarFragment {
                     DistanceDelta = 0;
                     Distance = 0;
                     handler.postDelayed(runnable,0);
-
-
-                    //Laps = Laps + 1;
-                }
-            }
-        });
+*/
 
 
 
-        start.setOnClickListener(new View.OnClickListener(){
+
+
+
+
+
+                    btnStart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
-                start.setText("Armed");
-                start.setVisibility(View.INVISIBLE);
-                pause.setVisibility(View.VISIBLE);
-                reset.setVisibility(View.INVISIBLE);
 
+                btnStart.setText("Armed");
+                btnStart.setVisibility(View.INVISIBLE);
+                btnPause.setVisibility(View.VISIBLE);
+                btnReset.setVisibility(View.INVISIBLE);
+                StartTime = SystemClock.uptimeMillis();
+
+
+
+
+                // when speed > 0, start clock
+
+                handler.postDelayed(runnable,0);
 
                 //    reset.setEnabled(false);
-              //  lap.setVisibility(View.VISIBLE);
+
             }
         });
 
-        pause.setOnClickListener(new View.OnClickListener() {
+        btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -155,23 +191,14 @@ public class MeasurementsFragment extends CarFragment {
                 handler.removeCallbacks(runnable);
 
                 //reset.setEnabled(true);
-                reset.setVisibility(View.VISIBLE);
+                btnReset.setVisibility(View.VISIBLE);
 
-                pause.setVisibility(View.INVISIBLE);
-                start.setVisibility(View.VISIBLE);
+                btnPause.setVisibility(View.INVISIBLE);
+                btnStart.setVisibility(View.VISIBLE);
             }
         });
 
-        simulate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                mCurrentSpeed.speedTo(400,60000);
-              //  mCurrentSpeed.slowDown();
-            }
-        });
-
-        reset.setOnClickListener(new View.OnClickListener() {
+        btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -184,34 +211,23 @@ public class MeasurementsFragment extends CarFragment {
                 Hours = 0 ;
                 MilliSeconds = 0 ;
                 Laps = 1;
-                mCurrentSpeed.speedTo(0,1000);
-                textSwTimer.setText("00:00");
+
+                textMeasTimer.setText("00:00");
                 textSeconds.setText("00");
                 mStopwatch.speedTo(0,1000);
                 ListElementsArrayList.clear();
                 textTimer.setText("00:00:00:000");
+
                 adapter.notifyDataSetChanged();
-                start.setText("Ready?");
             }
         });
 
-        /*
-        //toevoegen aan listview
-        lap.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                ListElementsArrayList.add(Laps+": "+ ((textTimer.getText().toString())));
-                Laps = Laps + 1;
-                adapter.notifyDataSetChanged();
 
-            }
-        });
-*/
+
 
         return rootView;
     }
-
 
     private static String formatInterval(final long millis) {
         final long hr = TimeUnit.MILLISECONDS.toHours(millis);
@@ -223,41 +239,32 @@ public class MeasurementsFragment extends CarFragment {
 
     public Runnable runnable = new Runnable() {
 
-
         public void run() {
 
+            MillisecondTime = SystemClock.uptimeMillis() - StartTime;
 
-                MillisecondTime = SystemClock.uptimeMillis() - StartTime;
+            UpdateTime = TimeBuff + MillisecondTime;
 
-                UpdateTime = TimeBuff + MillisecondTime;
+            Seconds = (int) (UpdateTime / 1000);
 
-                Seconds = (int) (UpdateTime / 1000);
+            Minutes = Seconds / 60;
 
-                Minutes = Seconds / 60;
+            Hours = TimeUnit.MILLISECONDS.toHours(UpdateTime);
 
-                Hours = TimeUnit.MILLISECONDS.toHours(UpdateTime);
+            Seconds = Seconds % 60;
 
-                Seconds = Seconds % 60;
+            MilliSeconds = (int) (UpdateTime % 1000);
 
-                MilliSeconds = (int) (UpdateTime % 1000);
-
-                textSwTimer.setText((String.format("%02d", Hours)) + ":" + (String.format("%02d", Minutes)));
-                textSeconds.setText(String.format("%02d", Seconds));
-                textTimer.setText(formatInterval(UpdateTime));
-                mStopwatch.speedTo(Seconds);
-
-                CurrentSpeed = mCurrentSpeed.getCurrentIntSpeed();
-
-               /* this is crappy stuff*/
-                DistanceDelta = (long) ((CurrentSpeed/3.6));
-                Distance = Distance + DistanceDelta;
-                textDistance.setText((String.format("%05d",Distance)));
-                textDelta.setText((String.format("%05d",DistanceDelta)));
-                DistanceDelta = 0;
+            textMeasTimer.setText((String.format("%02d", Hours)) +":" +(String.format("%02d", Minutes)));
+            textSeconds.setText(String.format("%02d", Seconds));
+            textTimer.setText(formatInterval(UpdateTime));
+            mStopwatch.speedTo(Seconds);
 
 
 
-// this listens for a change to medium section, which is 100km/h
+
+            /* OLD CODE
+            // this listens for a change to medium section, which is 100km/h
             mCurrentSpeed.setOnSectionChangeListener(new OnSectionChangeListener() {
                                                          @Override
                                                          public void onSectionChangeListener(byte oldSection, byte newSection) {
@@ -274,7 +281,21 @@ public class MeasurementsFragment extends CarFragment {
 
                 }
 
+             */
 
+
+
+
+
+
+
+
+
+
+
+
+            handler.postDelayed(this, 0);
+        }
 
     };
 

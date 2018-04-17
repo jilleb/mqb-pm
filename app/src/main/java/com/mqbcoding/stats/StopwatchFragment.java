@@ -107,7 +107,7 @@ public class StopwatchFragment extends CarFragment {
         btnLap=rootView.findViewById(R.id.imgbtnSwSaveLap);
         listView=rootView.findViewById(R.id.listSwLaps);
         Laps = 1;
-        mStopwatch = rootView.findViewById(R.id.dialStopWatch);
+        mStopwatch = rootView.findViewById(R.id.dialMeasStopWatch);
 
         textSwTimer.setTypeface(typeface);
         textSeconds.setTypeface(typeface);
