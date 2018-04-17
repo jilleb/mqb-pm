@@ -825,7 +825,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "currentOutputPower":
                 icon.setText("");
-                clock.setUnit(getString(R.string.nm));
+                clock.setUnit(getString(R.string.kw));
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
