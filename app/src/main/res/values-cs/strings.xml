@@ -38,7 +38,7 @@
     <string name="bigquery_reupload_last_ok">Opětovné odesílání dat.</string>
     <string name="oil_notification_title">Teplota oleje</string>
     <string name="oil_notification_text">Motorový olej dosáhl provozní teploty.</string>
-    <string name="pref_oil_temp_threshold_title">Teplota oleje se zobrazuje od</string>
+    <string name="pref_oil_temp_threshold_title">Pracovní teplota oleje</string>
     <string name="pref_oil_temp_monitoring_title">Monitorování teploty oleje</string>
     <string name="pref_oil_temp_monitoring_summary">Oznámit dosažení provozní teploty oleje.</string>
     <string name="pref_notifications_category_title">Oznámení</string>
@@ -104,7 +104,7 @@
     <string name="currentConsumptionSecondary">Aktuální spotřeba, sekundární palivo</string>
     <string name="cycleConsumptionPrimary">Spotřeba od načerpání, primární  palivo</string>
     <string name="cycleConsumptionSecondary">Spotřeba od načerpání, sekundární  palivo</string>
-    <string name="vehicleSpeed_alternative">Ryclost (jiný zdroj)</string>
+    <string name="vehicleSpeed_alternative">Rychlost (jiný zdroj)</string>
     <string name="test">Test (zobrazí náhodná data,která nepochází z auta)</string>
 
 
@@ -113,9 +113,9 @@
     <string name="thanks">Speciálně děkuji:</string>
     <string name="drivesafely">Bezpečnou jízdu.</string>
     <string name="testing">testování</string>
-    <string name="activity_measurements_title">Measurements</string>
-    <string name="activity_stopwatch_title">Stopwatch</string>
-    <string name="activity_graph_title">Graphs</string>
+    <string name="activity_measurements_title">Měření</string>
+    <string name="activity_stopwatch_title">Stopky</string>
+    <string name="activity_graph_title">Grafy</string>
     <string name="activity_credits_title">O projektu</string>
     <string name="activity_main_title">Monitor výkonu</string>
     <string name="activity_carstatus_title">Info o autě</string>
