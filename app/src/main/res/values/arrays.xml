@@ -159,6 +159,7 @@
         <item>@string/vw2</item>
         <item>@string/seat</item>
         <item>@string/seat2</item>
+        <item>Frutiger</item>
     </string-array>
 
 
@@ -168,6 +169,7 @@
         <item>vw2</item>
         <item>seat</item>
         <item>seat2</item>
+        <item>frutiger</item>
     </string-array>
 
 

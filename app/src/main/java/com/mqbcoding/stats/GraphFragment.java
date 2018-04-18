@@ -151,6 +151,9 @@ public class GraphFragment extends CarFragment {
             case "vw2":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "VWThesis_MIB_Regular.ttf");
                 break;
+            case "frutiger":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "Frutiger.otf");
+                break;
         }
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
 
