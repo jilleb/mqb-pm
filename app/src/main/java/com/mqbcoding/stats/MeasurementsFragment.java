@@ -1,11 +1,14 @@
 package com.mqbcoding.stats;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -19,34 +22,69 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
+import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class MeasurementsFragment extends CarFragment {
     private String selectedFont;
     private final String TAG = "MeasurementsFragment";
+    private Float carSpeed, carGforce;
+    private TextView textMeasTimer, textSeconds, textTimer;
+    private TextView textSpeed;
 
-    TextView textMeasTimer;
-    TextView textSeconds;
-    TextView textTimer;
 
 
-    Button btnStart, btnPause, btnReset;
+    Button btnStart, btnReset;
     long MillisecondTime, StartTime, TimeBuff, UpdateTime = 0L ;
     Handler handler;
     int Seconds, Minutes, MilliSeconds, Laps ;
     long Hours;
     ListView listView ;
     String[] ListElements = new String[] {  };
+    private CarStatsClient mStatsClient;
     private Speedometer mStopwatch;
-
+    private final CarStatsClient.Listener mCarStatsListener;
+    private Map<String, Object> mLastMeasurements = new HashMap<>();
 
     List<String> ListElementsArrayList ;
 
     ArrayAdapter<String> adapter ;
+
+
+    {
+        mCarStatsListener = new CarStatsClient.Listener() {
+            @Override
+            public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
+                mLastMeasurements.putAll(values);
+                //postUpdate();
+            }
+        };
+    }
+
+    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder) iBinder;
+            mStatsClient = carStatsBinder.getStatsClient();
+            mLastMeasurements = mStatsClient.getMergedMeasurements();
+            mStatsClient.registerListener(mCarStatsListener);
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mStatsClient.unregisterListener(mCarStatsListener);
+        }
+    };
+
+
 
     public MeasurementsFragment() {
         // Required empty public constructor
@@ -101,41 +139,39 @@ public class MeasurementsFragment extends CarFragment {
         textMeasTimer= rootView.findViewById(R.id.textMeasTimer);
         textSeconds = rootView.findViewById(R.id.textMeasSeconds);
         textTimer = rootView.findViewById(R.id.textMeasTimerLong);
+        textSpeed = rootView.findViewById(R.id.textMeasSpeed);
         btnStart=rootView.findViewById(R.id.imgbtnMeasStart);
         btnReset=rootView.findViewById(R.id.imgbtnMeasReset);
-        btnPause=rootView.findViewById(R.id.imgbtnMeasPause);
         listView=rootView.findViewById(R.id.listRecords);
         mStopwatch = rootView.findViewById(R.id.dialMeasStopWatch);
+
+        carSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
+
+        if (carSpeed != null){
+            textSpeed.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), carSpeed));
+        }
 
         textMeasTimer.setTypeface(typeface);
         textSeconds.setTypeface(typeface);
         textTimer.setTypeface(typeface);
 
-
-
-
+        // build ImageIndicator using the resourceId
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[] { R.attr.themedNeedle });
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
-
-
-        // build ImageIndicator using the resourceId
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200,200);
-
         mStopwatch.setIndicator(imageIndicator);
-        mStopwatch.speedPercentTo(100,5000);
 
         handler = new Handler();
 
+        // make the list
         ListElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));
-
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, ListElementsArrayList);
-
         listView.setAdapter(adapter);
 
         // here should be something "if speed > 0, start timer"
-
+        // or even better: if acceleratorpedal != 0
 
 
     /*
@@ -154,19 +190,14 @@ public class MeasurementsFragment extends CarFragment {
 
 
 
-
-
-
-
-
-                    btnStart.setOnClickListener(new View.OnClickListener(){
+    btnStart.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view)
             {
 
                 btnStart.setText("Armed");
-                btnStart.setVisibility(View.INVISIBLE);
-                btnPause.setVisibility(View.VISIBLE);
+                //btnStart.setVisibility(View.INVISIBLE);
+
                 btnReset.setVisibility(View.INVISIBLE);
                 StartTime = SystemClock.uptimeMillis();
 
@@ -182,21 +213,6 @@ public class MeasurementsFragment extends CarFragment {
             }
         });
 
-        btnPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                TimeBuff += MillisecondTime;
-
-                handler.removeCallbacks(runnable);
-
-                //reset.setEnabled(true);
-                btnReset.setVisibility(View.VISIBLE);
-
-                btnPause.setVisibility(View.INVISIBLE);
-                btnStart.setVisibility(View.VISIBLE);
-            }
-        });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -241,6 +257,9 @@ public class MeasurementsFragment extends CarFragment {
 
         public void run() {
 
+            carSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
+
+
             MillisecondTime = SystemClock.uptimeMillis() - StartTime;
 
             UpdateTime = TimeBuff + MillisecondTime;
@@ -258,7 +277,10 @@ public class MeasurementsFragment extends CarFragment {
             textMeasTimer.setText((String.format("%02d", Hours)) +":" +(String.format("%02d", Minutes)));
             textSeconds.setText(String.format("%02d", Seconds));
             textTimer.setText(formatInterval(UpdateTime));
-            mStopwatch.speedTo(Seconds);
+            if (carSpeed != null){
+                textSpeed.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), carSpeed));
+            }
+
 
 
 
@@ -332,6 +354,10 @@ public class MeasurementsFragment extends CarFragment {
     @Override
     public void onDetach() {
         Log.i(TAG, "onDetach");
+
+        mStatsClient.unregisterListener(mCarStatsListener);
+        getContext().unbindService(mServiceConnection);
+
         super.onDetach();
     }
 

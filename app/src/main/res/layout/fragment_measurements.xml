@@ -82,20 +82,6 @@
         app:layout_constraintTop_toTopOf="@+id/dialMeasStopWatch">
 
         <Button
-            android:id="@+id/imgbtnMeasPause"
-            android:layout_width="wrap_content"
-            android:layout_height="60dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/sw_button_selector"
-            android:drawableTop="@drawable/sw_pause"
-            android:visibility="invisible"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/sw_pause" />
-
-        <Button
             android:id="@+id/imgbtnMeasStart"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
@@ -165,7 +151,7 @@
         app:layout_constraintTop_toTopOf="@+id/listRecords" />
 
     <TextView
-        android:id="@+id/textCurrentspeed"
+        android:id="@+id/textMeasSpeed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -177,16 +163,6 @@
         app:layout_constraintBottom_toBottomOf="@+id/listRecords"
         app:layout_constraintEnd_toStartOf="@+id/listRecords"
         app:layout_constraintStart_toEndOf="@+id/clSwBtns" />
-
-    <Button
-        android:id="@+id/btnDriver"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="simulate"
-        app:layout_constraintStart_toStartOf="@+id/textCurrentspeed"
-        app:layout_constraintTop_toBottomOf="@+id/clSwBtns" />
 
 
 </android.support.constraint.ConstraintLayout>
