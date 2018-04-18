@@ -228,7 +228,7 @@ public class GraphFragment extends CarFragment {
                         Float temp = mClockGraph.getCurrentSpeed();
                         if (temp != null) {
                             graphLastXValue += 1d;
-                            mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 1000);
+                            mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 125);
                             mHandler.postDelayed(this, graphDelay);
                         }
                     }

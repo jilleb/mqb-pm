@@ -39,6 +39,7 @@ public class MeasurementsFragment extends CarFragment {
     private Float carSpeed, carGforce;
     private TextView textMeasTimer, textSeconds, textTimer;
     private TextView textSpeed;
+    private boolean boolHundred, boolThirty;
 
 
 
@@ -170,25 +171,6 @@ public class MeasurementsFragment extends CarFragment {
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, ListElementsArrayList);
         listView.setAdapter(adapter);
 
-        // here should be something "if speed > 0, start timer"
-        // or even better: if acceleratorpedal != 0
-
-
-    /*
-        mCurrentSpeed.setOnSectionChangeListener(new OnSectionChangeListener() {
-            @Override
-            public void onSectionChangeListener(byte oldSection, byte newSection) {
-                if (oldSection==Speedometer.LOW_SECTION && newSection == Speedometer.MEDIUM_SECTION && start.getText()=="Armed"){
-                    ListElementsArrayList.add("start!/h @ "+ ((textTimer.getText().toString())));
-                    adapter.notifyDataSetChanged();
-                    StartTime = SystemClock.uptimeMillis();
-                    PreviousMilliSecondTime = 0;
-                    DistanceDelta = 0;
-                    Distance = 0;
-                    handler.postDelayed(runnable,0);
-*/
-
-
 
     btnStart.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -197,14 +179,16 @@ public class MeasurementsFragment extends CarFragment {
 
                 btnStart.setText("Armed");
                 //btnStart.setVisibility(View.INVISIBLE);
+                boolHundred = false;
+                boolThirty = false;
 
-                btnReset.setVisibility(View.INVISIBLE);
+                //btnReset.setVisibility(View.INVISIBLE);
                 StartTime = SystemClock.uptimeMillis();
 
-
-
-
                 // when speed > 0, start clock
+                // maybe it's best to use the onspeedchanged listener from Speedview for this.
+                // for the time being it will just start
+                // when it starts to run, change "armed" to "running"
 
                 handler.postDelayed(runnable,0);
 
@@ -227,12 +211,16 @@ public class MeasurementsFragment extends CarFragment {
                 Hours = 0 ;
                 MilliSeconds = 0 ;
                 Laps = 1;
+                boolThirty = false;
+                boolHundred = false;
 
                 textMeasTimer.setText("00:00");
                 textSeconds.setText("00");
                 mStopwatch.speedTo(0,1000);
                 ListElementsArrayList.clear();
                 textTimer.setText("00:00:00:000");
+                handler.removeCallbacks(runnable);
+
 
                 adapter.notifyDataSetChanged();
             }
@@ -273,17 +261,24 @@ public class MeasurementsFragment extends CarFragment {
             Seconds = Seconds % 60;
 
             MilliSeconds = (int) (UpdateTime % 1000);
+            mStopwatch.speedTo(Seconds);
 
             textMeasTimer.setText((String.format("%02d", Hours)) +":" +(String.format("%02d", Minutes)));
             textSeconds.setText(String.format("%02d", Seconds));
             textTimer.setText(formatInterval(UpdateTime));
             if (carSpeed != null){
                 textSpeed.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), carSpeed));
+                if ((carSpeed > 10 ) && (boolThirty = false) ){
+                    ListElementsArrayList.add("0 - 10km/h @ " + ((textTimer.getText().toString())));
+                    adapter.notifyDataSetChanged();
+                    boolThirty = true;
+                } else if ((carSpeed > 100 ) && (boolHundred = false) ){
+                    ListElementsArrayList.add("0 - 100km/h @ " + ((textTimer.getText().toString())));
+                    adapter.notifyDataSetChanged();
+                    boolHundred = true;
+                }
+
             }
-
-
-
-
 
             /* OLD CODE
             // this listens for a change to medium section, which is 100km/h
