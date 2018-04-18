@@ -38,6 +38,7 @@ import java.util.Random;
 public class DashboardFragment extends CarFragment {
     public static final float FULL_BRAKE_PRESSURE = 100.0f;
     private final String TAG = "DashboardFragment";
+    private Runnable mTimer1;
     private CarStatsClient mStatsClient;
     private WheelStateMonitor mWheelStateMonitor;
     private ProgressBar mBrakeAccel;
@@ -500,12 +501,15 @@ public class DashboardFragment extends CarFragment {
     }
 
     private void postUpdate() {
-        mHandler.post(new Runnable() {
-            @Override
+        mTimer1 = new Runnable() {
             public void run() {
                 doUpdate();
             }
-        });
+
+        };
+        //experimental delay
+        mHandler.postDelayed(mTimer1, 10);
+
     }
 
     private void doUpdate() {
