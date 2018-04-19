@@ -511,7 +511,7 @@ public class DashboardFragment extends CarFragment {
 
         };
         //experimental delay
-        mHandler.postDelayed(mTimer1, 10);
+        mHandler.postDelayed(mTimer1, 100);
 
     }
 

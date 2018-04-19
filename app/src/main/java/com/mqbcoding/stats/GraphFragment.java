@@ -535,6 +535,7 @@ public class GraphFragment extends CarFragment {
             }
 
         }, 1000);
+
     }
 
     private void doUpdate() {
