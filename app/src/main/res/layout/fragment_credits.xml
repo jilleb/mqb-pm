@@ -58,6 +58,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
+        android:textSize="24dip"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
         app:layout_constraintLeft_toLeftOf="@+id/textStopwatch"
         app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -107,8 +108,8 @@
         android:layout_height="wrap_content"
 
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="16dp"
-        android:text="meich, borconi, mikhailkozlov, javigody, nerone,  illclown, divacky"
+        android:layout_marginTop="8dp"
+        android:text="meich, borconi, mikhailkozlov, javigody, nerone,  illclown, divacky, calfredop"
         android:textAlignment="center"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
