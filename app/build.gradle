@@ -7,8 +7,8 @@ android {
         applicationId "com.mqbcoding.stats"
         minSdkVersion 22
         targetSdkVersion 27
-        versionCode 44
-        versionName "0.44B"
+        versionCode 45
+        versionName "0.45B"
     }
     buildTypes {
         release {

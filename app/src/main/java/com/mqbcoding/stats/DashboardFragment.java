@@ -805,7 +805,7 @@ public class DashboardFragment extends CarFragment {
             case "powermeter":
                 icon.setText("");
                 clock.setUnit("");
-                clock.setMinMaxSpeed(0, 2000);
+                clock.setMinMaxSpeed(0, 5000);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
@@ -906,7 +906,6 @@ public class DashboardFragment extends CarFragment {
                 case "yawRate":
                 case "EcoHMI_Score.AvgShort":
                 case "EcoHMI_Score.AvgTrip":
-                case "powermeter":
                 case "brakePressure":
                 case "currentTorque":
                 case "currentOutputPower":
@@ -929,7 +928,14 @@ public class DashboardFragment extends CarFragment {
                         dial.speedTo(clockValue);
                     }
                     break;
-                // percentages
+                    // hybrid power has 1020 as value 0.
+                case "powermeter":
+                    if (clockValue != null) {
+                        clockValue = clockValue - 1020;
+                        dial.speedTo(clockValue);
+                    }
+
+                    // percentages
                 case "acceleratorPosition":
                     if (clockValue != null) {
                         float accelPercent = clockValue * 100;
