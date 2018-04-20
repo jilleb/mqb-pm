@@ -29,7 +29,7 @@
         android:layout_width="wrap_content"
         android:layout_height="45dp"
         android:layout_marginLeft="@dimen/car_standard_margin"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="80dp"
         android:text="@string/author"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
@@ -41,7 +41,7 @@
         style="@style/CarTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="8dp"
         android:text="@string/basedon"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toLeftOf="@+id/textStopwatch"
@@ -55,6 +55,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/thanks"
+        android:textAlignment="center"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="@+id/textView7"
@@ -67,16 +68,14 @@
         style="@style/CarTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginBottom="24dp"
         android:text="@string/drivesafely"
+        android:textAlignment="center"
         android:textAppearance="@style/CarHeadline1"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        app:layout_constraintVertical_bias="0.561" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
@@ -108,8 +107,9 @@
         android:layout_height="wrap_content"
 
         android:layout_marginBottom="8dp"
-        android:layout_marginTop="8dp"
-        android:text='Meich, Emil Borconi, Mikhail Kozlov, "Nerone", Javier Godoy'
+        android:layout_marginTop="16dp"
+        android:text="meich, borconi, mikhailkozlov, javigody, nerone,  illclown, divacky"
+        android:textAlignment="center"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/textView3"
