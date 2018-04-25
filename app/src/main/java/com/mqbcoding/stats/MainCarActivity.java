@@ -168,7 +168,7 @@ public class MainCarActivity extends CarActivity {
         CarFragment carfragment = new DashboardFragment();
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
         MeasurementsFragment measurementsfragment = new MeasurementsFragment();
-        //CardataFragment cardatafragment = new CardataFragment();
+        CardataFragment cardatafragment = new CardataFragment();
         GraphFragment graphfragment = new GraphFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
         fragmentManager.beginTransaction()
@@ -178,8 +178,8 @@ public class MainCarActivity extends CarActivity {
                 .detach(stopwatchfragment)
 //                .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
 //                .detach(measurementsfragment)
-//                .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
-//                .detach(cardatafragment)
+                .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
+                .detach(cardatafragment)
                 .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
                 .detach(graphfragment)
                 .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
@@ -202,10 +202,10 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-    /*    mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
+        mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_carstatus_title))
                 .setType(MenuItem.Type.ITEM)
-                .build());*/
+                .build());
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))

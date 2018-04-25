@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Performance Monitor for VAG</string>
     <string name="car_service_name">Performance Monitor</string>
+    <string name="version">0.45B</string>
 
     <string name="temp_format">%.0f°</string>
     <string name="temp_formatF">%.0f°F</string>
