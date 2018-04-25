@@ -223,14 +223,14 @@ engineTypes_secondaryEngine
         } else {
             mVIN.setText("VIN: " + sVIN);   //Should be some WVWZZZZbladiebla string
         }
-/*
+
         if (sOdometer == null) {
             mOdometer.setVisibility(View.GONE);
-        } else {
+        } else if (sOdometerUnits != null) {
             mOdometer.setVisibility(View.VISIBLE);
             mOdometer.setText("Driven: " + sOdometer + " " + sOdometerUnits); // eg 71811.0 km
         }
-
+/*
         //check if there are any warnings, and if so, display it
         //this could probably be done in a nicer way ;-)
         if (sWarningID0 == null) {
