@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.martoreto.aauto.vex.CarStatsClient;
-import com.google.android.apps.auto.sdk.DayNightStyle;
-import com.google.android.apps.auto.sdk.StatusBarController;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -110,7 +109,7 @@ engineTypes_secondaryEngine
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_cardata, container, false);
@@ -269,17 +268,6 @@ engineTypes_secondaryEngine
 
 
 
-    }
-
-    private void animateAlpha(View view, float alpha) {
-        if (view.getAlpha() == alpha) {
-            return;
-        }
-        if (isVisible()) {
-            view.animate().alpha(alpha).setDuration(mAnimationDuration).setListener(null);
-        } else {
-            view.setAlpha(alpha);
-        }
     }
 
 }
