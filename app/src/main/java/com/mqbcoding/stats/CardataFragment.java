@@ -220,7 +220,7 @@ engineTypes_secondaryEngine
         if (sVIN == null) {
             mVIN.setText("VIN: unknown");
         } else {
-            mVIN.setText("VIN: " + sVIN);   //Should be some WVWZZZZbladiebla string
+            mVIN.setText("VIN known" );   //Should be some WVWZZZZbladiebla string
         }
 /*
         if (sOdometer == null) {
