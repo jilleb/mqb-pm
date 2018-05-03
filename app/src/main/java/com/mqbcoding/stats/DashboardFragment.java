@@ -721,7 +721,7 @@ public class DashboardFragment extends CarFragment {
             case "batteryVoltage":
                 icon.setText("");
                 clock.setUnit(getString(R.string.volt));
-                clock.setMinMaxSpeed(0, 15);
+                clock.setMinMaxSpeed(0, 16);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 clock.setBackgroundResource(emptyBackgroundResource);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
