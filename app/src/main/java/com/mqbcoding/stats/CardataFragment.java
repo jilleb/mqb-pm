@@ -60,6 +60,9 @@ engineTypes_secondaryEngine
     private TextView mVIN;
     private TextView mOdometer;
 
+
+
+
     private int mAnimationDuration;
     private static final float DISABLED_ALPHA = 0.3f;
 
@@ -205,24 +208,31 @@ engineTypes_secondaryEngine
 
     private void doUpdate() {
 
+        // check if the element is there, otherwise return
+        if (mVIN == null) {
+            return;
+        }
+
         //get strings from the Measurements:
-        String sVIN           = (String) mLastMeasurements.get("vehicleIdenticationNumber_VIN");
+        String sVIN           = (String) mLastMeasurements.get("vehicleIdenticationNumber.VIN");
         String sWarningID0    = (String) mLastMeasurements.get("Car_vehicleState_Warning_0_WarnID");
         String sWarningID1    = (String) mLastMeasurements.get("Car_vehicleState_Warning_1_WarnID");
         String sWarningID2    = (String) mLastMeasurements.get("Car_vehicleState_Warning_2_WarnID");
         String sWarningIDVal0 = (String) mLastMeasurements.get("Car_vehicleState_Warning_0_dynamicValue");
         String sWarningIDVal1 = (String) mLastMeasurements.get("Car_vehicleState_Warning_1_dynamicValue");
         String sWarningIDVal2 = (String) mLastMeasurements.get("Car_vehicleState_Warning_2_dynamicValue");
-       // String sOdometer      = (String) mLastMeasurements.get("totalDistance_distanceValue"); //odometer value
-     //   String sOdometerUnits = (String) mLastMeasurements.get("totalDistance_unit"); //odometer unit (km/miles)
+        String sOdometer      = (String) mLastMeasurements.get("totalDistance.distanceValue"); //odometer value
+        String sOdometerUnits = (String) mLastMeasurements.get("totalDistance.unit"); //odometer unit (km/miles)
 
         //check if VIN is known, and if so, display it.
         if (sVIN == null) {
             mVIN.setText("VIN: unknown");
+
         } else {
-            mVIN.setText("VIN known" );   //Should be some WVWZZZZbladiebla string
+            mVIN.setText("VIN: " + sVIN );   //Should be some WVWZZZZbladiebla string
+
         }
-/*
+
         if (sOdometer == null) {
             mOdometer.setVisibility(View.GONE);
         } else if (sOdometerUnits != null) {

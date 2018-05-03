@@ -205,8 +205,10 @@ public class DashboardFragment extends CarFragment {
 
 
 
+
         // build ImageIndicator using the resourceId
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
+
 
         //-------------------------------------------------------------
         //find all elements needed
@@ -684,6 +686,10 @@ public class DashboardFragment extends CarFragment {
 
     private void setupClock(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
 
+        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedEmptyDialBackground});
+        int emptyBackgroundResource = typedArray.getResourceId(0, 0);
+        typedArray.recycle();
+
         switch (queryClock) {
             case "none":
                 icon.setText("");
@@ -702,6 +708,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit(getString(R.string.kmh));
                 clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "engineSpeed":
@@ -716,6 +723,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit(getString(R.string.volt));
                 clock.setMinMaxSpeed(0, 15);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
             case "oilTemperature":
@@ -737,6 +745,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("°");
                 clock.setMinMaxSpeed(-25, 50);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_outsidetemperature));
                 break;
             case "gearboxOilTemperature":
@@ -765,6 +774,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit(getString(R.string.g));
                 clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "longitudinalAcceleration":
@@ -772,6 +782,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit(getString(R.string.g));
                 clock.setMinMaxSpeed(-2, 2);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "yawRate":
@@ -779,6 +790,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("%");
                 clock.setMinMaxSpeed(-1, 1);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "wheelAngle":
@@ -786,6 +798,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("°");
                 clock.setMinMaxSpeed(-45, 45);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_wheelangle));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "EcoHMI_Score.AvgShort":
@@ -793,6 +806,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "EcoHMI_Score.AvgTrip":
@@ -800,6 +814,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_eco));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "powermeter":
@@ -807,6 +822,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("");
                 clock.setMinMaxSpeed(0, 5000);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_powermeter));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "acceleratorPosition":
@@ -814,6 +830,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("%");
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_pedalposition));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "brakePressure":
@@ -821,6 +838,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("%");
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
             case "currentTorque":
@@ -829,6 +847,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 break;
             case "currentOutputPower":
                 icon.setText("");
@@ -836,6 +855,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 break;
             case "currentConsumptionPrimary":
                 icon.setText("");

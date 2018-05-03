@@ -151,13 +151,18 @@ public class MeasurementsFragment extends CarFragment {
 
         carSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
 
-        if (carSpeed != null){
-            textSpeed.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), carSpeed));
-        }
+        if (textSpeed != null)
+        {
+                if (carSpeed != null)
+                {
+                textSpeed.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), carSpeed));
+                }
+
 
         textMeasTimer.setTypeface(typeface);
         textSeconds.setTypeface(typeface);
         textTimer.setTypeface(typeface);
+
 
         // build ImageIndicator using the resourceId
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[] { R.attr.themedNeedle });
@@ -173,6 +178,8 @@ public class MeasurementsFragment extends CarFragment {
         ListElementsArrayList = new ArrayList<String>(Arrays.asList(ListElements));
         adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1, ListElementsArrayList);
         listView.setAdapter(adapter);
+        }
+
 
 
     btnStart.setOnClickListener(new View.OnClickListener(){
@@ -249,20 +256,13 @@ public class MeasurementsFragment extends CarFragment {
         public void run() {
 
             carSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-
-
             MillisecondTime = SystemClock.uptimeMillis() - StartTime;
 
             UpdateTime = TimeBuff + MillisecondTime;
-
             Seconds = (int) (UpdateTime / 1000);
-
             Minutes = Seconds / 60;
-
             Hours = TimeUnit.MILLISECONDS.toHours(UpdateTime);
-
             Seconds = Seconds % 60;
-
             MilliSeconds = (int) (UpdateTime % 1000);
             mStopwatch.speedTo(Seconds);
 
@@ -303,18 +303,7 @@ public class MeasurementsFragment extends CarFragment {
 
              */
 
-
-
-
-
-
-
-
-
-
-
-
-            handler.postDelayed(this, 0);
+       handler.postDelayed(this, 0);
         }
 
     };
