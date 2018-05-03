@@ -159,7 +159,8 @@
         <item>@string/vw2</item>
         <item>@string/seat</item>
         <item>@string/seat2</item>
-        <item>Frutiger</item>
+        <item>@string/frutiger</item>
+        <item>@string/porsche</item>
     </string-array>
 
 
@@ -170,6 +171,7 @@
         <item>seat</item>
         <item>seat2</item>
         <item>frutiger</item>
+        <item>porsche</item>
     </string-array>
 
 
@@ -306,4 +308,6 @@
     hevOperationMode
 
      -->
-    </resources>
+    <string name="frutiger">Frutiger</string>
+    <string name="porsche">Porsche</string>
+</resources>

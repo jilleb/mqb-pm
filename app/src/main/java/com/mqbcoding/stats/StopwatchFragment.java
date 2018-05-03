@@ -98,6 +98,9 @@ public class StopwatchFragment extends CarFragment {
             case "frutiger":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Frutiger.otf");
                 break;
+            case "porsche":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "911porschav3cond.ttf");
+                break;
         }
 
 
