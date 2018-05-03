@@ -772,7 +772,7 @@ public class DashboardFragment extends CarFragment {
             case "lateralAcceleration":
                 icon.setText("");
                 clock.setUnit(getString(R.string.g));
-                clock.setMinMaxSpeed(-2, 2);
+                clock.setMinMaxSpeed(-3, 3);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -780,7 +780,7 @@ public class DashboardFragment extends CarFragment {
             case "longitudinalAcceleration":
                 icon.setText("");
                 clock.setUnit(getString(R.string.g));
-                clock.setMinMaxSpeed(-2, 2);
+                clock.setMinMaxSpeed(-3, 3);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
