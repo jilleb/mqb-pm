@@ -133,6 +133,9 @@
     <string name="seat2">Seat Kombi</string>
     <string name="frutiger">Frutiger</string>
     <string name="porsche">Porsche</string>
+    <string name="odometerunknown">unknown</string>
+    <string name="km_format">%.1f km</string>
+    <string name="m_format">%.1f miles</string>
 
 
 </resources>

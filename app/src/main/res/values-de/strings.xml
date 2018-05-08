@@ -123,6 +123,9 @@
     <string name="drivesafely">Drive Safely.</string>
     <string name="testing">testing</string>
     <string name="pref_font">Font</string>
+    <string name="odometerunknown">unknown</string>
+    <string name="km_format">%.1f km</string>
+    <string name="m_format">%.1f miles</string>
 
 
 </resources>

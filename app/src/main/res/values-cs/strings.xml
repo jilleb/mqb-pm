@@ -119,5 +119,8 @@
     <string name="activity_credits_title">O projektu</string>
     <string name="activity_main_title">Monitor výkonu</string>
     <string name="activity_carstatus_title">Info o autě</string>
-    <string name="resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>`
+    <string name="resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>
+    <string name="odometerunknown">unknown</string>
+    <string name="km_format">%.1f km</string>
+    <string name="m_format">%.1f miles</string>`
 </resources>

@@ -18,6 +18,7 @@ import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Nullable;
@@ -221,7 +222,7 @@ engineTypes_secondaryEngine
         String sWarningIDVal0 = (String) mLastMeasurements.get("Car_vehicleState_Warning_0_dynamicValue");
         String sWarningIDVal1 = (String) mLastMeasurements.get("Car_vehicleState_Warning_1_dynamicValue");
         String sWarningIDVal2 = (String) mLastMeasurements.get("Car_vehicleState_Warning_2_dynamicValue");
-        String sOdometer      = (String) mLastMeasurements.get("totalDistance.distanceValue"); //odometer value
+        Float sOdometer      = (Float) mLastMeasurements.get("totalDistance.distanceValue"); //odometer value
         String sOdometerUnits = (String) mLastMeasurements.get("totalDistance.unit"); //odometer unit (km/miles)
 
         //check if VIN is known, and if so, display it.
@@ -230,14 +231,16 @@ engineTypes_secondaryEngine
 
         } else {
             mVIN.setText("VIN: " + sVIN );   //Should be some WVWZZZZbladiebla string
-
         }
 
         if (sOdometer == null) {
-            mOdometer.setVisibility(View.GONE);
-        } else if (sOdometerUnits != null) {
+            mOdometer.setText(R.string.odometerunknown);
+        } else if (sOdometerUnits == "km") {
             mOdometer.setVisibility(View.VISIBLE);
-            mOdometer.setText("Driven: " + sOdometer + " " + sOdometerUnits); // eg 71811.0 km
+            mOdometer.setText(String.format(Locale.US, getContext().getText(R.string.km_format).toString(), sOdometer));
+        }
+            else if (sOdometerUnits == "m") {
+            mOdometer.setText(String.format(Locale.US, getContext().getText(R.string.m_format).toString(), sOdometer));
         }
 /*
         //check if there are any warnings, and if so, display it

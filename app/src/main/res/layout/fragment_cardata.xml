@@ -17,7 +17,8 @@
         android:text="VIN"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtOdometer"
@@ -27,7 +28,8 @@
         android:text="Odometer"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtVIN" />
+        app:layout_constraintTop_toTopOf="@+id/txtVIN"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtWarning_0_WarnID"
@@ -37,7 +39,8 @@
         android:text="Car_vehicleState_Warning_0_WarnID"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtVIN" />
+        app:layout_constraintTop_toBottomOf="@+id/txtVIN"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtWarning_0_dynamicValue"
@@ -47,7 +50,8 @@
         android:text="Car_vehicleState_Warning_0_dynamicValue"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_0_WarnID" />
+        app:layout_constraintTop_toBottomOf="@+id/txtWarning_0_WarnID"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtWarning_1_WarnID"
@@ -57,7 +61,8 @@
         android:text="Car_vehicleState_Warning_1_WarnID"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_0_dynamicValue" />
+        app:layout_constraintTop_toBottomOf="@+id/txtWarning_0_dynamicValue"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtWarning_1_dynamicValue"
@@ -68,7 +73,8 @@
         android:textAppearance="@style/CarBody2"
         android:visibility="visible"
         app:layout_constraintStart_toStartOf="@+id/txtWarning_1_WarnID"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_1_WarnID" />
+        app:layout_constraintTop_toBottomOf="@+id/txtWarning_1_WarnID"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtWarning_2_WarnID"
@@ -78,7 +84,8 @@
         android:text="Car_vehicleState_Warning_2_WarnID"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_1_dynamicValue" />
+        app:layout_constraintTop_toBottomOf="@+id/txtWarning_1_dynamicValue"
+        tools:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/txtWarning_2_dynamicValue"
@@ -88,7 +95,8 @@
         android:text="Car_vehicleState_Warning_2_dynamicValue"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_2_WarnID" />
+        app:layout_constraintTop_toBottomOf="@+id/txtWarning_2_WarnID"
+        tools:textColor="@android:color/white" />
 
 
 </android.support.constraint.ConstraintLayout>
