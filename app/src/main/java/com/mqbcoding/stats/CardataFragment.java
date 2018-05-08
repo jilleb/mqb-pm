@@ -242,7 +242,7 @@ engineTypes_secondaryEngine
             else if (sOdometerUnits == "m") {
             mOdometer.setText(String.format(Locale.US, getContext().getText(R.string.m_format).toString(), sOdometer));
         }
-/*
+
         //check if there are any warnings, and if so, display it
         //this could probably be done in a nicer way ;-)
         if (sWarningID0 == null) {
@@ -277,10 +277,7 @@ engineTypes_secondaryEngine
             mWarning2ID.setText(sWarningID2); //seems to be some kind of error code, like 41511.0 or 42254.0
             mWarning2Value.setText(sWarningIDVal2);//
         }
-        */
-
-
-
+ 
     }
 
 }
