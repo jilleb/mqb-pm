@@ -201,24 +201,27 @@
     todo: Add an optional icon area to the main dash view showing these items?
         accIsActive
         acceleratorKickDown
-        clutch
-        coastingIsActive
+        clutch (not_clutchedIn)
+        coastingIsActive (true, false)
         displayNightDesign
         driverIsBraking     <- pretty distracting data, maybe not add it.
         fuelWarningPrimaryTank
         fuelWarningSecondaryTank
+        clampState.clamp_S 
+        clampState.clamp_15
+        clampState.clamp_X
 
     *Text*
-        blinkingState
+        blinkingState (off, left, right)
         car_vehicleInformation
         car_vehicleState
         context_States
         engineTypes
         fuelLevelState
-        gearTransmissionMode
+        gearTransmissionMode (position_B, position_D)
         vehicleDate
         vehicleIdenticationNumber
-        vehicleTime
+        vehicleTime_hour(8.0), vehicleTime_minute (14.0)
 
     Todo: add one of these and test if the unit actually forwards this data over exlap
     *media-related*
@@ -305,7 +308,7 @@
     *Other data elements, found om 13/2, still need to be categorized:
     torqueDistribution
     refillVolume
-    hevOperationMode
+    hevOperationMode (sustaining)
 
      -->
 </resources>

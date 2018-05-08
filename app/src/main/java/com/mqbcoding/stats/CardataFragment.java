@@ -28,29 +28,6 @@ public class CardataFragment extends CarFragment {
 
     private CarStatsClient mStatsClient;
 
-
-    /* todo:
-
-    driveMode_activeProfile
-
-    serviceInspection_distance
-serviceInspection_time
-serviceInspection_timeState
-serviceInspection_distanceState
-serviceInspection_distanceUnit
-serviceOil_distance
-serviceOil_time
-serviceOil_timeState
-serviceOil_distanceState
-serviceOil_distanceUnit
-
-engineTypes_primaryEngine
-engineTypes_secondaryEngine
-
-     */
-
-
-
     //the various data elements included and their textviews
     private TextView mWarning0ID;
     private TextView mWarning0Value;
@@ -277,7 +254,34 @@ engineTypes_secondaryEngine
             mWarning2ID.setText(sWarningID2); //seems to be some kind of error code, like 41511.0 or 42254.0
             mWarning2Value.setText(sWarningIDVal2);//
         }
- 
+
     }
 
 }
+
+    /* todo:
+
+    driveMode_activeProfile
+
+    serviceInspection_distance
+serviceInspection_time
+serviceInspection_timeState
+serviceInspection_distanceState
+serviceInspection_distanceUnit
+serviceOil_distance
+serviceOil_time
+serviceOil_timeState
+serviceOil_distanceState
+serviceOil_distanceUnit
+
+engineTypes_primaryEngine
+engineTypes_secondaryEngine
+
+combustionEngineDisplacement (1.4)
+engineTypes_secondaryEngine (electric)
+engineTypes_primaryEngine (petrol_gasoline)
+combustionEngineInjection_type (turbo)
+System_HMISkin (HIGH_VW_Skin_SPORT)
+
+
+     */
