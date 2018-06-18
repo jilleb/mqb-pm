@@ -86,6 +86,21 @@
 
     </style>
 
+
+
+    <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car">
+        <item name="themedDialBackground">@drawable/mib2p_dial_background</item>
+        <item name="themedEmptyDialBackground">@drawable/mib2p_dial_background</item>
+        <item name="themedCarBackground">@drawable/vw3_background_incar</item>
+        <item name="themedNeedle">@drawable/mib2p_needle</item>
+        <item name="sv_markColor">@android:color/transparent</item>
+        <item name="themedStopWatchBackground">@drawable/mib2p_stopwatch_background</item>
+        <item name="themedNeedleColor">@color/red</item>
+
+
+
+    </style>
+
     <style name="AppTheme.VolkswagenR" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>

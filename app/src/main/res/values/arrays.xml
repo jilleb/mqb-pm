@@ -6,6 +6,7 @@
         <item>VW GTI</item>
         <item>VW GTE</item>
         <item>VW R</item>
+        <item>VW MIB2</item>
         <item>Seat</item>
         <item>Seat Cupra</item>
         <item>Cupra Division</item>
@@ -207,7 +208,7 @@
         driverIsBraking     <- pretty distracting data, maybe not add it.
         fuelWarningPrimaryTank
         fuelWarningSecondaryTank
-        clampState.clamp_S 
+        clampState.clamp_S
         clampState.clamp_15
         clampState.clamp_X
 
@@ -276,6 +277,8 @@
         nav_Altitude
         nav_CurrentPosition
         nav_GeoPosition
+        Nav_GeoPosition_Latitude (52.003735)
+	    Nav_GeoPosition_Longitude (5.922491)
         nav_GuidanceDestination
         nav_GuidanceRemaining
         nav_GuidanceState
