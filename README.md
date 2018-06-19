@@ -72,7 +72,6 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - Seat 0351
 - Seat 0359
 
-
 **RCD330:**
 - VW 5406
 
@@ -85,6 +84,9 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - VW 0814
 - VW 1187
 - Seat 1146
+- Seat 1219
+- Seat 1308
+- Seat 1338
 - Skoda 0468 
 
 **MIB2.5**
