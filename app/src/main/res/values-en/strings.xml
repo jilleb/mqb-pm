@@ -130,5 +130,11 @@
     <string name="odometerunknown">unknown</string>
     <string name="km_format">%.1f km</string>
     <string name="m_format">%.1f miles</string>
+    <string name="bigquery_reupload_all_failed">Failed to initate re-upload of the all log files.</string>
+    <string name="bigquery_reupload_ok">Re-upload scheduled.</string>
+    <string name="reupload_last_nothing_to_do">Nothing to re-upload.</string>
+    <string name="cancel_uploads_done">Upload cancelled.</string>
+    <string name="pref_bigquery_reupload_all_title">Re-upload all log files</string>
+    <string name="pref_cancel_uploads_title">Cancel all uploads</string>
 
 </resources>

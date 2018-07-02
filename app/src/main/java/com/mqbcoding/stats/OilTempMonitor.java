@@ -131,6 +131,13 @@ public class OilTempMonitor implements CarStatsClient.Listener {
         }
     }
 
+    @Override
+    public void onSchemaChanged() {
+       // do nothing
+       }
+
+
+
     public synchronized void close() {
         mHandler.post(mDismissNotification);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);

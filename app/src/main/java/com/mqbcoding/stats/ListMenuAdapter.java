@@ -1,15 +1,15 @@
 package com.mqbcoding.stats;
 
 
-        import android.util.SparseArray;
+import android.util.SparseArray;
 
-        import com.google.android.apps.auto.sdk.MenuAdapter;
-        import com.google.android.apps.auto.sdk.MenuItem;
+import com.google.android.apps.auto.sdk.MenuAdapter;
+import com.google.android.apps.auto.sdk.MenuItem;
 
-        import java.util.ArrayList;
-        import java.util.HashMap;
-        import java.util.List;
-        import java.util.Map;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ListMenuAdapter extends MenuAdapter {
     private List<MenuItem> mMenuItems = new ArrayList<>();

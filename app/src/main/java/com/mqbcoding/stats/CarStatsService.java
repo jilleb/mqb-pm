@@ -22,6 +22,7 @@ public class CarStatsService extends Service {
 
     private final IBinder mBinder = new CarStatsBinder();
 
+    @SuppressWarnings("unused")
     public class CarStatsBinder extends Binder {
         CarStatsClient getStatsClient() {
             return mStatsClient;
@@ -38,11 +39,11 @@ public class CarStatsService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        Log.d(TAG, "Service starting.");
+        Log.d(TAG, "Service starting...");
 
         mStatsClient = new CarStatsClient(this);
 
-        mStatsLogger = new CarStatsLogger(this, new Handler());
+        mStatsLogger = new CarStatsLogger(this, mStatsClient, new Handler());
         mStatsLogger.registerListener(mStatsLoggerListener);
         mStatsClient.registerListener(mStatsLogger);
 

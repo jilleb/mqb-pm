@@ -163,17 +163,21 @@ public class CardataFragment extends CarFragment {
         super.onDestroy();
     }
 
-    private final CarStatsClient.Listener mCarStatsListener;
+    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
 
-    {
-        mCarStatsListener = new CarStatsClient.Listener() {
             @Override
             public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
                 mLastMeasurements.putAll(values);
                 postUpdate();
             }
+
+            @Override
+            public void onSchemaChanged() {
+              // do nothing
+          }
+
+
         };
-    }
 
     private void postUpdate() {
         mHandler.post(new Runnable() {

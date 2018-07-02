@@ -24,9 +24,9 @@ configurations.all {
 
 dependencies {
     implementation 'com.github.martoreto:aauto-sdk:v4.7'
-    implementation 'com.github.martoreto:aauto-vex-base:v3.1'
+    implementation 'com.github.martoreto:aauto-vex-base:v4.3'
     implementation 'com.jjoe64:graphview:4.2.1'
-    implementation('com.google.apis:google-api-services-bigquery:v2-rev352-1.22.0') exclude module: 'httpclient'
+    implementation('com.google.apis:google-api-services-bigquery:v2-rev377-1.22.0') exclude module: 'httpclient'
     implementation 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
     implementation 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
 

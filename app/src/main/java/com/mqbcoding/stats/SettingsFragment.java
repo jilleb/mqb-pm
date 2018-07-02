@@ -20,7 +20,7 @@ import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,6 +56,18 @@ public class SettingsFragment extends PreferenceFragment {
                         .getAll().get(preference.getKey()));
     }
 
+    private List<File> findLogs() throws IOException {
+        File logDir = CarStatsLogger.getLogsDir();
+        List<File> files = new ArrayList<>();
+        for (File f: logDir.listFiles()) {
+            if (f.getName().endsWith(".log.gz")) {
+                files.add(f);
+            }
+        }
+        Collections.sort(files);
+        return files;
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,16 +85,46 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        findPreference("bigqueryReuploadAll").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                try {
+                    List<File> files = findLogs();
+                    if (files.isEmpty()) {
+                        Toast.makeText(getActivity(), R.string.reupload_last_nothing_to_do,
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+                        for (File f: files) {
+                            LogUploadService.schedule(getActivity(), f);
+                        }
+                        Toast.makeText(getActivity(), R.string.bigquery_reupload_ok,
+                                Toast.LENGTH_SHORT).show();
+                    }
+                } catch (Exception e) {
+                    Log.w(TAG, "Re-upload error", e);
+                    Toast.makeText(getActivity(), R.string.bigquery_reupload_all_failed,
+                            Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            }
+        });
+
         findPreference("bigqueryReuploadLast").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 try {
-                    File logDir = CarStatsLogger.getLogsDir();
-                    String[] entries = logDir.list();
-                    String lastEntry = Collections.max(Arrays.asList(entries));
-                    LogUploadService.schedule(getActivity(), new File(logDir, lastEntry));
-                    Toast.makeText(getActivity(), R.string.bigquery_reupload_last_ok,
-                            Toast.LENGTH_SHORT).show();
+                    List<File> files = findLogs();
+                    if (files.isEmpty()) {
+                        Toast.makeText(getActivity(), R.string.reupload_last_nothing_to_do,
+                                Toast.LENGTH_SHORT).show();
+                    } else {
+
+
+
+                        LogUploadService.schedule(getActivity(), files.get(files.size() - 1));
+                        Toast.makeText(getActivity(), R.string.bigquery_reupload_ok,
+                                Toast.LENGTH_SHORT).show();
+                    }
                 } catch (Exception e) {
                     Log.w(TAG, "Re-upload error", e);
                     Toast.makeText(getActivity(), R.string.bigquery_reupload_last_failed,
@@ -114,6 +156,18 @@ public class SettingsFragment extends PreferenceFragment {
                     Toast.makeText(getActivity(), R.string.kick_uploads_done,
                             Toast.LENGTH_SHORT).show();
                 }
+                return true;
+            }
+        });
+
+        findPreference("cancelUploads").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                JobScheduler scheduler = (JobScheduler) getActivity().getSystemService(Context.JOB_SCHEDULER_SERVICE);
+                assert scheduler != null;
+                scheduler.cancelAll();
+                Toast.makeText(getActivity(), R.string.cancel_uploads_done,
+                        Toast.LENGTH_SHORT).show();
                 return true;
             }
         });

@@ -73,17 +73,7 @@ public class DashboardFragment extends CarFragment {
             postUpdate();
         }
     };
-    private final CarStatsClient.Listener mCarStatsListener;
 
-    {
-        mCarStatsListener = new CarStatsClient.Listener() {
-            @Override
-            public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
-                mLastMeasurements.putAll(values);
-                postUpdate();
-            }
-        };
-    }
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override
@@ -503,6 +493,20 @@ public class DashboardFragment extends CarFragment {
         Log.i(TAG, "onDestroy");
         super.onDestroy();
     }
+
+    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
+        @Override
+        public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
+            mLastMeasurements.putAll(values);
+            postUpdate();
+        }
+
+        @Override
+        public void onSchemaChanged() {
+            // do nothing
+        }
+    };
+
 
     private void postUpdate() {
         mTimer1 = new Runnable() {
