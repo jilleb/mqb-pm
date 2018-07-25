@@ -28,4 +28,6 @@ public class CarUtils {
         drawable.draw(canvas);
         return bitmap;
     }
+
+
 }

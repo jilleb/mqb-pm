@@ -1,13 +1,17 @@
 package com.mqbcoding.stats;
 
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.apps.auto.sdk.CarActivity;
 import com.google.android.apps.auto.sdk.CarUiController;
@@ -15,6 +19,10 @@ import com.google.android.apps.auto.sdk.DayNightStyle;
 import com.google.android.apps.auto.sdk.MenuController;
 import com.google.android.apps.auto.sdk.MenuItem;
 import com.google.android.apps.auto.sdk.StatusBarController;
+
+import java.util.HashSet;
+
+import eu.chainfire.libsuperuser.Shell;
 
 public class MainCarActivity extends CarActivity {
     static final String MENU_HOME = "home";
@@ -25,6 +33,7 @@ public class MainCarActivity extends CarActivity {
     static final String MENU_STOPWATCH = "stopwatch";
     static final String MENU_MEASUREMENTS = "measurements";
     static final String MENU_GRAPH = "graph";
+    static final String MENU_UNLOCK = "unlock";
     private static final String TAG = "MainCarActivity";
 
 
@@ -61,6 +70,9 @@ public class MainCarActivity extends CarActivity {
                     break;
                 case MENU_CREDITS:
                     switchToFragment(FRAGMENT_CREDITS);
+                    break;
+                case MENU_UNLOCK:
+                    unlock();
                     break;
             }
         }
@@ -231,6 +243,11 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
+        mainMenu.addMenuItem(MENU_UNLOCK, new MenuItem.Builder()
+                .setTitle("unlock")
+                .setType(MenuItem.Type.ITEM)
+                .build());
+
 
 // 1 submenu item
      /*   ListMenuAdapter otherMenu = new ListMenuAdapter();
@@ -287,5 +304,45 @@ public class MainCarActivity extends CarActivity {
         getCarUiController().getStatusBarController().setTitle(fragment.getTitle());
     }
 
+
+
+    private void unlock() {
+        if (Shell.SU.available()) {
+            Shell.SU.run("pm disable --user 0 com.google.android.gms/.phenotype.service.sync.PhenotypeConfigurator");
+            Shell.SU.run("pm disable --user 0 com.google.android.gms/.phenotype.service.PhenotypeService");
+            Shell.SU.run("chmod 777 /data/data/com.google.android.gms/databases/phenotype.db*");
+            try {
+                SQLiteDatabase sql = SQLiteDatabase.openDatabase("/data/data/com.google.android.gms/databases/phenotype.db", null, 0);
+                if (sql != null) {
+                    Cursor cursor = sql.rawQuery("SELECT stringVal FROM Flags WHERE packageName=? AND name=?;", new String[]{"com.google.android.gms.car", "app_white_list"});
+                    HashSet<String> packageNames = new HashSet<>();
+                    if (cursor.getCount() > 0) {
+                        while (cursor.moveToNext()) {
+                            String stringVal = cursor.getString(cursor.getColumnIndex("stringVal"));
+                            if (stringVal != null) {
+                                packageNames.add(stringVal);
+                            }
+                        }
+                    }
+                    cursor.close();
+                    packageNames.add(getApplicationContext().getPackageName()); //add myself
+                    sql.execSQL("DELETE FROM Flags WHERE packageName=\"com.google.android.gms.car\" AND name=\"app_white_list\";");
+                    String joinedPackageNames = TextUtils.join(",", packageNames);
+                    sql.execSQL("INSERT INTO Flags (packageName, version, flagType, partitionId, user, name, stringVal, committed) VALUES (\"com.google.android.gms.car\", 209, 0, 0, \"\", \"app_white_list\", \"" + joinedPackageNames + "\", 1);");
+                    sql.execSQL("INSERT INTO Flags (packageName, version, flagType, partitionId, user, name, stringVal, committed) VALUES (\"com.google.android.gms.car\", 224, 0, 0, \"\", \"app_white_list\", \"" + joinedPackageNames + "\", 1);");
+                    sql.close();
+                    Toast.makeText(this, "Successfully unlocked. Reboot phone and connect to Android Auto", Toast.LENGTH_LONG).show();
+                }
+            } catch (Exception e) {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append("sql exception : ");
+                stringBuilder.append(e.toString());
+                Toast.makeText(this, "Error in executing commands : " + stringBuilder.toString(), Toast.LENGTH_LONG).show();
+            }
+            Shell.SU.run("chmod 660 /data/data/com.google.android.gms/databases/phenotype.db*");
+            return;
+        }
+        Toast.makeText(this, "Root not available, install SuperSU and perform root first.", Toast.LENGTH_LONG).show();
+    }
 
 }
