@@ -1,19 +1,26 @@
 package com.mqbcoding.stats;
 
-import android.app.Service;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.io.File;
 
-public class CarStatsService extends Service {
+public class CarStatsService extends CarModeService {
     private static final String TAG = "CarStatsService";
+
+    private static final int NOTIFICATION_ID = 1;
+    public static final String NOTIFICATION_CHANNEL_ID = "car";
 
     private CarStatsClient mStatsClient;
     private CarStatsLogger mStatsLogger;
@@ -40,6 +47,17 @@ public class CarStatsService extends Service {
 
         Log.d(TAG, "Service starting.");
 
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
+                    getString(R.string.notification_channel_name),
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            mChannel.setDescription(getString(R.string.notification_channel_description));
+            NotificationManager mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            assert mNotificationManager != null;
+            mNotificationManager.createNotificationChannel(mChannel);
+        }
+
         mStatsClient = new CarStatsClient(this);
 
         mStatsLogger = new CarStatsLogger(this, new Handler());
@@ -55,15 +73,28 @@ public class CarStatsService extends Service {
         mStatsClient.start();
     }
 
+    @Override
+    protected int getNotificationId() {
+        return NOTIFICATION_ID;
+    }
+
+    @Override
+    protected Notification buildNotification() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationCompat.Builder notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
+                    .setContentTitle(getText(R.string.app_name))
+                    .setContentText(getText(R.string.service_notification_text))
+                    .setSmallIcon(R.drawable.ic_launcher);
+            return notification.build();
+        } else {
+            return null;
+        }
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return mBinder;
-    }
-
-    @Override
-    public int onStartCommand(Intent intent, int flags, int startId) {
-        return START_STICKY;
     }
 
     @Override

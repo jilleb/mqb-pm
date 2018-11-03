@@ -23,7 +23,7 @@ public class OilTempMonitor implements CarStatsClient.Listener {
 
     public static final String EXLAP_KEY = "oilTemperature";
 
-    private static final int NOTIFICATION_ID = 1;
+    private static final int NOTIFICATION_ID = 2;
 
     private static final int NOTIFICATION_TIMEOUT_MS = 60000;
 
@@ -87,7 +87,7 @@ public class OilTempMonitor implements CarStatsClient.Listener {
         String title = mContext.getString(R.string.oil_notification_title);
         String text = mContext.getString(R.string.oil_notification_text);
 
-        Notification notification = new NotificationCompat.Builder(mContext)
+        Notification notification = new NotificationCompat.Builder(mContext, CarStatsService.NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_oil)
                 .setContentTitle(title)
                 .setContentText(text)
