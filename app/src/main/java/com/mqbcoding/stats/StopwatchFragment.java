@@ -129,7 +129,7 @@ public class StopwatchFragment extends CarFragment {
 
 
         // build ImageIndicator using the resourceId
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200,200);
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 250,250);
 
         mStopwatch.setIndicator(imageIndicator);
         mStopwatch.speedPercentTo(100,5000);

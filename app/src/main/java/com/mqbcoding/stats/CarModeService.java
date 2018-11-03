@@ -19,7 +19,16 @@ public abstract class CarModeService extends Service {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(UiModeManager.ACTION_EXIT_CAR_MODE);
         registerReceiver(mBroadcastReceiver, intentFilter);
+
     }
+
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(mBroadcastReceiver);
+        super.onDestroy();
+    }
+
+
 
     @Override
     @CallSuper
