@@ -207,7 +207,7 @@ public class DashboardFragment extends CarFragment {
         typedArray.recycle();
 
         // build ImageIndicator using the resourceId
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 250, 250);
 
         //-------------------------------------------------------------
         //find all elements needed
