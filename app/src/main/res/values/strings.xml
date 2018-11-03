@@ -130,9 +130,11 @@
     <string name="vw">Volkswagen Text CarUI</string>
     <string name="vw2">Volkswagen Thesis</string>
     <string name="seat">Seat Metastyle</string>
-    <string name="seat2">Seat Kombi</string>
+    <string name="audi">Audi Virtual Cockpit</string>
     <string name="frutiger">Frutiger</string>
     <string name="porsche">Porsche</string>
+
+
     <string name="odometerunknown">unknown</string>
     <string name="km_format">%.1f km</string>
     <string name="m_format">%.1f miles</string>

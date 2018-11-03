@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -183,8 +184,8 @@ public class DashboardFragment extends CarFragment {
             case "seat":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "SEAT_MetaStyle_MonoDigit_Regular.ttf");
                 break;
-            case "seat2":
-                typeface = Typeface.createFromAsset(getContext().getAssets(), "seatKombi_normal.ttf");
+            case "audi":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "AudiTypeDisplayHigh.ttf");
                 break;
             case "vw":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "VWTextCarUI-Regular.ttf");
@@ -205,6 +206,7 @@ public class DashboardFragment extends CarFragment {
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
+
 
         // build ImageIndicator using the resourceId
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 250, 250);

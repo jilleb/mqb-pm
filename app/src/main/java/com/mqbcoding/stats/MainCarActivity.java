@@ -142,6 +142,9 @@ public class MainCarActivity extends CarActivity {
             case "Audi RS":
                 setTheme(R.style.AppTheme_AudiRS);
                 break;
+            case "Audi Virtual Cockpit":
+                setTheme(R.style.AppTheme_AudiVC);
+                break;
             case "Clubsport":
                 setTheme(R.style.AppTheme_Clubsport);
                 break;

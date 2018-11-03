@@ -125,8 +125,8 @@ public class MeasurementsFragment extends CarFragment {
             case "seat":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "SEAT_MetaStyle_MonoDigit_Regular.ttf");
                 break;
-            case "seat2":
-                typeface = Typeface.createFromAsset(getContext().getAssets(), "seatKombi_normal.ttf");
+            case "audi":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "AudiTypeDisplayHigh.ttf");
                 break;
             case "vw":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "VWTextCarUI-Regular.ttf");
