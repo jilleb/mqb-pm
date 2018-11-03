@@ -244,6 +244,18 @@
         <item name="themedNeedleColor">@color/green</item>
     </style>
 
+    <style name="AppTheme.Testing" parent="AppTheme.Car">
+        <item name="themedCarBackground">@drawable/test_background_incar</item>
+        <item name="themedDialBackground">@drawable/dial_background_test</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_test</item>
+        <item name="themedNeedle">@drawable/needle_test</item>
+        <item name="sv_markColor">@android:color/white</item>
+        <item name="themedStopWatchBackground">@drawable/dial_background_test</item>
+        <item name="themedNeedleColor">@color/green</item>
+    </style>
+
+
+
 
     <style name="AppTheme.Car.Speedometer">
         <item name="sv_indicatorWidth">8dp</item>
