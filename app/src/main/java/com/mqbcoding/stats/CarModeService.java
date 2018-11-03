@@ -11,6 +11,9 @@ import android.content.res.Configuration;
 import android.support.annotation.CallSuper;
 
 public abstract class CarModeService extends Service {
+
+    private boolean mForegroundStarted;
+
     @Override
     @CallSuper
     public void onCreate() {
@@ -40,11 +43,14 @@ public abstract class CarModeService extends Service {
             stopSelf();
         }
 
-        Notification notification = buildNotification();
-        if (notification != null) {
-            // This is required on Oreo so that the service is not destroyed when the app is
-            // in background.
-            startForeground(getNotificationId(), notification);
+        if (!mForegroundStarted) {
+            Notification notification = buildNotification();
+            if (notification != null) {
+                // This is required on Oreo so that the service is not destroyed when the app is
+                // in background.
+                startForeground(getNotificationId(), notification);
+            }
+            mForegroundStarted = true;
         }
 
         return START_STICKY;
