@@ -208,8 +208,7 @@ public class DashboardFragment extends CarFragment {
         typedArray.recycle();
 
 
-        // build ImageIndicator using the resourceId
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 250, 250);
+
 
         //-------------------------------------------------------------
         //find all elements needed
@@ -217,6 +216,12 @@ public class DashboardFragment extends CarFragment {
         mClockLeft = rootView.findViewById(R.id.dial_Left);
         mClockCenter = rootView.findViewById(R.id.dial_Center);
         mClockRight = rootView.findViewById(R.id.dial_Right);
+
+        // build ImageIndicator using the resourceId
+
+
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId);
+
         //give clocks a custom image indicator
         mClockLeft.setIndicator(imageIndicator);
         mClockCenter.setIndicator(imageIndicator);

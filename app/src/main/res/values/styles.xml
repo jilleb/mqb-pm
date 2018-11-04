@@ -187,23 +187,23 @@
         <item name="themedNeedleColor">@color/red</item>
     </style>
 
+    <style name="AppTheme.AudiVC" parent="AppTheme.Car">
+        <item name="themedDialBackground">@drawable/audi3_dial_background</item>
+        <item name="themedEmptyDialBackground">@drawable/audi3_dial_background</item>
+        <item name="themedCarBackground">@drawable/vw3_background_incar</item>
+        <item name="themedNeedle">@drawable/audi3_red_needle</item>
+        <item name="sv_markColor">@android:color/white</item>
+        <item name="themedStopWatchBackground">@drawable/audi3_dial_background</item>
+        <item name="themedNeedleColor">@color/red</item>
+    </style>
+
+
 
     <style name="AppTheme.AudiRS" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/audi2_dial_background</item>
         <item name="themedEmptyDialBackground">@drawable/audi2_dial_background</item>
         <item name="themedCarBackground">@drawable/vw3_background_incar</item>
         <item name="themedNeedle">@drawable/audi_red_needle</item>
-        <item name="sv_markColor">@android:color/white</item>
-        <item name="themedStopWatchBackground">@drawable/audi2_sw_background</item>
-        <item name="themedNeedleColor">@color/red</item>
-    </style>
-
-
-    <style name="AppTheme.AudiVC" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/audi3_dial_background</item>
-        <item name="themedEmptyDialBackground">@drawable/audi3_dial_background</item>
-        <item name="themedCarBackground">@drawable/vw3_background_incar</item>
-        <item name="themedNeedle">@drawable/audi3_red_needle</item>
         <item name="sv_markColor">@android:color/white</item>
         <item name="themedStopWatchBackground">@drawable/audi2_sw_background</item>
         <item name="themedNeedleColor">@color/red</item>

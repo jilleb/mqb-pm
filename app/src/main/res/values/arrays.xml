@@ -161,7 +161,7 @@
         <item>@string/vw</item>
         <item>@string/vw2</item>
         <item>@string/seat</item>
-        <item>@string/seat2</item>
+        <item>@string/audi</item>
         <item>@string/frutiger</item>
         <item>@string/porsche</item>
     </string-array>
@@ -172,7 +172,7 @@
         <item>vw</item>
         <item>vw2</item>
         <item>seat</item>
-        <item>seat2</item>
+        <item>audi</item>
         <item>frutiger</item>
         <item>porsche</item>
     </string-array>

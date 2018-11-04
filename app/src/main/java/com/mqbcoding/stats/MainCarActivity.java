@@ -139,11 +139,11 @@ public class MainCarActivity extends CarActivity {
             case "Audi":
                 setTheme(R.style.AppTheme_Audi);
                 break;
-            case "Audi RS":
-                setTheme(R.style.AppTheme_AudiRS);
-                break;
             case "Audi Virtual Cockpit":
                 setTheme(R.style.AppTheme_AudiVC);
+                break;
+            case "Audi RS":
+                setTheme(R.style.AppTheme_AudiRS);
                 break;
             case "Clubsport":
                 setTheme(R.style.AppTheme_Clubsport);
@@ -154,6 +154,7 @@ public class MainCarActivity extends CarActivity {
             case "Test":
                 setTheme(R.style.AppTheme_Testing);
                 break;
+
         }
         Log.d(TAG, "Set theme: " + selectedTheme);
 
@@ -184,8 +185,8 @@ public class MainCarActivity extends CarActivity {
                 .detach(carfragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
-               .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
-               .detach(measurementsfragment)
+                .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
+                .detach(measurementsfragment)
                 .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
                 .detach(cardatafragment)
                 .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
@@ -226,9 +227,9 @@ public class MainCarActivity extends CarActivity {
                 .build());
 
         mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
-                    .setTitle(getString(R.string.activity_measurements_title))
-                    .setType(MenuItem.Type.ITEM)
-                    .build());
+                .setTitle(getString(R.string.activity_measurements_title))
+                .setType(MenuItem.Type.ITEM)
+                .build());
 
 
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
