@@ -19,6 +19,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -139,7 +140,7 @@ public class DashboardFragment extends CarFragment {
         return convertedGear;
     }
     
-    
+
 
     @Override
     public void onAttach(Context context) {
@@ -199,14 +200,12 @@ public class DashboardFragment extends CarFragment {
             case "porsche":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "911porschav3cond.ttf");
                 break;
+            case "skoda":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
+                break;
+
+
         }
-
-
-        //this is to enable an image as indicator.
-        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
-        int resourceId = typedArray.getResourceId(0, 0);
-        typedArray.recycle();
-
 
 
 
@@ -219,13 +218,6 @@ public class DashboardFragment extends CarFragment {
 
         // build ImageIndicator using the resourceId
 
-
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId);
-
-        //give clocks a custom image indicator
-        mClockLeft.setIndicator(imageIndicator);
-        mClockCenter.setIndicator(imageIndicator);
-        mClockRight.setIndicator(imageIndicator);
 
         //max & min dials
         mClockMaxLeft = rootView.findViewById(R.id.dial_MaxLeft);
@@ -341,6 +333,32 @@ public class DashboardFragment extends CarFragment {
             pressureMin = -30;
             pressureMax = 30;
         }
+
+        // get the size of the Clock, to make sure the imageindicator has the right size.
+        mClockLeft.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mClockLeft.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int clockSize = mClockLeft.getHeight();
+                if (clockSize==0){
+                    clockSize=250;
+                    }
+                //this is to enable an image as indicator.
+                TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
+                int resourceId = typedArray.getResourceId(0, 0);
+                typedArray.recycle();
+
+                ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
+
+                //give clocks a custom image indicator
+                mClockLeft.setIndicator(imageIndicator);
+                mClockCenter.setIndicator(imageIndicator);
+                mClockRight.setIndicator(imageIndicator);
+
+
+            }
+
+        });
 
         //set up each of the elements with the query and icon that goes with it
         setupElement(mElement1Query, mValueElement1, mIconElement1);
@@ -528,6 +546,8 @@ public class DashboardFragment extends CarFragment {
         if (mClockLeft == null) {
             return;
         }
+
+
 
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);

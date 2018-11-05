@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -101,6 +102,9 @@ public class StopwatchFragment extends CarFragment {
             case "porsche":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "911porschav3cond.ttf");
                 break;
+            case "skoda":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
+                break;
         }
 
 
@@ -122,16 +126,30 @@ public class StopwatchFragment extends CarFragment {
 
 
 
-        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[] { R.attr.themedNeedle });
-        int resourceId = typedArray.getResourceId(0, 0);
-        typedArray.recycle();
+        mStopwatch = rootView.findViewById(R.id.dialMeasStopWatch);
+        mStopwatch.setSpeedTextTypeface(typeface);
 
+        mStopwatch.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mStopwatch.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int clockSize = mStopwatch.getHeight();
+                if (clockSize==0){
+                    clockSize=250;
+                }
+                //this is to enable an image as indicator.
+                TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
+                int resourceId = typedArray.getResourceId(0, 0);
+                typedArray.recycle();
 
+                ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
 
-        // build ImageIndicator using the resourceId
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 250,250);
+                //give clocks a custom image indicator
+                mStopwatch.setIndicator(imageIndicator);
+            }
 
-        mStopwatch.setIndicator(imageIndicator);
+        });
+
         mStopwatch.speedPercentTo(100,5000);
 
 

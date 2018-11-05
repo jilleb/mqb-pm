@@ -2,14 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="left"
     android:layout_marginLeft="0dp"
     android:layout_marginTop="@dimen/car_card_margin"
     android:layout_marginRight="0dp"
     android:layout_marginBottom="0dp"
-    app:layout_constraintBottom_toTopOf="@+id/gearbox_container"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.0"
@@ -203,7 +202,7 @@
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_Left"
         style="@style/AppTheme.Car.Speedometer"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="?attr/themedDialBackground"
         android:elevation="0dp"
@@ -222,7 +221,7 @@
 
     <com.github.anastr.speedviewlib.RaySpeedometer
         android:id="@+id/rayLeft"
-        android:layout_width="0dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:padding="40dp"
         app:layout_constraintBottom_toBottomOf="@+id/dial_Left"
@@ -303,7 +302,7 @@
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_Right"
         style="@style/AppTheme.Car.Speedometer"
-        android:layout_width="249dp"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:background="?attr/themedDialBackground"
         android:padding="25dp"
@@ -380,7 +379,7 @@
         app:sv_unitTextSize="0dp"
         app:sv_unitUnderSpeedText="false" />
 
-      <com.github.anastr.speedviewlib.SpeedView
+    <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_MaxCenter"
         style="@style/AppTheme.Car.Speedometer"
         android:layout_width="250dp"

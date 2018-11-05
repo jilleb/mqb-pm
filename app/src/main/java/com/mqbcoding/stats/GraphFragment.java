@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -157,12 +158,38 @@ public class GraphFragment extends CarFragment {
             case "porsche":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "911porschav3cond.ttf");
                 break;
+            case "skoda":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
+                break;
         }
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, 200, 200);
 
         mClockGraph = rootView.findViewById(R.id.dial_graph);
-        mClockGraph.setIndicator(imageIndicator);
         mClockGraph.setSpeedTextTypeface(typeface);
+
+        mClockGraph.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mClockGraph.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                int clockSize = mClockGraph.getHeight();
+                if (clockSize==0){
+                    clockSize=250;
+                }
+                //this is to enable an image as indicator.
+                TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
+                int resourceId = typedArray.getResourceId(0, 0);
+                typedArray.recycle();
+
+                ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
+
+                //give clocks a custom image indicator
+                mClockGraph.setIndicator(imageIndicator);
+            }
+
+        });
+
+
+
+
         mClockIcon = rootView.findViewById(R.id.icon_GraphClock);
         btnStart=rootView.findViewById(R.id.imgbtnGraphStart);
         btnPause=rootView.findViewById(R.id.imgbtnGraphReset);

@@ -133,6 +133,8 @@
     <string name="audi">Audi Virtual Cockpit</string>
     <string name="frutiger">Frutiger</string>
     <string name="porsche">Porsche</string>
+    <string name="skoda">Skoda</string>
+
 
 
     <string name="odometerunknown">unknown</string>

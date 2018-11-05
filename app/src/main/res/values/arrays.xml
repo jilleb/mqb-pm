@@ -164,6 +164,7 @@
         <item>@string/audi</item>
         <item>@string/frutiger</item>
         <item>@string/porsche</item>
+        <item>@string/skoda</item>
     </string-array>
 
 
@@ -175,6 +176,7 @@
         <item>audi</item>
         <item>frutiger</item>
         <item>porsche</item>
+        <item>skoda</item>
     </string-array>
 
 
