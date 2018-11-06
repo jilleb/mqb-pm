@@ -176,7 +176,7 @@ public class MainCarActivity extends CarActivity {
         //set fragments:
         CarFragment carfragment = new DashboardFragment();
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
-        MeasurementsFragment measurementsfragment = new MeasurementsFragment();
+       // MeasurementsFragment measurementsfragment = new MeasurementsFragment();
         CardataFragment cardatafragment = new CardataFragment();
         GraphFragment graphfragment = new GraphFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
@@ -185,8 +185,8 @@ public class MainCarActivity extends CarActivity {
                 .detach(carfragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
-                .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
-                .detach(measurementsfragment)
+              //  .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
+              //  .detach(measurementsfragment)
                 .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
                 .detach(cardatafragment)
                 .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
@@ -211,10 +211,10 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-        mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
-                .setTitle(getString(R.string.activity_carstatus_title))
-                .setType(MenuItem.Type.ITEM)
-                .build());
+       // mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
+       //         .setTitle(getString(R.string.activity_carstatus_title))
+       //         .setType(MenuItem.Type.ITEM)
+       //         .build());
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))
@@ -226,11 +226,11 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-        mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
-                .setTitle(getString(R.string.activity_measurements_title))
-                .setType(MenuItem.Type.ITEM)
-                .build());
-
+     //   mainMenu.addMenuItem(MENU_MEASUREMENTS, new MenuItem.Builder()
+     //           .setTitle(getString(R.string.activity_measurements_title))
+     //           .setType(MenuItem.Type.ITEM)
+     //           .build());
+//
 
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_credits_title))
