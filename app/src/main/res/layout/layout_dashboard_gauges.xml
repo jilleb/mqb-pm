@@ -33,7 +33,9 @@
         app:sv_unit=""
         app:sv_unitSpeedInterval="3dp"
         app:sv_unitTextColor="@android:color/white"
-        app:sv_unitTextSize="20sp" />
+        app:sv_unitTextSize="20sp"
+
+        />
 
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_Right"
@@ -88,7 +90,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:alpha="0.7"
+        android:alpha="1.0"
         android:background="@drawable/ic_none"
         android:backgroundTint="@color/car_primary"
         android:gravity="center"
@@ -104,7 +106,7 @@
         android:layout_height="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:alpha="0.7"
+        android:alpha="1.0"
         android:background="@drawable/ic_oil"
         android:backgroundTint="@color/car_primary"
         android:elevation="5dp"
@@ -126,7 +128,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:alpha="0.7"
+        android:alpha="1.0"
         android:background="@drawable/ic_oil"
         android:backgroundTint="@color/car_primary"
         android:elevation="5dp"
@@ -147,7 +149,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:alpha="0.7"
+        android:alpha="1.0"
         android:background="@drawable/ic_oil"
         android:backgroundTint="@color/car_primary"
         android:elevation="5dp"
@@ -166,7 +168,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:alpha="0.7"
+        android:alpha="1.0"
         android:background="@drawable/ic_none"
         android:backgroundTint="@color/car_primary"
         android:gravity="center"
@@ -182,7 +184,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:alpha="0.7"
+        android:alpha="1.0"
         android:background="@drawable/ic_none"
         android:backgroundTint="@color/car_primary"
         android:gravity="center"
@@ -198,7 +200,7 @@
         android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:alpha="0.7"
+        android:alpha="1.0"
         android:background="@drawable/ic_none"
         android:backgroundTint="@color/car_primary"
         android:gravity="center"
@@ -288,7 +290,7 @@
         app:sv_speedometerWidth="20dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitTextColor="@android:color/transparent"
-        app:sv_withEffects="true"
+        app:sv_withEffects="false"
         app:sv_withTremble="false" />
 
     <com.github.anastr.speedviewlib.RaySpeedometer
@@ -314,7 +316,7 @@
         app:sv_speedometerWidth="20dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitTextColor="@android:color/transparent"
-        app:sv_withEffects="true"
+        app:sv_withEffects="false"
         app:sv_withTremble="false" />
 
 
@@ -340,7 +342,7 @@
         app:sv_speedometerWidth="20dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitTextColor="@android:color/transparent"
-        app:sv_withEffects="true"
+        app:sv_withEffects="false"
         app:sv_withTremble="false" />
 
 
@@ -379,7 +381,9 @@
         app:sv_unitSpeedInterval="0dp"
         app:sv_unitTextColor="@android:color/transparent"
         app:sv_unitTextSize="0dp"
-        app:sv_unitUnderSpeedText="false" />
+        app:sv_unitUnderSpeedText="false"
+        app:sv_withIndicatorLight="false"
+    />
 
       <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_MaxCenter"
@@ -404,7 +408,10 @@
         app:sv_unitSpeedInterval="0dp"
         app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="0dp"
-        app:sv_unitUnderSpeedText="false" />
+        app:sv_unitUnderSpeedText="false"
+          app:sv_withIndicatorLight="false"
+
+          />
 
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_MaxRight"
@@ -430,7 +437,10 @@
         app:sv_unitSpeedInterval="0dp"
         app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="0dp"
-        app:sv_unitUnderSpeedText="false" />
+        app:sv_unitUnderSpeedText="false"
+        app:sv_withIndicatorLight="false"
+
+        />
 
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_MinLeft"
@@ -456,7 +466,11 @@
         app:sv_unitSpeedInterval="0dp"
         app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="0dp"
-        app:sv_unitUnderSpeedText="false" />
+        app:sv_unitUnderSpeedText="false"
+        app:sv_withIndicatorLight="false"
+
+
+        />
 
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_MinCenter"
@@ -482,7 +496,10 @@
         app:sv_unitSpeedInterval="0dp"
         app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="0dp"
-        app:sv_unitUnderSpeedText="false" />
+        app:sv_unitUnderSpeedText="false"
+        app:sv_withIndicatorLight="false"
+
+        />
 
     <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_MinRight"
@@ -507,7 +524,10 @@
         app:sv_unitSpeedInterval="0dp"
         app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="0dp"
-        app:sv_unitUnderSpeedText="false" />
+        app:sv_unitUnderSpeedText="false"
+        app:sv_withIndicatorLight="false"
+
+        />
 
     <TextView
         android:id="@+id/textMinLeft"

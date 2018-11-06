@@ -250,10 +250,12 @@
         <item name="themedCarBackground">@drawable/skodaone_background_incar</item>
         <item name="themedDialBackground">@drawable/skodaone_dial_background_empty</item>
         <item name="themedEmptyDialBackground">@drawable/skodaone_dial_background_empty</item>
-        <item name="themedNeedle">@drawable/skodaone_needle</item>
+        <item name="themedNeedle">@drawable/mib2p_needle</item>
         <item name="sv_markColor">@android:color/white</item>
         <item name="themedStopWatchBackground">@drawable/skodaone_sw_background</item>
         <item name="themedNeedleColor">@color/green</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">#44FFFFFF</item>
     </style>
 
     <style name="AppTheme.Testing" parent="AppTheme.Car">
