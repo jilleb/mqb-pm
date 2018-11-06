@@ -216,7 +216,6 @@ public class DashboardFragment extends CarFragment {
         mClockCenter = rootView.findViewById(R.id.dial_Center);
         mClockRight = rootView.findViewById(R.id.dial_Right);
 
-        // build ImageIndicator using the resourceId
 
 
         //max & min dials
@@ -334,6 +333,7 @@ public class DashboardFragment extends CarFragment {
             pressureMax = 30;
         }
 
+        // build ImageIndicator using the resourceId
         // get the size of the Clock, to make sure the imageindicator has the right size.
         mClockLeft.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -350,11 +350,18 @@ public class DashboardFragment extends CarFragment {
 
                 ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
 
-                //give clocks a custom image indicator
-                mClockLeft.setIndicator(imageIndicator);
-                mClockCenter.setIndicator(imageIndicator);
-                mClockRight.setIndicator(imageIndicator);
+                if (raysOn) {
 
+                    mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
+                    mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
+                    mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
+                } else {
+
+                    //give clocks a custom image indicator
+                    mClockLeft.setIndicator(imageIndicator);
+                    mClockCenter.setIndicator(imageIndicator);
+                    mClockRight.setIndicator(imageIndicator);
+                }
 
             }
 
