@@ -7,6 +7,7 @@
         <item>VW GTE</item>
         <item>VW R</item>
         <item>VW MIB2</item>
+        <item>Clubsport</item>
         <item>Seat</item>
         <item>Seat Cupra</item>
         <item>Cupra Division</item>
@@ -14,12 +15,12 @@
         <item>Skoda</item>
         <item>Skoda vRS</item>
         <item>Skoda ONE</item>
+        <item>Skoda Virtual Cockpit</item>
         <item>Audi</item>
         <item>Audi RS</item>
         <item>Audi Virtual Cockpit</item>
-        <item>Clubsport</item>
+        <item>Audi TT</item>
         <item>Tesla</item>
-        <item>Back to the 80s</item>
         <item>Outrun</item>
         <item>Test</item>
     </string-array>

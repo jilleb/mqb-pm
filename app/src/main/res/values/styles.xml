@@ -135,14 +135,14 @@
         <item name="themedNeedleColor">@color/aqua</item>
     </style>
 
-    <style name="AppTheme.80s" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/retro_dial_background</item>
-        <item name="themedEmptyDialBackground">@drawable/retro_dial_background</item>
-        <item name="themedCarBackground">@drawable/retro_background_incar</item>
-        <item name="themedNeedle">@drawable/retro_needle</item>
-        <item name="sv_markColor">@color/orange</item>
-        <item name="themedStopWatchBackground">@drawable/retro_dial_background</item>
-        <item name="themedNeedleColor">@color/orange</item>
+    <style name="AppTheme.AudiTT" parent="AppTheme.Car">
+        <item name="themedDialBackground">@drawable/audi4_dial_background</item>
+        <item name="themedEmptyDialBackground">@drawable/audi4_dial_background</item>
+        <item name="themedCarBackground">@drawable/background_incar_plain</item>
+        <item name="themedNeedle">@drawable/audi_4_needle</item>
+        <item name="sv_markColor">@color/white</item>
+        <item name="themedStopWatchBackground">@drawable/audi4_dial_background</item>
+        <item name="themedNeedleColor">@color/red</item>
     </style>
 
 
@@ -201,8 +201,8 @@
 
 
     <style name="AppTheme.AudiRS" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/audi2_dial_background</item>
-        <item name="themedEmptyDialBackground">@drawable/audi2_dial_background</item>
+        <item name="themedDialBackground">@drawable/dial_background_audi2</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_audi2</item>
         <item name="themedCarBackground">@drawable/vw3_background_incar</item>
         <item name="themedNeedle">@drawable/audi_red_needle</item>
         <item name="sv_markColor">@android:color/white</item>
@@ -242,6 +242,19 @@
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/skoda2_stopwatch_background</item>
         <item name="themedNeedleColor">@color/green</item>
+
+
+    </style>
+
+
+    <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
+        <item name="themedCarBackground">@drawable/background_incar_plain</item>
+        <item name="themedDialBackground">@drawable/skoda3_dial_background</item>
+        <item name="themedEmptyDialBackground">@drawable/skoda3_dial_background</item>
+        <item name="themedNeedle">@drawable/skoda_needle_2</item>
+        <item name="sv_markColor">@android:color/white</item>
+        <item name="themedStopWatchBackground">@drawable/skoda3_dial_background</item>
+        <item name="themedNeedleColor">@color/red</item>
 
 
     </style>

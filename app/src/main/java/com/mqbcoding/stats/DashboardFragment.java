@@ -350,17 +350,30 @@ public class DashboardFragment extends CarFragment {
                 ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
 
                 if (raysOn) {
-
                     mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
                 } else {
-
                     //give clocks a custom image indicator
                     mClockLeft.setIndicator(imageIndicator);
                     mClockCenter.setIndicator(imageIndicator);
                     mClockRight.setIndicator(imageIndicator);
+
                 }
+
+                mClockLeft.speedPercentTo(100,1000);
+                mClockCenter.speedPercentTo(100,1000);
+                mClockRight.speedPercentTo(100,1000);
+
+
+
+                Handler staging = new Handler();
+                staging.postDelayed(new Runnable() {
+                    public void run() {
+                        mClockLeft.speedPercentTo(0,1000);
+                        mClockCenter.speedPercentTo(0,1000);
+                        mClockRight.speedPercentTo(0,1000);                    }
+                }, 1000);   //5 seconds
 
             }
 

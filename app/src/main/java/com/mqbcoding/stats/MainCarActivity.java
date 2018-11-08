@@ -118,8 +118,8 @@ public class MainCarActivity extends CarActivity {
             case "Tesla":
                 setTheme(R.style.AppTheme_Tesla);
                 break;
-            case "Back to the 80s":
-                setTheme(R.style.AppTheme_80s);
+            case "Audi TT":
+                setTheme(R.style.AppTheme_AudiTT);
                 break;
             case "Seat":
                 setTheme(R.style.AppTheme_Seat);
@@ -135,6 +135,9 @@ public class MainCarActivity extends CarActivity {
                 break;
             case "Skoda vRS":
                 setTheme(R.style.AppTheme_SkodavRS);
+                break;
+            case "Skoda Virtual Cockpit":
+                setTheme(R.style.AppTheme_SkodaVC);
                 break;
             case "Audi":
                 setTheme(R.style.AppTheme_Audi);

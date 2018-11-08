@@ -135,8 +135,6 @@
     <string name="vw3">VW Digit</string>
     <string name="skoda">Skoda</string>
 
-
-
     <string name="odometerunknown">unknown</string>
     <string name="km_format">%.1f km</string>
     <string name="m_format">%.1f miles</string>
