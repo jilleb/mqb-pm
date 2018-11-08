@@ -127,12 +127,12 @@
 
     <string name="pref_font">Font</string>
     <string name="segments">7 segment display</string>
-    <string name="vw">Volkswagen Text CarUI</string>
+    <string name="vw">Volkswagen CarUI</string>
     <string name="vw2">Volkswagen Thesis</string>
     <string name="seat">Seat Metastyle</string>
     <string name="audi">Audi Virtual Cockpit</string>
     <string name="frutiger">Frutiger</string>
-    <string name="porsche">Porsche</string>
+    <string name="vw3">VW Digit</string>
     <string name="skoda">Skoda</string>
 
 

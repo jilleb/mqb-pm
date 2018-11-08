@@ -160,10 +160,11 @@
         <item>@string/segments</item>
         <item>@string/vw</item>
         <item>@string/vw2</item>
+        <item>@string/vw3</item>
         <item>@string/seat</item>
         <item>@string/audi</item>
         <item>@string/frutiger</item>
-        <item>@string/porsche</item>
+
         <item>@string/skoda</item>
     </string-array>
 
@@ -172,10 +173,10 @@
         <item>segments</item>
         <item>vw</item>
         <item>vw2</item>
+        <item>vw3</item>
         <item>seat</item>
         <item>audi</item>
         <item>frutiger</item>
-        <item>porsche</item>
         <item>skoda</item>
     </string-array>
 

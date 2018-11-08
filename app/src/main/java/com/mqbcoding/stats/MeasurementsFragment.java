@@ -137,8 +137,8 @@ public class MeasurementsFragment extends CarFragment {
             case "frutiger":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Frutiger.otf");
                 break;
-            case "porsche":
-                typeface = Typeface.createFromAsset(getContext().getAssets(), "911porschav3cond.ttf");
+            case "vw3":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "VW_Digit_Reg.otf");
                 break;
             case "skoda":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
