@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    tools:showIn="@layout/preview_dashboard">
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/layout_dashboard_gauges"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="110dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/brake_accel_view"
+        style="@style/AppTheme.Car.ProgressBar.Horizontal"
+        android:layout_width="5dp"
+        android:layout_height="299dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:elevation="0dp"
+        android:max="10000"
+        android:orientation="vertical"
+        android:progress="3000"
+        android:progressTint="@color/car_primary"
+        android:rotation="180"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/include" />
+
+
+</android.support.constraint.ConstraintLayout>
