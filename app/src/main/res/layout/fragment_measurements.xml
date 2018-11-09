@@ -99,7 +99,7 @@
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/sw_button_selector"
-            android:drawableTop="@drawable/sw_reset"
+            android:drawableTop="@drawable/ic_reset"
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintHorizontal_bias="0.0"

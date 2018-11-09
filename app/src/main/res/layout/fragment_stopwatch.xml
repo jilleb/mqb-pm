@@ -90,26 +90,26 @@
             android:layout_height="60dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/sw_button_selector"
-            android:drawableTop="@drawable/sw_pause"
+            android:drawableTop="@drawable/ic_pause"
             android:visibility="invisible"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/sw_pause" />
+            app:srcCompat="@drawable/ic_pause" />
 
         <Button
             android:id="@+id/imgbtnSwStart"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
             android:background="@drawable/sw_button_selector"
-            android:drawableTop="@drawable/sw_start"
+            android:drawableTop="@drawable/ic_start"
             android:elevation="0dp"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgbtnSwPause"
-            app:srcCompat="@drawable/sw_start" />
+            app:srcCompat="@drawable/ic_start" />
 
         <Button
             android:id="@+id/imgbtnSwReset"
@@ -117,7 +117,7 @@
             android:layout_height="60dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/sw_button_selector"
-            android:drawableTop="@drawable/sw_reset"
+            android:drawableTop="@drawable/ic_reset"
             app:layout_constraintBottom_toBottomOf="parent"
 
             app:layout_constraintHorizontal_bias="0.0"
@@ -131,7 +131,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/sw_button_selector"
-            android:drawableTop="@drawable/sw_savelap"
+            android:drawableTop="@drawable/ic_savelap"
             app:layout_constraintBottom_toTopOf="@+id/imgbtnSwReset"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"

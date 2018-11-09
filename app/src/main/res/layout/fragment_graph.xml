@@ -14,12 +14,12 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/sw_button_selector"
-        android:drawableTop="@drawable/sw_start"
+        android:drawableTop="@drawable/ic_start"
         android:elevation="0dp"
         app:layout_constraintEnd_toEndOf="@+id/dial_graph"
         app:layout_constraintStart_toStartOf="@+id/dial_graph"
         app:layout_constraintTop_toBottomOf="@+id/dial_graph"
-        app:srcCompat="@drawable/sw_start" />
+        app:srcCompat="@drawable/ic_start" />
 
     <Button
         android:id="@+id/imgbtnGraphReset"
@@ -30,7 +30,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/sw_button_selector"
-        android:drawableTop="@drawable/sw_pause"
+        android:drawableTop="@drawable/ic_pause"
         app:layout_constraintEnd_toEndOf="@+id/dial_graph"
         app:layout_constraintStart_toStartOf="@+id/dial_graph"
         app:layout_constraintTop_toBottomOf="@+id/dial_graph" />
