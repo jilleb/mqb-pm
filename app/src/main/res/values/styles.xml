@@ -248,7 +248,7 @@
 
 
     <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
-        <item name="themedCarBackground">@drawable/background_incar_plain</item>
+        <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_skoda3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_skoda3</item>
         <item name="themedNeedle">@drawable/needle_skoda_2</item>
