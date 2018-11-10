@@ -65,6 +65,7 @@ public class DashboardFragment extends CarFragment {
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits;
+    private Boolean stagingDone = false;
     private Boolean raysOn, maxOn, accelOn, maxMarksOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
@@ -361,20 +362,27 @@ public class DashboardFragment extends CarFragment {
 
                 }
 
-                mClockLeft.speedPercentTo(100,1000);
-                mClockCenter.speedPercentTo(100,1000);
-                mClockRight.speedPercentTo(100,1000);
 
 
+                //initiating staging:
+                if (!stagingDone){
 
-                Handler staging = new Handler();
-                staging.postDelayed(new Runnable() {
-                    public void run() {
-                        mClockLeft.speedPercentTo(0,1000);
-                        mClockCenter.speedPercentTo(0,1000);
-                        mClockRight.speedPercentTo(0,1000);                    }
-                }, 1000);   //5 seconds
+                    mClockLeft.speedPercentTo(100,1000);
+                    mClockCenter.speedPercentTo(100,1000);
+                    mClockRight.speedPercentTo(100,1000);
 
+                    final Handler staging = new Handler();
+                    staging.postDelayed(new Runnable() {
+                        public void run() {
+                            mClockLeft.speedPercentTo(0,1000);
+                            mClockCenter.speedPercentTo(0,1000);
+                            mClockRight.speedPercentTo(0,1000);
+
+                        }
+                    }, 1000);   //5 seconds
+                    stagingDone=true;
+
+                }
             }
 
         });
@@ -556,7 +564,7 @@ public class DashboardFragment extends CarFragment {
 
         };
         //experimental delay
-        mHandler.postDelayed(mTimer1, 100);
+        mHandler.postDelayed(mTimer1, 1000);
 
     }
 
@@ -566,8 +574,10 @@ public class DashboardFragment extends CarFragment {
             return;
         }
 
-
-
+        //wait until staging is done before displaying any data on the clocks.
+        if (!stagingDone){
+            return;
+        }
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
         updateElement(mElement2Query, mValueElement2, mIconElement2);
