@@ -32,48 +32,48 @@
         tools:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/txtWarning_0_WarnID"
+        android:id="@+id/txtWheelState_FL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Car_vehicleState_Warning_0_WarnID"
+        android:text="Wheel state front left"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
         app:layout_constraintTop_toBottomOf="@+id/txtVIN"
         tools:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/txtWarning_0_dynamicValue"
+        android:id="@+id/txtWheelState_FR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Car_vehicleState_Warning_0_dynamicValue"
+        android:text="Wheel state front right"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_0_WarnID"
+        app:layout_constraintTop_toBottomOf="@+id/txtWheelState_FL"
         tools:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/txtWarning_1_WarnID"
+        android:id="@+id/txtWheelState_RL"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Car_vehicleState_Warning_1_WarnID"
+        android:text="Wheel state rear left"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_0_dynamicValue"
+        app:layout_constraintTop_toBottomOf="@+id/txtWheelState_FR"
         tools:textColor="@android:color/white" />
 
     <TextView
-        android:id="@+id/txtWarning_1_dynamicValue"
+        android:id="@+id/txtWheelState_RR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Car_vehicleState_Warning_1_dynamicValue"
+        android:text="Wheel state rear right"
         android:textAppearance="@style/CarBody2"
         android:visibility="visible"
-        app:layout_constraintStart_toStartOf="@+id/txtWarning_1_WarnID"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_1_WarnID"
+        app:layout_constraintStart_toStartOf="@+id/txtWheelState_RL"
+        app:layout_constraintTop_toBottomOf="@+id/txtWheelState_RL"
         tools:textColor="@android:color/white" />
 
     <TextView
@@ -84,7 +84,7 @@
         android:text="Car_vehicleState_Warning_2_WarnID"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="@+id/txtVIN"
-        app:layout_constraintTop_toBottomOf="@+id/txtWarning_1_dynamicValue"
+        app:layout_constraintTop_toBottomOf="@+id/txtWheelState_RR"
         tools:textColor="@android:color/white" />
 
     <TextView

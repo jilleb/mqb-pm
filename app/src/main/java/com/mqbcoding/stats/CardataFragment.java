@@ -29,16 +29,13 @@ public class CardataFragment extends CarFragment {
     private CarStatsClient mStatsClient;
 
     //the various data elements included and their textviews
-    private TextView mWarning0ID;
-    private TextView mWarning0Value;
-    private TextView mWarning1ID;
-    private TextView mWarning1Value;
-    private TextView mWarning2ID;
-    private TextView mWarning2Value;
+    private TextView mWheelStateFL;
+    private TextView mWheelStateRL;
+    private TextView mWheelStateFR;
+    private TextView mWheelStateRR;
+
     private TextView mVIN;
     private TextView mOdometer;
-
-
 
 
     private int mAnimationDuration;
@@ -48,11 +45,9 @@ public class CardataFragment extends CarFragment {
     private Handler mHandler = new Handler();
 
 
-
     public CardataFragment() {
         // Required empty public constructor
     }
-
 
 
     @Override
@@ -96,18 +91,25 @@ public class CardataFragment extends CarFragment {
         View rootView = inflater.inflate(R.layout.fragment_cardata, container, false);
 
         //find the various layout elements and give them value
-        mWarning0ID     = rootView.findViewById(R.id.txtWarning_0_WarnID);
-        mWarning1ID     = rootView.findViewById(R.id.txtWarning_1_WarnID);
-        mWarning2ID     = rootView.findViewById(R.id.txtWarning_2_WarnID);
-        mWarning0Value  = rootView.findViewById(R.id.txtWarning_0_dynamicValue);
-        mWarning1Value  = rootView.findViewById(R.id.txtWarning_1_dynamicValue);
-        mWarning2Value  = rootView.findViewById(R.id.txtWarning_2_dynamicValue);
-        mVIN            = rootView.findViewById(R.id.txtVIN);
-        mOdometer       = rootView.findViewById(R.id.txtOdometer);
+
+        //todo: sCompountState and styreSystem
+        //       sCompoundState
+        //        sTyreSystem
+
+        mWheelStateFL = rootView.findViewById(R.id.txtWheelState_FL);
+        mWheelStateRL = rootView.findViewById(R.id.txtWheelState_RL);
+        mWheelStateFR = rootView.findViewById(R.id.txtWheelState_FR);
+        mWheelStateRR = rootView.findViewById(R.id.txtWheelState_RR);
+
+        //  mWarning2ID     = rootView.findViewById(R.id.txtWarning_2_WarnID);
+        //  mWarning2Value  = rootView.findViewById(R.id.txtWarning_2_dynamicValue);
+        mVIN = rootView.findViewById(R.id.txtVIN);
+        mOdometer = rootView.findViewById(R.id.txtOdometer);
 
         doUpdate();
 
-        return rootView;    }
+        return rootView;
+    }
 
     @Override
     public void onStart() {
@@ -131,13 +133,12 @@ public class CardataFragment extends CarFragment {
     public void onDestroyView() {
         Log.i(TAG, "onDestroyView");
         // set everything back to null
-        mWarning1Value = null;
-        mWarning2Value = null;
-        mWarning0Value = null;
-        mWarning1ID = null;
-        mWarning2ID = null;
-        mWarning0ID = null;
-        mVIN= null;
+        mWheelStateFL = null;
+        mWheelStateRL = null;
+        mWheelStateFR = null;
+        mWheelStateRR = null;
+
+        mVIN = null;
         mOdometer = null;
 
         super.onDestroyView();
@@ -192,14 +193,12 @@ public class CardataFragment extends CarFragment {
         }
 
         //get strings from the Measurements:
-        String sVIN           = (String) mLastMeasurements.get("vehicleIdenticationNumber.VIN");
-        String sWarningID0    = (String) mLastMeasurements.get("Car_vehicleState_Warning_0_WarnID");
-        String sWarningID1    = (String) mLastMeasurements.get("Car_vehicleState_Warning_1_WarnID");
-        String sWarningID2    = (String) mLastMeasurements.get("Car_vehicleState_Warning_2_WarnID");
-        String sWarningIDVal0 = (String) mLastMeasurements.get("Car_vehicleState_Warning_0_dynamicValue");
-        String sWarningIDVal1 = (String) mLastMeasurements.get("Car_vehicleState_Warning_1_dynamicValue");
-        String sWarningIDVal2 = (String) mLastMeasurements.get("Car_vehicleState_Warning_2_dynamicValue");
-        Float sOdometer      = (Float) mLastMeasurements.get("totalDistance.distanceValue"); //odometer value
+        String sVIN = (String) mLastMeasurements.get("vehicleIdenticationNumber.VIN");
+
+        String sCompoundState = (String) mLastMeasurements.get("tyreStates.compoundState");
+        String sTyreSystem = (String) mLastMeasurements.get("tyreStates.system");
+
+        Float sOdometer = (Float) mLastMeasurements.get("totalDistance.distanceValue"); //odometer value
         String sOdometerUnits = (String) mLastMeasurements.get("totalDistance.unit"); //odometer unit (km/miles)
 
         //check if VIN is known, and if so, display it.
@@ -207,58 +206,37 @@ public class CardataFragment extends CarFragment {
             mVIN.setText("VIN: unknown");
 
         } else {
-            mVIN.setText("VIN: " + sVIN );   //Should be some WVWZZZZbladiebla string
+            mVIN.setText("VIN: " + sVIN);   //Should be some WVWZZZZbladiebla string
         }
 
         if (sOdometer == null) {
             mOdometer.setText(R.string.odometerunknown);
-        } else if (sOdometerUnits == "km") {
+        } else if (sOdometerUnits.equals("km")) {
             mOdometer.setVisibility(View.VISIBLE);
             mOdometer.setText(String.format(Locale.US, getContext().getText(R.string.km_format).toString(), sOdometer));
-        }
-            else if (sOdometerUnits == "m") {
+        } else if (sOdometerUnits.equals("m")) {
             mOdometer.setText(String.format(Locale.US, getContext().getText(R.string.m_format).toString(), sOdometer));
         }
 
-        //check if there are any warnings, and if so, display it
-        //this could probably be done in a nicer way ;-)
-        if (sWarningID0 == null) {
-            mWarning0ID.setVisibility(View.GONE);
-            mWarning0Value.setVisibility(View.GONE);
-        } else {
-            mWarning0ID.setVisibility(View.VISIBLE);
-            mWarning0Value.setVisibility(View.VISIBLE);
-            mWarning0ID.setText(sWarningID0); //seems to be some kind of error code, like 41511.0 or 42254.0
-            mWarning0Value.setText(sWarningIDVal0);//
-        }
-        //check if there are any warnings, and if so, display it
-        //this could probably be done in a nicer way ;-)
-        if (sWarningID1 == null) {
-            mWarning1ID.setVisibility(View.GONE);
-            mWarning1Value.setVisibility(View.GONE);
-        } else {
-            mWarning1ID.setVisibility(View.VISIBLE);
-            mWarning1Value.setVisibility(View.VISIBLE);
-            mWarning1ID.setText(sWarningID1); //seems to be some kind of error code, like 41511.0 or 42254.0
-            mWarning1Value.setText(sWarningIDVal1);//
-        }
-
-        //check if there are any warnings, and if so, display it
-        //this could probably be done in a nicer way ;-)
-        if (sWarningID2 == null) {
-            mWarning2ID.setVisibility(View.GONE);
-            mWarning2Value.setVisibility(View.GONE);
-        } else {
-            mWarning2ID.setVisibility(View.VISIBLE);
-            mWarning2Value.setVisibility(View.VISIBLE);
-            mWarning2ID.setText(sWarningID2); //seems to be some kind of error code, like 41511.0 or 42254.0
-            mWarning2Value.setText(sWarningIDVal2);//
-        }
+        readDataUpdateTextView("tyreStates.stateFrontLeft",mWheelStateFL,"State front left: ", "-");
+        readDataUpdateTextView("tyreStates.stateFrontRight",mWheelStateFR,"State front right: ", "-");
+        readDataUpdateTextView("tyreStates.stateRearLeft",mWheelStateRL,"State rear left: ", "-");
+        readDataUpdateTextView("tyreStates.stateRearRight",mWheelStateRR,"State rear right: ", "-");
 
     }
 
-}
+    private void readDataUpdateTextView(String queryElement, TextView displayElement, String dataName, String customErrorText) {
+        String sData = (String) mLastMeasurements.get("queryElement");
 
+        if (sData == null) {
+            String errorText=dataName+customErrorText;
+            displayElement.setText(errorText);
+            } else {
+            String displayText=dataName+sData;
+            displayElement.setText(displayText);
+                  }
+    }
+}
     /* todo:
 
     driveMode_activeProfile

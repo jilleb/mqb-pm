@@ -52,7 +52,7 @@
 
     <style name="AppTheme.Cupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_cupra</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_cupra</item>
         <item name="themedCarBackground">@drawable/background_incar_cupra</item>
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedNeedle">@drawable/needle_cupra</item>

@@ -214,10 +214,10 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-       // mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
-       //         .setTitle(getString(R.string.activity_carstatus_title))
-       //         .setType(MenuItem.Type.ITEM)
-       //         .build());
+       mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
+               .setTitle(getString(R.string.activity_carstatus_title))
+               .setType(MenuItem.Type.ITEM)
+               .build());
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))
