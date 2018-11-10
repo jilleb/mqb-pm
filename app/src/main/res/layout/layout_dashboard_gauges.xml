@@ -353,6 +353,7 @@
         android:layout_height="0dp"
         android:src="@drawable/ic_steering"
         android:tint="@color/car_primary"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/dial_Center"
         app:layout_constraintLeft_toLeftOf="@+id/dial_Center"
         app:layout_constraintRight_toRightOf="@+id/dial_Center"

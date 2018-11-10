@@ -56,7 +56,7 @@ public class DashboardFragment extends CarFragment {
     private int pressureMin, pressureMax;
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
-    //valuesof the data elements. upper left, upper right, lower left, lower right.
+    //values of the data elements. upper left, upper right, lower left, lower right.
     private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4;
     private TextView mTextMinLeft, mTextMaxLeft;
     private TextView mTextMinCenter, mTextMaxCenter;
@@ -370,6 +370,9 @@ public class DashboardFragment extends CarFragment {
                     mClockLeft.speedPercentTo(100,1000);
                     mClockCenter.speedPercentTo(100,1000);
                     mClockRight.speedPercentTo(100,1000);
+                    mRayLeft.speedPercentTo(100,1000);
+                    mRayCenter.speedPercentTo(100,1000);
+                    mRayRight.speedPercentTo(100,1000);
 
                     final Handler staging = new Handler();
                     staging.postDelayed(new Runnable() {
@@ -377,6 +380,9 @@ public class DashboardFragment extends CarFragment {
                             mClockLeft.speedPercentTo(0,1000);
                             mClockCenter.speedPercentTo(0,1000);
                             mClockRight.speedPercentTo(0,1000);
+                            mRayLeft.speedPercentTo(0,1000);
+                            mRayCenter.speedPercentTo(0,1000);
+                            mRayRight.speedPercentTo(0,1000);
 
                         }
                     }, 1000);   //5 seconds
@@ -985,7 +991,7 @@ public class DashboardFragment extends CarFragment {
                 case "currentTorque":
                 case "currentOutputPower":
                     if (clockValue != null) {
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
                 // pressures
@@ -993,28 +999,28 @@ public class DashboardFragment extends CarFragment {
                 case "relChargingAirPressure":
                     if (clockValue != null) {
                         clockValue = clockValue * pressureFactor;
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
                 // specific case for wheel angle, since it needs to be turned around
                 case "wheelAngle":
                     if (clockValue != null) {
                         clockValue = clockValue * -1; // make it negative, otherwise right = left and vice versa
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
                     // hybrid power has 1020 as value 0.
                 case "powermeter":
                     if (clockValue != null) {
                         clockValue = clockValue - 1020;
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
 
                     // percentages
                 case "acceleratorPosition":
                     if (clockValue != null) {
                         float accelPercent = clockValue * 100;
-                        dial.speedTo(accelPercent);
+                        dial.speedTo(accelPercent,500);
                     }
                     break;
                 // specific consumption data with specific consumption units
@@ -1023,28 +1029,28 @@ public class DashboardFragment extends CarFragment {
                     String consumptionUnit = (String) mLastMeasurements.get("currentConsumptionPrimary.unit");
                     if (clockValue != null && consumptionUnit != null) {
                         dial.setUnit(consumptionUnit);
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
                 case "currentConsumptionSecondary":
                     String consumption2Unit = (String) mLastMeasurements.get("currentConsumptionSecondary.unit");
                     if (clockValue != null && consumption2Unit != null) {
                         dial.setUnit(consumption2Unit);
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
                 case "cycleConsumptionPrimary":
                     String cycconsumptionUnit = (String) mLastMeasurements.get("cycleConsumptionPrimary.unit");
                     if (clockValue != null && cycconsumptionUnit != null) {
                         dial.setUnit(cycconsumptionUnit);
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
                 case "cycleConsumptionSecondary":
                     String cycconsumption2Unit = (String) mLastMeasurements.get("cycleConsumptionSecondary.unit");
                     if (clockValue != null && cycconsumption2Unit != null) {
                         dial.setUnit(cycconsumption2Unit);
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
                 // speed, has specific unit requirements and mph calculation
@@ -1063,13 +1069,13 @@ public class DashboardFragment extends CarFragment {
 
                         }
                         clockValue = clockValue * speedFactor;
-                        dial.speedTo(clockValue);
+                        dial.speedTo(clockValue,500);
                     }
                     break;
             }
             // get the speed from the clock and have the high-visibility rays move to this speed as well
             float tempValue = dial.getSpeed();
-            visray.speedTo(tempValue);
+            visray.speedTo(tempValue,500);
 
             // update the max clocks and text
             Float maxValue = clockmax.getSpeed();
