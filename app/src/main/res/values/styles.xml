@@ -32,6 +32,11 @@
         <item name="sv_markColor">@android:color/white</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat</item>
         <item name="themedNeedleColor">@color/yellow</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">@color/yellow</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorColor">#fecc00</item>
+        <item name="sv_indicatorWidth">4dp</item>
 
 
 
@@ -45,6 +50,11 @@
         <item name="themedNeedle">@drawable/needle_seat</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat2</item>
         <item name="themedNeedleColor">@color/yellow</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">@color/yellow</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorColor">#fecc00</item>
+        <item name="sv_indicatorWidth">4dp</item>
 
     </style>
 
@@ -58,6 +68,12 @@
         <item name="themedNeedle">@drawable/needle_cupra</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat2</item>
         <item name="themedNeedleColor">@color/white</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">#44FFFFFF</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorColor">#FFFFFFFF</item>
+        <item name="sv_indicatorWidth">4dp</item>
+
 
     </style>
 
@@ -69,6 +85,11 @@
         <item name="themedNeedle">@drawable/needle_seatmqb</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat2</item>
         <item name="themedNeedleColor">@color/green</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">@color/yellow</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorColor">#00ff00</item>
+        <item name="sv_indicatorWidth">4dp</item>
 
 
     </style>
@@ -97,6 +118,11 @@
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_mib2p</item>
         <item name="themedNeedleColor">@color/red</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">@color/white</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorColor">#ffffff</item>
+        <item name="sv_indicatorWidth">4dp</item>
 
 
 
@@ -154,10 +180,6 @@
         <item name="sv_markColor">@android:color/white</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/white</item>
-
-
-
-
     </style>
 
 
@@ -169,10 +191,6 @@
         <item name="sv_markColor">@android:color/white</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_outrun</item>
         <item name="themedNeedleColor">@color/pink</item>
-
-
-
-
     </style>
 
 
@@ -271,6 +289,7 @@
         <item name="sv_indicatorLightColor">#44FFFFFF</item>
         <item name="sv_indicator">HalfLineIndicator</item>
         <item name="sv_indicatorColor">#FFFFFFFF</item>
+        <item name="sv_indicatorWidth">4dp</item>
     </style>
 
     <style name="AppTheme.Testing" parent="AppTheme.Car">
@@ -288,7 +307,6 @@
 
     <style name="AppTheme.Car.Speedometer">
         <item name="android:padding">25dp</item>
-        <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_lowSpeedPercent">85</item>
         <item name="sv_mediumSpeedPercent">85</item>
         <item name="sv_speedTextColor">@color/car_primary</item>

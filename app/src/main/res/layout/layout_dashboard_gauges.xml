@@ -70,7 +70,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="0.4"
-        app:sv_indicatorWidth="4dp"
         app:sv_maxSpeed="2"
         app:sv_speedTextPadding="0dp"
         app:sv_speedTextPosition="CENTER"
@@ -457,7 +456,6 @@
         app:layout_constraintRight_toLeftOf="@+id/dial_Center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/dial_Right"
-
         app:layout_constraintVertical_bias="0.0"
         app:sv_indicator="QuarterLineIndicator"
         app:sv_indicatorColor="@color/red"
