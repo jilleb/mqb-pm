@@ -81,9 +81,7 @@
         app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="20sp"
         app:sv_withTremble="false"
-
-
-        />
+     />
 
     <TextView
         android:id="@+id/icon_Element1"
@@ -292,7 +290,8 @@
         app:sv_textColor="@android:color/transparent"
         app:sv_unitTextColor="@android:color/transparent"
         app:sv_withEffects="false"
-        app:sv_withTremble="false" />
+        app:sv_withTremble="false"
+        app:sv_indicatorWidth="8dp"/>
 
     <com.github.anastr.speedviewlib.RaySpeedometer
         android:id="@+id/rayCenter"
@@ -318,7 +317,8 @@
         app:sv_textColor="@android:color/transparent"
         app:sv_unitTextColor="@android:color/transparent"
         app:sv_withEffects="false"
-        app:sv_withTremble="false" />
+        app:sv_withTremble="false"
+        app:sv_indicatorWidth="8dp"/>
 
 
     <com.github.anastr.speedviewlib.RaySpeedometer
@@ -344,7 +344,8 @@
         app:sv_textColor="@android:color/transparent"
         app:sv_unitTextColor="@android:color/transparent"
         app:sv_withEffects="false"
-        app:sv_withTremble="false" />
+        app:sv_withTremble="false"
+        app:sv_indicatorWidth="8dp"/>
 
 
     <ImageView

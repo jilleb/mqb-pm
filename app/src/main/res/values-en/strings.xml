@@ -133,5 +133,8 @@
     <string name="pref_ticks_off">Don\'t display value of ticks</string>
     <string name="pref_ticks_on">Display value of ticks</string>
     <string name="pref_ticks">Tick values</string>
+    <string name="pref_ambient_off">Don\'t use ambient colors</string>
+    <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
+    <string name="pref_ambient">Ambient colors</string>
 
 </resources>

@@ -72,7 +72,7 @@ public class DashboardFragment extends CarFragment {
     private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits;
     private Boolean stagingDone = false;
-    private Boolean raysOn, maxOn, accelOn, maxMarksOn, ticksOn;
+    private Boolean raysOn, maxOn, accelOn, maxMarksOn, ticksOn, ambientOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private View.OnClickListener celebrateOnClickListener = new View.OnClickListener() {
@@ -181,9 +181,7 @@ public class DashboardFragment extends CarFragment {
         accelOn = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
         selectedFont = sharedPreferences.getString("selectedFont", "segments");
         ticksOn = sharedPreferences.getBoolean("ticksActive",false); // if true, it will display the value of each of the ticks
-
-//todo: add a "use ambient colors" setting, to use the ambient color from the car, if available
-
+        ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -212,13 +210,8 @@ public class DashboardFragment extends CarFragment {
             case "skoda":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
                 break;
-
-
-        }
-
-
-
-        //-------------------------------------------------------------
+     }
+     //-------------------------------------------------------------
         //find all elements needed
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
@@ -365,10 +358,19 @@ public class DashboardFragment extends CarFragment {
                     mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
                 } else  if (color==-14575885) {
                     //if theme has transparent indicator color, give clocks a custom image indicator
+                    //todo: do this on other fragments as well
                     mClockLeft.setIndicator(imageIndicator);
                     mClockCenter.setIndicator(imageIndicator);
                     mClockRight.setIndicator(imageIndicator);
-                }
+                } else if (ambientOn) {
+                    String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
+
+                    if (ambientColor != null){
+                        mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
+                        mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
+                        mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
+                    }
+                 }
 
                 // show value of the ticks
                 if (ticksOn){
