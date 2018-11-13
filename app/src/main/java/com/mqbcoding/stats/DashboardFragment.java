@@ -6,18 +6,15 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
-import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,7 +25,6 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
-import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
@@ -39,8 +35,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
-
-import static android.support.v7.widget.TintTypedArray.obtainStyledAttributes;
 
 public class DashboardFragment extends CarFragment {
     public static final float FULL_BRAKE_PRESSURE = 100.0f;
@@ -121,10 +115,10 @@ public class DashboardFragment extends CarFragment {
     }
 
     public static String convGear(String gear) {
-        
+
         String convertedGear = "0";
         if (gear == null) {
-        convertedGear = "-";
+            convertedGear = "-";
         } else if (gear.equals("Gear1")) {
             convertedGear = "1";
         } else if (gear.equals("Gear2")) {
@@ -145,7 +139,7 @@ public class DashboardFragment extends CarFragment {
 
         return convertedGear;
     }
-    
+
 
 
     @Override
@@ -210,8 +204,8 @@ public class DashboardFragment extends CarFragment {
             case "skoda":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
                 break;
-     }
-     //-------------------------------------------------------------
+        }
+        //-------------------------------------------------------------
         //find all elements needed
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
@@ -342,7 +336,7 @@ public class DashboardFragment extends CarFragment {
                 int clockSize = mClockLeft.getHeight();
                 if (clockSize==0){
                     clockSize=250;
-                    }
+                }
                 //this is to enable an image as indicator.
                 TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
                 int resourceId = typedArray.getResourceId(0, 0);
@@ -370,7 +364,7 @@ public class DashboardFragment extends CarFragment {
                         mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
                         mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
                     }
-                 }
+                }
 
                 // show value of the ticks
                 if (ticksOn){
@@ -442,6 +436,14 @@ public class DashboardFragment extends CarFragment {
             mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
             mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
             mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
+
+            String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
+
+            if (ambientColor != null) {
+                mRayLeft.setRayColor(Color.parseColor(ambientColor));
+                mRayCenter.setRayColor(Color.parseColor(ambientColor));
+                mRayRight.setRayColor(Color.parseColor(ambientColor));
+            }
 
         } else {
             mRayLeft.setVisibility(View.INVISIBLE);
@@ -609,9 +611,9 @@ public class DashboardFragment extends CarFragment {
         }
 
         //wait until staging is done before displaying any data on the clocks.
-       if (!stagingDone){
-           return;
-       }
+        if (!stagingDone){
+            return;
+        }
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
         updateElement(mElement2Query, mValueElement2, mIconElement2);
@@ -632,18 +634,18 @@ public class DashboardFragment extends CarFragment {
             float normalizedBrakePressure = Math.min(Math.max(0.0f, brakePressure / FULL_BRAKE_PRESSURE), 1.0f);
             boolean isBraking = normalizedBrakePressure > 0;
 
-                mBrakeAccel.setRotation(isBraking ? 180.0f : 0.0f);
+            mBrakeAccel.setRotation(isBraking ? 180.0f : 0.0f);
 
-                //noinspection deprecation
-                mBrakeAccel.setProgressTintList(ColorStateList.valueOf(getContext().getResources()
-                        .getColor(isBraking ? R.color.car_accent : R.color.car_primary)));
-                mBrakeAccel.setProgress((int) ((isBraking ? normalizedBrakePressure : accelPos) * 10000));
+            //noinspection deprecation
+            mBrakeAccel.setProgressTintList(ColorStateList.valueOf(getContext().getResources()
+                    .getColor(isBraking ? R.color.car_accent : R.color.car_primary)));
+            mBrakeAccel.setProgress((int) ((isBraking ? normalizedBrakePressure : accelPos) * 10000));
 
         } else if (mBrakeAccel != null)   {
             mBrakeAccel.setProgress(0);
         }
 
- // wheel angle monitor
+        // wheel angle monitor
         Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
         mWheelState = mWheelStateMonitor == null ? WheelStateMonitor.WheelState.WHEEL_UNKNOWN
                 : mWheelStateMonitor.getWheelState();
@@ -1036,7 +1038,7 @@ public class DashboardFragment extends CarFragment {
                         dial.speedTo(clockValue,500);
                     }
                     break;
-                    // hybrid power has 1020 as value 0.
+                // hybrid power has 1020 as value 0.
                 case "powermeter":
                     if (clockValue != null) {
                         clockValue = clockValue - 1020;
@@ -1141,7 +1143,7 @@ public class DashboardFragment extends CarFragment {
                     }
                     break;
 
-                    // all temperatures can be handled in the same way, the only difference is the queryElement string
+                // all temperatures can be handled in the same way, the only difference is the queryElement string
                 case "coolantTemperature":
                 case "oilTemperature":
                 case "gearboxOilTemperature":
@@ -1165,7 +1167,7 @@ public class DashboardFragment extends CarFragment {
                     }
                     break;
 
-                    // Decimal values, without any specific modification:
+                // Decimal values, without any specific modification:
                 case "currentOutputPower":
                 case "currentTorque":
                     Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
@@ -1252,10 +1254,10 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-    
-    
-    
-    
-    
+
+
+
+
+
 
 }
