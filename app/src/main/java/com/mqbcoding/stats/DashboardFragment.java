@@ -6,15 +6,18 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +28,7 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
+import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
@@ -35,6 +39,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+
+import static android.support.v7.widget.TintTypedArray.obtainStyledAttributes;
 
 public class DashboardFragment extends CarFragment {
     public static final float FULL_BRAKE_PRESSURE = 100.0f;
@@ -66,7 +72,7 @@ public class DashboardFragment extends CarFragment {
     private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits;
     private Boolean stagingDone = false;
-    private Boolean raysOn, maxOn, accelOn, maxMarksOn;
+    private Boolean raysOn, maxOn, accelOn, maxMarksOn, ticksOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private View.OnClickListener celebrateOnClickListener = new View.OnClickListener() {
@@ -165,7 +171,7 @@ public class DashboardFragment extends CarFragment {
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
 
-        //Get shared preferences
+        //Get preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
@@ -174,6 +180,9 @@ public class DashboardFragment extends CarFragment {
         maxMarksOn = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
         accelOn = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
         selectedFont = sharedPreferences.getString("selectedFont", "segments");
+        ticksOn = sharedPreferences.getBoolean("ticksActive",false); // if true, it will display the value of each of the ticks
+
+//todo: add a "use ambient colors" setting, to use the ambient color from the car, if available
 
 
         //set textview to have a custom digital font:
@@ -215,8 +224,6 @@ public class DashboardFragment extends CarFragment {
         mClockLeft = rootView.findViewById(R.id.dial_Left);
         mClockCenter = rootView.findViewById(R.id.dial_Center);
         mClockRight = rootView.findViewById(R.id.dial_Right);
-
-
 
         //max & min dials
         mClockMaxLeft = rootView.findViewById(R.id.dial_MaxLeft);
@@ -350,19 +357,34 @@ public class DashboardFragment extends CarFragment {
 
                 ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
 
+                int color = mClockLeft.getIndicatorColor();
+
                 if (raysOn) {
                     mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
-                } else {
-                    //give clocks a custom image indicator
+                } else  if (color==-14575885) {
+                    //if theme has transparent indicator color, give clocks a custom image indicator
                     mClockLeft.setIndicator(imageIndicator);
                     mClockCenter.setIndicator(imageIndicator);
                     mClockRight.setIndicator(imageIndicator);
-
                 }
 
+                // show value of the ticks
+                if (ticksOn){
+                    int tickNum = 10;
+                    int tickPad = 20;
 
+                    mClockLeft.setTickNumber(tickNum);
+                    mClockLeft.setTextColor(Color.WHITE);
+                    mClockLeft.setTickPadding(tickPad);
+                    mClockCenter.setTickNumber(tickNum);
+                    mClockCenter.setTextColor(Color.WHITE);
+                    mClockCenter.setTickPadding(tickPad);
+                    mClockRight.setTickNumber(tickNum);
+                    mClockRight.setTextColor(Color.WHITE);
+                    mClockRight.setTickPadding(tickPad);
+                }
 
                 //initiating staging:
                 if (!stagingDone){
@@ -407,6 +429,8 @@ public class DashboardFragment extends CarFragment {
         setupClock(mClockRQuery, mClockRight, mIconClockR, mRayRight, mClockMinRight, mClockMaxRight);
 
         //show high visible rays on, according to the setting
+
+
         if (raysOn) {
             mRayLeft.setVisibility(View.VISIBLE);
             mRayCenter.setVisibility(View.VISIBLE);
@@ -422,6 +446,8 @@ public class DashboardFragment extends CarFragment {
             mRayCenter.setVisibility(View.INVISIBLE);
             mRayRight.setVisibility(View.INVISIBLE);
         }
+
+
 
         //show texts and backgrounds for max/min, according to the setting
         if (maxOn) {   // show the minmax values
@@ -570,7 +596,7 @@ public class DashboardFragment extends CarFragment {
 
         };
         //experimental delay
-        mHandler.postDelayed(mTimer1, 1000);
+        mHandler.postDelayed(mTimer1, 100);
 
     }
 
@@ -581,9 +607,9 @@ public class DashboardFragment extends CarFragment {
         }
 
         //wait until staging is done before displaying any data on the clocks.
-        if (!stagingDone){
-            return;
-        }
+       if (!stagingDone){
+           return;
+       }
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
         updateElement(mElement2Query, mValueElement2, mIconElement2);
@@ -964,7 +990,6 @@ public class DashboardFragment extends CarFragment {
         } else {
 
             Float clockValue = (Float) mLastMeasurements.get(query);
-
             float randomClockVal = randFloat(-100, 200);
             speedFactor = 1f;
             pressureFactor = 1f;

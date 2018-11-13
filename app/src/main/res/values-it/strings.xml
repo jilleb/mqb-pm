@@ -125,6 +125,9 @@
     <string name="odometerunknown">unknown</string>
     <string name="km_format">%.1f km</string>
     <string name="m_format">%.1f miles</string>
+    <string name="pref_ticks_off">Don\'t display value of ticks</string>
+    <string name="pref_ticks_on">Display value of ticks</string>
+    <string name="pref_ticks">Tick values</string>
 
 
 </resources>

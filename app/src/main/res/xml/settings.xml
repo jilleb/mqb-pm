@@ -27,6 +27,12 @@
             android:title="@string/pref_highvis" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:key="ticksActive"
+            android:summaryOff="@string/pref_ticks_off"
+            android:summaryOn="@string/pref_ticks_on"
+            android:title="@string/pref_ticks" />
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="maxValuesActive"
             android:summaryOff="@string/pref_highlow_off"
             android:summaryOn="@string/pref_highlow_on"
