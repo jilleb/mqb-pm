@@ -630,6 +630,19 @@ public class DashboardFragment extends CarFragment {
         Float brakePressure = (Float) mLastMeasurements.get("brakePressure");
         Float accelPos = (Float) mLastMeasurements.get("acceleratorPosition");
 
+
+        // get ambient color, change color of some elements to match the ambient color.
+        if (ambientOn) {
+            String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
+
+            if (ambientColor != null) {
+                mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
+                mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
+                mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
+            }
+        }
+
+
         if (brakePressure != null && accelPos != null && mBrakeAccel != null) {
             float normalizedBrakePressure = Math.min(Math.max(0.0f, brakePressure / FULL_BRAKE_PRESSURE), 1.0f);
             boolean isBraking = normalizedBrakePressure > 0;
@@ -998,6 +1011,11 @@ public class DashboardFragment extends CarFragment {
             speedFactor = 1f;
             pressureFactor = 1f;
 
+            String temperatureUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
+            if (temperatureUnit==null){
+                temperatureUnit ="°";
+            }
+
             switch (query) {
                 case "test":
                     dial.speedTo(randomClockVal);
@@ -1007,10 +1025,6 @@ public class DashboardFragment extends CarFragment {
                 // all data that can be put on the clock without further modification
                 case "engineSpeed":
                 case "batteryVoltage":
-                case "oilTemperature":
-                case "coolantTemperature":
-                case "outsideTemperature":
-                case "gearboxOilTemperature":
                 case "lateralAcceleration":
                 case "longitudinalAcceleration":
                 case "yawRate":
@@ -1020,36 +1034,45 @@ public class DashboardFragment extends CarFragment {
                 case "currentTorque":
                 case "currentOutputPower":
                     if (clockValue != null) {
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
+                // temperatures
+                case "oilTemperature":
+                case "coolantTemperature":
+                case "outsideTemperature":
+                case "gearboxOilTemperature":
+                    if (clockValue != null) {
+                        dial.speedTo(clockValue);
+                    }
+                    dial.setUnit(temperatureUnit);
                 // pressures
                 case "absChargingAirPressure":
                 case "relChargingAirPressure":
                     if (clockValue != null) {
                         clockValue = clockValue * pressureFactor;
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
                 // specific case for wheel angle, since it needs to be turned around
                 case "wheelAngle":
                     if (clockValue != null) {
                         clockValue = clockValue * -1; // make it negative, otherwise right = left and vice versa
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
                 // hybrid power has 1020 as value 0.
                 case "powermeter":
                     if (clockValue != null) {
                         clockValue = clockValue - 1020;
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
 
                     // percentages
                 case "acceleratorPosition":
                     if (clockValue != null) {
                         float accelPercent = clockValue * 100;
-                        dial.speedTo(accelPercent,500);
+                        dial.speedTo(accelPercent);
                     }
                     break;
                 // specific consumption data with specific consumption units
@@ -1058,28 +1081,28 @@ public class DashboardFragment extends CarFragment {
                     String consumptionUnit = (String) mLastMeasurements.get("currentConsumptionPrimary.unit");
                     if (clockValue != null && consumptionUnit != null) {
                         dial.setUnit(consumptionUnit);
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
                 case "currentConsumptionSecondary":
                     String consumption2Unit = (String) mLastMeasurements.get("currentConsumptionSecondary.unit");
                     if (clockValue != null && consumption2Unit != null) {
                         dial.setUnit(consumption2Unit);
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
                 case "cycleConsumptionPrimary":
                     String cycconsumptionUnit = (String) mLastMeasurements.get("cycleConsumptionPrimary.unit");
                     if (clockValue != null && cycconsumptionUnit != null) {
                         dial.setUnit(cycconsumptionUnit);
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
                 case "cycleConsumptionSecondary":
                     String cycconsumption2Unit = (String) mLastMeasurements.get("cycleConsumptionSecondary.unit");
                     if (clockValue != null && cycconsumption2Unit != null) {
                         dial.setUnit(cycconsumption2Unit);
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
                 // speed, has specific unit requirements and mph calculation
@@ -1098,7 +1121,7 @@ public class DashboardFragment extends CarFragment {
 
                         }
                         clockValue = clockValue * speedFactor;
-                        dial.speedTo(clockValue,500);
+                        dial.speedTo(clockValue);
                     }
                     break;
             }

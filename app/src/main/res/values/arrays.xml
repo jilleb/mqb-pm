@@ -306,7 +306,7 @@
     *units*
         unitDateFormat
         unitPressure
-        unitTemperature
+        done: unitTemperature
         unitTimeFormat
 
     *lighting*
