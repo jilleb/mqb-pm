@@ -53,6 +53,8 @@
         <item>@string/currentConsumptionSecondary</item>
         <item>@string/cycleConsumptionPrimary</item>
         <item>@string/cycleConsumptionSecondary</item>
+        <item>@string/tankLevelPrimary</item>
+        <item>@string/tankLevelSecondary</item>
         <item>@string/test</item>
     </string-array>
 
@@ -83,6 +85,8 @@
         <item>currentConsumptionSecondary</item>
         <item>cycleConsumptionPrimary</item>
         <item>cycleConsumptionSecondary</item>
+        <item>tankLevelPrimary</item>
+        <item>tankLevelSecondary</item>
         <item>test</item>
 
     </string-array>
@@ -110,6 +114,12 @@
         <item>@string/EcoHMI_Score.AvgShort</item>
         <item>@string/EcoHMI_Score.AvgTrip</item>
         <item>@string/test</item>
+
+        <!--
+        todo:
+        nav_Altitude
+        nav_Heading
+        -->
 
     </string-array>
 
@@ -274,13 +284,11 @@
             modCount
             oilLevel
             recuperationLevel
-            tankLevelPrimary
-            tankLevelSecondary
             totalDistance
 
     *navi data*
         longitude
-        nav_Altitude
+
         nav_CurrentPosition
         nav_GeoPosition
         Nav_GeoPosition_Latitude (52.003735)
@@ -288,7 +296,7 @@
         nav_GuidanceDestination
         nav_GuidanceRemaining
         nav_GuidanceState
-        nav_Heading
+
         nav_LastDestinations
 
     *unknown data formats*
@@ -320,4 +328,6 @@
     hevOperationMode (sustaining)
 
      -->
+    <string name="tankLevelPrimary">Tank level (primary)</string>
+    <string name="tankLevelSecondary">Tank level (secondary)</string>
 </resources>

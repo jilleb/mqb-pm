@@ -989,6 +989,20 @@ public class DashboardFragment extends CarFragment {
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
+            case "tankLevelPrimary":
+                icon.setText("");
+                clock.setUnit("%");
+                clock.setMinMaxSpeed(0, 100);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                break;
+            case "tankLevelSecondary":
+                icon.setText("");
+                clock.setUnit("%");
+                clock.setMinMaxSpeed(0, 100);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                break;
         }
 
         float minimum = clock.getMinSpeed();
@@ -1070,11 +1084,13 @@ public class DashboardFragment extends CarFragment {
 
                     // percentages
                 case "acceleratorPosition":
+                case "tankLevelPrimary":
+                case "tankLevelSecondary":
                     if (clockValue != null) {
-                        float accelPercent = clockValue * 100;
-                        dial.speedTo(accelPercent);
+                        float valuePercent = clockValue * 100;
+                        dial.speedTo(valuePercent);
                     }
-                    break;
+                 break;
                 // specific consumption data with specific consumption units
                 // todo: maybe it's better to remove setting the unit from updateclock, but do it on setupclock
                 case "currentConsumptionPrimary":
