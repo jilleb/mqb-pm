@@ -345,11 +345,27 @@ public class DashboardFragment extends CarFragment {
                 ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
 
                 int color = mClockLeft.getIndicatorColor();
-
+                // if rays on, turn off everything else.
+                // it doesn't look too efficient at the moment, but that's to prevent the theme from adding an indicator to the rays.
                 if (raysOn) {
                     mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
+
+                    mRayLeft.setIndicator(Indicator.Indicators.NoIndicator);
+                    mRayRight.setIndicator(Indicator.Indicators.NoIndicator);
+                    mRayCenter.setIndicator(Indicator.Indicators.NoIndicator);
+
+                    mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+                    mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+                    mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+
+                    mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+                    mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+                    mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+
+
+
                 } else  if (color==-14575885) {
                     //if theme has transparent indicator color, give clocks a custom image indicator
                     //todo: do this on other fragments as well
@@ -612,16 +628,22 @@ public class DashboardFragment extends CarFragment {
         // this can't be done during setup, because then the ambientColor is probably not received yet.
         if (ambientOn) {
             String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
-
+            //ambientColor = "#FF0000"; // for testing purposes
             if (ambientColor != null) {
                 if (raysOn) {
-                    mRayLeft.setRayColor(Color.parseColor(ambientColor));
-                    mRayCenter.setRayColor(Color.parseColor(ambientColor));
-                    mRayRight.setRayColor(Color.parseColor(ambientColor));
+                   mRayLeft.setLowSpeedColor(Color.parseColor(ambientColor));
+                   mRayCenter.setLowSpeedColor(Color.parseColor(ambientColor));
+                   mRayRight.setLowSpeedColor(Color.parseColor(ambientColor));
+                    mRayLeft.setMediumSpeedColor(Color.parseColor(ambientColor));
+                    mRayCenter.setMediumSpeedColor(Color.parseColor(ambientColor));
+                    mRayRight.setMediumSpeedColor(Color.parseColor(ambientColor));
                 } else {
                     mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
                     mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
                     mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
+                    mClockLeft.setIndicatorLightColor(Color.parseColor(ambientColor));
+                    mClockCenter.setIndicatorLightColor(Color.parseColor(ambientColor));
+                    mClockRight.setIndicatorLightColor(Color.parseColor(ambientColor));
                 }
             }
         }

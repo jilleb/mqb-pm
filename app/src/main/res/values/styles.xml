@@ -327,6 +327,8 @@
         <item name="sv_indicatorColor">#FFFFFFFF</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_speedometerWidth">4dp</item>
+
 
     </style>
 

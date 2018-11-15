@@ -290,7 +290,10 @@
         app:sv_unitTextColor="@android:color/transparent"
         app:sv_withEffects="false"
         app:sv_withTremble="false"
-        app:sv_indicatorWidth="8dp"/>
+        app:sv_indicatorColor="@android:color/transparent"
+        app:sv_indicatorLightColor="@android:color/transparent"
+
+        />
 
     <com.github.anastr.speedviewlib.RaySpeedometer
         android:id="@+id/rayCenter"
