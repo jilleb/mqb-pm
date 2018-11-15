@@ -356,30 +356,18 @@ public class DashboardFragment extends CarFragment {
                     mClockLeft.setIndicator(imageIndicator);
                     mClockCenter.setIndicator(imageIndicator);
                     mClockRight.setIndicator(imageIndicator);
-                } else if (ambientOn) {
-                    String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
-
-                    if (ambientColor != null){
-                        mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
-                        mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
-                        mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
-                    }
                 }
 
                 // show value of the ticks
                 if (ticksOn){
-                    int tickNum = 10;
-                    int tickPad = 20;
+                    int tickNum = 5;
 
                     mClockLeft.setTickNumber(tickNum);
                     mClockLeft.setTextColor(Color.WHITE);
-                    mClockLeft.setTickPadding(tickPad);
                     mClockCenter.setTickNumber(tickNum);
                     mClockCenter.setTextColor(Color.WHITE);
-                    mClockCenter.setTickPadding(tickPad);
                     mClockRight.setTickNumber(tickNum);
                     mClockRight.setTextColor(Color.WHITE);
-                    mClockRight.setTickPadding(tickPad);
                 }
 
                 //initiating staging:
@@ -436,22 +424,11 @@ public class DashboardFragment extends CarFragment {
             mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
             mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
             mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
-
-            String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
-
-            if (ambientColor != null) {
-                mRayLeft.setRayColor(Color.parseColor(ambientColor));
-                mRayCenter.setRayColor(Color.parseColor(ambientColor));
-                mRayRight.setRayColor(Color.parseColor(ambientColor));
-            }
-
         } else {
             mRayLeft.setVisibility(View.INVISIBLE);
             mRayCenter.setVisibility(View.INVISIBLE);
             mRayRight.setVisibility(View.INVISIBLE);
         }
-
-
 
         //show texts and backgrounds for max/min, according to the setting
         if (maxOn) {   // show the minmax values
@@ -632,13 +609,20 @@ public class DashboardFragment extends CarFragment {
 
 
         // get ambient color, change color of some elements to match the ambient color.
+        // this can't be done during setup, because then the ambientColor is probably not received yet.
         if (ambientOn) {
             String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
 
             if (ambientColor != null) {
-                mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
-                mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
-                mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
+                if (raysOn) {
+                    mRayLeft.setRayColor(Color.parseColor(ambientColor));
+                    mRayCenter.setRayColor(Color.parseColor(ambientColor));
+                    mRayRight.setRayColor(Color.parseColor(ambientColor));
+                } else {
+                    mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
+                    mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
+                    mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
+                }
             }
         }
 
