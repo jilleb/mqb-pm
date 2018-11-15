@@ -693,7 +693,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "test":
                 label.setText("");
-                value.setText("0");
+                value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
             case "batteryVoltage":
@@ -718,22 +718,22 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "vehicleSpeed":
                 label.setText(R.string.kmh);
-                value.setText("0");
+                value.setText("-");
                 label.setBackgroundResource(0);
                 break;
             case "engineSpeed":
                 label.setText(R.string.rpm);
-                value.setText("0");
+                value.setText("-");
                 label.setBackgroundResource(0);
                 break;
             case "currentOutputPower":
                 label.setText(R.string.kw);
-                value.setText("0");
+                value.setText("-");
                 label.setBackgroundResource(0);
                 break;
             case "currentTorque":
                 label.setText(R.string.nm);
-                value.setText("0");
+                value.setText("-");
                 label.setBackgroundResource(0);
                 break;
             case "gearboxOilTemperature":
