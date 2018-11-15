@@ -830,7 +830,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "nav.Altitude":
                 icon.setText("");
-                clock.setUnit("meters");
+                clock.setUnit("m"); //still needs a unit and translation, but haven't found where the unit gets this unit yet.
                 clock.setMinMaxSpeed(0, 360);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
                 clock.setBackgroundResource(emptyBackgroundResource);
