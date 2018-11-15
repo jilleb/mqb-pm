@@ -55,6 +55,7 @@
         <item>@string/cycleConsumptionSecondary</item>
         <item>@string/tankLevelPrimary</item>
         <item>@string/tankLevelSecondary</item>
+        <item>@string/navAltitude</item>
         <item>@string/test</item>
     </string-array>
 
@@ -87,6 +88,7 @@
         <item>cycleConsumptionSecondary</item>
         <item>tankLevelPrimary</item>
         <item>tankLevelSecondary</item>
+        <item>nav.Altitude</item>
         <item>test</item>
 
     </string-array>
@@ -113,12 +115,13 @@
         <item>@string/powermeter</item>
         <item>@string/EcoHMI_Score.AvgShort</item>
         <item>@string/EcoHMI_Score.AvgTrip</item>
+        <item>@string/navAltitude</item>
         <item>@string/test</item>
 
         <!--
         todo:
-        nav_Altitude
         nav_Heading
+        sound_Volume
         -->
 
     </string-array>
@@ -146,6 +149,7 @@
         <item>powermeter</item>
         <item>EcoHMI_Score.AvgShort</item>
         <item>EcoHMI_Score.AvgTrip</item>
+        <item>nav.Altitude</item>
         <item>test</item>
     </string-array>
 
@@ -266,7 +270,6 @@
             radio_Tuner
         sound_BalanceFader
         sound_BalanceFaderSetup
-        sound_Volume
         sound_VolumeSetup
 
     Todo: Clocks or dashboard elements can be made for most of these
@@ -328,6 +331,5 @@
     hevOperationMode (sustaining)
 
      -->
-    <string name="tankLevelPrimary">Tank level (primary)</string>
-    <string name="tankLevelSecondary">Tank level (secondary)</string>
+
 </resources>

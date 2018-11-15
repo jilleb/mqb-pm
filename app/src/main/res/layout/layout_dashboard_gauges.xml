@@ -388,7 +388,8 @@
         app:sv_unitTextColor="@android:color/transparent"
         app:sv_unitTextSize="0dp"
         app:sv_unitUnderSpeedText="false"
-        app:sv_withIndicatorLight="false" />
+        app:sv_withIndicatorLight="false"
+        />
 
       <com.github.anastr.speedviewlib.SpeedView
         android:id="@+id/dial_MaxCenter"

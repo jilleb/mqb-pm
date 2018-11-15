@@ -118,6 +118,9 @@
     <string name="cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
     <string name="vehicleSpeed_alternative">Car speed (different source)</string>
     <string name="test">Test (random, does not get data from the car)</string>
+    <string name="tankLevelPrimary">Tank level (primary)</string>
+    <string name="tankLevelSecondary">Tank level (secondary)</string>
+    <string name="navAltitude">Altitude</string>
 
     <string name="author">This application was made by:</string>
     <string name="basedon">Based on the SDK and demo App by:</string>

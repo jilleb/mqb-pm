@@ -701,6 +701,11 @@ public class DashboardFragment extends CarFragment {
                 value.setText(R.string.zeroVolt);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
+            case "nav.Altitude":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
+                break;
             case "coolantTemperature":
                 label.setText("");
                 value.setText(R.string.zeroCelcius);
@@ -791,6 +796,7 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_ecoavg));
                 break;
+
         }
     }
 
@@ -806,6 +812,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("");
                 icon.setBackgroundResource(0);
                 break;
+
             case "test":
                 icon.setText("");
                 clock.setUnit(getString(R.string.testing));
@@ -818,6 +825,14 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit(getString(R.string.kmh));
                 clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
+                clock.setBackgroundResource(emptyBackgroundResource);
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                break;
+            case "nav.Altitude":
+                icon.setText("");
+                clock.setUnit("meters");
+                clock.setMinMaxSpeed(0, 360);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
@@ -1045,6 +1060,7 @@ public class DashboardFragment extends CarFragment {
                 // all data that can be put on the clock without further modification
                 case "engineSpeed":
                 case "batteryVoltage":
+                case "nav.Altitude":
                 case "lateralAcceleration":
                 case "longitudinalAcceleration":
                 case "yawRate":
@@ -1205,10 +1221,12 @@ public class DashboardFragment extends CarFragment {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mVehicleSpeed));
                         label.setText(speedUnit);
                     }
+                // values that don't need any decimals
                 case "engineSpeed":
-                    Float mEngineSpeed = (Float) mLastMeasurements.get(queryElement);
-                    if (mEngineSpeed != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mEngineSpeed));
+                case "nav.Altitude":
+                    Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
+                    if (mNoDecimalValue != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mNoDecimalValue));
                     }
                     break;
 
