@@ -154,6 +154,9 @@ public class MainCarActivity extends CarActivity {
             case "Outrun":
                 setTheme(R.style.AppTheme_Outrun);
                 break;
+            case "Minimalistic":
+                setTheme(R.style.AppTheme_Minimalistic);
+                break;
             case "Test":
                 setTheme(R.style.AppTheme_Testing);
                 break;

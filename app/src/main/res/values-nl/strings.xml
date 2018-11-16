@@ -122,7 +122,7 @@
     <string name="basedon">Gebaseerd op de SDK en demo App door:</string>
     <string name="thanks">Speciale dank aan:</string>
     <string name="drivesafely">Rijd voorzichtig.</string>
-    <string name="testing">testen</string>
+    <string name="testing">Random</string>
     <string name="pref_font">Lettertype</string>
     <string name="odometerunknown">onbekend</string>
     <string name="km_format">%.1f km</string>

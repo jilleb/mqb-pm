@@ -160,6 +160,9 @@ public class GraphFragment extends CarFragment {
             case "skoda":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
                 break;
+            case "larabie":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "Larabie.ttf");
+                break;
         }
 
         mClockGraph = rootView.findViewById(R.id.dial_graph);

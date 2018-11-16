@@ -204,6 +204,9 @@ public class DashboardFragment extends CarFragment {
             case "skoda":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
                 break;
+            case "larabie":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "Larabie.ttf");
+                break;
         }
         //-------------------------------------------------------------
         //find all elements needed
@@ -407,7 +410,7 @@ public class DashboardFragment extends CarFragment {
                             mRayRight.speedPercentTo(0,1000);
 
                         }
-                    }, 1000);   //5 seconds
+                    }, 1000);
                     stagingDone=true;
 
                 }

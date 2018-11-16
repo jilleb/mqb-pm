@@ -137,6 +137,8 @@
     <string name="frutiger">Frutiger</string>
     <string name="vw3">VW Digit</string>
     <string name="skoda">Skoda</string>
+    <string name="larabie">Larabie</string>
+
 
     <string name="odometerunknown">unknown</string>
     <string name="km_format">%.1f km</string>

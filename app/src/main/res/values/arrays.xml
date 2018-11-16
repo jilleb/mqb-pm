@@ -22,6 +22,7 @@
         <item>Audi TT</item>
         <item>Tesla</item>
         <item>Outrun</item>
+        <item>Minimalistic</item>
         <item>Test</item>
     </string-array>
 
@@ -181,6 +182,7 @@
         <item>@string/frutiger</item>
 
         <item>@string/skoda</item>
+        <item>@string/larabie</item>
     </string-array>
 
 
@@ -193,6 +195,7 @@
         <item>audi</item>
         <item>frutiger</item>
         <item>skoda</item>
+        <item>larabie</item>
     </string-array>
 
 

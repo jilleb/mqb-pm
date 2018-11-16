@@ -143,6 +143,9 @@ public class MeasurementsFragment extends CarFragment {
             case "skoda":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Skoda.ttf");
                 break;
+            case "larabie":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "Larabie.ttf");
+                break;
         }
 
 
