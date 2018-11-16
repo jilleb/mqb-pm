@@ -1,5 +1,4 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
@@ -10,20 +9,13 @@
         <item name="actionModeBackground">@color/accent</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
-    <style name="AppTheme.Car" parent="@style/CarAppTheme" tools:ignore="PrivateResource">
-
-    </style>
-
+    <style name="AppTheme.Car" parent="@style/CarAppTheme" tools:ignore="PrivateResource"></style>
     <style name="AppTheme.Seat" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_seat</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_seat</item>
@@ -38,10 +30,7 @@
         <item name="sv_indicatorColor">#fecc00</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-
-
     </style>
-
     <style name="AppTheme.SeatCupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_seat2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
@@ -56,11 +45,7 @@
         <item name="sv_indicatorColor">#fecc00</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-
-
     </style>
-
-
     <style name="AppTheme.Cupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_cupra</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_cupra</item>
@@ -75,10 +60,7 @@
         <item name="sv_indicatorColor">#FFFFFFFF</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-
-
     </style>
-
     <style name="AppTheme.SeatMQB" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_seatmqb</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
@@ -93,11 +75,7 @@
         <item name="sv_indicatorColor">#00ff00</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-
-
     </style>
-
-
     <style name="AppTheme.VolkswagenGTI" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
@@ -108,8 +86,6 @@
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
-
-
     <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_mib2p</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_mib2p</item>
@@ -125,7 +101,6 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
-
     <style name="AppTheme.VolkswagenR" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
@@ -135,10 +110,7 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
         <item name="sv_tickPadding">20dp</item>
-
-
     </style>
-
     <style name="AppTheme.VolkswagenGTE" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
@@ -148,9 +120,7 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
     <style name="AppTheme.Tesla" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_tesla</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_tesla</item>
@@ -160,9 +130,7 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/aqua</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
     <style name="AppTheme.AudiTT" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_audi4</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi4</item>
@@ -172,10 +140,7 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_audi4</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
-
     <style name="AppTheme.Volkswagen" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
@@ -185,10 +150,7 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/white</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
-
     <style name="AppTheme.Outrun" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_outrun</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_outrun</item>
@@ -198,10 +160,7 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_outrun</item>
         <item name="themedNeedleColor">@color/pink</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
-
     <style name="AppTheme.Audi" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_audi</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi</item>
@@ -211,9 +170,7 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_audi</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
     <style name="AppTheme.AudiVC" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_audi3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi3</item>
@@ -223,10 +180,7 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_audi3</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
-
     <style name="AppTheme.AudiRS" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_audi2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi2</item>
@@ -236,9 +190,7 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_audi2</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
     <style name="AppTheme.Clubsport" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_vw2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_vw2</item>
@@ -248,10 +200,7 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw2</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">0dp</item>
-
-
     </style>
-
     <style name="AppTheme.Skoda" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_skoda</item>
         <item name="themedDialBackground">@drawable/dial_background_skoda</item>
@@ -267,10 +216,7 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_speedometerWidth">40dp</item>
-
-
     </style>
-
     <style name="AppTheme.SkodavRS" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_skoda2</item>
         <item name="themedDialBackground">@drawable/dial_background_skoda2</item>
@@ -286,11 +232,7 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_speedometerWidth">40dp</item>
-
-
     </style>
-
-
     <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_skoda3</item>
@@ -300,10 +242,7 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_skoda3</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
-
-
     </style>
-
     <style name="AppTheme.SkodaOneApp" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_skodaone</item>
         <item name="themedDialBackground">@drawable/dial_background_empty_skodaone</item>
@@ -319,10 +258,7 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_speedometerWidth">400dp</item>
-
-
     </style>
-
     <style name="AppTheme.Testing" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_test</item>
         <item name="themedDialBackground">@drawable/dial_background_test</item>
@@ -332,10 +268,7 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_test</item>
         <item name="themedNeedleColor">@color/green</item>
         <item name="sv_tickPadding">20dp</item>
-
     </style>
-
-
     <style name="AppTheme.Minimalistic" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_minimal</item>
@@ -351,8 +284,6 @@
         <item name="sv_indicatorWidth">3dp</item>
         <item name="sv_tickPadding">15dp</item>
     </style>
-
-
     <style name="AppTheme.Car.Speedometer">
         <item name="android:padding">25dp</item>
         <item name="sv_lowSpeedPercent">85</item>
@@ -375,8 +306,6 @@
         <item name="sv_lowSpeedColor">@android:color/transparent</item>
         <item name="sv_tickRotation">false</item>
     </style>
-
-
     <style name="AppTheme.Car.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_vertical_material_car</item>
         <item name="android:minWidth">@dimen/progress_bar_height_material_car</item>

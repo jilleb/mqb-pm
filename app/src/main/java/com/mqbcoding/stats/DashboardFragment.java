@@ -1168,7 +1168,7 @@ public class DashboardFragment extends CarFragment {
             }
             // get the speed from the clock and have the high-visibility rays move to this speed as well
             float tempValue = dial.getSpeed();
-            visray.speedTo(tempValue,500);
+            visray.speedTo(tempValue);
 
             // update the max clocks and text
             Float maxValue = clockmax.getSpeed();

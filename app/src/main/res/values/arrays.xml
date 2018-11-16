@@ -323,11 +323,6 @@
         done: unitTemperature
         unitTimeFormat
 
-    *lighting*
-    Car_ambienceLightColour_ColourHMI
-    Car_ambienceLightColour_ColourSRGB      - could be used to have a dynamic theme, based on the current ambient color. maybe make a needle that has variable color or something
-
-
     *Other data elements, found om 13/2, still need to be categorized:
     torqueDistribution
     refillVolume
