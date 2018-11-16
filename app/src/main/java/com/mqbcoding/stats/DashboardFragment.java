@@ -704,7 +704,7 @@ public class DashboardFragment extends CarFragment {
                 value.setText(R.string.zeroVolt);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
-            case "nav.Altitude":
+            case "Nav.Altitude":
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
@@ -831,7 +831,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
-            case "nav.Altitude":
+            case "Nav.Altitude":
                 icon.setText("");
                 clock.setUnit("m"); //still needs a unit and translation, but haven't found where the unit gets this unit yet.
                 clock.setMinMaxSpeed(0, 360);
@@ -1063,7 +1063,7 @@ public class DashboardFragment extends CarFragment {
                 // all data that can be put on the clock without further modification
                 case "engineSpeed":
                 case "batteryVoltage":
-                case "nav.Altitude":
+                case "Nav.Altitude":
                 case "lateralAcceleration":
                 case "longitudinalAcceleration":
                 case "yawRate":
@@ -1226,7 +1226,7 @@ public class DashboardFragment extends CarFragment {
                     }
                 // values that don't need any decimals
                 case "engineSpeed":
-                case "nav.Altitude":
+                case "Nav.Altitude":
                     Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
                     if (mNoDecimalValue != null) {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mNoDecimalValue));

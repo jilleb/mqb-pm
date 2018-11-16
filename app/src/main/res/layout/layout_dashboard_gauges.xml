@@ -210,7 +210,7 @@
 
     <TextView
         android:id="@+id/value_Element1"
-        android:layout_width="72dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -224,7 +224,7 @@
 
     <TextView
         android:id="@+id/value_Element2"
-        android:layout_width="72dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -238,7 +238,7 @@
 
     <TextView
         android:id="@+id/value_Element3"
-        android:layout_width="72dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
@@ -254,7 +254,7 @@
 
     <TextView
         android:id="@+id/value_Element4"
-        android:layout_width="72dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"

@@ -40,8 +40,6 @@
         <item name="sv_tickPadding">20dp</item>
 
 
-
-
     </style>
 
     <style name="AppTheme.SeatCupra" parent="AppTheme.Car">
@@ -63,7 +61,6 @@
     </style>
 
 
-
     <style name="AppTheme.Cupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_cupra</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_cupra</item>
@@ -78,7 +75,6 @@
         <item name="sv_indicatorColor">#FFFFFFFF</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-
 
 
     </style>
@@ -99,7 +95,6 @@
         <item name="sv_tickPadding">20dp</item>
 
 
-
     </style>
 
 
@@ -112,17 +107,12 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
-
-
-
-
     </style>
-
 
 
     <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_mib2p</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_mib2p</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_mib2p</item>
         <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_mib2p</item>
         <item name="sv_markColor">@android:color/transparent</item>
@@ -134,10 +124,6 @@
         <item name="sv_indicatorColor">#ffffff</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-
-
-
-
     </style>
 
     <style name="AppTheme.VolkswagenR" parent="AppTheme.Car">
@@ -149,8 +135,6 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
         <item name="sv_tickPadding">20dp</item>
-
-
 
 
     </style>
@@ -218,8 +202,6 @@
     </style>
 
 
-
-
     <style name="AppTheme.Audi" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_audi</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi</item>
@@ -243,7 +225,6 @@
         <item name="sv_tickPadding">20dp</item>
 
     </style>
-
 
 
     <style name="AppTheme.AudiRS" parent="AppTheme.Car">
@@ -288,8 +269,6 @@
         <item name="sv_speedometerWidth">40dp</item>
 
 
-
-
     </style>
 
     <style name="AppTheme.SkodavRS" parent="AppTheme.Car">
@@ -309,7 +288,6 @@
         <item name="sv_speedometerWidth">40dp</item>
 
 
-
     </style>
 
 
@@ -322,7 +300,6 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_skoda3</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
-
 
 
     </style>
@@ -376,8 +353,6 @@
     </style>
 
 
-
-
     <style name="AppTheme.Car.Speedometer">
         <item name="android:padding">25dp</item>
         <item name="sv_lowSpeedPercent">85</item>
@@ -400,8 +375,6 @@
         <item name="sv_lowSpeedColor">@android:color/transparent</item>
         <item name="sv_tickRotation">false</item>
     </style>
-
-
 
 
     <style name="AppTheme.Car.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
