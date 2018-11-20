@@ -42,7 +42,6 @@ public class DashboardFragment extends CarFragment {
     private Runnable mTimer1;
     private CarStatsClient mStatsClient;
     private WheelStateMonitor mWheelStateMonitor;
-    private ProgressBar mBrakeAccel;
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
     private Speedometer mClockMinLeft, mClockMinCenter, mClockMinRight;
@@ -280,8 +279,6 @@ public class DashboardFragment extends CarFragment {
         mTextMinRight.setTypeface(typeface);
         mTextMaxRight.setTypeface(typeface);
 
-        //additional dashboard elements:
-        mBrakeAccel = rootView.findViewById(R.id.brake_accel_view);
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
 
         //
@@ -493,12 +490,6 @@ public class DashboardFragment extends CarFragment {
             mClockMinRight.setVisibility(View.INVISIBLE);
         }
 
-        if (accelOn) {
-            mBrakeAccel.setVisibility(View.VISIBLE);
-        } else {
-            mBrakeAccel.setVisibility(View.INVISIBLE);
-        }
-
         //update!
         doUpdate();
 
@@ -533,7 +524,6 @@ public class DashboardFragment extends CarFragment {
         mClockLeft = null;
         mClockCenter = null;
         mClockRight = null;
-        mBrakeAccel = null;
         mSteeringWheelAngle = null;
         mValueElement1 = null;
         mValueElement2 = null;
@@ -622,11 +612,6 @@ public class DashboardFragment extends CarFragment {
         updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter);
         updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight);
 
-        //get brakePressure and accelPos, used in other dash views
-        Float brakePressure = (Float) mLastMeasurements.get("brakePressure");
-        Float accelPos = (Float) mLastMeasurements.get("acceleratorPosition");
-
-
         // get ambient color, change color of some elements to match the ambient color.
         // this can't be done during setup, because then the ambientColor is probably not received yet.
         if (ambientOn) {
@@ -651,21 +636,6 @@ public class DashboardFragment extends CarFragment {
             }
         }
 
-
-        if (brakePressure != null && accelPos != null && mBrakeAccel != null) {
-            float normalizedBrakePressure = Math.min(Math.max(0.0f, brakePressure / FULL_BRAKE_PRESSURE), 1.0f);
-            boolean isBraking = normalizedBrakePressure > 0;
-
-            mBrakeAccel.setRotation(isBraking ? 180.0f : 0.0f);
-
-            //noinspection deprecation
-            mBrakeAccel.setProgressTintList(ColorStateList.valueOf(getContext().getResources()
-                    .getColor(isBraking ? R.color.car_accent : R.color.car_primary)));
-            mBrakeAccel.setProgress((int) ((isBraking ? normalizedBrakePressure : accelPos) * 10000));
-
-        } else if (mBrakeAccel != null)   {
-            mBrakeAccel.setProgress(0);
-        }
 
         // wheel angle monitor
         Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");

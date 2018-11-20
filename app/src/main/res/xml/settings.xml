@@ -47,12 +47,6 @@
             android:title="@string/pref_highlowmarks" />
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="showAccelView"
-            android:summaryOff="@string/pref_accbrakeindicator_off"
-            android:summaryOn="@string/pref_accbrakeindicator_on"
-            android:title="@string/pref_accbrakeindicator" />
-        <CheckBoxPreference
-            android:defaultValue="false"
             android:key="ambientActive"
             android:summaryOff="@string/pref_ambient_off"
             android:summaryOn="@string/pref_ambient_on"
