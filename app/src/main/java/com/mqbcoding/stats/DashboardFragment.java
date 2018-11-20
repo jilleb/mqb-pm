@@ -990,6 +990,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("l/h");
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "currentConsumptionSecondary":
@@ -997,6 +998,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("l/h");
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
+                clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 break;
             case "cycleConsumptionPrimary":
@@ -1005,6 +1007,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 break;
             case "cycleConsumptionSecondary":
                 icon.setText("");
@@ -1012,6 +1015,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 break;
             case "tankLevelPrimary":
                 icon.setText("");
@@ -1019,6 +1023,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 break;
             case "tankLevelSecondary":
                 icon.setText("");
@@ -1026,6 +1031,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+                clock.setBackgroundResource(emptyBackgroundResource);
                 break;
         }
 
