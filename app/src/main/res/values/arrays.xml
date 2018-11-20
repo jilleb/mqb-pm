@@ -89,7 +89,7 @@
         <item>cycleConsumptionSecondary</item>
         <item>tankLevelPrimary</item>
         <item>tankLevelSecondary</item>
-        <item>Nav.Altitude</item>
+        <item>Nav_Altitude</item>
         <item>test</item>
 
     </string-array>
