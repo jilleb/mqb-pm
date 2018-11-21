@@ -118,6 +118,9 @@
         <item>@string/EcoHMI_Score.AvgTrip</item>
         <item>@string/navAltitude</item>
         <item>@string/test</item>
+        <item>Debug</item>
+
+
 
         <!--
         todo:
@@ -152,6 +155,7 @@
         <item>EcoHMI_Score.AvgTrip</item>
         <item>nav.Altitude</item>
         <item>test</item>
+        <item>debug</item>
     </string-array>
 
 

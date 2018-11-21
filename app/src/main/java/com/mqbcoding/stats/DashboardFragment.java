@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,7 +19,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
@@ -37,7 +35,6 @@ import java.util.Map;
 import java.util.Random;
 
 public class DashboardFragment extends CarFragment {
-    public static final float FULL_BRAKE_PRESSURE = 100.0f;
     private final String TAG = "DashboardFragment";
     private Runnable mTimer1;
     private CarStatsClient mStatsClient;
@@ -49,6 +46,7 @@ public class DashboardFragment extends CarFragment {
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
+    private String mDebugQuery;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
     private String pressureUnit, selectedFont;
     private float pressureFactor, speedFactor;
@@ -65,15 +63,17 @@ public class DashboardFragment extends CarFragment {
     private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits;
     private Boolean stagingDone = false;
-    private Boolean raysOn, maxOn, accelOn, maxMarksOn, ticksOn, ambientOn;
+    private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
-    private View.OnClickListener celebrateOnClickListener = new View.OnClickListener() {
+
+    private View.OnClickListener forceUpdate = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             postUpdate();
         }
     };
+
     private final CarStatsClient.Listener mCarStatsListener;
 
     {
@@ -171,10 +171,10 @@ public class DashboardFragment extends CarFragment {
         raysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
         maxOn = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
         maxMarksOn = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
-        accelOn = sharedPreferences.getBoolean("showAccelView", false); //true = show indicator, false = hide it
         selectedFont = sharedPreferences.getString("selectedFont", "segments");
         ticksOn = sharedPreferences.getBoolean("ticksActive",false); // if true, it will display the value of each of the ticks
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
+        mDebugQuery = sharedPreferences.getString("debugQuery","");
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -281,8 +281,8 @@ public class DashboardFragment extends CarFragment {
 
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
 
-        //
-        mClockCenter.setOnClickListener(celebrateOnClickListener);
+        //click the
+        mClockCenter.setOnClickListener(forceUpdate);
 
         //determine what data the user wants to have on the 4 data views
         mElement1Query = sharedPreferences.getString("selectedView1", "none");
@@ -428,7 +428,7 @@ public class DashboardFragment extends CarFragment {
         setupClock(mClockCQuery, mClockCenter, mIconClockC, mRayCenter, mClockMinCenter, mClockMaxCenter);
         setupClock(mClockRQuery, mClockRight, mIconClockR, mRayRight, mClockMinRight, mClockMaxRight);
 
-        //show high visible rays on, according to the setting
+            //show high visible rays on, according to the setting
 
 
         if (raysOn) {
@@ -552,6 +552,12 @@ public class DashboardFragment extends CarFragment {
         mRayLeft = null;
         mRayCenter = null;
         mRayRight = null;
+        mImageMaxLeft= null;
+        mImageMaxCenter= null;
+        mImageMaxRight= null;
+        mDebugQuery= null;
+        selectedFont= null;
+        pressureUnit= null;
 
         super.onDestroyView();
     }
@@ -615,7 +621,7 @@ public class DashboardFragment extends CarFragment {
         // get ambient color, change color of some elements to match the ambient color.
         // this can't be done during setup, because then the ambientColor is probably not received yet.
         if (ambientOn) {
-            String ambientColor = (String) mLastMeasurements.get("Car.ambienceLightColour.ColourSRGB");
+            String ambientColor = (String) mLastMeasurements.get("Car_ambienceLightColour.ColourSRGB");
             //ambientColor = "#FF0000"; // for testing purposes
             if (ambientColor != null) {
                 if (raysOn) {
@@ -669,12 +675,17 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
+            case "debug":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_spanner));
+                break;
             case "batteryVoltage":
                 label.setText("");
                 value.setText(R.string.zeroVolt);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
-            case "Nav.Altitude":
+            case "Nav_Altitude":
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
@@ -801,10 +812,10 @@ public class DashboardFragment extends CarFragment {
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
-            case "Nav.Altitude":
+            case "Nav_Altitude":
                 icon.setText("");
                 clock.setUnit("m"); //still needs a unit and translation, but haven't found where the unit gets this unit yet.
-                clock.setMinMaxSpeed(0, 360);
+                clock.setMinMaxSpeed(-100, 3000);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
@@ -1039,7 +1050,7 @@ public class DashboardFragment extends CarFragment {
                 // all data that can be put on the clock without further modification
                 case "engineSpeed":
                 case "batteryVoltage":
-                case "Nav.Altitude":
+                case "Nav_Altitude":
                 case "lateralAcceleration":
                 case "longitudinalAcceleration":
                 case "yawRate":
@@ -1176,6 +1187,12 @@ public class DashboardFragment extends CarFragment {
                     float randomValue = randFloat(0, 100);
                     value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), randomValue));
                     break;
+                case "debug":
+                    String mDebugvalue = (String) mLastMeasurements.get(mDebugQuery);
+                    if (mDebugvalue != null) {
+                        value.setText(mDebugvalue);
+                    }
+                    break;
                 case "batteryVoltage":
                     Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
                     if (mBatteryVoltage != null) {
@@ -1202,7 +1219,7 @@ public class DashboardFragment extends CarFragment {
                     }
                 // values that don't need any decimals
                 case "engineSpeed":
-                case "Nav.Altitude":
+                case "Nav_Altitude":
                     Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
                     if (mNoDecimalValue != null) {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mNoDecimalValue));

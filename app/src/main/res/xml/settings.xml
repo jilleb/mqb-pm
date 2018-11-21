@@ -139,6 +139,11 @@
             android:summaryOff="@string/psi"
             android:summaryOn="@string/bar"
             android:title="@string/pref_pressureunit" />
+        <EditTextPreference
+            android:defaultValue="Car_ambienceLightColour.ColourSRGB"
+            android:key="debugQuery"
+            android:summary="%s"
+            android:title="Debug query" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_notifications_category_title">
         <CheckBoxPreference
