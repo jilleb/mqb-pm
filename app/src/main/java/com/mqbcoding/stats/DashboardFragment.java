@@ -140,7 +140,6 @@ public class DashboardFragment extends CarFragment {
     }
 
 
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -172,13 +171,13 @@ public class DashboardFragment extends CarFragment {
         maxOn = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
         maxMarksOn = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
         selectedFont = sharedPreferences.getString("selectedFont", "segments");
-        ticksOn = sharedPreferences.getBoolean("ticksActive",false); // if true, it will display the value of each of the ticks
+        ticksOn = sharedPreferences.getBoolean("ticksActive", false); // if true, it will display the value of each of the ticks
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
-        mDebugQuery = sharedPreferences.getString("debugQuery","");
+        mDebugQuery = sharedPreferences.getString("debugQuery", "");
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
-        switch(selectedFont){
+        switch (selectedFont) {
             case "segments":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
                 break;
@@ -334,8 +333,8 @@ public class DashboardFragment extends CarFragment {
             public void onGlobalLayout() {
                 mClockLeft.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int clockSize = mClockLeft.getHeight();
-                if (clockSize==0){
-                    clockSize=250;
+                if (clockSize == 0) {
+                    clockSize = 250;
                 }
                 //this is to enable an image as indicator.
                 TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
@@ -365,8 +364,7 @@ public class DashboardFragment extends CarFragment {
                     mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
 
 
-
-                } else  if (color==-14575885) {
+                } else if (color == -14575885) {
                     //if theme has transparent indicator color, give clocks a custom image indicator
                     //todo: do this on other fragments as well
                     mClockLeft.setIndicator(imageIndicator);
@@ -375,7 +373,7 @@ public class DashboardFragment extends CarFragment {
                 }
 
                 // show value of the ticks
-                if (ticksOn){
+                if (ticksOn) {
                     int tickNum = 5;
 
                     mClockLeft.setTickNumber(tickNum);
@@ -387,28 +385,28 @@ public class DashboardFragment extends CarFragment {
                 }
 
                 //initiating staging:
-                if (!stagingDone){
+                if (!stagingDone) {
 
-                    mClockLeft.speedPercentTo(100,1000);
-                    mClockCenter.speedPercentTo(100,1000);
-                    mClockRight.speedPercentTo(100,1000);
-                    mRayLeft.speedPercentTo(100,1000);
-                    mRayCenter.speedPercentTo(100,1000);
-                    mRayRight.speedPercentTo(100,1000);
+                    mClockLeft.speedPercentTo(100, 1000);
+                    mClockCenter.speedPercentTo(100, 1000);
+                    mClockRight.speedPercentTo(100, 1000);
+                    mRayLeft.speedPercentTo(100, 1000);
+                    mRayCenter.speedPercentTo(100, 1000);
+                    mRayRight.speedPercentTo(100, 1000);
 
                     final Handler staging = new Handler();
                     staging.postDelayed(new Runnable() {
                         public void run() {
-                            mClockLeft.speedPercentTo(0,1000);
-                            mClockCenter.speedPercentTo(0,1000);
-                            mClockRight.speedPercentTo(0,1000);
-                            mRayLeft.speedPercentTo(0,1000);
-                            mRayCenter.speedPercentTo(0,1000);
-                            mRayRight.speedPercentTo(0,1000);
+                            mClockLeft.speedTo(0, 1000);
+                            mClockCenter.speedTo(0, 1000);
+                            mClockRight.speedTo(0, 1000);
+                            mRayLeft.speedTo(0, 1000);
+                            mRayCenter.speedTo(0, 1000);
+                            mRayRight.speedTo(0, 1000);
 
                         }
                     }, 1000);
-                    stagingDone=true;
+                    stagingDone = true;
 
                 }
             }
@@ -428,7 +426,7 @@ public class DashboardFragment extends CarFragment {
         setupClock(mClockCQuery, mClockCenter, mIconClockC, mRayCenter, mClockMinCenter, mClockMaxCenter);
         setupClock(mClockRQuery, mClockRight, mIconClockR, mRayRight, mClockMinRight, mClockMaxRight);
 
-            //show high visible rays on, according to the setting
+        //show high visible rays on, according to the setting
 
 
         if (raysOn) {
@@ -552,12 +550,12 @@ public class DashboardFragment extends CarFragment {
         mRayLeft = null;
         mRayCenter = null;
         mRayRight = null;
-        mImageMaxLeft= null;
-        mImageMaxCenter= null;
-        mImageMaxRight= null;
-        mDebugQuery= null;
-        selectedFont= null;
-        pressureUnit= null;
+        mImageMaxLeft = null;
+        mImageMaxCenter = null;
+        mImageMaxRight = null;
+        mDebugQuery = null;
+        selectedFont = null;
+        pressureUnit = null;
 
         super.onDestroyView();
     }
@@ -603,7 +601,7 @@ public class DashboardFragment extends CarFragment {
         }
 
         //wait until staging is done before displaying any data on the clocks.
-        if (!stagingDone){
+        if (!stagingDone) {
             return;
         }
         //update each of the elements:
@@ -625,9 +623,9 @@ public class DashboardFragment extends CarFragment {
             //ambientColor = "#FF0000"; // for testing purposes
             if (ambientColor != null) {
                 if (raysOn) {
-                   mRayLeft.setLowSpeedColor(Color.parseColor(ambientColor));
-                   mRayCenter.setLowSpeedColor(Color.parseColor(ambientColor));
-                   mRayRight.setLowSpeedColor(Color.parseColor(ambientColor));
+                    mRayLeft.setLowSpeedColor(Color.parseColor(ambientColor));
+                    mRayCenter.setLowSpeedColor(Color.parseColor(ambientColor));
+                    mRayRight.setLowSpeedColor(Color.parseColor(ambientColor));
                     mRayLeft.setMediumSpeedColor(Color.parseColor(ambientColor));
                     mRayCenter.setMediumSpeedColor(Color.parseColor(ambientColor));
                     mRayRight.setMediumSpeedColor(Color.parseColor(ambientColor));
@@ -1037,8 +1035,8 @@ public class DashboardFragment extends CarFragment {
             pressureFactor = 1f;
 
             String temperatureUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
-            if (temperatureUnit==null){
-                temperatureUnit ="°";
+            if (temperatureUnit == null) {
+                temperatureUnit = "°";
             }
 
             switch (query) {
@@ -1072,7 +1070,7 @@ public class DashboardFragment extends CarFragment {
                         dial.speedTo(clockValue);
                     }
                     dial.setUnit(temperatureUnit);
-                // pressures
+                    // pressures
                 case "absChargingAirPressure":
                 case "relChargingAirPressure":
                     if (clockValue != null) {
@@ -1102,7 +1100,7 @@ public class DashboardFragment extends CarFragment {
                         float valuePercent = clockValue * 100;
                         dial.speedTo(valuePercent);
                     }
-                 break;
+                    break;
                 // specific consumption data with specific consumption units
                 // todo: maybe it's better to remove setting the unit from updateclock, but do it on setupclock
                 case "currentConsumptionPrimary":
@@ -1158,17 +1156,21 @@ public class DashboardFragment extends CarFragment {
             visray.speedTo(tempValue);
 
             // update the max clocks and text
-            Float maxValue = clockmax.getSpeed();
-            if (tempValue > maxValue) {
-                clockmax.setSpeedAt(tempValue);
-                textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
-            }
+            if (stagingDone) {
+                Float maxValue = clockmax.getSpeed();
+                Float minValue = clockmin.getSpeed();
 
-            // update the min clocks and text
-            Float minValue = clockmin.getSpeed();
-            if (tempValue < minValue) {
-                clockmin.setSpeedAt(tempValue);
-                textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
+                if (tempValue > maxValue) {
+                    clockmax.setSpeedAt(tempValue);
+                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
+                }
+
+
+                    // update the min clocks and text
+                if (tempValue < minValue) {
+                    clockmin.setSpeedAt(tempValue);
+                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
+                }
             }
         }
     }
@@ -1206,7 +1208,7 @@ public class DashboardFragment extends CarFragment {
                 case "gearboxOilTemperature":
                 case "outsideTemperature":
                     Float mTemperature = (Float) mLastMeasurements.get(queryElement);
-                    if (mTemperature!= null) {
+                    if (mTemperature != null) {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mTemperature));
                     }
                     break;
@@ -1217,7 +1219,7 @@ public class DashboardFragment extends CarFragment {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mVehicleSpeed));
                         label.setText(speedUnit);
                     }
-                // values that don't need any decimals
+                    // values that don't need any decimals
                 case "engineSpeed":
                 case "Nav_Altitude":
                     Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
@@ -1240,7 +1242,7 @@ public class DashboardFragment extends CarFragment {
                     Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
                     String currentGear = (String) mLastMeasurements.get("currentGear");
                     String recommendedGear = (String) mLastMeasurements.get("recommendedGear");
-                    String gearText="-";
+                    String gearText = "-";
 
                     if (parkingBrake != null && parkingBrake) {
                         value.setTextColor(Color.WHITE);
@@ -1255,7 +1257,7 @@ public class DashboardFragment extends CarFragment {
                         if (recommendedGear.equals(currentGear) || recommendedGear.equals("NoRecommendation")) {
                             value.setTextColor(Color.WHITE);
                             gearText = convGear(currentGear);
-                        } else if (!recommendedGear.equals(currentGear)){
+                        } else if (!recommendedGear.equals(currentGear)) {
                             value.setTextColor(Color.RED);
                             gearText = (convGear(currentGear) + "▶" + convGear(recommendedGear));
                         }
@@ -1312,11 +1314,6 @@ public class DashboardFragment extends CarFragment {
             }
         }
     }
-
-
-
-
-
 
 
 }

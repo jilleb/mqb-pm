@@ -105,7 +105,7 @@ public class CarStatsLogger implements CarStatsClient.Listener {
                 Map<String, Object> o = new HashMap<>();
                 o.put("timestamp", JSON_DATE_FORMAT.format(date));
                 for (Map.Entry<String, Object> measurement: values.entrySet()) {
-                    String key = measurement.getKey().replaceAll("[^a-zA-Z0-9]", "_");
+                    String key = measurement.getKey().replaceAll("[^a-zA-Z0-9.]", "_");
                     o.put(key, measurement.getValue());
                 }
                 mLogWriter.write(mGson.toJson(o));
