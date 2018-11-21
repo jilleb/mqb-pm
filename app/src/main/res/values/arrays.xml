@@ -57,6 +57,7 @@
         <item>@string/tankLevelPrimary</item>
         <item>@string/tankLevelSecondary</item>
         <item>@string/navAltitude</item>
+        <item>@string/navHeading</item>
         <item>@string/test</item>
     </string-array>
 
@@ -90,6 +91,7 @@
         <item>tankLevelPrimary</item>
         <item>tankLevelSecondary</item>
         <item>Nav_Altitude</item>
+        <item>Nav_Heading</item>
         <item>test</item>
 
     </string-array>
@@ -117,14 +119,14 @@
         <item>@string/EcoHMI_Score.AvgShort</item>
         <item>@string/EcoHMI_Score.AvgTrip</item>
         <item>@string/navAltitude</item>
+        <item>@string/navHeading</item>
         <item>@string/test</item>
-        <item>Debug</item>
+        <item>@string/debug</item>
 
 
 
         <!--
         todo:
-        nav_Heading
         sound_Volume
         -->
 
@@ -153,7 +155,8 @@
         <item>powermeter</item>
         <item>EcoHMI_Score.AvgShort</item>
         <item>EcoHMI_Score.AvgTrip</item>
-        <item>nav.Altitude</item>
+        <item>Nav_Altitude</item>
+        <item>Nav_Heading</item>
         <item>test</item>
         <item>debug</item>
     </string-array>
@@ -334,4 +337,6 @@
 
      -->
 
+    <string name="navHeading">Heading</string>
+    <string name="debug">Debug query</string>
 </resources>

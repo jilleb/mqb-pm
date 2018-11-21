@@ -34,6 +34,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
+import static com.github.anastr.speedviewlib.components.Indicators.Indicator.Indicators.HalfLineIndicator;
+
 public class DashboardFragment extends CarFragment {
     private final String TAG = "DashboardFragment";
     private Runnable mTimer1;
@@ -347,6 +349,8 @@ public class DashboardFragment extends CarFragment {
                 // if rays on, turn off everything else.
                 // it doesn't look too efficient at the moment, but that's to prevent the theme from adding an indicator to the rays.
                 if (raysOn) {
+                    // todo: move this to setupClock
+
                     mClockLeft.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockCenter.setIndicator(Indicator.Indicators.NoIndicator);
                     mClockRight.setIndicator(Indicator.Indicators.NoIndicator);
@@ -355,10 +359,11 @@ public class DashboardFragment extends CarFragment {
                     mRayRight.setIndicator(Indicator.Indicators.NoIndicator);
                     mRayCenter.setIndicator(Indicator.Indicators.NoIndicator);
 
+                    //make indicatorlight color transparent if you don't need it:
                     mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
                     mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
                     mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-
+//
                     mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
                     mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
                     mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
@@ -688,6 +693,11 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
                 break;
+            case "Nav_Heading":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_heading));
+                break;
             case "coolantTemperature":
                 label.setText("");
                 value.setText(R.string.zeroCelcius);
@@ -788,6 +798,23 @@ public class DashboardFragment extends CarFragment {
         int emptyBackgroundResource = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
+        TypedArray typedArray2 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedStopWatchBackground});
+        int swBackgroundResource = typedArray2.getResourceId(0, 0);
+        typedArray2.recycle();
+
+        TypedArray typedArray3 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
+        int needleResource = typedArray3.getResourceId(0, 0);
+        typedArray3.recycle();
+
+        int clockSize = clock.getHeight();
+        if (clockSize == 0) {
+            clockSize = 250;
+        }
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), needleResource, clockSize, clockSize);
+
+
+
+
         switch (queryClock) {
             case "none":
                 icon.setText("");
@@ -817,6 +844,33 @@ public class DashboardFragment extends CarFragment {
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_altitude));
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                break;
+            case "Nav_Heading": // this is a compass
+                icon.setText("");
+                clock.setUnit("°"); //still needs a unit and translation, but haven't found where the unit gets this unit yet.
+                clock.setMarkColor(Color.parseColor("#00FFFFFF"));
+
+                clock.setMinMaxSpeed(0, 360);
+                ray.setMinMaxSpeed(0, 360);
+                min.setMinMaxSpeed(0, 360);
+                max.setMinMaxSpeed(0, 360);
+
+                //set the degrees so it functions as a circle
+                clock.setStartDegree(270);
+                clock.setEndDegree(630);
+
+                ray.setStartDegree(270);
+                ray.setEndDegree(630);
+                min.setStartDegree(270);
+                min.setEndDegree(630);
+                max.setStartDegree(270);
+                max.setEndDegree(630);
+
+
+                clock.setBackgroundResource(swBackgroundResource);
+                icon.setBackground(getContext().getDrawable(R.drawable.ic_heading));
+                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+
                 break;
             case "engineSpeed":
                 icon.setText("");
@@ -1030,7 +1084,7 @@ public class DashboardFragment extends CarFragment {
         } else {
 
             Float clockValue = (Float) mLastMeasurements.get(query);
-            float randomClockVal = randFloat(-100, 200);
+            float randomClockVal = randFloat(0, 360);
             speedFactor = 1f;
             pressureFactor = 1f;
 
@@ -1046,6 +1100,7 @@ public class DashboardFragment extends CarFragment {
                 case "none":    // none cannot happen currently
                     break;
                 // all data that can be put on the clock without further modification
+                case "Nav_Heading":
                 case "engineSpeed":
                 case "batteryVoltage":
                 case "Nav_Altitude":
@@ -1221,6 +1276,7 @@ public class DashboardFragment extends CarFragment {
                     }
                     // values that don't need any decimals
                 case "engineSpeed":
+                case "Nav_Heading":
                 case "Nav_Altitude":
                     Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
                     if (mNoDecimalValue != null) {
