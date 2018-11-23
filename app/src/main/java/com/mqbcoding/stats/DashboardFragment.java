@@ -378,8 +378,16 @@ public class DashboardFragment extends CarFragment {
                 }
 
                 // show value of the ticks
+          //      int tickNum = 3;
+           //     int markColor = mClockLeft.getMarkColor();
+            //    Log.i(TAG, "markcolor"+ markColor);
+//
+  //              if (markColor==-1){
+    //                tickNum = 9;
+      //          }
+
                 if (ticksOn) {
-                    int tickNum = 5;
+                    int tickNum = 9;
 
                     mClockLeft.setTickNumber(tickNum);
                     mClockLeft.setTextColor(Color.WHITE);
@@ -825,7 +833,7 @@ public class DashboardFragment extends CarFragment {
             case "test":
                 icon.setText("");
                 clock.setUnit(getString(R.string.testing));
-                clock.setMinMaxSpeed(-100, 200);
+                clock.setMinMaxSpeed(0, 360);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;

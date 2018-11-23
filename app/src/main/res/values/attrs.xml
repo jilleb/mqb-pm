@@ -8,5 +8,4 @@
     <attr name="themedStopWatchBackground" format="reference" />
     <attr name="themedNeedleColor" format="reference" />
 
-
 </resources>

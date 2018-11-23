@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.apps.auto.sdk.CarActivity;
 import com.google.android.apps.auto.sdk.CarUiController;
@@ -26,6 +27,7 @@ public class MainCarActivity extends CarActivity {
     static final String MENU_MEASUREMENTS = "measurements";
     static final String MENU_GRAPH = "graph";
     private static final String TAG = "MainCarActivity";
+
 
 
     // static final String MENU_DEBUG_LOG = "log";
@@ -115,17 +117,11 @@ public class MainCarActivity extends CarActivity {
             case "Cupra Division":
                 setTheme(R.style.AppTheme_Cupra);
                 break;
-            case "Tesla":
-                setTheme(R.style.AppTheme_Tesla);
-                break;
             case "Audi TT":
                 setTheme(R.style.AppTheme_AudiTT);
                 break;
             case "Seat":
                 setTheme(R.style.AppTheme_Seat);
-                break;
-            case "MQB Coding":
-                setTheme(R.style.AppTheme_SeatMQB);
                 break;
             case "Skoda":
                 setTheme(R.style.AppTheme_Skoda);
@@ -145,14 +141,8 @@ public class MainCarActivity extends CarActivity {
             case "Audi Virtual Cockpit":
                 setTheme(R.style.AppTheme_AudiVC);
                 break;
-            case "Audi RS":
-                setTheme(R.style.AppTheme_AudiRS);
-                break;
             case "Clubsport":
                 setTheme(R.style.AppTheme_Clubsport);
-                break;
-            case "Outrun":
-                setTheme(R.style.AppTheme_Outrun);
                 break;
             case "Minimalistic":
                 setTheme(R.style.AppTheme_Minimalistic);
@@ -165,6 +155,8 @@ public class MainCarActivity extends CarActivity {
         Log.d(TAG, "Set theme: " + selectedTheme);
 
         setContentView(R.layout.activity_car_main);
+
+        
 
 
         CarUiController carUiController = getCarUiController();

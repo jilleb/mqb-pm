@@ -16,12 +16,13 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
     <style name="AppTheme.Car" parent="@style/CarAppTheme" tools:ignore="PrivateResource"></style>
+
     <style name="AppTheme.Seat" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_seat</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks_seat</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_seat</item>
         <item name="themedCarBackground">@drawable/background_incar_seat</item>
         <item name="themedNeedle">@drawable/needle_seat</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat</item>
         <item name="themedNeedleColor">@color/yellow</item>
         <item name="sv_withIndicatorLight">true</item>
@@ -29,7 +30,7 @@
         <item name="sv_indicator">HalfLineIndicator</item>
         <item name="sv_indicatorColor">#fecc00</item>
         <item name="sv_indicatorWidth">4dp</item>
-        <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickPadding">15dp</item>
     </style>
     <style name="AppTheme.SeatCupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_seat2</item>
@@ -61,27 +62,12 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
-    <style name="AppTheme.SeatMQB" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_seatmqb</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
-        <item name="themedCarBackground">@drawable/background_incar_seat2</item>
-        <item name="sv_markColor">@android:color/transparent</item>
-        <item name="themedNeedle">@drawable/needle_seatmqb</item>
-        <item name="themedStopWatchBackground">@drawable/sw_background_seat2</item>
-        <item name="themedNeedleColor">@color/green</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">@color/green</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#00ff00</item>
-        <item name="sv_indicatorWidth">4dp</item>
-        <item name="sv_tickPadding">20dp</item>
-    </style>
     <style name="AppTheme.VolkswagenGTI" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedCarBackground">@drawable/background_incar_vw</item>
         <item name="themedNeedle">@drawable/needle_vw_red</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
@@ -102,67 +88,48 @@
         <item name="sv_tickPadding">20dp</item>
     </style>
     <style name="AppTheme.VolkswagenR" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedCarBackground">@drawable/background_incar_vw2</item>
         <item name="themedNeedle">@drawable/needle_vw_blue</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
     <style name="AppTheme.VolkswagenGTE" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedCarBackground">@drawable/background_incar_gte</item>
         <item name="themedNeedle">@drawable/needle_vw_blue</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
-    <style name="AppTheme.Tesla" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_tesla</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_tesla</item>
-        <item name="themedCarBackground">@drawable/background_incar_tesla</item>
-        <item name="themedNeedle">@drawable/needle_tesla</item>
-        <item name="sv_markColor">@android:color/white</item>
-        <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
-        <item name="themedNeedleColor">@color/aqua</item>
-        <item name="sv_tickPadding">20dp</item>
-    </style>
+
     <style name="AppTheme.AudiTT" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_audi4</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks_audi4</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi4</item>
         <item name="themedCarBackground">@drawable/background_incar_plain</item>
         <item name="themedNeedle">@drawable/needle_audi4</item>
-        <item name="sv_markColor">@color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_audi4</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
     <style name="AppTheme.Volkswagen" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_empty</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_vw_white</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/white</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
-    <style name="AppTheme.Outrun" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_outrun</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_outrun</item>
-        <item name="themedCarBackground">@drawable/background_incar_outrun</item>
-        <item name="themedNeedle">@drawable/needle_outrun</item>
-        <item name="sv_markColor">@android:color/white</item>
-        <item name="themedStopWatchBackground">@drawable/dial_background_outrun</item>
-        <item name="themedNeedleColor">@color/pink</item>
-        <item name="sv_tickPadding">20dp</item>
-    </style>
     <style name="AppTheme.Audi" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_audi</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks_audi</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi</item>
         <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_audi_red</item>
@@ -172,22 +139,12 @@
         <item name="sv_tickPadding">20dp</item>
     </style>
     <style name="AppTheme.AudiVC" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_audi3</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_audi3</item>
         <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_audi3</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_audi3</item>
-        <item name="themedNeedleColor">@color/red</item>
-        <item name="sv_tickPadding">20dp</item>
-    </style>
-    <style name="AppTheme.AudiRS" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_audi2</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_audi2</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw3</item>
-        <item name="themedNeedle">@drawable/needle_audi_red</item>
-        <item name="sv_markColor">@android:color/white</item>
-        <item name="themedStopWatchBackground">@drawable/sw_background_audi2</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
@@ -235,20 +192,20 @@
     </style>
     <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
-        <item name="themedDialBackground">@drawable/dial_background_skoda3</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks_skoda3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_skoda3</item>
         <item name="themedNeedle">@drawable/needle_skoda_2</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_skoda3</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
     </style>
     <style name="AppTheme.SkodaOneApp" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_skodaone</item>
-        <item name="themedDialBackground">@drawable/dial_background_empty_skodaone</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks_skodaone</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_skodaone</item>
         <item name="themedNeedle">@drawable/needle_mib2p</item>
-        <item name="sv_markColor">@android:color/white</item>
+        <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_skodaone</item>
         <item name="themedNeedleColor">@color/green</item>
         <item name="sv_withIndicatorLight">true</item>
@@ -284,6 +241,7 @@
         <item name="sv_indicatorWidth">3dp</item>
         <item name="sv_tickPadding">15dp</item>
     </style>
+
     <style name="AppTheme.Car.Speedometer">
         <item name="android:padding">25dp</item>
         <item name="sv_lowSpeedPercent">85</item>
