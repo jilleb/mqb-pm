@@ -1,6 +1,7 @@
 package com.mqbcoding.stats;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
@@ -92,8 +93,13 @@ public class MainCarActivity extends CarActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
+
+        //todo: make signal and other icons optional:
+       // Boolean signalOn = sharedPreferences.getBoolean("signalActive", false);
+
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
+
 
         switch (selectedTheme) {
             case "VW GTI":
@@ -155,8 +161,18 @@ public class MainCarActivity extends CarActivity {
         Log.d(TAG, "Set theme: " + selectedTheme);
 
         setContentView(R.layout.activity_car_main);
+       // getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
-        
+
+        // todo: make background user selectable:
+       // View someView = findViewById(R.id.fragment_container);
+
+        // Find the root view
+        //View root = someView.getRootView();
+
+        // Set the background
+        //root.setBackground(someView.getContext().getDrawable(R.drawable.background_incar_outrun));
+
 
 
         CarUiController carUiController = getCarUiController();
@@ -164,6 +180,7 @@ public class MainCarActivity extends CarActivity {
         //force night mode
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
 
+        //todo: make these user options
         //hide all stuff you don't want to see on your screen
         //      carUiController.getStatusBarController().hideBatteryLevel();
         //     carUiController.getStatusBarController().hideMicButton();
@@ -209,10 +226,10 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-       mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
-               .setTitle(getString(R.string.activity_carstatus_title))
-               .setType(MenuItem.Type.ITEM)
-               .build());
+//       mainMenu.addMenuItem(MENU_CARDATA, new MenuItem.Builder()
+//               .setTitle(getString(R.string.activity_carstatus_title))
+//               .setType(MenuItem.Type.ITEM)
+//               .build());
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))

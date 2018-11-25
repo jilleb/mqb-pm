@@ -128,6 +128,7 @@ public class StopwatchFragment extends CarFragment {
 
 
 
+//todo: make stopwatch clocks identical in styling, to the dashboardfragment
 
         mStopwatch = rootView.findViewById(R.id.dialMeasStopWatch);
         mStopwatch.setSpeedTextTypeface(typeface);
