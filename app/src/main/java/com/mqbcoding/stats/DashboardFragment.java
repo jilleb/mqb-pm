@@ -377,15 +377,6 @@ public class DashboardFragment extends CarFragment {
                     mClockRight.setIndicator(imageIndicator);
                 }
 
-                // show value of the ticks
-          //      int tickNum = 3;
-           //     int markColor = mClockLeft.getMarkColor();
-            //    Log.i(TAG, "markcolor"+ markColor);
-//
-  //              if (markColor==-1){
-    //                tickNum = 9;
-      //          }
-
                 if (ticksOn) {
                     int tickNum = 9;
 

@@ -139,5 +139,13 @@
     <string name="pref_ambient_off">Don\'t use ambient colors</string>
     <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
     <string name="pref_ambient">Ambient colors</string>
+    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
+    <string name="pref_showclock_summary">Show current time in header</string>
+    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
+    <string name="pref_showmic_summary">Show microphone icon in header</string>
+    <string name="pref_showconnectivity_title">Connectivity icon</string>
+    <string name="pref_showclock_title">Time display</string>
+    <string name="pref_showsbatterylevel_title">Battery level</string>
+    <string name="pref_showmic_title">Microphone icon</string>
 
 </resources>

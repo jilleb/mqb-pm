@@ -95,7 +95,11 @@ public class MainCarActivity extends CarActivity {
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
 
         //todo: make signal and other icons optional:
-       // Boolean signalOn = sharedPreferences.getBoolean("signalActive", false);
+        Boolean connectivityOn  = sharedPreferences.getBoolean("connectivityActive", true);
+        Boolean batteryOn       = sharedPreferences.getBoolean("batterylevelActive", true);
+        Boolean clockOn         = sharedPreferences.getBoolean("clockActive", true);
+        Boolean micOn           = sharedPreferences.getBoolean("micActive", true);
+
 
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
@@ -180,11 +184,23 @@ public class MainCarActivity extends CarActivity {
         //force night mode
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
 
-        //todo: make these user options
-        //hide all stuff you don't want to see on your screen
-        //      carUiController.getStatusBarController().hideBatteryLevel();
-        //     carUiController.getStatusBarController().hideMicButton();
-        //    carUiController.getStatusBarController().hideConnectivityLevel();
+        // Show or hide Android Auto icons in the header
+        //signal:
+        if (!connectivityOn) {
+            carUiController.getStatusBarController().hideConnectivityLevel();
+        }
+        // battery
+        if (!batteryOn) {
+            carUiController.getStatusBarController().hideBatteryLevel();
+        }
+        // clock
+        if (!clockOn) {
+            carUiController.getStatusBarController().hideClock();
+        }
+        //microphone
+        if (!micOn) {
+            carUiController.getStatusBarController().hideMicButton();
+        }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
@@ -200,8 +216,6 @@ public class MainCarActivity extends CarActivity {
                 .detach(carfragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
-              //  .add(R.id.fragment_container, measurementsfragment, FRAGMENT_MEASUREMENTS)
-              //  .detach(measurementsfragment)
                 .add(R.id.fragment_container, cardatafragment, FRAGMENT_CARDATA)
                 .detach(cardatafragment)
                 .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)

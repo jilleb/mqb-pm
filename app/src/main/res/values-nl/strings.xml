@@ -134,5 +134,13 @@
     <string name="pref_ambient_on">Gebruik ambient kleuren, indien beschikbaar</string>
     <string name="pref_ambient">Ambient kleuren</string>
     <string name="service_notification_text">Logging is actief</string>
+    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
+    <string name="pref_showclock_summary">Show current time in header</string>
+    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
+    <string name="pref_showmic_summary">Show microphone icon in header</string>
+    <string name="pref_showconnectivity_title">Connectivity icon</string>
+    <string name="pref_showclock_title">Time display</string>
+    <string name="pref_showsbatterylevel_title">Battery level</string>
+    <string name="pref_showmic_title">Microphone icon</string>
 
 </resources>

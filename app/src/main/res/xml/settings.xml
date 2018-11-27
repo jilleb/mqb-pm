@@ -144,17 +144,26 @@
             android:key="debugQuery"
             android:summary="%s"
             android:title="Debug query" />
-        <!--todo: make clock and signal and stuff optional
         <EditTextPreference
             android:defaultValue="false"
-            android:key="signalActive"
-            android:summary="@pref_showsignalstrength_summary"
-            android:title="@string/pref_showsignalstrength_title" />
+            android:key="connectivityActive"
+            android:summary="@string/pref_showconnectivity_summary"
+            android:title="@string/pref_showconnectivity_title" />
         <EditTextPreference
             android:defaultValue="false"
             android:key="clockActive"
-            android:summary="@pref_showclock_summary"
-            android:title="@string/pref_showclock_title" />-->
+            android:summary="@string/pref_showclock_summary"
+            android:title="@string/pref_showclock_title" />
+        <EditTextPreference
+            android:defaultValue="false"
+            android:key="batterylevelActive"
+            android:summary="@string/pref_showbatterylevel_summary"
+            android:title="@string/pref_showsbatterylevel_title" />
+        <EditTextPreference
+            android:defaultValue="false"
+            android:key="micActive"
+            android:summary="@string/pref_showmic_summary"
+            android:title="@string/pref_showmic_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_notifications_category_title">
         <CheckBoxPreference
