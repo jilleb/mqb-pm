@@ -43,6 +43,8 @@ public class MainCarActivity extends CarActivity {
 
     private static final int TEST_NOTIFICATION_ID = 1;
     private String mCurrentFragmentTag;
+    private Boolean connectivityOn, batteryOn, clockOn, micOn;
+
     private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
         @Override
         public void onMenuItemClicked(String name) {
@@ -93,13 +95,6 @@ public class MainCarActivity extends CarActivity {
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
-
-        //todo: make signal and other icons optional:
-        Boolean connectivityOn  = sharedPreferences.getBoolean("connectivityActive", true);
-        Boolean batteryOn       = sharedPreferences.getBoolean("batterylevelActive", true);
-        Boolean clockOn         = sharedPreferences.getBoolean("clockActive", true);
-        Boolean micOn           = sharedPreferences.getBoolean("micActive", true);
-
 
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
@@ -164,6 +159,11 @@ public class MainCarActivity extends CarActivity {
         }
         Log.d(TAG, "Set theme: " + selectedTheme);
 
+        connectivityOn  = sharedPreferences.getBoolean("connectivityActive",true);
+        batteryOn       = sharedPreferences.getBoolean("batterylevelActive", true);
+        clockOn         = sharedPreferences.getBoolean("clockActive", true);
+        micOn           = sharedPreferences.getBoolean("micActive", true);
+
         setContentView(R.layout.activity_car_main);
        // getWindow().getDecorView().setBackgroundColor(Color.WHITE);
 
@@ -186,20 +186,27 @@ public class MainCarActivity extends CarActivity {
 
         // Show or hide Android Auto icons in the header
         //signal:
-        if (!connectivityOn) {
-            carUiController.getStatusBarController().hideConnectivityLevel();
+        carUiController.getStatusBarController().hideConnectivityLevel();
+        carUiController.getStatusBarController().hideBatteryLevel();
+        carUiController.getStatusBarController().hideClock();
+        carUiController.getStatusBarController().hideMicButton();
+        carUiController.getStatusBarController().hideAppHeader();
+
+
+        if (connectivityOn) {
+            carUiController.getStatusBarController().showConnectivityLevel();
         }
         // battery
-        if (!batteryOn) {
-            carUiController.getStatusBarController().hideBatteryLevel();
+        if (batteryOn) {
+            carUiController.getStatusBarController().showBatteryLevel();
         }
         // clock
-        if (!clockOn) {
-            carUiController.getStatusBarController().hideClock();
+        if (clockOn) {
+            carUiController.getStatusBarController().showClock();
         }
         //microphone
-        if (!micOn) {
-            carUiController.getStatusBarController().hideMicButton();
+        if (micOn) {
+            carUiController.getStatusBarController().showMicButton();
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();

@@ -154,6 +154,7 @@
     <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
     <string name="pref_ambient">Ambient colors</string>
     <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
+    <string name="pref_headericons">Header icons</string>
 
 
 </resources>

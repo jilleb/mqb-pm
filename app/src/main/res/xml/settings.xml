@@ -142,26 +142,27 @@
         <EditTextPreference
             android:defaultValue="Car_ambienceLightColour.ColourSRGB"
             android:key="debugQuery"
-            android:summary="%s"
             android:title="Debug query" />
-        <EditTextPreference
-            android:defaultValue="false"
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_headericons">
+        <CheckBoxPreference
             android:key="connectivityActive"
+            android:defaultValue="false"
             android:summary="@string/pref_showconnectivity_summary"
             android:title="@string/pref_showconnectivity_title" />
-        <EditTextPreference
-            android:defaultValue="false"
+        <CheckBoxPreference
             android:key="clockActive"
+            android:defaultValue="false"
             android:summary="@string/pref_showclock_summary"
             android:title="@string/pref_showclock_title" />
-        <EditTextPreference
-            android:defaultValue="false"
+        <CheckBoxPreference
             android:key="batterylevelActive"
+            android:defaultValue="false"
             android:summary="@string/pref_showbatterylevel_summary"
             android:title="@string/pref_showsbatterylevel_title" />
-        <EditTextPreference
-            android:defaultValue="false"
+        <CheckBoxPreference
             android:key="micActive"
+            android:defaultValue="false"
             android:summary="@string/pref_showmic_summary"
             android:title="@string/pref_showmic_title" />
     </PreferenceCategory>
