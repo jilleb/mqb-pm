@@ -3,15 +3,15 @@
     <string name="app_name">Monitor výkonu pro VAG</string>
     <string name="format_temperatureF">%.0f°F</string>
     <string name="format_temperature">%.0f°</string>
-    <string name="car_service_name">Monitor výkonu</string>
+    <string name="app_car_service_name">Monitor výkonu</string>
     <string name="format_temperatureC">%.0f°C</string>
     <string name="format_volt">%.1fV</string>
     <string name="format_gforce">%.1fG</string>
     <string name="format_percent">%.1f</string>
-    <string name="degrees_format">%.1f°</string>
-    <string name="decimals">%.1f</string>
+    <string name="format_degrees">%.1f°</string>
+    <string name="format_decimals">%.1f</string>
     <string name="format_noDecimals">%.0f</string>
-    <string name="psi">psi</string>
+    <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
     <string name="format_volt0">0,0V</string>
     <string name="format_temperature0">0,0°</string>
@@ -34,10 +34,10 @@
     <string name="kick_uploads_nothing_to_do">Všechna data jsou odeslána.</string>
     <string name="kick_uploads_done">Odeslání dat naplánováno.</string>
     <string name="pref_bigquery_reupload_last_title">Znovu odeslat poslední log.</string>
-    <string name="bigquery_reupload_last_failed">Selhalo odeslání posledního logu.</string>
-    <string name="bigquery_reupload_last_ok">Opětovné odesílání dat.</string>
-    <string name="oil_notification_title">Teplota oleje</string>
-    <string name="oil_notification_text">Motorový olej dosáhl provozní teploty.</string>
+    <string name="pref_bigquery_reupload_last_failed">Selhalo odeslání posledního logu.</string>
+    <string name="pref_bigquery_reupload_last_ok">Opětovné odesílání dat.</string>
+    <string name="notification_oil_title">Teplota oleje</string>
+    <string name="notification_oil_text">Motorový olej dosáhl provozní teploty.</string>
     <string name="pref_oil_temp_threshold_title">Pracovní teplota oleje</string>
     <string name="pref_oil_temp_monitoring_title">Monitorování teploty oleje</string>
     <string name="pref_oil_temp_monitoring_summary">Oznámit dosažení provozní teploty oleje.</string>
@@ -50,7 +50,7 @@
     <string name="pref_stats_logging_not_available">Logování není dostupné: %1$s</string>
     <string name="pref_providers_category_title">Poskytovatel telemetrických dat</string>
     <string name="pref_list_providers_title">Seznam poskytovatelů</string>
-    <string name="providers">Poskytovatel telemetrických dat</string>
+    <string name="pref_providers">Poskytovatel telemetrických dat</string>
     <string name="pref_leftclock">Levý budík</string>
     <string name="pref_centerclock">Prostřední budík</string>
     <string name="pref_rightclock">Pravý budík</string>
@@ -70,11 +70,11 @@
     <string name="pref_highlowmarks_on">Minimální a maximální hodnoty jsou zobrazeny.</string>
     <string name="pref_highlowmarks_off">Minimální a maximální hodnoty nejsou zobrazeny.</string>
     <string name="pref_graphitem">Graf</string>
-    <string name="graphDelay">Rozlišení grafu</string>
+    <string name="pref_graphDelay">Rozlišení grafu</string>
     <string name="unit_volt">V</string>
     <string name="unit_g">G</string>
     <string name="unit_mph">mph</string>
-    <string name="rpm">ot.</string>
+    <string name="unit_rpm">ot.</string>
 
 
     <string name="element_none">Nepoužito</string>
@@ -111,30 +111,17 @@
     <string name="credits_author">Aplikaci vytvořil:</string>
     <string name="credits_basedon">Na základě SDK a demo aplikací od:</string>
     <string name="credits_thanks">Speciálně děkuji:</string>
-    <string name="drivesafely">Bezpečnou jízdu.</string>
+    <string name="credits_drivesafely">Bezpečnou jízdu.</string>
     <string name="testing">testování</string>
     <string name="activity_measurements_title">Měření</string>
     <string name="activity_stopwatch_title">Stopky</string>
     <string name="activity_graph_title">Grafy</string>
     <string name="activity_credits_title">O projektu</string>
     <string name="activity_main_title">Monitor výkonu</string>
-    <string name="activity_carstatus_title">Info o autě</string>
-    <string name="resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>
+    <string name="pref_resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>
     <string name="unknown">unknown</string>
-    <string name="km_format">%.1f km</string>
+    <string name="format_km">%.1f km</string>
     <string name="format_miles">%.1f miles</string>
-    <string name="pref_ticks_off">Don\'t display value of ticks</string>
     <string name="pref_ticks_on">Display value of ticks</string>
-    <string name="pref_ticks">Tick values</string>
-    <string name="pref_ambient_off">Don\'t use ambient colors</string>
-    <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
-    <string name="pref_ambient">Ambient colors</string>
-    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
-    <string name="pref_showclock_summary">Show current time in header</string>
-    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
-    <string name="pref_showmic_summary">Show microphone icon in header</string>
-    <string name="pref_showconnectivity_title">Connectivity icon</string>
-    <string name="pref_showclock_title">Time display</string>
-    <string name="pref_showsbatterylevel_title">Battery level</string>
-    <string name="pref_showmic_title">Microphone icon</string>`
+    `
 </resources>

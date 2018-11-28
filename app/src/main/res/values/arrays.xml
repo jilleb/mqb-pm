@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- List of themes, used in settings -->
+    <string-array name="Themes">
+        <item>VW</item>
+        <item>VW GTI</item>
+        <item>VW GTE</item>
+        <item>VW R</item>
+        <item>VW MIB2</item>
+        <item>Clubsport</item>
+        <item>Seat</item>
+        <item>Seat Cupra</item>
+        <item>Cupra Division</item>
+        <item>Skoda</item>
+        <item>Skoda vRS</item>
+        <item>Skoda ONE</item>
+        <item>Skoda Virtual Cockpit</item>
+        <item>Audi</item>
+        <item>Audi Virtual Cockpit</item>
+        <item>Audi TT</item>
+        <item>Minimalistic</item>
+        <item>Test</item>
+    </string-array>
+
+    <!-- Pressure units, used in settings-->
+
+    <!-- Names of Entries for clock data settings -->
+    <string-array name="ClockDataElementsEntries">
+        <item>@string/element_absChargingAirPressure</item>
+        <item>@string/element_relChargingAirPressure</item>
+        <item>@string/element_batteryVoltage</item>
+        <item>@string/element_coolantTemperature</item>
+        <item>@string/element_oilTemperature</item>
+        <item>@string/element_gearboxOilTemperature</item>
+        <item>@string/element_outsideTemperature</item>
+        <item>@string/element_vehicleSpeed</item>
+        <item>@string/element_engineSpeed</item>
+        <item>@string/element_lateralAcceleration</item>
+        <item>@string/element_longitudinalAcceleration</item>
+        <item>@string/element_yawRate</item>
+        <item>@string/element_wheelAngle</item>
+        <item>@string/element_acceleratorPosition</item>
+        <item>@string/element_brakePressure</item>
+        <item>@string/element_powermeter</item>
+        <item>@string/element_currentTorque</item>
+        <item>@string/element_currentOutputPower</item>
+        <item>@string/element_EcoHMI_Score.AvgShort</item>
+        <item>@string/element_EcoHMI_Score.AvgTrip</item>
+        <item>@string/element_currentConsumptionPrimary</item>
+        <item>@string/element_currentConsumptionSecondary</item>
+        <item>@string/element_cycleConsumptionPrimary</item>
+        <item>@string/element_cycleConsumptionSecondary</item>
+        <item>@string/element_tankLevelPrimary</item>
+        <item>@string/element_tankLevelSecondary</item>
+        <item>@string/element_navAltitude</item>
+        <item>@string/element_navHeading</item>
+        <item>@string/element_test</item>
+    </string-array>
+
+    <!-- Values/query strings for each of the Entries for clock data settings -->
+    <!-- These NEED TO be aligned with ClockDataElementsEntries!-->
+    <string-array name="ClockDataElementsValues">
+        <item>absChargingAirPressure</item>
+        <item>relChargingAirPressure</item>
+        <item>batteryVoltage</item>
+        <item>coolantTemperature</item>
+        <item>oilTemperature</item>
+        <item>gearboxOilTemperature</item>
+        <item>outsideTemperature</item>
+        <item>vehicleSpeed</item>
+        <item>engineSpeed</item>
+        <item>lateralAcceleration</item>
+        <item>longitudinalAcceleration</item>
+        <item>yawRate</item>
+        <item>wheelAngle</item>
+        <item>acceleratorPosition</item>
+        <item>brakePressure</item>
+        <item>powermeter</item>
+        <item>currentTorque</item>
+        <item>currentOutputPower</item>
+        <item>EcoHMI_Score.AvgShort</item>
+        <item>EcoHMI_Score.AvgTrip</item>
+        <item>currentConsumptionPrimary</item>
+        <item>currentConsumptionSecondary</item>
+        <item>cycleConsumptionPrimary</item>
+        <item>cycleConsumptionSecondary</item>
+        <item>tankLevelPrimary</item>
+        <item>tankLevelSecondary</item>
+        <item>Nav_Altitude</item>
+        <item>Nav_Heading</item>
+        <item>test</item>
+
+    </string-array>
+
+    <!-- Names of each of the Entries for dashboard elements settings -->
+    <string-array name="TextDataElementsEntries">
+        <item>@string/element_none</item>
+        <item>@string/element_batteryVoltage</item>
+        <item>@string/element_coolantTemperature</item>
+        <item>@string/element_oilTemperature</item>
+        <item>@string/element_gearboxOilTemperature</item>
+        <item>@string/element_outsideTemperature</item>
+        <item>@string/element_currentOutputPower</item>
+        <item>@string/element_currentTorque</item>
+        <item>@string/element_engineSpeed</item>
+        <item>@string/element_vehicleSpeed</item>
+        <item>@string/element_currentGear</item>
+        <item>@string/element_lateralAcceleration</item>
+        <item>@string/element_longitudinalAcceleration</item>
+        <item>@string/element_yawRate</item>
+        <item>@string/element_wheelAngle</item>
+        <item>@string/element_acceleratorPosition</item>
+        <item>@string/element_brakePressure</item>
+        <item>@string/element_powermeter</item>
+        <item>@string/element_EcoHMI_Score.AvgShort</item>
+        <item>@string/element_EcoHMI_Score.AvgTrip</item>
+        <item>@string/element_navAltitude</item>
+        <item>@string/element_navHeading</item>
+
+        <!--<item>@string/element_blinkingState</item>-->
+        <item>@string/element_navLongitude</item>
+        <item>@string/element_navLatitude</item>
+        <item>@string/element_navCity</item>
+        <item>@string/element_navState</item>
+        <item>@string/element_navCountry</item>
+        <item>@string/element_soundVolume</item>
+        <item>@string/element_radioStation</item>
+        <item>@string/element_radioText</item>
+        <item>@string/element_odometer</item>
+        <item>@string/element_tyreStateRR</item>
+        <item>@string/element_tyreStateRL</item>
+        <item>@string/element_tyreStateFR</item>
+        <item>@string/element_tyreStateFL</item>
+        <item>@string/element_VIN</item>
+
+
+        <item>@string/element_test</item>
+        <item>@string/element_debug</item>
+
+
+    </string-array>
+
+    <!-- Values/query strings for each of the Entries for dashboard elements settings -->
+    <!-- These NEED TO be aligned with TextDataElementsEntries!-->
+    <string-array name="TextDataElementsValues">
+        <item>none</item>
+        <item>batteryVoltage</item>
+        <item>coolantTemperature</item>
+        <item>oilTemperature</item>
+        <item>gearboxOilTemperature</item>
+        <item>outsideTemperature</item>
+        <item>currentOutputPower</item>
+        <item>currentTorque</item>
+        <item>engineSpeed</item>
+        <item>vehicleSpeed</item>
+        <item>currentGear</item>
+        <item>lateralAcceleration</item>
+        <item>longitudinalAcceleration</item>
+        <item>yawRate</item>
+        <item>wheelAngle</item>
+        <item>acceleratorPosition</item>
+        <item>brakePressure</item>
+        <item>powermeter</item>
+        <item>EcoHMI_Score.AvgShort</item>
+        <item>EcoHMI_Score.AvgTrip</item>
+        <item>Nav_Altitude</item>
+        <item>Nav_Heading</item>
+        <!--<item>blinkingState</item>-->
+        <item>Nav_CurrentPosition.Longitude</item>
+        <item>Nav_CurrentPosition.Latitude</item>
+        <item>Nav_CurrentPosition.City</item>
+        <item>Nav_CurrentPosition.State</item>
+        <item>Nav_CurrentPosition.Country</item>
+        <item>Sound_Volume</item>
+        <item>Radio_Tuner.Name</item>
+        <item>Radio_Text</item>
+        <item>totalDistance.distanceValue</item>
+        <item>tyreStates.stateRearRight</item>
+        <item>tyreStates.stateRearLeft</item>
+        <item>tyreStates.stateFrontRight</item>
+        <item>tyreStates.stateFrontLeft</item>
+        <item>vehicleIdenticationNumber.VIN</item>
+
+        <item>test</item>
+        <item>debug</item>
+    </string-array>
+
+
+    <string-array name="graphDelayEntries">
+        <item>0.1s</item>
+        <item>0.5s</item>
+        <item>1s</item>
+        <item>5s</item>
+        <item>60s</item>
+    </string-array>
+
+
+    <string-array name="graphDelayValues">
+        <item>100</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>5000</item>
+        <item>60000</item>
+    </string-array>
+
+    <string-array name="fontEntries">
+        <item>@string/font_segments</item>
+        <item>@string/font_vw</item>
+        <item>@string/font_vw2</item>
+        <item>@string/font_vw3</item>
+        <item>@string/font_seat</item>
+        <item>@string/font_audi</item>
+        <item>@string/font_frutiger</item>
+        <item>@string/font_skoda</item>
+        <item>@string/font_larabie</item>
+    </string-array>
+
+
+    <string-array name="fontyValues">
+        <item>segments</item>
+        <item>vw</item>
+        <item>vw2</item>
+        <item>vw3</item>
+        <item>seat</item>
+        <item>audi</item>
+        <item>frutiger</item>
+        <item>skoda</item>
+        <item>larabie</item>
+    </string-array>
+
+
+    <!--
+    Todo: add non-exlap data to the app:
+        SENSOR_TYPE_COMPASS,
+            SENSOR_TYPE_CAR_SPEED,
+            SENSOR_TYPE_RPM,
+            SENSOR_TYPE_ODOMETER,
+            SENSOR_TYPE_FUEL_LEVEL,
+            SENSOR_TYPE_PARKING_BRAKE,
+            SENSOR_TYPE_GEAR,
+            SENSOR_TYPE_NIGHT,
+            SENSOR_TYPE_LOCATION,
+            SENSOR_TYPE_DRIVING_STATUS,
+            SENSOR_TYPE_ENVIRONMENT,
+            SENSOR_TYPE_ACCELEROMETER,
+            SENSOR_TYPE_GPS_SATELLITE,
+            SENSOR_TYPE_GYROSCOPE,
+            SENSOR_TYPE_WHEEL_TICK_DISTANCE,
+            SENSOR_TYPE_ABS_ACTIVE,
+            SENSOR_TYPE_TRACTION_CONTROL_ACTIVE
+
+    The following is a list of all other exlap data elements currently known.
+
+    *Booleans*
+    todo: Add an optional icon area to the main dash view showing these items?
+        accIsActive
+        acceleratorKickDown
+        clutch (not_clutchedIn)
+        coastingIsActive (true, false)
+        displayNightDesign
+        driverIsBraking     <- pretty distracting data, maybe not add it.
+        fuelWarningPrimaryTank
+        fuelWarningSecondaryTank
+        clampState.clamp_S
+        clampState.clamp_15
+        clampState.clamp_X
+
+    *Text*
+        blinkingState (off, left, right)
+        car_vehicleInformation
+        car_vehicleState
+        context_States
+        engineTypes
+        fuelLevelState
+        gearTransmissionMode (position_B, position_D)
+        vehicleDate
+        vehicleIdenticationNumber
+        vehicleTime_hour(8.0), vehicleTime_minute (14.0)
+
+    Todo: add one of these and test if the unit actually forwards this data over exlap
+    *media-related*
+        mediaBrowser_FollowMode
+        mediaBrowser_ListState
+        mediaBrowser_Path
+        mediaBrowser_PathCurrentTrack
+        media_AvailableSources
+        media_PlayMode
+        media_PlayerState
+        media_Track
+        *radio*
+            radio_AMPresets
+            radio_AMStations
+            radio_AvailableBands
+            radio_DABEnsembles
+            radio_DABPresets
+            radio_DABServiceComponent
+            radio_DABServices
+            radio_FMPresets
+            radio_FMStations
+            radio_FrequencyRanges
+            radio_TA
+            radio_Text
+            radio_Tuner
+        sound_BalanceFader
+        sound_BalanceFaderSetup
+        sound_VolumeSetup
+
+    Todo: Clocks or dashboard elements can be made for most of these
+    *float*
+        *consumption data*
+            consumptionLongTermGeneral
+            consumptionShortTermGeneral
+            longTermConsumptionPrimary
+            longTermConsumptionSecondary
+            shortTermConsumptionPrimary
+            shortTermConsumptionSecondary
+        *other dashboard items*
+            maxChargingAirPressure  - use this to determine min/max for charging air pressure max.
+            maxOutputPower      - use this to determine min/max for output clock? Might not be wise, since the output might be higher than the car thinks in some cases
+            modCount
+            oilLevel
+            recuperationLevel
+            totalDistance
+
+    *navi data*
+        longitude
+
+        nav_CurrentPosition
+        nav_GeoPosition
+        Nav_GeoPosition_Latitude (52.003735)
+	    Nav_GeoPosition_Longitude (5.922491)
+        nav_GuidanceDestination
+        nav_GuidanceRemaining
+        nav_GuidanceState
+
+        nav_LastDestinations
+
+    *unknown data formats*
+        seatHeater_zone1
+        seatHeater_zone2
+        system_DayNight
+        system_HMISkin
+        system_Language
+        system_ProximityRecognition
+        system_RestrictionMode
+        system_UnitDistance
+        system_activeSource
+
+    Todo: read these during initialisation, so the app is set up in the same way as the car
+    *units*
+        unitDateFormat
+        unitPressure
+        done: unitTemperature
+        unitTimeFormat
+
+    *Other data elements, found om 13/2, still need to be categorized:
+    torqueDistribution
+    refillVolume
+    hevOperationMode (sustaining)
+
+     -->
+</resources>

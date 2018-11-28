@@ -31,11 +31,9 @@ public class MainCarActivity extends CarActivity {
 
     // static final String MENU_DEBUG_LOG = "log";
     // static final String MENU_DEBUG_TEST_NOTIFICATION = "test_notification";
-    private static final String FRAGMENT_CARDATA = "cardata";
     private static final String FRAGMENT_CAR = "dashboard";
     private static final String FRAGMENT_CREDITS = "credits";
     private static final String FRAGMENT_STOPWATCH = "stopwatch";
-    private static final String FRAGMENT_MEASUREMENTS = "measurements";
     private static final String FRAGMENT_GRAPH = "graph";
     private static final String CURRENT_FRAGMENT_KEY = "app_current_fragment";
 

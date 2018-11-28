@@ -322,7 +322,7 @@ public class GraphFragment extends CarFragment {
                 break;
             case "engineSpeed":
                 mClockIcon.setText("");
-                mClockGraph.setUnit(getContext().getText(R.string.rpm).toString());
+                mClockGraph.setUnit(getContext().getText(R.string.unit_rpm).toString());
                 mClockGraph.setMinMaxSpeed(0, 8000);
                 mClockGraph.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 mClockIcon.setBackgroundResource(0);

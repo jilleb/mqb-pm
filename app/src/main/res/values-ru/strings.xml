@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Performance Monitor for VAG</string>
-    <string name="car_service_name">Performance Monitor</string>
 
     <string name="format_temperature">%.0f°</string>
     <string name="format_temperatureF">%.0f°F</string>
@@ -8,17 +6,17 @@
     <string name="format_volt">%.1fV</string>
     <string name="format_gforce">%.1fG</string>
     <string name="format_percent">%.1f</string>
-    <string name="degrees_format">%.1f°</string>
+    <string name="format_degrees">%.1f°</string>
 
-    <string name="decimals">%.1f</string>
+    <string name="format_decimals">%.1f</string>
     <string name="format_noDecimals">%.0f</string>
 
-    <string name="psi">psi</string>
+    <string name="unit_psi">psi</string>
     <string name="unit_bar">бар</string>
     <string name="format_volt0">0,0V</string>
     <string name="format_temperature0">0,0°</string>
     <string name="unit_kmh">км/ч</string>
-    <string name="rpm">об. мин</string>
+    <string name="unit_rpm">об. мин</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_kw">KW</string>
     <string name="unit_g">G</string>
@@ -26,15 +24,6 @@
     <string name="unit_volt">V</string>
 
 
-    <string name="activity_settings_title">Performance Monitor Settings</string>
-    <string name="activity_graph_title">Graphs</string>
-    <string name="activity_credits_title">Credits</string>
-    <string name="activity_stopwatch_title">Stopwatch</string>
-    <string name="activity_main_title">Performance Monitor</string>
-    <string name="activity_carstatus_title">Car status</string>
-    <string name="activity_measurements_title">Measurements (Alpha test)</string>
-
-    <string name="resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
     <string name="pref_appearance">Оформление</string>
     <string name="pref_highvis">Высококонтрастные приборы</string>
     <string name="pref_theme">Тема</string>
@@ -50,10 +39,10 @@
     <string name="kick_uploads_nothing_to_do">Все выгрузки уже обработаны.</string>
     <string name="kick_uploads_done">Выгрузка запланирована.</string>
     <string name="pref_bigquery_reupload_last_title">Повторно выгрузить последний журнал</string>
-    <string name="bigquery_reupload_last_failed">Ошибка инициализации повторной выгрузки последнего журнала.</string>
-    <string name="bigquery_reupload_last_ok">Повторная выгрузка запланирована.</string>
-    <string name="oil_notification_title">Температура Масла</string>
-    <string name="oil_notification_text">Моторное масло достигло рабочей температуры.</string>
+    <string name="pref_bigquery_reupload_last_failed">Ошибка инициализации повторной выгрузки последнего журнала.</string>
+    <string name="pref_bigquery_reupload_last_ok">Повторная выгрузка запланирована.</string>
+    <string name="notification_oil_title">Температура Масла</string>
+    <string name="notification_oil_text">Моторное масло достигло рабочей температуры.</string>
     <string name="pref_oil_temp_threshold_title">Рабочая Температура Масла</string>
     <string name="pref_oil_temp_monitoring_title">Наблюдать за температурой моторного масла</string>
     <string name="pref_oil_temp_monitoring_summary">Показывать уведомление когда моторное масло достигнет рабочей температуры.</string>
@@ -66,7 +55,7 @@
     <string name="pref_stats_logging_not_available">Запись измерений не доступна: %1$s</string>
     <string name="pref_providers_category_title">Источники Данных</string>
     <string name="pref_list_providers_title">Список источников</string>
-    <string name="providers">Источники Данных</string>
+    <string name="pref_providers">Источники Данных</string>
     <string name="pref_leftclock">Левый прибор</string>
     <string name="pref_centerclock">Ценатральный прибор</string>
     <string name="pref_rightclock">Правый прибор</string>
@@ -86,60 +75,10 @@
     <string name="pref_highlowmarks_on">Высокое/низкое знаечения показано на приборах</string>
     <string name="pref_highlowmarks_off">Высокое/низкое знаечения не показано на приборах</string>
     <string name="pref_graphitem">График</string>
-    <string name="graphDelay">График частота</string>
+    <string name="pref_graphDelay">График частота</string>
 
-    <string name="element_none">None</string>
-    <string name="element_absChargingAirPressure">Turbo charge pressure (absolute)</string>
-    <string name="element_relChargingAirPressure">Turbo charge pressure (relative)</string>
-    <string name="element_batteryVoltage">Battery voltage</string>
-    <string name="element_coolantTemperature">Coolant temperature</string>
-    <string name="element_oilTemperature">Oil temperature</string>
-    <string name="element_gearboxOilTemperature">Gearbox temperature</string>
-    <string name="element_outsideTemperature">Outside temperature</string>
-    <string name="element_vehicleSpeed">Speed</string>
-    <string name="element_currentGear">Current gear</string>
-    <string name="element_recommendedGear">Recommended gear</string>
-    <string name="element_engineSpeed">RPM</string>
-    <string name="element_lateralAcceleration">Lateral G\'s</string>
-    <string name="element_longitudinalAcceleration">Longitudinal G\'s</string>
-    <string name="element_yawRate">Yaw rate</string>
-    <string name="element_wheelAngle">Wheel angle</string>
-    <string name="element_acceleratorPosition">Accelerator position</string>
-    <string name="element_brakePressure">Brake Pressure</string>
-    <string name="element_powermeter">Hybrid power</string>
-    <string name="element_currentTorque">Torque</string>
-    <string name="element_currentOutputPower">Output power</string>
-    <string name="element_EcoHMI_Score.AvgShort">Eco score</string>
-    <string name="element_EcoHMI_Score.AvgTrip">Eco score average</string>
-    <string name="element_currentConsumptionPrimary">Current consumption, primary fuel</string>
-    <string name="element_currentConsumptionSecondary">Current consumption, secondary fuel</string>
-    <string name="element_cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
-    <string name="element_cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
-    <string name="element_vehicleSpeed_alternative">Car speed (different source)</string>
-    <string name="element_test">Test (random, does not get data from the car)</string>
-
-    <string name="credits_author">This application was made by:</string>
-    <string name="credits_basedon">Based on the SDK and demo App by:</string>
-    <string name="credits_thanks">Special thanks to:</string>
-    <string name="drivesafely">Drive Safely.</string>
     <string name="testing">testing</string>
-    <string name="pref_font">Font</string>
-    <string name="unknown">unknown</string>
-    <string name="km_format">%.1f km</string>
+    <string name="format_km">%.1f km</string>
     <string name="format_miles">%.1f miles</string>
-    <string name="pref_ticks_off">Don\'t display value of ticks</string>
-    <string name="pref_ticks_on">Display value of ticks</string>
-    <string name="pref_ticks">Tick values</string>
-    <string name="pref_ambient_off">Don\'t use ambient colors</string>
-    <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
-    <string name="pref_ambient">Ambient colors</string>
-    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
-    <string name="pref_showclock_summary">Show current time in header</string>
-    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
-    <string name="pref_showmic_summary">Show microphone icon in header</string>
-    <string name="pref_showconnectivity_title">Connectivity icon</string>
-    <string name="pref_showclock_title">Time display</string>
-    <string name="pref_showsbatterylevel_title">Battery level</string>
-    <string name="pref_showmic_title">Microphone icon</string>
 
 </resources>

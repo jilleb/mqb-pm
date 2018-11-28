@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Leistungsmonitor für VAG</string>
-    <string name="car_service_name">Leistungsmonitor</string>
+    <string name="app_car_service_name">Leistungsmonitor</string>
 
     <string name="format_temperature">%.0f°</string>
     <string name="format_temperatureF">%.0f°F</string>
@@ -8,17 +8,17 @@
     <string name="format_volt">%.1fV</string>
     <string name="format_gforce">%.1fG</string>
     <string name="format_percent">%.1f</string>
-    <string name="degrees_format">%.1f°</string>
+    <string name="format_degrees">%.1f°</string>
 
-    <string name="decimals">%.1f</string>
+    <string name="format_decimals">%.1f</string>
     <string name="format_noDecimals">%.0f</string>
 
-    <string name="psi">psi</string>
+    <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
     <string name="format_volt0">0,0V</string>
     <string name="format_temperature0">0,0°</string>
     <string name="unit_kmh">km/h</string>
-    <string name="rpm">RPM</string>
+    <string name="unit_rpm">RPM</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_kw">KW</string>
     <string name="unit_g">G</string>
@@ -27,14 +27,8 @@
 
 
     <string name="activity_settings_title">Leistungsmonitor Einstellingen</string>
-    <string name="activity_graph_title">Graphs</string>
-    <string name="activity_credits_title">Credits</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
-    <string name="activity_main_title">Performance Monitor</string>
-    <string name="activity_carstatus_title">Car status</string>
-    <string name="activity_measurements_title">Measurements (Alpha test)</string>
 
-    <string name="resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
     <string name="pref_appearance">Ansicht</string>
     <string name="pref_highvis">Instrumente mit hoher Kontrast</string>
     <string name="pref_theme">Thema</string>
@@ -43,16 +37,15 @@
     <string name="pref_choose_account_title">Wähle Konto</string>
     <string name="pref_upload_to_bigquery_title">Logs hochladen nach BigQuery</string>
     <string name="pref_bigquery_project_id_title">Projekt ID</string>
-    <string name="pref_bigquery_dataset_title">Dataset Name</string>
     <string name="pref_bigquery_table_title">Tabellenname</string>
     <string name="pref_kick_uploads_title">Daten hochladen</string>
     <string name="kick_uploads_nothing_to_do">Alle Uploads sind fertig.</string>
     <string name="kick_uploads_done">Uploads geplant</string>
     <string name="pref_bigquery_reupload_last_title">Die letzte Datei erneut hochladen</string>
-    <string name="bigquery_reupload_last_failed">Fehler beim Hochladen.</string>
-    <string name="bigquery_reupload_last_ok">Re-Upload geplant.</string>
-    <string name="oil_notification_title">Öltemperatur</string>
-    <string name="oil_notification_text">Motoröl ist auf Temperatur.</string>
+    <string name="pref_bigquery_reupload_last_failed">Fehler beim Hochladen.</string>
+    <string name="pref_bigquery_reupload_last_ok">Re-Upload geplant.</string>
+    <string name="notification_oil_title">Öltemperatur</string>
+    <string name="notification_oil_text">Motoröl ist auf Temperatur.</string>
     <string name="pref_oil_temp_threshold_title">Gewünschte Öltemperatur</string>
     <string name="pref_oil_temp_monitoring_title">Öltemperatur Überwachen</string>
     <string name="pref_oil_temp_monitoring_summary">Benachrichtigung anzeigen, wenn das Motoröl Betriebstemperatur erreicht.</string>
@@ -65,7 +58,7 @@
     <string name="pref_stats_logging_not_available">Protokollierung nicht verfügbar: %1$s</string>
     <string name="pref_providers_category_title">Datenanbieter </string>
     <string name="pref_list_providers_title">Liste der Anbieter</string>
-    <string name="providers">Datenanbieter</string>
+    <string name="pref_providers">Datenanbieter</string>
     <string name="pref_leftclock">Instrument links</string>
     <string name="pref_centerclock">Instrument mitte</string>
     <string name="pref_rightclock">Instrument rechts</string>
@@ -85,60 +78,13 @@
     <string name="pref_highlowmarks_on">Zeige Min/Max-Wert Markierung</string>
     <string name="pref_highlowmarks_off">Keine Markierung</string>
     <string name="pref_graphitem">Diagramm</string>
-    <string name="graphDelay">Grafikfrequenz</string>
+    <string name="pref_graphDelay">Grafikfrequenz</string>
 
-    <string name="element_none">None</string>
-    <string name="element_absChargingAirPressure">Turbo charge pressure (absolute)</string>
-    <string name="element_relChargingAirPressure">Turbo charge pressure (relative)</string>
-    <string name="element_batteryVoltage">Battery voltage</string>
-    <string name="element_coolantTemperature">Coolant temperature</string>
-    <string name="element_oilTemperature">Oil temperature</string>
-    <string name="element_gearboxOilTemperature">Gearbox temperature</string>
-    <string name="element_outsideTemperature">Outside temperature</string>
-    <string name="element_vehicleSpeed">Speed</string>
-    <string name="element_currentGear">Current gear</string>
-    <string name="element_recommendedGear">Recommended gear</string>
-    <string name="element_engineSpeed">RPM</string>
-    <string name="element_lateralAcceleration">Lateral G\'s</string>
-    <string name="element_longitudinalAcceleration">Longitudinal G\'s</string>
-    <string name="element_yawRate">Yaw rate</string>
-    <string name="element_wheelAngle">Wheel angle</string>
-    <string name="element_acceleratorPosition">Accelerator position</string>
-    <string name="element_brakePressure">Brake Pressure</string>
-    <string name="element_powermeter">Hybrid power</string>
-    <string name="element_currentTorque">Torque</string>
-    <string name="element_currentOutputPower">Output power</string>
-    <string name="element_EcoHMI_Score.AvgShort">Eco score</string>
-    <string name="element_EcoHMI_Score.AvgTrip">Eco score average</string>
-    <string name="element_currentConsumptionPrimary">Current consumption, primary fuel</string>
-    <string name="element_currentConsumptionSecondary">Current consumption, secondary fuel</string>
-    <string name="element_cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
-    <string name="element_cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
-    <string name="element_vehicleSpeed_alternative">Car speed (different source)</string>
-    <string name="element_test">Test (random, does not get data from the car)</string>
-
-    <string name="credits_author">This application was made by:</string>
-    <string name="credits_basedon">Based on the SDK and demo App by:</string>
-    <string name="credits_thanks">Special thanks to:</string>
-    <string name="drivesafely">Drive Safely.</string>
     <string name="testing">testing</string>
     <string name="pref_font">Font</string>
-    <string name="unknown">unknown</string>
-    <string name="km_format">%.1f km</string>
+    <string name="format_km">%.1f km</string>
     <string name="format_miles">%.1f miles</string>
-    <string name="pref_ticks_off">Don\'t display value of ticks</string>
-    <string name="pref_ticks">Tick values</string>
-    <string name="pref_ambient_off">Don\'t use ambient colors</string>
-    <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
-    <string name="pref_ambient">Ambient colors</string>
-    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
-    <string name="pref_showclock_summary">Show current time in header</string>
-    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
-    <string name="pref_showmic_summary">Show microphone icon in header</string>
-    <string name="pref_showconnectivity_title">Connectivity icon</string>
-    <string name="pref_showclock_title">Time display</string>
-    <string name="pref_showsbatterylevel_title">Battery level</string>
-    <string name="pref_showmic_title">Microphone icon</string>
+    <string name="pref_bigquery_dataset_title">Dataset name</string>
 
 
 </resources>

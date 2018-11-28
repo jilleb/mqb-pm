@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -711,7 +712,7 @@ public class DashboardFragment extends CarFragment {
                 label.setBackgroundResource(0);
                 break;
             case "engineSpeed":
-                label.setText(R.string.rpm);
+                label.setText(R.string.unit_rpm);
                 value.setText("-");
                 label.setBackgroundResource(0);
                 break;
@@ -786,34 +787,56 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_ecoavg));
                 break;
             case "Nav_CurrentPosition.Longitude":
-                break;
             case "Nav_CurrentPosition.Latitude":
-                break;
             case "Nav_CurrentPosition.City":
-                break;
             case "Nav_CurrentPosition.State":
-                break;
             case "Nav_CurrentPosition.Country":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_world));
                 break;
             case "blinkingState":
                 break;
             case "Sound_Volume":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_volume));
                 break;
             case "Radio_Tuner.Name":
-                break;
             case "Radio_Text":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_radio));
                 break;
             case "totalDistance.distanceValue":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_odometer));
                 break;
             case "vehicleIdenticationNumber.VIN":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_vin));
                 break;
             case "tyreStates.stateRearRight":
+                label.setText(getString(R.string.label_tyreRR));
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateRearLeft":
+                label.setText(getString(R.string.label_tyreRL));
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateFrontRight":
+                label.setText(getString(R.string.label_tyreFR));
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateFrontLeft":
+                label.setText(getString(R.string.label_tyreFL));
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             default:
                 label.setText("");
@@ -901,7 +924,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "engineSpeed":
                 icon.setText("");
-                clock.setUnit(getString(R.string.rpm));
+                clock.setUnit(getString(R.string.unit_rpm));
                 clock.setMinMaxSpeed(0, 8000);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 icon.setBackgroundResource(0);
@@ -1244,14 +1267,14 @@ public class DashboardFragment extends CarFragment {
 
                 if (tempValue > maxValue) {
                     clockmax.setSpeedAt(tempValue);
-                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
+                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
                 }
 
 
                     // update the min clocks and text
                 if (tempValue < minValue) {
                     clockmin.setSpeedAt(tempValue);
-                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), tempValue));
+                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
                 }
             }
         }
@@ -1262,166 +1285,163 @@ public class DashboardFragment extends CarFragment {
 
         if (queryElement == null) {
             return;
-        } else {
-            switch (queryElement) {
-                case "none":
-                    value.setText("");
-                    break;
-                case "test":
-                    float randomValue = randFloat(0, 100);
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), randomValue));
-                    break;
-                case "debug":
-                    String mDebugvalue = (String) mLastMeasurements.get(mDebugQuery);
-                    if (mDebugvalue != null) {
-                        value.setText(mDebugvalue);
-                    }
-                    break;
-                case "batteryVoltage":
-                    Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
-                    if (mBatteryVoltage != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_volt).toString(), mBatteryVoltage));
-                    }
-                    break;
+        } else switch (queryElement) {
+            case "none":
+                value.setText("");
+                break;
+            case "test":
+                float randomValue = randFloat(0, 100);
+                value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), randomValue));
+                break;
+            case "debug":
+                String mDebugvalue = (String) mLastMeasurements.get(mDebugQuery);
+                if (mDebugvalue != null) {
+                    value.setText(mDebugvalue);
+                }
+                break;
+            case "batteryVoltage":
+                Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
+                if (mBatteryVoltage != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_volt).toString(), mBatteryVoltage));
+                }
+                break;
 
-                // all temperatures can be handled in the same way, the only difference is the queryElement string
-                case "coolantTemperature":
-                case "oilTemperature":
-                case "gearboxOilTemperature":
-                case "outsideTemperature":
-                    Float mTemperature = (Float) mLastMeasurements.get(queryElement);
-                    if (mTemperature != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), mTemperature));
-                    }
-                    break;
-                case "vehicleSpeed":
-                    Float mVehicleSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-                    String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-                    if (mVehicleSpeed != null && speedUnit != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mVehicleSpeed));
-                        label.setText(speedUnit);
-                    }
-                    // values that don't need any decimals
-                case "engineSpeed":
-                case "Nav_Heading":
-                case "Nav_Altitude":
-                    Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
-                    if (mNoDecimalValue != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mNoDecimalValue));
-                    }
-                    break;
+            // all temperatures can be handled in the same way, the only difference is the queryElement string
+            case "coolantTemperature":
+            case "oilTemperature":
+            case "gearboxOilTemperature":
+            case "outsideTemperature":
+                Float mTemperature = (Float) mLastMeasurements.get(queryElement);
+                if (mTemperature != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), mTemperature));
+                }
+                break;
+            case "vehicleSpeed":
+                Float mVehicleSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
+                String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
+                if (mVehicleSpeed != null && speedUnit != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), mVehicleSpeed));
+                    label.setText(speedUnit);
+                }
+                // values that don't need any decimals
+            case "engineSpeed":
+            case "Nav_Heading":
+            case "Nav_Altitude":
+                Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
+                if (mNoDecimalValue != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mNoDecimalValue));
+                }
+                break;
 
-                // Decimal values, without any specific modification:
-                case "currentOutputPower":
-                case "element_currentTorque":
-                    Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
-                    if (mCurrentDecimalValue != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentDecimalValue));
-                    }
-                    break;
+            // Decimal values, without any specific modification:
+            case "currentOutputPower":
+            case "element_currentTorque":
+                Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
+                if (mCurrentDecimalValue != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), mCurrentDecimalValue));
+                }
+                break;
 
-                case "currentGear":
-                    Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
-                    Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
-                    String currentGear = (String) mLastMeasurements.get("currentGear");
-                    String recommendedGear = (String) mLastMeasurements.get("recommendedGear");
-                    String gearText = "-";
+            case "currentGear":
+                Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
+                Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
+                String currentGear = (String) mLastMeasurements.get("currentGear");
+                String recommendedGear = (String) mLastMeasurements.get("recommendedGear");
+                String gearText = "-";
 
-                    if (parkingBrake != null && parkingBrake) {
+                if (parkingBrake != null && parkingBrake) {
+                    value.setTextColor(Color.WHITE);
+                    gearText = "P";
+                } else if (reverseGear != null && reverseGear) {
+                    value.setTextColor(Color.WHITE);
+                    gearText = "R";
+                } else if (currentGear == null) {
+                    value.setTextColor(Color.WHITE);
+                    gearText = "-";
+                } else if (currentGear != null && recommendedGear != null) {
+                    if (recommendedGear.equals(currentGear) || recommendedGear.equals("NoRecommendation")) {
                         value.setTextColor(Color.WHITE);
-                        gearText = "P";
-                    } else if (reverseGear != null && reverseGear) {
-                        value.setTextColor(Color.WHITE);
-                        gearText = "R";
-                    } else if (currentGear == null) {
-                        value.setTextColor(Color.WHITE);
-                        gearText = "-";
-                    } else if (currentGear != null && recommendedGear != null) {
-                        if (recommendedGear.equals(currentGear) || recommendedGear.equals("NoRecommendation")) {
-                            value.setTextColor(Color.WHITE);
-                            gearText = convGear(currentGear);
-                        } else if (!recommendedGear.equals(currentGear)) {
-                            value.setTextColor(Color.RED);
-                            gearText = (convGear(currentGear) + "▶" + convGear(recommendedGear));
-                        }
+                        gearText = convGear(currentGear);
+                    } else if (!recommendedGear.equals(currentGear)) {
+                        value.setTextColor(Color.RED);
+                        gearText = (convGear(currentGear) + "▶" + convGear(recommendedGear));
                     }
-                    value.setText(gearText);
-                    break;
-                case "lateralAcceleration":
-                case "longitudinalAcceleration":
-                    Float mAcceleration = (Float) mLastMeasurements.get(queryElement);
-                    if (mAcceleration != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_gforce).toString(), mAcceleration));
-                    }
-                    break;
-                case "yawRate":
-                    Float mYawRate = (Float) mLastMeasurements.get(queryElement);
-                    if (mYawRate != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mYawRate));
-                    }
-                    break;
-                case "acceleratorPosition":
-                    Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
-                    if (mAcceleratorPosition != null) {
-                        Float mAccelPosPercent = mAcceleratorPosition * 100;
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mAccelPosPercent));
-                    }
-                    break;
-                case "brakePressure":
-                    Float mBrakePressure = (Float) mLastMeasurements.get("brakePressure");
-                    if (mBrakePressure != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mBrakePressure));
-                    }
-                    break;
-                case "wheelAngle":
-                    Float mWheelAngle = (Float) mLastMeasurements.get(queryElement);
-                    if (mWheelAngle != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.degrees_format).toString(), mWheelAngle));
-                    }
-                    break;
-                case "powermeter":
-                    Float mPowermeter = (Float) mLastMeasurements.get(queryElement);
-                    if (mPowermeter != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mPowermeter));
-                    }
-                    break;
+                }
+                value.setText(gearText);
+                break;
+            case "lateralAcceleration":
+            case "longitudinalAcceleration":
+                Float mAcceleration = (Float) mLastMeasurements.get(queryElement);
+                if (mAcceleration != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_gforce).toString(), mAcceleration));
+                }
+                break;
+            case "yawRate":
+                Float mYawRate = (Float) mLastMeasurements.get(queryElement);
+                if (mYawRate != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mYawRate));
+                }
+                break;
+            case "acceleratorPosition":
+                Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
+                if (mAcceleratorPosition != null) {
+                    Float mAccelPosPercent = mAcceleratorPosition * 100;
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mAccelPosPercent));
+                }
+                break;
+            case "brakePressure":
+                Float mBrakePressure = (Float) mLastMeasurements.get("brakePressure");
+                if (mBrakePressure != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mBrakePressure));
+                }
+                break;
+            case "wheelAngle":
+                Float mWheelAngle = (Float) mLastMeasurements.get(queryElement);
+                if (mWheelAngle != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_degrees).toString(), mWheelAngle));
+                }
+                break;
+            case "powermeter":
+                Float mPowermeter = (Float) mLastMeasurements.get(queryElement);
+                if (mPowermeter != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mPowermeter));
+                }
+                break;
 
-                // eco values
-                case "EcoHMI_Score.AvgShort":
-                case "EcoHMI_Score.AvgTrip":
-                    Float mEcoScore = (Float) mLastMeasurements.get(queryElement);
-                    if (mEcoScore != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mEcoScore));
-                    }
-                    break;
-                case "Nav_CurrentPosition.Longitude":
-                case "Nav_CurrentPosition.Latitude":
-                case "Nav_CurrentPosition.City":
-                case "Nav_CurrentPosition.State":
-                case "Nav_CurrentPosition.Country":
-                    break;
-                case "blinkingState":
-                    break;
-                case "Sound_Volume":
-                    break;
-                case "Radio_Tuner.Name":
-                    break;
-                case "Radio_Text":
-                    break;
-                case "totalDistance.distanceValue":
-                    break;
-                case "vehicleIdenticationNumber.VIN":
-                    break;
-                case "tyreStates.stateRearRight":
-                    break;
-                case "tyreStates.stateRearLeft":
-                    break;
-                case "tyreStates.stateFrontRight":
-                    break;
-                case "tyreStates.stateFrontLeft":
-                    break;
+            // eco values
+            case "EcoHMI_Score.AvgShort":
+            case "EcoHMI_Score.AvgTrip":
+                Float mEcoScore = (Float) mLastMeasurements.get(queryElement);
+                if (mEcoScore != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mEcoScore));
+                }
+                break;
+            case "Nav_CurrentPosition.Longitude":
+            case "Nav_CurrentPosition.Latitude":
+            case "Nav_CurrentPosition.City":
+            case "Nav_CurrentPosition.State":
+            case "Nav_CurrentPosition.Country":
+            case "Sound_Volume":
+            case "Radio_Tuner.Name":
+            case "Radio_Text":
+            case "totalDistance.distanceValue":
+            case "vehicleIdenticationNumber.VIN":
+                String elementValue = (String) mLastMeasurements.get(queryElement);
+                if (elementValue != null) value.setText(elementValue);
+                break;
+            case "blinkingState":
+                break;
+            case "tyreStates.stateRearRight":
+            case "tyreStates.stateRearLeft":
+            case "tyreStates.stateFrontRight":
+            case "tyreStates.stateFrontLeft":
+                String tyreState = (String) mLastMeasurements.get(queryElement);
+                if (tyreState != null) {
+                    value.setText(tyreState);
+                    if (tyreState != "OK") value.setTextColor(Color.RED);
+                }
+                break;
 
-            }
         }
     }
 

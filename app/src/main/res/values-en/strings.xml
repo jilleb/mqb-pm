@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Performance Monitor for VAG</string>
-    <string name="car_service_name">Performance Monitor</string>
+    <string name="app_car_service_name">Performance Monitor</string>
 
     <string name="format_temperature">%.0f°</string>
     <string name="format_temperatureF">%.0f°F</string>
@@ -8,17 +8,17 @@
     <string name="format_volt">%.1fV</string>
     <string name="format_gforce">%.1fG</string>
     <string name="format_percent">%.1f</string>
-    <string name="degrees_format">%.1f°</string>
+    <string name="format_degrees">%.1f°</string>
 
-    <string name="decimals">%.1f</string>
+    <string name="format_decimals">%.1f</string>
     <string name="format_noDecimals">%.0f</string>
 
-    <string name="psi">psi</string>
+    <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
     <string name="format_volt0">0,0V</string>
     <string name="format_temperature0">0,0°</string>
     <string name="unit_kmh">km/h</string>
-    <string name="rpm">RPM</string>
+    <string name="unit_rpm">RPM</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_kw">KW</string>
     <string name="unit_volt">V</string>
@@ -28,13 +28,11 @@
 
     <string name="activity_settings_title">Performance Monitor Settings</string>
     <string name="activity_graph_title">Graphs</string>
-    <string name="activity_credits_title">Credits</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
     <string name="activity_main_title">Performance Monitor</string>
-    <string name="activity_carstatus_title">Car status</string>
     <string name="activity_measurements_title">Measurements (Alpha test)</string>
 
-    <string name="resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
+    <string name="pref_resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
     <string name="pref_appearance">Appearance</string>
     <string name="pref_highvis">High visibility dials</string>
     <string name="pref_theme">Theme</string>
@@ -50,11 +48,11 @@
     <string name="kick_uploads_nothing_to_do">All uploads already completed.</string>
     <string name="kick_uploads_done">Uploads scheduled.</string>
     <string name="pref_bigquery_reupload_last_title">Re-upload last log file</string>
-    <string name="bigquery_reupload_last_failed">Failed to initiate re-upload of the last log file.</string>
-    <string name="bigquery_reupload_last_ok">Re-upload scheduled.</string>
+    <string name="pref_bigquery_reupload_last_failed">Failed to initiate re-upload of the last log file.</string>
+    <string name="pref_bigquery_reupload_last_ok">Re-upload scheduled.</string>
 
-    <string name="oil_notification_title">Oil temperature</string>
-    <string name="oil_notification_text">Engine oil reached the working temperature.</string>
+    <string name="notification_oil_title">Oil temperature</string>
+    <string name="notification_oil_text">Engine oil reached the working temperature.</string>
     <string name="pref_oil_temp_threshold_title">Oil working temperature</string>
     <string name="pref_oil_temp_monitoring_title">Monitor oil temperature</string>
     <string name="pref_oil_temp_monitoring_summary">Show notification when engine oil reaches working temperature.</string>
@@ -68,7 +66,7 @@
     <string name="pref_stats_logging_not_available">Logging not available: %1$s</string>
     <string name="pref_providers_category_title">Telemetry providers</string>
     <string name="pref_list_providers_title">List providers</string>
-    <string name="providers">Telemetry providers</string>
+    <string name="pref_providers">Telemetry providers</string>
 
     <string name="pref_leftclock">Left clock</string>
     <string name="pref_centerclock">Center clock</string>
@@ -89,7 +87,7 @@
     <string name="pref_highlowmarks_on">A min and max mark is shown on the clocks</string>
     <string name="pref_highlowmarks_off">A min and max mark is not shown on the clocks</string>
     <string name="pref_graphitem">Graph</string>
-    <string name="graphDelay">Graph Resolution</string>
+    <string name="pref_graphDelay">Graph Resolution</string>
 
     <string name="element_none">None</string>
     <string name="element_absChargingAirPressure">Turbo charge pressure (absolute)</string>
@@ -124,11 +122,10 @@
     <string name="credits_author">This application was made by:</string>
     <string name="credits_basedon">Based on the SDK and demo App by:</string>
     <string name="credits_thanks">Special thanks to:</string>
-    <string name="drivesafely">Drive Safely.</string>
+    <string name="credits_drivesafely">Drive Safely.</string>
     <string name="testing">testing</string>
     <string name="pref_font">Font</string>
-    <string name="unknown">unknown</string>
-    <string name="km_format">%.1f km</string>
+    <string name="format_km">%.1f km</string>
     <string name="format_miles">%.1f miles</string>
     <string name="pref_ticks_off">Don\'t display value of ticks</string>
     <string name="pref_ticks_on">Display value of ticks</string>
@@ -136,13 +133,15 @@
     <string name="pref_ambient_off">Don\'t use ambient colors</string>
     <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
     <string name="pref_ambient">Ambient colors</string>
-    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
-    <string name="pref_showclock_summary">Show current time in header</string>
     <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
-    <string name="pref_showmic_summary">Show microphone icon in header</string>
-    <string name="pref_showconnectivity_title">Connectivity icon</string>
+    <string name="pref_showclock_summary">Show current time in header</string>
     <string name="pref_showclock_title">Time display</string>
-    <string name="pref_showsbatterylevel_title">Battery level</string>
+    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
+    <string name="pref_showconnectivity_title">Connectivity icon</string>
+    <string name="pref_showmic_summary">Show microphone icon in header</string>
     <string name="pref_showmic_title">Microphone icon</string>
+    <string name="pref_showbatterylevel_title">Battery level</string>
+    <string name="unknown">unknown</string>
+    <string name="activity_credits_title">Credits</string>
 
 </resources>

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Performance Monitor per VAG</string>
-    <string name="car_service_name">Performance Monitor</string>
+    <string name="app_car_service_name">Performance Monitor</string>
 
     <string name="format_temperature">%.0f°</string>
     <string name="format_temperatureF">%.0f°F</string>
@@ -8,17 +8,17 @@
     <string name="format_volt">%.1fV</string>
     <string name="format_gforce">%.1fG</string>
     <string name="format_percent">%.1f</string>
-    <string name="degrees_format">%.1f°</string>
+    <string name="format_degrees">%.1f°</string>
 
-    <string name="decimals">%.1f</string>
+    <string name="format_decimals">%.1f</string>
     <string name="format_noDecimals">%.0f</string>
 
-    <string name="psi">psi</string>
+    <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
     <string name="format_volt0">0,0V</string>
     <string name="format_temperature0">0,0°</string>
     <string name="unit_kmh">km/h</string>
-    <string name="rpm">RPM</string>
+    <string name="unit_rpm">RPM</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_kw">KW</string>
     <string name="unit_volt">V</string>
@@ -41,10 +41,10 @@
     <string name="kick_uploads_nothing_to_do">Tutti gli upload sono stati completati.</string>
     <string name="kick_uploads_done">Upload programmato.</string>
     <string name="pref_bigquery_reupload_last_title">Ricarica l\'ultimo file log</string>
-    <string name="bigquery_reupload_last_failed">Errore nel caricare l\'ultimo file log.</string>
-    <string name="bigquery_reupload_last_ok">Upload ri-programmato.</string>
-    <string name="oil_notification_title">Temperatura olio</string>
-    <string name="oil_notification_text">L\'olio ha raggiunto la temperatura operativa.</string>
+    <string name="pref_bigquery_reupload_last_failed">Errore nel caricare l\'ultimo file log.</string>
+    <string name="pref_bigquery_reupload_last_ok">Upload ri-programmato.</string>
+    <string name="notification_oil_title">Temperatura olio</string>
+    <string name="notification_oil_text">L\'olio ha raggiunto la temperatura operativa.</string>
     <string name="pref_oil_temp_threshold_title">Temperatura operativa olio</string>
     <string name="pref_oil_temp_monitoring_title">Temperatura olio motore</string>
     <string name="pref_oil_temp_monitoring_summary">Mostra una notifica quando il motore raggiunge la temperatura operativa desiderata.</string>
@@ -57,7 +57,7 @@
     <string name="pref_stats_logging_not_available">Registrazione dati non eseguibile: %1$s</string>
     <string name="pref_providers_category_title">Servizi cattura dati dell\'auto</string>
     <string name="pref_list_providers_title">Lista de servizi</string>
-    <string name="providers">Servizi cattura dati dell\'auto</string>
+    <string name="pref_providers">Servizi cattura dati dell\'auto</string>
     <string name="pref_leftclock">Indicatore sinistro</string>
     <string name="pref_centerclock">Indicatore centrale</string>
     <string name="pref_rightclock">Indicatore destro</string>
@@ -77,12 +77,11 @@
     <string name="pref_highlowmarks_on">I valori massimi/minimi sono mostrati sugli indicatori circolari</string>
     <string name="pref_highlowmarks_off">I valori massimi/minimi sono nascosti dagli indicatori circolari</string>
     <string name="pref_graphitem">Grafico</string>
-    <string name="graphDelay">Risoluzione temporale grafico</string>
+    <string name="pref_graphDelay">Risoluzione temporale grafico</string>
     <string name="unit_g">G</string>
     <string name="unit_mph">mph</string>
     <string name="activity_stopwatch_title">Cronometro</string>
     <string name="activity_credits_title">Crediti</string>
-    <string name="activity_carstatus_title">Stato</string>
     <string name="activity_measurements_title">Misure</string>
     <string name="activity_graph_title">Grafico</string>
     <string name="element_none">Niente</string>
@@ -119,26 +118,11 @@
     <string name="credits_author">Questa applicazione è sviluppata da:</string>
     <string name="credits_basedon">Basata sull\' SDK e demo App by:</string>
     <string name="credits_thanks">Ringraziamento speciale a:</string>
-    <string name="drivesafely">Guida prudente.</string>
+    <string name="credits_drivesafely">Guida prudente.</string>
     <string name="testing">prova</string>
     <string name="pref_font">Font</string>
-    <string name="unknown">unknown</string>
-    <string name="km_format">%.1f km</string>
+    <string name="format_km">%.1f km</string>
     <string name="format_miles">%.1f miles</string>
-    <string name="pref_ticks_off">Don\'t display value of ticks</string>
-    <string name="pref_ticks_on">Display value of ticks</string>
-    <string name="pref_ticks">Tick values</string>
-    <string name="pref_ambient_off">Don\'t use ambient colors</string>
-    <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
-    <string name="pref_ambient">Ambient colors</string>
-    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
-    <string name="pref_showclock_summary">Show current time in header</string>
-    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
-    <string name="pref_showmic_summary">Show microphone icon in header</string>
-    <string name="pref_showconnectivity_title">Connectivity icon</string>
-    <string name="pref_showclock_title">Time display</string>
-    <string name="pref_showsbatterylevel_title">Battery level</string>
-    <string name="pref_showmic_title">Microphone icon</string>
 
 
 </resources>

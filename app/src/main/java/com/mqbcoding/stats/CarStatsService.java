@@ -83,7 +83,7 @@ public class CarStatsService extends CarModeService {
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationCompat.Builder notification = new NotificationCompat.Builder(this, NOTIFICATION_CHANNEL_ID)
                     .setContentTitle(getText(R.string.app_name))
-                    .setContentText(getText(R.string.service_notification_text))
+                    .setContentText(getText(R.string.notification_service_text))
                     .setSmallIcon(R.drawable.ic_launcher);
             return notification.build();
         } else {

@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="@string/drivesafely"
+        android:text="@string/credits_drivesafely"
         android:textAlignment="center"
         android:textAppearance="@style/CarHeadline1"
         android:textColor="@android:color/white"

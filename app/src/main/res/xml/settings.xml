@@ -132,11 +132,11 @@
             android:entryValues="@array/graphDelayValues"
             android:key="graphDelay"
             android:summary="%s"
-            android:title="@string/graphDelay" />
+            android:title="@string/pref_graphDelay" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectPressureUnit"
-            android:summaryOff="@string/psi"
+            android:summaryOff="@string/unit_psi"
             android:summaryOn="@string/unit_bar"
             android:title="@string/pref_pressureunit" />
         <EditTextPreference
@@ -159,7 +159,7 @@
             android:key="batterylevelActive"
             android:defaultValue="false"
             android:summary="@string/pref_showbatterylevel_summary"
-            android:title="@string/pref_showsbatterylevel_title" />
+            android:title="@string/pref_showbatterylevel_title" />
         <CheckBoxPreference
             android:key="micActive"
             android:defaultValue="false"

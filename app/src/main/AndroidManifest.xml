@@ -32,7 +32,7 @@
 
         <service
             android:name=".CarService"
-            android:label="@string/car_service_name"
+            android:label="@string/app_car_service_name"
             tools:ignore="ExportedService">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

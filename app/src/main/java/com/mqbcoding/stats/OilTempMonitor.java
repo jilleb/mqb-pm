@@ -84,8 +84,8 @@ public class OilTempMonitor implements CarStatsClient.Listener {
     };
 
     private void notifyOilTempReached() {
-        String title = mContext.getString(R.string.oil_notification_title);
-        String text = mContext.getString(R.string.oil_notification_text);
+        String title = mContext.getString(R.string.notification_oil_title);
+        String text = mContext.getString(R.string.notification_oil_text);
 
         Notification notification = new NotificationCompat.Builder(mContext, CarStatsService.NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_oil)

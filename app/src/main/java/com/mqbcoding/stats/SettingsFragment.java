@@ -81,11 +81,11 @@ public class SettingsFragment extends PreferenceFragment {
                     String[] entries = logDir.list();
                     String lastEntry = Collections.max(Arrays.asList(entries));
                     LogUploadService.schedule(getActivity(), new File(logDir, lastEntry));
-                    Toast.makeText(getActivity(), R.string.bigquery_reupload_last_ok,
+                    Toast.makeText(getActivity(), R.string.pref_bigquery_reupload_last_ok,
                             Toast.LENGTH_SHORT).show();
                 } catch (Exception e) {
                     Log.w(TAG, "Re-upload error", e);
-                    Toast.makeText(getActivity(), R.string.bigquery_reupload_last_failed,
+                    Toast.makeText(getActivity(), R.string.pref_bigquery_reupload_last_failed,
                             Toast.LENGTH_SHORT).show();
                 }
                 return true;
@@ -122,7 +122,7 @@ public class SettingsFragment extends PreferenceFragment {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle(R.string.providers);
+                builder.setTitle(R.string.pref_providers);
                 ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(getActivity(),
                         android.R.layout.simple_list_item_1);
                 PackageManager pm = getActivity().getPackageManager();
