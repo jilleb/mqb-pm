@@ -137,7 +137,7 @@
             android:defaultValue="true"
             android:key="selectPressureUnit"
             android:summaryOff="@string/psi"
-            android:summaryOn="@string/bar"
+            android:summaryOn="@string/unit_bar"
             android:title="@string/pref_pressureunit" />
         <EditTextPreference
             android:defaultValue="Car_ambienceLightColour.ColourSRGB"

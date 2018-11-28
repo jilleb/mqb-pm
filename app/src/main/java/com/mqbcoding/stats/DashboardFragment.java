@@ -34,8 +34,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 
-import static com.github.anastr.speedviewlib.components.Indicators.Indicator.Indicators.HalfLineIndicator;
-
 public class DashboardFragment extends CarFragment {
     private final String TAG = "DashboardFragment";
     private Runnable mTimer1;
@@ -684,7 +682,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "batteryVoltage":
                 label.setText("");
-                value.setText(R.string.zeroVolt);
+                value.setText(R.string.format_volt0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
             case "Nav_Altitude":
@@ -699,16 +697,16 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "coolantTemperature":
                 label.setText("");
-                value.setText(R.string.zeroCelcius);
+                value.setText(R.string.format_temperature0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
             case "oilTemperature":
                 label.setText("");
-                value.setText(R.string.zeroCelcius);
+                value.setText(R.string.format_temperature0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "vehicleSpeed":
-                label.setText(R.string.kmh);
+                label.setText(R.string.unit_kmh);
                 value.setText("-");
                 label.setBackgroundResource(0);
                 break;
@@ -718,23 +716,23 @@ public class DashboardFragment extends CarFragment {
                 label.setBackgroundResource(0);
                 break;
             case "currentOutputPower":
-                label.setText(R.string.kw);
+                label.setText(R.string.unit_kw);
                 value.setText("-");
                 label.setBackgroundResource(0);
                 break;
-            case "currentTorque":
-                label.setText(R.string.nm);
+            case "element_currentTorque":
+                label.setText(R.string.unit_nm);
                 value.setText("-");
                 label.setBackgroundResource(0);
                 break;
             case "gearboxOilTemperature":
                 label.setText("");
-                value.setText(R.string.zeroCelcius);
+                value.setText(R.string.format_temperature0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
             case "outsideTemperature":
                 label.setText("");
-                value.setText(R.string.zeroCelcius);
+                value.setText(R.string.format_temperature0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_outsidetemperature));
                 break;
             case "currentGear":
@@ -787,8 +785,42 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_ecoavg));
                 break;
-
-        }
+            case "Nav_CurrentPosition.Longitude":
+                break;
+            case "Nav_CurrentPosition.Latitude":
+                break;
+            case "Nav_CurrentPosition.City":
+                break;
+            case "Nav_CurrentPosition.State":
+                break;
+            case "Nav_CurrentPosition.Country":
+                break;
+            case "blinkingState":
+                break;
+            case "Sound_Volume":
+                break;
+            case "Radio_Tuner.Name":
+                break;
+            case "Radio_Text":
+                break;
+            case "totalDistance.distanceValue":
+                break;
+            case "vehicleIdenticationNumber.VIN":
+                break;
+            case "tyreStates.stateRearRight":
+                break;
+            case "tyreStates.stateRearLeft":
+                break;
+            case "tyreStates.stateFrontRight":
+                break;
+            case "tyreStates.stateFrontLeft":
+                break;
+            default:
+                label.setText("");
+                value.setText("");
+                label.setBackgroundResource(0);
+                break;
+       }
     }
 
     private void setupClock(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
@@ -811,17 +843,13 @@ public class DashboardFragment extends CarFragment {
         }
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), needleResource, clockSize, clockSize);
 
-
-
-
         switch (queryClock) {
             case "none":
                 icon.setText("");
                 clock.setUnit("");
                 icon.setBackgroundResource(0);
                 break;
-
-            case "test":
+           case "test":
                 icon.setText("");
                 clock.setUnit(getString(R.string.testing));
                 clock.setMinMaxSpeed(0, 360);
@@ -830,7 +858,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "vehicleSpeed":
                 icon.setText("");
-                clock.setUnit(getString(R.string.kmh));
+                clock.setUnit(getString(R.string.unit_kmh));
                 clock.setMinMaxSpeed(0, 350);
                 icon.setBackgroundResource(0);
                 clock.setBackgroundResource(emptyBackgroundResource);
@@ -880,7 +908,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "batteryVoltage":
                 icon.setText("");
-                clock.setUnit(getString(R.string.volt));
+                clock.setUnit(getString(R.string.unit_volt));
                 clock.setMinMaxSpeed(0, 16);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 clock.setBackgroundResource(emptyBackgroundResource);
@@ -931,7 +959,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "lateralAcceleration":
                 icon.setText("");
-                clock.setUnit(getString(R.string.g));
+                clock.setUnit(getString(R.string.unit_g));
                 clock.setMinMaxSpeed(-3, 3);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 clock.setBackgroundResource(emptyBackgroundResource);
@@ -939,7 +967,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "longitudinalAcceleration":
                 icon.setText("");
-                clock.setUnit(getString(R.string.g));
+                clock.setUnit(getString(R.string.unit_g));
                 clock.setMinMaxSpeed(-3, 3);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_longitudinal));
                 clock.setBackgroundResource(emptyBackgroundResource);
@@ -1001,9 +1029,9 @@ public class DashboardFragment extends CarFragment {
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
-            case "currentTorque":
+            case "element_currentTorque":
                 icon.setText("");
-                clock.setUnit(getString(R.string.nm));
+                clock.setUnit(getString(R.string.unit_nm));
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -1011,7 +1039,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "currentOutputPower":
                 icon.setText("");
-                clock.setUnit(getString(R.string.kw));
+                clock.setUnit(getString(R.string.unit_kw));
                 clock.setMinMaxSpeed(0, 500);
                 icon.setBackgroundResource(0);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
@@ -1109,7 +1137,7 @@ public class DashboardFragment extends CarFragment {
                 case "EcoHMI_Score.AvgShort":
                 case "EcoHMI_Score.AvgTrip":
                 case "brakePressure":
-                case "currentTorque":
+                case "element_currentTorque":
                 case "currentOutputPower":
                     if (clockValue != null) {
                         dial.speedTo(clockValue);
@@ -1252,7 +1280,7 @@ public class DashboardFragment extends CarFragment {
                 case "batteryVoltage":
                     Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
                     if (mBatteryVoltage != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.volt_format).toString(), mBatteryVoltage));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_volt).toString(), mBatteryVoltage));
                     }
                     break;
 
@@ -1263,7 +1291,7 @@ public class DashboardFragment extends CarFragment {
                 case "outsideTemperature":
                     Float mTemperature = (Float) mLastMeasurements.get(queryElement);
                     if (mTemperature != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.temp_format).toString(), mTemperature));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), mTemperature));
                     }
                     break;
                 case "vehicleSpeed":
@@ -1279,13 +1307,13 @@ public class DashboardFragment extends CarFragment {
                 case "Nav_Altitude":
                     Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
                     if (mNoDecimalValue != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mNoDecimalValue));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mNoDecimalValue));
                     }
                     break;
 
                 // Decimal values, without any specific modification:
                 case "currentOutputPower":
-                case "currentTorque":
+                case "element_currentTorque":
                     Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
                     if (mCurrentDecimalValue != null) {
                         value.setText(String.format(Locale.US, getContext().getText(R.string.decimals).toString(), mCurrentDecimalValue));
@@ -1323,26 +1351,26 @@ public class DashboardFragment extends CarFragment {
                 case "longitudinalAcceleration":
                     Float mAcceleration = (Float) mLastMeasurements.get(queryElement);
                     if (mAcceleration != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.gforce_format).toString(), mAcceleration));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_gforce).toString(), mAcceleration));
                     }
                     break;
                 case "yawRate":
                     Float mYawRate = (Float) mLastMeasurements.get(queryElement);
                     if (mYawRate != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mYawRate));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mYawRate));
                     }
                     break;
                 case "acceleratorPosition":
                     Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
                     if (mAcceleratorPosition != null) {
                         Float mAccelPosPercent = mAcceleratorPosition * 100;
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mAccelPosPercent));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mAccelPosPercent));
                     }
                     break;
                 case "brakePressure":
                     Float mBrakePressure = (Float) mLastMeasurements.get("brakePressure");
                     if (mBrakePressure != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.percent_format).toString(), mBrakePressure));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mBrakePressure));
                     }
                     break;
                 case "wheelAngle":
@@ -1354,7 +1382,7 @@ public class DashboardFragment extends CarFragment {
                 case "powermeter":
                     Float mPowermeter = (Float) mLastMeasurements.get(queryElement);
                     if (mPowermeter != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mPowermeter));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mPowermeter));
                     }
                     break;
 
@@ -1363,9 +1391,36 @@ public class DashboardFragment extends CarFragment {
                 case "EcoHMI_Score.AvgTrip":
                     Float mEcoScore = (Float) mLastMeasurements.get(queryElement);
                     if (mEcoScore != null) {
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.no_decimals).toString(), mEcoScore));
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mEcoScore));
                     }
                     break;
+                case "Nav_CurrentPosition.Longitude":
+                case "Nav_CurrentPosition.Latitude":
+                case "Nav_CurrentPosition.City":
+                case "Nav_CurrentPosition.State":
+                case "Nav_CurrentPosition.Country":
+                    break;
+                case "blinkingState":
+                    break;
+                case "Sound_Volume":
+                    break;
+                case "Radio_Tuner.Name":
+                    break;
+                case "Radio_Text":
+                    break;
+                case "totalDistance.distanceValue":
+                    break;
+                case "vehicleIdenticationNumber.VIN":
+                    break;
+                case "tyreStates.stateRearRight":
+                    break;
+                case "tyreStates.stateRearLeft":
+                    break;
+                case "tyreStates.stateFrontRight":
+                    break;
+                case "tyreStates.stateFrontLeft":
+                    break;
+
             }
         }
     }

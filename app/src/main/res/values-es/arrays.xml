@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="tankLevelPrimary">Tank level (primary)</string>
-    <string name="tankLevelSecondary">Tank level (secondary)</string>
-    <string name="navAltitude">Altitude</string>
-    <string name="navHeading">Heading</string>
-    <string name="debug">Debug query</string>
-</resources>

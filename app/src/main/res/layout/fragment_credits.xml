@@ -30,7 +30,7 @@
         android:layout_height="45dp"
         android:layout_marginLeft="@dimen/car_standard_margin"
         android:layout_marginTop="80dp"
-        android:text="@string/author"
+        android:text="@string/credits_author"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/basedon"
+        android:text="@string/credits_basedon"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toLeftOf="@+id/textStopwatch"
         app:layout_constraintTop_toBottomOf="@+id/textStopwatch" />
@@ -54,7 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="@string/thanks"
+        android:text="@string/credits_thanks"
         android:textAlignment="center"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"
@@ -123,7 +123,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:text="@string/version"
+        android:text="@string/app_version"
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
         app:layout_constraintEnd_toEndOf="@+id/textView5" />
 
