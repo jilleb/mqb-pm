@@ -22,6 +22,27 @@
         <item>Test</item>
     </string-array>
 
+    <array name="ThemesThumbs">
+        <item>@drawable/ic_theme_vw</item>
+        <item>@drawable/ic_theme_vwgti</item>
+        <item>@drawable/ic_theme_vwgte</item>
+        <item>@drawable/ic_theme_vwr</item>
+        <item>@drawable/ic_theme_vwmib2</item>
+        <item>@drawable/ic_theme_vwclubsport</item>
+        <item>@drawable/ic_theme_seat</item>
+        <item>@drawable/ic_theme_seatcupra</item>
+        <item>@drawable/ic_theme_cupra</item>
+        <item>@drawable/ic_theme_skoda</item>
+        <item>@drawable/ic_theme_skoda2</item>
+        <item>@drawable/ic_theme_skodaone</item>
+        <item>@drawable/ic_theme_skodavc</item>
+        <item>@drawable/ic_theme_audi</item>
+        <item>@drawable/ic_theme_audivc</item>
+        <item>@drawable/ic_theme_auditt</item>
+        <item>@drawable/ic_theme_minimalistic</item>
+        <item>@drawable/ic_theme_test</item>
+    </array>
+
     <!-- Pressure units, used in settings-->
 
     <!-- Names of Entries for clock data settings -->

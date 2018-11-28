@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
         android:singleLineTitle="false"
         android:summary="Apply changes by switching the lights on/off"
         android:title="@string/pref_appearance">
 
-        <ListPreference
-            android:defaultValue="1"
+        <com.austingreco.imagelistpreference.ImageListPreference
+            android:title="@string/pref_theme"
+            android:summary="%s"
+            android:key="theme"
             android:entries="@array/Themes"
             android:entryValues="@array/Themes"
-            android:key="selectedTheme"
-            android:summary="%s"
-            android:title="@string/pref_theme" />
+            app:ilp_entryImages="@array/ThemesThumbs"
+            app:ilp_backgroundTint="@color/blue"
+            app:ilp_tint="#00FFFFFF"
+            />
+
+
         <ListPreference
             android:entries="@array/fontEntries"
             android:entryValues="@array/fontyValues"
