@@ -9,13 +9,31 @@
         <item name="actionModeBackground">@color/accent</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
     <style name="AppTheme.Car" parent="@style/CarAppTheme" tools:ignore="PrivateResource"></style>
+
+    <style name="AppTheme.Car.Speedometer">
+        <item name="android:padding">25dp</item>
+        <item name="sv_lowSpeedPercent">85</item>
+        <item name="sv_mediumSpeedPercent">85</item>
+
+        <item name="sv_unit"></item>
+        <item name="sv_unitUnderSpeedText">true</item>
+        <item name="sv_backgroundCircleColor">@android:color/transparent</item>
+        <item name="sv_centerCircleColor">@android:color/transparent</item>
+        <item name="sv_highSpeedColor">@android:color/transparent</item>
+        <item name="sv_mediumSpeedColor">@android:color/transparent</item>
+        <item name="sv_lowSpeedColor">@android:color/transparent</item>
+    </style>
 
     <style name="AppTheme.Seat" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks_seat</item>
@@ -31,7 +49,24 @@
         <item name="sv_indicatorColor">#fecc00</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">15dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
+
     </style>
+
     <style name="AppTheme.SeatCupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_seat2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
@@ -46,7 +81,23 @@
         <item name="sv_indicatorColor">#fecc00</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.Cupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_cupra</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_cupra</item>
@@ -61,7 +112,23 @@
         <item name="sv_indicatorColor">#FFFFFFFF</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.VolkswagenGTI" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
@@ -71,7 +138,24 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
+
     </style>
+
     <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_mib2p</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_mib2p</item>
@@ -86,7 +170,23 @@
         <item name="sv_indicatorColor">#ffffff</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.VolkswagenR" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
@@ -96,7 +196,23 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.VolkswagenGTE" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
@@ -106,6 +222,20 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
     </style>
 
     <style name="AppTheme.AudiTT" parent="AppTheme.Car">
@@ -117,7 +247,23 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_audi4</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">5dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.Volkswagen" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
@@ -127,7 +273,47 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/white</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
+    <style name="AppTheme.Beetle" parent="AppTheme.Car">
+        <item name="themedDialBackground">@drawable/dial_background_beetle</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_beetle</item>
+        <item name="themedCarBackground">@drawable/background_incar_cloth</item>
+        <item name="themedNeedle">@drawable/needle_beetle</item>
+        <item name="sv_markColor">@android:color/transparent</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
+        <item name="themedNeedleColor">@color/white</item>
+        <item name="sv_tickPadding">-10dp</item>
+        <item name="sv_tickRotation">true</item>
+        <item name="sv_textSize">40dp</item>
+        <item name="sv_speedTextColor ">@android:color/transparent</item>
+        <item name="sv_unitTextColor ">@android:color/black</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPadding">30dp</item>
+
+        <item name="sv_withTremble">true</item>
+        <item name="sv_trembleDegree">1</item>
+        <item name="sv_speedTextPosition">TOP_CENTER</item>
+    </style>
+
     <style name="AppTheme.Audi" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi</item>
@@ -137,7 +323,22 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_audi</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
+
     </style>
+
     <style name="AppTheme.AudiVC" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi3</item>
@@ -147,7 +348,24 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_audi3</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">5dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
+
     </style>
+
     <style name="AppTheme.Clubsport" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_vw2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_vw2</item>
@@ -157,7 +375,24 @@
         <item name="themedStopWatchBackground">@drawable/sw_background_vw2</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">0dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
+        <item name="sv_withTremble">false</item>
+
+
+
     </style>
+
     <style name="AppTheme.Skoda" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_skoda</item>
         <item name="themedDialBackground">@drawable/dial_background_skoda</item>
@@ -173,7 +408,22 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_speedometerWidth">40dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.SkodavRS" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_skoda2</item>
         <item name="themedDialBackground">@drawable/dial_background_skoda2</item>
@@ -189,7 +439,22 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_speedometerWidth">40dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_marks_skoda3</item>
@@ -199,7 +464,22 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_skoda3</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">5dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.SkodaOneApp" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_skodaone</item>
         <item name="themedDialBackground">@drawable/dial_background_marks_skodaone</item>
@@ -215,7 +495,22 @@
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">0dp</item>
         <item name="sv_speedometerWidth">400dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.Testing" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_test</item>
         <item name="themedDialBackground">@drawable/dial_background_test</item>
@@ -225,7 +520,22 @@
         <item name="themedStopWatchBackground">@drawable/dial_background_test</item>
         <item name="themedNeedleColor">@color/green</item>
         <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+
+
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_withTremble">false</item>
+
+
     </style>
+
     <style name="AppTheme.Minimalistic" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_minimal</item>
@@ -240,30 +550,23 @@
         <item name="sv_indicatorColor">#FFFF0000</item>
         <item name="sv_indicatorWidth">3dp</item>
         <item name="sv_tickPadding">15dp</item>
-    </style>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+        <item name="sv_withTremble">false</item>
 
-    <style name="AppTheme.Car.Speedometer">
-        <item name="android:padding">25dp</item>
-        <item name="sv_lowSpeedPercent">85</item>
-        <item name="sv_mediumSpeedPercent">85</item>
+
+
         <item name="sv_speedTextColor">@color/car_primary</item>
         <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
         <item name="sv_textColor">@android:color/transparent</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
-        <item name="sv_unitTextColor">@color/car_primary</item>
-        <item name="sv_unitTextSize">20sp</item>
-        <item name="sv_unit"></item>
-        <item name="sv_speedTextPadding">50dp</item>
-        <item name="sv_unitUnderSpeedText">true</item>
-        <item name="sv_withTremble">false</item>
-        <item name="sv_backgroundCircleColor">@android:color/transparent</item>
-        <item name="sv_centerCircleColor">@android:color/transparent</item>
-        <item name="sv_highSpeedColor">@android:color/transparent</item>
-        <item name="sv_mediumSpeedColor">@android:color/transparent</item>
-        <item name="sv_lowSpeedColor">@android:color/transparent</item>
-        <item name="sv_tickRotation">false</item>
+
     </style>
+
+
     <style name="AppTheme.Car.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_vertical_material_car</item>
         <item name="android:minWidth">@dimen/progress_bar_height_material_car</item>

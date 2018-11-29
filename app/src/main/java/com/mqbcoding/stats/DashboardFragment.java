@@ -9,6 +9,7 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -47,7 +48,7 @@ public class DashboardFragment extends CarFragment {
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
-    private String mDebugQuery;
+    private String mDebugQuery, selectedTheme;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
     private String pressureUnit, selectedFont;
     private float pressureFactor, speedFactor;
@@ -175,6 +176,8 @@ public class DashboardFragment extends CarFragment {
         ticksOn = sharedPreferences.getBoolean("ticksActive", false); // if true, it will display the value of each of the ticks
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         mDebugQuery = sharedPreferences.getString("debugQuery", "");
+        selectedTheme = sharedPreferences.getString("selectedTheme", "");
+
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -207,6 +210,8 @@ public class DashboardFragment extends CarFragment {
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Larabie.ttf");
                 break;
         }
+
+
         //-------------------------------------------------------------
         //find all elements needed
         //clocks:
@@ -265,6 +270,14 @@ public class DashboardFragment extends CarFragment {
         mClockLeft.setSpeedTextTypeface(typeface);
         mClockCenter.setSpeedTextTypeface(typeface);
         mClockRight.setSpeedTextTypeface(typeface);
+
+        if (selectedTheme.equals("Beetle")){
+            Typeface beetletypeface = Typeface.createFromAsset(getContext().getAssets(), "Schluber.ttf");
+            mClockLeft.setTextTypeface(beetletypeface);
+            mClockCenter.setTextTypeface(beetletypeface);
+            mClockRight.setTextTypeface(beetletypeface);
+        }
+
         //elements
         mValueElement1.setTypeface(typeface);
         mValueElement2.setTypeface(typeface);
@@ -377,7 +390,9 @@ public class DashboardFragment extends CarFragment {
                 }
 
                 if (ticksOn) {
+
                     int tickNum = 9;
+                    if (selectedTheme.equals("Beetle")) tickNum = 7; //special for Beetle theme
 
                     mClockLeft.setTickNumber(tickNum);
                     mClockLeft.setTextColor(Color.WHITE);
@@ -843,6 +858,7 @@ public class DashboardFragment extends CarFragment {
                 value.setText("");
                 label.setBackgroundResource(0);
                 break;
+
        }
     }
 
@@ -1116,6 +1132,14 @@ public class DashboardFragment extends CarFragment {
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 clock.setBackgroundResource(emptyBackgroundResource);
                 break;
+        }
+
+        // make the icon appear in the color of unitTextColor
+        Drawable iconBackground = (Drawable) icon.getBackground();
+        if (iconBackground!=null) {
+            int iconTint = clock.getUnitTextColor();
+            iconBackground.setColorFilter(iconTint, PorterDuff.Mode.SRC_ATOP);
+            icon.setBackground(iconBackground);
         }
 
         float minimum = clock.getMinSpeed();

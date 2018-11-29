@@ -10,7 +10,7 @@
         <com.austingreco.imagelistpreference.ImageListPreference
             android:title="@string/pref_theme"
             android:summary="%s"
-            android:key="theme"
+            android:key="selectedTheme"
             android:entries="@array/Themes"
             android:entryValues="@array/Themes"
             app:ilp_entryImages="@array/ThemesThumbs"
@@ -18,13 +18,19 @@
             app:ilp_tint="#00FFFFFF"
             />
 
-
-        <ListPreference
-            android:entries="@array/fontEntries"
-            android:entryValues="@array/fontyValues"
-            android:key="selectedFont"
+        <com.austingreco.imagelistpreference.ImageListPreference
+            android:title="@string/pref_font"
             android:summary="%s"
-            android:title="@string/pref_font" />
+            android:key="selectedFont"
+            android:entries="@array/fontEntries"
+            android:entryValues="@array/fontValues"
+            app:ilp_entryImages="@array/FontThumbs"
+            app:ilp_backgroundTint="@color/white"
+            app:ilp_tint="#00FFFFFF"
+            />
+
+
+
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="highVisActive"

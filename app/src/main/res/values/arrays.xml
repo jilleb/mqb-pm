@@ -7,6 +7,7 @@
         <item>VW GTE</item>
         <item>VW R</item>
         <item>VW MIB2</item>
+        <item>Beetle</item>
         <item>Clubsport</item>
         <item>Seat</item>
         <item>Seat Cupra</item>
@@ -27,6 +28,7 @@
         <item>@drawable/ic_theme_vwgti</item>
         <item>@drawable/ic_theme_vwgte</item>
         <item>@drawable/ic_theme_vwr</item>
+        <item>@drawable/ic_theme_vwmib2</item>
         <item>@drawable/ic_theme_vwmib2</item>
         <item>@drawable/ic_theme_vwclubsport</item>
         <item>@drawable/ic_theme_seat</item>
@@ -237,7 +239,7 @@
     </string-array>
 
 
-    <string-array name="fontyValues">
+    <string-array name="fontValues">
         <item>segments</item>
         <item>vw</item>
         <item>vw2</item>
@@ -248,6 +250,20 @@
         <item>skoda</item>
         <item>larabie</item>
     </string-array>
+
+
+    <string-array name="FontThumbs">
+        <item>@drawable/ic_font_segments</item>
+        <item>@drawable/ic_font_vwcarui</item>
+        <item>@drawable/ic_font_thesis</item>
+        <item>@drawable/ic_font_vwdigit</item>
+        <item>@drawable/ic_font_seat</item>
+        <item>@drawable/ic_font_audi</item>
+        <item>@drawable/ic_font_frutiger</item>
+        <item>@drawable/ic_font_skoda</item>
+        <item>@drawable/ic_font_larabie</item>
+    </string-array>
+
 
 
     <!--

@@ -28,13 +28,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:sv_speedTextPosition="CENTER"
         app:sv_speedTextSize="36dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unit=""
         app:sv_unitSpeedInterval="3dp"
-        app:sv_unitTextColor="@android:color/white"
-
         app:sv_unitTextSize="20sp" />
 
     <com.github.anastr.speedviewlib.SpeedView
@@ -50,12 +47,9 @@
         app:layout_constraintLeft_toRightOf="@+id/dial_Center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:sv_speedTextPadding="0dp"
-        app:sv_speedTextPosition="CENTER"
         app:sv_speedTextSize="36dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitSpeedInterval="3dp"
-        app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="20sp" />
 
     <com.github.anastr.speedviewlib.SpeedView
@@ -71,13 +65,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="0.4"
         app:sv_maxSpeed="2"
-        app:sv_speedTextPadding="0dp"
-        app:sv_speedTextPosition="CENTER"
         app:sv_speedTextSize="36dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unit=""
         app:sv_unitSpeedInterval="3dp"
-        app:sv_unitTextColor="@android:color/white"
         app:sv_unitTextSize="20sp"
         app:sv_withTremble="false"
      />
@@ -107,6 +98,7 @@
         android:alpha="1.0"
         android:background="@drawable/ic_oil"
         android:backgroundTint="@color/car_primary"
+        android:backgroundTintMode="multiply"
         android:elevation="5dp"
         android:gravity="center"
         android:textColor="@android:color/white"
@@ -379,7 +371,6 @@
         app:sv_markColor="@android:color/transparent"
         app:sv_speedTextColor="@android:color/transparent"
         app:sv_speedTextPadding="10dp"
-        app:sv_speedTextPosition="BOTTOM_RIGHT"
         app:sv_speedTextSize="15dp"
         app:sv_unitSpeedInterval="0dp"
         app:sv_unitTextColor="@android:color/transparent"
@@ -404,8 +395,6 @@
         app:sv_markColor="@android:color/transparent"
         app:sv_speedTextColor="@android:color/transparent"
         app:sv_speedTextPadding="50dp"
-
-        app:sv_speedTextPosition="BOTTOM_RIGHT"
         app:sv_speedTextSize="15dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitSpeedInterval="0dp"
@@ -435,7 +424,6 @@
         app:sv_markColor="@android:color/transparent"
         app:sv_speedTextColor="@android:color/transparent"
         app:sv_speedTextPadding="50dp"
-        app:sv_speedTextPosition="BOTTOM_RIGHT"
         app:sv_speedTextSize="15dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitSpeedInterval="0dp"
@@ -463,7 +451,6 @@
         app:sv_markColor="@android:color/transparent"
         app:sv_speedTextColor="@android:color/transparent"
         app:sv_speedTextPadding="50dp"
-        app:sv_speedTextPosition="BOTTOM_LEFT"
         app:sv_speedTextSize="15dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitSpeedInterval="0dp"
@@ -492,7 +479,6 @@
         app:sv_speedTextColor="@android:color/transparent"
         app:sv_speedTextPadding="50dp"
 
-        app:sv_speedTextPosition="BOTTOM_LEFT"
         app:sv_speedTextSize="15dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitSpeedInterval="0dp"
@@ -520,7 +506,6 @@
 
         app:sv_speedTextColor="@android:color/transparent"
         app:sv_speedTextPadding="50dp"
-        app:sv_speedTextPosition="BOTTOM_LEFT"
         app:sv_speedTextSize="15dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unitSpeedInterval="0dp"
