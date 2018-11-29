@@ -169,6 +169,7 @@
     <string name="unit_nm">Nm</string>
     <string name="unit_psi">psi</string>
     <string name="unit_rpm">RPM</string>
+    <string name="unit_rpm1000">×1000</string>
     <string name="unit_volt">V</string>
 
     <string name="unknown">unknown</string>

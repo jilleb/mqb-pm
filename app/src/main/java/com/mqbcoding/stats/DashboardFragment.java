@@ -28,6 +28,7 @@ import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
+import com.github.anastr.speedviewlib.util.OnPrintTickLabel;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.util.Date;
@@ -939,11 +940,15 @@ public class DashboardFragment extends CarFragment {
 
                 break;
             case "engineSpeed":
-                icon.setText("");
-                clock.setUnit(getString(R.string.unit_rpm));
-                clock.setMinMaxSpeed(0, 8000);
-                clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+                icon.setText("RPM");
+                clock.setUnit(getString(R.string.unit_rpm1000));
+                clock.setMinMaxSpeed(0, 9);
+                clock.setTicks();
+                clock.setTickTextFormat(0);
+                clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackgroundResource(0);
+                int iconColor = clock.getUnitTextColor();
+                icon.setTextColor(iconColor);
                 break;
             case "batteryVoltage":
                 icon.setText("");
@@ -1140,6 +1145,7 @@ public class DashboardFragment extends CarFragment {
             int iconTint = clock.getUnitTextColor();
             iconBackground.setColorFilter(iconTint, PorterDuff.Mode.SRC_ATOP);
             icon.setBackground(iconBackground);
+            icon.setTextColor(iconTint);
         }
 
         float minimum = clock.getMinSpeed();
@@ -1174,8 +1180,13 @@ public class DashboardFragment extends CarFragment {
                 case "none":    // none cannot happen currently
                     break;
                 // all data that can be put on the clock without further modification
-                case "Nav_Heading":
                 case "engineSpeed":
+                    if (clockValue != null) {
+                        float rpmValue = clockValue/1000;
+                        dial.speedTo(rpmValue);
+                    }
+                    break;
+                case "Nav_Heading":
                 case "batteryVoltage":
                 case "Nav_Altitude":
                 case "lateralAcceleration":
@@ -1301,6 +1312,7 @@ public class DashboardFragment extends CarFragment {
                     textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
                 }
             }
+
         }
     }
 
