@@ -77,17 +77,17 @@ public class DashboardFragment extends CarFragment {
         }
     };
 
-    private final CarStatsClient.Listener mCarStatsListener;
-
-    {
-        mCarStatsListener = new CarStatsClient.Listener() {
-            @Override
-            public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
-                mLastMeasurements.putAll(values);
-                postUpdate();
-            }
-        };
-    }
+    private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
+        @Override
+        public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
+            mLastMeasurements.putAll(values);
+            postUpdate();
+        }
+        @Override
+        public void onSchemaChanged() {
+            // do nothing
+        }
+    };
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
         @Override

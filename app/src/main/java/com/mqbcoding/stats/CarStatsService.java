@@ -29,6 +29,7 @@ public class CarStatsService extends CarModeService {
 
     private final IBinder mBinder = new CarStatsBinder();
 
+    @SuppressWarnings("unused")
     public class CarStatsBinder extends Binder {
         CarStatsClient getStatsClient() {
             return mStatsClient;
@@ -45,7 +46,7 @@ public class CarStatsService extends CarModeService {
     public void onCreate() {
         super.onCreate();
 
-        Log.d(TAG, "Service starting.");
+        Log.d(TAG, "Service starting...");
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             NotificationChannel mChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
@@ -60,7 +61,7 @@ public class CarStatsService extends CarModeService {
 
         mStatsClient = new CarStatsClient(this);
 
-        mStatsLogger = new CarStatsLogger(this, new Handler());
+        mStatsLogger = new CarStatsLogger(this, mStatsClient, new Handler());
         mStatsLogger.registerListener(mStatsLoggerListener);
         mStatsClient.registerListener(mStatsLogger);
 

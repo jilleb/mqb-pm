@@ -293,7 +293,7 @@
     <style name="AppTheme.Beetle" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_beetle</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_beetle</item>
-        <item name="themedCarBackground">@drawable/background_incar_cloth</item>
+        <item name="themedCarBackground">@drawable/background_incar_beetle</item>
         <item name="themedNeedle">@drawable/needle_beetle</item>
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="sv_textColor">@android:color/transparent</item>

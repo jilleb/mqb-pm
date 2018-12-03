@@ -8,6 +8,10 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.github.martoreto.aauto.vex.CarStatsClient;
+import com.github.martoreto.aauto.vex.FieldSchema;
+import com.google.common.io.Files;
+import com.google.gson.reflect.TypeToken;
+
 import com.google.gson.Gson;
 
 import java.io.File;
@@ -15,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.lang.reflect.Type;
 import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -45,30 +50,36 @@ public class CarStatsLogger implements CarStatsClient.Listener {
 
     private boolean mIsEnabled;
     private final String mPrefix;
+    private final CarStatsClient mCarStatsClient;
+    private GZIPOutputStream mLogStream;
     private Writer mLogWriter;
     private File mLogFile;
     private Collection<Listener> mListeners = new ArrayList<>();
     private Handler mHandler;
     private Gson mGson = new Gson();
+    private boolean schemaNeedsUpdate = true;
 
-    public CarStatsLogger(Context context, Handler handler, String prefix) {
+    public CarStatsLogger(Context context, CarStatsClient statsClient, Handler handler, String prefix) {
         super();
         mHandler = handler;
         mPrefix = prefix;
+        mCarStatsClient = statsClient;
+
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.registerOnSharedPreferenceChangeListener(mPreferencesListener);
         readPreferences(sharedPreferences);
     }
 
-    public CarStatsLogger(Context context, Handler handler) {
-        this(context, handler, "car");
+    public CarStatsLogger(Context context, CarStatsClient statsClient, Handler handler) {
+        this(context, statsClient, handler, "car");
     }
 
     private void readPreferences(SharedPreferences preferences) {
         mIsEnabled = preferences.getBoolean(PREF_ENABLED, true);
     }
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final SharedPreferences.OnSharedPreferenceChangeListener mPreferencesListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String s) {
@@ -105,7 +116,7 @@ public class CarStatsLogger implements CarStatsClient.Listener {
                 Map<String, Object> o = new HashMap<>();
                 o.put("timestamp", JSON_DATE_FORMAT.format(date));
                 for (Map.Entry<String, Object> measurement: values.entrySet()) {
-                    String key = measurement.getKey().replaceAll("[^a-zA-Z0-9.]", "_");
+                    String key = makeJsonKey(measurement.getKey());
                     o.put(key, measurement.getValue());
                 }
                 mLogWriter.write(mGson.toJson(o));
@@ -116,6 +127,14 @@ public class CarStatsLogger implements CarStatsClient.Listener {
             Log.w(TAG, "Error saving measurements", e);
             close();
         }
+    }
+
+    public static String makeJsonKey(String key) {
+        return key.replaceAll("[^a-zA-Z0-9.]", "_");
+    }
+    @Override
+    public void onSchemaChanged() {
+        schemaNeedsUpdate = true;
     }
 
     public static File getLogsDir() throws IOException {
@@ -129,7 +148,14 @@ public class CarStatsLogger implements CarStatsClient.Listener {
         return logsDir;
     }
 
+    public static File getSchemaFile() throws IOException {
+        return new File(getLogsDir(), "schema.json");
+    }
+
     private synchronized void createLogStream() throws IOException {
+        if (schemaNeedsUpdate) {
+            updateSchema();
+        }
         if (mLogWriter != null) {
             return;
         }
@@ -140,10 +166,34 @@ public class CarStatsLogger implements CarStatsClient.Listener {
 
         String formattedDate = LOG_FILENAME_DATE_FORMAT.format(new Date());
         mLogFile = new File(getLogsDir(), mPrefix + "-" + formattedDate + ".log.gz");
-        mLogWriter = new OutputStreamWriter(new GZIPOutputStream(new FileOutputStream(mLogFile)),
+        mLogStream = new GZIPOutputStream(new FileOutputStream(mLogFile));
+        mLogWriter = new OutputStreamWriter(mLogStream,
                 StandardCharsets.UTF_8);
         Log.i(TAG, "Started log file: " + mLogFile.getAbsolutePath());
     }
+
+    private void updateSchema() throws IOException {
+        Log.d(TAG, "Updating schema...");
+        Map<String, Object> schema = null;
+        File schemaFile = getSchemaFile();
+        Type type = new TypeToken<Map<String, Object>>(){}.getType();
+        if (schemaFile.exists()) {
+            schema = mGson.fromJson(Files.asCharSource(schemaFile, StandardCharsets.UTF_8).read(),
+                    type);
+        }
+        if (schema == null) {
+            schema = new HashMap<>();
+        }
+        for (Map.Entry<String, FieldSchema> e: mCarStatsClient.getSchema().entrySet()) {
+            if (!schema.containsKey(e.getKey())) {
+                Log.d(TAG, "  New schema key: " + e.getKey() + " " + mGson.toJson(e.getValue()));
+            }
+        }
+        schema.putAll(mCarStatsClient.getSchema());
+        Files.asCharSink(schemaFile, StandardCharsets.UTF_8).write(mGson.toJson(schema, type));
+        schemaNeedsUpdate = false;
+    }
+
 
     public synchronized void close() {
         if (mLogWriter != null) {
@@ -151,6 +201,11 @@ public class CarStatsLogger implements CarStatsClient.Listener {
                 mLogWriter.flush();
                 mLogWriter.close();
             } catch (Exception e) {
+                Log.e(TAG, "Error closing log stream", e);
+            }
+            try {
+                mLogStream.close();
+            } catch (IOException e) {
                 Log.e(TAG, "Error closing log stream", e);
             }
             for (Listener listener: mListeners) {
@@ -161,6 +216,7 @@ public class CarStatsLogger implements CarStatsClient.Listener {
                 }
             }
             mLogWriter = null;
+            mLogStream = null;
             mLogFile = null;
             mHandler.removeCallbacks(mSync);
         }

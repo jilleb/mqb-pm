@@ -67,6 +67,11 @@ class WheelStateMonitor implements CarStatsClient.Listener {
         postUpdate();
     }
 
+    @Override
+    public void onSchemaChanged() {
+        // do nothing
+    }
+
     private void doUpdate() {
         Float lastSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
         String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");

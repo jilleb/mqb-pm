@@ -110,7 +110,9 @@
     <string name="pref_bigquery_dataset_title">Dataset name</string>
     <string name="pref_bigquery_project_id_title">Project ID</string>
     <string name="pref_bigquery_reupload_last_failed">Failed to initiate re-upload of the last log file.</string>
-    <string name="pref_bigquery_reupload_last_ok">Re-upload scheduled.</string>
+    <string name="pref_bigquery_reupload_all_title">Re-upload all log files</string>
+    <string name="bigquery_reupload_all_failed">Failed to initate re-upload of the all log files.</string>
+    <string name="bigquery_reupload_ok">Re-upload scheduled.</string>
     <string name="pref_bigquery_reupload_last_title">Re-upload last log file</string>
     <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
     <string name="pref_bigquery_table_title">Table name</string>
@@ -158,6 +160,9 @@
     <string name="pref_view4">View 4</string>
     <string name="pref_wheel_state_monitoring_summary">Generates a beep when during reverse-gear maneuvers the steering wheel crosses the zero angle.</string>
     <string name="pref_wheel_state_monitoring_title">Beep at zero steering angle</string>
+    <string name="reupload_last_nothing_to_do">Nothing to re-upload.</string>
+    <string name="cancel_uploads_done">Upload cancelled.</string>
+    <string name="pref_cancel_uploads_title">Cancel all uploads</string>
 
     <string name="testing">testing</string>
 

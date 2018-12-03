@@ -233,6 +233,10 @@
             android:key="bigqueryTable"
             android:title="@string/pref_bigquery_table_title" />
         <Preference
+            android:key="bigqueryReuploadAll"
+            android:dependency="uploadToBigquery"
+            android:title="@string/pref_bigquery_reupload_all_title" />
+        <Preference
             android:dependency="uploadToBigquery"
             android:key="bigqueryReuploadLast"
             android:title="@string/pref_bigquery_reupload_last_title" />
@@ -240,5 +244,9 @@
             android:dependency="uploadToBigquery"
             android:key="kickUploads"
             android:title="@string/pref_kick_uploads_title" />
+        <Preference
+            android:key="cancelUploads"
+            android:dependency="uploadToBigquery"
+            android:title="@string/pref_cancel_uploads_title" />
     </PreferenceCategory>
 </PreferenceScreen>
