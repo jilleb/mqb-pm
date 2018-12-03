@@ -63,6 +63,7 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 **MIB2:**
 - VW 0245
 - VW 0343
+- VW 0430 
 - VW 0613
 - VW 0617
 - VW 0755
@@ -83,14 +84,17 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 **MIB2:**
 - VW 0814
 - VW 1187
+- Seat 0472
 - Seat 1146
 - Seat 1219
 - Seat 1308
 - Seat 1338
+
 - Skoda 0468 
 
 **MIB2.5**
 - Seat 1162
+- VW 1161
 
 # Mixed results:
 **MIB2:**
