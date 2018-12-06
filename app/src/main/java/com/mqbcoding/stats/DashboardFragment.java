@@ -952,7 +952,7 @@ public class DashboardFragment extends CarFragment {
             case "batteryVoltage":
                 icon.setText("");
                 clock.setUnit(getString(R.string.unit_volt));
-                clock.setMinMaxSpeed(0, 16);
+                clock.setMinMaxSpeed(0, 17);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 clock.setBackgroundResource(emptyBackgroundResource);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_battery));
@@ -960,14 +960,14 @@ public class DashboardFragment extends CarFragment {
             case "oilTemperature":
                 icon.setText("");
                 clock.setUnit("°");
-                clock.setMinMaxSpeed(0, 150);
+                clock.setMinMaxSpeed(0, 200);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "coolantTemperature":
                 icon.setText("");
                 clock.setUnit("°");
-                clock.setMinMaxSpeed(0, 150);
+                clock.setMinMaxSpeed(0, 200);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
@@ -982,7 +982,7 @@ public class DashboardFragment extends CarFragment {
             case "gearboxOilTemperature":
                 icon.setText("");
                 clock.setUnit("°");
-                clock.setMinMaxSpeed(0, 150);
+                clock.setMinMaxSpeed(0, 200);
                 clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
@@ -1018,7 +1018,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "yawRate":
                 icon.setText("");
-                clock.setUnit("%");
+                clock.setUnit("°/s");
                 clock.setMinMaxSpeed(-1, 1);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_yaw));
                 clock.setBackgroundResource(emptyBackgroundResource);
@@ -1066,7 +1066,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "brakePressure":
                 icon.setText("");
-                clock.setUnit("%");
+                clock.setUnit("%");// brakepressure should probably be in BAR
                 clock.setMinMaxSpeed(0, 100);
                 icon.setBackground(getContext().getDrawable(R.drawable.ic_brakepedalposition));
                 clock.setBackgroundResource(emptyBackgroundResource);
@@ -1414,7 +1414,7 @@ public class DashboardFragment extends CarFragment {
             case "yawRate":
                 Float mYawRate = (Float) mLastMeasurements.get(queryElement);
                 if (mYawRate != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mYawRate));
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_degreespersec).toString(), mYawRate));
                 }
                 break;
             case "acceleratorPosition":

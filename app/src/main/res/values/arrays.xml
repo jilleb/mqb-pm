@@ -336,8 +336,12 @@
             radio_FMStations
             radio_FrequencyRanges
             radio_TA
-            radio_Text
-            radio_Tuner
+            Radio_Text.Artist
+            Radio_Text.Title
+            Radio_Text.ImageAvailable
+            Radio_Text.Image
+            Radio_Text.Album
+            Radio_Tuner.ShortName
         sound_BalanceFader
         sound_BalanceFaderSetup
         sound_VolumeSetup
@@ -359,17 +363,6 @@
             recuperationLevel
             totalDistance
 
-    *navi data*
-        longitude
-
-        nav_CurrentPosition
-        nav_GeoPosition
-        Nav_GeoPosition_Latitude (52.003735)
-	    Nav_GeoPosition_Longitude (5.922491)
-        nav_GuidanceDestination
-        nav_GuidanceRemaining
-        nav_GuidanceState
-
         nav_LastDestinations
 
     *unknown data formats*
@@ -383,17 +376,54 @@
         system_UnitDistance
         system_activeSource
 
+
     Todo: read these during initialisation, so the app is set up in the same way as the car
     *units*
         unitDateFormat
-        unitPressure
-        done: unitTemperature
+        unitPressure.pressureUnit
+        unitTemperature.temperatureUnit
         unitTimeFormat
+        unitVolume.volumeUnit
+
+
+
 
     *Other data elements, found om 13/2, still need to be categorized:
     torqueDistribution
     refillVolume
     hevOperationMode (sustaining)
+
+
+    more data elements:
+    tyreStates.compoundState
+    oilLevel.showBargraph
+    oilLevel.refillVolume
+    oilLevel.systemAvailable
+    oilLevel.warnings
+    recuperationLevel.recupLevel
+
+    tyreTemperatures.temperatureRearRight (and other positions and SpareWheel)
+    tyreTemperatures.temperatureUnit
+    tyrePressures.pressureFrontLeft (and other positions and SpareWheel)
+    tyrePressures.pressureUnit
+    tyreRequiredPressures. (same options as tyrePressures)
+    Car_vehicleInformation.Type (car derivate, e.g. 0203070200 for regular Golf 7)
+    Car_vehicleInformation.StickerBits
+
+    Nav_CurrentPosition.Street
+    Nav_CurrentPosition.Housenumber
+    Nav_CurrentPosition.Description
+    Nav_CurrentPosition.PostalCode
+    driveMode.activeProfile
+engineTypes.primaryEngine
+engineTypes.secondaryEngine
+suspensionProfile
+suspensionStates.height_frontLeft and other wheel locations (0-100 %)
+
+fuelWarningPrimaryTank true/false
+fuelWarningSecondaryTank true/false
+System_ProximityRecognition.InRange
+
 
      -->
 </resources>

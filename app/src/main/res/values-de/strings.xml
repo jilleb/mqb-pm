@@ -85,6 +85,46 @@
     <string name="format_km">%.1f km</string>
     <string name="format_miles">%.1f miles</string>
     <string name="pref_bigquery_dataset_title">Dataset name</string>
+    <string name="element_yawRate">Gierrate</string>
+    <string name="element_wheelAngle">Lenkwinkel</string>
+    <string name="element_acceleratorPosition">Fahrpedalstellung</string>
+    <string name="element_brakePressure">Bremsdruck</string>
+    <string name="element_powermeter">PHEV Boostanzeige</string>
+    <string name="element_currentTorque">Drehmoment</string>
+    <string name="element_currentOutputPower">Momentanleistung</string>
+    <string name="element_EcoHMI_Score.AvgShort">Eco Wert</string>
+    <string name="element_EcoHMI_Score.AvgTrip">Eco Wert (durchschnitt)</string>
+    <string name="element_currentConsumptionPrimary">Momentanverbrauch des Primärantriebes</string>
+    <string name="element_currentConsumptionSecondary">Momentanverbrauch des Sekundärantriebes</string>
+    <string name="element_cycleConsumptionPrimary">Durchchnittsverbrauch des Primärantriebes seit Tanken</string>
+    <string name="element_cycleConsumptionSecondary">Durchchnittsverbrauch des Sekundärantriebes seit Tanken</string>
+    <string name="element_soundVolume">Lautstärke</string>
+    <string name="element_odometer">Gesamtwegstrecke</string>
+    <string name="element_tyreStateFL">Reifenzustände vorne links</string>
+    <string name="element_tyreStateFR">Reifenzustände vorne rechts</string>
+    <string name="element_tyreStateRL">Reifenzustände hinten links</string>
+    <string name="element_tyreStateRR">Reifenzustände hinten rechts</string>
+    <string name="element_VIN">Fahrgestellnummer</string>
+    <string name="element_batteryVoltage">Spannung der 12V-Batterie</string>
+    <string name="element_vehicleSpeed">Fahrzeuggeschwindigkeit</string>
+    <string name="element_outsideTemperature">Außentemperatur</string>
+    <string name="element_coolantTemperature">Kühlmitteltemperatur</string>
+    <string name="element_oilTemperature">Öltemperatur</string>
+    <string name="element_longitudinalAcceleration">Längsbeschleunigung</string>
+    <string name="element_tankLevelPrimary">Tankfüllstand des primären Antriebs</string>
+    <string name="element_tankLevelSecondary">Tankfüllstand des sekundären Antriebs</string>
+    <string name="element_absChargingAirPressure">Absoluten Ladedruck</string>
+    <string name="element_relChargingAirPressure">Relativen Ladedruck</string>
+    <string name="element_recommendedGear">Empfohlenen Gang</string>
+    <string name="element_navAltitude">Höhe</string>
+    <string name="element_navCity">Stadt</string>
+    <string name="element_navCountry">Land</string>
+    <string name="element_navHeading">Fahrtrichtung</string>
+    <string name="element_blinkingState">Blinkleuchtenzustand</string>
+    <string name="element_currentGear">Gang</string>
+    <string name="element_engineSpeed">Motordrehzahl</string>
+    <string name="element_gearboxOilTemperature">Getriebetemperatur</string>
+    <string name="element_lateralAcceleration">Querbeschleunigung</string>
 
 
 </resources>

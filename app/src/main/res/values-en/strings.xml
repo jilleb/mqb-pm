@@ -143,5 +143,8 @@
     <string name="pref_showbatterylevel_title">Battery level</string>
     <string name="unknown">unknown</string>
     <string name="activity_credits_title">Credits</string>
+    <string name="element_soundVolume">Sound volume</string>
+    <string name="element_VIN">VIN</string>
+    <string name="element_navAltitude">Altitude</string>
 
 </resources>

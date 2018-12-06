@@ -84,6 +84,7 @@
     <string name="format_miles">%.1f miles</string>
     <string name="format_noDecimals">%.0f</string>
     <string name="format_percent">%.1f</string>
+    <string name="format_degreespersec">%.1f°/s</string>
     <string name="format_temperature">%.1f°</string>
     <string name="format_temperature0">-,-°</string>
     <string name="format_temperatureC">%.1f°C</string>
