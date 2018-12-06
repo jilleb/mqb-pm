@@ -24,7 +24,6 @@ public class MainCarActivity extends CarActivity {
     //menu stuff//
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
-    static final String MENU_GRAPH = "graph";
     private static final String TAG = "MainCarActivity";
 
 
@@ -34,7 +33,6 @@ public class MainCarActivity extends CarActivity {
     private static final String FRAGMENT_CAR = "dashboard";
     private static final String FRAGMENT_CREDITS = "credits";
     private static final String FRAGMENT_STOPWATCH = "stopwatch";
-    private static final String FRAGMENT_GRAPH = "graph";
     private static final String CURRENT_FRAGMENT_KEY = "app_current_fragment";
 
     private static final int TEST_NOTIFICATION_ID = 1;
@@ -50,9 +48,6 @@ public class MainCarActivity extends CarActivity {
                     break;
                 case MENU_STOPWATCH:
                     switchToFragment(FRAGMENT_STOPWATCH);
-                    break;
-                case MENU_GRAPH:
-                    switchToFragment(FRAGMENT_GRAPH);
                     break;
                 case MENU_CREDITS:
                     switchToFragment(FRAGMENT_CREDITS);
@@ -207,15 +202,12 @@ public class MainCarActivity extends CarActivity {
         //set fragments:
         CarFragment carfragment = new DashboardFragment();
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
-        GraphFragment graphfragment = new GraphFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, carfragment, FRAGMENT_CAR)
                 .detach(carfragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
-                .add(R.id.fragment_container, graphfragment, FRAGMENT_GRAPH)
-                .detach(graphfragment)
                 .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
                 .detach(creditsfragment)
                 .commitNow();
@@ -238,11 +230,6 @@ public class MainCarActivity extends CarActivity {
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))
-                .setType(MenuItem.Type.ITEM)
-                .build());
-
-        mainMenu.addMenuItem(MENU_GRAPH, new MenuItem.Builder()
-                .setTitle(getString(R.string.activity_graph_title))
                 .setType(MenuItem.Type.ITEM)
                 .build());
 

@@ -28,7 +28,6 @@ import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
-import com.github.anastr.speedviewlib.util.OnPrintTickLabel;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 
 import java.util.Date;
@@ -1474,7 +1473,7 @@ public class DashboardFragment extends CarFragment {
                 String tyreState = (String) mLastMeasurements.get(queryElement);
                 if (tyreState != null) {
                     value.setText(tyreState);
-                    if (tyreState != "OK") value.setTextColor(Color.RED);
+                    //if (tyreState != "OK") value.setTextColor(Color.RED);
                 }
                 break;
 
