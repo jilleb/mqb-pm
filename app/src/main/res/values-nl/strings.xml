@@ -139,7 +139,7 @@
     <string name="notification_channel_name">Auto</string>
     <string name="element_navAltitude">Hoogte</string>
     <string name="element_blinkingState">Knipperlicht status</string>
-    <string name="element_navCity">Actuele land</string>
+    <string name="element_navCity">Actuele stad</string>
     <string name="element_navCountry">Actuele land</string>
     <string name="element_navState">Actuele regio</string>
     <string name="element_debug">Debug query</string>

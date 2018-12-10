@@ -1417,6 +1417,12 @@ public class DashboardFragment extends CarFragment {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.format_degreespersec).toString(), mYawRate));
                 }
                 break;
+            case "Sound_Volume":
+                Float mSoundVol = (Float) mLastMeasurements.get(queryElement);
+                if (mSoundVol != null) {
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mSoundVol));
+                }
+                break;
             case "acceleratorPosition":
                 Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
                 if (mAcceleratorPosition != null) {
@@ -1456,7 +1462,6 @@ public class DashboardFragment extends CarFragment {
             case "Nav_CurrentPosition.City":
             case "Nav_CurrentPosition.State":
             case "Nav_CurrentPosition.Country":
-            case "Sound_Volume":
             case "Radio_Tuner.Name":
             case "Radio_Text":
             case "totalDistance.distanceValue":
