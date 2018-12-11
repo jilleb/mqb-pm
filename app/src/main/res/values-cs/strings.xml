@@ -131,6 +131,7 @@
     <string name="element_navLongitude">GPS zeměpisná šířka</string>
     <string name="element_navHeading">Kompas</string>
     <string name="element_navCity">Město</string>
+    <string name="element_navStreet">NAV Ulice</string>
     <string name="element_navCountry">Stát</string>
     <string name="element_navState">Oblast</string>
     <string name="element_odometer">Stav km</string>

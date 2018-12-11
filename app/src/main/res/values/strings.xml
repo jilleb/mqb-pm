@@ -45,6 +45,7 @@
     <string name="element_navLatitude">GPS latitude</string>
     <string name="element_navLongitude">GPS longitude</string>
     <string name="element_navState">Current state</string>
+    <string name="element_navStreet">Street</string>
     <string name="element_none">None</string>
     <string name="element_odometer">Odometer</string>
     <string name="element_oilTemperature">Oil temperature</string>
@@ -66,6 +67,8 @@
     <string name="element_vehicleSpeed_alternative">Car speed (different source)</string>
     <string name="element_wheelAngle">Wheel angle</string>
     <string name="element_yawRate">Yaw rate</string>
+    <string name="element_shortTermConsumptionPrimary">Short Term Consumption (primary fuel)</string>
+    <string name="element_shortTermConsumptionSecondary">Short Term Consumption (secondary fuel)</string>
 
     <string name="font_audi" translatable="false">Audi Virtual Cockpit</string>
     <string name="font_frutiger" translatable="false">Frutiger</string>

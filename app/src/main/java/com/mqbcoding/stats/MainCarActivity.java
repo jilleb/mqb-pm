@@ -1,5 +1,12 @@
 package com.mqbcoding.stats;
 
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothHeadset;
+import android.bluetooth.BluetoothHealth;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -39,6 +46,9 @@ public class MainCarActivity extends CarActivity {
     private String mCurrentFragmentTag;
     private Boolean connectivityOn, batteryOn, clockOn, micOn;
 
+
+
+
     private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
         @Override
         public void onMenuItemClicked(String name) {
@@ -77,6 +87,7 @@ public class MainCarActivity extends CarActivity {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
@@ -146,6 +157,54 @@ public class MainCarActivity extends CarActivity {
 
         }
         Log.d(TAG, "Set theme: " + selectedTheme);
+
+
+
+// test code to change bluetooth name
+        final String sNewName = selectedTheme;
+        final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
+
+        final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
+
+        if (myBTAdapter != null)
+        {
+            String sOldName = myBTAdapter.getName();
+            if (sOldName.equalsIgnoreCase(sNewName) == false)
+            {
+                final Handler myTimerHandler = new Handler();
+                myBTAdapter.enable();
+
+                myTimerHandler.postDelayed(
+                        new Runnable()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                if (myBTAdapter.isEnabled())
+                                {
+                                    myBTAdapter.setName(sNewName);
+
+                                    if (sNewName.equalsIgnoreCase(myBTAdapter.getName()))
+                                    {
+                                        Log.i(TAG, "Updated BT Name to " + myBTAdapter.getName());
+                                        //myBTAdapter.disable();
+                                    }
+                                }
+                                if ((sNewName.equalsIgnoreCase(myBTAdapter.getName()) == false) && (System.currentTimeMillis() < lTimeToGiveUp_ms))
+                                {
+                                    myTimerHandler.postDelayed(this, 500);
+                                    if (myBTAdapter.isEnabled())
+                                        Log.i(TAG, "Update BT Name: waiting on BT Enable");
+                                    else
+                                        Log.i(TAG, "Update BT Name: waiting for Name (" + sNewName + ") to set in");
+                                }
+                            }
+                        } , 500);
+            }
+        }
+// end of test code to change bluetooth name.
+
+
 
         connectivityOn  = sharedPreferences.getBoolean("connectivityActive",true);
         batteryOn       = sharedPreferences.getBoolean("batterylevelActive", true);

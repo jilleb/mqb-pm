@@ -139,8 +139,8 @@
         <item>@string/element_EcoHMI_Score.AvgTrip</item>
         <item>@string/element_navAltitude</item>
         <item>@string/element_navHeading</item>
-
         <!--<item>@string/element_blinkingState</item>-->
+        <item>@string/element_navStreet</item>
         <item>@string/element_navLongitude</item>
         <item>@string/element_navLatitude</item>
         <item>@string/element_navCity</item>
@@ -154,6 +154,8 @@
         <item>@string/element_tyreStateRL</item>
         <item>@string/element_tyreStateFR</item>
         <item>@string/element_tyreStateFL</item>
+        <item>@string/element_shortTermConsumptionPrimary</item>
+        <item>@string/element_shortTermConsumptionSecondary</item>
         <item>@string/element_VIN</item>
 
 
@@ -189,6 +191,7 @@
         <item>Nav_Altitude</item>
         <item>Nav_Heading</item>
         <!--<item>blinkingState</item>-->
+        <item>Nav_CurrentPosition.Street</item>
         <item>Nav_CurrentPosition.Longitude</item>
         <item>Nav_CurrentPosition.Latitude</item>
         <item>Nav_CurrentPosition.City</item>
@@ -202,7 +205,11 @@
         <item>tyreStates.stateRearLeft</item>
         <item>tyreStates.stateFrontRight</item>
         <item>tyreStates.stateFrontLeft</item>
+        <item>shortTermConsumptionPrimary</item>
+        <item>shortTermConsumptionSecondary</item>
+
         <item>vehicleIdenticationNumber.VIN</item>
+
 
         <item>test</item>
         <item>debug</item>

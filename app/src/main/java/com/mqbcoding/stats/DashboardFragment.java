@@ -80,6 +80,7 @@ public class DashboardFragment extends CarFragment {
         @Override
         public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
             mLastMeasurements.putAll(values);
+            Log.i(TAG, "onCarStatsClient.Listener");
             postUpdate();
         }
         @Override
@@ -92,6 +93,7 @@ public class DashboardFragment extends CarFragment {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder) iBinder;
+            Log.i(TAG, "ServiceConnected");
             mStatsClient = carStatsBinder.getStatsClient();
             mWheelStateMonitor = carStatsBinder.getWheelStateMonitor();
             mLastMeasurements = mStatsClient.getMergedMeasurements();
@@ -101,6 +103,7 @@ public class DashboardFragment extends CarFragment {
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
             mStatsClient.unregisterListener(mCarStatsListener);
+            Log.i(TAG, "ServiceDisconnected");
         }
     };
 
@@ -146,10 +149,6 @@ public class DashboardFragment extends CarFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Log.i(TAG, "onAttach");
-
-        Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
-        getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
-
     }
 
     @Override
@@ -164,7 +163,6 @@ public class DashboardFragment extends CarFragment {
         Log.i(TAG, "onCreateView");
         View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
-
         //Get preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
@@ -177,7 +175,6 @@ public class DashboardFragment extends CarFragment {
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         mDebugQuery = sharedPreferences.getString("debugQuery", "");
         selectedTheme = sharedPreferences.getString("selectedTheme", "");
-
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -522,11 +519,15 @@ public class DashboardFragment extends CarFragment {
     public void onResume() {
         super.onResume();
         Log.i(TAG, "onActivate");
+        Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
+        getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
     public void onPause() {
         Log.i(TAG, "onDeactivate");
+        mStatsClient.unregisterListener(mCarStatsListener);
+        getContext().unbindService(mServiceConnection);
         super.onPause();
     }
 
@@ -736,7 +737,7 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackgroundResource(0);
                 break;
-            case "element_currentTorque":
+            case "currentTorque":
                 label.setText(R.string.unit_nm);
                 value.setText("-");
                 label.setBackgroundResource(0);
@@ -801,11 +802,22 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_ecoavg));
                 break;
+            case "shortTermConsumptionPrimary":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_fuelprimary));
+                break;
+            case "shortTermConsumptionSecondary":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_fuelsecondary));
+                break;
             case "Nav_CurrentPosition.Longitude":
             case "Nav_CurrentPosition.Latitude":
             case "Nav_CurrentPosition.City":
             case "Nav_CurrentPosition.State":
             case "Nav_CurrentPosition.Country":
+            case "Nav_CurrentPosition.Street":
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_world));
@@ -1072,7 +1084,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setBackgroundResource(emptyBackgroundResource);
                 clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
                 break;
-            case "element_currentTorque":
+            case "currentTorque":
                 icon.setText("");
                 clock.setUnit(getString(R.string.unit_nm));
                 clock.setMinMaxSpeed(0, 500);
@@ -1163,6 +1175,12 @@ public class DashboardFragment extends CarFragment {
         } else {
 
             Float clockValue = (Float) mLastMeasurements.get(query);
+            Float oldValue =  (Float) dial.getSpeed();
+            // don't update when there's nothing to update
+            if (clockValue == oldValue) {
+                return;
+            }
+
             float randomClockVal = randFloat(0, 360);
             speedFactor = 1f;
             pressureFactor = 1f;
@@ -1194,7 +1212,7 @@ public class DashboardFragment extends CarFragment {
                 case "EcoHMI_Score.AvgShort":
                 case "EcoHMI_Score.AvgTrip":
                 case "brakePressure":
-                case "element_currentTorque":
+                case "currentTorque":
                 case "currentOutputPower":
                     if (clockValue != null) {
                         dial.speedTo(clockValue);
@@ -1370,7 +1388,7 @@ public class DashboardFragment extends CarFragment {
 
             // Decimal values, without any specific modification:
             case "currentOutputPower":
-            case "element_currentTorque":
+            case "currentTorque":
                 Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
                 if (mCurrentDecimalValue != null) {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), mCurrentDecimalValue));
@@ -1457,11 +1475,19 @@ public class DashboardFragment extends CarFragment {
                     value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mEcoScore));
                 }
                 break;
+            case "shortTermConsumptionPrimary":
+            case "shortTermConsumptionSecondary":
+                Float mshortConsumption = (Float) mLastMeasurements.get(queryElement);
+                if (mshortConsumption != null) {
+                    value.setText(String.format(Locale.US, "%.1f".toString(),mshortConsumption));
+                }
+                break;
             case "Nav_CurrentPosition.Longitude":
             case "Nav_CurrentPosition.Latitude":
             case "Nav_CurrentPosition.City":
             case "Nav_CurrentPosition.State":
             case "Nav_CurrentPosition.Country":
+            case "Nav_CurrentPosition.Street":
             case "Radio_Tuner.Name":
             case "Radio_Text":
             case "totalDistance.distanceValue":
