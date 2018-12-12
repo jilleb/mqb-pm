@@ -1,5 +1,6 @@
 package com.mqbcoding.stats;
 
+import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -588,10 +589,6 @@ public class DashboardFragment extends CarFragment {
     @Override
     public void onDetach() {
         Log.i(TAG, "onDetach");
-
-        mStatsClient.unregisterListener(mCarStatsListener);
-        getContext().unbindService(mServiceConnection);
-
         super.onDetach();
     }
 
@@ -628,6 +625,8 @@ public class DashboardFragment extends CarFragment {
         updateElement(mElement2Query, mValueElement2, mIconElement2);
         updateElement(mElement3Query, mValueElement3, mIconElement3);
         updateElement(mElement4Query, mValueElement4, mIconElement4);
+
+        updateBluetooth(mElement1Query);
 
         //update each of the clocks and the min/max/ray elements that go with it
         // query, dial, visray, textmax, textmin, clockmax, clockmin) {
@@ -669,6 +668,56 @@ public class DashboardFragment extends CarFragment {
                         WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG));
         mSteeringWheelAngle.setVisibility(View.INVISIBLE);
 
+    }
+
+    private void updateBluetooth(String queryElement) {
+
+        if (queryElement == null) {
+            return;
+        } else {
+
+            final String sNewName = (String) mLastMeasurements.get(queryElement);
+
+            if (sNewName != null) {
+            }
+
+            // test code to change bluetooth name
+            final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
+
+            final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
+
+            if (myBTAdapter != null) {
+                String sOldName = myBTAdapter.getName();
+                if (sOldName.equalsIgnoreCase(sNewName) == false) {
+                    final Handler myTimerHandler = new Handler();
+                    myBTAdapter.enable();
+
+                    myTimerHandler.postDelayed(
+                            new Runnable() {
+                                @Override
+                                public void run() {
+                                    if (myBTAdapter.isEnabled()) {
+                                        myBTAdapter.setName(sNewName);
+
+                                        if (sNewName.equalsIgnoreCase(myBTAdapter.getName())) {
+                                            Log.i(TAG, "Updated BT Name to " + myBTAdapter.getName());
+                                            //myBTAdapter.disable();
+                                        }
+                                    }
+                                    if ((sNewName.equalsIgnoreCase(myBTAdapter.getName()) == false) && (System.currentTimeMillis() < lTimeToGiveUp_ms)) {
+                                        myTimerHandler.postDelayed(this, 500);
+                                        if (myBTAdapter.isEnabled())
+                                            Log.i(TAG, "Update BT Name: waiting on BT Enable");
+                                        else
+                                            Log.i(TAG, "Update BT Name: waiting for Name (" + sNewName + ") to set in");
+                                    }
+                                }
+                            }, 500);
+                }
+            }
+// end of test code to change bluetooth name.
+
+        }
     }
 
     // this sets all the labels/values in an initial state, depending on the chosen options
