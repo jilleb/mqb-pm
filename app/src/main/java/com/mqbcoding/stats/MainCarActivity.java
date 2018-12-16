@@ -1,6 +1,5 @@
 package com.mqbcoding.stats;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -37,9 +36,6 @@ public class MainCarActivity extends CarActivity {
     private static final int TEST_NOTIFICATION_ID = 1;
     private String mCurrentFragmentTag;
     private Boolean connectivityOn, batteryOn, clockOn, micOn;
-
-
-
 
     private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
         @Override
@@ -86,7 +82,6 @@ public class MainCarActivity extends CarActivity {
 
         Log.d(TAG, "Selected theme: " + selectedTheme);
         setTheme(R.style.AppTheme_VolkswagenGTI);
-
 
         switch (selectedTheme) {
             case "VW GTI":
@@ -149,7 +144,6 @@ public class MainCarActivity extends CarActivity {
 
         }
         Log.d(TAG, "Set theme: " + selectedTheme);
-
 
         connectivityOn  = sharedPreferences.getBoolean("connectivityActive",true);
         batteryOn       = sharedPreferences.getBoolean("batterylevelActive", true);

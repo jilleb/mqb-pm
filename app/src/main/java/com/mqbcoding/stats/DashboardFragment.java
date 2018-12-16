@@ -1,6 +1,5 @@
 package com.mqbcoding.stats;
 
-import android.bluetooth.BluetoothAdapter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -76,6 +75,26 @@ public class DashboardFragment extends CarFragment {
             postUpdate();
         }
     };
+
+// todo: reset min/max when clock is touched
+    private View.OnClickListener resetMinMax = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Float speedLeft = (Float) mClockLeft.getSpeed();
+            float speedCenter = mClockCenter.getSpeed();
+            float speedRight = mClockRight.getSpeed();
+
+            mClockMaxLeft.speedTo(speedLeft);
+            mClockMinLeft.speedTo(speedLeft);
+            mClockMinCenter.speedTo(speedCenter);
+            mClockMaxCenter.speedTo(speedCenter);
+            mClockMaxRight.speedTo(speedRight);
+            mClockMinRight.speedTo(speedRight);
+
+        }
+    };
+
 
     private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
         @Override
@@ -293,7 +312,7 @@ public class DashboardFragment extends CarFragment {
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
 
         //click the
-        mClockCenter.setOnClickListener(forceUpdate);
+        mClockCenter.setOnClickListener(resetMinMax);
 
         //determine what data the user wants to have on the 4 data views
         mElement1Query = sharedPreferences.getString("selectedView1", "none");
@@ -626,8 +645,6 @@ public class DashboardFragment extends CarFragment {
         updateElement(mElement3Query, mValueElement3, mIconElement3);
         updateElement(mElement4Query, mValueElement4, mIconElement4);
 
-        updateBluetooth(mElement1Query);
-
         //update each of the clocks and the min/max/ray elements that go with it
         // query, dial, visray, textmax, textmin, clockmax, clockmin) {
         updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft);
@@ -668,56 +685,6 @@ public class DashboardFragment extends CarFragment {
                         WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG));
         mSteeringWheelAngle.setVisibility(View.INVISIBLE);
 
-    }
-
-    private void updateBluetooth(String queryElement) {
-
-        if (queryElement == null) {
-            return;
-        } else {
-
-            final String sNewName = (String) mLastMeasurements.get(queryElement);
-
-            if (sNewName != null) {
-            }
-
-            // test code to change bluetooth name
-            final BluetoothAdapter myBTAdapter = BluetoothAdapter.getDefaultAdapter();
-
-            final long lTimeToGiveUp_ms = System.currentTimeMillis() + 10000;
-
-            if (myBTAdapter != null) {
-                String sOldName = myBTAdapter.getName();
-                if (sOldName.equalsIgnoreCase(sNewName) == false) {
-                    final Handler myTimerHandler = new Handler();
-                    myBTAdapter.enable();
-
-                    myTimerHandler.postDelayed(
-                            new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (myBTAdapter.isEnabled()) {
-                                        myBTAdapter.setName(sNewName);
-
-                                        if (sNewName.equalsIgnoreCase(myBTAdapter.getName())) {
-                                            Log.i(TAG, "Updated BT Name to " + myBTAdapter.getName());
-                                            //myBTAdapter.disable();
-                                        }
-                                    }
-                                    if ((sNewName.equalsIgnoreCase(myBTAdapter.getName()) == false) && (System.currentTimeMillis() < lTimeToGiveUp_ms)) {
-                                        myTimerHandler.postDelayed(this, 500);
-                                        if (myBTAdapter.isEnabled())
-                                            Log.i(TAG, "Update BT Name: waiting on BT Enable");
-                                        else
-                                            Log.i(TAG, "Update BT Name: waiting for Name (" + sNewName + ") to set in");
-                                    }
-                                }
-                            }, 500);
-                }
-            }
-// end of test code to change bluetooth name.
-
-        }
     }
 
     // this sets all the labels/values in an initial state, depending on the chosen options
@@ -1218,11 +1185,10 @@ public class DashboardFragment extends CarFragment {
 
     //update clock with data
     private void updateClock(String query, Speedometer dial, RaySpeedometer visray, TextView textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin) {
-
         if (query == null) {
             return;
         } else {
-
+            // Get the value that should be put on the clock, depending on the query
             Float clockValue = (Float) mLastMeasurements.get(query);
             Float oldValue =  (Float) dial.getSpeed();
             // don't update when there's nothing to update
@@ -1352,6 +1318,7 @@ public class DashboardFragment extends CarFragment {
                                 break;
 
                         }
+                        clockValue = clockValue * speedFactor;
                         clockValue = clockValue * speedFactor;
                         dial.speedTo(clockValue);
                     }
