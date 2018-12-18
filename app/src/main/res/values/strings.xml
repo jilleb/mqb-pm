@@ -193,5 +193,6 @@
     <string name="label_tyreRL">RL</string>
     <string name="label_tyreFR">FR</string>
     <string name="label_tyreFL">FL</string>
+    <string name="element_torqueversion">Torque app version</string>
 
 </resources>

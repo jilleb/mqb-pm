@@ -13,6 +13,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.os.RemoteException;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -22,6 +25,8 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import org.prowl.torque.remote.ITorqueService;
 
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
@@ -68,6 +73,8 @@ public class DashboardFragment extends CarFragment {
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
+    private ITorqueService torqueService;
+
 
     private View.OnClickListener forceUpdate = new View.OnClickListener() {
         @Override
@@ -91,6 +98,8 @@ public class DashboardFragment extends CarFragment {
             mClockMaxCenter.speedTo(speedCenter);
             mClockMaxRight.speedTo(speedRight);
             mClockMinRight.speedTo(speedRight);
+
+            postUpdate();
 
         }
     };
@@ -432,12 +441,14 @@ public class DashboardFragment extends CarFragment {
                     final Handler staging = new Handler();
                     staging.postDelayed(new Runnable() {
                         public void run() {
+                            if (mClockLeft != null){
                             mClockLeft.speedTo(0, 1000);
                             mClockCenter.speedTo(0, 1000);
                             mClockRight.speedTo(0, 1000);
                             mRayLeft.speedTo(0, 1000);
                             mRayCenter.speedTo(0, 1000);
                             mRayRight.speedTo(0, 1000);
+                            }
 
                         }
                     }, 1000);
@@ -541,6 +552,19 @@ public class DashboardFragment extends CarFragment {
         Log.i(TAG, "onActivate");
         Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
         getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+
+        try {
+            // Bind to the torque service
+            Intent intent = new Intent();
+            intent.setClassName("org.prowl.torque", "org.prowl.torque.remote.TorqueService");
+            boolean successfulBind = getContext().bindService(intent, torqueConnection, 0);
+
+            if ( ! successfulBind ) {
+                throw new Exception("Couldn't connect to Torque");
+            }
+        } catch ( Exception e ) {
+            Log.e(TAG,"Error: " + e.getMessage());
+        }
     }
 
     @Override
@@ -548,6 +572,7 @@ public class DashboardFragment extends CarFragment {
         Log.i(TAG, "onDeactivate");
         mStatsClient.unregisterListener(mCarStatsListener);
         getContext().unbindService(mServiceConnection);
+        getContext().unbindService(torqueConnection);
         super.onPause();
     }
 
@@ -712,6 +737,11 @@ public class DashboardFragment extends CarFragment {
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_spanner));
+                break;
+            case "torqueversion":
+                label.setText("");
+                value.setText("-");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_obd2));
                 break;
             case "batteryVoltage":
                 label.setText("");
@@ -1319,7 +1349,6 @@ public class DashboardFragment extends CarFragment {
 
                         }
                         clockValue = clockValue * speedFactor;
-                        clockValue = clockValue * speedFactor;
                         dial.speedTo(clockValue);
                     }
                     break;
@@ -1367,6 +1396,20 @@ public class DashboardFragment extends CarFragment {
                 if (mDebugvalue != null) {
                     value.setText(mDebugvalue);
                 }
+                break;
+            case "torqueversion":
+                try {
+                    if (torqueService != null) {
+                        String torqueVersion = Integer.toString(torqueService.getVersion());
+                        if (torqueVersion != null) {
+                            value.setText(torqueVersion);
+                        }
+                    }
+
+                } catch ( Exception e ) {
+                    Log.e(TAG,"Error: " + e.getMessage());
+                }
+
                 break;
             case "batteryVoltage":
                 Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
@@ -1526,6 +1569,28 @@ public class DashboardFragment extends CarFragment {
 
         }
     }
+
+    private ServiceConnection torqueConnection = new ServiceConnection() {
+        /**
+         * What to do when we get connected to Torque.
+         *
+         * @param arg0
+         * @param service
+         */
+        public void onServiceConnected(ComponentName arg0, IBinder service) {
+            torqueService = ITorqueService.Stub.asInterface(service);
+            postUpdate();
+        };
+
+        /**
+         * What to do when we get disconnected from Torque.
+         *
+         * @param name
+         */
+        public void onServiceDisconnected(ComponentName name) {
+            torqueService = null;
+        };
+    };
 
 
 }

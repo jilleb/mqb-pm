@@ -158,7 +158,7 @@
         <item>@string/element_shortTermConsumptionSecondary</item>
         <item>@string/element_VIN</item>
 
-
+        <item>@string/element_torqueversion</item>
         <item>@string/element_test</item>
         <item>@string/element_debug</item>
 
@@ -210,7 +210,7 @@
 
         <item>vehicleIdenticationNumber.VIN</item>
 
-
+        <item>torqueversion</item>
         <item>test</item>
         <item>debug</item>
     </string-array>
