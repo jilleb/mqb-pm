@@ -158,7 +158,26 @@
         <item>@string/element_shortTermConsumptionSecondary</item>
         <item>@string/element_VIN</item>
 
+        <!-- PIDs from Torque -->
         <item>@string/element_torqueversion</item>
+        <item>@string/element_torque_rpm</item>
+        <item>@string/element_torque_speed</item>
+        <item>@string/element_torque_fuelpressure</item>
+        <item>@string/element_torque_engineload</item>
+        <item>@string/element_torque_timing_advance</item>
+        <item>@string/element_torque_intake_air_temperature</item>
+        <item>@string/element_torque_mass_air_flow</item>
+        <item>@string/element_torque_throttle_position</item>
+        <item>@string/element_torque_turboboost</item>
+        <item>@string/element_torque_voltage</item>
+        <item>@string/element_torque_AFR</item>
+        <item>@string/element_torque_fueltrimshortterm1</item>
+        <item>@string/element_torque_fueltrimlongterm1</item>
+        <item>@string/element_torque_fueltrimshortterm2</item>
+        <item>@string/element_torque_fueltrimlongterm2</item>
+        <item>@string/element_torque_accelerometer_total</item>
+
+
         <item>@string/element_test</item>
         <item>@string/element_debug</item>
 
@@ -209,8 +228,26 @@
         <item>shortTermConsumptionSecondary</item>
 
         <item>vehicleIdenticationNumber.VIN</item>
+        <!-- PIDs from Torque -->
+        <item>torque_version</item>
+        <!-- Use PIDs like this: torque_<description>_<pid> -->
+        <item>torque_rpm_0x0c</item>
+        <item>torque_speed_0x0d</item>
+        <item>torque_fuelpressure_0x0a</item>
+        <item>torque_engineload_0x04</item>
+        <item>torque_timing_advance_0x0e</item>
+        <item>torque_intake_air_temperature_0x0f</item>
+        <item>torque_mass_air_flow_0x10</item>
+        <item>torque_throttle_position_0x11</item>
+        <item>torque_turboboost_0xff1202</item>
+        <item>torque_voltage_0xff1238</item>
+        <item>torque_AFR_0xff1249</item>
+        <item>torque_fueltrimshortterm1_0x06</item>
+        <item>torque_fueltrimlongterm1_0x07</item>
+        <item>torque_fueltrimshortterm2_0x08</item>
+        <item>torque_fueltrimlongterm2_0x09</item>
+        <item>torque_accelerometer_total_0xff1223</item>
 
-        <item>torqueversion</item>
         <item>test</item>
         <item>debug</item>
     </string-array>
@@ -415,4 +452,5 @@ System_ProximityRecognition.InRange
 
 
      -->
+    <string name="element_torque_fueltrimlongterm1">Torque - Long term fuel trim (bank 1)</string>
 </resources>

@@ -35,6 +35,7 @@ import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -83,7 +84,7 @@ public class DashboardFragment extends CarFragment {
         }
     };
 
-// todo: reset min/max when clock is touched
+    // todo: reset min/max when clock is touched
     private View.OnClickListener resetMinMax = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -442,14 +443,22 @@ public class DashboardFragment extends CarFragment {
                     staging.postDelayed(new Runnable() {
                         public void run() {
                             if (mClockLeft != null){
-                            mClockLeft.speedTo(0, 1000);
-                            mClockCenter.speedTo(0, 1000);
-                            mClockRight.speedTo(0, 1000);
-                            mRayLeft.speedTo(0, 1000);
-                            mRayCenter.speedTo(0, 1000);
-                            mRayRight.speedTo(0, 1000);
-                            }
+                                mClockLeft.speedTo(0, 1000);
+                                mClockCenter.speedTo(0, 1000);
+                                mClockRight.speedTo(0, 1000);
+                                mRayLeft.speedTo(0, 1000);
+                                mRayCenter.speedTo(0, 1000);
+                                mRayRight.speedTo(0, 1000);
 
+
+
+                                mClockMaxLeft.speedTo(mClockLeft.getSpeed(),2000);
+                                mClockMinLeft.speedTo(mClockLeft.getSpeed(),2000);
+                                mClockMinCenter.speedTo(mClockCenter.getSpeed(),2000);
+                                mClockMaxCenter.speedTo(mClockCenter.getSpeed(),2000);
+                                mClockMaxRight.speedTo(mClockRight.getSpeed(),2000);
+                                mClockMinRight.speedTo(mClockRight.getSpeed(),2000);
+                            }
                         }
                     }, 1000);
                     stagingDone = true;
@@ -738,7 +747,7 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_spanner));
                 break;
-            case "torqueversion":
+            case "torque_version":
                 label.setText("");
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_obd2));
@@ -769,10 +778,12 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "vehicleSpeed":
+            case "torque_speed_0x0d":
                 label.setText(R.string.unit_kmh);
                 value.setText("-");
                 label.setBackgroundResource(0);
                 break;
+            case "torque_rpm_0x0c":
             case "engineSpeed":
                 label.setText(R.string.unit_rpm);
                 value.setText("-");
@@ -911,13 +922,28 @@ public class DashboardFragment extends CarFragment {
                 value.setText("-");
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
+            case "torque_fuelpressure_0x0a":
+            case "torque_engineload_0x04":
+            case "torque_timing_advance_0x0e":
+            case "torque_intake_air_temperature_0x0f":
+            case "torque_mass_air_flow_0x10":
+            case "torque_throttle_position_0x11":
+            case "torque_turboboost_0xff1202":
+            case "torque_voltage_0xff1238":
+            case "torque_AFR_0xff1249":
+            case "torque_fueltrimshortterm1_0x06":
+            case "torque_fueltrimlongterm1_0x07":
+            case "torque_fueltrimshortterm2_0x08":
+            case "torque_fueltrimlongterm2_0x09":
+            case "torque_accelerometer_total_0xff1223":
+
             default:
                 label.setText("");
                 value.setText("");
                 label.setBackgroundResource(0);
                 break;
 
-       }
+        }
     }
 
     private void setupClock(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
@@ -946,7 +972,7 @@ public class DashboardFragment extends CarFragment {
                 clock.setUnit("");
                 icon.setBackgroundResource(0);
                 break;
-           case "test":
+            case "test":
                 icon.setText("");
                 clock.setUnit(getString(R.string.testing));
                 clock.setMinMaxSpeed(0, 360);
@@ -1368,7 +1394,7 @@ public class DashboardFragment extends CarFragment {
                 }
 
 
-                    // update the min clocks and text
+                // update the min clocks and text
                 if (tempValue < minValue) {
                     clockmin.setSpeedAt(tempValue);
                     textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
@@ -1380,6 +1406,7 @@ public class DashboardFragment extends CarFragment {
 
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {
+    long queryPid = 0;
 
         if (queryElement == null) {
             return;
@@ -1397,7 +1424,7 @@ public class DashboardFragment extends CarFragment {
                     value.setText(mDebugvalue);
                 }
                 break;
-            case "torqueversion":
+            case "torque_version":
                 try {
                     if (torqueService != null) {
                         String torqueVersion = Integer.toString(torqueService.getVersion());
@@ -1405,12 +1432,56 @@ public class DashboardFragment extends CarFragment {
                             value.setText(torqueVersion);
                         }
                     }
-
                 } catch ( Exception e ) {
                     Log.e(TAG,"Error: " + e.getMessage());
                 }
-
                 break;
+                // the following are torque PIDs.
+            case "torque_fuelpressure_0x0a":
+            case "torque_engineload_0x04":
+            case "torque_timing_advance_0x0e":
+            case "torque_intake_air_temperature_0x0f":
+            case "torque_mass_air_flow_0x10":
+            case "torque_throttle_position_0x11":
+            case "torque_turboboost_0xff1202":
+            case "torque_voltage_0xff1238":
+            case "torque_AFR_0xff1249":
+            case "torque_fueltrimshortterm1_0x06":
+            case "torque_fueltrimlongterm1_0x07":
+            case "torque_fueltrimshortterm2_0x08":
+            case "torque_fueltrimlongterm2_0x09":
+            case "torque_accelerometer_total_0xff1223":
+                queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
+                queryElement = queryElement.substring(2);
+                queryPid = new BigInteger(queryElement, 16).longValue();
+                try {
+                    if (torqueService != null) {
+                        float torqueData = torqueService.getValueForPid(queryPid, true);
+                        String unitText = torqueService.getUnitForPid(queryPid);
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString() + unitText,torqueData));
+                    }
+                } catch ( Exception e ) {
+                    Log.e(TAG,"Error: " + e.getMessage());
+                }
+                break;
+            // the following torque values should have the unit as label
+            case "torque_rpm_0x0c":
+            case "torque_speed_0x0d":
+                queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
+                queryElement = queryElement.substring(2);
+                queryPid = new BigInteger(queryElement, 16).longValue();
+                try {
+                    if (torqueService != null) {
+                        float torqueData = torqueService.getValueForPid(queryPid, true);
+                        String unitText = torqueService.getUnitForPid(queryPid);
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(),torqueData));
+                        label.setText(unitText);
+                    }
+                } catch ( Exception e ) {
+                    Log.e(TAG,"Error: " + e.getMessage());
+                }
+                break;
+
             case "batteryVoltage":
                 Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
                 if (mBatteryVoltage != null) {

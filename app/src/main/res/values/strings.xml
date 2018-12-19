@@ -193,6 +193,21 @@
     <string name="label_tyreRL">RL</string>
     <string name="label_tyreFR">FR</string>
     <string name="label_tyreFL">FL</string>
-    <string name="element_torqueversion">Torque app version</string>
+    <string name="element_torqueversion">Torque - App version</string>
+    <string name="element_torque_rpm">Torque - RPM</string>
+    <string name="element_torque_speed">Torque - Speed</string>
+    <string name="element_torque_fuelpressure">Torque - Fuel pressure</string>
+    <string name="element_torque_engineload">Torque - Engine load</string>
+    <string name="element_torque_timing_advance">Torque - Timing advance</string>
+    <string name="element_torque_intake_air_temperature">Torque - Intake Air temperature</string>
+    <string name="element_torque_mass_air_flow">Torque - Mass Air Flow</string>
+    <string name="element_torque_throttle_position">Torque - Throttle position</string>
+    <string name="element_torque_turboboost">Torque - Turbo boost pressure</string>
+    <string name="element_torque_voltage">Torque - Voltage</string>
+    <string name="element_torque_AFR">Torque - AFR</string>
+    <string name="element_torque_fueltrimshortterm1">Torque - Short term fuel trim (bank 1)</string>
+    <string name="element_torque_fueltrimshortterm2">Torque - Short term fuel trim (bank 2)</string>
+    <string name="element_torque_fueltrimlongterm2">Torque - Long term fuel trim (bank 2)</string>
+    <string name="element_torque_accelerometer_total">Torque - Accelerometer (Total)</string>
 
 </resources>
