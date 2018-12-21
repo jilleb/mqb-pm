@@ -218,10 +218,10 @@
     <string name="label_maf">MAF</string>
     <string name="label_throttle">Throttle</string>
     <string name="label_afr">AFR</string>
-    <string name="label_ftst1">FTST1</string>
-    <string name="label_ftst2">FTST2</string>
-    <string name="label_ftlt2">FTLT2</string>
-    <string name="label_ftlt1">FTLT1</string>
+    <string name="label_ftst1">FTst1</string>
+    <string name="label_ftst2">FTst2</string>
+    <string name="label_ftlt2">FTlt2</string>
+    <string name="label_ftlt1">FTlt1</string>
     <string name="element_torque_phonebatterylevel">Torque - Phone battery level</string>
     <string name="element_torque_phonebarometer">Torque - Phone barometer</string>
     <string name="element_torque_obdadaptervoltage">Torque - OBD voltage</string>
