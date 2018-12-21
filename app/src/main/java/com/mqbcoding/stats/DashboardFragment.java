@@ -105,6 +105,12 @@ public class DashboardFragment extends CarFragment {
             mClockMaxRight.speedTo(speedRight);
             mClockMinRight.speedTo(speedRight);
 
+            mTextMaxLeft.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), speedLeft));
+            mTextMinLeft.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), speedLeft));
+            mTextMaxCenter.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), speedCenter));
+            mTextMinCenter.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), speedCenter));
+            mTextMinRight.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), speedRight));
+            mTextMaxRight.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), speedRight));
             postUpdate();
 
         }
@@ -463,19 +469,32 @@ public class DashboardFragment extends CarFragment {
                                 mRayLeft.speedTo(0, 1000);
                                 mRayCenter.speedTo(0, 1000);
                                 mRayRight.speedTo(0, 1000);
-
-
-
-                                mClockMaxLeft.speedTo(mClockLeft.getSpeed(),2000);
-                                mClockMinLeft.speedTo(mClockLeft.getSpeed(),2000);
-                                mClockMinCenter.speedTo(mClockCenter.getSpeed(),2000);
-                                mClockMaxCenter.speedTo(mClockCenter.getSpeed(),2000);
-                                mClockMaxRight.speedTo(mClockRight.getSpeed(),2000);
-                                mClockMinRight.speedTo(mClockRight.getSpeed(),2000);
                             }
                         }
                     }, 1000);
-                    stagingDone = true;
+
+                    final Handler stagingReset = new Handler();
+                    stagingReset.postDelayed(new Runnable() {
+                        public void run() {
+                            if (mClockLeft != null){
+                                mClockMaxLeft.speedTo(mClockLeft.getSpeed(),1000);
+                                mClockMinLeft.speedTo(mClockLeft.getSpeed(),1000);
+                                mClockMinCenter.speedTo(mClockCenter.getSpeed(),1000);
+                                mClockMaxCenter.speedTo(mClockCenter.getSpeed(),1000);
+                                mClockMaxRight.speedTo(mClockRight.getSpeed(),1000);
+                                mClockMinRight.speedTo(mClockRight.getSpeed(),1000);
+
+                                mTextMaxLeft.setText("-");
+                                mTextMinLeft.setText("-");
+                                mTextMaxCenter.setText("-");
+                                mTextMinCenter.setText("-");
+                                mTextMinRight.setText("-");
+                                mTextMaxRight.setText("-");
+                            }
+                        }
+                    }, 2500);
+
+                  stagingDone = true;
 
                 }
             }
