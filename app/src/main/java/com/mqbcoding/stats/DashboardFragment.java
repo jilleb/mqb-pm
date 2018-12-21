@@ -44,6 +44,8 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class DashboardFragment extends CarFragment {
     private final String TAG = "DashboardFragment";
@@ -121,12 +123,13 @@ public class DashboardFragment extends CarFragment {
         public void onNewMeasurements(String provider, Date timestamp, Map<String, Object> values) {
             mLastMeasurements.putAll(values);
             Log.i(TAG, "onCarStatsClient.Listener");
-            postUpdate();
         }
         @Override
         public void onSchemaChanged() {
             // do nothing
         }
+
+
     };
 
     private final ServiceConnection mServiceConnection = new ServiceConnection() {
@@ -138,6 +141,7 @@ public class DashboardFragment extends CarFragment {
             mWheelStateMonitor = carStatsBinder.getWheelStateMonitor();
             mLastMeasurements = mStatsClient.getMergedMeasurements();
             mStatsClient.registerListener(mCarStatsListener);
+            doUpdate();
         }
 
         @Override
@@ -195,7 +199,24 @@ public class DashboardFragment extends CarFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate");
+        startTorque();
+        updateDisplay();
+
     }
+
+    private void updateDisplay() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+            postUpdate();
+            }
+
+        },0,1000);//Update text every second
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -586,7 +607,6 @@ public class DashboardFragment extends CarFragment {
     public void onStart() {
         super.onStart();
         Log.i(TAG, "onStart");
-        postUpdate();
     }
 
     @Override
@@ -1184,7 +1204,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon,"ic_battery","",clock,false,"G",0,100,"integer");
                 break;
             case "torque-phonebarometer_0xff1270":
-                setupClock(icon,"ic_none","",clock,false,"",900,1300,"integer");
+                setupClock(icon,"ic_none","",clock,false,"",900,1300,"float");
                 break;
             case "torque-obdadaptervoltage_0xff1238":
                 setupClock(icon,"ic_obd2","",clock,false,"G",0,17,"float");
@@ -1719,6 +1739,8 @@ public class DashboardFragment extends CarFragment {
         Intent intent = new Intent();
         intent.setClassName("org.prowl.torque", "org.prowl.torque.remote.TorqueService");
         getContext().startService(intent);
+        Log.d(TAG,"Torque start");
+
         boolean successfulBind = getContext().bindService(intent, torqueConnection, 0);
         if (successfulBind) {
             torqueBind=true;
