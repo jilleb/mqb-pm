@@ -209,5 +209,22 @@
     <string name="element_torque_fueltrimshortterm2">Torque - Short term fuel trim (bank 2)</string>
     <string name="element_torque_fueltrimlongterm2">Torque - Long term fuel trim (bank 2)</string>
     <string name="element_torque_accelerometer_total">Torque - Accelerometer (Total)</string>
+    <string name="element_torque_fueltrimlongterm1">Torque - Long term fuel trim (bank 1)</string>
+
+    <string name="label_fuel">Fuel</string>
+    <string name="label_load">Engine</string>
+    <string name="label_timing">Timing</string>
+    <string name="label_iat">IAT</string>
+    <string name="label_maf">MAF</string>
+    <string name="label_throttle">Throttle</string>
+    <string name="label_afr">AFR</string>
+    <string name="label_ftst1">FTST1</string>
+    <string name="label_ftst2">FTST2</string>
+    <string name="label_ftlt2">FTLT2</string>
+    <string name="label_ftlt1">FTLT1</string>
+    <string name="element_torque_phonebatterylevel">Torque - Phone battery level</string>
+    <string name="element_torque_phonebarometer">Torque - Phone barometer</string>
+    <string name="element_torque_obdadaptervoltage">Torque - OBD voltage</string>
+    <string name="element_torque_hybridbattlevel">Torque - Hybrid battery level</string>
 
 </resources>

@@ -77,40 +77,85 @@
         <item>@string/element_tankLevelSecondary</item>
         <item>@string/element_navAltitude</item>
         <item>@string/element_navHeading</item>
+
+        <!-- PIDs from Torque -->
+        <item>@string/element_torque_rpm</item>
+        <item>@string/element_torque_speed</item>
+        <item>@string/element_torque_fuelpressure</item>
+        <item>@string/element_torque_engineload</item>
+        <item>@string/element_torque_timing_advance</item>
+        <item>@string/element_torque_intake_air_temperature</item>
+        <item>@string/element_torque_mass_air_flow</item>
+        <item>@string/element_torque_throttle_position</item>
+        <item>@string/element_torque_turboboost</item>
+        <item>@string/element_torque_voltage</item>
+        <item>@string/element_torque_AFR</item>
+        <item>@string/element_torque_fueltrimshortterm1</item>
+        <item>@string/element_torque_fueltrimlongterm1</item>
+        <item>@string/element_torque_fueltrimshortterm2</item>
+        <item>@string/element_torque_fueltrimlongterm2</item>
+        <item>@string/element_torque_accelerometer_total</item>
+        <item>@string/element_torque_phonebatterylevel</item>
+        <item>@string/element_torque_phonebarometer</item>
+        <item>@string/element_torque_obdadaptervoltage</item>
+        <item>@string/element_torque_hybridbattlevel</item>
+
+
         <item>@string/element_test</item>
     </string-array>
 
     <!-- Values/query strings for each of the Entries for clock data settings -->
     <!-- These NEED TO be aligned with ClockDataElementsEntries!-->
     <string-array name="ClockDataElementsValues">
-        <item>absChargingAirPressure</item>
-        <item>relChargingAirPressure</item>
-        <item>batteryVoltage</item>
-        <item>coolantTemperature</item>
-        <item>oilTemperature</item>
-        <item>gearboxOilTemperature</item>
-        <item>outsideTemperature</item>
-        <item>vehicleSpeed</item>
-        <item>engineSpeed</item>
-        <item>lateralAcceleration</item>
-        <item>longitudinalAcceleration</item>
-        <item>yawRate</item>
-        <item>wheelAngle</item>
-        <item>acceleratorPosition</item>
-        <item>brakePressure</item>
-        <item>powermeter</item>
-        <item>currentTorque</item>
-        <item>currentOutputPower</item>
-        <item>EcoHMI_Score.AvgShort</item>
-        <item>EcoHMI_Score.AvgTrip</item>
-        <item>currentConsumptionPrimary</item>
-        <item>currentConsumptionSecondary</item>
-        <item>cycleConsumptionPrimary</item>
-        <item>cycleConsumptionSecondary</item>
-        <item>tankLevelPrimary</item>
-        <item>tankLevelSecondary</item>
-        <item>Nav_Altitude</item>
-        <item>Nav_Heading</item>
+        <item>exlap-absChargingAirPressure</item>
+        <item>exlap-relChargingAirPressure</item>
+        <item>exlap-batteryVoltage</item>
+        <item>exlap-coolantTemperature</item>
+        <item>exlap-oilTemperature</item>
+        <item>exlap-gearboxOilTemperature</item>
+        <item>exlap-outsideTemperature</item>
+        <item>exlap-vehicleSpeed</item>
+        <item>exlap-engineSpeed</item>
+        <item>exlap-lateralAcceleration</item>
+        <item>exlap-longitudinalAcceleration</item>
+        <item>exlap-yawRate</item>
+        <item>exlap-wheelAngle</item>
+        <item>exlap-acceleratorPosition</item>
+        <item>exlap-brakePressure</item>
+        <item>exlap-powermeter</item>
+        <item>exlap-currentTorque</item>
+        <item>exlap-currentOutputPower</item>
+        <item>exlap-EcoHMI_Score.AvgShort</item>
+        <item>exlap-EcoHMI_Score.AvgTrip</item>
+        <item>exlap-currentConsumptionPrimary</item>
+        <item>exlap-currentConsumptionSecondary</item>
+        <item>exlap-cycleConsumptionPrimary</item>
+        <item>exlap-cycleConsumptionSecondary</item>
+        <item>exlap-tankLevelPrimary</item>
+        <item>exlap-tankLevelSecondary</item>
+        <item>exlap-Nav_Altitude</item>
+        <item>exlap-Nav_Heading</item>
+
+        <item>torque-rpm_0x0c</item>
+        <item>torque-speed_0x0d</item>
+        <item>torque-fuelpressure_0x0a</item>
+        <item>torque-engineload_0x04</item>
+        <item>torque-timing_advance_0x0e</item>
+        <item>torque-intake_air_temperature_0x0f</item>
+        <item>torque-mass_air_flow_0x10</item>
+        <item>torque-throttle_position_0x11</item>
+        <item>torque-turboboost_0xff1202</item>
+        <item>torque-voltage_0xff1238</item>
+        <item>torque-AFR_0xff1249</item>
+        <item>torque-fueltrimshortterm1_0x06</item>
+        <item>torque-fueltrimlongterm1_0x07</item>
+        <item>torque-fueltrimshortterm2_0x08</item>
+        <item>torque-fueltrimlongterm2_0x09</item>
+        <item>torque-accelerometer_total_0xff1223</item>
+        <item>torque-phonebatterylevel_0xff129a</item>
+        <item>torque-phonebarometer_0xff1270</item>
+        <item>torque-obdadaptervoltage_0xff1238</item>
+        <item>torque-hybridbattlevel_0x5b</item>
         <item>test</item>
 
     </string-array>
@@ -451,6 +496,12 @@ fuelWarningSecondaryTank true/false
 System_ProximityRecognition.InRange
 
 
+
+todo: add these torque PIDs
+EXTRA_TRIP_MPG      = 0xFF1205;
+EXTRA_TRIP_KPL      = 0xFF1206;
+ACCEL_X_FILTERED    = 0xFF1250;
+ACCEL_Y_FILTERED    = 0xFF1251;
+ACCEL_Z_FILTERED    = 0xFF1252;
      -->
-    <string name="element_torque_fueltrimlongterm1">Torque - Long term fuel trim (bank 1)</string>
 </resources>
