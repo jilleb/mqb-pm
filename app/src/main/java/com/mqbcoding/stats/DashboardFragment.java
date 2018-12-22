@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,6 @@ public class DashboardFragment extends CarFragment {
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
     private Speedometer mClockMinLeft, mClockMinCenter, mClockMinRight;
-    private ImageView mImageMaxLeft, mImageMaxCenter, mImageMaxRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
@@ -207,7 +207,7 @@ public class DashboardFragment extends CarFragment {
                 postUpdate();
             }
 
-        }, 0, 1000);//Update text every second
+        }, 0, 250);//Update display 0,25 second
     }
 
 
@@ -309,11 +309,6 @@ public class DashboardFragment extends CarFragment {
         mTextMinLeft = rootView.findViewById(R.id.textMinLeft);
         mTextMinCenter = rootView.findViewById(R.id.textMinCenter);
         mTextMinRight = rootView.findViewById(R.id.textMinRight);
-
-        //minmax backgrounds:
-        mImageMaxLeft = rootView.findViewById(R.id.image_MaxLeft);
-        mImageMaxCenter = rootView.findViewById(R.id.image_MaxCenter);
-        mImageMaxRight = rootView.findViewById(R.id.image_MaxRight);
 
         //-------------------------------------------------------------
         //Give them all the right custom typeface
@@ -504,11 +499,12 @@ public class DashboardFragment extends CarFragment {
                                 mTextMinCenter.setText("-");
                                 mTextMinRight.setText("-");
                                 mTextMaxRight.setText("-");
+                                stagingDone = true;
+
                             }
                         }
                     }, 2000);
 
-                    stagingDone = true;
 
                 }
             }
@@ -556,9 +552,6 @@ public class DashboardFragment extends CarFragment {
             mTextMinCenter.setVisibility(View.VISIBLE);
             mTextMinRight.setVisibility(View.VISIBLE);
 
-            mImageMaxLeft.setVisibility(View.VISIBLE);
-            mImageMaxCenter.setVisibility(View.VISIBLE);
-            mImageMaxRight.setVisibility(View.VISIBLE);
         } else { // don't show any of it
             mTextMaxLeft.setVisibility(View.INVISIBLE);
             mTextMaxCenter.setVisibility(View.INVISIBLE);
@@ -568,9 +561,6 @@ public class DashboardFragment extends CarFragment {
             mTextMinCenter.setVisibility(View.INVISIBLE);
             mTextMinRight.setVisibility(View.INVISIBLE);
 
-            mImageMaxLeft.setVisibility(View.INVISIBLE);
-            mImageMaxCenter.setVisibility(View.INVISIBLE);
-            mImageMaxRight.setVisibility(View.INVISIBLE);
         }
 
         //show clock marks for max/min, according to the setting
@@ -670,9 +660,7 @@ public class DashboardFragment extends CarFragment {
         mRayLeft = null;
         mRayCenter = null;
         mRayRight = null;
-        mImageMaxLeft = null;
-        mImageMaxCenter = null;
-        mImageMaxRight = null;
+
         mDebugQuery = null;
         selectedFont = null;
         pressureUnit = null;
@@ -1032,10 +1020,25 @@ public class DashboardFragment extends CarFragment {
                 label.setBackgroundResource(0);
                 break;
         }
+
+        if (label.getText() != "")
+        {
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) label.getLayoutParams();
+            params.width = 600;
+            label.setLayoutParams(params);
+        }
+
+
+
     }
 
 
     private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
+
+        String queryTrim = "";
+        String queryLong = queryClock;
+        String torqueUnit = "";
+        long queryPid = 0;
 
         TypedArray typedArray2 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedStopWatchBackground});
         int swBackgroundResource = typedArray2.getResourceId(0, 0);
@@ -1051,623 +1054,654 @@ public class DashboardFragment extends CarFragment {
         }
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), needleResource, clockSize, clockSize);
 
-
-        switch (queryClock) {
-            case "none": // currently impossible to choose, maybe in the future?
-                setupClock(icon, "ic_none", "", clock, false, "", 0, 100, "float");
-                break;
-            case "test":
-                setupClock(icon, "ic_measurement", "", clock, false, getString(R.string.testing), 0, 360, "float");
-                break;
-            case "exlap-vehicleSpeed":
-                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kmh), 0, 350, "integer");
-                break;
-            case "exlap-Nav_Altitude":
-                setupClock(icon, "ic_altitude", "", clock, false, "m", -100, 3000, "integer");
-                break;
-            case "exlap-Nav_Heading": // this is a compass, so a little bit more is needed to setup the clock
-                setupClock(icon, "ic_heading", "", clock, false, "°", 0, 360, "integer");
-                clock.setUnit(""); //still needs a unit and translation, but haven't found where the unit gets this unit yet.
-                clock.setMarkColor(Color.parseColor("#00FFFFFF"));
-
-                //set the degrees so it functions as a circle
-                clock.setStartDegree(270);
-                clock.setEndDegree(630);
-                ray.setStartDegree(270);
-                ray.setEndDegree(630);
-                min.setStartDegree(270);
-                min.setEndDegree(630);
-                max.setStartDegree(270);
-                max.setEndDegree(630);
-                // set background resource to the same as stopwatch
-                clock.setBackgroundResource(swBackgroundResource);
-                break;
-            case "exlap-engineSpeed":
-                setupClock(icon, "ic_none", getString(R.string.unit_rpm), clock, true, getString(R.string.unit_rpm1000), 0, 9, "float");
-
-                clock.setTicks();
-                clock.setTickTextFormat(0);
-
-                break;
-            case "torque-voltage_0xff1238":
-            case "exlap-batteryVoltage":
-                setupClock(icon, "ic_battery", "", clock, false, getString(R.string.unit_volt), 0, 17, "float");
-                break;
-            case "exlap-oilTemperature":
-                setupClock(icon, "ic_oil", "", clock, true, "°", 0, 200, "float");
-                break;
-            case "exlap-coolantTemperature":
-                setupClock(icon, "ic_water", "", clock, true, "°", 0, 200, "float");
-                break;
-            case "exlap-outsideTemperature":
-                setupClock(icon, "ic_outsidetemperature", "", clock, false, "°", -25, 50, "float");
-                break;
-            case "exlap-gearboxOilTemperature":
-                setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float");
-                break;
-            case "torque-turboboost_0xff1202":
-            case "exlap-absChargingAirPressure":
-            case "exlap-relChargingAirPressure":
-                setupClock(icon, "ic_turbo", "", clock, true, pressureUnit, pressureMin, pressureMax, "float");
-                break;
-            case "exlap-lateralAcceleration":
-                setupClock(icon, "ic_lateral", "", clock, false, getString(R.string.unit_g), -3, 3, "float");
-                break;
-            case "exlap-longitudinalAcceleration":
-                setupClock(icon, "ic_longitudinal", "", clock, false, getString(R.string.unit_g), -3, 3, "float");
-                break;
-            case "exlap-yawRate":
-                setupClock(icon, "ic_yaw", "", clock, false, "°/s", -1, 1, "float");
-                break;
-            case "wheelAngle":
-                setupClock(icon, "ic_wheelangle", "", clock, false, "°", -45, 45, "float");
-                break;
-            case "exlap-EcoHMI_Score.AvgShort":
-            case "exlap-EcoHMI_Score.AvgTrip":
-                setupClock(icon, "ic_eco", "", clock, false, "", 0, 100, "integer");
-                break;
-            case "exlap-powermeter":
-                setupClock(icon, "ic_powermeter", "", clock, false, "%", 0, 5000, "integer");
-                break;
-            case "exlap-acceleratorPosition":
-                setupClock(icon, "ic_pedalposition", "", clock, false, "%", 0, 100, "integer");
-                break;
-            case "exlap-brakePressure":
-                setupClock(icon, "ic_brakepedalposition", "", clock, false, "%", 0, 100, "integer");
-                break;
-            case "exlap-currentTorque":
-                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_nm), 0, 500, "float");
-                break;
-            case "exlap-currentOutputPower":
-                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kw), 0, 500, "float");
-                break;
-            case "exlap-currentConsumptionPrimary":
-            case "exlap-cycleConsumptionPrimary":
-                setupClock(icon, "ic_fuelprimary", "", clock, false, "l/h", 0, 100, "float");
-                break;
-            case "exlap-currentConsumptionSecondary":
-            case "exlap-cycleConsumptionSecondary":
-                setupClock(icon, "ic_fuelsecondary", "", clock, false, "l/h", 0, 100, "float");
-                break;
-            case "exlap-tankLevelPrimary":
-                setupClock(icon, "ic_fuelprimary", "", clock, false, "%", 0, 100, "float");
-                break;
-            case "exlap-tankLevelSecondary":
-                setupClock(icon, "ic_fuelsecondary", "", clock, false, "%", 0, 100, "float");
-                break;
-            case "torque-fuelpressure_0x0a":
-                setupClock(icon, "ic_none", getString(R.string.label_fuel), clock, false, "", 0, 350, "float");
-                break;
-            case "torque-engineload_0x04":
-                setupClock(icon, "ic_none", getString(R.string.label_load), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-timing_advance_0x0e":
-                setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-intake_air_temperature_0x0f":
-                setupClock(icon, "ic_none", getString(R.string.label_iat), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-mass_air_flow_0x10":
-                setupClock(icon, "ic_none", getString(R.string.label_maf), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-throttle_position_0x11":
-                setupClock(icon, "ic_none", getString(R.string.label_throttle), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-AFR_0xff1249":
-                setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, ":1", 0, 100, "float");
-                break;
-            case "torque-fueltrimshortterm1_0x06":
-                setupClock(icon, "ic_none", getString(R.string.label_ftst1), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-fueltrimlongterm1_0x07":
-                setupClock(icon, "ic_none", getString(R.string.label_ftlt1), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-fueltrimshortterm2_0x08":
-                setupClock(icon, "ic_none", getString(R.string.label_ftst2), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-fueltrimlongterm2_0x09":
-                setupClock(icon, "ic_none", getString(R.string.label_ftlt2), clock, false, "", 0, 100, "float");
-                break;
-            case "torque-accelerometer_total_0xff1223":
-                setupClock(icon, "ic_none", "", clock, false, "G", -3, 3, "float");
-                break;
-            case "torque-phonebatterylevel_0xff129a":
-                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "integer");
-                break;
-            case "torque-phonebarometer_0xff1270":
-                setupClock(icon, "ic_none", "", clock, false, "", 900, 1300, "float");
-                break;
-            case "torque-obdadaptervoltage_0xff1238":
-                setupClock(icon, "ic_obd2", "", clock, false, "V", 0, 17, "float");
-                break;
-            case "torque-hybridbattlevel_0x5b":
-                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "float");
-                break;
-
+        if (queryClock.contains("-")) {
+            queryTrim = queryClock.substring(0, queryClock.indexOf("-")); // check the prefix
+        } else {
+            queryTrim = "other";
         }
+        // get min/max values and unit from torque
+        if (queryTrim.equals("torque")) {
+            queryClock = queryClock.substring(queryClock.lastIndexOf('_') + 1);
+            queryClock = queryClock.substring(2);
+            queryPid = new BigInteger(queryClock, 16).longValue();
 
-        // make the icon appear in the color of unitTextColor
-        Drawable iconBackground = (Drawable) icon.getBackground();
-        if (iconBackground != null) {
-            int iconTint = clock.getUnitTextColor();
-            iconBackground.setColorFilter(iconTint, PorterDuff.Mode.SRC_ATOP);
-            icon.setBackground(iconBackground);
-            icon.setTextColor(iconTint);
-        }
-
-        // bring mins and max's in line with the clock
-        float minimum = clock.getMinSpeed();
-        float maximum = clock.getMaxSpeed();
-
-        min.setMinMaxSpeed(minimum, maximum);
-        ray.setMinMaxSpeed(minimum, maximum);
-        max.setMinMaxSpeed(minimum, maximum);
-    }
-
-    //update clock with data
-    private void updateClock(String query, Speedometer clock, RaySpeedometer visray, TextView textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin) {
-        if (query == null) {
-            return;
-
-        } else if (stagingDone == true) {
-
-            float randomClockVal = randFloat(0, 360);
-            speedFactor = 1f;
-            pressureFactor = 1f;
-            long queryPid = 0;
-            Float clockValue = 0f;
-            Float oldValue = 0f;
-            String queryTrim = "";
-            String temperatureUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
-            String queryLong = query;
-
-            if (temperatureUnit == null) {
-                temperatureUnit = "°";
-            }
-
-            if (query.contains("-")) {
-                queryTrim = query.substring(0, query.indexOf("-")); // check the prefix
-            } else {
-                queryTrim = "other";
-            }
-            // Get the value that should be put on the clock, depending on the query
-            // exlap queries use mLastMeasurements.get(query)
-            // torque pid queries use torqueService.getValueForPid(queryPid), queryPid is trimmed from the query string
-            if (queryTrim.equals("torque")) {
-                query = query.substring(query.lastIndexOf('_') + 1);
-                query = query.substring(2);
-                queryPid = new BigInteger(query, 16).longValue();
-
-                try {
-                    if (torqueService != null) {
-                        clockValue = torqueService.getValueForPid(queryPid, true);
-                    }
-                } catch (Exception e) {
-                    Log.e(TAG, "Error: " + e.getMessage());
+            try {
+                if (torqueService != null) {
+                    torqueUnit = torqueService.getUnitForPid(queryPid);
                 }
-            } else if (queryTrim.equals("exlap")) {
-                query = query.substring(query.lastIndexOf('-') + 1);
-                clockValue = (Float) mLastMeasurements.get(query);
-            } else { // the only other kind of query is the  "random" one.
-                clockValue = randomClockVal;
+            } catch (Exception e) {
+                Log.e(TAG, "Error: " + e.getMessage());
             }
-            oldValue = (Float) clock.getSpeed();
-            if (clockValue != null) {
-                switch (queryLong) {
-                    case "test":
-                    case "none":    // none cannot happen currently
-                        //don't do anything
-                        break;
-                    // all data that can be put on the clock without further modification:
-                    case "exlap-Nav_Heading":
-                    case "exlap-batteryVoltage":
-                    case "exlap-Nav_Altitude":
-                    case "exlap-lateralAcceleration":
-                    case "exlap-longitudinalAcceleration":
-                    case "exlap-yawRate":
-                    case "exlap-EcoHMI_Score.AvgShort":
-                    case "exlap-EcoHMI_Score.AvgTrip":
-                    case "exlap-brakePressure":
-                    case "exlap-currentTorque":
-                    case "exlap-currentOutputPower":
-                        // all data that can be put on the clock without further modification:
-                        break;
-                    //rpm data, needs to be divided by 1000 before displayed on the clock
-                    case "exlap-engineSpeed":
-                        clockValue = clockValue / 1000;
-                        // temperatures
-                    case "exlap-oilTemperature":
-                    case "exlap-coolantTemperature":
-                    case "exlap-outsideTemperature":
-                    case "exlap-gearboxOilTemperature":
-                        clock.setUnit(temperatureUnit);
-                        // pressures
-                    case "exlap-absChargingAirPressure":
-                    case "exlap-relChargingAirPressure":
-                        clockValue = clockValue * pressureFactor;
-                        break;
-                    // specific case for wheel angle, since it needs to be turned around
-                    case "exlap-wheelAngle":
-                        clockValue = clockValue * -1; // make it negative, otherwise right = left and vice versa
-                        break;
-                    // hybrid power has 1020 as value 0.
-                    case "exlap-powermeter":
-                        clockValue = clockValue - 1020;
-                        // percentages
-                    case "exlap-acceleratorPosition":
-                    case "exlap-tankLevelPrimary":
-                    case "exlap-tankLevelSecondary":
-                        clockValue = clockValue * 100;
-                        break;
-                    // specific consumption data with specific consumption units
-                    // todo: maybe it's better to remove setting the unit from updateclock, but do it on setupclock
-                    case "exlap-currentConsumptionPrimary":
-                        String consumptionUnit = (String) mLastMeasurements.get("currentConsumptionPrimary.unit");
-                        if (consumptionUnit != null) {
-                            clock.setUnit(consumptionUnit);
-                        }
-                        break;
-                    case "exlap-currentConsumptionSecondary":
-                        String consumption2Unit = (String) mLastMeasurements.get("currentConsumptionSecondary.unit");
-                        if (consumption2Unit != null) {
-                            clock.setUnit(consumption2Unit);
-                        }
-                        break;
-                    case "exlap-cycleConsumptionPrimary":
-                        String cycconsumptionUnit = (String) mLastMeasurements.get("cycleConsumptionPrimary.unit");
-                        if (cycconsumptionUnit != null) {
-                            clock.setUnit(cycconsumptionUnit);
-                        }
-                        break;
-                    case "exlap-cycleConsumptionSecondary":
-                        String cycconsumption2Unit = (String) mLastMeasurements.get("cycleConsumptionSecondary.unit");
-                        if (cycconsumption2Unit != null) {
-                            clock.setUnit(cycconsumption2Unit);
-                        }
-                        break;
-                    // speed, has specific unit requirements and mph calculation
-                    case "exlap-vehicleSpeed":
-                        String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-                        if (speedUnit != null) {
-                            switch (speedUnit) {
-                                case "mph":
-                                    speedFactor = 1.60934f;
-                                    clock.setUnit("mph");
-                                    break;
-                                case "kmh":
-                                    speedFactor = 1f;
-                                    clock.setUnit("kmh");
-                                    break;
-                            }
-                            clockValue = clockValue * speedFactor;
-                        }
-                        break;
-                    // torque data elements:
-                    case "torque-fuelpressure_0x0a":
-                    case "torque-engineload_0x04":
-                    case "torque-timing_advance_0x0e":
-                    case "torque-intake_air_temperature_0x0f":
-                    case "torque-mass_air_flow_0x10":
-                    case "torque-throttle_position_0x11":
-                    case "torque-AFR_0xff1249":
-                    case "torque-fueltrimshortterm1_0x06":
-                    case "torque-fueltrimlongterm1_0x07":
-                    case "torque-fueltrimshortterm2_0x08":
-                    case "torque-fueltrimlongterm2_0x09":
-                    case "torque-accelerometer_total_0xff1223":
-                    case "torque-phonebatterylevel_0xff129a":
-                    case "torque-phonebarometer_0xff1270":
-                    case "torque-obdadaptervoltage_0xff1238":
-                    case "torque-hybridbattlevel_0x5b":
+        }
+
+        // setup each of the clocks:
+            switch (queryLong) {
+                case "none": // currently impossible to choose, maybe in the future?
+                    setupClock(icon, "ic_none", "", clock, false, "", 0, 100, "float");
+                    break;
+                case "test":
+                    setupClock(icon, "ic_measurement", "", clock, false, getString(R.string.testing), 0, 360, "float");
+                    break;
+                case "exlap-vehicleSpeed":
+                case "torque_speed_0x0d":
+                    setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kmh), 0, 350, "integer");
+                    break;
+                case "exlap-Nav_Altitude":
+                    setupClock(icon, "ic_altitude", "", clock, false, "m", -100, 3000, "integer");
+                    break;
+                case "exlap-Nav_Heading": // this is a compass, so a little bit more is needed to setup the clock
+                    setupClock(icon, "ic_heading", "", clock, false, "°", 0, 360, "integer");
+                    clock.setMarkColor(Color.parseColor("#00FFFFFF"));
+
+                    //set the degrees so it functions as a circle
+                    clock.setStartDegree(270);
+                    clock.setEndDegree(630);
+                    ray.setStartDegree(270);
+                    ray.setEndDegree(630);
+                    min.setStartDegree(270);
+                    min.setEndDegree(630);
+                    max.setStartDegree(270);
+                    max.setEndDegree(630);
+                    // set background resource to the same as stopwatch
+                    clock.setBackgroundResource(swBackgroundResource);
+                    break;
+                case "exlap-engineSpeed":
+                case "torque_rpm_0x0c":
+                    setupClock(icon, "ic_none", getString(R.string.unit_rpm), clock, true, getString(R.string.unit_rpm1000), 0, 9, "float");
+
+                    clock.setTicks();
+                    clock.setTickTextFormat(0);
+
+                    break;
+                case "torque-voltage_0xff1238":
+                case "exlap-batteryVoltage":
+                    setupClock(icon, "ic_battery", "", clock, false, getString(R.string.unit_volt), 0, 17, "float");
+                    break;
+                case "exlap-oilTemperature":
+                    setupClock(icon, "ic_oil", "", clock, true, "°", 0, 200, "float");
+                    break;
+                case "exlap-coolantTemperature":
+                    setupClock(icon, "ic_water", "", clock, true, "°", 0, 200, "float");
+                    break;
+                case "exlap-outsideTemperature":
+                    setupClock(icon, "ic_outsidetemperature", "", clock, false, "°", -25, 50, "float");
+                    break;
+                case "exlap-gearboxOilTemperature":
+                    setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float");
+                    break;
+                case "torque-turboboost_0xff1202":
+                case "exlap-absChargingAirPressure":
+                case "exlap-relChargingAirPressure":
+                    setupClock(icon, "ic_turbo", "", clock, true, pressureUnit, pressureMin, pressureMax, "float");
+                    break;
+                case "exlap-lateralAcceleration":
+                    setupClock(icon, "ic_lateral", "", clock, false, getString(R.string.unit_g), -3, 3, "float");
+                    break;
+                case "exlap-longitudinalAcceleration":
+                    setupClock(icon, "ic_longitudinal", "", clock, false, getString(R.string.unit_g), -3, 3, "float");
+                    break;
+                case "exlap-yawRate":
+                    setupClock(icon, "ic_yaw", "", clock, false, "°/s", -1, 1, "float");
+                    break;
+                case "wheelAngle":
+                    setupClock(icon, "ic_wheelangle", "", clock, false, "°", -45, 45, "float");
+                    break;
+                case "exlap-EcoHMI_Score.AvgShort":
+                case "exlap-EcoHMI_Score.AvgTrip":
+                    setupClock(icon, "ic_eco", "", clock, false, "", 0, 100, "integer");
+                    break;
+                case "exlap-powermeter":
+                    setupClock(icon, "ic_powermeter", "", clock, false, "%", 0, 5000, "integer");
+                    break;
+                case "exlap-acceleratorPosition":
+                    setupClock(icon, "ic_pedalposition", "", clock, false, "%", 0, 100, "integer");
+                    break;
+                case "exlap-brakePressure":
+                    setupClock(icon, "ic_brakepedalposition", "", clock, false, "%", 0, 100, "integer");
+                    break;
+                case "exlap-currentTorque":
+                    setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_nm), 0, 500, "float");
+                    break;
+                case "exlap-currentOutputPower":
+                    setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kw), 0, 500, "float");
+                    break;
+                case "exlap-currentConsumptionPrimary":
+                case "exlap-cycleConsumptionPrimary":
+                    setupClock(icon, "ic_fuelprimary", "", clock, false, "l/h", 0, 100, "float");
+                    break;
+                case "exlap-currentConsumptionSecondary":
+                case "exlap-cycleConsumptionSecondary":
+                    setupClock(icon, "ic_fuelsecondary", "", clock, false, "l/h", 0, 100, "float");
+                    break;
+                case "exlap-tankLevelPrimary":
+                    setupClock(icon, "ic_fuelprimary", "", clock, false, "%", 0, 100, "float");
+                    break;
+                case "exlap-tankLevelSecondary":
+                    setupClock(icon, "ic_fuelsecondary", "", clock, false, "%", 0, 100, "float");
+                    break;
+                case "torque-fuelpressure_0x0a":
+                    setupClock(icon, "ic_none", getString(R.string.label_fuel), clock, false, torqueUnit, 0, 800, "float");
+                    break;
+                case "torque-engineload_0x04":
+                    setupClock(icon, "ic_none", getString(R.string.label_load), clock, false, torqueUnit, 0, 100, "float");
+                    break;
+                case "torque-timing_advance_0x0e":
+                    setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, torqueUnit, -60, 60, "float");
+                    break;
+                case "torque-intake_air_temperature_0x0f":
+                    setupClock(icon, "ic_none", getString(R.string.label_iat), clock, false, torqueUnit, 0, 100, "float");
+                    break;
+                case "torque-mass_air_flow_0x10":
+                    setupClock(icon, "ic_none", getString(R.string.label_maf), clock, false, torqueUnit, 0, 700, "float");
+                    break;
+                case "torque-throttle_position_0x11":
+                    setupClock(icon, "ic_none", getString(R.string.label_throttle), clock, false, torqueUnit, 0, 100,"float");
+                    break;
+                case "torque-AFR_0xff1249":
+                    setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, "torqueUnit", 0, 35, "float");
+                    break;
+                case "torque-fueltrimshortterm1_0x06":
+                    setupClock(icon, "ic_none", getString(R.string.label_ftst1), clock, false, torqueUnit, -20, 20, "float");
+                    break;
+                case "torque-fueltrimlongterm1_0x07":
+                    setupClock(icon, "ic_none", getString(R.string.label_ftlt1), clock, false, torqueUnit, -20, 20, "float");
+                    break;
+                case "torque-fueltrimshortterm2_0x08":
+                    setupClock(icon, "ic_none", getString(R.string.label_ftst2), clock, false, torqueUnit, -20, 20, "float");
+                    break;
+                case "torque-fueltrimlongterm2_0x09":
+                    setupClock(icon, "ic_none", getString(R.string.label_ftlt2), clock, false, torqueUnit, -20, 20, "float");
+                    break;
+                case "torque-accelerometer_total_0xff1223":
+                    setupClock(icon, "ic_none", "", clock, false, "G", -3, 3, "float");
+                    break;
+                case "torque-phonebatterylevel_0xff129a":
+                    setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "integer");
+                    break;
+                case "torque-phonebarometer_0xff1270":
+                    setupClock(icon, "ic_none", "", clock, false, torqueUnit, 900, 1070, "float");
+                    break;
+                case "torque-obdadaptervoltage_0xff1238":
+                    setupClock(icon, "ic_obd2", "", clock, false, "V", 0, 17, "float");
+                    break;
+                case "torque-hybridbattlevel_0x5b":
+                    setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "float");
+                    break;
+
+            }
+
+            // make the icon appear in the color of unitTextColor
+            Drawable iconBackground = (Drawable) icon.getBackground();
+            if (iconBackground != null) {
+                int iconTint = clock.getUnitTextColor();
+                iconBackground.setColorFilter(iconTint, PorterDuff.Mode.SRC_ATOP);
+                icon.setBackground(iconBackground);
+                icon.setTextColor(iconTint);
+            }
+
+            // bring mins and max's in line with the clock
+            float minimum = clock.getMinSpeed();
+            float maximum = clock.getMaxSpeed();
+
+            min.setMinMaxSpeed(minimum, maximum);
+            ray.setMinMaxSpeed(minimum, maximum);
+            max.setMinMaxSpeed(minimum, maximum);
+        }
+
+        //update clock with data
+        private void updateClock (String query, Speedometer clock, RaySpeedometer visray, TextView
+        textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin){
+            if (query == null) {
+                return;
+
+            } else if (stagingDone) {
+
+                float randomClockVal = randFloat(0, 360);
+                speedFactor = 1f;
+                pressureFactor = 1f;
+                long queryPid = 0;
+                Float clockValue = 0f;
+                Float oldValue = 0f;
+                String queryTrim = "";
+                String queryLong = query;
+                String temperatureUnit = (String) mLastMeasurements.get("unitTemperature.temperatureUnit");
+
+
+                if (temperatureUnit == null) {
+                    temperatureUnit = "°";
+                }
+
+                if (query.contains("-")) {
+                    queryTrim = query.substring(0, query.indexOf("-")); // check the prefix
+                } else {
+                    queryTrim = "other";
+                }
+                // Get the value that should be put on the clock, depending on the query
+                // exlap queries use mLastMeasurements.get(query)
+                // torque pid queries use torqueService.getValueForPid(queryPid), queryPid is trimmed from the query string
+                switch (queryTrim) {
+                    case "torque":
+                        query = query.substring(query.lastIndexOf('_') + 1);
+                        query = query.substring(2);
                         queryPid = new BigInteger(query, 16).longValue();
+
                         try {
                             if (torqueService != null) {
-                                float torqueData = torqueService.getValueForPid(queryPid, true);
-                                String unitText = torqueService.getUnitForPid(queryPid);
-                                Log.d(TAG,"Query: " + query + " unit: " + unitText);
-
-                                //todo: also get min/max
-                                float torqueMin = torqueService.getMinValueForPid(queryPid);
-                                float torqueMax = torqueService.getMinValueForPid(queryPid);
-                                clock.setMinSpeed(torqueMin);
-                                clock.setMaxSpeed(torqueMax);
-                                clockValue = torqueData;
+                                clockValue = torqueService.getValueForPid(queryPid, true);
                             }
                         } catch (Exception e) {
                             Log.e(TAG, "Error: " + e.getMessage());
                         }
                         break;
-                }
-            }
-            // don't update when there's nothing to update
-            if (clockValue == oldValue) {
-                return;
-            }
-            // update clock with latest clockValue
-            if (clockValue != null) {
-                clock.speedTo(clockValue);
-            }
-
-            // get the speed from the clock and have the high-visibility rays move to this speed as well
-            float tempValue = clock.getSpeed();
-            visray.speedTo(tempValue);
-
-            // update the max clocks and text
-            if (stagingDone) {
-                Float maxValue = clockmax.getSpeed();
-                Float minValue = clockmin.getSpeed();
-
-                if (tempValue > maxValue) {
-                    clockmax.setSpeedAt(tempValue);
-                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                    case "exlap":
+                        query = query.substring(query.lastIndexOf('-') + 1);
+                        clockValue = (Float) mLastMeasurements.get(query);
+                        break;
+                    default:  // the only other kind of query is the  "random" one.
+                        clockValue = randomClockVal;
+                        break;
                 }
 
+                oldValue = (Float) clock.getSpeed();
+                if (clockValue != null) {
+                    switch (queryLong) {
+                        case "test":
+                        case "none":    // none cannot happen currently
+                            //don't do anything
+                            break;
+                        // all data that can be put on the clock without further modification:
+                        case "exlap-Nav_Heading":
+                        case "exlap-batteryVoltage":
+                        case "exlap-Nav_Altitude":
+                        case "exlap-lateralAcceleration":
+                        case "exlap-longitudinalAcceleration":
+                        case "exlap-yawRate":
+                        case "exlap-EcoHMI_Score.AvgShort":
+                        case "exlap-EcoHMI_Score.AvgTrip":
+                        case "exlap-brakePressure":
+                        case "exlap-currentTorque":
+                        case "exlap-currentOutputPower":
+                            // all data that can be put on the clock without further modification:
+                            break;
+                        //rpm data, needs to be divided by 1000 before displayed on the clock
+                        case "exlap-engineSpeed":
+                            clockValue = clockValue / 1000;
+                            // temperatures
+                        case "exlap-oilTemperature":
+                        case "exlap-coolantTemperature":
+                        case "exlap-outsideTemperature":
+                        case "exlap-gearboxOilTemperature":
+                            clock.setUnit(temperatureUnit);
+                            // pressures
+                        case "exlap-absChargingAirPressure":
+                        case "exlap-relChargingAirPressure":
+                            clockValue = clockValue * pressureFactor;
+                            break;
+                        // specific case for wheel angle, since it needs to be turned around
+                        case "exlap-wheelAngle":
+                            clockValue = clockValue * -1; // make it negative, otherwise right = left and vice versa
+                            break;
+                        // hybrid power has 1020 as value 0.
+                        case "exlap-powermeter":
+                            clockValue = clockValue - 1020;
+                            // percentages
+                        case "exlap-acceleratorPosition":
+                        case "exlap-tankLevelPrimary":
+                        case "exlap-tankLevelSecondary":
+                            clockValue = clockValue * 100;
+                            break;
+                        // specific consumption data with specific consumption units
+                        // todo: maybe it's better to remove setting the unit from updateclock, but do it on setupclock
+                        case "exlap-currentConsumptionPrimary":
+                            String consumptionUnit = (String) mLastMeasurements.get("currentConsumptionPrimary.unit");
+                            if (consumptionUnit != null) {
+                                clock.setUnit(consumptionUnit);
+                            }
+                            break;
+                        case "exlap-currentConsumptionSecondary":
+                            String consumption2Unit = (String) mLastMeasurements.get("currentConsumptionSecondary.unit");
+                            if (consumption2Unit != null) {
+                                clock.setUnit(consumption2Unit);
+                            }
+                            break;
+                        case "exlap-cycleConsumptionPrimary":
+                            String cycconsumptionUnit = (String) mLastMeasurements.get("cycleConsumptionPrimary.unit");
+                            if (cycconsumptionUnit != null) {
+                                clock.setUnit(cycconsumptionUnit);
+                            }
+                            break;
+                        case "exlap-cycleConsumptionSecondary":
+                            String cycconsumption2Unit = (String) mLastMeasurements.get("cycleConsumptionSecondary.unit");
+                            if (cycconsumption2Unit != null) {
+                                clock.setUnit(cycconsumption2Unit);
+                            }
+                            break;
+                        // speed, has specific unit requirements and mph calculation
+                        case "exlap-vehicleSpeed":
+                            String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
+                            if (speedUnit != null) {
+                                switch (speedUnit) {
+                                    case "mph":
+                                        speedFactor = 1.60934f;
+                                        clock.setUnit("mph");
+                                        break;
+                                    case "kmh":
+                                        speedFactor = 1f;
+                                        clock.setUnit("kmh");
+                                        break;
+                                }
+                                clockValue = clockValue * speedFactor;
+                            }
+                            break;
+                        // torque data elements:
+                        case "torque-rpm_0x0c":
+                            clockValue = clockValue / 1000;
+                            break;
+                        case "torque-speed_0x0d":
+                        case "torque-fuelpressure_0x0a":
+                        case "torque-engineload_0x04":
+                        case "torque-timing_advance_0x0e":
+                        case "torque-intake_air_temperature_0x0f":
+                        case "torque-mass_air_flow_0x10":
+                        case "torque-throttle_position_0x11":
+                        case "torque-AFR_0xff1249":
+                        case "torque-fueltrimshortterm1_0x06":
+                        case "torque-fueltrimlongterm1_0x07":
+                        case "torque-fueltrimshortterm2_0x08":
+                        case "torque-fueltrimlongterm2_0x09":
+                        case "torque-accelerometer_total_0xff1223":
+                        case "torque-phonebatterylevel_0xff129a":
+                        case "torque-phonebarometer_0xff1270":
+                        case "torque-obdadaptervoltage_0xff1238":
+                        case "torque-hybridbattlevel_0x5b":
+                            queryPid = new BigInteger(query, 16).longValue();
+                            Log.d(TAG,"queryPid " + queryPid);
 
-                // update the min clocks and text
-                if (tempValue < minValue) {
-                    clockmin.setSpeedAt(tempValue);
-                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                            try {
+                                if (torqueService != null) {
+                                    float torqueData = torqueService.getValueForPid(queryPid, true);
+                                    String unitText = torqueService.getUnitForPid(queryPid);
+                                    clockValue = torqueData;
+                                    clock.setUnit(unitText);
+
+                                }
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error: " + e.getMessage());
+                            }
+                            break;
+                    }
+                }
+                // don't update when there's nothing to update
+                if (clockValue == oldValue) {
+                    return;
+                }
+                // update clock with latest clockValue
+                if (clockValue != null) {
+                    clock.speedTo(clockValue);
+                }
+
+                // get the speed from the clock and have the high-visibility rays move to this speed as well
+                float tempValue = clock.getSpeed();
+                visray.speedTo(tempValue);
+
+                // update the max clocks and text
+                if (stagingDone) {
+                    Float maxValue = clockmax.getSpeed();
+                    Float minValue = clockmin.getSpeed();
+
+                    if (tempValue > maxValue) {
+                        clockmax.setSpeedAt(tempValue);
+                        textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                    }
+
+
+                    // update the min clocks and text
+                    if (tempValue < minValue) {
+                        clockmin.setSpeedAt(tempValue);
+                        textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                    }
                 }
             }
         }
-    }
 
-    //update the elements
-    private void updateElement(String queryElement, TextView value, TextView label) {
-        long queryPid = 0;
+        //update the elements
+        private void updateElement (String queryElement, TextView value, TextView label){
+            long queryPid = 0;
 
-        if (queryElement == null) {
-            return;
-        } else switch (queryElement) {
-            case "none":
-                value.setText("");
-                break;
-            case "test":
-                float randomValue = randFloat(0, 100);
-                value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), randomValue));
-                break;
-            case "debug":
-                String mDebugvalue = (String) mLastMeasurements.get(mDebugQuery);
-                if (mDebugvalue != null) {
-                    value.setText(mDebugvalue);
-                }
-                break;
-            case "torque_version":
-                try {
-                    if (torqueService != null) {
-                        String torqueVersion = Integer.toString(torqueService.getVersion());
-                        if (torqueVersion != null) {
-                            value.setText(torqueVersion);
+            if (queryElement == null) {
+                return;
+            } else switch (queryElement) {
+                case "none":
+                    value.setText("");
+                    break;
+                case "test":
+                    float randomValue = randFloat(0, 100);
+                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), randomValue));
+                    break;
+                case "debug":
+                    String mDebugvalue = (String) mLastMeasurements.get(mDebugQuery);
+                    if (mDebugvalue != null) {
+                        value.setText(mDebugvalue);
+                    }
+                    break;
+                case "torque_version":
+                    try {
+                        if (torqueService != null) {
+                            String torqueVersion = Integer.toString(torqueService.getVersion());
+                            if (torqueVersion != null) {
+                                value.setText(torqueVersion);
+                            }
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error: " + e.getMessage());
+                    }
+                    break;
+                // the following are torque PIDs.
+                case "torque_fuelpressure_0x0a":
+                case "torque_engineload_0x04":
+                case "torque_timing_advance_0x0e":
+                case "torque_intake_air_temperature_0x0f":
+                case "torque_mass_air_flow_0x10":
+                case "torque_throttle_position_0x11":
+                case "torque_turboboost_0xff1202":
+                case "torque_voltage_0xff1238":
+                case "torque_AFR_0xff1249":
+                case "torque_fueltrimshortterm1_0x06":
+                case "torque_fueltrimlongterm1_0x07":
+                case "torque_fueltrimshortterm2_0x08":
+                case "torque_fueltrimlongterm2_0x09":
+                case "torque_accelerometer_total_0xff1223":
+                    queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
+                    queryElement = queryElement.substring(2);
+                    queryPid = new BigInteger(queryElement, 16).longValue();
+                    try {
+                        if (torqueService != null) {
+                            float torqueData = torqueService.getValueForPid(queryPid, true);
+                            String unitText = torqueService.getUnitForPid(queryPid);
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString() + unitText, torqueData));
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error: " + e.getMessage());
+                    }
+                    break;
+                // the following torque values should have the unit as label
+                case "torque_rpm_0x0c":
+                case "torque_speed_0x0d":
+                    queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
+                    queryElement = queryElement.substring(2);
+                    queryPid = new BigInteger(queryElement, 16).longValue();
+                    try {
+                        if (torqueService != null) {
+                            float torqueData = torqueService.getValueForPid(queryPid, true);
+                            String unitText = torqueService.getUnitForPid(queryPid);
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), torqueData));
+                            label.setText(unitText);
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error: " + e.getMessage());
+                    }
+                    break;
+
+                case "batteryVoltage":
+                    Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
+                    if (mBatteryVoltage != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_volt).toString(), mBatteryVoltage));
+                    }
+                    break;
+
+                // all temperatures can be handled in the same way, the only difference is the queryElement string
+                case "coolantTemperature":
+                case "oilTemperature":
+                case "gearboxOilTemperature":
+                case "outsideTemperature":
+                    Float mTemperature = (Float) mLastMeasurements.get(queryElement);
+                    if (mTemperature != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), mTemperature));
+                    }
+                    break;
+                case "vehicleSpeed":
+                    Float mVehicleSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
+                    String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
+                    if (mVehicleSpeed != null && speedUnit != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), mVehicleSpeed));
+                        label.setText(speedUnit);
+                    }
+                    // values that don't need any decimals
+                case "engineSpeed":
+                case "Nav_Heading":
+                case "Nav_Altitude":
+                    Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
+                    if (mNoDecimalValue != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mNoDecimalValue));
+                    }
+                    break;
+
+                // Decimal values, without any specific modification:
+                case "currentOutputPower":
+                case "currentTorque":
+                    Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
+                    if (mCurrentDecimalValue != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), mCurrentDecimalValue));
+                    }
+                    break;
+
+                case "currentGear":
+                    Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
+                    Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
+                    String currentGear = (String) mLastMeasurements.get("currentGear");
+                    String recommendedGear = (String) mLastMeasurements.get("recommendedGear");
+                    String gearText = "-";
+
+                    if (parkingBrake != null && parkingBrake) {
+                        value.setTextColor(Color.WHITE);
+                        gearText = "P";
+                    } else if (reverseGear != null && reverseGear) {
+                        value.setTextColor(Color.WHITE);
+                        gearText = "R";
+                    } else if (currentGear == null) {
+                        value.setTextColor(Color.WHITE);
+                        gearText = "-";
+                    } else if (currentGear != null && recommendedGear != null) {
+                        if (recommendedGear.equals(currentGear) || recommendedGear.equals("NoRecommendation")) {
+                            value.setTextColor(Color.WHITE);
+                            gearText = convGear(currentGear);
+                        } else if (!recommendedGear.equals(currentGear)) {
+                            value.setTextColor(Color.RED);
+                            gearText = (convGear(currentGear) + "▶" + convGear(recommendedGear));
                         }
                     }
-                } catch (Exception e) {
-                    Log.e(TAG, "Error: " + e.getMessage());
-                }
-                break;
-            // the following are torque PIDs.
-            case "torque_fuelpressure_0x0a":
-            case "torque_engineload_0x04":
-            case "torque_timing_advance_0x0e":
-            case "torque_intake_air_temperature_0x0f":
-            case "torque_mass_air_flow_0x10":
-            case "torque_throttle_position_0x11":
-            case "torque_turboboost_0xff1202":
-            case "torque_voltage_0xff1238":
-            case "torque_AFR_0xff1249":
-            case "torque_fueltrimshortterm1_0x06":
-            case "torque_fueltrimlongterm1_0x07":
-            case "torque_fueltrimshortterm2_0x08":
-            case "torque_fueltrimlongterm2_0x09":
-            case "torque_accelerometer_total_0xff1223":
-                queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
-                queryElement = queryElement.substring(2);
-                queryPid = new BigInteger(queryElement, 16).longValue();
-                try {
-                    if (torqueService != null) {
-                        float torqueData = torqueService.getValueForPid(queryPid, true);
-                        String unitText = torqueService.getUnitForPid(queryPid);
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString() + unitText, torqueData));
+                    value.setText(gearText);
+                    break;
+                case "lateralAcceleration":
+                case "longitudinalAcceleration":
+                    Float mAcceleration = (Float) mLastMeasurements.get(queryElement);
+                    if (mAcceleration != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_gforce).toString(), mAcceleration));
                     }
-                } catch (Exception e) {
-                    Log.e(TAG, "Error: " + e.getMessage());
-                }
-                break;
-            // the following torque values should have the unit as label
-            case "torque_rpm_0x0c":
-            case "torque_speed_0x0d":
-                queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
-                queryElement = queryElement.substring(2);
-                queryPid = new BigInteger(queryElement, 16).longValue();
-                try {
-                    if (torqueService != null) {
-                        float torqueData = torqueService.getValueForPid(queryPid, true);
-                        String unitText = torqueService.getUnitForPid(queryPid);
-                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), torqueData));
-                        label.setText(unitText);
+                    break;
+                case "yawRate":
+                    Float mYawRate = (Float) mLastMeasurements.get(queryElement);
+                    if (mYawRate != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_degreespersec).toString(), mYawRate));
                     }
-                } catch (Exception e) {
-                    Log.e(TAG, "Error: " + e.getMessage());
-                }
-                break;
-
-            case "batteryVoltage":
-                Float mBatteryVoltage = (Float) mLastMeasurements.get("batteryVoltage");
-                if (mBatteryVoltage != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_volt).toString(), mBatteryVoltage));
-                }
-                break;
-
-            // all temperatures can be handled in the same way, the only difference is the queryElement string
-            case "coolantTemperature":
-            case "oilTemperature":
-            case "gearboxOilTemperature":
-            case "outsideTemperature":
-                Float mTemperature = (Float) mLastMeasurements.get(queryElement);
-                if (mTemperature != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), mTemperature));
-                }
-                break;
-            case "vehicleSpeed":
-                Float mVehicleSpeed = (Float) mLastMeasurements.get("vehicleSpeed");
-                String speedUnit = (String) mLastMeasurements.get("vehicleSpeed.unit");
-                if (mVehicleSpeed != null && speedUnit != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), mVehicleSpeed));
-                    label.setText(speedUnit);
-                }
-                // values that don't need any decimals
-            case "engineSpeed":
-            case "Nav_Heading":
-            case "Nav_Altitude":
-                Float mNoDecimalValue = (Float) mLastMeasurements.get(queryElement);
-                if (mNoDecimalValue != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mNoDecimalValue));
-                }
-                break;
-
-            // Decimal values, without any specific modification:
-            case "currentOutputPower":
-            case "currentTorque":
-                Float mCurrentDecimalValue = (Float) mLastMeasurements.get(queryElement);
-                if (mCurrentDecimalValue != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), mCurrentDecimalValue));
-                }
-                break;
-
-            case "currentGear":
-                Boolean reverseGear = (Boolean) mLastMeasurements.get("reverseGear.engaged");
-                Boolean parkingBrake = (Boolean) mLastMeasurements.get("parkingBrake.engaged");
-                String currentGear = (String) mLastMeasurements.get("currentGear");
-                String recommendedGear = (String) mLastMeasurements.get("recommendedGear");
-                String gearText = "-";
-
-                if (parkingBrake != null && parkingBrake) {
-                    value.setTextColor(Color.WHITE);
-                    gearText = "P";
-                } else if (reverseGear != null && reverseGear) {
-                    value.setTextColor(Color.WHITE);
-                    gearText = "R";
-                } else if (currentGear == null) {
-                    value.setTextColor(Color.WHITE);
-                    gearText = "-";
-                } else if (currentGear != null && recommendedGear != null) {
-                    if (recommendedGear.equals(currentGear) || recommendedGear.equals("NoRecommendation")) {
-                        value.setTextColor(Color.WHITE);
-                        gearText = convGear(currentGear);
-                    } else if (!recommendedGear.equals(currentGear)) {
-                        value.setTextColor(Color.RED);
-                        gearText = (convGear(currentGear) + "▶" + convGear(recommendedGear));
+                    break;
+                case "Sound_Volume":
+                    Float mSoundVol = (Float) mLastMeasurements.get(queryElement);
+                    if (mSoundVol != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mSoundVol));
                     }
-                }
-                value.setText(gearText);
-                break;
-            case "lateralAcceleration":
-            case "longitudinalAcceleration":
-                Float mAcceleration = (Float) mLastMeasurements.get(queryElement);
-                if (mAcceleration != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_gforce).toString(), mAcceleration));
-                }
-                break;
-            case "yawRate":
-                Float mYawRate = (Float) mLastMeasurements.get(queryElement);
-                if (mYawRate != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_degreespersec).toString(), mYawRate));
-                }
-                break;
-            case "Sound_Volume":
-                Float mSoundVol = (Float) mLastMeasurements.get(queryElement);
-                if (mSoundVol != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mSoundVol));
-                }
-                break;
-            case "acceleratorPosition":
-                Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
-                if (mAcceleratorPosition != null) {
-                    Float mAccelPosPercent = mAcceleratorPosition * 100;
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mAccelPosPercent));
-                }
-                break;
-            case "brakePressure":
-                Float mBrakePressure = (Float) mLastMeasurements.get("brakePressure");
-                if (mBrakePressure != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mBrakePressure));
-                }
-                break;
-            case "wheelAngle":
-                Float mWheelAngle = (Float) mLastMeasurements.get(queryElement);
-                if (mWheelAngle != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_degrees).toString(), mWheelAngle));
-                }
-                break;
-            case "powermeter":
-                Float mPowermeter = (Float) mLastMeasurements.get(queryElement);
-                if (mPowermeter != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mPowermeter));
-                }
-                break;
+                    break;
+                case "acceleratorPosition":
+                    Float mAcceleratorPosition = (Float) mLastMeasurements.get("acceleratorPosition");
+                    if (mAcceleratorPosition != null) {
+                        Float mAccelPosPercent = mAcceleratorPosition * 100;
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mAccelPosPercent));
+                    }
+                    break;
+                case "brakePressure":
+                    Float mBrakePressure = (Float) mLastMeasurements.get("brakePressure");
+                    if (mBrakePressure != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_percent).toString(), mBrakePressure));
+                    }
+                    break;
+                case "wheelAngle":
+                    Float mWheelAngle = (Float) mLastMeasurements.get(queryElement);
+                    if (mWheelAngle != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_degrees).toString(), mWheelAngle));
+                    }
+                    break;
+                case "powermeter":
+                    Float mPowermeter = (Float) mLastMeasurements.get(queryElement);
+                    if (mPowermeter != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mPowermeter));
+                    }
+                    break;
 
-            // eco values
-            case "EcoHMI_Score.AvgShort":
-            case "EcoHMI_Score.AvgTrip":
-                Float mEcoScore = (Float) mLastMeasurements.get(queryElement);
-                if (mEcoScore != null) {
-                    value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mEcoScore));
-                }
-                break;
-            case "shortTermConsumptionPrimary":
-            case "shortTermConsumptionSecondary":
-                Float mshortConsumption = (Float) mLastMeasurements.get(queryElement);
-                if (mshortConsumption != null) {
-                    value.setText(String.format(Locale.US, "%.1f".toString(), mshortConsumption));
-                }
-                break;
-            case "Nav_CurrentPosition.Longitude":
-            case "Nav_CurrentPosition.Latitude":
-            case "Nav_CurrentPosition.City":
-            case "Nav_CurrentPosition.State":
-            case "Nav_CurrentPosition.Country":
-            case "Nav_CurrentPosition.Street":
-            case "Radio_Tuner.Name":
-            case "Radio_Text":
-            case "totalDistance.distanceValue":
-            case "vehicleIdenticationNumber.VIN":
-                String elementValue = (String) mLastMeasurements.get(queryElement);
-                if (elementValue != null) value.setText(elementValue);
-                break;
-            case "blinkingState":
-                break;
-            case "tyreStates.stateRearRight":
-            case "tyreStates.stateRearLeft":
-            case "tyreStates.stateFrontRight":
-            case "tyreStates.stateFrontLeft":
-                String tyreState = (String) mLastMeasurements.get(queryElement);
-                if (tyreState != null) {
-                    value.setText(tyreState);
-                    //if (tyreState != "OK") value.setTextColor(Color.RED);
-                }
-                break;
+                // eco values
+                case "EcoHMI_Score.AvgShort":
+                case "EcoHMI_Score.AvgTrip":
+                    Float mEcoScore = (Float) mLastMeasurements.get(queryElement);
+                    if (mEcoScore != null) {
+                        value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), mEcoScore));
+                    }
+                    break;
+                case "shortTermConsumptionPrimary":
+                case "shortTermConsumptionSecondary":
+                    Float mshortConsumption = (Float) mLastMeasurements.get(queryElement);
+                    if (mshortConsumption != null) {
+                        value.setText(String.format(Locale.US, "%.1f".toString(), mshortConsumption));
+                    }
+                    break;
+                case "Nav_CurrentPosition.Longitude":
+                case "Nav_CurrentPosition.Latitude":
+                case "Nav_CurrentPosition.City":
+                case "Nav_CurrentPosition.State":
+                case "Nav_CurrentPosition.Country":
+                case "Nav_CurrentPosition.Street":
+                case "Radio_Tuner.Name":
+                case "Radio_Text":
+                case "totalDistance.distanceValue":
+                case "vehicleIdenticationNumber.VIN":
+                    String elementValue = (String) mLastMeasurements.get(queryElement);
+                    if (elementValue != null) value.setText(elementValue);
+                    break;
+                case "blinkingState":
+                    break;
+                case "tyreStates.stateRearRight":
+                case "tyreStates.stateRearLeft":
+                case "tyreStates.stateFrontRight":
+                case "tyreStates.stateFrontLeft":
+                    String tyreState = (String) mLastMeasurements.get(queryElement);
+                    if (tyreState != null) {
+                        value.setText(tyreState);
+                        //if (tyreState != "OK") value.setTextColor(Color.RED);
+                    }
+                    break;
 
+            }
         }
-    }
+
+
 
     // set clock label, units, etc.
     private void setupClock(TextView icon, String iconDrawableName, String iconText, Speedometer clock, Boolean backgroundWithWarningArea, String unit, Integer minspeed, Integer maxspeed, String speedFormat) {
@@ -1686,6 +1720,17 @@ public class DashboardFragment extends CarFragment {
         icon.setText(iconText);
         clock.setUnit(unit);
         clock.setMinMaxSpeed(minspeed, maxspeed);
+
+        //dynamically scale the icon_space in case there's only an icon, and no text
+        if (iconText != "")
+        {
+
+
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) icon.getLayoutParams();
+            params.width = 600;
+            icon.setLayoutParams(params);
+                    }
+
 
         // determine if an empty background, without red warning area is wanted
         if (!backgroundWithWarningArea) {
