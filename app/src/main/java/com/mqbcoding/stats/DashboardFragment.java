@@ -386,7 +386,7 @@ public class DashboardFragment extends CarFragment {
         if (pressureUnits) {
             pressureFactor = 1;
             pressureUnit = "bar";
-            pressureMin = -2;
+            pressureMin = -3;
             pressureMax = 3;
 
         } else {
@@ -618,7 +618,13 @@ public class DashboardFragment extends CarFragment {
         Log.i(TAG, "onDeactivate");
         mStatsClient.unregisterListener(mCarStatsListener);
         getContext().unbindService(mServiceConnection);
-        getContext().unbindService(torqueConnection);
+        //getContext().unbindService(torqueConnection);
+        if (torqueBind)
+            try {
+                getContext().unbindService(torqueConnection);
+            } catch (Exception E) {
+                throw E;
+            }
         super.onPause();
     }
 
@@ -668,7 +674,7 @@ public class DashboardFragment extends CarFragment {
 
         if (torqueBind)
             try {
-                getContext().unbindService(torqueConnection);
+             //   getContext().unbindService(torqueConnection);
             } catch (Exception E) {
                 throw E;
             }
@@ -829,6 +835,7 @@ public class DashboardFragment extends CarFragment {
             case "torque_throttle_position_0x11":
             case "torque_turboboost_0xff1202":
             case "torque_AFR_0xff1249":
+            case "torque-AFRc_0xff124d":
             case "torque_fueltrimshortterm1_0x06":
             case "torque_fueltrimlongterm1_0x07":
             case "torque_fueltrimshortterm2_0x08":
@@ -1002,6 +1009,9 @@ public class DashboardFragment extends CarFragment {
             case "torque_AFR_0xff1249":
                 label.setText(getString(R.string.label_afr));
                 break;
+            case "torque_AFRc_0xff124d":
+                label.setText(getString(R.string.label_afrc));
+                break;
             case "torque_fueltrimshortterm1_0x06":
                 label.setText(getString(R.string.label_ftst1));
                 break;
@@ -1083,7 +1093,7 @@ public class DashboardFragment extends CarFragment {
                     setupClock(icon, "ic_measurement", "", clock, false, getString(R.string.testing), 0, 360, "float");
                     break;
                 case "exlap-vehicleSpeed":
-                case "torque_speed_0x0d":
+                case "torque-speed_0x0d":
                     setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kmh), 0, 350, "integer");
                     break;
                 case "exlap-Nav_Altitude":
@@ -1106,12 +1116,10 @@ public class DashboardFragment extends CarFragment {
                     clock.setBackgroundResource(swBackgroundResource);
                     break;
                 case "exlap-engineSpeed":
-                case "torque_rpm_0x0c":
+                case "torque-rpm_0x0c":
                     setupClock(icon, "ic_none", getString(R.string.unit_rpm), clock, true, getString(R.string.unit_rpm1000), 0, 9, "float");
-
                     clock.setTicks();
                     clock.setTickTextFormat(0);
-
                     break;
                 case "torque-voltage_0xff1238":
                 case "exlap-batteryVoltage":
@@ -1198,7 +1206,10 @@ public class DashboardFragment extends CarFragment {
                     setupClock(icon, "ic_none", getString(R.string.label_throttle), clock, false, torqueUnit, 0, 100,"float");
                     break;
                 case "torque-AFR_0xff1249":
-                    setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, "torqueUnit", 0, 35, "float");
+                    setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, torqueUnit, 0, 35, "float");
+                    break;
+                case "torque-AFRc_0xff124d":
+                    setupClock(icon, "ic_none", getString(R.string.label_afrc), clock, false, torqueUnit, 0, 35, "float");
                     break;
                 case "torque-fueltrimshortterm1_0x06":
                     setupClock(icon, "ic_none", getString(R.string.label_ftst1), clock, false, torqueUnit, -20, 20, "float");
@@ -1227,6 +1238,7 @@ public class DashboardFragment extends CarFragment {
                 case "torque-hybridbattlevel_0x5b":
                     setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "float");
                     break;
+
 
             }
 
@@ -1414,6 +1426,7 @@ public class DashboardFragment extends CarFragment {
                         case "torque-phonebarometer_0xff1270":
                         case "torque-obdadaptervoltage_0xff1238":
                         case "torque-hybridbattlevel_0x5b":
+                        case "torque-voltage_0xff1238":
                             queryPid = new BigInteger(query, 16).longValue();
                             Log.d(TAG,"queryPid " + queryPid);
 
@@ -1429,6 +1442,37 @@ public class DashboardFragment extends CarFragment {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
                             break;
+                        case "torque-turboboost_0xff1202":
+
+                            queryPid = new BigInteger(query, 16).longValue();
+                            Log.d(TAG,"queryPid " + queryPid);
+
+                            try {
+                                if (torqueService != null) {
+                                    float torqueData = torqueService.getValueForPid(queryPid, true);
+                                    String unitText = torqueService.getUnitForPid(queryPid);
+
+
+
+
+                                    if (unitText=="psi" && pressureUnit == "bar"){
+                                        torqueData = torqueData / 14.5037738f;
+                                        unitText = "bar";
+                                    } else if (unitText=="bar" && pressureUnit == "psi"){
+                                        torqueData = torqueData * 14.5037738f;
+                                        unitText = "psi";
+                                    }
+                                    clockValue = torqueData;
+                                    clock.setUnit(unitText);
+
+                                }
+                            } catch (Exception e) {
+                                Log.e(TAG, "Error: " + e.getMessage());
+                            }
+                            break;
+
+
+
                     }
                 }
                 // don't update when there's nothing to update
@@ -1503,7 +1547,6 @@ public class DashboardFragment extends CarFragment {
                 case "torque_intake_air_temperature_0x0f":
                 case "torque_mass_air_flow_0x10":
                 case "torque_throttle_position_0x11":
-                case "torque_turboboost_0xff1202":
                 case "torque_voltage_0xff1238":
                 case "torque_AFR_0xff1249":
                 case "torque_fueltrimshortterm1_0x06":
@@ -1514,17 +1557,49 @@ public class DashboardFragment extends CarFragment {
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
                     queryPid = new BigInteger(queryElement, 16).longValue();
+                    float torqueData = 0f;
+
                     try {
                         if (torqueService != null) {
-                            float torqueData = torqueService.getValueForPid(queryPid, true);
+                            torqueData = torqueService.getValueForPid(queryPid, true);
                             String unitText = torqueService.getUnitForPid(queryPid);
-                            value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString() + unitText, torqueData));
+                            String valueText = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(),torqueData));
+                            value.setText(valueText+ unitText);
                         }
                     } catch (Exception e) {
                         Log.e(TAG, "Error: " + e.getMessage());
                     }
                     break;
                 // the following torque values should have the unit as label
+                case "torque_turboboost_0xff1202":
+                    queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
+                    queryElement = queryElement.substring(2);
+                    queryPid = new BigInteger(queryElement, 16).longValue();
+                    float torqueData3 = 0f;
+
+                    try {
+                        if (torqueService != null) {
+                            torqueData3 = torqueService.getValueForPid(queryPid, true);
+
+
+                            String unitText = torqueService.getUnitForPid(queryPid);
+                            // workaround for Torque displaying the unit for turbo pressure
+                            if (unitText=="psi" && pressureUnit == "bar"){
+                                torqueData3 = torqueData3 / 14.5037738f;
+                                unitText = "bar";
+                            } else if (unitText=="bar" && pressureUnit == "psi"){
+                                torqueData3 = torqueData3 * 14.5037738f;
+                                unitText = "psi";
+                            }
+
+                            String valueText = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(),torqueData3));
+                            value.setText(valueText+ unitText);
+
+                        }
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error: " + e.getMessage());
+                    }
+                    break;
                 case "torque_rpm_0x0c":
                 case "torque_speed_0x0d":
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
@@ -1532,9 +1607,9 @@ public class DashboardFragment extends CarFragment {
                     queryPid = new BigInteger(queryElement, 16).longValue();
                     try {
                         if (torqueService != null) {
-                            float torqueData = torqueService.getValueForPid(queryPid, true);
+                            float torqueData2 = torqueService.getValueForPid(queryPid, true);
                             String unitText = torqueService.getUnitForPid(queryPid);
-                            value.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), torqueData));
+                            value.setText(String.format(Locale.US, getContext().getText(R.string.format_noDecimals).toString(), torqueData2));
                             label.setText(unitText);
                         }
                     } catch (Exception e) {

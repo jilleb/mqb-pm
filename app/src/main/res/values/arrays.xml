@@ -90,6 +90,7 @@
         <item>@string/element_torque_turboboost</item>
         <item>@string/element_torque_voltage</item>
         <item>@string/element_torque_AFR</item>
+        <item>@string/element_torque_AFRc</item>
         <item>@string/element_torque_fueltrimshortterm1</item>
         <item>@string/element_torque_fueltrimlongterm1</item>
         <item>@string/element_torque_fueltrimshortterm2</item>
@@ -98,7 +99,6 @@
         <item>@string/element_torque_phonebatterylevel</item>
         <item>@string/element_torque_phonebarometer</item>
         <item>@string/element_torque_obdadaptervoltage</item>
-        <item>@string/element_torque_hybridbattlevel</item>
 
 
         <item>@string/element_test</item>
@@ -147,6 +147,7 @@
         <item>torque-turboboost_0xff1202</item>
         <item>torque-voltage_0xff1238</item>
         <item>torque-AFR_0xff1249</item>
+        <item>torque-AFRc_0xff124d</item>
         <item>torque-fueltrimshortterm1_0x06</item>
         <item>torque-fueltrimlongterm1_0x07</item>
         <item>torque-fueltrimshortterm2_0x08</item>
@@ -155,7 +156,7 @@
         <item>torque-phonebatterylevel_0xff129a</item>
         <item>torque-phonebarometer_0xff1270</item>
         <item>torque-obdadaptervoltage_0xff1238</item>
-        <item>torque-hybridbattlevel_0x5b</item>
+
         <item>test</item>
 
     </string-array>
@@ -204,7 +205,6 @@
         <item>@string/element_VIN</item>
 
         <!-- PIDs from Torque -->
-        <item>@string/element_torqueversion</item>
         <item>@string/element_torque_rpm</item>
         <item>@string/element_torque_speed</item>
         <item>@string/element_torque_fuelpressure</item>
@@ -216,6 +216,7 @@
         <item>@string/element_torque_turboboost</item>
         <item>@string/element_torque_voltage</item>
         <item>@string/element_torque_AFR</item>
+        <item>@string/element_torque_AFRc</item>
         <item>@string/element_torque_fueltrimshortterm1</item>
         <item>@string/element_torque_fueltrimlongterm1</item>
         <item>@string/element_torque_fueltrimshortterm2</item>
@@ -274,7 +275,6 @@
 
         <item>vehicleIdenticationNumber.VIN</item>
         <!-- PIDs from Torque -->
-        <item>torque_version</item>
         <!-- Use PIDs like this: torque_<description>_<pid> -->
         <item>torque_rpm_0x0c</item>
         <item>torque_speed_0x0d</item>
@@ -287,6 +287,7 @@
         <item>torque_turboboost_0xff1202</item>
         <item>torque_voltage_0xff1238</item>
         <item>torque_AFR_0xff1249</item>
+        <item>torque_AFRc_0xff124d</item>
         <item>torque_fueltrimshortterm1_0x06</item>
         <item>torque_fueltrimlongterm1_0x07</item>
         <item>torque_fueltrimshortterm2_0x08</item>
@@ -503,5 +504,37 @@ EXTRA_TRIP_KPL      = 0xFF1206;
 ACCEL_X_FILTERED    = 0xFF1250;
 ACCEL_Y_FILTERED    = 0xFF1251;
 ACCEL_Z_FILTERED    = 0xFF1252;
+turbo boost vacuum gauge = 0xff1202
+turbo pressure control = 0x70
+transmission temperature = 0105
+transmission temperature = fe1805
+
+speed gps = ff1001
+torque-relativethrottleposition_0x45
+
+o2 volts bank   1 sensor 2 = ff1215
+o2 volts bank   1 sensor 1 = ff1214
+o2 sensor1 equivalence ratio (alternate) = 34
+intake manifold pressure = 0b
+torque-
+torque-
+torque-
+gps vs obd speed differnce = ff1237
+engine load absolute = 43
+engine load = 04
+engine coolant temperature =  05
+commanded equivalence ratio (lambda)= 44
+charge air cooler temperature CACT = 3c
+barometric pressure from vehicle = 33
+catalyst temperature (bank 1 sensor 1) =3c
+ambient air temp = 46
+absolute throttle position = 47
+voltage (module) = 42
+
+
      -->
+
+
+
+
 </resources>
