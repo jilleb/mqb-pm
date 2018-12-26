@@ -131,30 +131,13 @@
             android:key="selectedView4"
             android:summary="%s"
             android:title="@string/pref_view4" />
-        <ListPreference
-            android:entries="@array/ClockDataElementsEntries"
-            android:entryValues="@array/ClockDataElementsValues"
-            android:icon="@drawable/ic_settings_graph"
-            android:key="selectedGraphItem"
-            android:summary="%s"
-            android:title="@string/pref_graphitem" />
-        <ListPreference
-            android:defaultValue="1000"
-            android:entries="@array/graphDelayEntries"
-            android:entryValues="@array/graphDelayValues"
-            android:key="graphDelay"
-            android:summary="%s"
-            android:title="@string/pref_graphDelay" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectPressureUnit"
             android:summaryOff="@string/unit_psi"
             android:summaryOn="@string/unit_bar"
-            android:title="@string/pref_pressureunit" />
-        <EditTextPreference
-            android:defaultValue="Car_ambienceLightColour.ColourSRGB"
-            android:key="debugQuery"
-            android:title="Debug query" />
+            android:title="@string/pref_pressureunit"
+            android:visibility="invisible"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_headericons">
         <CheckBoxPreference
@@ -248,5 +231,33 @@
             android:key="cancelUploads"
             android:dependency="uploadToBigquery"
             android:title="@string/pref_cancel_uploads_title" />
+
     </PreferenceCategory>
-</PreferenceScreen>
+
+    <PreferenceCategory android:title="Currently unused settings">
+<EditTextPreference
+android:defaultValue="Car_ambienceLightColour.ColourSRGB"
+android:key="debugQuery"
+android:title="Debug query"
+android:visibility="gone" />
+        <ListPreference
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_graph"
+            android:key="selectedGraphItem"
+            android:summary="%s"
+            android:title="@string/pref_graphitem" />
+        <ListPreference
+            android:defaultValue="1000"
+            android:entries="@array/graphDelayEntries"
+            android:entryValues="@array/graphDelayValues"
+            android:key="graphDelay"
+            android:summary="%s"
+            android:title="@string/pref_graphDelay" />
+
+    </PreferenceCategory>
+
+
+
+
+    </PreferenceScreen>

@@ -378,6 +378,7 @@ public class DashboardFragment extends CarFragment {
         pressureMin = -2;
         pressureMax = 3;
         pressureFactor = 1;
+        pressureUnit = "bar";
 
         //set pressure dial to the wanted units
         //Most bar dials go from -2 to 3 bar.
@@ -1001,7 +1002,7 @@ public class DashboardFragment extends CarFragment {
                 label.setText(getString(R.string.label_maf));
                 break;
             case "torque_throttle_position_0x11":
-                label.setText(getString(R.string.label_throttle));
+                label.setBackground(getContext().getDrawable(R.drawable.ic_throttle));
                 break;
             case "torque_turboboost_0xff1202":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
@@ -1134,6 +1135,8 @@ public class DashboardFragment extends CarFragment {
                 case "exlap-outsideTemperature":
                     setupClock(icon, "ic_outsidetemperature", "", clock, false, "°", -25, 50, "float");
                     break;
+                case "torque-transmissiontemp_0x0105":
+                case "torque-transmissiontemp2_0xfe1805":
                 case "exlap-gearboxOilTemperature":
                     setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float");
                     break;
@@ -1202,9 +1205,6 @@ public class DashboardFragment extends CarFragment {
                 case "torque-mass_air_flow_0x10":
                     setupClock(icon, "ic_none", getString(R.string.label_maf), clock, false, torqueUnit, 0, 700, "float");
                     break;
-                case "torque-throttle_position_0x11":
-                    setupClock(icon, "ic_none", getString(R.string.label_throttle), clock, false, torqueUnit, 0, 100,"float");
-                    break;
                 case "torque-AFR_0xff1249":
                     setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, torqueUnit, 0, 35, "float");
                     break;
@@ -1233,10 +1233,31 @@ public class DashboardFragment extends CarFragment {
                     setupClock(icon, "ic_none", "", clock, false, torqueUnit, 900, 1070, "float");
                     break;
                 case "torque-obdadaptervoltage_0xff1238":
-                    setupClock(icon, "ic_obd2", "", clock, false, "V", 0, 17, "float");
+                    setupClock(icon, "ic_obd2", "", clock, false, torqueUnit, 0, 17, "float");
                     break;
                 case "torque-hybridbattlevel_0x5b":
                     setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "float");
+                    break;
+                case "torque-commandedequivalenceratiolambda_0x44":
+                    setupClock(icon, "ic_none", "lambda", clock, false, torqueUnit, 0, 3, "float");
+                    break;
+                case "torque-catalysttemperature_0x3c":
+                    setupClock(icon, "ic_catalyst", "", clock, false, torqueUnit, 0, 3, "float");
+                    break;
+                case "torque-relativethrottleposition_0x45":
+                case "torque-absolutethrottlepostion_0x47":
+                case "torque-throttle_position_0x11":
+                    setupClock(icon, "ic_throttle", "", clock, false, torqueUnit, 0, 100, "float");
+                    break;
+
+                case "torque-voltagemodule_0x42":
+                case "torque-ambientairtemp_0x46":
+                case "torque-intakemanifoldpressure_0x0b":
+                case "torque-chargeaircoolertemperature_0x3c":
+                case "torque-enginecoolanttemp_0x05":
+                case "torque-engineloadabsolute_0x43":
+                case "torque-pressurecontrol_0x70":
+
                     break;
 
 
@@ -1428,7 +1449,6 @@ public class DashboardFragment extends CarFragment {
                         case "torque-hybridbattlevel_0x5b":
                         case "torque-voltage_0xff1238":
                             queryPid = new BigInteger(query, 16).longValue();
-                            Log.d(TAG,"queryPid " + queryPid);
 
                             try {
                                 if (torqueService != null) {
@@ -1445,34 +1465,30 @@ public class DashboardFragment extends CarFragment {
                         case "torque-turboboost_0xff1202":
 
                             queryPid = new BigInteger(query, 16).longValue();
-                            Log.d(TAG,"queryPid " + queryPid);
-
                             try {
                                 if (torqueService != null) {
                                     float torqueData = torqueService.getValueForPid(queryPid, true);
                                     String unitText = torqueService.getUnitForPid(queryPid);
 
-
-
-
-                                    if (unitText=="psi" && pressureUnit == "bar"){
+                                    if (unitText.equals("psi") && pressureUnit.equals("bar")){
                                         torqueData = torqueData / 14.5037738f;
                                         unitText = "bar";
-                                    } else if (unitText=="bar" && pressureUnit == "psi"){
-                                        torqueData = torqueData * 14.5037738f;
-                                        unitText = "psi";
                                     }
+
+                                    //read data from Torque using the right functionality, more efficient
+                               //     String[] tempArray = new String[1];
+                                //    tempArray[0]="ff1202";
+                                 //   Log.d(TAG, "getPidValues: " + torqueService.getPIDInformation(tempArray)[0]);
+
+
+
                                     clockValue = torqueData;
                                     clock.setUnit(unitText);
-
                                 }
                             } catch (Exception e) {
                                 Log.e(TAG, "Error: " + e.getMessage());
                             }
                             break;
-
-
-
                     }
                 }
                 // don't update when there's nothing to update
@@ -1584,12 +1600,9 @@ public class DashboardFragment extends CarFragment {
 
                             String unitText = torqueService.getUnitForPid(queryPid);
                             // workaround for Torque displaying the unit for turbo pressure
-                            if (unitText=="psi" && pressureUnit == "bar"){
+                            if (unitText.equals("psi") && pressureUnit.equals("bar")) {
                                 torqueData3 = torqueData3 / 14.5037738f;
                                 unitText = "bar";
-                            } else if (unitText=="bar" && pressureUnit == "psi"){
-                                torqueData3 = torqueData3 * 14.5037738f;
-                                unitText = "psi";
                             }
 
                             String valueText = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(),torqueData3));

@@ -17,7 +17,7 @@
         style="@style/AppTheme.Car.Speedometer"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="2dp"
         android:background="?attr/themedDialBackground"
         android:elevation="0dp"
         android:padding="25dp"
@@ -28,7 +28,7 @@
         app:sv_speedTextSize="36dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unit=""
-        app:sv_unitSpeedInterval="3dp"
+        app:sv_unitSpeedInterval="5dp"
         app:sv_unitTextSize="20sp" />
 
     <com.github.anastr.speedviewlib.SpeedView
@@ -36,7 +36,7 @@
         style="@style/AppTheme.Car.Speedometer"
         android:layout_width="275dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="2dp"
         android:background="?attr/themedDialBackground"
         android:padding="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -45,7 +45,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:sv_speedTextSize="36dp"
         app:sv_textColor="@android:color/transparent"
-        app:sv_unitSpeedInterval="3dp"
+        app:sv_unitSpeedInterval="5dp"
         app:sv_unitTextSize="20sp" />
 
     <com.github.anastr.speedviewlib.SpeedView
@@ -63,7 +63,7 @@
         app:sv_speedTextSize="36dp"
         app:sv_textColor="@android:color/transparent"
         app:sv_unit=""
-        app:sv_unitSpeedInterval="3dp"
+        app:sv_unitSpeedInterval="5dp"
         app:sv_unitTextSize="20sp"
         app:sv_withTremble="false" />
 
@@ -526,7 +526,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="265dp"
-        android:drawableRight="@drawable/ic_max"
+        android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
         android:text="0"
         android:textAlignment="textEnd"
@@ -554,7 +554,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="265dp"
-        android:drawableRight="@drawable/ic_max"
+        android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
         android:text="0"
         android:textAlignment="textEnd"
@@ -585,7 +585,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="265dp"
 
-        android:drawableRight="@drawable/ic_max"
+        android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
         android:text="0"
         android:textAlignment="textEnd"

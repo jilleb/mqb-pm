@@ -504,33 +504,30 @@ EXTRA_TRIP_KPL      = 0xFF1206;
 ACCEL_X_FILTERED    = 0xFF1250;
 ACCEL_Y_FILTERED    = 0xFF1251;
 ACCEL_Z_FILTERED    = 0xFF1252;
-turbo boost vacuum gauge = 0xff1202
-turbo pressure control = 0x70
-transmission temperature = 0105
-transmission temperature = fe1805
+
+
+torque-transmissiontemp_0x0105
+torque-transmissiontemp2_0xfe1805
+torque-pressurecontrol_0x70
+torque-relativethrottleposition_0x45
+torque-absolutethrottlepostion_0x47
+torque-voltagemodule_0x42
+torque-ambientairtemp_0x46
+torque-intakemanifoldpressure_0x0b
+torque-commandedequivalenceratiolambda_0x44
+torque-chargeaircoolertemperature_0x3c
+torque-enginecoolanttemp_0x05
+torque-engineloadabsolute_0x43
+torque-catalysttemperature_0x3c
+
 
 speed gps = ff1001
-torque-relativethrottleposition_0x45
-
 o2 volts bank   1 sensor 2 = ff1215
 o2 volts bank   1 sensor 1 = ff1214
 o2 sensor1 equivalence ratio (alternate) = 34
-intake manifold pressure = 0b
-torque-
-torque-
-torque-
 gps vs obd speed differnce = ff1237
-engine load absolute = 43
-engine load = 04
-engine coolant temperature =  05
-commanded equivalence ratio (lambda)= 44
-charge air cooler temperature CACT = 3c
-barometric pressure from vehicle = 33
-catalyst temperature (bank 1 sensor 1) =3c
-ambient air temp = 46
-absolute throttle position = 47
-voltage (module) = 42
 
+barometric pressure from vehicle = 33
 
      -->
 
