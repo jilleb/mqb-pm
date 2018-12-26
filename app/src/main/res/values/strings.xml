@@ -180,6 +180,10 @@
     <string name="unit_rpm">RPM</string>
     <string name="unit_rpm1000">×1000</string>
     <string name="unit_volt">V</string>
+    <string name="unit_fahrenheit">Fahrenheit</string>
+    <string name="unit_celcius">Celcius</string>
+    <string name="unit_f">°F</string>
+    <string name="unit_c">°C</string>
 
     <string name="unknown">unknown</string>
     <string name="pref_showclock_summary">Show current time in header</string>
@@ -228,5 +232,7 @@
     <string name="element_torque_hybridbattlevel">Torque - Hybrid battery level</string>
     <string name="element_torque_AFRc">Torque - AFR(commanded)</string>
     <string name="label_afrc">AFR(c)</string>
+    <string name="pref_temperatureunit">Temperature unit</string>
+
 
 </resources>

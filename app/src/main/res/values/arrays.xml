@@ -505,19 +505,18 @@ ACCEL_X_FILTERED    = 0xFF1250;
 ACCEL_Y_FILTERED    = 0xFF1251;
 ACCEL_Z_FILTERED    = 0xFF1252;
 
-
+torque-voltagemodule_0x42
 torque-transmissiontemp_0x0105
 torque-transmissiontemp2_0xfe1805
 torque-pressurecontrol_0x70
 torque-relativethrottleposition_0x45
 torque-absolutethrottlepostion_0x47
-torque-voltagemodule_0x42
-torque-ambientairtemp_0x46
 torque-intakemanifoldpressure_0x0b
 torque-commandedequivalenceratiolambda_0x44
 torque-chargeaircoolertemperature_0x3c
 torque-enginecoolanttemp_0x05
 torque-engineloadabsolute_0x43
+torque-ambientairtemp_0x46
 torque-catalysttemperature_0x3c
 
 

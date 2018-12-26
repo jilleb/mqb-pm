@@ -138,6 +138,13 @@
             android:summaryOn="@string/unit_bar"
             android:title="@string/pref_pressureunit"
             android:visibility="invisible"/>
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="selectTemperatureUnit"
+            android:summaryOff="@string/unit_fahrenheit"
+            android:summaryOn="@string/unit_celcius"
+            android:title="@string/pref_temperatureunit"
+            android:visibility="invisible"/>
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_headericons">
         <CheckBoxPreference
