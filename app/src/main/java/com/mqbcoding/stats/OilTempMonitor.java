@@ -104,7 +104,7 @@ public class OilTempMonitor implements CarStatsClient.Listener {
         mNotificationManager.notify(TAG, NOTIFICATION_ID, notification);
         mHandler.postDelayed(mDismissNotification, NOTIFICATION_TIMEOUT_MS);
 
-        CarNotificationSoundPlayer soundPlayer = new CarNotificationSoundPlayer(mContext, R.raw.bubble);
+        CarNotificationSoundPlayer soundPlayer = new CarNotificationSoundPlayer(mContext, R.raw.light);
         soundPlayer.play();
     }
 
