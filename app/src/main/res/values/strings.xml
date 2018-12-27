@@ -10,7 +10,7 @@
 
     <string name="app_car_service_name">Performance Monitor</string>
     <string name="app_name">Performance Monitor for VAG</string>
-    <string name="app_version" translatable="false">0.6B</string>
+    <string name="app_version" translatable="false">0.7A</string>
 
     <string name="credits_author">This application was made by:</string>
     <string name="credits_basedon">Based on the SDK and demo App by:</string>
@@ -203,9 +203,10 @@
     <string name="element_torque_fuelpressure">Torque - Fuel pressure</string>
     <string name="element_torque_engineload">Torque - Engine load</string>
     <string name="element_torque_timing_advance">Torque - Timing advance</string>
-    <string name="element_torque_intake_air_temperature">Torque - Intake Air temperature</string>
-    <string name="element_torque_mass_air_flow">Torque - Mass Air Flow</string>
-    <string name="element_torque_throttle_position">Torque - Throttle position(Manifold)</string>
+    <string name="element_torque_intake_air_temperature">Torque - Intake air temperature (IAT)</string>
+    <string name="element_torque_mass_air_flow">Torque - Mass Air Flow (MAF)</string>
+    <string name="element_torque_throttle_position">Torque - Throttle position (Manifold)</string>
+    <string name="element_torque_relativethrottleposition">Torque - Throttle position (Relative)</string>
     <string name="element_torque_turboboost">Torque - Turbo boost pressure</string>
     <string name="element_torque_voltage">Torque - Voltage</string>
     <string name="element_torque_AFR">Torque - AFR</string>
@@ -216,7 +217,7 @@
     <string name="element_torque_fueltrimlongterm1">Torque - Long term fuel trim (bank 1)</string>
 
     <string name="label_fuel">Fuel</string>
-    <string name="label_load">Engine</string>
+    <string name="label_load">Load</string>
     <string name="label_timing">Timing</string>
     <string name="label_iat">IAT</string>
     <string name="label_maf">MAF</string>
@@ -233,6 +234,22 @@
     <string name="element_torque_AFRc">Torque - AFR(commanded)</string>
     <string name="label_afrc">AFR(c)</string>
     <string name="pref_temperatureunit">Temperature unit</string>
+    <string name="pref_title">Statusbar</string>
+    <string name="element_locationinfo">Location info</string>
+    <string name="element_mediainfo">Media info</string>
+    <string name="element_torque_voltagemodule">Torque - Voltage (Car)</string>
+    <string name="element_torque_transmissiontemp">Torque - Transmission temperature</string>
+    <string name="element_torque_pressurecontrol">Turbo pressure control</string>
+    <string name="element_torque_absolutethrottlepostion">Torque - Throttle position(Absolute)</string>
+    <string name="element_torque_intakemanifoldpressure">Torque - Intake manifold pressure</string>
+    <string name="element_torque_commandedequivalenceratiolambda">Torque - Commanded equivalence ratio (Lambda)</string>
+    <string name="element_torque_chargeaircoolertemperature">Torque - Charge air cooler temperature (CACT)</string>
+    <string name="element_torque_enginecoolanttemp">Torque - Engine coolant temperature</string>
+    <string name="element_torque_engineloadabsolute">Torque - Engine load (Absolute)</string>
+    <string name="element_torque_ambientairtemp">Torque - Ambient air temperature</string>
+    <string name="element_torque_catalysttemperature">Torque - Catalyst temperature</string>
+    <string name="element_torque_fuellevel">Torque - Fuel level</string>
+    <string name="element_torque_o2sensor1equivalenceratio">Torque - O2 sensor 1 equivalence ratio</string>
 
 
 </resources>

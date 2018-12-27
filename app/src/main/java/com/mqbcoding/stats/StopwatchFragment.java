@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
+import com.google.android.apps.auto.sdk.StatusBarController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,6 +52,11 @@ public class StopwatchFragment extends CarFragment {
 
     public StopwatchFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    protected void setupStatusBar(StatusBarController sc) {
+
     }
 
     @Override

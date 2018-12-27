@@ -7,11 +7,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.apps.auto.sdk.StatusBarController;
+
 public class CreditsFragment extends CarFragment {
     private final String TAG = "CreditsFragment";
 
     public CreditsFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    protected void setupStatusBar(StatusBarController sc) {
+
     }
 
     @Override

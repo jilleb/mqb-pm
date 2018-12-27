@@ -131,6 +131,16 @@
             android:key="selectedView4"
             android:summary="%s"
             android:title="@string/pref_view4" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:entries="@array/TitleDataElementsEntries"
+            android:entryValues="@array/TitleDataElementsValues"
+            android:key="selectedTitle"
+            android:icon="@drawable/ic_settings_title"
+            android:summary="%s"
+            android:title="@string/pref_title" />
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectPressureUnit"
@@ -242,11 +252,6 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="Currently unused settings">
-<EditTextPreference
-android:defaultValue="Car_ambienceLightColour.ColourSRGB"
-android:key="debugQuery"
-android:title="Debug query"
-android:visibility="gone" />
         <ListPreference
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"

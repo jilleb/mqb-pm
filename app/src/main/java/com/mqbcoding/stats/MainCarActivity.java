@@ -249,7 +249,7 @@ public class MainCarActivity extends CarActivity {
         menuController.setRootMenuAdapter(mainMenu);
         menuController.showMenuButton();
         StatusBarController statusBarController = getCarUiController().getStatusBarController();
-
+        carfragment.setupStatusBar(statusBarController);
         getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
                 false);
 

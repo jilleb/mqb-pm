@@ -83,10 +83,13 @@
         <item>@string/element_torque_speed</item>
         <item>@string/element_torque_fuelpressure</item>
         <item>@string/element_torque_engineload</item>
+        <item>@string/element_torque_engineloadabsolute</item>
         <item>@string/element_torque_timing_advance</item>
         <item>@string/element_torque_intake_air_temperature</item>
         <item>@string/element_torque_mass_air_flow</item>
         <item>@string/element_torque_throttle_position</item>
+        <item>@string/element_torque_relativethrottleposition</item>
+        <item>@string/element_torque_absolutethrottlepostion</item>
         <item>@string/element_torque_turboboost</item>
         <item>@string/element_torque_voltage</item>
         <item>@string/element_torque_AFR</item>
@@ -99,8 +102,20 @@
         <item>@string/element_torque_phonebatterylevel</item>
         <item>@string/element_torque_phonebarometer</item>
         <item>@string/element_torque_obdadaptervoltage</item>
+        <item>@string/element_torque_fuellevel</item>
 
 
+        <item>@string/element_torque_voltagemodule</item>
+        <item>@string/element_torque_transmissiontemp</item>
+        <item>@string/element_torque_pressurecontrol</item>
+
+        <item>@string/element_torque_intakemanifoldpressure</item>
+        <item>@string/element_torque_commandedequivalenceratiolambda</item>
+        <item>@string/element_torque_o2sensor1equivalenceratio</item>
+        <item>@string/element_torque_chargeaircoolertemperature</item>
+        <item>@string/element_torque_enginecoolanttemp</item>
+        <item>@string/element_torque_ambientairtemp</item>
+        <item>@string/element_torque_catalysttemperature</item>
         <item>@string/element_test</item>
     </string-array>
 
@@ -140,10 +155,13 @@
         <item>torque-speed_0x0d</item>
         <item>torque-fuelpressure_0x0a</item>
         <item>torque-engineload_0x04</item>
+        <item>torque-engineloadabsolute_0x43</item>
         <item>torque-timing_advance_0x0e</item>
         <item>torque-intake_air_temperature_0x0f</item>
         <item>torque-mass_air_flow_0x10</item>
         <item>torque-throttle_position_0x11</item>
+        <item>torque-relativethrottleposition_0x45</item>
+        <item>torque-absolutethrottlepostion_0x47</item>
         <item>torque-turboboost_0xff1202</item>
         <item>torque-voltage_0xff1238</item>
         <item>torque-AFR_0xff1249</item>
@@ -156,6 +174,19 @@
         <item>torque-phonebatterylevel_0xff129a</item>
         <item>torque-phonebarometer_0xff1270</item>
         <item>torque-obdadaptervoltage_0xff1238</item>
+        <item>torque-fuellevel_0x2f</item>
+
+        <item>torque-voltagemodule_0x42</item>
+        <item>torque-transmissiontemp_0x0105</item>
+        <item>torque-pressurecontrol_0x70</item>
+        <item>torque-intakemanifoldpressure_0x0b</item>
+        <item>torque-commandedequivalenceratiolambda_0x44</item>
+        <item>torque-o2sensor1equivalenceratio_0x34</item>
+        <item>torque-chargeaircoolertemperature_0x77</item>
+        <item>torque-enginecoolanttemp_0x05</item>
+        <item>torque-ambientairtemp_0x46</item>
+        <item>torque-catalysttemperature_0x3c</item>
+
 
         <item>test</item>
 
@@ -186,15 +217,9 @@
         <item>@string/element_navAltitude</item>
         <item>@string/element_navHeading</item>
         <!--<item>@string/element_blinkingState</item>-->
-        <item>@string/element_navStreet</item>
         <item>@string/element_navLongitude</item>
         <item>@string/element_navLatitude</item>
-        <item>@string/element_navCity</item>
-        <item>@string/element_navState</item>
-        <item>@string/element_navCountry</item>
         <item>@string/element_soundVolume</item>
-        <item>@string/element_radioStation</item>
-        <item>@string/element_radioText</item>
         <item>@string/element_odometer</item>
         <item>@string/element_tyreStateRR</item>
         <item>@string/element_tyreStateRL</item>
@@ -222,12 +247,7 @@
         <item>@string/element_torque_fueltrimshortterm2</item>
         <item>@string/element_torque_fueltrimlongterm2</item>
         <item>@string/element_torque_accelerometer_total</item>
-
-
         <item>@string/element_test</item>
-        <item>@string/element_debug</item>
-
-
     </string-array>
 
     <!-- Values/query strings for each of the Entries for dashboard elements settings -->
@@ -255,16 +275,9 @@
         <item>EcoHMI_Score.AvgTrip</item>
         <item>Nav_Altitude</item>
         <item>Nav_Heading</item>
-        <!--<item>blinkingState</item>-->
-        <item>Nav_CurrentPosition.Street</item>
         <item>Nav_CurrentPosition.Longitude</item>
         <item>Nav_CurrentPosition.Latitude</item>
-        <item>Nav_CurrentPosition.City</item>
-        <item>Nav_CurrentPosition.State</item>
-        <item>Nav_CurrentPosition.Country</item>
         <item>Sound_Volume</item>
-        <item>Radio_Tuner.Name</item>
-        <item>Radio_Text</item>
         <item>totalDistance.distanceValue</item>
         <item>tyreStates.stateRearRight</item>
         <item>tyreStates.stateRearLeft</item>
@@ -295,7 +308,18 @@
         <item>torque_accelerometer_total_0xff1223</item>
 
         <item>test</item>
-        <item>debug</item>
+    </string-array>
+
+    <string-array name="TitleDataElementsEntries">
+        <item>@string/element_none</item>
+        <item>@string/element_locationinfo</item>
+        <item>@string/element_mediainfo</item>
+    </string-array>
+
+    <string-array name="TitleDataElementsValues">
+        <item>None</item>
+        <item>Location</item>
+        <item>Media</item>
     </string-array>
 
 
@@ -505,20 +529,6 @@ ACCEL_X_FILTERED    = 0xFF1250;
 ACCEL_Y_FILTERED    = 0xFF1251;
 ACCEL_Z_FILTERED    = 0xFF1252;
 
-torque-voltagemodule_0x42
-torque-transmissiontemp_0x0105
-torque-transmissiontemp2_0xfe1805
-torque-pressurecontrol_0x70
-torque-relativethrottleposition_0x45
-torque-absolutethrottlepostion_0x47
-torque-intakemanifoldpressure_0x0b
-torque-commandedequivalenceratiolambda_0x44
-torque-chargeaircoolertemperature_0x3c
-torque-enginecoolanttemp_0x05
-torque-engineloadabsolute_0x43
-torque-ambientairtemp_0x46
-torque-catalysttemperature_0x3c
-
 
 speed gps = ff1001
 o2 volts bank   1 sensor 2 = ff1215
@@ -529,8 +539,6 @@ gps vs obd speed differnce = ff1237
 barometric pressure from vehicle = 33
 
      -->
-
-
 
 
 </resources>
