@@ -24,8 +24,6 @@ public class MainCarActivity extends CarActivity {
     static final String MENU_STOPWATCH = "stopwatch";
     private static final String TAG = "MainCarActivity";
 
-
-
     // static final String MENU_DEBUG_LOG = "log";
     // static final String MENU_DEBUG_TEST_NOTIFICATION = "test_notification";
     private static final String FRAGMENT_CAR = "dashboard";

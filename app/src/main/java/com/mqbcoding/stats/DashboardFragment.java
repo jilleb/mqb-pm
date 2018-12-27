@@ -30,6 +30,7 @@ import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
+import com.google.android.apps.auto.sdk.CarUiController;
 
 import org.prowl.torque.remote.ITorqueService;
 
@@ -219,6 +220,9 @@ public class DashboardFragment extends CarFragment {
 
         //Get preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+
+        this.setTitle("test");
+
 
         pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
         temperatureUnits = sharedPreferences.getBoolean("selectTemperatureUnit", true);  //true = celcius, false = fahrenheit
@@ -1258,7 +1262,7 @@ public class DashboardFragment extends CarFragment {
             case "torque-throttle_position_0x11":
                 setupClock(icon, "ic_throttle", "", clock, false, torqueUnit, 0, 100, "float");
                 break;
-
+//todo: add these elements:
             case "torque-voltagemodule_0x42":
             case "torque-ambientairtemp_0x46":
             case "torque-intakemanifoldpressure_0x0b":
@@ -1474,6 +1478,11 @@ public class DashboardFragment extends CarFragment {
                         clock.setUnit(unitText);
                         break;
                     case "torque-intake_air_temperature_0x0f":
+                    case "torque-transmissiontemp_0x0105":
+                    case "torque-transmissiontemp2_0xfe1805":
+                    case "torque-catalysttemperature_0x3c":
+                    case "torque-chargeaircoolertemperature_0x3c":
+                    case "torque-enginecoolanttemp_0x05":
                         if (unitText.equals("°C") && temperatureUnit.equals("°C")) {
                             unitText = "°C";
                         } else {
@@ -1508,7 +1517,6 @@ public class DashboardFragment extends CarFragment {
                         textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
                     }
 
-
                     // update the min clocks and text
                     if (tempValue < minValue) {
                         clockmin.setSpeedAt(tempValue);
@@ -1522,6 +1530,7 @@ public class DashboardFragment extends CarFragment {
     //update the elements
     private void updateElement (String queryElement, TextView value, TextView label){
         long queryPid = 0;
+
 
         if (queryElement == null) {
             return;
