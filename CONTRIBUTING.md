@@ -31,18 +31,18 @@ The app will generate marks in the color which is specified in sv_markColor.
 
 Always make sure there is enough room for data in the center circle. 
 
-![Dial image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/skoda_dial_background.png "Dial background")
+![Dial image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/dial_background_skoda.png "Dial background")
 
 
 
 ### Stopwatch background
 Basically the same as the dial background, but this one should have marks on it.
 
-![Stopwatch image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/skoda_stopwatch_background.png "Stopwatch background")
+![Stopwatch image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/stopwatch_background_skoda.png "Stopwatch background")
 
 ### App background
 The wallpaper in the app. This should be 800x400px. This is the image that will be visible throughout the entire application, so make sure it's nice.
-![Background image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/skoda_background_incar.png "App background")
+![Background image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/background_incar_skoda.png "App background")
 
 ### Colors
 - Needle color (themedNeedleColor)
