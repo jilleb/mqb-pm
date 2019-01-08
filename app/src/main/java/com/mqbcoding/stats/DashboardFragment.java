@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
+import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
@@ -34,7 +35,6 @@ import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.google.android.apps.auto.sdk.StatusBarController;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
-import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -79,16 +79,18 @@ public class DashboardFragment extends CarFragment {
     private Boolean pressureUnits, temperatureUnits;
     private Boolean stagingDone = false;
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn;
+    private Boolean leftGraphOn, centerGraphOn, rightGraphOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
     private boolean torqueBind = false;
-    private GraphView mGraphLeft;
-    private LineGraphSeries<DataPoint> mSpeedSeries;
-    private double graphLastXValue = 5d;
-
-
-
+    private GraphView mGraphLeft, mGraphCenter, mGraphRight;
+    private LineGraphSeries<DataPoint> mSpeedSeriesLeft;
+    private LineGraphSeries<DataPoint> mSpeedSeriesCenter;
+    private LineGraphSeries<DataPoint> mSpeedSeriesRight;
+    private double graphLeftLastXValue = 5d;
+    private double graphCenterLastXValue = 5d;
+    private double graphRightLastXValue = 5d;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -249,8 +251,9 @@ public class DashboardFragment extends CarFragment {
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         selectedTheme = sharedPreferences.getString("selectedTheme", "");
 
-
-
+        leftGraphOn = sharedPreferences.getBoolean("switch_leftClockGraph", false);
+        centerGraphOn = sharedPreferences.getBoolean("switch_centerClockGraph", false);
+        rightGraphOn = sharedPreferences.getBoolean("switch_rightClockGraph", false);
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -302,33 +305,16 @@ public class DashboardFragment extends CarFragment {
 
         //graph test
         mGraphLeft = (GraphView) rootView.findViewById(R.id.chart_Left);
-
-        mSpeedSeries = new LineGraphSeries<>();
-
-        if (mGraphLeft!=null){
-            mGraphLeft.addSeries(mSpeedSeries);
-
-            mGraphLeft.getViewport().setXAxisBoundsManual(true);
-            mGraphLeft.getViewport().setYAxisBoundsManual(true);
-            mGraphLeft.getViewport().setMinX(0);
-            // set default max and min, these will be set dynamically later
-            mGraphLeft.getViewport().setMaxX(120);
-            mGraphLeft.getViewport().setMaxY(360);
-            mGraphLeft.getViewport().setMinY(0);
-            mGraphLeft.getViewport().setScrollable(true);
-            mGraphLeft.getGridLabelRenderer().setVerticalLabelsVisible(false);
-            mGraphLeft.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        mGraphCenter = (GraphView) rootView.findViewById(R.id.chart_Center);
+        mGraphRight = (GraphView) rootView.findViewById(R.id.chart_Right);
+        mSpeedSeriesLeft = new LineGraphSeries<>();
+        mSpeedSeriesCenter = new LineGraphSeries<>();
+        mSpeedSeriesRight = new LineGraphSeries<>();
 
 
 
-            //Only show horizontal lines on the grid
-            mGraphLeft.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
-            mSpeedSeries.setDrawDataPoints(false);
-            mSpeedSeries.setThickness(3);
 
-            mGraphLeft.getViewport().setBackgroundColor(Color.argb(0, 0,0,0));
-            mSpeedSeries.setColor(Color.argb(80, 255, 255, 255));
-        }
+
 
         //set max/min values to 0
 
@@ -506,6 +492,29 @@ public class DashboardFragment extends CarFragment {
                     mClockCenter.setIndicator(imageIndicator);
                     mClockRight.setIndicator(imageIndicator);
                 }
+
+
+                if (leftGraphOn) {
+                    setupGraph(leftGraphOn, mClockLeft, mGraphLeft, mSpeedSeriesLeft);
+                } else {
+                    mGraphLeft.setVisibility(View.INVISIBLE);
+
+                }
+
+                if (centerGraphOn) {
+                    setupGraph(centerGraphOn, mClockCenter, mGraphCenter, mSpeedSeriesCenter);
+                } else {
+                    mGraphCenter.setVisibility(View.INVISIBLE);
+
+            }
+
+                if (rightGraphOn) {
+                    setupGraph(rightGraphOn, mClockRight, mGraphRight, mSpeedSeriesRight);
+                } else {
+                    mGraphRight.setVisibility(View.INVISIBLE);
+
+                }
+
 
                 if (ticksOn) {
 
@@ -731,6 +740,12 @@ public class DashboardFragment extends CarFragment {
         selectedFont = null;
         pressureUnit = null;
         stagingDone = false;
+        mGraphCenter = null;
+        mGraphLeft = null;
+        mGraphRight = null;
+        mSpeedSeriesCenter = null;
+        mSpeedSeriesLeft = null;
+        mSpeedSeriesRight = null;
 
         if (torqueBind)
             try {
@@ -789,10 +804,13 @@ public class DashboardFragment extends CarFragment {
         updateElement(mElement4Query, mValueElement4, mIconElement4);
 
         //update each of the clocks and the min/max/ray elements that go with it
-        // query, dial, visray, textmax, textmin, clockmax, clockmin) {
-        updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft);
-        updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter);
-        updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight);
+        // query, dial, visray, textmax, textmin, clockmax, clockmin)
+        graphLeftLastXValue += 1d;
+        graphCenterLastXValue += 1d;
+        graphRightLastXValue += 1d;
+        updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft, leftGraphOn, mGraphLeft, mSpeedSeriesLeft, graphLeftLastXValue);
+        updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter, centerGraphOn, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue);
+        updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight, rightGraphOn, mGraphRight, mSpeedSeriesRight, graphRightLastXValue);
 
         updateTitle(mTitleQuery);
 
@@ -1113,8 +1131,39 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
+    private void setupGraph(Boolean graphOn, Speedometer clock, GraphView graph, LineGraphSeries serie) {
+        clock.setIndicator(Indicator.Indicators.NoIndicator);
+        graph.addSeries(serie);
+        clock.setSpeedTextPosition(Gauge.Position.BOTTOM_CENTER);
+        clock.setSpeedTextPadding(-5);
+        serie.setAnimated(false);
 
-    private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
+
+        graph.setVisibility(View.VISIBLE);
+        graph.setElevation(55);
+        clock.setMarkColor(Color.parseColor("#00FFFFFF"));
+        clock.setWithIndicatorLight(false);
+        graph.getViewport().setXAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setMinX(0);
+        // set default max and min, these will be set dynamically later
+        graph.getViewport().setMaxX(120);
+        graph.getViewport().setMaxY(360);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setScrollable(true);
+        graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        graph.getViewport().setBackgroundColor(Color.argb(0, 255, 0, 0));
+        serie.setDrawDataPoints(false);
+        serie.setThickness(3);
+        serie.setColor(Color.argb(80, 255, 255, 255));
+
+    }
+
+
+
+        private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
 
         String queryTrim = "";
         String queryLong = queryClock;
@@ -1345,11 +1394,11 @@ public class DashboardFragment extends CarFragment {
         min.setMinMaxSpeed(minimum, maximum);
         ray.setMinMaxSpeed(minimum, maximum);
         max.setMinMaxSpeed(minimum, maximum);
-    }
+        }
 
     //update clock with data
     private void updateClock (String query, Speedometer clock, RaySpeedometer visray, TextView
-            textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin) {
+            textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin, Boolean graphOn, GraphView graph, LineGraphSeries series, Double graphLastXValue) {
         if (query == null) {
             return;
 
@@ -1583,15 +1632,18 @@ public class DashboardFragment extends CarFragment {
                     }
                 }
 
-                //if (clock==mClockLeft) {
-                graphLastXValue += 1d;
-                Float temp = mClockLeft.getCurrentSpeed();
-
-                mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 200);
+                if (graphOn) {
+                    Float temp = clock.getCurrentSpeed();
+                    graph.getViewport().setMaxY(clock.getMaxSpeed());
+                    graph.getViewport().setMinY(clock.getMinSpeed());
+                    series.appendData(new DataPoint(graphLastXValue, temp), true, 200);
+                    
+                }
+            }
 
 
             }
-        }
+
     }
 
 

@@ -75,6 +75,12 @@
             android:key="selectedClockLeft"
             android:summary="%s"
             android:title="@string/pref_leftclock" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_leftClockGraph"
+            android:summaryOff="@string/pref_graphOff"
+            android:summaryOn="@string/pref_graphOn"
+            android:title="@string/pref_displayasgraph" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,6 +90,19 @@
             android:key="selectedClockCenter"
             android:summary="%s"
             android:title="@string/pref_centerclock" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="switch_centerClockGraph"
+            android:summaryOff="@string/pref_graphOff"
+            android:summaryOn="@string/pref_graphOn"
+            android:title="@string/pref_displayasgraph" /><![CDATA[ />
+
+        />
+
+
+        ]]>
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,6 +112,14 @@
             android:key="selectedClockRight"
             android:summary="%s"
             android:title="@string/pref_rightclock" />
+        <SwitchPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="switch_rightClockGraph"
+            android:summaryOff="@string/pref_graphOff"
+            android:summaryOn="@string/pref_graphOn"
+            android:title="@string/pref_displayasgraph" />
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/TextDataElementsEntries"
@@ -141,40 +168,43 @@
             android:icon="@drawable/ic_settings_title"
             android:summary="%s"
             android:title="@string/pref_title" />
-        <SwitchPreference
-            android:defaultValue="true"
-            android:key="selectPressureUnit"
-            android:summaryOff="@string/unit_psi"
-            android:summaryOn="@string/unit_bar"
-            android:title="@string/pref_pressureunit"
-            android:visibility="invisible"/>
+    </PreferenceCategory>
+    <PreferenceCategory android:title="@string/pref_unitprefs">
+
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectTemperatureUnit"
             android:summaryOff="@string/unit_fahrenheit"
             android:summaryOn="@string/unit_celcius"
             android:title="@string/pref_temperatureunit"
-            android:visibility="invisible"/>
+            android:visibility="invisible" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="selectPressureUnit"
+            android:summaryOff="@string/unit_psi"
+            android:summaryOn="@string/unit_bar"
+            android:title="@string/pref_pressureunit"
+            android:visibility="invisible" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_headericons">
         <CheckBoxPreference
-            android:key="connectivityActive"
             android:defaultValue="false"
+            android:key="connectivityActive"
             android:summary="@string/pref_showconnectivity_summary"
             android:title="@string/pref_showconnectivity_title" />
         <CheckBoxPreference
-            android:key="clockActive"
             android:defaultValue="false"
+            android:key="clockActive"
             android:summary="@string/pref_showclock_summary"
             android:title="@string/pref_showclock_title" />
         <CheckBoxPreference
-            android:key="batterylevelActive"
             android:defaultValue="false"
+            android:key="batterylevelActive"
             android:summary="@string/pref_showbatterylevel_summary"
             android:title="@string/pref_showbatterylevel_title" />
         <CheckBoxPreference
-            android:key="micActive"
             android:defaultValue="false"
+            android:key="micActive"
             android:summary="@string/pref_showmic_summary"
             android:title="@string/pref_showmic_title" />
     </PreferenceCategory>

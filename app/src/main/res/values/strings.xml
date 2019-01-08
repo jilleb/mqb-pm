@@ -250,6 +250,10 @@
     <string name="element_torque_catalysttemperature">Torque - Catalyst temperature</string>
     <string name="element_torque_fuellevel">Torque - Fuel level</string>
     <string name="element_torque_o2sensor1equivalenceratio">Torque - O2 sensor 1 equivalence ratio</string>
+    <string name="pref_unitprefs">Unit preferences</string>
+    <string name="pref_graphOff">Clocks are displayed in regular mode</string>
+    <string name="pref_graphOn">Clocks are displayed in graph-mode</string>
+    <string name="pref_displayasgraph">Display graph instead of clock</string>
 
 
 </resources>

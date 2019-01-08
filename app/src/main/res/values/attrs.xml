@@ -5,7 +5,12 @@
     <attr name="themedCarBackground" format="reference" />
     <attr name="themedDialBackground" format="reference" />
     <attr name="themedEmptyDialBackground" format="reference" />
+    <attr name="themedBlankDialBackground" format="reference" />
     <attr name="themedStopWatchBackground" format="reference" />
     <attr name="themedNeedleColor" format="reference" />
+
+
+
+
 
 </resources>
