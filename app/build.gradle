@@ -28,6 +28,7 @@ dependencies {
     implementation 'com.jjoe64:graphview:4.2.2'
     implementation('com.google.apis:google-api-services-bigquery:v2-rev377-1.22.0') exclude module: 'httpclient'
     implementation 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
+    implementation 'com.github.christophesmet:android_maskable_layout:v1.3.1'
     implementation 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
 
     implementation 'com.android.support:appcompat-v7:27.1.1'

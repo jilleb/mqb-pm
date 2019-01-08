@@ -30,7 +30,13 @@ import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
+
 import com.google.android.apps.auto.sdk.StatusBarController;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.prowl.torque.remote.ITorqueService;
 
@@ -46,6 +52,7 @@ import java.util.TimerTask;
 public class DashboardFragment extends CarFragment {
     private final String TAG = "DashboardFragment";
     private Runnable mTimer1;
+    private Runnable mTimer2;
     private CarStatsClient mStatsClient;
     private WheelStateMonitor mWheelStateMonitor;
     private Speedometer mClockLeft, mClockCenter, mClockRight;
@@ -76,6 +83,12 @@ public class DashboardFragment extends CarFragment {
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
     private boolean torqueBind = false;
+    private GraphView mGraphLeft;
+    private LineGraphSeries<DataPoint> mSpeedSeries;
+    private double graphLastXValue = 5d;
+
+
+
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -236,6 +249,9 @@ public class DashboardFragment extends CarFragment {
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         selectedTheme = sharedPreferences.getString("selectedTheme", "");
 
+
+
+
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
         switch (selectedFont) {
@@ -283,6 +299,36 @@ public class DashboardFragment extends CarFragment {
         mClockMinLeft = rootView.findViewById(R.id.dial_MinLeft);
         mClockMinCenter = rootView.findViewById(R.id.dial_MinCenter);
         mClockMinRight = rootView.findViewById(R.id.dial_MinRight);
+
+        //graph test
+        mGraphLeft = (GraphView) rootView.findViewById(R.id.chart_Left);
+
+        mSpeedSeries = new LineGraphSeries<>();
+
+        if (mGraphLeft!=null){
+            mGraphLeft.addSeries(mSpeedSeries);
+
+            mGraphLeft.getViewport().setXAxisBoundsManual(true);
+            mGraphLeft.getViewport().setYAxisBoundsManual(true);
+            mGraphLeft.getViewport().setMinX(0);
+            // set default max and min, these will be set dynamically later
+            mGraphLeft.getViewport().setMaxX(120);
+            mGraphLeft.getViewport().setMaxY(360);
+            mGraphLeft.getViewport().setMinY(0);
+            mGraphLeft.getViewport().setScrollable(true);
+            mGraphLeft.getGridLabelRenderer().setVerticalLabelsVisible(false);
+            mGraphLeft.getGridLabelRenderer().setHorizontalLabelsVisible(false);
+
+
+
+            //Only show horizontal lines on the grid
+            mGraphLeft.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+            mSpeedSeries.setDrawDataPoints(false);
+            mSpeedSeries.setThickness(3);
+
+            mGraphLeft.getViewport().setBackgroundColor(Color.argb(0, 0,0,0));
+            mSpeedSeries.setColor(Color.argb(80, 255, 255, 255));
+        }
 
         //set max/min values to 0
 
@@ -1099,6 +1145,8 @@ public class DashboardFragment extends CarFragment {
             }
         }
 
+
+
         // setup each of the clocks:
         switch (queryLong) {
             case "none": // currently impossible to choose, maybe in the future?
@@ -1534,6 +1582,14 @@ public class DashboardFragment extends CarFragment {
                         textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
                     }
                 }
+
+                //if (clock==mClockLeft) {
+                graphLastXValue += 1d;
+                Float temp = mClockLeft.getCurrentSpeed();
+
+                mSpeedSeries.appendData(new DataPoint(graphLastXValue, temp), true, 200);
+
+
             }
         }
     }
@@ -1841,8 +1897,6 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-
-
     // set clock label, units, etc.
     private void setupClock(TextView icon, String iconDrawableName, String iconText, Speedometer clock, Boolean backgroundWithWarningArea, String unit, Integer minspeed, Integer maxspeed, String speedFormat) {
 
@@ -1928,5 +1982,8 @@ public class DashboardFragment extends CarFragment {
             Log.e("HU", "Unable to connect to Torque plugin service");
         }
     }
+
+
+
 
 }
