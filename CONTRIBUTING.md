@@ -6,6 +6,7 @@ There are a few ways to contribute the development of this app. On this page you
 Each app theme consists of:
 - a needle / indicator
 - a dial background
+- a dial background without red warning marks ("empty")
 - a stopwatch background
 - an app background
 - a needle color
@@ -22,7 +23,7 @@ Here are my basic design principes:
 The needle image should always be in the 12'o'clock position. 
 ![Needle image](https://github.com/jilleb/mqb-pm/raw/master/app/src/main/res/drawable/skoda_needle.png "Needle")
 
-### Dial background
+### Dial background (with red warning zone)
 - Dial backgound with marks on it:
 If you use marks on the graphic, the start and end positions should be in the same location as the example. sv_markColor should be transparent in this case.
 
@@ -33,12 +34,16 @@ Always make sure there is enough room for data in the center circle.
 
 ![Dial image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/dial_background_skoda.png "Dial background")
 
+### Dial background empty
+The "empty" dial background is identical to the other dial background, but is has no red warning zone.
+Always make sure there is enough room for data in the center circle. 
 
+![Dial image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/dial_background_empty_skoda.png "Dial background empty")
 
 ### Stopwatch background
 Basically the same as the dial background, but this one should have marks on it.
 
-![Stopwatch image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/stopwatch_background_skoda.png "Stopwatch background")
+![Stopwatch image](https://github.com/jilleb/mqb-pm/blob/master/app/src/main/res/drawable/sw_background_skoda.png "Stopwatch background")
 
 ### App background
 The wallpaper in the app. This should be 800x400px. This is the image that will be visible throughout the entire application, so make sure it's nice.
@@ -53,14 +58,3 @@ Mark colors should be transparent when the dial background graphic has marks on 
 
 ### Theme name
 Pick whatever you like!
-
-
-
-
-
-
-
-
-
-
-
