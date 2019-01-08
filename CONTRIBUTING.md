@@ -21,7 +21,7 @@ Here are my basic design principes:
 
 ### Needle
 The needle image should always be in the 12'o'clock position. 
-![Needle image](https://github.com/jilleb/mqb-pm/raw/master/app/src/main/res/drawable/skoda_needle.png "Needle")
+![Needle image](https://github.com/jilleb/mqb-pm/raw/master/app/src/main/res/drawable/needle_skoda.png "Needle")
 
 ### Dial background (with red warning zone)
 - Dial backgound with marks on it:
