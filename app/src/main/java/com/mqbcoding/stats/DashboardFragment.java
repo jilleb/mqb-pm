@@ -26,7 +26,6 @@ import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
-import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
@@ -805,9 +804,7 @@ public class DashboardFragment extends CarFragment {
 
         //update each of the clocks and the min/max/ray elements that go with it
         // query, dial, visray, textmax, textmin, clockmax, clockmin)
-        graphLeftLastXValue += 1d;
-        graphCenterLastXValue += 1d;
-        graphRightLastXValue += 1d;
+
         updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft, leftGraphOn, mGraphLeft, mSpeedSeriesLeft, graphLeftLastXValue);
         updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter, centerGraphOn, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue);
         updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight, rightGraphOn, mGraphRight, mSpeedSeriesRight, graphRightLastXValue);
@@ -1132,11 +1129,18 @@ public class DashboardFragment extends CarFragment {
     }
 
     private void setupGraph(Boolean graphOn, Speedometer clock, GraphView graph, LineGraphSeries serie) {
+
+        TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedBlankDialBackground});
+        int blankBackgroundResource = typedArray.getResourceId(0, 0);
+        typedArray.recycle();
+
         clock.setIndicator(Indicator.Indicators.NoIndicator);
         graph.addSeries(serie);
         clock.setSpeedTextPosition(Gauge.Position.BOTTOM_CENTER);
         clock.setSpeedTextPadding(-5);
+        clock.setBackgroundResource(blankBackgroundResource);
         serie.setAnimated(false);
+
 
 
         graph.setVisibility(View.VISIBLE);
@@ -1609,11 +1613,33 @@ public class DashboardFragment extends CarFragment {
                 // update clock with latest clockValue
                 if (clockValue != null) {
                     clock.speedTo(clockValue);
+                    visray.speedTo(clockValue);
+
+                    if (graphOn) {
+                        graph.getViewport().setMaxY(clock.getMaxSpeed());
+                        graph.getViewport().setMinY(clock.getMinSpeed());
+
+                        // only shift x asis 2 positions when there's new data
+                        if (clock==mClockLeft) {
+                            graphLeftLastXValue += 1d;
+                        } else if (clock==mClockCenter) {
+                            graphCenterLastXValue += 1d;
+                        } else if (clock==mClockRight) {
+                            graphRightLastXValue += 1d;
+                        }
+
+
+                        series.appendData(new DataPoint(graphLastXValue, clockValue), true, 200);
+
+                        }
+
+
+                    }
                 }
 
                 // get the speed from the clock and have the high-visibility rays move to this speed as well
                 float tempValue = clock.getSpeed();
-                visray.speedTo(tempValue);
+
 
                 // update the max clocks and text
                 if (stagingDone) {
@@ -1632,18 +1658,7 @@ public class DashboardFragment extends CarFragment {
                     }
                 }
 
-                if (graphOn) {
-                    Float temp = clock.getCurrentSpeed();
-                    graph.getViewport().setMaxY(clock.getMaxSpeed());
-                    graph.getViewport().setMinY(clock.getMinSpeed());
-                    series.appendData(new DataPoint(graphLastXValue, temp), true, 200);
-                    
-                }
             }
-
-
-            }
-
     }
 
 

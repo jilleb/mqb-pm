@@ -163,7 +163,7 @@
     <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_mib2p</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_mib2p</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_empty_mib2p</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_mib2p</item>
 
         <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_mib2p</item>
