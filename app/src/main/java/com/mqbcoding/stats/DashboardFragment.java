@@ -30,7 +30,6 @@ import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
-
 import com.google.android.apps.auto.sdk.StatusBarController;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -40,6 +39,8 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.prowl.torque.remote.ITorqueService;
 
 import java.math.BigInteger;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -68,7 +69,7 @@ public class DashboardFragment extends CarFragment {
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
     //values of the data elements. upper left, upper right, lower left, lower right.
-    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4;
+    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement;
     private TextView mTextMinLeft, mTextMaxLeft;
     private TextView mTextMinCenter, mTextMaxCenter;
     private TextView mTextMinRight, mTextMaxRight;
@@ -98,9 +99,7 @@ public class DashboardFragment extends CarFragment {
 
     @Override
     protected void setupStatusBar(StatusBarController sc) {
-        sc.showTitle();
-        sc.setTitle(getString(R.string.activity_main_title));
-
+        sc.hideTitle();
     }
 
 
@@ -333,6 +332,10 @@ public class DashboardFragment extends CarFragment {
         mValueElement3 = rootView.findViewById(R.id.value_Element3);
         mValueElement4 = rootView.findViewById(R.id.value_Element4);
 
+        //title text element
+        mTitleElement = rootView.findViewById(R.id.textTitleElement);
+
+
         //labels at these text elements:
         mIconElement1 = rootView.findViewById(R.id.icon_Element1);
         mIconElement2 = rootView.findViewById(R.id.icon_Element2);
@@ -372,6 +375,7 @@ public class DashboardFragment extends CarFragment {
         mValueElement2.setTypeface(typeface);
         mValueElement3.setTypeface(typeface);
         mValueElement4.setTypeface(typeface);
+        mTitleElement.setTypeface(typeface);
 
         //max
         mTextMinLeft.setTypeface(typeface);
@@ -713,6 +717,7 @@ public class DashboardFragment extends CarFragment {
         mValueElement2 = null;
         mValueElement3 = null;
         mValueElement4 = null;
+        mTitleElement = null;
         mIconElement1 = null;
         mIconElement2 = null;
         mIconElement3 = null;
@@ -1664,44 +1669,56 @@ public class DashboardFragment extends CarFragment {
 
     private void updateTitle (String queryTitle) {
 
+        String titleValue = "";
+        String currentTime = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+
+        String currentTitleValue = mTitleElement.getText().toString();
+
         if (queryTitle == null) {
             return;
-        }else switch (queryTitle) {
+        } else switch (queryTitle) {
             case "Location":
                 String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
                 String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
                 String location3 = (String) mLastMeasurements.get("Nav_CurrentPosition.State");
                 String location4 = (String) mLastMeasurements.get("Nav_CurrentPosition.Country");
-                String location = location1+", "+location2+", "+location3+", "+location4;
-
+                String location = location1 + ", " + location2 + ", " + location3 + ", " + location4;
                 if (location1 != null) {
-                    this.setTitle(location);
-                }                 else {
-                    this.setTitle("");
-
+                    titleValue = location;
+                } else {
+                    titleValue = currentTime;
                 }
-
                 break;
             case "Media info":
                 String media1 = (String) mLastMeasurements.get("Radio_Tuner.Name");
                 String media2 = (String) mLastMeasurements.get("Radio_Text");
-                String media = media1+", "+media2;
-
+                String media = media1 + ", " + media2;
                 if (media != null) {
-                    this.setTitle(media);
+                    titleValue = media;
                 } else {
-                    this.setTitle("");
-
+                    titleValue = currentTime;
                 }
                 break;
-
+            case "Clock":
+                String tempString = "";
+                Float mTemperature = (Float) mLastMeasurements.get("outsideTemperature");
+                if (mTemperature != null) {
+                    tempString = (String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), mTemperature));
+                    titleValue = currentTime +  " " + tempString + temperatureUnit ;
+                } else {
+                    titleValue = currentTime;
+                }
+                break;
             case "None":
-
-                this.setTitle("");
-
+                titleValue = "";
                 break;
         }
 
+        if (currentTitleValue == titleValue){
+            return;
+        } else {
+            mTitleElement.setText(titleValue);
+        }
     }
 
     //update the elements
@@ -2049,8 +2066,5 @@ public class DashboardFragment extends CarFragment {
             Log.e("HU", "Unable to connect to Torque plugin service");
         }
     }
-
-
-
 
 }

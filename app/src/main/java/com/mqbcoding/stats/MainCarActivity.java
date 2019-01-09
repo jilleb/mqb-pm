@@ -143,9 +143,6 @@ public class MainCarActivity extends CarActivity {
         }
         Log.d(TAG, "Set theme: " + selectedTheme);
 
-        connectivityOn  = sharedPreferences.getBoolean("connectivityActive",true);
-        batteryOn       = sharedPreferences.getBoolean("batterylevelActive", true);
-        clockOn         = sharedPreferences.getBoolean("clockActive", true);
         micOn           = sharedPreferences.getBoolean("micActive", true);
 
         setContentView(R.layout.activity_car_main);
@@ -176,18 +173,6 @@ public class MainCarActivity extends CarActivity {
         carUiController.getStatusBarController().hideMicButton();
         carUiController.getStatusBarController().hideAppHeader();
 
-
-        if (connectivityOn) {
-            carUiController.getStatusBarController().showConnectivityLevel();
-        }
-        // battery
-        if (batteryOn) {
-            carUiController.getStatusBarController().showBatteryLevel();
-        }
-        // clock
-        if (clockOn) {
-            carUiController.getStatusBarController().showClock();
-        }
         //microphone
         if (micOn) {
             carUiController.getStatusBarController().showMicButton();

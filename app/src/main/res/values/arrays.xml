@@ -314,14 +314,15 @@
         <item>@string/element_none</item>
         <item>@string/element_locationinfo</item>
         <item>@string/element_mediainfo</item>
+        <item>@string/element_clock</item>
     </string-array>
 
     <string-array name="TitleDataElementsValues">
         <item>None</item>
         <item>Location</item>
         <item>Media</item>
+        <item>Clock</item>
     </string-array>
-
 
     <string-array name="graphDelayEntries">
         <item>0.1s</item>
@@ -330,7 +331,6 @@
         <item>5s</item>
         <item>60s</item>
     </string-array>
-
 
     <string-array name="graphDelayValues">
         <item>100</item>
@@ -352,7 +352,6 @@
         <item>@string/font_larabie</item>
     </string-array>
 
-
     <string-array name="fontValues">
         <item>segments</item>
         <item>vw</item>
@@ -364,7 +363,6 @@
         <item>skoda</item>
         <item>larabie</item>
     </string-array>
-
 
     <string-array name="FontThumbs">
         <item>@drawable/ic_font_segments</item>
