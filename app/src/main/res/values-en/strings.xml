@@ -27,17 +27,14 @@
 
 
     <string name="activity_settings_title">Performance Monitor Settings</string>
-    <string name="activity_graph_title">Graphs</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
     <string name="activity_main_title">Performance Monitor</string>
-    <string name="activity_measurements_title">Measurements (Alpha test)</string>
 
     <string name="pref_resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
     <string name="pref_appearance">Appearance</string>
     <string name="pref_highvis">High visibility dials</string>
     <string name="pref_theme">Theme</string>
     <string name="pref_highlow">Highest/lowest values</string>
-    <string name="pref_accbrakeindicator">Acceleration/brake indicator</string>
 
     <string name="pref_choose_account_title">Choose account</string>
     <string name="pref_upload_to_bigquery_title">Upload logs to BigQuery</string>
@@ -49,7 +46,6 @@
     <string name="kick_uploads_done">Uploads scheduled.</string>
     <string name="pref_bigquery_reupload_last_title">Re-upload last log file</string>
     <string name="pref_bigquery_reupload_last_failed">Failed to initiate re-upload of the last log file.</string>
-    <string name="pref_bigquery_reupload_last_ok">Re-upload scheduled.</string>
 
     <string name="notification_oil_title">Oil temperature</string>
     <string name="notification_oil_text">Engine oil reached the working temperature.</string>
@@ -81,8 +77,6 @@
     <string name="pref_highvis_on">Display a highly visible ray instead of a needle</string>
     <string name="pref_highlow_off">Do not show max/min values</string>
     <string name="pref_highlow_on">Show max/min values for each clock</string>
-    <string name="pref_accbrakeindicator_off">Indicator is not displayed</string>
-    <string name="pref_accbrakeindicator_on">Indicator is displayed</string>
     <string name="pref_highlowmarks">Mark high/low values on clocks</string>
     <string name="pref_highlowmarks_on">A min and max mark is shown on the clocks</string>
     <string name="pref_highlowmarks_off">A min and max mark is not shown on the clocks</string>
@@ -99,7 +93,6 @@
     <string name="element_outsideTemperature">Outside temperature</string>
     <string name="element_vehicleSpeed">Speed</string>
     <string name="element_currentGear">Current gear</string>
-    <string name="element_recommendedGear">Recommended gear</string>
     <string name="element_engineSpeed">RPM</string>
     <string name="element_lateralAcceleration">Lateral G\'s</string>
     <string name="element_longitudinalAcceleration">Longitudinal G\'s</string>
@@ -116,7 +109,6 @@
     <string name="element_currentConsumptionSecondary">Current consumption, secondary fuel</string>
     <string name="element_cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
     <string name="element_cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
-    <string name="element_vehicleSpeed_alternative">Car speed (different source)</string>
     <string name="element_test">Test (random, does not get data from the car)</string>
 
     <string name="credits_author">This application was made by:</string>
@@ -133,14 +125,8 @@
     <string name="pref_ambient_off">Don\'t use ambient colors</string>
     <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
     <string name="pref_ambient">Ambient colors</string>
-    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
-    <string name="pref_showclock_summary">Show current time in header</string>
-    <string name="pref_showclock_title">Time display</string>
-    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
-    <string name="pref_showconnectivity_title">Connectivity icon</string>
     <string name="pref_showmic_summary">Show microphone icon in header</string>
     <string name="pref_showmic_title">Microphone icon</string>
-    <string name="pref_showbatterylevel_title">Battery level</string>
     <string name="unknown">unknown</string>
     <string name="activity_credits_title">Credits</string>
     <string name="element_soundVolume">Sound volume</string>

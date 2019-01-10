@@ -16,6 +16,7 @@ import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -85,6 +86,7 @@ public class DashboardFragment extends CarFragment {
     private ITorqueService torqueService;
     private boolean torqueBind = false;
     private GraphView mGraphLeft, mGraphCenter, mGraphRight;
+    private CardView mGraphLayoutLeft, mGraphLayoutCenter, mGraphLayoutRight;
     private LineGraphSeries<DataPoint> mSpeedSeriesLeft;
     private LineGraphSeries<DataPoint> mSpeedSeriesCenter;
     private LineGraphSeries<DataPoint> mSpeedSeriesRight;
@@ -305,14 +307,14 @@ public class DashboardFragment extends CarFragment {
         mGraphLeft = (GraphView) rootView.findViewById(R.id.chart_Left);
         mGraphCenter = (GraphView) rootView.findViewById(R.id.chart_Center);
         mGraphRight = (GraphView) rootView.findViewById(R.id.chart_Right);
+
+        mGraphLayoutLeft = (CardView) rootView.findViewById(R.id.left_layout);
+        mGraphLayoutCenter = (CardView) rootView.findViewById(R.id.center_layout);
+        mGraphLayoutRight = (CardView) rootView.findViewById(R.id.right_layout);
+
         mSpeedSeriesLeft = new LineGraphSeries<>();
         mSpeedSeriesCenter = new LineGraphSeries<>();
         mSpeedSeriesRight = new LineGraphSeries<>();
-
-
-
-
-
 
         //set max/min values to 0
 
@@ -496,26 +498,29 @@ public class DashboardFragment extends CarFragment {
                     mClockRight.setIndicator(imageIndicator);
                 }
 
-
+                // if user wants graphs to be on, turn other stuff off:
                 if (leftGraphOn) {
                     setupGraph(leftGraphOn, mClockLeft, mGraphLeft, mSpeedSeriesLeft);
+                    mRayLeft.setVisibility(View.INVISIBLE);
                 } else {
                     mGraphLeft.setVisibility(View.INVISIBLE);
-
+                    mGraphLayoutLeft.setVisibility(View.INVISIBLE);
                 }
 
                 if (centerGraphOn) {
                     setupGraph(centerGraphOn, mClockCenter, mGraphCenter, mSpeedSeriesCenter);
+                    mRayCenter.setVisibility(View.INVISIBLE);
                 } else {
                     mGraphCenter.setVisibility(View.INVISIBLE);
-
-            }
+                    mGraphLayoutCenter.setVisibility(View.INVISIBLE);
+                }
 
                 if (rightGraphOn) {
                     setupGraph(rightGraphOn, mClockRight, mGraphRight, mSpeedSeriesRight);
+                    mRayRight.setVisibility(View.INVISIBLE);
                 } else {
                     mGraphRight.setVisibility(View.INVISIBLE);
-
+                    mGraphLayoutRight.setVisibility(View.INVISIBLE);
                 }
 
 
@@ -1143,14 +1148,11 @@ public class DashboardFragment extends CarFragment {
         graph.addSeries(serie);
         clock.setSpeedTextPosition(Gauge.Position.BOTTOM_CENTER);
         clock.setSpeedTextPadding(-5);
-        clock.setBackgroundResource(blankBackgroundResource);
+        clock.setBackgroundResource(blankBackgroundResource); // put blank background
         serie.setAnimated(false);
-
-
-
         graph.setVisibility(View.VISIBLE);
         graph.setElevation(55);
-        clock.setMarkColor(Color.parseColor("#00FFFFFF"));
+        clock.setMarkColor(Color.parseColor("#00FFFFFF")); // hide marks
         clock.setWithIndicatorLight(false);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setYAxisBoundsManual(true);
@@ -1215,7 +1217,7 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "exlap-vehicleSpeed":
             case "torque-speed_0x0d":
-                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kmh), 0, 350, "integer");
+                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kmh), 0, 300, "integer");
                 break;
             case "exlap-Nav_Altitude":
                 setupClock(icon, "ic_altitude", "", clock, false, "m", -100, 3000, "integer");

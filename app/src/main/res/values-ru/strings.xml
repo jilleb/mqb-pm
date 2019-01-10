@@ -28,7 +28,6 @@
     <string name="pref_highvis">Высококонтрастные приборы</string>
     <string name="pref_theme">Тема</string>
     <string name="pref_highlow">Высокое/низкое знаечени</string>
-    <string name="pref_accbrakeindicator">Индикатор ускарения/торможения</string>
 
     <string name="pref_choose_account_title">Выбрать аккаунт</string>
     <string name="pref_upload_to_bigquery_title">Выгрузить данные в BigQuery</string>
@@ -40,7 +39,6 @@
     <string name="kick_uploads_done">Выгрузка запланирована.</string>
     <string name="pref_bigquery_reupload_last_title">Повторно выгрузить последний журнал</string>
     <string name="pref_bigquery_reupload_last_failed">Ошибка инициализации повторной выгрузки последнего журнала.</string>
-    <string name="pref_bigquery_reupload_last_ok">Повторная выгрузка запланирована.</string>
     <string name="notification_oil_title">Температура Масла</string>
     <string name="notification_oil_text">Моторное масло достигло рабочей температуры.</string>
     <string name="pref_oil_temp_threshold_title">Рабочая Температура Масла</string>
@@ -69,8 +67,6 @@
     <string name="pref_highvis_on">Использовать закрашивание прибора вместо иголки</string>
     <string name="pref_highlow_off">Не показывать высокое/низкое знаечения</string>
     <string name="pref_highlow_on">Показывать высокое/низкое знаечения на каждом приборе</string>
-    <string name="pref_accbrakeindicator_off">Индикатор не показан</string>
-    <string name="pref_accbrakeindicator_on">Индикатор показан</string>
     <string name="pref_highlowmarks">Отмечать высокое/низкое знаечения на приборах</string>
     <string name="pref_highlowmarks_on">Высокое/низкое знаечения показано на приборах</string>
     <string name="pref_highlowmarks_off">Высокое/низкое знаечения не показано на приборах</string>

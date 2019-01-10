@@ -33,7 +33,6 @@
     <string name="pref_highvis">Instrumente mit hoher Kontrast</string>
     <string name="pref_theme">Thema</string>
     <string name="pref_highlow">Höchste/niedrigste Werte</string>
-    <string name="pref_accbrakeindicator">Gasbremsanzeige</string>
     <string name="pref_choose_account_title">Wähle Konto</string>
     <string name="pref_upload_to_bigquery_title">Logs hochladen nach BigQuery</string>
     <string name="pref_bigquery_project_id_title">Projekt ID</string>
@@ -43,7 +42,6 @@
     <string name="kick_uploads_done">Uploads geplant</string>
     <string name="pref_bigquery_reupload_last_title">Die letzte Datei erneut hochladen</string>
     <string name="pref_bigquery_reupload_last_failed">Fehler beim Hochladen.</string>
-    <string name="pref_bigquery_reupload_last_ok">Re-Upload geplant.</string>
     <string name="notification_oil_title">Öltemperatur</string>
     <string name="notification_oil_text">Motoröl ist auf Temperatur.</string>
     <string name="pref_oil_temp_threshold_title">Gewünschte Öltemperatur</string>
@@ -72,8 +70,6 @@
     <string name="pref_highvis_on">Zeige einen kontrastreichen Strahl anstelle eines Zeigers</string>
     <string name="pref_highlow_off">Keinen Min/Max-Wert </string>
     <string name="pref_highlow_on">Zeige Min/Max-Wert</string>
-    <string name="pref_accbrakeindicator_off">Die Anzeige wird nicht angezeigt</string>
-    <string name="pref_accbrakeindicator_on">Die Anzeige wird angezeigt</string>
     <string name="pref_highlowmarks">Markieren die höchste und niedrigste Werte auf die Instrumente</string>
     <string name="pref_highlowmarks_on">Zeige Min/Max-Wert Markierung</string>
     <string name="pref_highlowmarks_off">Keine Markierung</string>
@@ -115,10 +111,7 @@
     <string name="element_tankLevelSecondary">Tankfüllstand des sekundären Antriebs</string>
     <string name="element_absChargingAirPressure">Absoluten Ladedruck</string>
     <string name="element_relChargingAirPressure">Relativen Ladedruck</string>
-    <string name="element_recommendedGear">Empfohlenen Gang</string>
     <string name="element_navAltitude">Höhe</string>
-    <string name="element_navCity">Stadt</string>
-    <string name="element_navCountry">Land</string>
     <string name="element_navHeading">Fahrtrichtung</string>
     <string name="element_blinkingState">Blinkleuchtenzustand</string>
     <string name="element_currentGear">Gang</string>

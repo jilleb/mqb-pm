@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="activity_credits_title">Créditos</string>
-    <string name="activity_graph_title">Gráficas</string>
     <string name="activity_main_title">Información Sport</string>
     <string name="activity_measurements_title">Mediciones (Alpha test)</string>
     <string name="activity_settings_title">Ajustes de Performance Monitor</string>
@@ -34,11 +33,9 @@
     <string name="element_oilTemperature">Temperatura del aceite</string>
     <string name="element_outsideTemperature">Temperatura exterior</string>
     <string name="element_powermeter">Potencia hibrida</string>
-    <string name="element_recommendedGear">Marcha recomendada</string>
     <string name="element_relChargingAirPressure">Carga del turbo (relativa)</string>
     <string name="element_test">Test (aleoatorio, no obtiene datos del coche)</string>
     <string name="element_vehicleSpeed">Velocidad</string>
-    <string name="element_vehicleSpeed_alternative">Velocidad (diferente fuente)</string>
     <string name="element_wheelAngle">Ángulo de las ruedas</string>
     <string name="element_yawRate">Velocidad de guiñada</string>
 
@@ -62,14 +59,10 @@
     <string name="kick_uploads_nothing_to_do">Todas las subidas completadas.</string>
     <string name="notification_oil_text">Temperatura de trabajo del aceite motor alcanzada.</string>
     <string name="notification_oil_title">Temperatura del aceite</string>
-    <string name="pref_accbrakeindicator">Indicador de aceleración/frenado</string>
-    <string name="pref_accbrakeindicator_off">No mostar indicador</string>
-    <string name="pref_accbrakeindicator_on">Mostrar indicador</string>
     <string name="pref_appearance">Apariencia</string>
     <string name="pref_bigquery_dataset_title">Nombre del dato</string>
     <string name="pref_bigquery_project_id_title">Nombre del proyecto</string>
     <string name="pref_bigquery_reupload_last_failed">Fallo al iniciar resubida del último log.</string>
-    <string name="pref_bigquery_reupload_last_ok">Resubida programada.</string>
     <string name="pref_bigquery_reupload_last_title">Resubir último archivo de registro</string>
     <string name="pref_bigquery_table_title">Nombre de la tabla</string>
     <string name="pref_centerclock">Reloj central</string>
@@ -126,18 +119,11 @@
     <string name="element_shortTermConsumptionSecondary">Consumo inmediato (combustible secundario)</string>
     <string name="element_VIN">Bastidor</string>
     <string name="element_blinkingState">Estado intermitencia</string>
-    <string name="element_debug">Debug query</string>
     <string name="element_navAltitude">Altitud</string>
-    <string name="element_navCity">Cidudad actual</string>
-    <string name="element_navCountry">País actual</string>
     <string name="element_navHeading">Brújula</string>
     <string name="element_navLatitude">Altitud GPS</string>
     <string name="element_navLongitude">Longitud GPS</string>
-    <string name="element_navState">Estado actual</string>
-    <string name="element_navStreet">Calle</string>
     <string name="element_odometer">Tacómetro</string>
-    <string name="element_radioStation">Emisora de radio</string>
-    <string name="element_radioText">Radiotexto</string>
     <string name="element_soundVolume">Volumen del sonido</string>
     <string name="element_tankLevelPrimary">Nivel del tanque (primario)</string>
     <string name="element_tankLevelSecondary">Nivel del tanque (secundario)</string>
@@ -155,8 +141,6 @@
     <string name="pref_bigquery_reupload_all_title">Resubir todos los archivos de registro</string>
     <string name="bigquery_reupload_all_failed">Error al iniciar la resubida de todos los archivos de registro.</string>
     <string name="bigquery_reupload_ok">Resubida programada.</string>
-    <string name="pref_headericons">Iconos de cabecera</string>
-    <string name="pref_showbatterylevel_summary">Mostrar icono de conectividad en la cabecera</string>
     <string name="pref_ticks">Valores tick</string>
     <string name="pref_ticks_off">No mostrar valores de ticks</string>
     <string name="pref_ticks_on">Mostrar valores de ticks</string>
@@ -165,13 +149,8 @@
     <string name="pref_cancel_uploads_title">Cancelar todas las subidas</string>
     <string name="unit_rpm1000">×1000</string>
     <string name="unknown">desconocido</string>
-    <string name="pref_showclock_summary">Mostrar reloj en la cabecera</string>
-    <string name="pref_showconnectivity_summary">Mostrar incono de conectividad</string>
-    <string name="pref_showclock_title">Reloj</string>
-    <string name="pref_showconnectivity_title">Icono conectividad</string>
     <string name="pref_showmic_summary">Mostrar icono de micrófono en la cabecera</string>
     <string name="pref_showmic_title">Icono de micrófono</string>
-    <string name="pref_showbatterylevel_title">Nivel de batería</string>
     <string name="label_tyreRR">TD</string>
     <string name="label_tyreRL">TI</string>
     <string name="label_tyreFR">FD</string>

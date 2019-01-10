@@ -168,6 +168,11 @@
             android:icon="@drawable/ic_settings_title"
             android:summary="%s"
             android:title="@string/pref_title" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="micActive"
+            android:summary="@string/pref_showmic_summary"
+            android:title="@string/pref_showmic_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_unitprefs">
 
@@ -186,28 +191,7 @@
             android:title="@string/pref_pressureunit"
             android:visibility="invisible" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_headericons">
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="connectivityActive"
-            android:summary="@string/pref_showconnectivity_summary"
-            android:title="@string/pref_showconnectivity_title" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="clockActive"
-            android:summary="@string/pref_showclock_summary"
-            android:title="@string/pref_showclock_title" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="batterylevelActive"
-            android:summary="@string/pref_showbatterylevel_summary"
-            android:title="@string/pref_showbatterylevel_title" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="micActive"
-            android:summary="@string/pref_showmic_summary"
-            android:title="@string/pref_showmic_title" />
-    </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/pref_notifications_category_title">
         <CheckBoxPreference
             android:defaultValue="true"
@@ -280,26 +264,6 @@
             android:title="@string/pref_cancel_uploads_title" />
 
     </PreferenceCategory>
-
-    <PreferenceCategory android:title="Currently unused settings">
-        <ListPreference
-            android:entries="@array/ClockDataElementsEntries"
-            android:entryValues="@array/ClockDataElementsValues"
-            android:icon="@drawable/ic_settings_graph"
-            android:key="selectedGraphItem"
-            android:summary="%s"
-            android:title="@string/pref_graphitem" />
-        <ListPreference
-            android:defaultValue="1000"
-            android:entries="@array/graphDelayEntries"
-            android:entryValues="@array/graphDelayValues"
-            android:key="graphDelay"
-            android:summary="%s"
-            android:title="@string/pref_graphDelay" />
-
-    </PreferenceCategory>
-
-
 
 
     </PreferenceScreen>

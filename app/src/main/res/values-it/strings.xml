@@ -30,7 +30,6 @@
     <string name="pref_highvis">Indicatori ad alta visibilità</string>
     <string name="pref_theme">Tema</string>
     <string name="pref_highlow">Valori massimi/minimi</string>
-    <string name="pref_accbrakeindicator">Indicatore acceleratore/freno</string>
 
     <string name="pref_choose_account_title">Scegli account</string>
     <string name="pref_upload_to_bigquery_title">Carica log su BigQuery</string>
@@ -42,7 +41,6 @@
     <string name="kick_uploads_done">Upload programmato.</string>
     <string name="pref_bigquery_reupload_last_title">Ricarica l\'ultimo file log</string>
     <string name="pref_bigquery_reupload_last_failed">Errore nel caricare l\'ultimo file log.</string>
-    <string name="pref_bigquery_reupload_last_ok">Upload ri-programmato.</string>
     <string name="notification_oil_title">Temperatura olio</string>
     <string name="notification_oil_text">L\'olio ha raggiunto la temperatura operativa.</string>
     <string name="pref_oil_temp_threshold_title">Temperatura operativa olio</string>
@@ -71,8 +69,6 @@
     <string name="pref_highvis_on">Mostra un raggio ad alta visibilità invece della lancetta sugli indicatori circolari</string>
     <string name="pref_highlow_off">Non mostrare i valori massimi/minimi</string>
     <string name="pref_highlow_on">Mostra i valori massimi/minimi sugli indicatori circolari</string>
-    <string name="pref_accbrakeindicator_off">L\'indicatore non viene mostrato</string>
-    <string name="pref_accbrakeindicator_on">L\'indicatore viene mostrato</string>
     <string name="pref_highlowmarks">Segna i valori massimi/minimi sugli indicatori circolari</string>
     <string name="pref_highlowmarks_on">I valori massimi/minimi sono mostrati sugli indicatori circolari</string>
     <string name="pref_highlowmarks_off">I valori massimi/minimi sono nascosti dagli indicatori circolari</string>
@@ -82,8 +78,6 @@
     <string name="unit_mph">mph</string>
     <string name="activity_stopwatch_title">Cronometro</string>
     <string name="activity_credits_title">Crediti</string>
-    <string name="activity_measurements_title">Misure</string>
-    <string name="activity_graph_title">Grafico</string>
     <string name="element_none">Niente</string>
 
     <string name="element_absChargingAirPressure">Pressione del turbo (assoluta)</string>
@@ -95,7 +89,6 @@
     <string name="element_outsideTemperature">Temperatura esterna</string>
     <string name="element_vehicleSpeed">Velocità</string>
     <string name="element_currentGear">Marcia inserita</string>
-    <string name="element_recommendedGear">Marcia consigliata</string>
     <string name="element_engineSpeed">Giri motore</string>
     <string name="element_lateralAcceleration">Accellerazione laterale</string>
     <string name="element_longitudinalAcceleration">Accellerazione longitudinale</string>
@@ -112,7 +105,6 @@
     <string name="element_currentConsumptionSecondary">Consumo attuale, carburante secondario</string>
     <string name="element_cycleConsumptionPrimary">Consumo dal rifornimento, carburante principale</string>
     <string name="element_cycleConsumptionSecondary">Consumo dal rifornimento, carburante secondario</string>
-    <string name="element_vehicleSpeed_alternative">Velocità (sorgente differente)</string>
     <string name="element_test">Test (casuale, non riceve informazioni dall\'auto)</string>
 
     <string name="credits_author">Questa applicazione è sviluppata da:</string>

@@ -2,9 +2,7 @@
 
 
     <string name="activity_credits_title">Credits</string>
-    <string name="activity_graph_title">Graphs</string>
     <string name="activity_main_title">Performance Monitor</string>
-    <string name="activity_measurements_title">Measurements (Alpha test)</string>
     <string name="activity_settings_title">Performance Monitor Settings</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
 
@@ -33,27 +31,19 @@
     <string name="element_currentTorque">Torque</string>
     <string name="element_cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
     <string name="element_cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
-    <string name="element_debug">Debug query</string>
     <string name="element_engineSpeed">RPM</string>
     <string name="element_gearboxOilTemperature">Gearbox temperature</string>
     <string name="element_lateralAcceleration">Lateral G\'s</string>
     <string name="element_longitudinalAcceleration">Longitudinal G\'s</string>
     <string name="element_navAltitude">Altitude</string>
-    <string name="element_navCity">Current city</string>
-    <string name="element_navCountry">Current country</string>
     <string name="element_navHeading">Heading</string>
     <string name="element_navLatitude">GPS latitude</string>
     <string name="element_navLongitude">GPS longitude</string>
-    <string name="element_navState">Current state</string>
-    <string name="element_navStreet">Street</string>
     <string name="element_none">None</string>
     <string name="element_odometer">Odometer</string>
     <string name="element_oilTemperature">Oil temperature</string>
     <string name="element_outsideTemperature">Outside temperature</string>
     <string name="element_powermeter">Hybrid power</string>
-    <string name="element_radioStation">Radio station</string>
-    <string name="element_radioText">Radio text</string>
-    <string name="element_recommendedGear">Recommended gear</string>
     <string name="element_relChargingAirPressure">Turbo charge pressure (relative)</string>
     <string name="element_soundVolume">Sound volume</string>
     <string name="element_tankLevelPrimary">Tank level (primary)</string>
@@ -64,7 +54,6 @@
     <string name="element_tyreStateRL">Tirestate rear left</string>
     <string name="element_tyreStateRR">Tirestate rear right</string>
     <string name="element_vehicleSpeed">Speed</string>
-    <string name="element_vehicleSpeed_alternative">Car speed (different source)</string>
     <string name="element_wheelAngle">Wheel angle</string>
     <string name="element_yawRate">Yaw rate</string>
     <string name="element_shortTermConsumptionPrimary">Short Term Consumption (primary fuel)</string>
@@ -104,9 +93,6 @@
     <string name="notification_oil_title">Oil temperature</string>
     <string name="notification_service_text">Logging is active.</string>
 
-    <string name="pref_accbrakeindicator">Acceleration/brake indicator</string>
-    <string name="pref_accbrakeindicator_off">Indicator is not displayed</string>
-    <string name="pref_accbrakeindicator_on">Indicator is displayed</string>
     <string name="pref_ambient">Ambient colors</string>
     <string name="pref_ambient_off">Don\'t use ambient colors</string>
     <string name="pref_ambient_on">Use ambient colors, if avaiable</string>
@@ -126,7 +112,6 @@
     <string name="pref_font">Font</string>
     <string name="pref_graphDelay">Graph Resolution</string>
     <string name="pref_graphitem">Graph</string>
-    <string name="pref_headericons">Header icons</string>
     <string name="pref_highlow">Highest/lowest values</string>
     <string name="pref_highlow_off">Do not show max/min values</string>
     <string name="pref_highlow_on">Show max/min values for each clock</string>
@@ -149,7 +134,6 @@
     <string name="pref_providers_category_title">Telemetry providers</string>
     <string name="pref_resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
     <string name="pref_rightclock">Right clock</string>
-    <string name="pref_showbatterylevel_summary">Show connectivity icon in header</string>
     <string name="pref_stats_logging_not_available">Logging not available: %1$s</string>
     <string name="pref_stats_logging_summary">Logs folder: %1$s</string>
     <string name="pref_stats_logging_title">Log car telemetry</string>
@@ -186,18 +170,12 @@
     <string name="unit_c">°C</string>
 
     <string name="unknown">unknown</string>
-    <string name="pref_showclock_summary">Show current time in header</string>
-    <string name="pref_showclock_title">Time display</string>
-    <string name="pref_showconnectivity_summary">Show connectivity icon</string>
-    <string name="pref_showconnectivity_title">Connectivity icon</string>
-    <string name="pref_showmic_summary">Show microphone icon in header</string>
+    <string name="pref_showmic_summary">Show microphone icon in statusbar</string>
     <string name="pref_showmic_title">Microphone icon</string>
-    <string name="pref_showbatterylevel_title">Battery level</string>
     <string name="label_tyreRR">RR</string>
     <string name="label_tyreRL">RL</string>
     <string name="label_tyreFR">FR</string>
     <string name="label_tyreFL">FL</string>
-    <string name="element_torqueversion">Torque - App version</string>
     <string name="element_torque_rpm">Torque - RPM</string>
     <string name="element_torque_speed">Torque - Speed</string>
     <string name="element_torque_fuelpressure">Torque - Fuel pressure</string>
@@ -230,7 +208,6 @@
     <string name="element_torque_phonebatterylevel">Torque - Phone battery level</string>
     <string name="element_torque_phonebarometer">Torque - Phone barometer</string>
     <string name="element_torque_obdadaptervoltage">Torque - OBD voltage</string>
-    <string name="element_torque_hybridbattlevel">Torque - Hybrid battery level</string>
     <string name="element_torque_AFRc">Torque - AFR(commanded)</string>
     <string name="label_afrc">AFR(c)</string>
     <string name="pref_temperatureunit">Temperature unit</string>

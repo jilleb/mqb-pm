@@ -24,7 +24,6 @@
     <string name="pref_highvis">Reflexní číselníky</string>
     <string name="pref_theme">Téma</string>
     <string name="pref_highlow">Nejvyšší / nejnižší hodnoty</string>
-    <string name="pref_accbrakeindicator">"Indikátor zrychlení/brždění "</string>
     <string name="pref_choose_account_title">Vyberte účet</string>
     <string name="pref_upload_to_bigquery_title">Odeslat logy do BigQuery</string>
     <string name="pref_bigquery_project_id_title">ID projektu</string>
@@ -35,7 +34,6 @@
     <string name="kick_uploads_done">Odeslání dat naplánováno.</string>
     <string name="pref_bigquery_reupload_last_title">Znovu odeslat poslední log.</string>
     <string name="pref_bigquery_reupload_last_failed">Selhalo odeslání posledního logu.</string>
-    <string name="pref_bigquery_reupload_last_ok">Opětovné odesílání dat.</string>
     <string name="notification_oil_title">Teplota oleje</string>
     <string name="notification_oil_text">Motorový olej dosáhl provozní teploty.</string>
     <string name="pref_oil_temp_threshold_title">Pracovní teplota oleje</string>
@@ -64,8 +62,6 @@
     <string name="pref_highvis_on">Zobrazí reflexní číselníky</string>
     <string name="pref_highlow_off">Nezobrazí minimální a maximální hodnoty</string>
     <string name="pref_highlow_on">Zobrazí minimální a maximální hodnoty</string>
-    <string name="pref_accbrakeindicator_off">Indicátor je zobrazen</string>
-    <string name="pref_accbrakeindicator_on">Indicátor není zobrazen</string>
     <string name="pref_highlowmarks">Značka min/max hodnoty na budících</string>
     <string name="pref_highlowmarks_on">Minimální a maximální hodnoty jsou zobrazeny.</string>
     <string name="pref_highlowmarks_off">Minimální a maximální hodnoty nejsou zobrazeny.</string>
@@ -87,7 +83,6 @@
     <string name="element_outsideTemperature">Venkovní teplota</string>
     <string name="element_vehicleSpeed">Rychlost</string>
     <string name="element_currentGear">Zařazený rychlostní stupeň</string>
-    <string name="element_recommendedGear">Doporučený rychlostní stupeň</string>
     <string name="element_engineSpeed">Otáčky motoru</string>
     <string name="element_lateralAcceleration">Příčné přetížení</string>
     <string name="element_longitudinalAcceleration">Podélné přetížení</string>
@@ -104,7 +99,6 @@
     <string name="element_currentConsumptionSecondary">Aktuální spotřeba, sekundární palivo</string>
     <string name="element_cycleConsumptionPrimary">Spotřeba od načerpání, primární  palivo</string>
     <string name="element_cycleConsumptionSecondary">Spotřeba od načerpání, sekundární  palivo</string>
-    <string name="element_vehicleSpeed_alternative">Rychlost (jiný zdroj)</string>
     <string name="element_test">Test (zobrazí náhodná data,která nepochází z auta)</string>
 
 
@@ -113,9 +107,7 @@
     <string name="credits_thanks">Speciálně děkuji:</string>
     <string name="credits_drivesafely">Bezpečnou jízdu.</string>
     <string name="testing">testování</string>
-    <string name="activity_measurements_title">Měření</string>
     <string name="activity_stopwatch_title">Stopky</string>
-    <string name="activity_graph_title">Grafy</string>
     <string name="activity_credits_title">O projektu</string>
     <string name="activity_main_title">Monitor výkonu</string>
     <string name="pref_resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>
@@ -125,18 +117,11 @@
     <string name="pref_ticks_on">Zobrazí hodnoty v budících</string>
     <string name="element_VIN">VIN</string>
     <string name="element_blinkingState">Blinkry</string>
-    <string name="element_debug">Ladící hodnota</string>
     <string name="element_navAltitude">Nadmořská výška</string>
     <string name="element_navLatitude">GPS zeměpisná šířka</string>
     <string name="element_navLongitude">GPS zeměpisná šířka</string>
     <string name="element_navHeading">Kompas</string>
-    <string name="element_navCity">Město</string>
-    <string name="element_navStreet">NAV Ulice</string>
-    <string name="element_navCountry">Stát</string>
-    <string name="element_navState">Oblast</string>
     <string name="element_odometer">Stav km</string>
-    <string name="element_radioStation">Stanice rádia</string>
-    <string name="element_radioText">Text rádia</string>
     <string name="element_soundVolume">Hlasitost</string>
     <string name="element_tankLevelPrimary">Stav nádrže</string>
     <string name="element_tankLevelSecondary">Stav nádrže (sekundární)</string>
@@ -149,17 +134,10 @@
     <string name="pref_ambient">Ambientní barvy</string>
     <string name="pref_ambient_off">Nepoužije ambientní barvy.</string>
     <string name="pref_ambient_on">Ambientní barvy budou použity, pokud jsou dostupné.</string>
-    <string name="pref_headericons">Ikony v záhlaví</string>
-    <string name="pref_showbatterylevel_summary">Zobrazí ikonu úroveně nabití baterie</string>
     <string name="pref_ticks">Hodnoty v budících</string>
     <string name="pref_ticks_off">Nezobrazí hodnoty v budících</string>
-    <string name="pref_showclock_summary">Zobrait aktuální čas v záhlaví</string>
-    <string name="pref_showclock_title">Zobrazení času</string>
-    <string name="pref_showconnectivity_summary">Zobrazí ikonu připojení</string>
-    <string name="pref_showconnectivity_title">Ikony připojení</string>
     <string name="pref_showmic_summary">Zobrazí ikonu microfonu v záhlaví</string>
     <string name="pref_showmic_title">Ikona mikrofonu</string>
-    <string name="pref_showbatterylevel_title">Stav baterie</string>
     <string name="notification_service_text">Logování je aktivní</string>
     <string name="pref_bigquery_reupload_all_title">Znovu odeslat všechny soubory s protokoly</string>
     <string name="bigquery_reupload_all_failed">Nepodařilo se opětovné odeslání souborů s protokoly</string>
