@@ -1196,7 +1196,7 @@ public class DashboardFragment extends CarFragment {
         graph.getViewport().setMaxX(120);
         graph.getViewport().setMaxY(360);
         graph.getViewport().setMinY(0);
-        graph.getViewport().setScrollable(true);
+        graph.getViewport().setScrollable(false);
         graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);

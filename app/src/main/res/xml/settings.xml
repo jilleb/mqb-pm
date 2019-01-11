@@ -14,7 +14,7 @@
             android:entries="@array/Themes"
             android:entryValues="@array/Themes"
             app:ilp_entryImages="@array/ThemesThumbs"
-            app:ilp_backgroundTint="@color/blue"
+            app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_tint="#00FFFFFF"
             />
 
@@ -25,6 +25,17 @@
             android:entries="@array/fontEntries"
             android:entryValues="@array/fontValues"
             app:ilp_entryImages="@array/FontThumbs"
+            app:ilp_backgroundTint="@color/white"
+            app:ilp_tint="#00FFFFFF"
+            />
+
+        <com.austingreco.imagelistpreference.ImageListPreference
+            android:title="@string/pref_background"
+            android:summary="%s"
+            android:key="selectedBackground"
+            android:entries="@array/backgroundstrings"
+            android:entryValues="@array/backgrounds"
+            app:ilp_entryImages="@array/thumbs_backgrounds"
             app:ilp_backgroundTint="@color/white"
             app:ilp_tint="#00FFFFFF"
             />

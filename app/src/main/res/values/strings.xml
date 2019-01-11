@@ -233,5 +233,25 @@
     <string name="pref_displayasgraph">Display graph instead of clock</string>
     <string name="element_clock">Clock</string>
 
+    <string name="bg_vw">Discover Pro Sport</string>
+    <string name="bg_vw2">Carbon fiber</string>
+    <string name="bg_vw3">Spotlight</string>
+    <string name="bg_vwplaid">GTI Tartan</string>
+    <string name="bg_gte">GTE Tartan</string>
+    <string name="bg_black">Black</string>
+    <string name="bg_cloth">Cloth</string>
+    <string name="bg_rock">Rock</string>
+    <string name="bg_outrun">Outrun</string>
+    <string name="bg_plain">Plain</string>
+    <string name="bg_seat">Lines</string>
+    <string name="bg_seat2">Dark grid</string>
+    <string name="bg_skoda">Columbus</string>
+    <string name="bg_skoda2">Columbus Sport</string>
+    <string name="bg_skodaone">OneApp</string>
+    <string name="bg_blackboard">Blackboard</string>
+    <string name="bg_test">Test</string>
+    <string name="bg_beetle">Herbie</string>
+    <string name="pref_background">Background</string>
+
 
 </resources>

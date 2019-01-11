@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutDashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="0dp"
@@ -53,18 +54,17 @@
         android:id="@+id/titleIcon1"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:background="@drawable/ic_outsidetemperature"
         app:layout_constraintRight_toLeftOf="@id/textTitleElementRight"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_outsidetemperature" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titleIcon2"
         android:layout_width="30dp"
         android:layout_height="30dp"
+        android:background="@drawable/ic_world"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/ic_world" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

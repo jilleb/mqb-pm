@@ -4,8 +4,7 @@
     <string-array name="Themes">
         <item>VW</item>
         <item>VW GTI</item>
-        <item>VW GTE</item>
-        <item>VW R</item>
+        <item>VW R/GTE</item>
         <item>VW MIB2</item>
         <item>Beetle</item>
         <item>Clubsport</item>
@@ -27,7 +26,6 @@
         <item>@drawable/ic_theme_vw</item>
         <item>@drawable/ic_theme_vwgti</item>
         <item>@drawable/ic_theme_vwgte</item>
-        <item>@drawable/ic_theme_vwr</item>
         <item>@drawable/ic_theme_vwmib2</item>
         <item>@drawable/ic_theme_beetle</item>
         <item>@drawable/ic_theme_vwclubsport</item>
@@ -376,6 +374,70 @@
         <item>@drawable/ic_font_larabie</item>
     </string-array>
 
+    <array name="backgroundstrings">
+        <item>@string/bg_vw</item>
+        <item>@string/bg_vw2</item>
+        <item>@string/bg_vw3</item>
+        <item>@string/bg_vwplaid</item>
+        <item>@string/bg_gte</item>
+        <item>@string/bg_black</item>
+        <item>@string/bg_blackboard</item>
+        <item>@string/bg_cloth</item>
+        <item>@string/bg_rock</item>
+        <item>@string/bg_outrun</item>
+        <item>@string/bg_plain</item>
+        <item>@string/bg_seat</item>
+        <item>@string/bg_seat2</item>
+        <item>@string/bg_skoda</item>
+        <item>@string/bg_skoda2</item>
+        <item>@string/bg_skodaone</item>
+        <item>@string/bg_test</item>
+        <item>@string/bg_beetle</item>
+
+    </array>
+
+    <array name="backgrounds">
+        <item>background_incar_vw</item>
+        <item>background_incar_vw2</item>
+        <item>background_incar_vw3</item>
+        <item>background_incar_vw_plaid</item>
+        <item>background_incar_gte</item>
+        <item>background_incar_black</item>
+        <item>background_incar_blackboard</item>
+        <item>background_incar_cloth</item>
+        <item>background_incar_cupra</item>
+        <item>background_incar_outrun</item>
+        <item>background_incar_plain</item>
+        <item>background_incar_seat</item>
+        <item>background_incar_seat2</item>
+        <item>background_incar_skoda</item>
+        <item>background_incar_skoda2</item>
+        <item>background_incar_skodaone</item>
+        <item>background_incar_test</item>
+        <item>background_incar_beetle</item>
+    </array>
+
+
+    <array name="thumbs_backgrounds">
+        <item>@drawable/thumb_background_incar_vw</item>
+        <item>@drawable/thumb_background_incar_vw2</item>
+        <item>@drawable/thumb_background_incar_vw3</item>
+        <item>@drawable/thumb_background_incar_vw_plaid</item>
+        <item>@drawable/thumb_background_incar_gte</item>
+        <item>@drawable/thumb_background_incar_black</item>
+        <item>@drawable/thumb_background_incar_blackboard</item>
+        <item>@drawable/thumb_background_incar_cloth</item>
+        <item>@drawable/thumb_background_incar_cupra</item>
+        <item>@drawable/thumb_background_incar_outrun</item>
+        <item>@drawable/thumb_background_incar_plain</item>
+        <item>@drawable/thumb_background_incar_seat</item>
+        <item>@drawable/thumb_background_incar_seat2</item>
+        <item>@drawable/thumb_background_incar_skoda</item>
+        <item>@drawable/thumb_background_incar_skoda2</item>
+        <item>@drawable/thumb_background_incar_skodaone</item>
+        <item>@drawable/thumb_background_incar_test</item>
+        <item>@drawable/thumb_background_incar_beetle</item>
+    </array>
 
 
     <!--
