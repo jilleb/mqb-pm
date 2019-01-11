@@ -1712,14 +1712,12 @@ public class DashboardFragment extends CarFragment {
         String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
         String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
 
-        String currentTemperature = (String) mLastMeasurements.get("outsideTemperature");
-
-        if (currentTemperature != null && currentTemperature != currentRightTitleValue) {
-            mTitleElementRight.setText(currentTemperature);
+        Float currentTemperature = (Float) mLastMeasurements.get("outsideTemperature");
+        if (currentTemperature != null) {
+            mTitleElementRight.setText(String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), currentTemperature));
         } else if (currentTemperature == null){
                 mTitleIcon1.setVisibility(View.INVISIBLE);
                         }
-
 
         if (location1 == null && location2 == null) {
             leftTitle =  "";
