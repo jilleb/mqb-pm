@@ -1,5 +1,7 @@
 package com.mqbcoding.stats;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
@@ -61,7 +63,7 @@ public class DashboardFragment extends CarFragment {
     private Speedometer mClockMinLeft, mClockMinCenter, mClockMinRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
-    private String mElement1Query, mElement2Query, mElement3Query, mElement4Query, mTitleQuery;
+    private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
     private String selectedTheme;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
     private String pressureUnit, temperatureUnit, selectedFont;
@@ -70,7 +72,9 @@ public class DashboardFragment extends CarFragment {
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
     //values of the data elements. upper left, upper right, lower left, lower right.
-    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement;
+    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement, mTitleElementRight, mTitleElementLeft, mTitleIcon1, mTitleIcon2;
+    private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
+    private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
     private TextView mTextMinLeft, mTextMaxLeft;
     private TextView mTextMinCenter, mTextMaxCenter;
     private TextView mTextMinRight, mTextMaxRight;
@@ -80,7 +84,6 @@ public class DashboardFragment extends CarFragment {
     private Boolean pressureUnits, temperatureUnits;
     private Boolean stagingDone = false;
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn;
-    private Boolean leftGraphOn, centerGraphOn, rightGraphOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
@@ -93,6 +96,8 @@ public class DashboardFragment extends CarFragment {
     private double graphLeftLastXValue = 5d;
     private double graphCenterLastXValue = 5d;
     private double graphRightLastXValue = 5d;
+    //value displayed on graphlayout
+    private TextView mGraphValueLeft, mGraphValueCenter, mGraphValueRight;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -106,6 +111,7 @@ public class DashboardFragment extends CarFragment {
 
 
     // todo: reset min/max when clock is touched
+
     private View.OnClickListener resetMinMax = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -131,6 +137,28 @@ public class DashboardFragment extends CarFragment {
 
         }
     };
+
+
+    private View.OnClickListener toggleView = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if (v==mConstraintClockLeft){
+                fadeOutfadeIn(v, mConstraintGraphLeft);
+            } else if (v==mConstraintClockCenter) {
+                fadeOutfadeIn(v, mConstraintGraphCenter);
+            } else if (v==mConstraintClockRight) {
+                fadeOutfadeIn(v, mConstraintGraphRight);
+            } else if (v==mConstraintGraphLeft) {
+                fadeOutfadeIn(v, mConstraintClockLeft);
+            } else if (v==mConstraintGraphCenter){
+                fadeOutfadeIn(v, mConstraintClockCenter);
+            } else if (v==mConstraintGraphRight) {
+                fadeOutfadeIn(v, mConstraintClockRight);
+            }
+        }
+
+    };
+
 
     private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
         @Override
@@ -165,7 +193,6 @@ public class DashboardFragment extends CarFragment {
             Log.i(TAG, "ServiceDisconnected");
         }
     };
-
 
 
     // random, for use in Test value
@@ -206,7 +233,6 @@ public class DashboardFragment extends CarFragment {
         super.onAttach(context);
         Log.i(TAG, "onAttach");
     }
-
 
 
     @Override
@@ -251,10 +277,6 @@ public class DashboardFragment extends CarFragment {
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         selectedTheme = sharedPreferences.getString("selectedTheme", "");
 
-        leftGraphOn = sharedPreferences.getBoolean("switch_leftClockGraph", false);
-        centerGraphOn = sharedPreferences.getBoolean("switch_centerClockGraph", false);
-        rightGraphOn = sharedPreferences.getBoolean("switch_rightClockGraph", false);
-
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
         switch (selectedFont) {
@@ -290,6 +312,16 @@ public class DashboardFragment extends CarFragment {
 
         //-------------------------------------------------------------
         //find all elements needed
+        //layouts/constrains:
+        mConstraintClockLeft = rootView.findViewById(R.id.constraintClockLeft);
+        mConstraintClockCenter = rootView.findViewById(R.id.constraintClockCenter);
+        mConstraintClockRight = rootView.findViewById(R.id.constraintClockRight);
+
+        mConstraintGraphLeft = rootView.findViewById(R.id.constraintGraphLeft);
+        mConstraintGraphCenter = rootView.findViewById(R.id.constraintGraphCenter);
+        mConstraintGraphRight = rootView.findViewById(R.id.constraintGraphRight);
+
+
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
         mClockCenter = rootView.findViewById(R.id.dial_Center);
@@ -307,6 +339,10 @@ public class DashboardFragment extends CarFragment {
         mGraphLeft = (GraphView) rootView.findViewById(R.id.chart_Left);
         mGraphCenter = (GraphView) rootView.findViewById(R.id.chart_Center);
         mGraphRight = (GraphView) rootView.findViewById(R.id.chart_Right);
+
+        mGraphValueLeft = rootView.findViewById(R.id.graphValueLeft);
+        mGraphValueCenter = rootView.findViewById(R.id.graphValueCenter);
+        mGraphValueRight = rootView.findViewById(R.id.graphValueRight);
 
         mGraphLayoutLeft = (CardView) rootView.findViewById(R.id.left_layout);
         mGraphLayoutCenter = (CardView) rootView.findViewById(R.id.center_layout);
@@ -336,7 +372,10 @@ public class DashboardFragment extends CarFragment {
 
         //title text element
         mTitleElement = rootView.findViewById(R.id.textTitleElement);
-
+        mTitleElementRight = rootView.findViewById(R.id.textTitleElementRight);
+        mTitleElementLeft = rootView.findViewById(R.id.textTitleElementLeft);
+        mTitleIcon1= rootView.findViewById(R.id.titleIcon1);
+        mTitleIcon2= rootView.findViewById(R.id.titleIcon2);
 
         //labels at these text elements:
         mIconElement1 = rootView.findViewById(R.id.icon_Element1);
@@ -358,6 +397,9 @@ public class DashboardFragment extends CarFragment {
         mClockLeft.setSpeedTextTypeface(typeface);
         mClockCenter.setSpeedTextTypeface(typeface);
         mClockRight.setSpeedTextTypeface(typeface);
+        mGraphValueLeft.setTypeface(typeface);
+        mGraphValueCenter.setTypeface(typeface);
+        mGraphValueRight.setTypeface(typeface);
 
         if (selectedTheme.equals("Beetle")) {
             Typeface beetletypeface = Typeface.createFromAsset(getContext().getAssets(), "Schluber.ttf");
@@ -378,6 +420,8 @@ public class DashboardFragment extends CarFragment {
         mValueElement3.setTypeface(typeface);
         mValueElement4.setTypeface(typeface);
         mTitleElement.setTypeface(typeface);
+        mTitleElementRight.setTypeface(typeface);
+        mTitleElementLeft.setTypeface(typeface);
 
         //max
         mTextMinLeft.setTypeface(typeface);
@@ -390,15 +434,19 @@ public class DashboardFragment extends CarFragment {
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
 
         //click the
-        mClockCenter.setOnClickListener(resetMinMax);
+        mTitleElement.setOnClickListener(resetMinMax);
+        mConstraintGraphLeft.setOnClickListener(toggleView);
+        mConstraintClockLeft.setOnClickListener(toggleView);
+        mConstraintGraphCenter.setOnClickListener(toggleView);
+        mConstraintClockCenter.setOnClickListener(toggleView);
+        mConstraintGraphRight.setOnClickListener(toggleView);
+        mConstraintClockRight.setOnClickListener(toggleView);
 
         //determine what data the user wants to have on the 4 data views
         mElement1Query = sharedPreferences.getString("selectedView1", "none");
         mElement2Query = sharedPreferences.getString("selectedView2", "none");
         mElement3Query = sharedPreferences.getString("selectedView3", "none");
         mElement4Query = sharedPreferences.getString("selectedView4", "none");
-
-        mTitleQuery = sharedPreferences.getString("selectedTitle", "none");
 
         //determine what data the user wants to have on the 3 clocks, but set defaults first
         mClockLQuery = "exlap-batteryVoltage";
@@ -442,7 +490,7 @@ public class DashboardFragment extends CarFragment {
             pressureMax = 30;
         }
 
-        if (temperatureUnits){
+        if (temperatureUnits) {
             temperatureUnit = getString(R.string.unit_c);
 
         } else {
@@ -498,31 +546,9 @@ public class DashboardFragment extends CarFragment {
                     mClockRight.setIndicator(imageIndicator);
                 }
 
-                // if user wants graphs to be on, turn other stuff off:
-                if (leftGraphOn) {
-                    setupGraph(leftGraphOn, mClockLeft, mGraphLeft, mSpeedSeriesLeft);
-                    mRayLeft.setVisibility(View.INVISIBLE);
-                } else {
-                    mGraphLeft.setVisibility(View.INVISIBLE);
-                    mGraphLayoutLeft.setVisibility(View.INVISIBLE);
-                }
-
-                if (centerGraphOn) {
-                    setupGraph(centerGraphOn, mClockCenter, mGraphCenter, mSpeedSeriesCenter);
-                    mRayCenter.setVisibility(View.INVISIBLE);
-                } else {
-                    mGraphCenter.setVisibility(View.INVISIBLE);
-                    mGraphLayoutCenter.setVisibility(View.INVISIBLE);
-                }
-
-                if (rightGraphOn) {
-                    setupGraph(rightGraphOn, mClockRight, mGraphRight, mSpeedSeriesRight);
-                    mRayRight.setVisibility(View.INVISIBLE);
-                } else {
-                    mGraphRight.setVisibility(View.INVISIBLE);
-                    mGraphLayoutRight.setVisibility(View.INVISIBLE);
-                }
-
+                setupGraph(mClockLeft, mGraphLeft, mSpeedSeriesLeft, mConstraintGraphLeft);
+                setupGraph(mClockCenter, mGraphCenter, mSpeedSeriesCenter, mConstraintGraphCenter);
+                setupGraph(mClockRight, mGraphRight, mSpeedSeriesRight, mConstraintGraphRight);
 
                 if (ticksOn) {
 
@@ -723,6 +749,9 @@ public class DashboardFragment extends CarFragment {
         mValueElement3 = null;
         mValueElement4 = null;
         mTitleElement = null;
+        mTitleElementRight = null;
+        mTitleIcon1=null;
+        mTitleIcon2=null;
         mIconElement1 = null;
         mIconElement2 = null;
         mIconElement3 = null;
@@ -755,6 +784,15 @@ public class DashboardFragment extends CarFragment {
         mSpeedSeriesCenter = null;
         mSpeedSeriesLeft = null;
         mSpeedSeriesRight = null;
+        mConstraintClockLeft = null;
+        mConstraintClockRight = null;
+        mConstraintClockCenter = null;
+        mConstraintGraphLeft = null;
+        mConstraintGraphRight = null;
+        mConstraintGraphCenter = null;
+        mGraphValueLeft = null;
+        mGraphValueCenter = null;
+        mGraphValueRight = null;
 
         if (torqueBind)
             try {
@@ -815,11 +853,11 @@ public class DashboardFragment extends CarFragment {
         //update each of the clocks and the min/max/ray elements that go with it
         // query, dial, visray, textmax, textmin, clockmax, clockmin)
 
-        updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft, leftGraphOn, mGraphLeft, mSpeedSeriesLeft, graphLeftLastXValue);
-        updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter, centerGraphOn, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue);
-        updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight, rightGraphOn, mGraphRight, mSpeedSeriesRight, graphRightLastXValue);
+        updateClock(mClockLQuery, mClockLeft, mRayLeft, mTextMaxLeft, mTextMinLeft, mClockMaxLeft, mClockMinLeft, mGraphLeft, mSpeedSeriesLeft, graphLeftLastXValue, mGraphValueLeft);
+        updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mTextMinCenter, mClockMaxCenter, mClockMinCenter, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue, mGraphValueCenter);
+        updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight, mTextMinRight, mClockMaxRight, mClockMinRight, mGraphRight, mSpeedSeriesRight, graphRightLastXValue, mGraphValueRight);
 
-        updateTitle(mTitleQuery);
+        updateTitle();
 
         // get ambient color, change color of some elements to match the ambient color.
         // this can't be done during setup, because then the ambientColor is probably not received yet.
@@ -1138,22 +1176,19 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-    private void setupGraph(Boolean graphOn, Speedometer clock, GraphView graph, LineGraphSeries serie) {
+    private void setupGraph(Speedometer clock, GraphView graph, LineGraphSeries serie, ConstraintLayout constraint) {
 
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedBlankDialBackground});
         int blankBackgroundResource = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
-        clock.setIndicator(Indicator.Indicators.NoIndicator);
         graph.addSeries(serie);
-        clock.setSpeedTextPosition(Gauge.Position.BOTTOM_CENTER);
-        clock.setSpeedTextPadding(-5);
-        clock.setBackgroundResource(blankBackgroundResource); // put blank background
+
+        graph.setTitle(clock.getUnit());
+
+        constraint.setBackgroundResource(blankBackgroundResource); // put blank background
         serie.setAnimated(false);
-        graph.setVisibility(View.VISIBLE);
         graph.setElevation(55);
-        clock.setMarkColor(Color.parseColor("#00FFFFFF")); // hide marks
-        clock.setWithIndicatorLight(false);
         graph.getViewport().setXAxisBoundsManual(true);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setMinX(0);
@@ -1173,8 +1208,7 @@ public class DashboardFragment extends CarFragment {
     }
 
 
-
-        private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
+    private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
 
         String queryTrim = "";
         String queryLong = queryClock;
@@ -1204,7 +1238,6 @@ public class DashboardFragment extends CarFragment {
                 Log.e(TAG, "Error: " + e.getMessage());
             }
         }
-
 
 
         // setup each of the clocks:
@@ -1382,7 +1415,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_cact", "", clock, false, torqueUnit, 0, 100, "float");
                 break;
             case "torque-pressurecontrol_0x70":
-                setupClock(icon, "ic_turbo", "", clock, false, pressureUnit, pressureMin*30, pressureMax*30,"float");
+                setupClock(icon, "ic_turbo", "", clock, false, pressureUnit, pressureMin * 30, pressureMax * 30, "float");
                 break;
             case "torque-o2sensor1equivalenceratio_0x34":
                 setupClock(icon, "ic_none", "O2 sensor", clock, false, torqueUnit, 0, 3, "float");
@@ -1405,11 +1438,11 @@ public class DashboardFragment extends CarFragment {
         min.setMinMaxSpeed(minimum, maximum);
         ray.setMinMaxSpeed(minimum, maximum);
         max.setMinMaxSpeed(minimum, maximum);
-        }
+    }
 
     //update clock with data
-    private void updateClock (String query, Speedometer clock, RaySpeedometer visray, TextView
-            textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin, Boolean graphOn, GraphView graph, LineGraphSeries series, Double graphLastXValue) {
+    private void updateClock(String query, Speedometer clock, RaySpeedometer visray, TextView
+            textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin, GraphView graph, LineGraphSeries series, Double graphLastXValue, TextView graphValue) {
         if (query == null) {
             return;
 
@@ -1613,6 +1646,15 @@ public class DashboardFragment extends CarFragment {
                         break;
                 }
 
+                // only shift x asis 2 positions when there's new data
+                if (clock == mClockLeft) {
+                    graphLeftLastXValue += 1d;
+                } else if (clock == mClockCenter) {
+                    graphCenterLastXValue += 1d;
+                } else if (clock == mClockRight) {
+                    graphRightLastXValue += 1d;
+                }
+
                 // don't update when there's nothing to update
                 if (clockValue.equals(oldValue)) {
                     return;
@@ -1622,109 +1664,88 @@ public class DashboardFragment extends CarFragment {
                     clock.speedTo(clockValue);
                     visray.speedTo(clockValue);
 
-                    if (graphOn) {
-                        graph.getViewport().setMaxY(clock.getMaxSpeed());
-                        graph.getViewport().setMinY(clock.getMinSpeed());
-
-                        // only shift x asis 2 positions when there's new data
-                        if (clock==mClockLeft) {
-                            graphLeftLastXValue += 1d;
-                        } else if (clock==mClockCenter) {
-                            graphCenterLastXValue += 1d;
-                        } else if (clock==mClockRight) {
-                            graphRightLastXValue += 1d;
-                        }
+                    graph.getViewport().setMaxY(clock.getMaxSpeed());
+                    graph.getViewport().setMinY(clock.getMinSpeed());
 
 
-                        series.appendData(new DataPoint(graphLastXValue, clockValue), true, 200);
-
-                        }
-
-
-                    }
+                    series.appendData(new DataPoint(graphLastXValue, clockValue), true, 200);
+                    String tempString = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValue));
+                    graphValue.setText(tempString);
                 }
-
-                // get the speed from the clock and have the high-visibility rays move to this speed as well
-                float tempValue = clock.getSpeed();
-
-
-                // update the max clocks and text
-                if (stagingDone) {
-                    Float maxValue = clockmax.getSpeed();
-                    Float minValue = clockmin.getSpeed();
-
-                    if (tempValue > maxValue) {
-                        clockmax.setSpeedAt(tempValue);
-                        textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
-                    }
-
-                    // update the min clocks and text
-                    if (tempValue < minValue) {
-                        clockmin.setSpeedAt(tempValue);
-                        textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
-                    }
-                }
-
             }
+
+            // get the speed from the clock and have the high-visibility rays move to this speed as well
+            float tempValue = clock.getSpeed();
+
+
+            // update the max clocks and text
+            if (stagingDone) {
+                Float maxValue = clockmax.getSpeed();
+                Float minValue = clockmin.getSpeed();
+
+                if (tempValue > maxValue) {
+                    clockmax.setSpeedAt(tempValue);
+                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                }
+
+                // update the min clocks and text
+                if (tempValue < minValue) {
+                    clockmin.setSpeedAt(tempValue);
+                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                }
+            }
+
+        }
     }
 
 
-    private void updateTitle (String queryTitle) {
+    private void updateTitle() {
 
-        String titleValue = "";
         String currentTime = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
 
         String currentTitleValue = mTitleElement.getText().toString();
+        String currentRightTitleValue = mTitleElementRight.getText().toString();
+        String currentLeftTitleValue = mTitleElementLeft.getText().toString();
 
-        if (queryTitle == null) {
-            return;
-        } else switch (queryTitle) {
-            case "Location":
-                String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
-                String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
-                String location3 = (String) mLastMeasurements.get("Nav_CurrentPosition.State");
-                String location4 = (String) mLastMeasurements.get("Nav_CurrentPosition.Country");
-                String location = location1 + ", " + location2 + ", " + location3 + ", " + location4;
-                if (location1 != null) {
-                    titleValue = location;
-                } else {
-                    titleValue = currentTime;
-                }
-                break;
-            case "Media info":
-                String media1 = (String) mLastMeasurements.get("Radio_Tuner.Name");
-                String media2 = (String) mLastMeasurements.get("Radio_Text");
-                String media = media1 + ", " + media2;
-                if (media != null) {
-                    titleValue = media;
-                } else {
-                    titleValue = currentTime;
-                }
-                break;
-            case "Clock":
-                String tempString = "";
-                Float mTemperature = (Float) mLastMeasurements.get("outsideTemperature");
-                if (mTemperature != null) {
-                    tempString = (String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), mTemperature));
-                    titleValue = currentTime +  " " + tempString + temperatureUnit ;
-                } else {
-                    titleValue = currentTime;
-                }
-                break;
-            case "None":
-                titleValue = "";
-                break;
+        String leftTitle = "" ;
+
+        String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
+        String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
+
+        String currentTemperature = (String) mLastMeasurements.get("outsideTemperature");
+
+        if (currentTemperature != null && currentTemperature != currentRightTitleValue) {
+            mTitleElementRight.setText(currentTemperature);
+        } else if (currentTemperature == null){
+                mTitleIcon1.setVisibility(View.INVISIBLE);
+                        }
+
+
+        if (location1 == null && location2 == null) {
+            leftTitle =  "";
+            mTitleIcon2.setVisibility(View.INVISIBLE);
+        } else if (location2 !=null && location1 == null){
+            leftTitle = location2;
+        } else if (location1 !=null && location2 !=null){
+            leftTitle = location1 + ", " + location2;
+        } else if (leftTitle==""){
+            mTitleIcon2.setVisibility(View.INVISIBLE);
         }
 
-        if (currentTitleValue == titleValue){
-            return;
-        } else {
-            mTitleElement.setText(titleValue);
+
+        if (currentLeftTitleValue != leftTitle) {
+            mTitleElementLeft.setText(leftTitle);
         }
+
+
+        if (currentTitleValue != currentTime) {
+            mTitleElement.setText(currentTime);
+        }
+
     }
 
     //update the elements
-    private void updateElement (String queryElement, TextView value, TextView label){
+    private void updateElement(String queryElement, TextView value, TextView label) {
         long queryPid = 0;
 
 
@@ -1773,8 +1794,8 @@ public class DashboardFragment extends CarFragment {
                     if (torqueService != null) {
                         torqueData = torqueService.getValueForPid(queryPid, true);
                         String unitText = torqueService.getUnitForPid(queryPid);
-                        String valueText = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(),torqueData));
-                        value.setText(valueText+ unitText);
+                        String valueText = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), torqueData));
+                        value.setText(valueText + unitText);
                     }
                 } catch (Exception e) {
                     Log.e(TAG, "Error: " + e.getMessage());
@@ -1799,8 +1820,8 @@ public class DashboardFragment extends CarFragment {
                             unitText = "bar";
                         }
 
-                        String valueText = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(),torqueData3));
-                        value.setText(valueText+ unitText);
+                        String valueText = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), torqueData3));
+                        value.setText(valueText + unitText);
 
                     }
                 } catch (Exception e) {
@@ -2004,8 +2025,7 @@ public class DashboardFragment extends CarFragment {
         clock.setMinMaxSpeed(minspeed, maxspeed);
 
         //dynamically scale the icon_space in case there's only an icon, and no text
-        if (!iconText.equals("") && resId == resIdEmpty)
-        {
+        if (!iconText.equals("") && resId == resIdEmpty) {
             ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) icon.getLayoutParams();
             params.width = 600;
             icon.setLayoutParams(params);
@@ -2067,6 +2087,30 @@ public class DashboardFragment extends CarFragment {
             torqueBind = false;
             Log.e("HU", "Unable to connect to Torque plugin service");
         }
+    }
+
+
+    private void fadeOutfadeIn(final View oldView, final View newView) {
+        oldView.animate()
+                .alpha(0f)
+                .setDuration(500)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        oldView.setVisibility(View.INVISIBLE);
+
+                    }
+                });
+        newView.animate()
+                .alpha(1f)
+                .setDuration(250)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        newView.setVisibility(View.VISIBLE);
+
+                    }
+                });
     }
 
 }

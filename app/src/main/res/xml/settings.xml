@@ -75,12 +75,7 @@
             android:key="selectedClockLeft"
             android:summary="%s"
             android:title="@string/pref_leftclock" />
-        <SwitchPreference
-            android:defaultValue="false"
-            android:key="switch_leftClockGraph"
-            android:summaryOff="@string/pref_graphOff"
-            android:summaryOn="@string/pref_graphOn"
-            android:title="@string/pref_displayasgraph" />
+
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -90,19 +85,8 @@
             android:key="selectedClockCenter"
             android:summary="%s"
             android:title="@string/pref_centerclock" />
-        <SwitchPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:defaultValue="false"
-            android:key="switch_centerClockGraph"
-            android:summaryOff="@string/pref_graphOff"
-            android:summaryOn="@string/pref_graphOn"
-            android:title="@string/pref_displayasgraph" /><![CDATA[ />
-
-        />
 
 
-        ]]>
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -112,14 +96,6 @@
             android:key="selectedClockRight"
             android:summary="%s"
             android:title="@string/pref_rightclock" />
-        <SwitchPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:defaultValue="false"
-            android:key="switch_rightClockGraph"
-            android:summaryOff="@string/pref_graphOff"
-            android:summaryOn="@string/pref_graphOn"
-            android:title="@string/pref_displayasgraph" />
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/TextDataElementsEntries"
@@ -158,16 +134,7 @@
             android:key="selectedView4"
             android:summary="%s"
             android:title="@string/pref_view4" />
-        <ListPreference
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:defaultValue="1"
-            android:entries="@array/TitleDataElementsEntries"
-            android:entryValues="@array/TitleDataElementsValues"
-            android:key="selectedTitle"
-            android:icon="@drawable/ic_settings_title"
-            android:summary="%s"
-            android:title="@string/pref_title" />
+
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="micActive"
