@@ -1523,14 +1523,14 @@ public class DashboardFragment extends CarFragment {
                     case "torque-rpm_0x0c":
                         clockValue = clockValue / 1000;
                         break;
-                        // temperatures
+                    // temperatures
                     case "exlap-oilTemperature":
                     case "exlap-coolantTemperature":
                     case "exlap-outsideTemperature":
                     case "exlap-gearboxOilTemperature":
                         clock.setUnit(temperatureUnitExlap);
                         break;
-                        // pressures
+                    // pressures
                     case "exlap-absChargingAirPressure":
                     case "exlap-relChargingAirPressure":
                         clockValue = clockValue * pressureFactor;
@@ -1543,7 +1543,7 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-powermeter":
                         clockValue = clockValue - 1020;
                         break;
-                        // percentages
+                    // percentages
                     case "exlap-acceleratorPosition":
                     case "exlap-tankLevelPrimary":
                     case "exlap-tankLevelSecondary":
@@ -1716,10 +1716,13 @@ public class DashboardFragment extends CarFragment {
 
         Float currentTemperature = (Float) mLastMeasurements.get("outsideTemperature");
         if (currentTemperature != null) {
-            mTitleElementRight.setText(String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), currentTemperature));
+            String temperature = String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), currentTemperature);
+            if (temperature != currentRightTitleValue){
+                mTitleElementRight.setText(temperature);
+            }
         } else if (currentTemperature == null){
-                mTitleIcon1.setVisibility(View.INVISIBLE);
-                        }
+            mTitleIcon1.setVisibility(View.INVISIBLE);
+        }
 
         if (location1 == null && location2 == null) {
             leftTitle =  "";
