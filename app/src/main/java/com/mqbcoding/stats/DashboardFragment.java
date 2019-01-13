@@ -1520,13 +1520,16 @@ public class DashboardFragment extends CarFragment {
                         break;
                     //rpm data, needs to be divided by 1000 before displayed on the clock
                     case "exlap-engineSpeed":
+                    case "torque-rpm_0x0c":
                         clockValue = clockValue / 1000;
+                        break;
                         // temperatures
                     case "exlap-oilTemperature":
                     case "exlap-coolantTemperature":
                     case "exlap-outsideTemperature":
                     case "exlap-gearboxOilTemperature":
                         clock.setUnit(temperatureUnitExlap);
+                        break;
                         // pressures
                     case "exlap-absChargingAirPressure":
                     case "exlap-relChargingAirPressure":
@@ -1539,6 +1542,7 @@ public class DashboardFragment extends CarFragment {
                     // hybrid power has 1020 as value 0.
                     case "exlap-powermeter":
                         clockValue = clockValue - 1020;
+                        break;
                         // percentages
                     case "exlap-acceleratorPosition":
                     case "exlap-tankLevelPrimary":
@@ -1589,9 +1593,6 @@ public class DashboardFragment extends CarFragment {
                         }
                         break;
                     // torque data elements:
-                    case "torque-rpm_0x0c":
-                        clockValue = clockValue / 1000;
-                        break;
                     case "torque-speed_0x0d":
                     case "torque-fuelpressure_0x0a":
                     case "torque-engineload_0x04":
@@ -1711,6 +1712,7 @@ public class DashboardFragment extends CarFragment {
 
         String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
         String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
+
 
         Float currentTemperature = (Float) mLastMeasurements.get("outsideTemperature");
         if (currentTemperature != null) {
