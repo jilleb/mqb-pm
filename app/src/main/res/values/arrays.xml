@@ -348,6 +348,8 @@
         <item>@string/font_frutiger</item>
         <item>@string/font_skoda</item>
         <item>@string/font_larabie</item>
+        <item>@string/font_ford</item>
+
     </string-array>
 
     <string-array name="fontValues">
@@ -360,6 +362,7 @@
         <item>frutiger</item>
         <item>skoda</item>
         <item>larabie</item>
+        <item>font</item>
     </string-array>
 
     <string-array name="FontThumbs">
@@ -372,6 +375,8 @@
         <item>@drawable/ic_font_frutiger</item>
         <item>@drawable/ic_font_skoda</item>
         <item>@drawable/ic_font_larabie</item>
+        <item>@drawable/ic_font_ford</item>
+
     </string-array>
 
     <array name="backgroundstrings">
@@ -601,4 +606,5 @@ barometric pressure from vehicle = 33
      -->
 
 
+    <string name="font_ford">United Sans</string>
 </resources>

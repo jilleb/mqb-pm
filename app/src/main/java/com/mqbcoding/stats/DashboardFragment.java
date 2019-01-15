@@ -138,7 +138,6 @@ public class DashboardFragment extends CarFragment {
         }
     };
 
-
     private View.OnClickListener toggleView = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -148,17 +147,15 @@ public class DashboardFragment extends CarFragment {
                 fadeOutfadeIn(v, mConstraintGraphCenter);
             } else if (v==mConstraintClockRight) {
                 fadeOutfadeIn(v, mConstraintGraphRight);
-            } else if (v==mConstraintGraphLeft) {
-                fadeOutfadeIn(v, mConstraintClockLeft);
-            } else if (v==mConstraintGraphCenter){
-                fadeOutfadeIn(v, mConstraintClockCenter);
-            } else if (v==mConstraintGraphRight) {
-                fadeOutfadeIn(v, mConstraintClockRight);
+            } else if (v == mGraphLayoutLeft) {
+                fadeOutfadeIn(mConstraintGraphLeft, mConstraintClockLeft);
+            } else if (v == mGraphLayoutCenter) {
+                fadeOutfadeIn(mConstraintGraphCenter, mConstraintClockCenter);
+            } else if (v == mGraphLayoutRight) {
+                fadeOutfadeIn(mConstraintGraphRight, mConstraintClockRight);
             }
         }
-
     };
-
 
     private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
         @Override
@@ -307,8 +304,10 @@ public class DashboardFragment extends CarFragment {
             case "larabie":
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Larabie.ttf");
                 break;
+            case "ford":
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "UnitedSansReg-Medium_TAB.otf");
+                break;
         }
-
 
         //-------------------------------------------------------------
         //find all elements needed
@@ -435,11 +434,11 @@ public class DashboardFragment extends CarFragment {
 
         //click the
         mTitleElement.setOnClickListener(resetMinMax);
-        mConstraintGraphLeft.setOnClickListener(toggleView);
+        mGraphLayoutLeft.setOnClickListener(toggleView);
         mConstraintClockLeft.setOnClickListener(toggleView);
-        mConstraintGraphCenter.setOnClickListener(toggleView);
+        mGraphLayoutCenter.setOnClickListener(toggleView);
         mConstraintClockCenter.setOnClickListener(toggleView);
-        mConstraintGraphRight.setOnClickListener(toggleView);
+        mGraphLayoutRight.setOnClickListener(toggleView);
         mConstraintClockRight.setOnClickListener(toggleView);
 
         //determine what data the user wants to have on the 4 data views
@@ -1702,18 +1701,45 @@ public class DashboardFragment extends CarFragment {
 
     private void updateTitle() {
 
-        String currentTime = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
-
         String currentTitleValue = mTitleElement.getText().toString();
         String currentRightTitleValue = mTitleElementRight.getText().toString();
         String currentLeftTitleValue = mTitleElementLeft.getText().toString();
 
+        // Display location in center of title bar:
+        String currentTime = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+
+        if (currentTitleValue != currentTime) {
+            mTitleElement.setText(currentTime);
+        }
+
+        // Display location in left side of Title  bar
         String leftTitle = "" ;
 
         String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
         String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
 
+        if (location1 == null) {
+            if (location2 == null) {
+                leftTitle = "";
+                mTitleIcon2.setVisibility(View.INVISIBLE);
+            } else if (location2 != null) {
+                leftTitle = location2;
+            }
 
+        } else if (location1 != null) {
+            if (location2 == null) {
+                leftTitle = location1;
+            } else if (location2 != null) {
+                leftTitle = location1 + ", " + location2;
+            }
+        }
+
+        if (currentLeftTitleValue != leftTitle) {
+            mTitleElementLeft.setText(leftTitle);
+        }
+
+
+        // Display temperature in right side of Title  bar
         Float currentTemperature = (Float) mLastMeasurements.get("outsideTemperature");
         if (currentTemperature != null) {
             String temperature = String.format(Locale.US, getContext().getText(R.string.format_temperature).toString(), currentTemperature);
@@ -1722,36 +1748,14 @@ public class DashboardFragment extends CarFragment {
             }
         } else if (currentTemperature == null){
             mTitleIcon1.setVisibility(View.INVISIBLE);
+            mTitleElementRight.setText("");
+
         }
-
-        if (location1 == null && location2 == null) {
-            leftTitle =  "";
-            mTitleIcon2.setVisibility(View.INVISIBLE);
-        } else if (location2 !=null && location1 == null){
-            leftTitle = location2;
-        } else if (location1 !=null && location2 !=null){
-            leftTitle = location1 + ", " + location2;
-        } else if (leftTitle==""){
-            mTitleIcon2.setVisibility(View.INVISIBLE);
-        }
-
-
-        if (currentLeftTitleValue != leftTitle) {
-            mTitleElementLeft.setText(leftTitle);
-        }
-
-
-        if (currentTitleValue != currentTime) {
-            mTitleElement.setText(currentTime);
-        }
-
     }
 
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {
         long queryPid = 0;
-
-
         if (queryElement == null) {
             return;
         } else switch (queryElement) {
@@ -2092,7 +2096,7 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-
+    // fade out 1 view, fade the other in during 500ms.
     private void fadeOutfadeIn(final View oldView, final View newView) {
         oldView.animate()
                 .alpha(0f)
@@ -2104,13 +2108,14 @@ public class DashboardFragment extends CarFragment {
 
                     }
                 });
+        newView.setAlpha(0f);
+        newView.setVisibility(View.VISIBLE);
         newView.animate()
                 .alpha(1f)
-                .setDuration(250)
+                .setDuration(500)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        newView.setVisibility(View.VISIBLE);
 
                     }
                 });
