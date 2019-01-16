@@ -305,9 +305,11 @@ public class DashboardFragment extends CarFragment {
                 typeface = Typeface.createFromAsset(getContext().getAssets(), "Larabie.ttf");
                 break;
             case "ford":
-                typeface = Typeface.createFromAsset(getContext().getAssets(), "UnitedSansReg-Medium_TAB.otf");
+                typeface = Typeface.createFromAsset(getContext().getAssets(), "UnitedSans.otf");
                 break;
         }
+
+        Log.d(TAG, "font: " + typeface);
 
         //-------------------------------------------------------------
         //find all elements needed
@@ -1189,14 +1191,14 @@ public class DashboardFragment extends CarFragment {
         serie.setAnimated(false);
         graph.setElevation(55);
         graph.getViewport().setXAxisBoundsManual(true);
-        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setYAxisBoundsManual(false);
         graph.getViewport().setMinX(0);
         // set default max and min, these will be set dynamically later
         graph.getViewport().setMaxX(120);
-        graph.getViewport().setMaxY(360);
-        graph.getViewport().setMinY(0);
+        //graph.getViewport().setMaxY(360);
+        //graph.getViewport().setMinY(0);
         graph.getViewport().setScrollable(false);
-        graph.getGridLabelRenderer().setVerticalLabelsVisible(false);
+        graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
         graph.getViewport().setBackgroundColor(Color.argb(0, 255, 0, 0));
@@ -2105,6 +2107,9 @@ public class DashboardFragment extends CarFragment {
                     @Override
                     public void onAnimationEnd(Animator animation) {
                         oldView.setVisibility(View.INVISIBLE);
+                        newView.setVisibility(View.VISIBLE);
+                        newView.setAlpha(1f);
+
 
                     }
                 });
