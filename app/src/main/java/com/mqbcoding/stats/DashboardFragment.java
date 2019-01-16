@@ -147,11 +147,11 @@ public class DashboardFragment extends CarFragment {
                 fadeOutfadeIn(v, mConstraintGraphCenter);
             } else if (v==mConstraintClockRight) {
                 fadeOutfadeIn(v, mConstraintGraphRight);
-            } else if (v == mGraphLayoutLeft) {
+            } else if (v == mGraphLeft) {
                 fadeOutfadeIn(mConstraintGraphLeft, mConstraintClockLeft);
-            } else if (v == mGraphLayoutCenter) {
+            } else if (v == mGraphCenter) {
                 fadeOutfadeIn(mConstraintGraphCenter, mConstraintClockCenter);
-            } else if (v == mGraphLayoutRight) {
+            } else if (v == mGraphRight) {
                 fadeOutfadeIn(mConstraintGraphRight, mConstraintClockRight);
             }
         }
@@ -434,11 +434,11 @@ public class DashboardFragment extends CarFragment {
 
         //click the
         mTitleElement.setOnClickListener(resetMinMax);
-        mGraphLayoutLeft.setOnClickListener(toggleView);
+        mGraphLeft.setOnClickListener(toggleView);
         mConstraintClockLeft.setOnClickListener(toggleView);
-        mGraphLayoutCenter.setOnClickListener(toggleView);
+        mGraphCenter.setOnClickListener(toggleView);
         mConstraintClockCenter.setOnClickListener(toggleView);
-        mGraphLayoutRight.setOnClickListener(toggleView);
+        mGraphRight.setOnClickListener(toggleView);
         mConstraintClockRight.setOnClickListener(toggleView);
 
         //determine what data the user wants to have on the 4 data views
