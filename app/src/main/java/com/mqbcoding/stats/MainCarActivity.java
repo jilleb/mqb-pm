@@ -1,6 +1,5 @@
 package com.mqbcoding.stats;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.apps.auto.sdk.CarActivity;
@@ -148,11 +146,15 @@ public class MainCarActivity extends CarActivity {
         setContentView(R.layout.activity_car_main);
 
         // todo: make background user selectable:
-        View someView = findViewById(R.id.fragment_container);
-        someView.setBackgroundResource(R.drawable.background_incar_black);
+        View container = findViewById(R.id.fragment_container);
+        container.setBackgroundResource(R.drawable.background_incar_black);
 
         int resId = getResources().getIdentifier(selectedBackground, "drawable", this.getPackageName());
-        someView.setBackgroundResource(resId);
+        Drawable wallpaperImage = getResources().getDrawable(resId);
+        container.setBackground(wallpaperImage);
+
+        //container.setBackgroundResource(resId);
+
 
 
     CarUiController carUiController = getCarUiController();

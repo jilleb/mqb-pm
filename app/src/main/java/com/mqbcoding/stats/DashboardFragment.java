@@ -9,6 +9,7 @@ import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -64,7 +65,7 @@ public class DashboardFragment extends CarFragment {
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
-    private String selectedTheme;
+    private String selectedTheme, selectedBackground;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
     private String pressureUnit, temperatureUnit, selectedFont;
     private float pressureFactor, speedFactor;
@@ -93,11 +94,13 @@ public class DashboardFragment extends CarFragment {
     private LineGraphSeries<DataPoint> mSpeedSeriesLeft;
     private LineGraphSeries<DataPoint> mSpeedSeriesCenter;
     private LineGraphSeries<DataPoint> mSpeedSeriesRight;
+    private View mBackGroundLayout;
     private double graphLeftLastXValue = 5d;
     private double graphCenterLastXValue = 5d;
     private double graphRightLastXValue = 5d;
     //value displayed on graphlayout
     private TextView mGraphValueLeft, mGraphValueCenter, mGraphValueRight;
+    private View rootView;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -258,7 +261,7 @@ public class DashboardFragment extends CarFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView");
-        View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
 
         //Get preferences
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
@@ -273,6 +276,11 @@ public class DashboardFragment extends CarFragment {
         ticksOn = sharedPreferences.getBoolean("ticksActive", false); // if true, it will display the value of each of the ticks
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         selectedTheme = sharedPreferences.getString("selectedTheme", "");
+        //todo: fix this. currently not very efficient, because this is already requested in MainCarActivity
+        selectedBackground   = sharedPreferences.getString("selectedBackground", "Black");
+
+        Log.d(TAG,"Background: " + selectedBackground);
+
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -313,6 +321,9 @@ public class DashboardFragment extends CarFragment {
 
         //-------------------------------------------------------------
         //find all elements needed
+
+        mBackGroundLayout = rootView.findViewById(R.id.fragment_container);
+
         //layouts/constrains:
         mConstraintClockLeft = rootView.findViewById(R.id.constraintClockLeft);
         mConstraintClockCenter = rootView.findViewById(R.id.constraintClockCenter);
@@ -321,7 +332,6 @@ public class DashboardFragment extends CarFragment {
         mConstraintGraphLeft = rootView.findViewById(R.id.constraintGraphLeft);
         mConstraintGraphCenter = rootView.findViewById(R.id.constraintGraphCenter);
         mConstraintGraphRight = rootView.findViewById(R.id.constraintGraphRight);
-
 
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
@@ -866,20 +876,36 @@ public class DashboardFragment extends CarFragment {
             String ambientColor = (String) mLastMeasurements.get("Car_ambienceLightColour.ColourSRGB");
             //ambientColor = "#FF0000"; // for testing purposes
             if (ambientColor != null) {
-                if (raysOn) {
-                    mRayLeft.setLowSpeedColor(Color.parseColor(ambientColor));
-                    mRayCenter.setLowSpeedColor(Color.parseColor(ambientColor));
-                    mRayRight.setLowSpeedColor(Color.parseColor(ambientColor));
-                    mRayLeft.setMediumSpeedColor(Color.parseColor(ambientColor));
-                    mRayCenter.setMediumSpeedColor(Color.parseColor(ambientColor));
-                    mRayRight.setMediumSpeedColor(Color.parseColor(ambientColor));
-                } else {
-                    mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
-                    mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
-                    mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
-                    mClockLeft.setIndicatorLightColor(Color.parseColor(ambientColor));
-                    mClockCenter.setIndicatorLightColor(Color.parseColor(ambientColor));
-                    mClockRight.setIndicatorLightColor(Color.parseColor(ambientColor));
+                if ((Color.parseColor(ambientColor) != mClockLeft.getIndicatorColor()) || ((Color.parseColor(ambientColor) != mRayLeft.getLowSpeedColor()))){
+                    if (raysOn) {
+                        mRayLeft.setLowSpeedColor(Color.parseColor(ambientColor));
+                        mRayCenter.setLowSpeedColor(Color.parseColor(ambientColor));
+                        mRayRight.setLowSpeedColor(Color.parseColor(ambientColor));
+                        mRayLeft.setMediumSpeedColor(Color.parseColor(ambientColor));
+                        mRayCenter.setMediumSpeedColor(Color.parseColor(ambientColor));
+                        mRayRight.setMediumSpeedColor(Color.parseColor(ambientColor));
+                    } else {
+                        mClockLeft.setIndicatorColor(Color.parseColor(ambientColor));
+                        mClockCenter.setIndicatorColor(Color.parseColor(ambientColor));
+                        mClockRight.setIndicatorColor(Color.parseColor(ambientColor));
+                        mClockLeft.setIndicatorLightColor(Color.parseColor(ambientColor));
+                        mClockCenter.setIndicatorLightColor(Color.parseColor(ambientColor));
+                        mClockRight.setIndicatorLightColor(Color.parseColor(ambientColor));
+                    }
+
+                    switch (selectedBackground) {
+                        case "background_incar_dots":
+                        case "background_incar_skoda2":
+                            int resId = getResources().getIdentifier(selectedBackground, "drawable", getContext().getPackageName());
+                            Drawable wallpaperImage = getResources().getDrawable(resId);
+
+                            wallpaperImage.setColorFilter(new LightingColorFilter(Color.parseColor(ambientColor), Color.parseColor("#010101")));
+
+                            rootView.setBackground(wallpaperImage);
+                            break;
+                    }
+
+
                 }
             }
         }
@@ -908,6 +934,7 @@ public class DashboardFragment extends CarFragment {
 
         // set items to have a "-" as value.
         switch (queryElement) {
+            //todo: clean this up. This can be done much nicer.
             case "test":
             case "torque_version":
             case "batteryVoltage":
@@ -979,6 +1006,7 @@ public class DashboardFragment extends CarFragment {
 
         // set the labels
         switch (queryElement) {
+            //todo: clean this up. maybe get the needed icons/labels from arrays.xml, so it's not needed here.
             case "none":
                 icon = "empty";
                 break;
@@ -1199,8 +1227,10 @@ public class DashboardFragment extends CarFragment {
         //graph.getViewport().setMinY(0);
         graph.getViewport().setScrollable(false);
         graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
+        graph.getGridLabelRenderer().setGridColor(Color.parseColor("#44FFFFFF"));
+
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
-        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.NONE);
+        graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
         graph.getViewport().setBackgroundColor(Color.argb(0, 255, 0, 0));
         serie.setDrawDataPoints(false);
         serie.setThickness(3);
@@ -1648,13 +1678,13 @@ public class DashboardFragment extends CarFragment {
                         break;
                 }
 
-                // only shift x asis 2 positions when there's new data
+                // only shift x asis 0.5 positions when there's new data
                 if (clock == mClockLeft) {
-                    graphLeftLastXValue += 1d;
+                    graphLeftLastXValue += 0.5d;
                 } else if (clock == mClockCenter) {
-                    graphCenterLastXValue += 1d;
+                    graphCenterLastXValue += 0.5d;
                 } else if (clock == mClockRight) {
-                    graphRightLastXValue += 1d;
+                    graphRightLastXValue += 0.5d;
                 }
 
                 // don't update when there's nothing to update
@@ -1732,14 +1762,17 @@ public class DashboardFragment extends CarFragment {
             if (location2 == null) {
                 leftTitle = location1;
             } else if (location2 != null) {
-                leftTitle = location1 + ", " + location2;
+                if (location1 ==""){
+                    leftTitle = location2;
+                } else {
+                    leftTitle = location1 + ", " + location2;
+                }
             }
         }
 
         if (currentLeftTitleValue != leftTitle) {
             mTitleElementLeft.setText(leftTitle);
         }
-
 
         // Display temperature in right side of Title  bar
         Float currentTemperature = (Float) mLastMeasurements.get("outsideTemperature");

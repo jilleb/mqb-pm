@@ -398,6 +398,7 @@
         <item>@string/bg_skodaone</item>
         <item>@string/bg_test</item>
         <item>@string/bg_beetle</item>
+        <item>@string/bg_dots</item>
 
     </array>
 
@@ -420,6 +421,7 @@
         <item>background_incar_skodaone</item>
         <item>background_incar_test</item>
         <item>background_incar_beetle</item>
+        <item>background_incar_dots</item>
     </array>
 
 
@@ -442,6 +444,8 @@
         <item>@drawable/thumb_background_incar_skodaone</item>
         <item>@drawable/thumb_background_incar_test</item>
         <item>@drawable/thumb_background_incar_beetle</item>
+        <item>@drawable/thumb_background_incar_dots</item>
+
     </array>
 
 
@@ -607,4 +611,5 @@ barometric pressure from vehicle = 33
 
 
     <string name="font_ford">United Sans</string>
+    <string name="bg_dots">Dots</string>
 </resources>
