@@ -73,7 +73,7 @@ public class DashboardFragment extends CarFragment {
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
     //values of the data elements. upper left, upper right, lower left, lower right.
-    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement, mTitleElementRight, mTitleElementLeft, mTitleIcon1, mTitleIcon2;
+    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement, mTitleElementRight, mTitleElementLeft;
     private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
     private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
     private TextView mTextMinLeft, mTextMaxLeft;
@@ -277,10 +277,13 @@ public class DashboardFragment extends CarFragment {
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         selectedTheme = sharedPreferences.getString("selectedTheme", "");
         //todo: fix this. currently not very efficient, because this is already requested in MainCarActivity
-        selectedBackground   = sharedPreferences.getString("selectedBackground", "Black");
+        selectedBackground = sharedPreferences.getString("selectedBackground", "background_incar_black");
 
-        Log.d(TAG,"Background: " + selectedBackground);
+        //Set wallpaper
+        int resId = getResources().getIdentifier(selectedBackground, "drawable", getContext().getPackageName());
+        Drawable wallpaperImage = getResources().getDrawable(resId);
 
+        rootView.setBackground(wallpaperImage);
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -385,8 +388,6 @@ public class DashboardFragment extends CarFragment {
         mTitleElement = rootView.findViewById(R.id.textTitleElement);
         mTitleElementRight = rootView.findViewById(R.id.textTitleElementRight);
         mTitleElementLeft = rootView.findViewById(R.id.textTitleElementLeft);
-        mTitleIcon1= rootView.findViewById(R.id.titleIcon1);
-        mTitleIcon2= rootView.findViewById(R.id.titleIcon2);
 
         //labels at these text elements:
         mIconElement1 = rootView.findViewById(R.id.icon_Element1);
@@ -761,8 +762,6 @@ public class DashboardFragment extends CarFragment {
         mValueElement4 = null;
         mTitleElement = null;
         mTitleElementRight = null;
-        mTitleIcon1=null;
-        mTitleIcon2=null;
         mIconElement1 = null;
         mIconElement2 = null;
         mIconElement3 = null;
@@ -1227,17 +1226,15 @@ public class DashboardFragment extends CarFragment {
         //graph.getViewport().setMinY(0);
         graph.getViewport().setScrollable(false);
         graph.getGridLabelRenderer().setVerticalLabelsVisible(true);
-        graph.getGridLabelRenderer().setGridColor(Color.parseColor("#44FFFFFF"));
+        graph.getGridLabelRenderer().setGridColor(Color.parseColor("#22FFFFFF"));
 
         graph.getGridLabelRenderer().setHorizontalLabelsVisible(false);
         graph.getGridLabelRenderer().setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
         graph.getViewport().setBackgroundColor(Color.argb(0, 255, 0, 0));
         serie.setDrawDataPoints(false);
-        serie.setThickness(3);
+        serie.setThickness(2);
         serie.setColor(Color.argb(80, 255, 255, 255));
-
     }
-
 
     private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
 
@@ -1692,7 +1689,6 @@ public class DashboardFragment extends CarFragment {
                     return;
                 }
                 // update clock with latest clockValue
-                if (clockValue != null) {
                     clock.speedTo(clockValue);
                     visray.speedTo(clockValue);
 
@@ -1700,36 +1696,36 @@ public class DashboardFragment extends CarFragment {
                     graph.getViewport().setMinY(clock.getMinSpeed());
 
 
-                    series.appendData(new DataPoint(graphLastXValue, clockValue), true, 200);
-                    String tempString = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValue));
-                    graphValue.setText(tempString);
-                }
             }
 
             // get the speed from the clock and have the high-visibility rays move to this speed as well
-            float tempValue = clock.getSpeed();
+            float clockValueToGraph = clock.getSpeed();
+            // update graph, based on the value of the clock
 
+
+            series.appendData(new DataPoint(graphLastXValue, clockValueToGraph), true, 400);
+            String tempString = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
+            graphValue.setText(tempString);
 
             // update the max clocks and text
             if (stagingDone) {
                 Float maxValue = clockmax.getSpeed();
                 Float minValue = clockmin.getSpeed();
 
-                if (tempValue > maxValue) {
-                    clockmax.setSpeedAt(tempValue);
-                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                if (clockValueToGraph > maxValue) {
+                    clockmax.setSpeedAt(clockValueToGraph);
+                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
                 }
 
                 // update the min clocks and text
-                if (tempValue < minValue) {
-                    clockmin.setSpeedAt(tempValue);
-                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), tempValue));
+                if (clockValueToGraph < minValue) {
+                    clockmin.setSpeedAt(clockValueToGraph);
+                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
                 }
             }
 
         }
     }
-
 
     private void updateTitle() {
 
@@ -1753,7 +1749,6 @@ public class DashboardFragment extends CarFragment {
         if (location1 == null) {
             if (location2 == null) {
                 leftTitle = "";
-                mTitleIcon2.setVisibility(View.INVISIBLE);
             } else if (location2 != null) {
                 leftTitle = location2;
             }
@@ -1782,7 +1777,6 @@ public class DashboardFragment extends CarFragment {
                 mTitleElementRight.setText(temperature);
             }
         } else if (currentTemperature == null){
-            mTitleIcon1.setVisibility(View.INVISIBLE);
             mTitleElementRight.setText("");
 
         }

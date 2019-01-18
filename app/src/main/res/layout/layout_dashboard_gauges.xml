@@ -88,7 +88,6 @@
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="2dp"
             android:background="?attr/themedDialBackground"
             android:padding="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -190,9 +189,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
+        app:layout_constraintTop_toTopOf="parent">
 
 
         <com.github.anastr.speedviewlib.SpeedView
@@ -312,7 +309,6 @@
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
             android:background="?attr/themedDialBackground"
             android:elevation="0dp"
             android:padding="25dp"
@@ -445,8 +441,7 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
         <android.support.v7.widget.CardView
@@ -523,9 +518,9 @@
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintGraphLeft"
-        android:visibility="invisible"
         android:layout_width="275dp"
         android:layout_height="0dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockLeft"
         app:layout_constraintRight_toRightOf="@+id/constraintClockLeft"
         app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"
@@ -543,8 +538,7 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/left_layout"

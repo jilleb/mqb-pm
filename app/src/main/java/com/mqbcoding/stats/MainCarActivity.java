@@ -138,7 +138,12 @@ public class MainCarActivity extends CarActivity {
             case "Test":
                 setTheme(R.style.AppTheme_Testing);
                 break;
-
+            case "Dark":
+                setTheme(R.style.AppTheme_Dark);
+                break;
+            case "Mustang GT":
+                setTheme(R.style.AppTheme_Ford);
+                break;
         }
         // get user setting for mic on/of
         micOn           = sharedPreferences.getBoolean("micActive", true);

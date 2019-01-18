@@ -318,7 +318,7 @@
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_vw2</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_vw2</item>
         <item name="themedCarBackground">@drawable/background_incar_vw_plaid</item>
-            <item name="themedNeedle">@drawable/needle_vw3</item>
+        <item name="themedNeedle">@drawable/needle_vw3</item>
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw2</item>
         <item name="themedNeedleColor">@color/red</item>
@@ -484,6 +484,63 @@
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
     </style>
+
+    <style name="AppTheme.Dark" parent="AppTheme.Car">
+        <item name="themedCarBackground">@drawable/background_incar_black</item>
+        <item name="themedDialBackground">@drawable/dial_background_dark</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_dark</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_dark</item>
+        <item name="themedNeedle">@drawable/needle_dark</item>
+        <item name="sv_markColor">@android:color/transparent</item>
+        <item name="sv_markWidth">20dp</item>
+        <item name="themedStopWatchBackground">@drawable/sw_background_dark</item>
+        <item name="themedNeedleColor">@color/red</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">#00FF0000</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorWidth">2dp</item>
+        <item name="sv_tickPadding">0dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+        <item name="sv_withTremble">false</item>
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+    </style>
+
+
+    <style name="AppTheme.Ford" parent="AppTheme.Car">
+        <item name="themedCarBackground">@drawable/background_incar_black</item>
+        <item name="themedDialBackground">@drawable/dial_background_ford</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_ford</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_ford</item>
+        <item name="themedNeedle">@drawable/needle_mib2p</item>
+        <item name="sv_markColor">@android:color/transparent</item>
+        <item name="sv_markWidth">20dp</item>
+        <item name="themedStopWatchBackground">@drawable/dial_background_blank_ford</item>
+        <item name="themedNeedleColor">@color/fordblue</item>
+        <item name="sv_withIndicatorLight">true</item>
+        <item name="sv_indicatorLightColor">#880066ff</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorColor">@android:color/white</item>
+        <item name="sv_indicatorWidth">2dp</item>
+        <item name="sv_tickPadding">15dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_speedTextPadding">50dp</item>
+        <item name="sv_withTremble">false</item>
+        <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextSize">32sp</item>
+        <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_textSize">12sp</item>
+        <item name="sv_unitSpeedInterval">4dp</item>
+    </style>
+
     <style name="AppTheme.Car.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_vertical_material_car</item>
         <item name="android:minWidth">@dimen/progress_bar_height_material_car</item>

@@ -36,7 +36,7 @@
         android:layout_height="40dp"
         android:textAppearance="@style/CarBody2"
         android:textColor="@android:color/white"
-        app:layout_constraintLeft_toRightOf="@id/titleIcon2"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -48,22 +48,6 @@
         android:textAppearance="@style/CarBody2"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/titleIcon1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/ic_outsidetemperature"
-        app:layout_constraintRight_toLeftOf="@id/textTitleElementRight"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/titleIcon2"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:background="@drawable/ic_world"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 

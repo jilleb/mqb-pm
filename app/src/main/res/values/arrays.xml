@@ -19,6 +19,8 @@
         <item>Audi Virtual Cockpit</item>
         <item>Audi TT</item>
         <item>Minimalistic</item>
+        <item>Dark</item>
+        <item>Mustang GT</item>
         <item>Test</item>
     </string-array>
 
@@ -40,6 +42,8 @@
         <item>@drawable/ic_theme_audivc</item>
         <item>@drawable/ic_theme_auditt</item>
         <item>@drawable/ic_theme_minimalistic</item>
+        <item>@drawable/ic_theme_dark</item>
+        <item>@drawable/ic_theme_ford</item>
         <item>@drawable/ic_theme_test</item>
     </array>
 
