@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Monitor výkonu pro VAG</string>
-    <string name="format_temperatureF">%.0f°F</string>
-    <string name="format_temperature">%.0f°</string>
+    <string name="format_temperatureF">%.1f°F</string>
+    <string name="format_temperature">%.1f°</string>
     <string name="app_car_service_name">Monitor výkonu</string>
-    <string name="format_temperatureC">%.0f°C</string>
+    <string name="format_temperatureC">%.1f°C</string>
     <string name="format_volt">%.1fV</string>
     <string name="format_gforce">%.1fG</string>
     <string name="format_percent">%.1f</string>
@@ -13,9 +13,9 @@
     <string name="format_noDecimals">%.0f</string>
     <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
-    <string name="format_volt0">0,0V</string>
-    <string name="format_temperature0">0,0°</string>
-    <string name="unit_kmh">kmh</string>
+    <string name="format_volt0">-,-V</string>
+    <string name="format_temperature0">-,-°</string>
+    <string name="unit_kmh">km/h</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_kw">KW</string>
     <string name="activity_settings_title">Nastavení Monitoru výkonu</string>
@@ -52,10 +52,10 @@
     <string name="pref_leftclock">Levý budík</string>
     <string name="pref_centerclock">Prostřední budík</string>
     <string name="pref_rightclock">Pravý budík</string>
-    <string name="pref_view1">Náhled 1</string>
-    <string name="pref_view2">Náhled 2</string>
-    <string name="pref_view3">Náhled 3</string>
-    <string name="pref_view4">Náhled 4</string>
+    <string name="pref_view1">Prvek 1</string>
+    <string name="pref_view2">Prvek 2</string>
+    <string name="pref_view3">Prvek 3</string>
+    <string name="pref_view4">Prvek 4</string>
     <string name="pref_pressureunit">Jednotka tlaku</string>
     <string name="pref_dataelementsettings">Nastavení datových prvků</string>
     <string name="pref_highvis_off">Zobrazit ručičku na budících</string>
@@ -113,7 +113,7 @@
     <string name="pref_resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>
     <string name="unknown">neznámý</string>
     <string name="format_km">%.1f km</string>
-    <string name="format_miles">%.1f miles</string>
+    <string name="format_miles">%.1f mil</string>
     <string name="pref_ticks_on">Zobrazí hodnoty v budících</string>
     <string name="element_VIN">VIN</string>
     <string name="element_blinkingState">Blinkry</string>
@@ -150,4 +150,22 @@
     <string name="label_tyreFL">LP</string>
     <string name="label_tyreRR">PZ</string>
     <string name="label_tyreRL">LZ</string>
+    <string name="element_shortTermConsumptionPrimary">Spotřeba od startu</string>
+    <string name="element_shortTermConsumptionSecondary">Spotřeba od startu (sekundární palivo)</string>
+    <string name="format_degreespersec">%.1f°/s</string>
+    <string name="unit_fahrenheit">Fahrenheita</string>
+    <string name="unit_celcius">Celsia</string>
+    <string name="unit_f">°F</string>
+    <string name="unit_c">°C</string>
+    <string name="label_fuel">Palivo</string>
+    <string name="pref_temperatureunit">Jednotka teploty</string>
+    <string name="pref_title">Stavový řádek</string>
+    <string name="element_locationinfo">Info o poloze</string>
+    <string name="element_mediainfo">Info o médiích</string>
+    <string name="pref_unitprefs">Předvolby jednotky</string>
+    <string name="pref_graphOff">Budík se zobrazí v běžném režimu</string>
+    <string name="pref_graphOn">Budík zobrazí graf</string>
+    <string name="pref_displayasgraph">Zobrazí graf místo budíku</string>
+    <string name="element_clock">Hodiny</string>
+    <string name="pref_background">Pozadí</string>
 </resources>
