@@ -1683,6 +1683,12 @@ public class DashboardFragment extends CarFragment {
                     graphRightLastXValue += 0.5d;
                 }
 
+                // update graph, based on the value of the clock
+                series.appendData(new DataPoint(graphLastXValue, clockValue), true, 400);
+                String tempString = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValue));
+                graphValue.setText(tempString);
+
+
                 // don't update when there's nothing to update
                 if (clockValue.equals(oldValue)) {
                     return;
@@ -1698,12 +1704,11 @@ public class DashboardFragment extends CarFragment {
             }
 
             // get the speed from the clock and have the high-visibility rays move to this speed as well
-            float clockValueToGraph = clock.getSpeed();
-            // update graph, based on the value of the clock
+            float currentClockValue = clock.getSpeed();
 
 
-            series.appendData(new DataPoint(graphLastXValue, clockValueToGraph), true, 400);
-            String tempString = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
+            series.appendData(new DataPoint(graphLastXValue, currentClockValue), true, 400);
+            String tempString = (String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), currentClockValue));
             graphValue.setText(tempString);
 
             // update the max clocks and text
@@ -1711,15 +1716,15 @@ public class DashboardFragment extends CarFragment {
                 Float maxValue = clockmax.getSpeed();
                 Float minValue = clockmin.getSpeed();
 
-                if (clockValueToGraph > maxValue) {
-                    clockmax.setSpeedAt(clockValueToGraph);
-                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
+                if (currentClockValue > maxValue) {
+                    clockmax.setSpeedAt(currentClockValue);
+                    textmax.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), currentClockValue));
                 }
 
                 // update the min clocks and text
-                if (clockValueToGraph < minValue) {
-                    clockmin.setSpeedAt(clockValueToGraph);
-                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
+                if (currentClockValue < minValue) {
+                    clockmin.setSpeedAt(currentClockValue);
+                    textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), currentClockValue));
                 }
             }
 
