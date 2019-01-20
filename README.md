@@ -29,24 +29,22 @@ Download the latest release here: https://github.com/jilleb/mqb-pm/releases
 - Open the Performance Monitor settings, grant all the rights it's requesting. If you don't do this, the app will NOT work.
 - Hook your phone to your car's USB, start Android Auto on your unit.
 - You can find the Performance Monitor in the menu on the lower right in Android Auto, the one with the dashboard clock on it.
+- If you want to use Torque data elements, make sure you have installed Torque: https://play.google.com/store/apps/details?id=org.prowl.torque. Also make sure you've enabled full plugin access in Torque settings, otherwise Performance Momitor will not be able to see any data.
 
 
 # Known issues
 - Google is actively blocking custom apps for Android Auto. So the app is not working with Android Auto v3.0 (unless you apply the workaround). Its also not working on Google Play Services v12.5.21. There are workarounds, but I will not describe or support them. 
-- App slowing down over time, and restarting. I haven't pinned this down completely yet. 
 
 - Black screen of death: On some cars it doesn't work for unknown reasons. This will not kill your car or headunit. Send me a logcat. 
 On Huawei and Honor devices this is a common problem, caused by a bug in their ROMs. A workaround to get OEM apps working again is to clear the Android Auto apk cache when this happens. (thanks to nerone-github for the information.)
 
 - No data
 If you don't see any data in the app, it can have various reasons:
-Some cars don't provide data to the headunit. 
+Some cars don't provide any data to the headunit. Workaround: Use Torque with an OBD2 dongle to get data. 
 Some MIB2 firmware versions don't provide data to the exlap channel.
 Not all data elements are available on all cars. If one element doesn't provide data, try an other one.
 Most cars do not report oil and coolant temperatures below 50.
-
-- Android Auto crashing after some time
-It looks like the app is crashing Android Auto when it's not getting any data. This doesn't happen on all cars.
+Most cars do not report any turbo pressure. Consider yourself lucky when your car does.
 
 - Appkillers/memory managers kill the service
 Put the Vag extensions for Android Auto app in the whitelist of your memory manager.
