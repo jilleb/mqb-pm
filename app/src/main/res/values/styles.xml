@@ -528,8 +528,8 @@
         <item name="sv_indicator">HalfLineIndicator</item>
         <item name="sv_indicatorColor">@android:color/white</item>
         <item name="sv_indicatorWidth">2dp</item>
-        <item name="sv_tickPadding">15dp</item>
-        <item name="sv_tickRotation">false</item>
+        <item name="sv_tickPadding">12dp</item>
+        <item name="sv_tickRotation">true</item>
         <item name="sv_speedTextPadding">50dp</item>
         <item name="sv_withTremble">false</item>
         <item name="sv_speedTextColor">@color/car_primary</item>

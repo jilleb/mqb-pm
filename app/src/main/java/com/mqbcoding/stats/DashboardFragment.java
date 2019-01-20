@@ -43,8 +43,7 @@ import com.jjoe64.graphview.series.LineGraphSeries;
 import org.prowl.torque.remote.ITorqueService;
 
 import java.math.BigInteger;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.text.DateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -1734,7 +1733,13 @@ public class DashboardFragment extends CarFragment {
         String currentLeftTitleValue = mTitleElementLeft.getText().toString();
 
         // Display location in center of title bar:
-        String currentTime = new SimpleDateFormat("HH:mm").format(Calendar.getInstance().getTime());
+
+
+        Date time = new Date();
+        DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT);
+
+        String currentTime = df.format(time);
+
 
         if (currentTitleValue != currentTime) {
             mTitleElement.setText(currentTime);

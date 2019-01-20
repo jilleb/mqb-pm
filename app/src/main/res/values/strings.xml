@@ -8,7 +8,7 @@
 
     <string name="app_car_service_name">Performance Monitor</string>
     <string name="app_name">Performance Monitor for VAG</string>
-    <string name="app_version" translatable="false">0.7A</string>
+    <string name="app_version" translatable="false">0.7B</string>
 
     <string name="credits_author">This application was made by:</string>
     <string name="credits_basedon">Based on the SDK and demo App by:</string>
@@ -216,7 +216,7 @@
     <string name="element_mediainfo">Media info</string>
     <string name="element_torque_voltagemodule">Torque - Voltage (Car)</string>
     <string name="element_torque_transmissiontemp">Torque - Transmission temperature</string>
-    <string name="element_torque_pressurecontrol">Turbo pressure control</string>
+    <string name="element_torque_pressurecontrol">Torque - Turbo pressure control</string>
     <string name="element_torque_absolutethrottlepostion">Torque - Throttle position(Absolute)</string>
     <string name="element_torque_intakemanifoldpressure">Torque - Intake manifold pressure</string>
     <string name="element_torque_commandedequivalenceratiolambda">Torque - Commanded equivalence ratio (Lambda)</string>
