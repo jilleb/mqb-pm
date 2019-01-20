@@ -3,6 +3,11 @@
 This is a performance monitor, based on Martoreto's aa-stats.
 It's made specifically for use with the Volkswagen/Skoda/Seat/Audi MIB2 infotainment units, but it might also work on others, as long as they have Android Auto support.
 
+# Main features:
+- Display data from the in-car exlap channel on your infotainment screen
+- Display OBD2 data from Torque
+- Many OEM-styled themes and backgrounds
+
 # Screenshots:
 Some screenshots of the app:
 
