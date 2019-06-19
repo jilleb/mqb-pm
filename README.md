@@ -11,11 +11,10 @@ It's made specifically for use with the Volkswagen/Skoda/Seat/Audi MIB2 infotain
 # Screenshots:
 Some screenshots of the app:
 
-Golf GTI theme with high visibility-dials.
-![VW theme](https://i.imgur.com/dTG3oBq.png)
+![VW theme](https://user-images.githubusercontent.com/8352494/48626461-322c1380-e9b2-11e8-990a-b380c43f93e1.png)
 
-Seat theme with high min/max turned on.
-![Seat theme](https://i.imgur.com/g8J8whV.png)
+Seat theme:
+![Seat theme](https://camo.githubusercontent.com/c3043a363e40cac344c4f2cb4a943671205806d2/68747470733a2f2f692e696d6775722e636f6d2f56436a58474d582e706e67)
 
 Skoda ONEapp theme with high min/max turned on.
 ![Skoda ONE theme](https://i.imgur.com/OfO3jpb.png)
