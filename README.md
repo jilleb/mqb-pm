@@ -62,7 +62,7 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - Unplug/replug your phone and try again
 
 # Currently not working firmware versions:
-**MIB2:**
+**MIB2 High:**
 - VW 0245
 - VW 0343
 - VW 0430 
@@ -70,8 +70,10 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - VW 0617
 - VW 0755
 - VW 1156
+- VW 0751
+- VW 0753
 
-**MIB2Std**
+**MIB2 Std**
 - Seat 0351
 - Seat 0359
 
@@ -79,11 +81,11 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - VW 5406
 
 # Currently confirmed working firmware versions:
-**MIB2Std**
+**MIB2 Std**
 - Seat 0462
 - Skoda 0468
 
-**MIB2:**
+**MIB2 High:**
 - VW 0814
 - VW 1187
 - Seat 0472
@@ -91,15 +93,11 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - Seat 1219
 - Seat 1308
 - Seat 1338
+- Seat 1409
+- Skoda 0468
+- Skoda 1433
 
-- Skoda 0468 
-
-**MIB2.5**
-- Seat 1162
+**MIB2.5 High**
 - VW 1161
-
-# Mixed results:
-**MIB2:**
-The following firmwares are working, but for some users they don't.
-- VW 0751
-- VW 0753
+- VW 1367
+- Skoda 1440
