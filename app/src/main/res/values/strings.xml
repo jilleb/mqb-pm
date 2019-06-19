@@ -238,6 +238,7 @@
     <string name="bg_vw3">Spotlight</string>
     <string name="bg_vwplaid">GTI Tartan</string>
     <string name="bg_gte">GTE Tartan</string>
+    <string name="bg_vwgtd">GTD Tartan</string>
     <string name="bg_black">Black</string>
     <string name="bg_cloth">Cloth</string>
     <string name="bg_rock">Rock</string>
@@ -252,6 +253,8 @@
     <string name="bg_test">Test</string>
     <string name="bg_beetle">Herbie</string>
     <string name="pref_background">Background</string>
+    <string name="font_ford">United Sans</string>
+    <string name="bg_dots">Dots</string>
 
 
 </resources>

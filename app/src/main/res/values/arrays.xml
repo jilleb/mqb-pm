@@ -47,8 +47,6 @@
         <item>@drawable/ic_theme_test</item>
     </array>
 
-    <!-- Pressure units, used in settings-->
-
     <!-- Names of Entries for clock data settings -->
     <string-array name="ClockDataElementsEntries">
         <item>@string/element_absChargingAirPressure</item>
@@ -105,8 +103,6 @@
         <item>@string/element_torque_phonebarometer</item>
         <item>@string/element_torque_obdadaptervoltage</item>
         <item>@string/element_torque_fuellevel</item>
-
-
         <item>@string/element_torque_voltagemodule</item>
         <item>@string/element_torque_transmissiontemp</item>
         <item>@string/element_torque_pressurecontrol</item>
@@ -388,6 +384,7 @@
         <item>@string/bg_vw2</item>
         <item>@string/bg_vw3</item>
         <item>@string/bg_vwplaid</item>
+        <item>@string/bg_vwgtd</item>
         <item>@string/bg_gte</item>
         <item>@string/bg_black</item>
         <item>@string/bg_blackboard</item>
@@ -411,6 +408,7 @@
         <item>background_incar_vw2</item>
         <item>background_incar_vw3</item>
         <item>background_incar_vw_plaid</item>
+        <item>background_incar_gtd</item>
         <item>background_incar_gte</item>
         <item>background_incar_black</item>
         <item>background_incar_blackboard</item>
@@ -434,6 +432,7 @@
         <item>@drawable/thumb_background_incar_vw2</item>
         <item>@drawable/thumb_background_incar_vw3</item>
         <item>@drawable/thumb_background_incar_vw_plaid</item>
+        <item>@drawable/thumb_background_incar_gtd</item>
         <item>@drawable/thumb_background_incar_gte</item>
         <item>@drawable/thumb_background_incar_black</item>
         <item>@drawable/thumb_background_incar_blackboard</item>
@@ -613,7 +612,4 @@ barometric pressure from vehicle = 33
 
      -->
 
-
-    <string name="font_ford">United Sans</string>
-    <string name="bg_dots">Dots</string>
 </resources>
