@@ -1474,13 +1474,20 @@ public class DashboardFragment extends CarFragment {
             return;
 
         } else if (stagingDone) {
+            Float clockValue = (Float) mLastMeasurements.get(query);
+            Float oldValue = (Float) clock.getSpeed();
+
+            // don't update when there's nothing to update
+            if (clockValue.equals(oldValue)) {
+                return;
+            }
 
             float randomClockVal = randFloat(0, 360);
             speedFactor = 1f;
             pressureFactor = 1f;
             long queryPid = 0;
-            Float clockValue = 0f;
-            Float oldValue = 0f;
+            clockValue = 0f;
+            oldValue = 0f;
             String queryTrim = "";
             String queryLong = query;
             String unitText = "";
