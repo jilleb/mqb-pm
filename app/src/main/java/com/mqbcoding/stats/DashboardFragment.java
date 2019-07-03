@@ -280,9 +280,11 @@ public class DashboardFragment extends CarFragment {
 
         //Set wallpaper
         int resId = getResources().getIdentifier(selectedBackground, "drawable", getContext().getPackageName());
-        Drawable wallpaperImage = getResources().getDrawable(resId);
 
-        rootView.setBackground(wallpaperImage);
+        if (resId != 0) {
+            Drawable wallpaperImage = getResources().getDrawable(resId);
+            rootView.setBackground(wallpaperImage);
+        }
 
         //set textview to have a custom digital font:
         Typeface typeface = Typeface.createFromAsset(getContext().getAssets(), "digital.ttf");
@@ -1478,7 +1480,7 @@ public class DashboardFragment extends CarFragment {
             Float oldValue = (Float) clock.getSpeed();
 
             // don't update when there's nothing to update
-            if (clockValue.equals(oldValue)) {
+            if (clockValue == oldValue) {
                 return;
             }
 
@@ -1486,8 +1488,10 @@ public class DashboardFragment extends CarFragment {
             speedFactor = 1f;
             pressureFactor = 1f;
             long queryPid = 0;
+
             clockValue = 0f;
             oldValue = 0f;
+
             String queryTrim = "";
             String queryLong = query;
             String unitText = "";
@@ -1531,7 +1535,6 @@ public class DashboardFragment extends CarFragment {
                     break;
             }
 
-            oldValue = (Float) clock.getSpeed();
             if (clockValue != null) {
                 switch (queryLong) {
                     case "test":

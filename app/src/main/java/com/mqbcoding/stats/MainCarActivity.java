@@ -81,13 +81,13 @@ public class MainCarActivity extends CarActivity {
         String selectedBackground   = sharedPreferences.getString("selectedBackground", "Black");
 
         // set default theme:
-        setTheme(R.style.AppTheme_VolkswagenGTI);
+        setTheme(R.style.AppTheme_VolkswagenMIB2);
 
         switch (selectedTheme) {
             case "VW GTI":
                 setTheme(R.style.AppTheme_VolkswagenGTI);
                 break;
-            case "VW GTE":
+            case "VW R/GTE":
                 setTheme(R.style.AppTheme_VolkswagenGTE);
                 break;
             case "VW":
@@ -155,12 +155,10 @@ public class MainCarActivity extends CarActivity {
         container.setBackgroundResource(R.drawable.background_incar_black);
 
         int resId = getResources().getIdentifier(selectedBackground, "drawable", this.getPackageName());
-        Drawable wallpaperImage = getResources().getDrawable(resId);
-        container.setBackground(wallpaperImage);
-
-        //container.setBackgroundResource(resId);
-
-
+        if (resId != 0) {
+            Drawable wallpaperImage = getResources().getDrawable(resId);
+            container.setBackground(wallpaperImage);
+        }
 
     CarUiController carUiController = getCarUiController();
         carUiController.getStatusBarController().showTitle();
