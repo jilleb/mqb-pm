@@ -168,6 +168,13 @@
             android:summaryOn="@string/unit_bar"
             android:title="@string/pref_pressureunit"
             android:visibility="invisible" />
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="selectPowerUnit"
+            android:summaryOff="@string/unit_hp"
+            android:summaryOn="@string/unit_kw"
+            android:title="@string/pref_powerunit"
+            android:visibility="invisible" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_notifications_category_title">
