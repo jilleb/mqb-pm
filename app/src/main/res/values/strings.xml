@@ -2,12 +2,12 @@
 
 
     <string name="activity_credits_title">Credits</string>
-    <string name="activity_main_title">Performance Monitor</string>
-    <string name="activity_settings_title">Performance Monitor Settings</string>
+    <string name="activity_main_title">VAG Dashboard</string>
+    <string name="activity_settings_title">VAG Dashboard Settings</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
 
-    <string name="app_car_service_name">Performance Monitor</string>
-    <string name="app_name">Performance Monitor for VAG</string>
+    <string name="app_car_service_name">VAG Dashboard</string>
+    <string name="app_name">VAG Dashboard</string>
     <string name="app_version" translatable="false">0.7B</string>
 
     <string name="credits_author">This application was made by:</string>
@@ -151,6 +151,7 @@
     <string name="reupload_last_nothing_to_do">Nothing to re-upload.</string>
     <string name="cancel_uploads_done">Upload cancelled.</string>
     <string name="pref_cancel_uploads_title">Cancel all uploads</string>
+    <string name="pref_powerunit">Power unit</string>
 
     <string name="testing">testing</string>
 
@@ -168,6 +169,7 @@
     <string name="unit_celcius">Celcius</string>
     <string name="unit_f">°F</string>
     <string name="unit_c">°C</string>
+    <string name="unit_hp">HP</string>
 
     <string name="unknown">unknown</string>
     <string name="pref_showmic_summary">Show microphone icon in statusbar</string>
