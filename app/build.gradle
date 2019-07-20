@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion '27.0.3'
     defaultConfig {
         applicationId "dev.gaitzsch.vagdashboard"
         minSdkVersion 22
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 60
         versionName "@string/app_version"
     }
@@ -26,22 +26,22 @@ dependencies {
     implementation 'com.github.martoreto:aauto-sdk:v4.7'
     implementation 'com.github.martoreto:aauto-vex-base:v4.4'
     implementation 'com.jjoe64:graphview:4.2.2'
-    implementation('com.google.apis:google-api-services-bigquery:v2-rev377-1.22.0') exclude module: 'httpclient'
+    implementation 'com.google.apis:google-api-services-bigquery:v2-rev377-1.22.0' exclude module: 'httpclient'
     implementation 'com.google.api-client:google-api-client-android:1.22.0' exclude module: 'httpclient'
     implementation 'com.github.christophesmet:android_maskable_layout:v1.3.1'
     implementation 'com.google.http-client:google-http-client-gson:1.22.0' exclude module: 'httpclient'
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:27.1.1'
-    implementation 'com.github.anastr:speedviewlib:1.3.0'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.github.anastr:speedviewlib:1.4.+'
     implementation 'com.austingreco:image-list-preference:1.0.0'
 
     //noinspection GradleDependency
     implementation 'com.google.guava:guava:22.0-android'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.google.android.gms:play-services-identity:16.0.0'
-    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:support-v4:28.0.0'
 
     testImplementation 'junit:junit:4.12'
 }
