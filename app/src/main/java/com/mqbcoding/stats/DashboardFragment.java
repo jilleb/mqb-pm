@@ -846,7 +846,8 @@ public class DashboardFragment extends CarFragment {
     }
 
 
-    long lastUpdate = -1;
+    private final static int UPDATE_AFTER = 200; //ms
+    private long lastUpdate = -1;
     private void postUpdate() {
 
         /*
@@ -860,7 +861,7 @@ public class DashboardFragment extends CarFragment {
         */
 
 
-        if (lastUpdate<0 || (System.currentTimeMillis()-lastUpdate)>100) {
+        if (lastUpdate<0 || (System.currentTimeMillis()-lastUpdate) > UPDATE_AFTER) {
             lastUpdate = System.currentTimeMillis();
             mHandler.post(new Runnable() {
                 public void run() {
@@ -1794,6 +1795,8 @@ public class DashboardFragment extends CarFragment {
 
         // Display location in left side of Title  bar
         String leftTitle = "" ;
+
+        //TODO: if no data -> get Data from Google Maps notification if available
 
         String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
         String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
