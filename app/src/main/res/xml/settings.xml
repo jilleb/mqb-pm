@@ -214,7 +214,7 @@
         <EditTextPreference
             android:defaultValue="4"
             android:dependency="engineSpeedSoundActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:dialogTitle="..."
             android:inputType="number"
             android:key="engineSpeedSoundUpToGear"
             android:title="Play sound up to gear x" />
@@ -222,21 +222,21 @@
         <EditTextPreference
             android:defaultValue="5500"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:dialogTitle="..."
             android:inputType="number"
             android:key="engineSpeedESInform"
             android:title="RPM inform" />
         <EditTextPreference
             android:defaultValue="5900"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:dialogTitle="..."
             android:inputType="number"
             android:key="engineSpeedESHint"
             android:title="RPM hint" />
         <EditTextPreference
             android:defaultValue="6300"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:dialogTitle="..."
             android:inputType="number"
             android:key="engineSpeedESWarn"
             android:title="RPM warn" />

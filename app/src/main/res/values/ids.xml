@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- To override corrupted ids from aauto-sdk; required für API Version >= 28-->
+    <item type="id" name="icon"/>
+    <item type="id" name="title"/>
+    <item type="id" name="text"/>
+    <item type="id" name="right_icon"/>
+    <item type="id" name="icon_container"/>
+    <item type="id" name="text_container"/>
+    <item type="id" name="container"/>
+    <item type="id" name="paged_scroll_view"/>
+    <item type="id" name="max_width_layout"/>
+    <item type="id" name="recycler_view"/>
+    <item type="id" name="page_up"/>
+    <item type="id" name="filler"/>
+    <item type="id" name="scrollbar_thumb"/>
+    <item type="id" name="page_down"/>
+</resources>

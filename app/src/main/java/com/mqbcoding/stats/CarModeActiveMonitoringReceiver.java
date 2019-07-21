@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.SystemClock;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.util.Log;
 @RequiresApi(26)
 public class CarModeActiveMonitoringReceiver extends BroadcastReceiver {

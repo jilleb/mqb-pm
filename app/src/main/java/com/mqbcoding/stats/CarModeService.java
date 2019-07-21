@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Configuration;
-import android.support.annotation.CallSuper;
+import androidx.annotation.CallSuper;
 
 public abstract class CarModeService extends Service {
 

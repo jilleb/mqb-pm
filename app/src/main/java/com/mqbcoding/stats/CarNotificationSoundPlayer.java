@@ -6,7 +6,7 @@ import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Handler;
-import android.support.annotation.RawRes;
+import androidx.annotation.RawRes;
 import android.support.car.Car;
 import android.support.car.CarConnectionCallback;
 import android.support.car.media.CarAudioManager;
