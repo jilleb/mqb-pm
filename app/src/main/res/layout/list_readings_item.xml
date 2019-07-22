@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textSize="32dp"
+        android:text="Name" />
+
+
+    <TextView
+        android:id="@+id/tvValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_toLeftOf="@id/tvUnit"
+        android:layout_below="@id/tvName"
+        android:gravity="end"
+        android:textSize="64dp"
+        android:text="0.00" />
+    <TextView
+        android:id="@+id/tvUnit"
+        android:layout_width="192dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:layout_below="@id/tvName"
+        android:textSize="64dp"
+        android:text="KM/h" />
+</RelativeLayout>
