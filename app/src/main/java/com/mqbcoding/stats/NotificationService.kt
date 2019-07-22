@@ -26,6 +26,8 @@ class NotificationService : NotificationListenerService() {
 
     override fun onNotificationPosted(sbn: StatusBarNotification) {
         try {
+            //TODO: If CarApp visible
+
             if (sbn.packageName == "com.google.android.apps.maps" && sbn.notification?.group == "navigation_status_notification_group") {
 
                 val pack = sbn.packageName
