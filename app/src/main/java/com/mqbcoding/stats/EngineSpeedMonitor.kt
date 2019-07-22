@@ -5,7 +5,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Handler
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import androidx.core.app.NotificationCompat
 import android.util.Log
 
@@ -49,7 +49,7 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
     private fun readPreferences(preferences: SharedPreferences) {
         mIsEnabled = preferences.getBoolean(PREF_ENABLED, false)
         mIsSoundEnabled = preferences.getBoolean(PREF_SOUND_ENABLED, true)
-        mSoundUpToGear = preferences.getInt(PREF_SOUND_UP_TO_GEAR, 4)
+        mSoundUpToGear = preferences.getString(PREF_SOUND_UP_TO_GEAR, "")?.toIntOrNull() ?: 4
 
         mESInform = preferences.getString(PREF_ES_INFORM, "")?.toFloatOrNull() ?: 5500f
         mESHint = preferences.getString(PREF_ES_HINT, "")?.toFloatOrNull() ?: 5900f

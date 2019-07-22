@@ -43,14 +43,21 @@ public abstract class CarModeService extends Service {
             stopSelf();
         }
 
-       if (!mForegroundStarted) {
-            Notification notification = buildNotification();
-            if (notification != null) {
-                // This is required on Oreo so that the service is not destroyed when the app is
-                // in background.
-                startForeground(getNotificationId(), notification);
+        if (!mForegroundStarted) {
+            try {
+                Notification notification = buildNotification();
+                if (notification != null) {
+                    // This is required on Oreo so that the service is not destroyed when the app is
+                    // in background.
+
+                    startForeground(getNotificationId(), notification);
+
+                }
+                mForegroundStarted = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                mForegroundStarted = false;
             }
-            mForegroundStarted = true;
         }
 
         return START_STICKY;

@@ -2,9 +2,11 @@ package com.mqbcoding.stats;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
@@ -20,6 +22,8 @@ import android.preference.PreferenceManager;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.cardview.widget.CardView;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,7 +121,7 @@ public class DashboardFragment extends CarFragment {
         @Override
         public void onClick(View v) {
 
-            Float speedLeft = (Float) mClockLeft.getSpeed();
+            Float speedLeft = mClockLeft.getSpeed();
             float speedCenter = mClockCenter.getSpeed();
             float speedRight = mClockRight.getSpeed();
 
@@ -716,6 +720,28 @@ public class DashboardFragment extends CarFragment {
         return rootView;
     }
 
+    private String currentLocationFromGoogleMapsNotification = null;
+
+    private BroadcastReceiver onNoticeGoogleNavigationUpdate = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String title = intent.getStringExtra("title");
+            String text = intent.getStringExtra("text");
+
+            currentLocationFromGoogleMapsNotification = title;
+
+            updateTitle();
+        }
+    };
+    private BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            currentLocationFromGoogleMapsNotification=null;
+
+            updateTitle();
+        }
+    };
+
     @Override
     public void onStart() {
         super.onStart();
@@ -741,6 +767,11 @@ public class DashboardFragment extends CarFragment {
         } catch (Exception e) {
             Log.e(TAG, "Error: " + e.getMessage());
         }
+
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(onNoticeGoogleNavigationUpdate, new IntentFilter("GoogleNavigationUpdate"));
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(onNoticeGoogleNavigationClosed, new IntentFilter("GoogleNavigationClosed"));
     }
 
     @Override
@@ -755,8 +786,16 @@ public class DashboardFragment extends CarFragment {
             } catch (Exception E) {
                 throw E;
             }
+
+        LocalBroadcastManager.getInstance(getContext())
+                .unregisterReceiver(onNoticeGoogleNavigationUpdate);
+        LocalBroadcastManager.getInstance(getContext())
+                .unregisterReceiver(onNoticeGoogleNavigationClosed);
+
         super.onPause();
     }
+
+
 
     @Override
     public void onDestroyView() {
@@ -1390,10 +1429,10 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_brakepedalposition", "", clock, false, "%", 0, 100, "integer");
                 break;
             case "exlap-currentTorque":
-                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_nm), 0, 500, "float");
+                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_nm), 0, 500, "integer");
                 break;
             case "exlap-currentOutputPower":
-                setupClock(icon, "ic_none", "", clock, false, powerUnits?getString(R.string.unit_kw):getString(R.string.unit_hp), 0, 500, "float");
+                setupClock(icon, "ic_none", "", clock, false, powerUnits?getString(R.string.unit_kw):getString(R.string.unit_hp), 0, 500, "integer");
                 break;
             case "exlap-currentConsumptionPrimary":
             case "exlap-cycleConsumptionPrimary":
@@ -1585,9 +1624,11 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-EcoHMI_Score.AvgTrip":
                     case "exlap-brakePressure":
                     case "exlap-currentTorque":
+                        // all data that can be put on the clock without further modification:
+                        break;
                     case "exlap-currentOutputPower":
                         clockValue=clockValue*powerFactor;
-                        // all data that can be put on the clock without further modification:
+
                         break;
                     //rpm data, needs to be divided by 1000 before displayed on the clock
                     case "exlap-engineSpeed":
@@ -1661,6 +1702,7 @@ public class DashboardFragment extends CarFragment {
                                     break;
                             }
                             clockValue = clockValue * speedFactor;
+
                         }
                         break;
                     // torque data elements:
@@ -1801,23 +1843,14 @@ public class DashboardFragment extends CarFragment {
         String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
         String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
 
-        if (location1 == null) {
-            if (location2 == null) {
-                leftTitle = "";
-            } else {
-                leftTitle = location2;
-            }
-
+        if (location1==null && location2==null) {
+            leftTitle = currentLocationFromGoogleMapsNotification; // ="";
+        } else if (location1==null || location1.equals("")) {
+            leftTitle = location2;
+        } else if (location2==null || location2.equals("")) {
+            leftTitle = location1;
         } else {
-            if (location2 == null) {
-                leftTitle = location1;
-            } else {
-                if (Objects.equals(location1, "")){
-                    leftTitle = location2;
-                } else {
-                    leftTitle = location1 + ", " + location2;
-                }
-            }
+            leftTitle = location1 + ", " + location2;
         }
 
         if (!Objects.equals(currentLeftTitleValue, leftTitle)) {

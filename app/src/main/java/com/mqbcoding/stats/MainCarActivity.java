@@ -77,8 +77,8 @@ public class MainCarActivity extends CarActivity {
 
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String selectedTheme        = sharedPreferences.getString("selectedTheme", "VW GTI");
-        String selectedBackground   = sharedPreferences.getString("selectedBackground", "Black");
+        String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
+        String selectedBackground = sharedPreferences.getString("selectedBackground", "Black");
 
         // set default theme:
         setTheme(R.style.AppTheme_VolkswagenMIB2);
@@ -146,7 +146,7 @@ public class MainCarActivity extends CarActivity {
                 break;
         }
         // get user setting for mic on/of
-        micOn           = sharedPreferences.getBoolean("micActive", true);
+        micOn = sharedPreferences.getBoolean("micActive", true);
 
         setContentView(R.layout.activity_car_main);
 
@@ -160,30 +160,30 @@ public class MainCarActivity extends CarActivity {
             container.setBackground(wallpaperImage);
         }
 
-    CarUiController carUiController = getCarUiController();
+        CarUiController carUiController = getCarUiController();
         carUiController.getStatusBarController().showTitle();
-    //force night mode
+        //force night mode
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
 
-    // Show or hide Android Auto icons in the header
-    //signal:
+        // Show or hide Android Auto icons in the header
+        //signal:
         carUiController.getStatusBarController().hideConnectivityLevel();
         carUiController.getStatusBarController().hideBatteryLevel();
         carUiController.getStatusBarController().hideClock();
         carUiController.getStatusBarController().hideMicButton();
         carUiController.getStatusBarController().hideAppHeader();
 
-    //microphone
+        //microphone
         if (micOn) {
-        carUiController.getStatusBarController().showMicButton();
-    }
+            carUiController.getStatusBarController().showMicButton();
+        }
 
-    FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
 
-    //set fragments:
-    CarFragment carfragment = new DashboardFragment();
-    StopwatchFragment stopwatchfragment = new StopwatchFragment();
-    CreditsFragment creditsfragment = new CreditsFragment();
+        //set fragments:
+        CarFragment carfragment = new DashboardFragment();
+        StopwatchFragment stopwatchfragment = new StopwatchFragment();
+        CreditsFragment creditsfragment = new CreditsFragment();
         fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, carfragment, FRAGMENT_CAR)
                 .detach(carfragment)
@@ -194,29 +194,29 @@ public class MainCarActivity extends CarActivity {
                 .commitNow();
 
 
-    String initialFragmentTag = FRAGMENT_CAR;
+        String initialFragmentTag = FRAGMENT_CAR;
         if (bundle != null && bundle.containsKey(CURRENT_FRAGMENT_KEY)) {
-        initialFragmentTag = bundle.getString(CURRENT_FRAGMENT_KEY);
-    }
-    switchToFragment(initialFragmentTag);
+            initialFragmentTag = bundle.getString(CURRENT_FRAGMENT_KEY);
+        }
+        switchToFragment(initialFragmentTag);
 
-    ListMenuAdapter mainMenu = new ListMenuAdapter();
+        ListMenuAdapter mainMenu = new ListMenuAdapter();
         mainMenu.setCallbacks(mMenuCallbacks);
 
-    //set menu
+        //set menu
         mainMenu.addMenuItem(MENU_HOME, new MenuItem.Builder()
-            .setTitle(getString(R.string.activity_main_title))
-            .setType(MenuItem.Type.ITEM)
+                .setTitle(getString(R.string.activity_main_title))
+                .setType(MenuItem.Type.ITEM)
                 .build());
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
-            .setTitle(getString(R.string.activity_stopwatch_title))
-            .setType(MenuItem.Type.ITEM)
+                .setTitle(getString(R.string.activity_stopwatch_title))
+                .setType(MenuItem.Type.ITEM)
                 .build());
 
         mainMenu.addMenuItem(MENU_CREDITS, new MenuItem.Builder()
-            .setTitle(getString(R.string.activity_credits_title))
-            .setType(MenuItem.Type.ITEM)
+                .setTitle(getString(R.string.activity_credits_title))
+                .setType(MenuItem.Type.ITEM)
                 .build());
 
 
@@ -228,17 +228,17 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());*/
 
-    //   mainMenu.addSubmenu(MENU_OTHER, otherMenu);
+        //   mainMenu.addSubmenu(MENU_OTHER, otherMenu);
 
-    MenuController menuController = getCarUiController().getMenuController();
+        MenuController menuController = getCarUiController().getMenuController();
         menuController.setRootMenuAdapter(mainMenu);
         menuController.showMenuButton();
-    StatusBarController statusBarController = getCarUiController().getStatusBarController();
+        StatusBarController statusBarController = getCarUiController().getStatusBarController();
         carfragment.setupStatusBar(statusBarController);
-    getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
                 false);
 
-}
+    }
 
     @Override
     public void onSaveInstanceState(Bundle bundle) {
@@ -265,15 +265,16 @@ public class MainCarActivity extends CarActivity {
         if (currentFragment != null) {
             transaction.detach(currentFragment);
         }
-        transaction.attach(newFragment);
-        transaction.commit();
-        mCurrentFragmentTag = tag;
+        if (newFragment!=null) {
+            transaction.attach(newFragment);
+            transaction.commit();
+            mCurrentFragmentTag = tag;
+        }
     }
 
     private void updateStatusBarTitle() {
         CarFragment fragment = (CarFragment) getSupportFragmentManager().findFragmentByTag(mCurrentFragmentTag);
-        getCarUiController().getStatusBarController().setTitle(fragment.getTitle());
+        if(fragment!=null)
+            getCarUiController().getStatusBarController().setTitle(fragment.getTitle());
     }
-
-
 }
