@@ -114,7 +114,7 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
             }
 
             if (newState > mState && newState != State.ENGINE_SPEED_OK)  {
-                notifyES(newState, true,mIsSoundEnabled && mSoundUpToGear<=currentGear)
+                notifyES(newState, true,mIsSoundEnabled && currentGear > 0 && currentGear<=mSoundUpToGear)
             } else if (newState < mState) {
                 notifyES(newState, false)
             }
