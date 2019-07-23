@@ -89,7 +89,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
     private void showNotificationSerrviceConfirmDialog() {
         new AlertDialog.Builder(this)
-                .setMessage("Please enable NotificationMonitor access")
+                .setMessage("Please enable notification access in settings")
                 .setTitle("Notification Access")
                 .setIconAttribute(android.R.attr.alertDialogIcon)
                 .setCancelable(true)

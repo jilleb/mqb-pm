@@ -19,7 +19,7 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
     //private val mNotificationManager: NotificationManager = mContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
     private var mIsEnabled = false
     private var mIsSoundEnabled= false
-    private var mSoundUpToGear = 5
+    private var mSoundUpToGear = 4
     private var mESInform: Float = 5500f
     private var mESHint: Float = 5900f
     private var mESWarn: Float = 6300f
