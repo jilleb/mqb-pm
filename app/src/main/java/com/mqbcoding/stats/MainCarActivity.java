@@ -21,13 +21,15 @@ public class MainCarActivity extends CarActivity {
     static final String MENU_HOME = "home";
 
     //menu stuff//
+    static final String MENU_DASHBOARD2 = "dashboard2";
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
     private static final String TAG = "MainCarActivity";
 
     // static final String MENU_DEBUG_LOG = "log";
     // static final String MENU_DEBUG_TEST_NOTIFICATION = "test_notification";
-    private static final String FRAGMENT_CAR = "dashboard";
+    private static final String FRAGMENT_CAR_1 = "dashboard1";
+    private static final String FRAGMENT_CAR_2 = "dashboard2";
     private static final String FRAGMENT_CREDITS = "credits";
     private static final String FRAGMENT_STOPWATCH = "stopwatch";
     private static final String CURRENT_FRAGMENT_KEY = "app_current_fragment";
@@ -41,7 +43,10 @@ public class MainCarActivity extends CarActivity {
         public void onMenuItemClicked(String name) {
             switch (name) {
                 case MENU_HOME:
-                    switchToFragment(FRAGMENT_CAR);
+                    switchToFragment(FRAGMENT_CAR_1);
+                    break;
+                case MENU_DASHBOARD2:
+                    switchToFragment(FRAGMENT_CAR_2);
                     break;
                 case MENU_STOPWATCH:
                     switchToFragment(FRAGMENT_STOPWATCH);
@@ -79,6 +84,8 @@ public class MainCarActivity extends CarActivity {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
         String selectedBackground = sharedPreferences.getString("selectedBackground", "Black");
+
+        boolean d2Active = sharedPreferences.getBoolean("d2_active", false);
 
         // set default theme:
         setTheme(R.style.AppTheme_VolkswagenMIB2);
@@ -181,20 +188,31 @@ public class MainCarActivity extends CarActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         //set fragments:
-        CarFragment carfragment = new DashboardFragment();
+        CarFragment carfragment1 = new DashboardFragment(1);
+
+        CarFragment carfragment2 = null;
+        if (d2Active)
+            carfragment2 = new DashboardFragment(2);
+
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
-        fragmentManager.beginTransaction()
-                .add(R.id.fragment_container, carfragment, FRAGMENT_CAR)
-                .detach(carfragment)
-                .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
+        FragmentTransaction transaction = fragmentManager.beginTransaction()
+                .add(R.id.fragment_container, carfragment1, FRAGMENT_CAR_1)
+                .detach(carfragment1);
+
+        if (d2Active)
+            transaction
+                    .add(R.id.fragment_container, carfragment2, FRAGMENT_CAR_2)
+                    .detach(carfragment2);
+
+        transaction.add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
                 .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
                 .detach(creditsfragment)
                 .commitNow();
 
 
-        String initialFragmentTag = FRAGMENT_CAR;
+        String initialFragmentTag = FRAGMENT_CAR_1;
         if (bundle != null && bundle.containsKey(CURRENT_FRAGMENT_KEY)) {
             initialFragmentTag = bundle.getString(CURRENT_FRAGMENT_KEY);
         }
@@ -206,6 +224,12 @@ public class MainCarActivity extends CarActivity {
         //set menu
         mainMenu.addMenuItem(MENU_HOME, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_main_title))
+                .setType(MenuItem.Type.ITEM)
+                .build());
+
+        if (d2Active)
+            mainMenu.addMenuItem(MENU_DASHBOARD2, new MenuItem.Builder()
+                .setTitle(getString(R.string.activity_main_title)+" 2")
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
@@ -234,7 +258,11 @@ public class MainCarActivity extends CarActivity {
         menuController.setRootMenuAdapter(mainMenu);
         menuController.showMenuButton();
         StatusBarController statusBarController = getCarUiController().getStatusBarController();
-        carfragment.setupStatusBar(statusBarController);
+
+        carfragment1.setupStatusBar(statusBarController);
+        if (d2Active)
+            carfragment2.setupStatusBar(statusBarController);
+
         getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
                 false);
 

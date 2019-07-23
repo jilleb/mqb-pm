@@ -65,6 +65,7 @@
     <string name="pref_view4">Element 4</string>
     <string name="pref_pressureunit">Druckeinheiten</string>
     <string name="pref_dataelementsettings">Datenelementeinstellungen</string>
+    <string name="pref_dataelementsettings2">Datenelementeinstellungen (2. Dashboard)</string>
     <string name="pref_highvis_off">Zeigen Sie einen Zeiger auf die Instrumente</string>
     <string name="pref_highvis_on">Zeige einen kontrastreichen Strahl anstelle eines Zeigers</string>
     <string name="pref_highlow_off">Keinen Min/Max-Wert </string>

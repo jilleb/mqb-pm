@@ -104,9 +104,17 @@ public class DashboardFragment extends CarFragment {
     private TextView mGraphValueLeft, mGraphValueCenter, mGraphValueRight;
     private View rootView;
 
+    int dashboardNum=1;
+
     public DashboardFragment() {
         // Required empty public constructor
 
+    }
+    public DashboardFragment(int dashboardNum) {
+        this.dashboardNum=dashboardNum;
+        if (this.dashboardNum<=1) {
+            this.dashboardNum=1;
+        }
     }
 
     @Override
@@ -121,7 +129,7 @@ public class DashboardFragment extends CarFragment {
         @Override
         public void onClick(View v) {
 
-            Float speedLeft = mClockLeft.getSpeed();
+            float speedLeft = mClockLeft.getSpeed();
             float speedCenter = mClockCenter.getSpeed();
             float speedRight = mClockRight.getSpeed();
 
@@ -462,20 +470,17 @@ public class DashboardFragment extends CarFragment {
         mGraphRight.setOnClickListener(toggleView);
         mConstraintClockRight.setOnClickListener(toggleView);
 
+        String dashboardId = "d"+dashboardNum+"_";
         //determine what data the user wants to have on the 4 data views
-        mElement1Query = sharedPreferences.getString("selectedView1", "none");
-        mElement2Query = sharedPreferences.getString("selectedView2", "none");
-        mElement3Query = sharedPreferences.getString("selectedView3", "none");
-        mElement4Query = sharedPreferences.getString("selectedView4", "none");
+        mElement1Query = sharedPreferences.getString(dashboardId+"selectedView1", "none");
+        mElement2Query = sharedPreferences.getString(dashboardId+"selectedView2", "none");
+        mElement3Query = sharedPreferences.getString(dashboardId+"selectedView3", "none");
+        mElement4Query = sharedPreferences.getString(dashboardId+"selectedView4", "none");
 
         //determine what data the user wants to have on the 3 clocks, but set defaults first
-        mClockLQuery = "exlap-batteryVoltage";
-        mClockCQuery = "exlap-oilTemperature";
-        mClockRQuery = "exlap-engineSpeed";
-
-        mClockLQuery = sharedPreferences.getString("selectedClockLeft", "exlap-batteryVoltage");
-        mClockCQuery = sharedPreferences.getString("selectedClockCenter", "exlap-oilTemperature");
-        mClockRQuery = sharedPreferences.getString("selectedClockRight", "exlap-engineSpeed");
+        mClockLQuery = sharedPreferences.getString(dashboardId+"selectedClockLeft", "exlap-batteryVoltage");
+        mClockCQuery = sharedPreferences.getString(dashboardId+"selectedClockCenter", "exlap-oilTemperature");
+        mClockRQuery = sharedPreferences.getString(dashboardId+"selectedClockRight", "exlap-engineSpeed");
 
         //debug logging of each of the chosen elements
         Log.d(TAG, "element 1 selected:" + mElement1Query);
