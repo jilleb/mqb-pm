@@ -735,7 +735,7 @@ public class DashboardFragment extends CarFragment {
 
             currentLocationFromGoogleMapsNotification = title;
 
-            updateTitle();
+            //updateTitle();
         }
     };
     private BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
@@ -743,7 +743,7 @@ public class DashboardFragment extends CarFragment {
         public void onReceive(Context context, Intent intent) {
             currentLocationFromGoogleMapsNotification=null;
 
-            updateTitle();
+            //updateTitle();
         }
     };
 
