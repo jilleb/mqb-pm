@@ -54,8 +54,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.stream.Collectors;
 
 public class DashboardFragment extends CarFragment {
     private final String TAG = "DashboardFragment";
@@ -1553,21 +1555,14 @@ public class DashboardFragment extends CarFragment {
             return;
 
         } else if (stagingDone) {
-            Float clockValue = (Float) mLastMeasurements.get(query);
-            Float oldValue = (Float) clock.getSpeed();
-
-            // don't update when there's nothing to update
-            if (Objects.equals(clockValue, oldValue)) {
-                return;
-            }
 
             float randomClockVal = randFloat(0, 360);
             speedFactor = 1f;
             pressureFactor = 1f;
             long queryPid = 0;
 
-            clockValue = 0f;
-            oldValue = 0f;
+            Float clockValue = 0f;
+            Float oldValue = clock.getSpeed();//0f;
 
             String queryTrim = "";
             String queryLong = query;
@@ -1632,7 +1627,7 @@ public class DashboardFragment extends CarFragment {
                         // all data that can be put on the clock without further modification:
                         break;
                     case "exlap-currentOutputPower":
-                        clockValue=clockValue*powerFactor;
+                        clockValue = clockValue * powerFactor;
 
                         break;
                     //rpm data, needs to be divided by 1000 before displayed on the clock
@@ -1775,47 +1770,60 @@ public class DashboardFragment extends CarFragment {
                 }
 
                 // update graph, based on the value of the clock
+                // But it will set already after this scope!!?!
+                /*
                 series.appendData(new DataPoint(graphLastXValue, clockValue), true, 400);
                 String tempString = (String.format(Locale.US, getText(R.string.format_decimals).toString(), clockValue));
                 graphValue.setText(tempString);
+                */
+                graph.getViewport().setMaxY(clock.getMaxSpeed());
+                graph.getViewport().setMinY(clock.getMinSpeed());
 
 
-                // don't update when there's nothing to update
-                if (clockValue.equals(oldValue)) {
-                    return;
-                }
-                // update clock with latest clockValue
-                    clock.speedTo(clockValue);
-                    visray.speedTo(clockValue);
 
-                    graph.getViewport().setMaxY(clock.getMaxSpeed());
-                    graph.getViewport().setMinY(clock.getMinSpeed());
 
 
             }
 
             // get the speed from the clock and have the high-visibility rays move to this speed as well
-            float currentClockValue = clock.getSpeed();
+
+            boolean noNewData = clockValue==null;
+            if (noNewData)
+                clockValue=oldValue;
 
 
-            series.appendData(new DataPoint(graphLastXValue, currentClockValue), true, 400);
-            String tempString = (String.format(Locale.US, getText(R.string.format_decimals).toString(), currentClockValue));
+            //TODO: Updates with a non fixed period could lead to strange graphs
+            series.appendData(new DataPoint(graphLastXValue, clockValue), true, 400);
+            String tempString = (String.format(Locale.US, getText(R.string.format_decimals).toString(), clockValue));
             graphValue.setText(tempString);
+
+
+
+            // don't update when there's nothing to update
+            // check if old value and new value (rounded to 1 decimal placed) are equal
+            if (noNewData || Math.round(clockValue*10) == Math.round(oldValue*10)) {
+                return;
+            }
+
+            // update clock with latest clockValue
+            clock.speedTo(clockValue);
+            visray.speedTo(clockValue);
+
 
             // update the max clocks and text
             if (stagingDone) {
                 float maxValue = clockmax.getSpeed();
                 float minValue = clockmin.getSpeed();
 
-                if (currentClockValue > maxValue) {
-                    clockmax.setSpeedAt(currentClockValue);
-                    textmax.setText(String.format(Locale.US, getText(R.string.format_decimals).toString(), currentClockValue));
+                if (clockValue > maxValue) {
+                    clockmax.setSpeedAt(clockValue);
+                    textmax.setText(String.format(Locale.US, getText(R.string.format_decimals).toString(), clockValue));
                 }
 
                 // update the min clocks and text
-                if (currentClockValue < minValue) {
-                    clockmin.setSpeedAt(currentClockValue);
-                    textmin.setText(String.format(Locale.US, getText(R.string.format_decimals).toString(), currentClockValue));
+                if (clockValue < minValue) {
+                    clockmin.setSpeedAt(clockValue);
+                    textmin.setText(String.format(Locale.US, getText(R.string.format_decimals).toString(), clockValue));
                 }
             }
 
@@ -2261,5 +2269,7 @@ public class DashboardFragment extends CarFragment {
                     }
                 });
     }
+
+
 
 }

@@ -291,41 +291,44 @@
             android:summary="..."
             android:title="Enable Engine Speed Monitoring" />
 
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:dependency="engineSpeedMonitoringActive"
-            android:key="engineSpeedSoundActive"
-            android:summary="..."
-            android:title="Play Sound" />
-        <EditTextPreference
-            android:defaultValue="4"
-            android:dependency="engineSpeedSoundActive"
-            android:dialogTitle="..."
-            android:inputType="number"
-            android:key="engineSpeedSoundUpToGear"
-            android:title="Play sound up to gear x" />
+
 
         <EditTextPreference
             android:defaultValue="5500"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="..."
+            android:dialogTitle="RPM inform"
             android:inputType="number"
             android:key="engineSpeedESInform"
-            android:title="RPM inform" />
+            android:title="RPM inform"/>
         <EditTextPreference
             android:defaultValue="5900"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="..."
+            android:dialogTitle="RPM hint"
             android:inputType="number"
             android:key="engineSpeedESHint"
             android:title="RPM hint" />
         <EditTextPreference
             android:defaultValue="6300"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="..."
+            android:dialogTitle="RPM warn"
             android:inputType="number"
             android:key="engineSpeedESWarn"
             android:title="RPM warn" />
+
+        <Seperator/>
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="engineSpeedMonitoringActive"
+            android:key="engineSpeedSoundActive"
+            android:title="Play Sound" />
+        <EditTextPreference
+            android:defaultValue="4"
+            android:dependency="engineSpeedSoundActive"
+            android:dialogTitle="Play sound up to gear x"
+            android:inputType="number"
+            android:key="engineSpeedSoundUpToGear"
+            android:title="Play sound up to gear x" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_providers_category_title">

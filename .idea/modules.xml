@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/VAG-Dashboard.iml" filepath="$PROJECT_DIR$/VAG-Dashboard.iml" />
+      <module fileurl="file://$PROJECT_DIR$/lib/aauto-sdk/aauto-sdk.iml" filepath="$PROJECT_DIR$/lib/aauto-sdk/aauto-sdk.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

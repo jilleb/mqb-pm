@@ -197,6 +197,11 @@ public class SettingsFragment extends PreferenceFragment {
         bindPreferenceSummaryToValue(findPreference("bigqueryTable"));
         bindPreferenceSummaryToValue(findPreference("oilTempThreshold"));
 
+        bindPreferenceSummaryToValue(findPreference("engineSpeedSoundUpToGear"));
+        bindPreferenceSummaryToValue(findPreference("engineSpeedESInform"));
+        bindPreferenceSummaryToValue(findPreference("engineSpeedESHint"));
+        bindPreferenceSummaryToValue(findPreference("engineSpeedESWarn"));
+
         Preference statsLoggerPref = findPreference(CarStatsLogger.PREF_ENABLED);
         try {
             statsLoggerPref.setSummary(
