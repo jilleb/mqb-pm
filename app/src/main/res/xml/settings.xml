@@ -150,6 +150,7 @@
             android:defaultValue="false"
             android:key="micActive"
             android:summary="@string/pref_showmic_summary"
+            android:summaryOff="@string/pref_showmic_summary_off"
             android:title="@string/pref_showmic_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_unitprefs">

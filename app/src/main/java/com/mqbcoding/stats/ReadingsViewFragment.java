@@ -102,18 +102,17 @@ public class ReadingsViewFragment extends CarFragment {
             TextView tvUnit = convertView.findViewById(R.id.tvUnit);
             tvName.setText(translated);
             tvValue.setText(value);
-            boolean unitVisible = false;
+            String unit = "";
             if (mSchema != null) {
                 FieldSchema field = mSchema.get(key);
                 if (field !=  null) {
-                    String unit = field.getUnit();
-                    if (unit != null && !unit.isEmpty()) {
-                        unitVisible = true;
-                        tvUnit.setText(field.getUnit());
+                    String receivedUnit = field.getUnit();
+                    if (receivedUnit != null && !receivedUnit.isEmpty()) {
+                        unit = receivedUnit;
                     }
                 }
             }
-            tvUnit.setVisibility(unitVisible ? View.VISIBLE : View.GONE);
+            tvUnit.setText(unit);
             return convertView;
         }
 

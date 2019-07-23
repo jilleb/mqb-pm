@@ -36,7 +36,8 @@ public class ExlapItemDetailsFragment extends CarFragment {
     private Timer updateTimer;
     private Handler mHandler;
     private HashMap<String, FieldSchema> mSchema;
-    private TextView tvCurrentValue, tvName, tvMin, tvMax, tvRes, tvDescr;
+    private TextView tvCurrentValue, tvName, tvMin, tvMax, tvRes, tvDescr,
+            tvMinUnit, tvMaxUnit, tvResUnit, tvCurrentUnit;
     private Runnable updateTimerRunnable;
     private String currentValue = "";
     private String selectedKey;
@@ -62,6 +63,10 @@ public class ExlapItemDetailsFragment extends CarFragment {
         tvRes = rootView.findViewById(R.id.fragment_item_details_tv_resVal_value);
         tvDescr = rootView.findViewById(R.id.fragment_item_details_tv_descr_value);
         tvCurrentValue = rootView.findViewById(R.id.fragment_item_details_tv_currentValue_value);
+        tvMinUnit = rootView.findViewById(R.id.fragment_item_details_tv_minVal_unit);
+        tvMaxUnit = rootView.findViewById(R.id.fragment_item_details_tv_maxVal_unit);
+        tvResUnit = rootView.findViewById(R.id.fragment_item_details_tv_resVal_unit);
+        tvCurrentUnit = rootView.findViewById(R.id.fragment_item_details_tv_currentValue_unit);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,6 +78,7 @@ public class ExlapItemDetailsFragment extends CarFragment {
         selectedKey = args.getString(ARG_SELECTED_KEY);
         mSchema = (HashMap<String, FieldSchema>) args.getSerializable(ARG_SCHEMA);
         fillTextViews();
+        tvName.setSelected(true);
 
         return rootView;
     }
@@ -86,6 +92,10 @@ public class ExlapItemDetailsFragment extends CarFragment {
             tvMax.setText(String.valueOf(field.getMax()));
             tvRes.setText(String.valueOf(field.getResolution()));
             tvDescr.setText(String.valueOf(field.getDescription()));
+            tvMinUnit.setText(field.getUnit());
+            tvMaxUnit.setText(field.getUnit());
+            tvResUnit.setText(field.getUnit());
+            tvCurrentUnit.setText(field.getUnit());
         }
     }
 
@@ -130,7 +140,7 @@ public class ExlapItemDetailsFragment extends CarFragment {
         @Override
         public void onNewMeasurements(String provider, Date timestamp, final Map<String, Object> values) {
             if (values.containsKey(selectedKey)) {
-                currentValue = (String)values.get(selectedKey);
+                currentValue = String.valueOf(values.get(selectedKey));
             }
         }
 

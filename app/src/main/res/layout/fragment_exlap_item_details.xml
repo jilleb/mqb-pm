@@ -19,12 +19,19 @@
 
     <TextView
         android:id="@+id/fragment_item_details_tv_itemName_value"
-        android:layout_width="329dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="488dp"
+        android:layout_marginEnd="32dp"
         android:layout_marginTop="32dp"
         android:textAppearance="@style/CarBody2"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:singleLine="true"
+        android:ellipsize="marquee"
+        android:scrollHorizontally="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:marqueeRepeatLimit="marquee_forever"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_item_details_tv_itemName"
         app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_itemName"
         tools:textColor="@android:color/white" />
 
@@ -42,13 +49,23 @@
 
     <TextView
         android:id="@+id/fragment_item_details_tv_minVal_value"
-        android:layout_width="329dp"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginStart="160dp"
         android:textAppearance="@style/CarBody2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/fragment_item_details_tv_itemName"
         app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_minVal_name"
+        tools:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/fragment_item_details_tv_minVal_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:textAppearance="@style/CarBody2"
+        app:layout_constraintEnd_toEndOf="@id/fragment_item_details_tv_minVal_value"
+        app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_minVal_value"
         tools:textColor="@android:color/white" />
 
     <TextView
@@ -65,13 +82,22 @@
 
     <TextView
         android:id="@+id/fragment_item_details_tv_maxVal_value"
-        android:layout_width="329dp"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:textAppearance="@style/CarBody2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_item_details_tv_minVal_value"
         app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_maxVal"
+        tools:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/fragment_item_details_tv_maxVal_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:textAppearance="@style/CarBody2"
+        app:layout_constraintEnd_toEndOf="@id/fragment_item_details_tv_maxVal_value"
+        app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_maxVal_value"
         tools:textColor="@android:color/white" />
 
     <TextView
@@ -88,13 +114,22 @@
 
     <TextView
         android:id="@+id/fragment_item_details_tv_resVal_value"
-        android:layout_width="329dp"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:textAppearance="@style/CarBody2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_item_details_tv_minVal_value"
         app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_resVal"
+        tools:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/fragment_item_details_tv_resVal_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:textAppearance="@style/CarBody2"
+        app:layout_constraintEnd_toEndOf="@id/fragment_item_details_tv_resVal_value"
+        app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_resVal_value"
         tools:textColor="@android:color/white" />
 
     <TextView
@@ -111,14 +146,23 @@
 
     <TextView
         android:id="@+id/fragment_item_details_tv_currentValue_value"
-        android:layout_width="329dp"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:textAppearance="@style/CarBody2"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/fragment_item_details_tv_minVal_value"
         app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_currentValue"
         android:textStyle="bold"
+        tools:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/fragment_item_details_tv_currentValue_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:textAppearance="@style/CarBody2"
+        app:layout_constraintEnd_toEndOf="@id/fragment_item_details_tv_currentValue_value"
+        app:layout_constraintBaseline_toBaselineOf="@id/fragment_item_details_tv_currentValue_value"
         tools:textColor="@android:color/white" />
 
     <TextView
@@ -135,10 +179,11 @@
 
     <TextView
         android:id="@+id/fragment_item_details_tv_descr_value"
-        android:layout_width="329dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginTop="24dp"
         android:textAppearance="@style/CarBody2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/fragment_item_details_tv_descr"
@@ -147,7 +192,7 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:id="@+id/items_fragment_back_btn"
         android:text="@string/item_details_go_back"
         app:layout_constraintBottom_toBottomOf="parent"/>

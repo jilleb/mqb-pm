@@ -6,8 +6,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:textSize="32dp"
-        android:text="Name" />
+        android:textSize="32dp" />
 
 
     <TextView
@@ -15,19 +14,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="16dp"
-        android:layout_toLeftOf="@id/tvUnit"
         android:layout_below="@id/tvName"
+        android:layout_toLeftOf="@id/tvUnit"
         android:gravity="end"
-        android:textSize="64dp"
-        android:text="0.00" />
+        android:textSize="64dp" />
     <TextView
         android:id="@+id/tvUnit"
-        android:layout_width="192dp"
+        android:layout_width="248dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:gravity="center"
         android:layout_below="@id/tvName"
-        android:textSize="64dp"
-        android:text="KM/h" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignBaseline="@id/tvValue"
+        android:textSize="64dp"/>
 </RelativeLayout>
