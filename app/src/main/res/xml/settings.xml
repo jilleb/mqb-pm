@@ -150,6 +150,7 @@
             android:defaultValue="false"
             android:key="micActive"
             android:summary="@string/pref_showmic_summary"
+            android:summaryOff="@string/pref_showmic_summary_off"
             android:title="@string/pref_showmic_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_unitprefs">
@@ -168,6 +169,11 @@
             android:summaryOn="@string/unit_bar"
             android:title="@string/pref_pressureunit"
             android:visibility="invisible" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="omitEmptyEntries"
+            android:summary="@string/pref_omit_empty_readings_summary"
+            android:title="@string/pref_omit_empty_readings_title" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_notifications_category_title">
