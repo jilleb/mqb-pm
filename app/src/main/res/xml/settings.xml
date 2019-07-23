@@ -173,6 +173,7 @@
             android:defaultValue="true"
             android:key="omitEmptyEntries"
             android:summary="@string/pref_omit_empty_readings_summary"
+            android:summaryOff="@string/pref_omit_empty_readings_summary_off"
             android:title="@string/pref_omit_empty_readings_title" />
     </PreferenceCategory>
 
