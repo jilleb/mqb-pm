@@ -43,15 +43,15 @@
                 <category android:name="com.google.android.gms.car.category.CATEGORY_PROJECTION_OEM" />
             </intent-filter>
         </service>
+
         <service android:name=".CarStatsService" />
         <service
-            android:name="com.mqbcoding.stats.LogUploadService"
+            android:name=".LogUploadService"
             android:permission="android.permission.BIND_JOB_SERVICE" />
 
         <receiver
             android:name=".CarModeBroadcastReceiver"
             android:enabled="@bool/not_oreo">
-
             <intent-filter>
                 <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
                 <!-- This won't work in Oreo due to background execution limits -->
