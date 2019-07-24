@@ -315,8 +315,6 @@
             android:key="engineSpeedESWarn"
             android:title="RPM warn" />
 
-        <Seperator/>
-
         <CheckBoxPreference
             android:defaultValue="true"
             android:dependency="engineSpeedMonitoringActive"

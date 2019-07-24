@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.os.Build
 import androidx.preference.Preference
 import android.service.notification.NotificationListenerService
+import android.text.SpannableString
 import androidx.preference.PreferenceManager
 
 
@@ -33,7 +34,15 @@ class NotificationService : NotificationListenerService() {
                 val pack = sbn.packageName
                 val ticker = sbn.notification.tickerText?.toString()
                 val extras = sbn.notification.extras
-                val title = extras.getString("android.title")
+                var title =""
+                val tmpTitle = extras.get("android.title")
+                try {
+                    if (tmpTitle is SpannableString) {
+                        //title = tmpTitle.toString()
+                    } else if (tmpTitle is CharSequence || tmpTitle is String) {
+                        title = tmpTitle.toString()
+                    }
+                } catch (e:Exception){}
                 val text = extras.getCharSequence("android.text")!!.toString()
 
                 val msgrcv = Intent("GoogleNavigationUpdate")

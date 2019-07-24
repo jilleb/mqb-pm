@@ -3,6 +3,7 @@ package com.mqbcoding.stats
 import android.app.Notification
 import android.app.NotificationManager
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Handler
 import androidx.preference.PreferenceManager
@@ -60,6 +61,7 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
             mHandler.post(mDismissNotification)
             mState = State.ENGINE_SPEED_OK
         }
+
     }
 
     private fun notifyES(state:State,goesUp:Boolean, playSound:Boolean=false) {
@@ -86,13 +88,26 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
 
         //TODO: Broadcast: state, goesUp
 
+        val stateInt = when(state) {
+            State.ENGINE_SPEED_OK -> 0
+            State.ENGINE_SPEED_INFORM -> 1
+            State.ENGINE_SPEED_HINT -> 2
+            State.ENGINE_SPEED_WARN -> 3
+        }
+
+        val intent = Intent()
+        //intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES) //TODO: maybe needed?
+        intent.action = "dev.gaitzsch.vagdashboard"
+        intent.putExtra("engineSpeedState", stateInt)
+        mContext.sendBroadcast(intent)
+
         if (playSound) {
             val soundPlayer = CarNotificationSoundPlayer(mContext, R.raw.light)
             soundPlayer.play()
         }
     }
 
-    var currentGear = Int.MAX_VALUE
+    private var currentGear = -1
     override fun onNewMeasurements(provider: String, timestamp: Date, values: Map<String, Any>) {
         if (!mIsEnabled) {
             return
@@ -114,7 +129,9 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
             }
 
             if (newState > mState && newState != State.ENGINE_SPEED_OK)  {
-                notifyES(newState, true,mIsSoundEnabled && currentGear > 0 && currentGear<=mSoundUpToGear)
+                val gearToPlaySound = if (currentGear==-1) true else (currentGear in 1..mSoundUpToGear)
+
+                notifyES(newState, true,mIsSoundEnabled && gearToPlaySound)
             } else if (newState < mState) {
                 notifyES(newState, false)
             }
