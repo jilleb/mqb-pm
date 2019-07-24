@@ -173,6 +173,7 @@
             android:defaultValue="true"
             android:key="omitEmptyEntries"
             android:summary="@string/pref_omit_empty_readings_summary"
+            android:summaryOff="@string/pref_omit_empty_readings_summary_off"
             android:title="@string/pref_omit_empty_readings_title" />
     </PreferenceCategory>
 
@@ -182,7 +183,7 @@
             android:key="oilTempMonitoringActive"
             android:summary="@string/pref_oil_temp_monitoring_summary"
             android:title="@string/pref_oil_temp_monitoring_title" />
-        <EditTextPreference
+        <com.mqbcoding.stats.TemperaturePreference
             android:defaultValue="70"
             android:dependency="oilTempMonitoringActive"
             android:dialogTitle="@string/pref_oil_temp_threshold_title"

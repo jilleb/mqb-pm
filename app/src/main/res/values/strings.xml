@@ -131,6 +131,7 @@
     <string name="pref_oil_temp_monitoring_title">Monitor oil temperature</string>
     <string name="pref_oil_temp_threshold_title">Oil working temperature</string>
     <string name="pref_omit_empty_readings_summary">Omit empty values in Readings</string>
+    <string name="pref_omit_empty_readings_summary_off">Show empty values in Readings</string>
     <string name="pref_omit_empty_readings_title">Omit empty values</string>
     <string name="pref_pressureunit">Pressure unit</string>
     <string name="pref_providers">Telemetry providers</string>

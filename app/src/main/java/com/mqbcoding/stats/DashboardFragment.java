@@ -44,6 +44,7 @@ import org.prowl.torque.remote.ITorqueService;
 
 import java.math.BigInteger;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -100,6 +101,7 @@ public class DashboardFragment extends CarFragment {
     //value displayed on graphlayout
     private TextView mGraphValueLeft, mGraphValueCenter, mGraphValueRight;
     private View rootView;
+    private String androidClockFormat = "hh:mm a";
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -697,6 +699,9 @@ public class DashboardFragment extends CarFragment {
             mClockMinCenter.setVisibility(View.INVISIBLE);
             mClockMinRight.setVisibility(View.INVISIBLE);
         }
+
+        androidClockFormat = android.text.format.DateFormat.is24HourFormat(getContext())
+                ? "HH:mm" : "hh:mm a";
 
         //update!
         doUpdate();
@@ -1741,6 +1746,26 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
+    private String getTime() {
+        String clockFormat = "hh:mm a";
+
+        // If available, force car clock format
+        String carClockFormat = (String)mLastMeasurements.get("unitTimeFormat.clockFormat");
+        if (carClockFormat != null) {
+            switch (carClockFormat) {
+                case "format_24h":
+                    clockFormat = "HH:mm";
+                    break;
+                case "format_12h":
+                    clockFormat = "hh:mm a";
+                    break;
+            }
+        } else { // if not, set time format based on phone settings
+            clockFormat = androidClockFormat;
+        }
+        return new SimpleDateFormat(clockFormat, Locale.US).format(new Date());
+    }
+
     private void updateTitle() {
 
         String currentTitleValue = mTitleElement.getText().toString();
@@ -1749,11 +1774,7 @@ public class DashboardFragment extends CarFragment {
 
         // Display location in center of title bar:
 
-
-        Date time = new Date();
-        DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT);
-
-        String currentTime = df.format(time);
+        String currentTime = getTime();
 
 
         if (currentTitleValue != currentTime) {
