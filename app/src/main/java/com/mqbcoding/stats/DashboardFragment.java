@@ -1255,10 +1255,10 @@ public class DashboardFragment extends CarFragment {
 
     private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray, Speedometer min, Speedometer max) {
 
-        String queryTrim = "";
+        String queryTrim;
         String queryLong = queryClock;
         String torqueUnit = "";
-        long queryPid = 0;
+        long queryPid;
 
         TypedArray typedArray2 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedStopWatchBackground});
         int swBackgroundResource = typedArray2.getResourceId(0, 0);
@@ -1773,7 +1773,7 @@ public class DashboardFragment extends CarFragment {
         String currentTime = getTime();
 
 
-        if (currentTitleValue != currentTime) {
+        if (!currentTitleValue.equals(currentTime)) {
             mTitleElement.setText(currentTime);
         }
 
@@ -1802,7 +1802,7 @@ public class DashboardFragment extends CarFragment {
             }
         }
 
-        if (currentLeftTitleValue != leftTitle) {
+        if (!currentLeftTitleValue.equals(leftTitle)) {
             mTitleElementLeft.setText(leftTitle);
         }
 
@@ -1810,7 +1810,7 @@ public class DashboardFragment extends CarFragment {
         Float currentTemperature = (Float) mLastMeasurements.get("outsideTemperature");
         if (currentTemperature != null) {
             String temperature = String.format(Locale.US, FORMAT_DECIMALS, currentTemperature);
-            if (temperature != currentRightTitleValue){
+            if (temperature.equals(currentRightTitleValue)){
                 mTitleElementRight.setText(temperature);
             }
         } else {
