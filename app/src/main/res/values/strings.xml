@@ -8,8 +8,8 @@
     <string name="activity_stopwatch_title">Stopwatch</string>
 
     <string name="app_car_service_name">Performance Monitor</string>
-    <string name="app_name">Performance Monitor for VAG</string>
-    <string name="app_version" translatable="false">0.7B</string>
+    <string name="app_name">Performance Monitor</string>
+    <string name="app_version" translatable="false">0.8A</string>
 
     <string name="credits_author">This application was made by:</string>
     <string name="credits_basedon">Based on the SDK and demo App by:</string>
@@ -110,6 +110,7 @@
     <string name="pref_centerclock">Center clock</string>
     <string name="pref_choose_account_title">Choose account</string>
     <string name="pref_dataelementsettings">Data element settings</string>
+    <string name="pref_dataelementsettings2">Data element settings (2nd dashboard)</string>
     <string name="pref_font">Font</string>
     <string name="pref_graphDelay">Graph Resolution</string>
     <string name="pref_graphitem">Graph</string>
@@ -155,6 +156,7 @@
     <string name="reupload_last_nothing_to_do">Nothing to re-upload.</string>
     <string name="cancel_uploads_done">Upload cancelled.</string>
     <string name="pref_cancel_uploads_title">Cancel all uploads</string>
+    <string name="pref_powerunit">Power unit</string>
 
     <string name="testing">testing</string>
 
@@ -172,10 +174,12 @@
     <string name="unit_celcius">Celcius</string>
     <string name="unit_f">°F</string>
     <string name="unit_c">°C</string>
+    <string name="unit_hp">HP</string>
 
     <string name="unknown">unknown</string>
     <string name="pref_showmic_summary">Show microphone icon in statusbar</string>
-    <string name="pref_showmic_summary_off">Don't show microphone icon in statusbar</string>
+
+    <string name="pref_showmic_summary_off">Don\'t show microphone icon in statusbar</string>
     <string name="pref_showmic_title">Microphone icon</string>
     <string name="label_tyreRR">RR</string>
     <string name="label_tyreRL">RL</string>

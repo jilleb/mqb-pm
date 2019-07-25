@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">Leistungsmonitor für VAG</string>
-    <string name="app_car_service_name">Leistungsmonitor</string>
 
     <string name="format_temperature">%.0f°</string>
     <string name="format_temperatureF">%.0f°F</string>
@@ -15,8 +13,8 @@
 
     <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
-    <string name="format_volt0">0,0V</string>
-    <string name="format_temperature0">0,0°</string>
+    <string name="format_volt0">-,-V</string>
+    <string name="format_temperature0">-,-°</string>
     <string name="unit_kmh">km/h</string>
     <string name="unit_rpm">RPM</string>
     <string name="unit_nm">Nm</string>
@@ -24,9 +22,10 @@
     <string name="unit_g">G</string>
     <string name="unit_mph">mph</string>
     <string name="unit_volt">V</string>
+    <string name="unit_hp">PS</string>
 
 
-    <string name="activity_settings_title">Leistungsmonitor Einstellingen</string>
+    <string name="activity_settings_title">AA-Dashboard Einstellungen</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
 
     <string name="pref_appearance">Ansicht</string>
@@ -66,6 +65,7 @@
     <string name="pref_view4">Element 4</string>
     <string name="pref_pressureunit">Druckeinheiten</string>
     <string name="pref_dataelementsettings">Datenelementeinstellungen</string>
+    <string name="pref_dataelementsettings2">Datenelementeinstellungen (2. Dashboard)</string>
     <string name="pref_highvis_off">Zeigen Sie einen Zeiger auf die Instrumente</string>
     <string name="pref_highvis_on">Zeige einen kontrastreichen Strahl anstelle eines Zeigers</string>
     <string name="pref_highlow_off">Keinen Min/Max-Wert </string>

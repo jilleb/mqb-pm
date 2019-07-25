@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Looper;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,6 +52,7 @@ public class ExlapItemDetailsFragment extends CarFragment {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.i(TAG, "onCreateView");
@@ -76,6 +77,7 @@ public class ExlapItemDetailsFragment extends CarFragment {
         mHandler = new Handler(Looper.getMainLooper());
         Bundle args = getArguments();
         selectedKey = args.getString(ARG_SELECTED_KEY);
+
         mSchema = (HashMap<String, FieldSchema>) args.getSerializable(ARG_SCHEMA);
         fillTextViews();
         tvName.setSelected(true);

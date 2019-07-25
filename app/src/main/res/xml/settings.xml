@@ -74,16 +74,23 @@
             android:summaryOff="@string/pref_ambient_off"
             android:summaryOn="@string/pref_ambient_on"
             android:title="@string/pref_ambient" />
+            
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="micActive"
+            android:summary="@string/pref_showmic_summary"
+            android:title="@string/pref_showmic_title" />
     </PreferenceCategory>
     <PreferenceCategory
         android:singleLineTitle="false"
         android:title="@string/pref_dataelementsettings">
+        <!--TODO: Title Dashboard1 -->
 
         <ListPreference
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockl"
-            android:key="selectedClockLeft"
+            android:key="d1_selectedClockLeft"
             android:summary="%s"
             android:title="@string/pref_leftclock" />
 
@@ -93,7 +100,7 @@
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockc"
-            android:key="selectedClockCenter"
+            android:key="d1_selectedClockCenter"
             android:summary="%s"
             android:title="@string/pref_centerclock" />
 
@@ -104,7 +111,7 @@
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockr"
-            android:key="selectedClockRight"
+            android:key="d1_selectedClockRight"
             android:summary="%s"
             android:title="@string/pref_rightclock" />
         <ListPreference
@@ -112,7 +119,7 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view1"
-            android:key="selectedView1"
+            android:key="d1_selectedView1"
             android:summary="%s"
             android:title="@string/pref_view1" />
         <ListPreference
@@ -122,7 +129,7 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view2"
-            android:key="selectedView2"
+            android:key="d1_selectedView2"
             android:summary="%s"
             android:title="@string/pref_view2" />
         <ListPreference
@@ -132,7 +139,7 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view3"
-            android:key="selectedView3"
+            android:key="d1_selectedView3"
             android:summary="%s"
             android:title="@string/pref_view3" />
         <ListPreference
@@ -142,17 +149,97 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view4"
-            android:key="selectedView4"
+            android:key="d1_selectedView4"
             android:summary="%s"
             android:title="@string/pref_view4" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:singleLineTitle="false"
+        android:title="@string/pref_dataelementsettings">
 
         <CheckBoxPreference
             android:defaultValue="false"
-            android:key="micActive"
-            android:summary="@string/pref_showmic_summary"
-            android:summaryOff="@string/pref_showmic_summary_off"
-            android:title="@string/pref_showmic_title" />
+
+            android:key="d2_active"
+            android:title="Enable second Dashboard"/>
+        <!--TODO: Localize -->
+
+        <ListPreference
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_clockl"
+            android:key="d2_selectedClockLeft"
+            android:summary="%s"
+            android:title="@string/pref_leftclock"
+            android:dependency="d2_active" />
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_clockc"
+            android:key="d2_selectedClockCenter"
+            android:summary="%s"
+            android:title="@string/pref_centerclock"
+            android:dependency="d2_active" />
+
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_clockr"
+            android:key="d2_selectedClockRight"
+            android:summary="%s"
+            android:title="@string/pref_rightclock"
+            android:dependency="d2_active" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view1"
+            android:key="d2_selectedView1"
+            android:summary="%s"
+            android:title="@string/pref_view1"
+            android:dependency="d2_active" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view2"
+            android:key="d2_selectedView2"
+            android:summary="%s"
+            android:title="@string/pref_view2"
+            android:dependency="d2_active" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view3"
+            android:key="d2_selectedView3"
+            android:summary="%s"
+            android:title="@string/pref_view3"
+            android:dependency="d2_active" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view4"
+            android:key="d2_selectedView4"
+            android:summary="%s"
+            android:title="@string/pref_view4"
+            android:dependency="d2_active" />
     </PreferenceCategory>
+
     <PreferenceCategory android:title="@string/pref_unitprefs">
 
         <SwitchPreference
@@ -169,6 +256,15 @@
             android:summaryOn="@string/unit_bar"
             android:title="@string/pref_pressureunit"
             android:visibility="invisible" />
+
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="selectPowerUnit"
+            android:summaryOff="@string/unit_hp"
+            android:summaryOn="@string/unit_kw"
+            android:title="@string/pref_powerunit"
+            android:visibility="invisible" />
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="omitEmptyEntries"
@@ -195,6 +291,52 @@
             android:key="wheelStateMonitoringActive"
             android:summary="@string/pref_wheel_state_monitoring_summary"
             android:title="@string/pref_wheel_state_monitoring_title" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Monitor Engine Speed">
+        <!-- TODO: Localize and add summaries -->
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="engineSpeedMonitoringActive"
+            android:summary="..."
+            android:title="Enable Engine Speed Monitoring" />
+
+
+
+        <EditTextPreference
+            android:defaultValue="5500"
+            android:dependency="engineSpeedMonitoringActive"
+            android:dialogTitle="RPM inform"
+            android:inputType="number"
+            android:key="engineSpeedESInform"
+            android:title="RPM inform"/>
+        <EditTextPreference
+            android:defaultValue="5900"
+            android:dependency="engineSpeedMonitoringActive"
+            android:dialogTitle="RPM hint"
+            android:inputType="number"
+            android:key="engineSpeedESHint"
+            android:title="RPM hint" />
+        <EditTextPreference
+            android:defaultValue="6300"
+            android:dependency="engineSpeedMonitoringActive"
+            android:dialogTitle="RPM warn"
+            android:inputType="number"
+            android:key="engineSpeedESWarn"
+            android:title="RPM warn" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="engineSpeedMonitoringActive"
+            android:key="engineSpeedSoundActive"
+            android:title="Play Sound" />
+        <EditTextPreference
+            android:defaultValue="4"
+            android:dependency="engineSpeedSoundActive"
+            android:dialogTitle="Play sound up to gear x"
+            android:inputType="number"
+            android:key="engineSpeedSoundUpToGear"
+            android:title="Play sound up to gear x" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_providers_category_title">
@@ -250,5 +392,4 @@
 
     </PreferenceCategory>
 
-
-    </PreferenceScreen>
+</PreferenceScreen>

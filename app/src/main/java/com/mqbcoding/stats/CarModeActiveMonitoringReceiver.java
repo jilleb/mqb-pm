@@ -9,7 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.SystemClock;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import android.util.Log;
 @RequiresApi(26)
 public class CarModeActiveMonitoringReceiver extends BroadcastReceiver {
@@ -21,7 +21,11 @@ public class CarModeActiveMonitoringReceiver extends BroadcastReceiver {
         Log.v(TAG, "intent: " + intent);
         UiModeManager uiModeManager = (UiModeManager) context.getSystemService(Context.UI_MODE_SERVICE);
         if (uiModeManager != null && uiModeManager.getCurrentModeType() == Configuration.UI_MODE_TYPE_CAR) {
-            context.startForegroundService(new Intent(context, CarStatsService.class));
+            try {
+                context.startForegroundService(new Intent(context, CarStatsService.class));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
         scheduleAlarm(context);
     }

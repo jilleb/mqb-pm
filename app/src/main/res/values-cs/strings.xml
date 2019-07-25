@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Monitor výkonu pro VAG</string>
     <string name="format_temperatureF">%.1f°F</string>
     <string name="format_temperature">%.1f°</string>
     <string name="app_car_service_name">Monitor výkonu</string>

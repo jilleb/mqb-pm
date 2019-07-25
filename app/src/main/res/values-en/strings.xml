@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Performance Monitor for VAG</string>
-    <string name="app_car_service_name">Performance Monitor</string>
+    <string name="app_name">AA-Dashboard</string>
+    <string name="app_car_service_name">AA-Dashboard</string>
 
     <string name="format_temperature">%.0f°</string>
     <string name="format_temperatureF">%.0f°F</string>
@@ -15,8 +15,8 @@
 
     <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
-    <string name="format_volt0">0,0V</string>
-    <string name="format_temperature0">0,0°</string>
+    <string name="format_volt0">-,-V</string>
+    <string name="format_temperature0">-,-°</string>
     <string name="unit_kmh">km/h</string>
     <string name="unit_rpm">RPM</string>
     <string name="unit_nm">Nm</string>

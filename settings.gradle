@@ -1,1 +1,2 @@
-include ':app'
+include ':app', ':aauto-sdk'
+project(':aauto-sdk').projectDir = new File('lib/aauto-sdk')
