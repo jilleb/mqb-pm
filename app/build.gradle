@@ -6,10 +6,10 @@ android {
     compileSdkVersion 29
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "dev.gaitzsch.vagdashboard"
+        applicationId "dev.gaitzsch.aadashboard"
         minSdkVersion 22
         targetSdkVersion 29
-        versionCode 60
+        versionCode 61
         versionName "@string/app_version"
     }
 }

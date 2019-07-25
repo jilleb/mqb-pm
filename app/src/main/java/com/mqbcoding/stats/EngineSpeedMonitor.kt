@@ -25,6 +25,8 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
     private var mESHint: Float = 5900f
     private var mESWarn: Float = 6300f
 
+    private val packageName = mContext.packageName
+
     private var mState = State.ENGINE_SPEED_OK
 
     private val mPreferencesListener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, _ -> readPreferences(sharedPreferences) }
@@ -86,7 +88,7 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
         mHandler.postDelayed(mDismissNotification, NOTIFICATION_TIMEOUT_MS.toLong())
         */
 
-        //TODO: Broadcast: state, goesUp
+        // Broadcast: state, goesUp
 
         val stateInt = when(state) {
             State.ENGINE_SPEED_OK -> 0
@@ -95,10 +97,11 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
             State.ENGINE_SPEED_WARN -> 3
         }
 
-        val intent = Intent()
-        //intent.addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES) //TODO: maybe needed?
-        intent.action = "dev.gaitzsch.vagdashboard"
-        intent.putExtra("engineSpeedState", stateInt)
+        val intent = Intent().apply {
+            //addFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES) //TODO: maybe needed?
+            action = packageName
+            putExtra("engineSpeedState", stateInt)
+        }
         mContext.sendBroadcast(intent)
 
         if (playSound) {
@@ -113,12 +116,12 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
             return
         }
         if (values.containsKey("currentGear")) {
-            currentGear = (values["currentGear"] as String).toIntOrNull() ?: Int.MAX_VALUE
+            currentGear = (values["currentGear"] as? String)?.toIntOrNull() ?: Int.MAX_VALUE
             Log.i(TAG,"Current gear: %s".format(currentGear))
         }
 
-        if (values.containsKey(EXLAP_KEY)) {
-            val measurement = values[EXLAP_KEY] as Float
+        if (values.containsKey("engineSpeed")) {
+            val measurement = values["engineSpeed"] as? Float ?: -1f
 
 
             val newState = when {
@@ -135,6 +138,8 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
             } else if (newState < mState) {
                 notifyES(newState, false)
             }
+
+            mState=newState
         }
     }
 
@@ -160,8 +165,6 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
         const val PREF_ES_INFORM = "engineSpeedESInform"
         const val PREF_ES_HINT = "engineSpeedESHint"
         const val PREF_ES_WARN = "engineSpeedESWarm"
-
-        const val EXLAP_KEY = "engineSpeed"
 
         private const val NOTIFICATION_ID = 22
 
