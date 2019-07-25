@@ -56,9 +56,7 @@ import java.util.TimerTask;
 public class DashboardFragment extends CarFragment {
     private final String TAG = "DashboardFragment";
     private Runnable mTimer1;
-    private Runnable mTimer2;
     private CarStatsClient mStatsClient;
-    private WheelStateMonitor mWheelStateMonitor;
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
     private Speedometer mClockMinLeft, mClockMinCenter, mClockMinRight;
@@ -81,7 +79,6 @@ public class DashboardFragment extends CarFragment {
     private TextView mTextMinRight, mTextMaxRight;
     //icons on the clocks
     private TextView mIconClockL, mIconClockC, mIconClockR;
-    private WheelStateMonitor.WheelState mWheelState;
     private Boolean pressureUnits, temperatureUnits;
     private Boolean stagingDone = false;
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn;
@@ -198,7 +195,6 @@ public class DashboardFragment extends CarFragment {
             CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder) iBinder;
             Log.i(TAG, "ServiceConnected");
             mStatsClient = carStatsBinder.getStatsClient();
-            mWheelStateMonitor = carStatsBinder.getWheelStateMonitor();
             mLastMeasurements = mStatsClient.getMergedMeasurements();
             mStatsClient.registerListener(mCarStatsListener);
             doUpdate();
@@ -934,8 +930,6 @@ public class DashboardFragment extends CarFragment {
 
         // wheel angle monitor
         Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
-        mWheelState = mWheelStateMonitor == null ? WheelStateMonitor.WheelState.WHEEL_UNKNOWN
-                : mWheelStateMonitor.getWheelState();
         mSteeringWheelAngle.setRotation(currentWheelAngle == null ? 0.0f :
                 Math.min(Math.max(-WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG, -currentWheelAngle),
                         WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG));
