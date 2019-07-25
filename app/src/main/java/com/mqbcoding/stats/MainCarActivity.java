@@ -56,9 +56,6 @@ public class MainCarActivity extends CarActivity {
                 case MENU_READINGS:
                     switchToFragment(FRAGMENT_READINGS);
                     break;
-                case MENU_READINGS:
-                    switchToFragment(FRAGMENT_READINGS);
-                    break;
                 case MENU_STOPWATCH:
                     switchToFragment(FRAGMENT_STOPWATCH);
                     break;
@@ -188,11 +185,6 @@ public class MainCarActivity extends CarActivity {
                     .build());
         }
         
-        mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
-                .setTitle(getString(R.string.activity_readings_title))
-                .setType(MenuItem.Type.ITEM)
-                .build());
-
         mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_readings_title))
                 .setType(MenuItem.Type.ITEM)

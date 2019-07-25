@@ -109,7 +109,7 @@
 
         android:layout_marginBottom="8dp"
         android:layout_marginTop="8dp"
-        android:text="meich, borconi, mikhailkozlov, javigody, nerone,  illclown, divacky, calfredop"
+        android:text="lucas-m-g, meich, borconi, mikhailkozlov, javigody, nerone,  illclown, divacky, calfredop"
         android:textAlignment="center"
         android:textAppearance="@style/CarBody1"
         android:textColor="@android:color/white"

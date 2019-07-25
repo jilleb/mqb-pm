@@ -6,7 +6,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion '28.0.3'
     defaultConfig {
-        applicationId "dev.gaitzsch.aadashboard"
+        applicationId "com.mqbcoding.stats"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 61
@@ -26,7 +26,6 @@ configurations {
 dependencies {
     // Replaced with updated SDK from "https://github.com/cupral/aauto-sdk.git" (as git-submodule)
     //implementation 'com.github.martoreto:aauto-sdk:v4.7'
-
 
     implementation 'com.github.martoreto:aauto-vex-base:v4.4'
     implementation 'com.jjoe64:graphview:4.2.2'
