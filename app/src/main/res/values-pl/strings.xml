@@ -6,7 +6,8 @@
     <string name="activity_stopwatch_title">Stoper</string>
 
     <string name="app_car_service_name">Performance Monitor</string>
-    <string name="app_name">Performance Monitor for AA</string>
+    <string name="app_name">Performance Monitor</string>
+
     <string name="app_version" translatable="false">0.7B</string>
 
     <string name="credits_author">This application was made by:</string>

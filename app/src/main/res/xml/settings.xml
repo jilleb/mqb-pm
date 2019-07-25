@@ -160,6 +160,7 @@
 
         <CheckBoxPreference
             android:defaultValue="false"
+
             android:key="d2_active"
             android:title="Enable second Dashboard"/>
         <!--TODO: Localize -->
@@ -255,6 +256,7 @@
             android:summaryOn="@string/unit_bar"
             android:title="@string/pref_pressureunit"
             android:visibility="invisible" />
+
         <SwitchPreference
             android:defaultValue="true"
             android:key="selectPowerUnit"
@@ -262,6 +264,7 @@
             android:summaryOn="@string/unit_kw"
             android:title="@string/pref_powerunit"
             android:visibility="invisible" />
+
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="omitEmptyEntries"

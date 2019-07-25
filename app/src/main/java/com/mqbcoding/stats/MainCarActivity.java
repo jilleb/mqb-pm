@@ -21,14 +21,17 @@ public class MainCarActivity extends CarActivity {
     private static final String TAG = "MainCarActivity";
 
     //menu stuff//
+
     static final String MENU_DASHBOARD1 = "dashboard1";  // home
     static final String MENU_DASHBOARD2 = "dashboard2";
+
     static final String MENU_READINGS = "readings";
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
 
     // static final String MENU_DEBUG_LOG = "log";
     // static final String MENU_DEBUG_TEST_NOTIFICATION = "test_notification";
+
     private static final String FRAGMENT_CAR_1 = "dashboard1";
     private static final String FRAGMENT_CAR_2 = "dashboard2";
     private static final String FRAGMENT_READINGS = "readings";
@@ -49,6 +52,9 @@ public class MainCarActivity extends CarActivity {
                     break;
                 case MENU_DASHBOARD2:
                     switchToFragment(FRAGMENT_CAR_2);
+                    break;
+                case MENU_READINGS:
+                    switchToFragment(FRAGMENT_READINGS);
                     break;
                 case MENU_READINGS:
                     switchToFragment(FRAGMENT_READINGS);
@@ -131,6 +137,7 @@ public class MainCarActivity extends CarActivity {
         //set fragments:
         CarFragment carfragment1 = new DashboardFragment(1);
 
+
         CarFragment carfragment2 = null;
         if (d2Active)
             carfragment2 = new DashboardFragment(2);
@@ -181,6 +188,11 @@ public class MainCarActivity extends CarActivity {
                     .build());
         }
         
+        mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
+                .setTitle(getString(R.string.activity_readings_title))
+                .setType(MenuItem.Type.ITEM)
+                .build());
+
         mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_readings_title))
                 .setType(MenuItem.Type.ITEM)

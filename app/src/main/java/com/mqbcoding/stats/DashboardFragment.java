@@ -1865,7 +1865,6 @@ public class DashboardFragment extends CarFragment {
 
         String currentTime = getTime();
 
-
         if (!Objects.equals(currentTitleValue, currentTime)) {
             mTitleElement.setText(currentTime);
         }
