@@ -432,8 +432,8 @@
 
         <TextView
             android:id="@+id/graphValueCenter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginBottom="32dp"
             android:textAlignment="viewEnd"
             android:textAppearance="@style/CarBody2"
@@ -479,8 +479,8 @@
 
         <TextView
             android:id="@+id/graphValueRight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginBottom="32dp"
             android:textAlignment="viewEnd"
             android:textAppearance="@style/CarBody2"
@@ -529,8 +529,8 @@
 
         <TextView
             android:id="@+id/graphValueLeft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginBottom="32dp"
             android:textAlignment="viewEnd"
             android:textAppearance="@style/CarBody2"
@@ -630,8 +630,8 @@
 
     <TextView
         android:id="@+id/value_Element1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
@@ -644,8 +644,8 @@
 
     <TextView
         android:id="@+id/value_Element2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
@@ -658,8 +658,8 @@
 
     <TextView
         android:id="@+id/value_Element3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
@@ -674,8 +674,8 @@
 
     <TextView
         android:id="@+id/value_Element4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
@@ -689,8 +689,8 @@
 
     <TextView
         android:id="@+id/textMinLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="265dp"
         android:drawableLeft="@drawable/ic_min"
         android:elevation="1dp"
@@ -702,8 +702,8 @@
 
     <TextView
         android:id="@+id/textMaxLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="265dp"
         android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
@@ -716,8 +716,8 @@
 
     <TextView
         android:id="@+id/textMinCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="265dp"
         android:drawableLeft="@drawable/ic_min"
@@ -730,8 +730,8 @@
 
     <TextView
         android:id="@+id/textMaxCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="265dp"
         android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
@@ -746,8 +746,8 @@
 
     <TextView
         android:id="@+id/textMinRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="265dp"
         android:drawableLeft="@drawable/ic_min"
@@ -760,8 +760,8 @@
 
     <TextView
         android:id="@+id/textMaxRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginBottom="265dp"
 
         android:drawableLeft="@drawable/ic_max"
