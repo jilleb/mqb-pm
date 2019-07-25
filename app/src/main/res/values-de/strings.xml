@@ -25,7 +25,7 @@
     <string name="unit_hp">PS</string>
 
 
-    <string name="activity_settings_title">VAG Dashboard Einstellungen</string>
+    <string name="activity_settings_title">AA-Dashboard Einstellungen</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
 
     <string name="pref_appearance">Ansicht</string>

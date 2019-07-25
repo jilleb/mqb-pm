@@ -2,15 +2,15 @@
 
 
     <string name="activity_credits_title">Credits</string>
-    <string name="activity_main_title">VAG Dashboard</string>
-    <string name="activity_settings_title">VAG Dashboard Settings</string>
+    <string name="activity_main_title">AA-Dashboard</string>
+    <string name="activity_settings_title">AA-Dashboard Settings</string>
 
     <string name="activity_readings_title">Readings</string>
     <string name="activity_stopwatch_title">Stopwatch</string>
 
-    <string name="app_car_service_name">VAG Dashboard</string>
-    <string name="app_name">VAG Dashboard</string>
-    <string name="app_version" translatable="false">0.7B</string>
+    <string name="app_car_service_name">AA-Dashboard</string>
+    <string name="app_name">AA-Dashboard</string>
+    <string name="app_version" translatable="false">0.8</string>
 
     <string name="credits_author">This application was made by:</string>
     <string name="credits_basedon">Based on the SDK and demo App by:</string>
