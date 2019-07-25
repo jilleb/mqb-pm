@@ -107,7 +107,7 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
         }
     }
 
-    private var currentGear = -1
+    private var currentGear = Int.MAX_VALUE
     override fun onNewMeasurements(provider: String, timestamp: Date, values: Map<String, Any>) {
         if (!mIsEnabled) {
             return
@@ -129,7 +129,7 @@ class EngineSpeedMonitor(private val mContext: Context, private val mHandler: Ha
             }
 
             if (newState > mState && newState != State.ENGINE_SPEED_OK)  {
-                val gearToPlaySound = if (currentGear==-1) true else (currentGear in 1..mSoundUpToGear)
+                val gearToPlaySound = if (currentGear==Int.MAX_VALUE) true else (currentGear in 1..mSoundUpToGear)
 
                 notifyES(newState, true,mIsSoundEnabled && gearToPlaySound)
             } else if (newState < mState) {

@@ -179,7 +179,7 @@
 
     <string name="unknown">unknown</string>
     <string name="pref_showmic_summary">Show microphone icon in statusbar</string>
-    <string name="pref_showmic_summary_off">Don't show microphone icon in statusbar</string>
+    <string name="pref_showmic_summary_off">Don\'t show microphone icon in statusbar</string>
     <string name="pref_showmic_title">Microphone icon</string>
     <string name="label_tyreRR">RR</string>
     <string name="label_tyreRL">RL</string>

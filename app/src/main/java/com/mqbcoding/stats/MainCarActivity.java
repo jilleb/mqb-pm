@@ -135,6 +135,8 @@ public class MainCarActivity extends CarActivity {
         if (d2Active)
             carfragment2 = new DashboardFragment(2);
 
+        ReadingsViewFragment readingsViewFragment = new ReadingsViewFragment();
+
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
         FragmentTransaction transaction = fragmentManager.beginTransaction()
