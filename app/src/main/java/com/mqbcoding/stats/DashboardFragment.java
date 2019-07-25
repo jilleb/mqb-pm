@@ -80,18 +80,16 @@ public class DashboardFragment extends CarFragment {
     //icons on the clocks
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private Boolean pressureUnits, temperatureUnits;
-    private Boolean stagingDone = false;
+    private Boolean stagingDone;
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
     private boolean torqueBind = false;
     private GraphView mGraphLeft, mGraphCenter, mGraphRight;
-    private CardView mGraphLayoutLeft, mGraphLayoutCenter, mGraphLayoutRight;
     private LineGraphSeries<DataPoint> mSpeedSeriesLeft;
     private LineGraphSeries<DataPoint> mSpeedSeriesCenter;
     private LineGraphSeries<DataPoint> mSpeedSeriesRight;
-    private View mBackGroundLayout;
     private double graphLeftLastXValue = 5d;
     private double graphCenterLastXValue = 5d;
     private double graphRightLastXValue = 5d;
@@ -291,6 +289,7 @@ public class DashboardFragment extends CarFragment {
         selectedTheme = sharedPreferences.getString("selectedTheme", "");
         //todo: fix this. currently not very efficient, because this is already requested in MainCarActivity
         selectedBackground = sharedPreferences.getString("selectedBackground", "background_incar_black");
+        stagingDone = !sharedPreferences.getBoolean("stagingActive",true);
 
         //Set wallpaper
         int resId = getResources().getIdentifier(selectedBackground, "drawable", getContext().getPackageName());
@@ -340,8 +339,6 @@ public class DashboardFragment extends CarFragment {
         //-------------------------------------------------------------
         //find all elements needed
 
-        mBackGroundLayout = rootView.findViewById(R.id.fragment_container);
-
         //layouts/constrains:
         mConstraintClockLeft = rootView.findViewById(R.id.constraintClockLeft);
         mConstraintClockCenter = rootView.findViewById(R.id.constraintClockCenter);
@@ -372,10 +369,6 @@ public class DashboardFragment extends CarFragment {
         mGraphValueLeft = rootView.findViewById(R.id.graphValueLeft);
         mGraphValueCenter = rootView.findViewById(R.id.graphValueCenter);
         mGraphValueRight = rootView.findViewById(R.id.graphValueRight);
-
-        mGraphLayoutLeft = (CardView) rootView.findViewById(R.id.left_layout);
-        mGraphLayoutCenter = (CardView) rootView.findViewById(R.id.center_layout);
-        mGraphLayoutRight = (CardView) rootView.findViewById(R.id.right_layout);
 
         mSpeedSeriesLeft = new LineGraphSeries<>();
         mSpeedSeriesCenter = new LineGraphSeries<>();
@@ -612,7 +605,7 @@ public class DashboardFragment extends CarFragment {
                                 mRayRight.speedTo(0, 1000);
                             }
                         }
-                    }, 1000);
+                    }, 1700);
 
                     final Handler stagingReset = new Handler();
                     stagingReset.postDelayed(new Runnable() {
@@ -635,7 +628,7 @@ public class DashboardFragment extends CarFragment {
 
                             }
                         }
-                    }, 2000);
+                    }, 2700);
 
 
                 }

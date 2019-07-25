@@ -152,6 +152,13 @@
             android:summary="@string/pref_showmic_summary"
             android:summaryOff="@string/pref_showmic_summary_off"
             android:title="@string/pref_showmic_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="stagingActive"
+            android:summary="@string/pref_staging_summary"
+            android:summaryOff="@string/pref_staging_summary_off"
+            android:title="@string/pref_staging_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_unitprefs">
 

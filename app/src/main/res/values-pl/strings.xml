@@ -251,4 +251,7 @@
     <string name="item_details_go_back">Wróć</string>
     <string name="pref_omit_empty_readings_summary_off">Pokazuj puste wartości w Odczytach</string>
     <string name="pref_showmic_summary_off">Nie pokazuj ikony mikrofosu w pasku stanu</string>
+    <string name="pref_staging_summary">Pokazuj animacje startową na zegarach</string>
+    <string name="pref_staging_title">Animacja startowa zegarów</string>
+    <string name="pref_staging_summary_off">Nie pokazuj animacji startowej na zegarach</string>
 </resources>
