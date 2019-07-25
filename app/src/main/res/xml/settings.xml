@@ -74,6 +74,7 @@
             android:summaryOff="@string/pref_ambient_off"
             android:summaryOn="@string/pref_ambient_on"
             android:title="@string/pref_ambient" />
+            
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="micActive"
@@ -261,6 +262,12 @@
             android:summaryOn="@string/unit_kw"
             android:title="@string/pref_powerunit"
             android:visibility="invisible" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="omitEmptyEntries"
+            android:summary="@string/pref_omit_empty_readings_summary"
+            android:summaryOff="@string/pref_omit_empty_readings_summary_off"
+            android:title="@string/pref_omit_empty_readings_title" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_notifications_category_title">
@@ -269,7 +276,7 @@
             android:key="oilTempMonitoringActive"
             android:summary="@string/pref_oil_temp_monitoring_summary"
             android:title="@string/pref_oil_temp_monitoring_title" />
-        <EditTextPreference
+        <com.mqbcoding.stats.TemperaturePreference
             android:defaultValue="70"
             android:dependency="oilTempMonitoringActive"
             android:dialogTitle="@string/pref_oil_temp_threshold_title"
@@ -382,5 +389,4 @@
 
     </PreferenceCategory>
 
-
-    </PreferenceScreen>
+</PreferenceScreen>

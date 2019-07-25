@@ -18,18 +18,20 @@ import com.google.android.apps.auto.sdk.MenuItem;
 import com.google.android.apps.auto.sdk.StatusBarController;
 
 public class MainCarActivity extends CarActivity {
-    static final String MENU_HOME = "home";
+    private static final String TAG = "MainCarActivity";
 
     //menu stuff//
+    static final String MENU_DASHBOARD1 = "dashboard1";  // home
     static final String MENU_DASHBOARD2 = "dashboard2";
+    static final String MENU_READINGS = "readings";
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
-    private static final String TAG = "MainCarActivity";
 
     // static final String MENU_DEBUG_LOG = "log";
     // static final String MENU_DEBUG_TEST_NOTIFICATION = "test_notification";
     private static final String FRAGMENT_CAR_1 = "dashboard1";
     private static final String FRAGMENT_CAR_2 = "dashboard2";
+    private static final String FRAGMENT_READINGS = "readings";
     private static final String FRAGMENT_CREDITS = "credits";
     private static final String FRAGMENT_STOPWATCH = "stopwatch";
     private static final String CURRENT_FRAGMENT_KEY = "app_current_fragment";
@@ -42,11 +44,14 @@ public class MainCarActivity extends CarActivity {
         @Override
         public void onMenuItemClicked(String name) {
             switch (name) {
-                case MENU_HOME:
+                case MENU_DASHBOARD1:
                     switchToFragment(FRAGMENT_CAR_1);
                     break;
                 case MENU_DASHBOARD2:
                     switchToFragment(FRAGMENT_CAR_2);
+                    break;
+                case MENU_READINGS:
+                    switchToFragment(FRAGMENT_READINGS);
                     break;
                 case MENU_STOPWATCH:
                     switchToFragment(FRAGMENT_STOPWATCH);
@@ -142,7 +147,10 @@ public class MainCarActivity extends CarActivity {
                     .detach(carfragment2);
         }
 
-        transaction.add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
+        transaction
+                .add(R.id.fragment_container, readingsViewFragment, FRAGMENT_READINGS)
+                .detach(readingsViewFragment)
+                .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
                 .detach(stopwatchfragment)
                 .add(R.id.fragment_container, creditsfragment, FRAGMENT_CREDITS)
                 .detach(creditsfragment)
@@ -159,7 +167,7 @@ public class MainCarActivity extends CarActivity {
         mainMenu.setCallbacks(mMenuCallbacks);
 
         //set menu
-        mainMenu.addMenuItem(MENU_HOME, new MenuItem.Builder()
+        mainMenu.addMenuItem(MENU_DASHBOARD1, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_main_title))
                 .setType(MenuItem.Type.ITEM)
                 .build());
@@ -170,6 +178,11 @@ public class MainCarActivity extends CarActivity {
                     .setType(MenuItem.Type.ITEM)
                     .build());
         }
+        
+        mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
+                .setTitle(getString(R.string.activity_readings_title))
+                .setType(MenuItem.Type.ITEM)
+                .build());
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))

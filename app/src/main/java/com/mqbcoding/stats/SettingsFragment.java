@@ -41,6 +41,8 @@ public class SettingsFragment extends PreferenceFragment {
                         index >= 0
                                 ? listPreference.getEntries()[index]
                                 : null);
+            } if (preference instanceof TemperaturePreference) {
+                return true;
             } else {
                 preference.setSummary(stringValue);
             }

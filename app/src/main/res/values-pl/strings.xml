@@ -1,0 +1,269 @@
+<resources>
+    <string name="activity_credits_title">O aplikacji</string>
+    <string name="activity_main_title">Performance Monitor</string>
+    <string name="activity_readings_title">Odczyty</string>
+    <string name="activity_settings_title">Ustawienia Performance Monitor</string>
+    <string name="activity_stopwatch_title">Stoper</string>
+
+    <string name="app_car_service_name">Performance Monitor</string>
+    <string name="app_name">Performance Monitor for VAG</string>
+    <string name="app_version" translatable="false">0.7B</string>
+
+    <string name="credits_author">This application was made by:</string>
+    <string name="credits_basedon">Based on the SDK and demo App by:</string>
+    <string name="credits_drivesafely">Drive Safely.</string>
+    <string name="credits_thanks">Special thanks to:</string>
+
+    <string name="element_EcoHMI_Score.AvgShort">Eco score</string>
+    <string name="element_EcoHMI_Score.AvgTrip">Eco score average</string>
+    <string name="element_VIN">VIN</string>
+    <string name="element_absChargingAirPressure">Ciśnienie doładowania (bezwględne)</string>
+    <string name="element_acceleratorPosition">Pozycja pedału gazu</string>
+    <string name="element_batteryVoltage">Napięcie akumulatora</string>
+    <string name="element_blinkingState">Stan kierunkowskazów</string>
+    <string name="element_brakePressure">Ciśnienie hamulców</string>
+    <string name="element_coolantTemperature">Temperatura płynu chłodniczego</string>
+    <string name="element_currentConsumptionPrimary">Aktualne zużycie, podstawowe</string>
+    <string name="element_currentConsumptionSecondary">Aktualne zużycie, alternatywne</string>
+    <string name="element_currentGear">Aktualny bieg</string>
+    <string name="element_currentOutputPower">Aktualna moc</string>
+    <string name="element_currentTorque">Aktualny moment</string>
+    <string name="element_cycleConsumptionPrimary">Cycle consumption, primary fuel</string>
+    <string name="element_cycleConsumptionSecondary">Cycle consumption, secondary fuel</string>
+    <string name="element_engineSpeed">Prędkość obrotowa</string>
+    <string name="element_gearboxOilTemperature">Temperatura skrzyni biegów</string>
+    <string name="element_lateralAcceleration">Boczne przyspiesznie (G)</string>
+    <string name="element_longitudinalAcceleration">Wzdłużne przyspieszenie (G)</string>
+    <string name="element_navAltitude">Wysokość</string>
+    <string name="element_navHeading">Kierunek</string>
+    <string name="element_navLatitude">Szerokość geograficzna GPS</string>
+    <string name="element_navLongitude">Długość geograficzna GPS</string>
+    <string name="element_none">None</string>
+    <string name="element_odometer">Licznik kilometrów</string>
+    <string name="element_oilTemperature">Temperatura oleju</string>
+    <string name="element_outsideTemperature">Temperatura otoczenia</string>
+    <string name="element_powermeter">Aktualna moc hybrydy</string>
+    <string name="element_relChargingAirPressure">Ciśnienie doładowania (względne)</string>
+    <string name="element_soundVolume">Głośność</string>
+    <string name="element_tankLevelPrimary">Poziom paliwa (podstawowy)</string>
+    <string name="element_tankLevelSecondary">Poziom paliwa (alternatywny)</string>
+    <string name="element_test">Test (losowe, nie pobiera z auta)</string>
+    <string name="element_tyreStateFL">Stan koła lewy przód</string>
+    <string name="element_tyreStateFR">Stan koła prawy przód</string>
+    <string name="element_tyreStateRL">Stan koła lewy tył</string>
+    <string name="element_tyreStateRR">Stan koła prawy tył</string>
+    <string name="element_vehicleSpeed">Prędkość</string>
+    <string name="element_wheelAngle">Kąt skręcenia kół</string>
+    <string name="element_yawRate">Stopa odchylenia</string>
+    <string name="element_shortTermConsumptionPrimary">Short Term Consumption (primary fuel)</string>
+    <string name="element_shortTermConsumptionSecondary">Short Term Consumption (secondary fuel)</string>
+
+    <string name="font_audi" translatable="false">Audi Virtual Cockpit</string>
+    <string name="font_frutiger" translatable="false">Frutiger</string>
+    <string name="font_larabie" translatable="false">Larabie</string>
+    <string name="font_seat" translatable="false">Seat Metastyle</string>
+    <string name="font_segments" translatable="false">Wyświetlacz 7 segmentowy</string>
+    <string name="font_skoda" translatable="false">Skoda</string>
+    <string name="font_vw" translatable="false">Volkswagen CarUI</string>
+    <string name="font_vw2" translatable="false">Volkswagen Thesis</string>
+    <string name="font_vw3" translatable="false">VW Digit</string>
+
+    <string name="format_decimals">%.1f</string>
+    <string name="format_degrees">%.1f°</string>
+    <string name="format_gforce">%.1fG</string>
+    <string name="format_km">%.1f km</string>
+    <string name="format_miles">%.1f miles</string>
+    <string name="format_noDecimals">%.0f</string>
+    <string name="format_percent">%.1f</string>
+    <string name="format_degreespersec">%.1f°/s</string>
+    <string name="format_temperature">%.1f°</string>
+    <string name="format_temperature0">-,-°</string>
+    <string name="format_temperatureC">%.1f°C</string>
+    <string name="format_temperatureF">%.1f°F</string>
+    <string name="format_volt">%.1fV</string>
+    <string name="format_volt0">-,-V</string>
+
+    <string name="kick_uploads_done">Wysyłanie zaplanowane.</string>
+    <string name="kick_uploads_nothing_to_do">Wszystkie pliki zostały już wysłane</string>
+
+    <string name="notification_channel_description">Powiadomienia wyświetlane w Android Auto.</string>
+    <string name="notification_channel_name">Auto</string>
+    <string name="notification_oil_text">Temperatura oleju osiągnęła temperaturę roboczą.</string>
+    <string name="notification_oil_title">Temperatura oleju</string>
+    <string name="notification_service_text">Logowanie aktywne.</string>
+
+    <string name="pref_ambient">Kolory otoczenia</string>
+    <string name="pref_ambient_off">Nie korzystaj z czujnika kolorów (jeżeli auto go posiada)</string>
+    <string name="pref_ambient_on">Korzystaj z czujnika kolorów (jeżeli auto go posiada).</string>
+    <string name="pref_appearance">Wygląd</string>
+    <string name="pref_bigquery_dataset_title">Nazwa Dataset\'u</string>
+    <string name="pref_bigquery_project_id_title">ID Projektu</string>
+    <string name="pref_bigquery_reupload_last_failed">Wystąpił błąd podczas wysyłania ponownego plików.</string>
+    <string name="pref_bigquery_reupload_all_title">Wyślij ponownie wszystkie pliki logów.</string>
+    <string name="bigquery_reupload_all_failed">Failed to initate re-upload of the all log files.</string>
+    <string name="bigquery_reupload_ok">Zaplanowano ponowne wysłanie.</string>
+    <string name="pref_bigquery_reupload_last_title">Wyślij ponownie ostatni plik logów</string>
+    <string name="pref_bigquery_table_default" translatable="false">mqbstats</string>
+    <string name="pref_bigquery_table_title">Nazwa tabeli</string>
+    <string name="pref_centerclock">Środkowy zegar</string>
+    <string name="pref_choose_account_title">Wybierz konto</string>
+    <string name="pref_dataelementsettings">Ustawienia elementu danych</string>
+    <string name="pref_font">Czcionka</string>
+    <string name="pref_graphDelay">Rozdzielczość wykresu</string>
+    <string name="pref_graphitem">Wykres</string>
+    <string name="pref_highlow">Największe/Najniższe wartości</string>
+    <string name="pref_highlow_off">Nie pokazuj maks/min wartości</string>
+    <string name="pref_highlow_on">Pokazuj maks/min wartości dla każdego zegara</string>
+    <string name="pref_highlowmarks">Zaznacz maks/min wartości na zegarze</string>
+    <string name="pref_highlowmarks_off">Maks/min wartość nie jest zaznaczona na zegarze</string>
+    <string name="pref_highlowmarks_on">Maks/min wartość jest zaznaczona na zegarze</string>
+    <string name="pref_highvis">Wysoko widoczne wskazówki</string>
+    <string name="pref_highvis_off">Wyświetla wskazówkę na zegarze</string>
+    <string name="pref_highvis_on">Wyświetla promień zamiast wskazówki na zegarze</string>
+    <string name="pref_kick_uploads_title">Wyślij wszystkie pliki teraz</string>
+    <string name="pref_leftclock">Lewy zegar</string>
+    <string name="pref_list_providers_title">Lista dostawców danych</string>
+    <string name="pref_logging_category_title">Logowanie zdarzeń</string>
+    <string name="pref_notifications_category_title">Powiadomienia</string>
+    <string name="pref_oil_temp_monitoring_summary">Pokaż powiadomienie gdy temperatura oleju silnikowego osiągnie temperaturę roboczą</string>
+    <string name="pref_oil_temp_monitoring_title">Sprawdzaj temperaturę oleju</string>
+    <string name="pref_oil_temp_threshold_title">Temperatura robocza oleju</string>
+    <string name="pref_omit_empty_readings_summary">Pomiń puste wartości w Odczytach</string>
+    <string name="pref_omit_empty_readings_title">Pomiń puste wartości</string>
+    <string name="pref_pressureunit">Jednostka ciśnienia</string>
+    <string name="pref_providers">Dostawcy telemetrii</string>
+    <string name="pref_providers_category_title">Dostawcy danych telemetrii</string>
+    <string name="pref_resettoapply">Zmiany będą widoczne po ponownym podłączeniu do Android Auto.</string>
+    <string name="pref_rightclock">Prawy zegar</string>
+    <string name="pref_stats_logging_not_available">Logowanie nie dostępne: %1$s</string>
+    <string name="pref_stats_logging_summary">Folder z logami: %1$s</string>
+    <string name="pref_stats_logging_title">Zapisuj telemetrię auta</string>
+    <string name="pref_theme">Skórka</string>
+    <string name="pref_ticks">Pokaż wartości pośrednie</string>
+    <string name="pref_ticks_off">Nie pokazuj wartości pośrednich</string>
+    <string name="pref_ticks_on">Pokaż wartości pośrednie</string>
+    <string name="pref_upload_to_bigquery_title">Wyślij logi do BigQuery</string>
+    <string name="pref_view1">Widok 1</string>
+    <string name="pref_view2">Widok 2</string>
+    <string name="pref_view3">Widok 3</string>
+    <string name="pref_view4">Widok 4</string>
+    <string name="pref_wheel_state_monitoring_summary">Generuje sygnał kiedy kąt kół przekroczy 0 stopni przy włączonym biegu wstecznym</string>
+    <string name="pref_wheel_state_monitoring_title">Sygnał przy 0 stopniach skręcenia kół</string>
+    <string name="reupload_last_nothing_to_do">Nie ma nic do ponownego wysłania.</string>
+    <string name="cancel_uploads_done">Wysyłanie anulowane.</string>
+    <string name="pref_cancel_uploads_title">Anuluj wysyłanie</string>
+
+    <string name="testing">testing</string>
+
+    <string name="unit_bar">bar</string>
+    <string name="unit_g">G</string>
+    <string name="unit_kmh">km/h</string>
+    <string name="unit_kw">KW</string>
+    <string name="unit_mph">mph</string>
+    <string name="unit_nm">Nm</string>
+    <string name="unit_psi">psi</string>
+    <string name="unit_rpm">RPM</string>
+    <string name="unit_rpm1000">×1000</string>
+    <string name="unit_volt">V</string>
+    <string name="unit_fahrenheit">Fahrenheit</string>
+    <string name="unit_celcius">Celcius</string>
+    <string name="unit_f">°F</string>
+    <string name="unit_c">°C</string>
+
+    <string name="unknown">unknown</string>
+    <string name="pref_showmic_summary">Pokaż ikonę mikrofonu w pasku stanu</string>
+    <string name="pref_showmic_title">Ikona mikrofonu</string>
+    <string name="label_tyreRR">PT</string>
+    <string name="label_tyreRL">LT</string>
+    <string name="label_tyreFR">PP</string>
+    <string name="label_tyreFL">LP</string>
+    <string name="element_torque_rpm">Torque - RPM</string>
+    <string name="element_torque_speed">Torque - Speed</string>
+    <string name="element_torque_fuelpressure">Torque - Fuel pressure</string>
+    <string name="element_torque_engineload">Torque - Engine load</string>
+    <string name="element_torque_timing_advance">Torque - Timing advance</string>
+    <string name="element_torque_intake_air_temperature">Torque - Intake air temperature (IAT)</string>
+    <string name="element_torque_mass_air_flow">Torque - Mass Air Flow (MAF)</string>
+    <string name="element_torque_throttle_position">Torque - Throttle position (Manifold)</string>
+    <string name="element_torque_relativethrottleposition">Torque - Throttle position (Relative)</string>
+    <string name="element_torque_turboboost">Torque - Turbo boost pressure</string>
+    <string name="element_torque_voltage">Torque - Voltage</string>
+    <string name="element_torque_AFR">Torque - AFR</string>
+    <string name="element_torque_fueltrimshortterm1">Torque - Short term fuel trim (bank 1)</string>
+    <string name="element_torque_fueltrimshortterm2">Torque - Short term fuel trim (bank 2)</string>
+    <string name="element_torque_fueltrimlongterm2">Torque - Long term fuel trim (bank 2)</string>
+    <string name="element_torque_accelerometer_total">Torque - Accelerometer (Total)</string>
+    <string name="element_torque_fueltrimlongterm1">Torque - Long term fuel trim (bank 1)</string>
+
+    <string name="label_fuel">Paliwo</string>
+    <string name="label_load">Obciążenie</string>
+    <string name="label_timing">Timing</string>
+    <string name="label_iat">IAT</string>
+    <string name="label_maf">MAF</string>
+    <string name="label_throttle">Przepustnica</string>
+    <string name="label_afr">AFR</string>
+    <string name="label_ftst1">FTst1</string>
+    <string name="label_ftst2">FTst2</string>
+    <string name="label_ftlt2">FTlt2</string>
+    <string name="label_ftlt1">FTlt1</string>
+    <string name="element_torque_phonebatterylevel">Torque - Phone battery level</string>
+    <string name="element_torque_phonebarometer">Torque - Phone barometer</string>
+    <string name="element_torque_obdadaptervoltage">Torque - OBD voltage</string>
+    <string name="element_torque_AFRc">Torque - AFR(commanded)</string>
+    <string name="label_afrc">AFR(c)</string>
+    <string name="pref_temperatureunit">Jednostka temperatury</string>
+    <string name="pref_title">Pasek stanu</string>
+    <string name="element_locationinfo">Location info</string>
+    <string name="element_mediainfo">Media info</string>
+    <string name="element_torque_voltagemodule">Torque - Voltage (Car)</string>
+    <string name="element_torque_transmissiontemp">Torque - Transmission temperature</string>
+    <string name="element_torque_pressurecontrol">Torque - Turbo pressure control</string>
+    <string name="element_torque_absolutethrottlepostion">Torque - Throttle position(Absolute)</string>
+    <string name="element_torque_intakemanifoldpressure">Torque - Intake manifold pressure</string>
+    <string name="element_torque_commandedequivalenceratiolambda">Torque - Commanded equivalence ratio (Lambda)</string>
+    <string name="element_torque_chargeaircoolertemperature">Torque - Charge air cooler temperature (CACT)</string>
+    <string name="element_torque_enginecoolanttemp">Torque - Engine coolant temperature</string>
+    <string name="element_torque_engineloadabsolute">Torque - Engine load (Absolute)</string>
+    <string name="element_torque_ambientairtemp">Torque - Ambient air temperature</string>
+    <string name="element_torque_catalysttemperature">Torque - Catalyst temperature</string>
+    <string name="element_torque_fuellevel">Torque - Fuel level</string>
+    <string name="element_torque_o2sensor1equivalenceratio">Torque - O2 sensor 1 equivalence ratio</string>
+    <string name="pref_unitprefs">Ustawienia jednostek</string>
+    <string name="pref_graphOff">Zegary są wyświetlne w zwykłym trybie</string>
+    <string name="pref_graphOn">Zegary są wyświetlane w trybie wykresu</string>
+    <string name="pref_displayasgraph">Wyświetl wykres zamiast zegara</string>
+    <string name="element_clock">Zegar</string>
+
+    <string name="bg_vw">Discover Pro Sport</string>
+    <string name="bg_vw2">Carbon fiber</string>
+    <string name="bg_vw3">Spotlight</string>
+    <string name="bg_vwplaid">GTI Tartan</string>
+    <string name="bg_gte">GTE Tartan</string>
+    <string name="bg_vwgtd">GTD Tartan</string>
+    <string name="bg_black">Black</string>
+    <string name="bg_cloth">Cloth</string>
+    <string name="bg_rock">Rock</string>
+    <string name="bg_outrun">Outrun</string>
+    <string name="bg_plain">Plain</string>
+    <string name="bg_seat">Lines</string>
+    <string name="bg_seat2">Dark grid</string>
+    <string name="bg_skoda">Columbus</string>
+    <string name="bg_skoda2">Columbus Sport</string>
+    <string name="bg_skodaone">OneApp</string>
+    <string name="bg_blackboard">Blackboard</string>
+    <string name="bg_test">Test</string>
+    <string name="bg_beetle">Herbie</string>
+    <string name="pref_background">Tło</string>
+    <string name="font_ford">United Sans</string>
+    <string name="bg_dots">Dots</string>
+
+    <string name="item_details_name">Nazwa:</string>
+    <string name="item_details_minimum">Minimalnie:</string>
+    <string name="item_details_maximum">Maksymalnie:</string>
+    <string name="item_details_resolution">Rozdzielczość:</string>
+    <string name="item_details_current">Aktualnie:</string>
+    <string name="item_details_desciption">Opis:</string>
+    <string name="item_details_go_back">Wróć</string>
+    <string name="pref_omit_empty_readings_summary_off">Pokazuj puste wartości w Odczytach</string>
+    <string name="pref_showmic_summary_off">Nie pokazuj ikony mikrofosu w pasku stanu</string>
+</resources>
