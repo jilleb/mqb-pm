@@ -2,7 +2,6 @@
 <resources>
     <string name="activity_credits_title">Créditos</string>
     <string name="activity_main_title">Información Sport</string>
-    <string name="activity_measurements_title">Mediciones (Alpha test)</string>
     <string name="activity_settings_title">Ajustes de Performance Monitor</string>
     <string name="activity_stopwatch_title">Cronómetro</string>
     <string name="app_car_service_name">Información Sport</string>

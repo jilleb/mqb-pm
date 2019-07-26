@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">AA-Dashboard</string>
-    <string name="app_car_service_name">AA-Dashboard</string>
 
     <string name="format_temperature">%.0f°</string>
     <string name="format_temperatureF">%.0f°F</string>

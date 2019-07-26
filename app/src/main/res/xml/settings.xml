@@ -162,7 +162,7 @@
             android:defaultValue="false"
 
             android:key="d2_active"
-            android:title="Enable second Dashboard"/>
+            android:title="@string/pref_enable_2nd_dash" />
         <!--TODO: Localize -->
 
         <ListPreference
@@ -299,7 +299,7 @@
             android:defaultValue="true"
             android:key="engineSpeedMonitoringActive"
             android:summary="..."
-            android:title="Enable Engine Speed Monitoring" />
+            android:title="@string/pref_enginespeed_monitor" />
 
 
 

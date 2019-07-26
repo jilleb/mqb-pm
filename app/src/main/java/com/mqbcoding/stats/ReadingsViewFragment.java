@@ -164,14 +164,12 @@ public class ReadingsViewFragment extends CarFragment {
             }
         });
 
+        //todo: Finalize this.
         HashMap<String, FieldSchema> schemaItem1 = new HashMap<>();
         HashMap<String, Object> tempMap = new HashMap<>();
-        schemaItem1.put("batteryVoltage", new FieldSchema(0,"TestDescr","",0,0,0));
-        tempMap.put("batteryVoltage", "DAfadslkfnadofnaskjdsa");
-        schemaItem1.put("batteryVoltage2", new FieldSchema(0,"Test","V",0,0,0));
-        tempMap.put("batteryVoltage2", "0.00");
-        schemaItem1.put("batteryVoltage3", new FieldSchema(0,"Test","V",0,0,0));
-        tempMap.put("batteryVoltage3", "0");
+        schemaItem1.put("No data available", new FieldSchema(0,"Currently, there's no data available. Make sure the car supports EXLAP data exchange.","",0,0,0));
+        tempMap.put("No data available", "-");
+
         mSchema.putAll(schemaItem1);
 
         mCarStatsListener.onNewMeasurements("DUPA", new Date(), tempMap);
