@@ -184,20 +184,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
         android:layout_marginTop="24dp"
         android:textAppearance="@style/CarBody2"
+        android:textStyle="italic"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/fragment_item_details_tv_descr"
-        android:textStyle="bold|italic"
         tools:textColor="@android:color/white" />
 
     <Button
+        android:id="@+id/items_fragment_back_btn"
+        style="@style/CarBody1"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:id="@+id/items_fragment_back_btn"
         android:text="@string/item_details_go_back"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
