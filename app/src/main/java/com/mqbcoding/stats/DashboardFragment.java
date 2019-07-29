@@ -113,6 +113,7 @@ public class DashboardFragment extends CarFragment {
     private static final String FORMAT_TEMPERATUREF = "%.1f°F";
     private static final String FORMAT_VOLT = "%.1fV";
     private static final String FORMAT_VOLT0 = "-,-V";
+    private boolean celsiusTempUnit;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -250,7 +251,7 @@ public class DashboardFragment extends CarFragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         boolean pressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
-        boolean temperatureUnits = sharedPreferences.getBoolean("selectTemperatureUnit", true);  //true = celcius, false = fahrenheit
+        celsiusTempUnit = sharedPreferences.getBoolean("selectTemperatureUnit", true);  //true = celcius, false = fahrenheit
 
         raysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
         boolean maxOn = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
@@ -468,7 +469,7 @@ public class DashboardFragment extends CarFragment {
         pressureMin = pressureUnits ? -3 : -30;
         pressureMax = pressureUnits ? 3 : 30;
 
-        temperatureUnit = getString(temperatureUnits ? R.string.unit_c : R.string.unit_f);
+        temperatureUnit = getString(celsiusTempUnit ? R.string.unit_c : R.string.unit_f);
 
         // build ImageIndicator using the resourceId
         // get the size of the Clock, to make sure the imageindicator has the right size.
@@ -1741,8 +1742,12 @@ public class DashboardFragment extends CarFragment {
         // Display temperature in right side of Title  bar
         Float currentTemperature = (Float) mLastMeasurements.get("outsideTemperature");
         if (currentTemperature != null) {
-            String temperature = String.format(Locale.US, FORMAT_DECIMALS, currentTemperature);
-            if (temperature.equals(currentRightTitleValue)){
+            if (!celsiusTempUnit) {
+                currentTemperature = CarUtils.celsiusToFahrenheit(currentTemperature);
+            }
+            String temperature =
+                    String.format(Locale.US, FORMAT_DECIMALS, currentTemperature) + " " + temperatureUnit;
+            if (!temperature.equals(currentRightTitleValue)){
                 mTitleElementRight.setText(temperature);
             }
         } else {
