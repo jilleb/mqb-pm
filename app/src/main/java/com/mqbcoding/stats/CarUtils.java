@@ -28,4 +28,8 @@ public class CarUtils {
         drawable.draw(canvas);
         return bitmap;
     }
+
+    public static float celsiusToFahrenheit(float celsius) {
+        return (float)(celsius * 1.8 + 32);
+    }
 }
