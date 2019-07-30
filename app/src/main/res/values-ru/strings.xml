@@ -1,20 +1,7 @@
 <resources>
 
-    <string name="format_temperature">%.0f°</string>
-    <string name="format_temperatureF">%.0f°F</string>
-    <string name="format_temperatureC">%.0f°C</string>
-    <string name="format_volt">%.1fV</string>
-    <string name="format_gforce">%.1fG</string>
-    <string name="format_percent">%.1f</string>
-    <string name="format_degrees">%.1f°</string>
-
-    <string name="format_decimals">%.1f</string>
-    <string name="format_noDecimals">%.0f</string>
-
     <string name="unit_psi">psi</string>
     <string name="unit_bar">бар</string>
-    <string name="format_volt0">0,0V</string>
-    <string name="format_temperature0">0,0°</string>
     <string name="unit_kmh">км/ч</string>
     <string name="unit_rpm">об. мин</string>
     <string name="unit_nm">Nm</string>
@@ -74,7 +61,5 @@
     <string name="pref_graphDelay">График частота</string>
 
     <string name="testing">testing</string>
-    <string name="format_km">%.1f km</string>
-    <string name="format_miles">%.1f miles</string>
 
 </resources>

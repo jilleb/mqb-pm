@@ -1,19 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="format_temperatureF">%.1f°F</string>
-    <string name="format_temperature">%.1f°</string>
+    <string name="app_name">Monitor výkonu pro VAG</string>
     <string name="app_car_service_name">Monitor výkonu</string>
-    <string name="format_temperatureC">%.1f°C</string>
-    <string name="format_volt">%.1fV</string>
-    <string name="format_gforce">%.1fG</string>
-    <string name="format_percent">%.1f</string>
-    <string name="format_degrees">%.1f°</string>
-    <string name="format_decimals">%.1f</string>
-    <string name="format_noDecimals">%.0f</string>
     <string name="unit_psi">psi</string>
     <string name="unit_bar">bar</string>
-    <string name="format_volt0">-,-V</string>
-    <string name="format_temperature0">-,-°</string>
     <string name="unit_kmh">km/h</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_kw">KW</string>
@@ -111,8 +101,6 @@
     <string name="activity_main_title">Monitor výkonu</string>
     <string name="pref_resettoapply">Změna nastavení se projeví opětovným připojením telefonu k systému Android Auto.</string>
     <string name="unknown">neznámý</string>
-    <string name="format_km">%.1f km</string>
-    <string name="format_miles">%.1f mil</string>
     <string name="pref_ticks_on">Zobrazí hodnoty v budících</string>
     <string name="element_VIN">VIN</string>
     <string name="element_blinkingState">Blinkry</string>
@@ -151,7 +139,6 @@
     <string name="label_tyreRL">LZ</string>
     <string name="element_shortTermConsumptionPrimary">Spotřeba od startu</string>
     <string name="element_shortTermConsumptionSecondary">Spotřeba od startu (sekundární palivo)</string>
-    <string name="format_degreespersec">%.1f°/s</string>
     <string name="unit_fahrenheit">Fahrenheita</string>
     <string name="unit_celcius">Celsia</string>
     <string name="unit_f">°F</string>

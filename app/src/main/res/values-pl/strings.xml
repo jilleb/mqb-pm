@@ -69,21 +69,6 @@
     <string name="font_vw2" translatable="false">Volkswagen Thesis</string>
     <string name="font_vw3" translatable="false">VW Digit</string>
 
-    <string name="format_decimals">%.1f</string>
-    <string name="format_degrees">%.1f°</string>
-    <string name="format_gforce">%.1fG</string>
-    <string name="format_km">%.1f km</string>
-    <string name="format_miles">%.1f miles</string>
-    <string name="format_noDecimals">%.0f</string>
-    <string name="format_percent">%.1f</string>
-    <string name="format_degreespersec">%.1f°/s</string>
-    <string name="format_temperature">%.1f°</string>
-    <string name="format_temperature0">-,-°</string>
-    <string name="format_temperatureC">%.1f°C</string>
-    <string name="format_temperatureF">%.1f°F</string>
-    <string name="format_volt">%.1fV</string>
-    <string name="format_volt0">-,-V</string>
-
     <string name="kick_uploads_done">Wysyłanie zaplanowane.</string>
     <string name="kick_uploads_nothing_to_do">Wszystkie pliki zostały już wysłane</string>
 
@@ -267,4 +252,7 @@
     <string name="item_details_go_back">Wróć</string>
     <string name="pref_omit_empty_readings_summary_off">Pokazuj puste wartości w Odczytach</string>
     <string name="pref_showmic_summary_off">Nie pokazuj ikony mikrofosu w pasku stanu</string>
+    <string name="pref_staging_summary">Pokazuj animacje startową na zegarach</string>
+    <string name="pref_staging_title">Animacja startowa zegarów</string>
+    <string name="pref_staging_summary_off">Nie pokazuj animacji startowej na zegarach</string>
 </resources>

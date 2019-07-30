@@ -161,9 +161,22 @@
         <CheckBoxPreference
             android:defaultValue="false"
 
+            android:key="micActive"
+            android:summary="@string/pref_showmic_summary"
+            android:summaryOff="@string/pref_showmic_summary_off"
+            android:title="@string/pref_showmic_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="stagingActive"
+            android:summary="@string/pref_staging_summary"
+            android:summaryOff="@string/pref_staging_summary_off"
+            android:title="@string/pref_staging_title" />
+
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="d2_active"
             android:title="@string/pref_enable_2nd_dash" />
-        <!--TODO: Localize -->
 
         <ListPreference
             android:entries="@array/ClockDataElementsEntries"
@@ -238,6 +251,7 @@
             android:summary="%s"
             android:title="@string/pref_view4"
             android:dependency="d2_active" />
+
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_unitprefs">

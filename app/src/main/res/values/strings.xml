@@ -70,21 +70,6 @@
     <string name="font_vw2" translatable="false">Volkswagen Thesis</string>
     <string name="font_vw3" translatable="false">VW Digit</string>
 
-    <string name="format_decimals">%.1f</string>
-    <string name="format_degrees">%.1f°</string>
-    <string name="format_gforce">%.1fG</string>
-    <string name="format_km">%.1f km</string>
-    <string name="format_miles">%.1f miles</string>
-    <string name="format_noDecimals">%.0f</string>
-    <string name="format_percent">%.1f</string>
-    <string name="format_degreespersec">%.1f°/s</string>
-    <string name="format_temperature">%.1f°</string>
-    <string name="format_temperature0">-,-°</string>
-    <string name="format_temperatureC">%.1f°C</string>
-    <string name="format_temperatureF">%.1f°F</string>
-    <string name="format_volt">%.1fV</string>
-    <string name="format_volt0">-,-V</string>
-
     <string name="kick_uploads_done">Uploads scheduled.</string>
     <string name="kick_uploads_nothing_to_do">All uploads already completed.</string>
 
@@ -181,6 +166,9 @@
 
     <string name="pref_showmic_summary_off">Don\'t show microphone icon in statusbar</string>
     <string name="pref_showmic_title">Microphone icon</string>
+    <string name="pref_staging_summary">Show clock Staging animation at startup</string>
+    <string name="pref_staging_summary_off">Don's show staging animation at startup</string>
+    <string name="pref_staging_title">Staging at start</string>
     <string name="label_tyreRR">RR</string>
     <string name="label_tyreRL">RL</string>
     <string name="label_tyreFR">FR</string>

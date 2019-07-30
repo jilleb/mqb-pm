@@ -41,19 +41,6 @@
     <string name="font_segments">Display de 7 segmentos</string>
 
 
-    <string name="format_decimals">%.1f</string>
-    <string name="format_degrees">%.1f°</string>
-    <string name="format_gforce">%.1fG</string>
-    <string name="format_km">%.1f km</string>
-    <string name="format_miles">%.1f miles</string>
-    <string name="format_noDecimals">%.0f</string>
-    <string name="format_percent">%.1f</string>
-    <string name="format_temperature">%.0f°</string>
-    <string name="format_temperature0">0,0°</string>
-    <string name="format_temperatureC">%.0f°C</string>
-    <string name="format_temperatureF">%.0f°F</string>
-    <string name="format_volt">%.1fV</string>
-    <string name="format_volt0">0,0V</string>
     <string name="kick_uploads_done">Subidas programadas.</string>
     <string name="kick_uploads_nothing_to_do">Todas las subidas completadas.</string>
     <string name="notification_oil_text">Temperatura de trabajo del aceite motor alcanzada.</string>
@@ -130,7 +117,6 @@
     <string name="element_tyreStateFR">Estado de la rueda frontal derecha</string>
     <string name="element_tyreStateRL">Estado de la rueda trasera izquierda</string>
     <string name="element_tyreStateRR">Estado de la rueda trasera derecha</string>
-    <string name="format_degreespersec">%.1f°/s</string>
     <string name="notification_channel_description">Notificaciones mostradas en Android Auto.</string>
     <string name="notification_channel_name">Coche</string>
     <string name="notification_service_text">Registro activo.</string>
