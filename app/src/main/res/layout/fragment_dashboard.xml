@@ -30,13 +30,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- FIXME: Fix this layout! I can't get properly autosized textTitleElementLeft-->
     <TextView
         android:id="@+id/textTitleElementLeft"
-        android:layout_width="wrap_content"
+        android:layout_width="372dp"
         android:layout_height="40dp"
         android:textAppearance="@style/CarBody2"
         android:textColor="@android:color/white"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        app:layout_constraintEnd_toStartOf="@id/textTitleElement"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView

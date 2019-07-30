@@ -15,6 +15,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -104,6 +105,8 @@ public class DashboardFragment extends CarFragment {
     private View rootView;
     private String androidClockFormat = "hh:mm a";
     int dashboardNum=1;
+    private String googleGeocodeLocationStr = null;
+    private GeocodeLocationService mGeocodingService;
 
     // notation formats
     private static final String FORMAT_DECIMALS = "%.1f";
@@ -204,7 +207,7 @@ public class DashboardFragment extends CarFragment {
 
     };
 
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+    private final ServiceConnection mVexServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder) iBinder;
@@ -735,10 +738,49 @@ public class DashboardFragment extends CarFragment {
         super.onResume();
         Log.i(TAG, "onActivate");
         Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
-        getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+        getContext().bindService(serviceIntent, mVexServiceConnection, Context.BIND_AUTO_CREATE);
         startTorque();
         createAndStartUpdateTimer();
+        getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
+                mGeocodingServiceConnection,
+                Context.BIND_AUTO_CREATE);
     }
+
+    private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
+            mGeocodingService.setOnNewGeocodeListener(new GeocodeLocationService.IGeocodeResult() {
+                @Override
+                public void onNewGeocodeResult(Address result) {
+                    StringBuilder sb = new StringBuilder();
+                    String tmp = result.getThoroughfare();
+                    if (tmp != null)
+                        sb.append(tmp);
+                    tmp = result.getSubThoroughfare();
+                    if (tmp != null) {
+                        sb.append(' ');
+                        sb.append(tmp);
+                    }
+                    if (sb.length() != 0)
+                        sb.append(", ");
+                    tmp = result.getLocality();
+                    if (tmp != null)
+                        sb.append(tmp);
+                    sb.append(' ');
+                    tmp = result.getCountryCode();
+                    if (tmp != null)
+                        sb.append(tmp);
+                    googleGeocodeLocationStr = sb.toString();
+                }
+            });
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            mGeocodingService = null;
+        }
+    };
 
     private void startTorque() {
         Intent intent = new Intent();
@@ -783,8 +825,8 @@ public class DashboardFragment extends CarFragment {
         updateTimer.cancel();
 
         mStatsClient.unregisterListener(mCarStatsListener);
-        getContext().unbindService(mServiceConnection);
-        //getContext().unbindService(torqueConnection);
+        getContext().unbindService(mVexServiceConnection);
+        getContext().unbindService(mGeocodingServiceConnection);
         if (torqueBind)
             try {
                 getContext().unbindService(torqueConnection);
@@ -1859,7 +1901,11 @@ public class DashboardFragment extends CarFragment {
             leftTitle = location1 + ", " + location2;
         }
 
-        if (!Objects.equals(currentLeftTitleValue, leftTitle)) {
+        if (leftTitle.isEmpty()) {
+            leftTitle = googleGeocodeLocationStr;
+        }
+
+        if (!currentLeftTitleValue.equals(leftTitle)) {
             mTitleElementLeft.setText(leftTitle);
         }
 
