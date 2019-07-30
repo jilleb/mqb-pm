@@ -4,13 +4,16 @@ import android.app.AlertDialog;
 import android.app.job.JobInfo;
 import android.app.job.JobScheduler;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.SwitchPreference;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.ArrayAdapter;
@@ -57,6 +60,17 @@ public class SettingsFragment extends PreferenceFragment {
                         .getDefaultSharedPreferences(preference.getContext())
                         .getAll().get(preference.getKey()));
     }
+
+    private SharedPreferences.OnSharedPreferenceChangeListener sharedPrefChangeListener =
+            new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            if (key.equals(SettingsActivity.PREF_LOCATION)) {
+                SwitchPreference useGeocoding = (SwitchPreference) findPreference(SettingsActivity.PREF_LOCATION);
+                useGeocoding.setChecked(sharedPreferences.getBoolean(SettingsActivity.PREF_LOCATION, false));
+            }
+        }
+    };
 
     private List<File> findLogs() throws IOException {
         File logDir = CarStatsLogger.getLogsDir();
@@ -170,6 +184,15 @@ public class SettingsFragment extends PreferenceFragment {
             }
         });
 
+        findPreference(SettingsActivity.PREF_LOCATION).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                SettingsActivity activity = (SettingsActivity) getActivity();
+                activity.checkLocationPermissions();
+                return true;
+            }
+        });
+
         findPreference("listProviders").setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
@@ -187,6 +210,7 @@ public class SettingsFragment extends PreferenceFragment {
                 return true;
             }
         });
+        PreferenceManager.getDefaultSharedPreferences(getActivity()).registerOnSharedPreferenceChangeListener(sharedPrefChangeListener);
     }
 
     @Override

@@ -138,6 +138,16 @@
     <string name="reupload_last_nothing_to_do">Nie ma nic do ponownego wysłania.</string>
     <string name="cancel_uploads_done">Wysyłanie anulowane.</string>
     <string name="pref_cancel_uploads_title">Anuluj wysyłanie</string>
+    <string name="pref_location_category_title">Lokalizacja</string>
+    <string name="pref_location_showstreet_title">Pokaż nazwę ulicy w górnej belce</string>
+    <string name="pref_location_showstreet_summary_off">Nazwa ulicy nie zostanie pokazana</string>
+    <string name="pref_location_showstreet_summary_on">Nazwa ulicy będzie widoczna</string>
+    <string name="pref_location_use_geocoding_summary">Użyj usług google dla nazwy ulic jeżeli auto nie ma nawigacji</string>
+    <string name="pref_location_use_geocoding_title">Użyj usług Google</string>
+    <string name="pref_location_force_geocoding_title">Wymuś usługi Google</string>
+    <string name="pref_location_force_geocoding_summary_on">Zawsze używaj usług Google, nawet jak auto ma nawigację</string>
+    <string name="pref_location_force_geocoding_summary_off">Jeżeli auto ma nawigację, to użyj jej w celu ustalenia nazwy ulicy</string>
+    <string name="location_permission_denied_toast">Uprawnienia do lokalizacji urządzenia są wymagane w celu skorzystania z usług Geolokalizacji Google.</string>
 
     <string name="testing">testing</string>
 

@@ -254,6 +254,27 @@
 
     </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_location_category_title">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="showStreetNameInTitle"
+            android:summaryOff="@string/pref_location_showstreet_summary_off"
+            android:summaryOn="@string/pref_location_showstreet_summary_on"
+            android:title="@string/pref_location_showstreet_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="useGoogleGeocoding"
+            android:dependency="showStreetNameInTitle"
+            android:summary="@string/pref_location_use_geocoding_summary"
+            android:title="@string/pref_location_use_geocoding_title" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="forceGoogleGeocoding"
+            android:summaryOff="@string/pref_location_force_geocoding_summary_off"
+            android:summaryOn="@string/pref_location_force_geocoding_summary_on"
+            android:dependency="useGoogleGeocoding"
+            android:title="@string/pref_location_force_geocoding_title" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_unitprefs">
 
         <SwitchPreference

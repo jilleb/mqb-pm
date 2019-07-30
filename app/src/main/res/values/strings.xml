@@ -163,12 +163,21 @@
 
     <string name="unknown">unknown</string>
     <string name="pref_showmic_summary">Show microphone icon in statusbar</string>
-
     <string name="pref_showmic_summary_off">Don\'t show microphone icon in statusbar</string>
     <string name="pref_showmic_title">Microphone icon</string>
     <string name="pref_staging_summary">Show clock Staging animation at startup</string>
-    <string name="pref_staging_summary_off">Don's show staging animation at startup</string>
+    <string name="pref_staging_summary_off">Don\'s show staging animation at startup</string>
     <string name="pref_staging_title">Staging at start</string>
+    <string name="pref_location_category_title">Location</string>
+    <string name="pref_location_showstreet_title">Show street name on Title bar</string>
+    <string name="pref_location_showstreet_summary_off">Street name won't be shown on left of time clock</string>
+    <string name="pref_location_showstreet_summary_on">Street name will be shown on left of time clock</string>
+    <string name="pref_location_use_geocoding_summary">Use Google geocoding services if car doesn't provide street name</string>
+    <string name="pref_location_use_geocoding_title">Use Google Geocoding</string>
+    <string name="pref_location_force_geocoding_title">Force geocoding</string>
+    <string name="pref_location_force_geocoding_summary_on">Always use Google geocoding, even if car has Nav</string>
+    <string name="pref_location_force_geocoding_summary_off">If car has Nav, use his own geocoding</string>
+    <string name="location_permission_denied_toast">Location permission is needed for Google geocoding</string>
     <string name="label_tyreRR">RR</string>
     <string name="label_tyreRL">RL</string>
     <string name="label_tyreFR">FR</string>
