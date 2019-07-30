@@ -8,8 +8,8 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.annotation.Nullable;
-import android.support.v4.app.NotificationCompat;
+import androidx.annotation.Nullable;
+import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 import com.github.martoreto.aauto.vex.CarStatsClient;
@@ -25,6 +25,7 @@ public class CarStatsService extends CarModeService {
     private CarStatsClient mStatsClient;
     private CarStatsLogger mStatsLogger;
     private OilTempMonitor mOilTempMonitor;
+    private EngineSpeedMonitor mEngineSpeedMonitor;
     private WheelStateMonitor mWheelStateMonitor;
 
     private final IBinder mBinder = new CarStatsBinder();
@@ -68,6 +69,9 @@ public class CarStatsService extends CarModeService {
         mOilTempMonitor = new OilTempMonitor(this, new Handler());
         mStatsClient.registerListener(mOilTempMonitor);
 
+        mEngineSpeedMonitor = new EngineSpeedMonitor(this,new Handler());
+        mStatsClient.registerListener(mEngineSpeedMonitor);
+
         mWheelStateMonitor = new WheelStateMonitor(this, new Handler());
         mStatsClient.registerListener(mWheelStateMonitor);
 
@@ -109,6 +113,10 @@ public class CarStatsService extends CarModeService {
         if (mOilTempMonitor != null) {
             mOilTempMonitor.close();
             mOilTempMonitor = null;
+        }
+        if (mEngineSpeedMonitor != null) {
+            mEngineSpeedMonitor.close();
+            mEngineSpeedMonitor = null;
         }
 
         mStatsClient.stop();

@@ -1,31 +1,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
+
     <TextView
         android:id="@+id/tvName"
+        style="@style/CarBody2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:textSize="32dp" />
+        android:layout_marginStart="16dp" />
 
 
     <TextView
         android:id="@+id/tvValue"
+        style="@style/CarBody2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
         android:layout_below="@id/tvName"
+        android:layout_marginRight="16dp"
         android:layout_toLeftOf="@id/tvUnit"
         android:gravity="end"
-        android:textSize="64dp" />
+        android:textAlignment="viewEnd" />
+
     <TextView
         android:id="@+id/tvUnit"
-        android:layout_width="248dp"
+        style="@style/CarBody2"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvName"
+        android:layout_alignBaseline="@id/tvValue"
+        android:layout_alignParentEnd="true"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:layout_below="@id/tvName"
-        android:layout_alignParentEnd="true"
-        android:layout_alignBaseline="@id/tvValue"
-        android:textSize="64dp"/>
+        android:textAlignment="viewStart" />
 </RelativeLayout>

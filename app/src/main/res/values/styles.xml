@@ -259,8 +259,8 @@
         <item name="sv_tickPadding">-10dp</item>
         <item name="sv_tickRotation">true</item>
         <item name="sv_textSize">40dp</item>
-        <item name="sv_speedTextColor ">@android:color/transparent</item>
-        <item name="sv_unitTextColor ">@android:color/black</item>
+        <item name="sv_speedTextColor">@android:color/transparent</item>
+        <item name="sv_unitTextColor">@android:color/black</item>
         <item name="sv_speedTextSize">32sp</item>
         <item name="sv_unitTextSize">20sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
@@ -360,6 +360,7 @@
         <item name="sv_textColor">@android:color/transparent</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_withTremble">false</item>
     </style>
     <style name="AppTheme.SkodavRS" parent="AppTheme.Car">
@@ -387,6 +388,7 @@
         <item name="sv_textColor">@android:color/transparent</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_withTremble">false</item>
     </style>
     <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
@@ -408,6 +410,7 @@
         <item name="sv_textColor">@android:color/transparent</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_withTremble">false</item>
     </style>
     <style name="AppTheme.SkodaOneApp" parent="AppTheme.Car">
@@ -435,6 +438,7 @@
         <item name="sv_textColor">@android:color/transparent</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_withTremble">false</item>
     </style>
     <style name="AppTheme.Testing" parent="AppTheme.Car">
@@ -454,6 +458,7 @@
         <item name="sv_unitTextColor">@color/car_primary</item>
         <item name="sv_unitTextSize">20sp</item>
         <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
         <item name="sv_withTremble">false</item>
@@ -479,6 +484,7 @@
         <item name="sv_speedTextColor">@color/car_primary</item>
         <item name="sv_speedTextSize">32sp</item>
         <item name="sv_unitTextColor">@color/car_primary</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_unitTextSize">20sp</item>
         <item name="sv_textColor">@android:color/transparent</item>
         <item name="sv_textSize">12sp</item>
@@ -492,7 +498,6 @@
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_dark</item>
         <item name="themedNeedle">@drawable/needle_dark</item>
         <item name="sv_markColor">@android:color/transparent</item>
-        <item name="sv_markWidth">20dp</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_dark</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_withIndicatorLight">true</item>
@@ -504,6 +509,7 @@
         <item name="sv_speedTextPadding">50dp</item>
         <item name="sv_withTremble">false</item>
         <item name="sv_speedTextColor">@color/car_primary</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_speedTextSize">32sp</item>
         <item name="sv_unitTextColor">@color/car_primary</item>
         <item name="sv_unitTextSize">20sp</item>
@@ -537,6 +543,7 @@
         <item name="sv_unitTextColor">@color/car_primary</item>
         <item name="sv_unitTextSize">20sp</item>
         <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_speedTextPosition">CENTER</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
     </style>
