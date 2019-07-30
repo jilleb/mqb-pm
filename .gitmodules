@@ -1,0 +1,3 @@
+[submodule "lib/aauto-sdk"]
+	path = lib/aauto-sdk
+	url = https://github.com/cupral/aauto-sdk.git

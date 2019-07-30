@@ -11,7 +11,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -198,6 +198,11 @@ public class SettingsFragment extends PreferenceFragment {
         bindPreferenceSummaryToValue(findPreference("bigqueryDataset"));
         bindPreferenceSummaryToValue(findPreference("bigqueryTable"));
         bindPreferenceSummaryToValue(findPreference("oilTempThreshold"));
+
+        bindPreferenceSummaryToValue(findPreference("engineSpeedSoundUpToGear"));
+        bindPreferenceSummaryToValue(findPreference("engineSpeedESInform"));
+        bindPreferenceSummaryToValue(findPreference("engineSpeedESHint"));
+        bindPreferenceSummaryToValue(findPreference("engineSpeedESWarn"));
 
         Preference statsLoggerPref = findPreference(CarStatsLogger.PREF_ENABLED);
         try {
