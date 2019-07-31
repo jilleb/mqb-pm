@@ -328,63 +328,49 @@
             android:title="@string/pref_wheel_state_monitoring_title" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="Monitor Engine Speed">
+    <PreferenceCategory android:title="@string/pref_enginespeed_category_title">
         <!-- TODO: Localize and add summaries -->
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="engineSpeedMonitoringActive"
-            android:summary="..."
             android:title="@string/pref_enginespeed_monitor" />
-
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:dependency="engineSpeedMonitoringActive"
-            android:key="engineSpeedSoundActive"
-            android:summary="..."
-            android:title="Play Sound" />
-        <EditTextPreference
-            android:defaultValue="4"
-            android:dependency="engineSpeedSoundActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
-            android:inputType="number"
-            android:key="engineSpeedSoundUpToGear"
-            android:title="Play sound up to gear x" />
 
         <EditTextPreference
             android:defaultValue="5500"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:dialogTitle="@string/pref_enginespeed_rpm_dialog_title"
             android:inputType="number"
             android:key="engineSpeedESInform"
-            android:title="RPM inform"/>
+            android:title="@string/pref_enginespeed_rpm_inform"/>
         <EditTextPreference
             android:defaultValue="5900"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:dialogTitle="@string/pref_enginespeed_rpm_dialog_title"
             android:inputType="number"
             android:key="engineSpeedESHint"
-            android:title="RPM hint" />
+            android:title="@string/pref_enginespeed_rpm_hint" />
         <EditTextPreference
             android:defaultValue="6300"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:dialogTitle="@string/pref_enginespeed_rpm_dialog_title"
             android:inputType="number"
             android:key="engineSpeedESWarn"
-            android:title="RPM warn" />
+            android:title="@string/pref_enginespeed_rpm_warn" />
 
         <CheckBoxPreference
             android:defaultValue="true"
             android:dependency="engineSpeedMonitoringActive"
             android:key="engineSpeedSoundActive"
-            android:title="Play Sound" />
+            android:title="@string/pref_enginespeed_play_sound"
+            android:summary="@string/pref_enginespeed_play_sound_summary"/>
+
         <EditTextPreference
             android:defaultValue="4"
             android:dependency="engineSpeedSoundActive"
-            android:dialogTitle="Play sound up to gear x"
+            android:dialogTitle="@string/pref_enginespeed_play_sound_upto"
             android:inputType="number"
             android:key="engineSpeedSoundUpToGear"
-            android:title="Play sound up to gear x" />
+            android:title="@string/pref_enginespeed_play_sound_upto" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_providers_category_title">

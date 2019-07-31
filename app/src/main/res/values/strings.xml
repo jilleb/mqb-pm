@@ -148,7 +148,7 @@
     <string name="unit_bar">bar</string>
     <string name="unit_g">G</string>
     <string name="unit_kmh">km/h</string>
-    <string name="unit_kw">KW</string>
+    <string name="unit_kw">kW</string>
     <string name="unit_mph">mph</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_psi">psi</string>
@@ -269,7 +269,16 @@
     <string name="item_details_current">Current value:</string>
     <string name="item_details_desciption">Description:</string>
     <string name="item_details_go_back">Go Back</string>
+    <string name="pref_enginespeed_category_title">Monitor Engine Speed</string>
     <string name="pref_enginespeed_monitor">Enable RPM monitoring</string>
+    <string name="pref_enginespeed_rpm_inform">RPM inform</string>
+    <string name="pref_enginespeed_rpm_hint">RPM hint</string>
+    <string name="pref_enginespeed_rpm_warn">RPM warn</string>
+    <string name="pref_enginespeed_play_sound">Play sound</string>
+    <string name="pref_enginespeed_play_sound_summary">Play sound when shift is needed</string>
+    <string name="pref_enginespeed_play_sound_upto">Play sound up to gear</string>
+    <string name="pref_enginespeed_summary">Monitor engine speed to play sound when shift is needed</string>
+    <string name="pref_enginespeed_rpm_dialog_title">Engine RPMs</string>
 
 
 </resources>
