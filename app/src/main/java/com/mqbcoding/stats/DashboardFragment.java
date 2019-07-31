@@ -1107,7 +1107,7 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
             case "oilTemperature":
-                value.setText(FORMAT_TEMPERATURE0);;
+                value.setText(FORMAT_TEMPERATURE0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "vehicleSpeed":
@@ -1290,13 +1290,13 @@ public class DashboardFragment extends CarFragment {
         graph.setTitle(clock.getUnit());
 
         constraint.setBackgroundResource(blankBackgroundResource); // put blank background
-        serie.setAnimated(false);
+        serie.setAnimated(true);
         graph.setElevation(55);
         Viewport graphViewport = graph.getViewport();
         GridLabelRenderer gridLabelRenderer = graph.getGridLabelRenderer();
 
         graphViewport.setXAxisBoundsManual(true);
-        graphViewport.setYAxisBoundsManual(false);
+        graphViewport.setYAxisBoundsManual(true);
         graphViewport.setMinX(0);
         // set default max and min, these will be set dynamically later
         graphViewport.setMaxX(120);
@@ -2201,8 +2201,6 @@ public class DashboardFragment extends CarFragment {
             torqueService = ITorqueService.Stub.asInterface(service);
         }
 
-        ;
-
         /**
          * What to do when we get disconnected from Torque.
          *
@@ -2212,7 +2210,6 @@ public class DashboardFragment extends CarFragment {
             torqueService = null;
         }
 
-        ;
     };
 
 
