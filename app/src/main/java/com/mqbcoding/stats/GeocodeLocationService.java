@@ -23,11 +23,11 @@ public class GeocodeLocationService extends Service {
     private static final String TAG = "GeocodeLocationService";
 
     // Minimum interval in ms between GPS location updates
-    private static final int LOCATION_INTERVAL = 2500;
+    private static final int LOCATION_INTERVAL = 250;
     // Distance threshold in meters, above which GPS location update will be fired
-    private static final float LOCATION_DISTANCE = 10f;
+    private static final float LOCATION_DISTANCE = 3f;
     // Minimum Distance threshold in meters above which we will query geocoding (and update client)
-    private static final float DISTANCE_THRESHOLD = 10f;
+    private static final float DISTANCE_THRESHOLD = 12f;
     // Geocoding thread sleep time in ms, which means minimum interval time between geocoding query
     private static final int GEOCODING_INTERVAL = 5000;
     // Start delay in ms of geocoding thread,
@@ -61,6 +61,7 @@ public class GeocodeLocationService extends Service {
         LocationListener(String provider) {
             Log.e(TAG, "LocationListener " + provider);
             mLastLocation = new Location(provider);
+            mLastDecodedLocation = new Location(provider);
         }
 
         @Override
@@ -158,14 +159,15 @@ public class GeocodeLocationService extends Service {
             geocodingTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    if (mLastDecodedLocation == null || mLastDecodedLocation.distanceTo(mLastLocation) > DISTANCE_THRESHOLD) {
+                    if (mLastDecodedLocation.distanceTo(mLastLocation) > DISTANCE_THRESHOLD) {
                         try {
                             List<Address> addresses = geocoder.getFromLocation(
                                     mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
+                            Log.e(TAG, "mLastLocation " + mLastLocation + " listener: " + mListener);
                             if (mListener != null && addresses != null && addresses.size() > 0) {
                                 mListener.onNewGeocodeResult(addresses.get(0));
-                                // Only save if we successfully send result to client
-                                mLastDecodedLocation = mLastLocation;
+                                mLastDecodedLocation.set(mLastLocation);
+                                Log.e(TAG, "Sended location to client: " + mLastDecodedLocation);
                             }
                         } catch (IOException e) {
                             Log.e(TAG, "Service Not Available");

@@ -106,6 +106,7 @@ public class DashboardFragment extends CarFragment {
     private String androidClockFormat = "hh:mm a";
     int dashboardNum=1;
     private String googleGeocodeLocationStr = null;
+    private String googleMapsLocationStr = null;
     private GeocodeLocationService mGeocodingService;
 
     // notation formats
@@ -709,25 +710,18 @@ public class DashboardFragment extends CarFragment {
         return rootView;
     }
 
-    private String currentLocationFromGoogleMapsNotification = null;
-
     private BroadcastReceiver onNoticeGoogleNavigationUpdate = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String title = intent.getStringExtra("title");
-            String text = intent.getStringExtra("text");
-
-            currentLocationFromGoogleMapsNotification = title;
-
-            //updateTitle();
+            //String text = intent.getStringExtra("text"); // Not used right now
+            googleMapsLocationStr = title;
         }
     };
     private BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            currentLocationFromGoogleMapsNotification=null;
-
-            //updateTitle();
+            googleMapsLocationStr = null;
         }
     };
 
@@ -750,6 +744,11 @@ public class DashboardFragment extends CarFragment {
                     mGeocodingServiceConnection,
                     Context.BIND_AUTO_CREATE);
         }
+
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(onNoticeGoogleNavigationUpdate, new IntentFilter("GoogleNavigationUpdate"));
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(onNoticeGoogleNavigationClosed, new IntentFilter("GoogleNavigationClosed"));
     }
 
     private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
@@ -1894,7 +1893,11 @@ public class DashboardFragment extends CarFragment {
         // Display location in left side of Title  bar
         if (showStreetName) {
             String leftTitle;
-            if (!forceGoogleGeocoding) {
+            if (googleMapsLocationStr != null) { // Google maps has always priority for now
+                leftTitle = googleMapsLocationStr;
+            } else if (forceGoogleGeocoding) {
+                leftTitle = googleGeocodeLocationStr;
+            } else {
                 String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
                 String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
 
@@ -1918,15 +1921,11 @@ public class DashboardFragment extends CarFragment {
                 if (leftTitle.isEmpty() && useGoogleGeocoding) {
                     leftTitle = googleGeocodeLocationStr;
                 }
-
-            } else {
-                leftTitle = googleGeocodeLocationStr;
             }
 
             if (!currentLeftTitleValue.equals(leftTitle)) {
                 mTitleElementLeft.setText(leftTitle);
             }
-
         }
 
         // Display temperature in right side of Title  bar

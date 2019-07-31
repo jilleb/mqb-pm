@@ -170,9 +170,9 @@
     <string name="pref_staging_title">Staging at start</string>
     <string name="pref_location_category_title">Location</string>
     <string name="pref_location_showstreet_title">Show street name on Title bar</string>
-    <string name="pref_location_showstreet_summary_off">Street name won't be shown on left of time clock</string>
+    <string name="pref_location_showstreet_summary_off">Street name won\'t be shown on left of time clock</string>
     <string name="pref_location_showstreet_summary_on">Street name will be shown on left of time clock</string>
-    <string name="pref_location_use_geocoding_summary">Use Google geocoding services if car doesn't provide street name</string>
+    <string name="pref_location_use_geocoding_summary">Use Google geocoding services if car doesn\'t provide street name</string>
     <string name="pref_location_use_geocoding_title">Use Google Geocoding</string>
     <string name="pref_location_force_geocoding_title">Force geocoding</string>
     <string name="pref_location_force_geocoding_summary_on">Always use Google geocoding, even if car has Nav</string>
