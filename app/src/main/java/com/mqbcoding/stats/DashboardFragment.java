@@ -1893,7 +1893,7 @@ public class DashboardFragment extends CarFragment {
         // Display location in left side of Title  bar
         if (showStreetName) {
             String leftTitle;
-            if (googleMapsLocationStr != null) { // Google maps has always priority for now
+            if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) { // Google maps has always priority for now
                 leftTitle = googleMapsLocationStr;
             } else if (forceGoogleGeocoding) {
                 leftTitle = googleGeocodeLocationStr;
