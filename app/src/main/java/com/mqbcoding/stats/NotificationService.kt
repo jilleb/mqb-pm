@@ -3,13 +3,11 @@ package com.mqbcoding.stats
 import android.app.Notification
 import android.content.*
 import android.service.notification.StatusBarNotification
-import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.graphics.Bitmap
 import android.os.Build
-import androidx.preference.Preference
 import android.service.notification.NotificationListenerService
+import android.support.v4.content.LocalBroadcastManager
 import android.text.SpannableString
-import androidx.preference.PreferenceManager
 
 
 class NotificationService : NotificationListenerService() {

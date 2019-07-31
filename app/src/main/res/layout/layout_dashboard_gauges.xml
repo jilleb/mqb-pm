@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toTopOf="@+id/constraintClockLeft"
         app:layout_constraintVertical_bias="0.69" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintClockRight"
         android:layout_width="275dp"
         android:layout_height="match_parent"
@@ -180,9 +180,9 @@
             app:sv_withEffects="false"
             app:sv_withTremble="false" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintClockCenter"
         android:layout_width="275dp"
         android:layout_height="match_parent"
@@ -290,9 +290,9 @@
             />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintClockLeft"
         android:layout_width="275dp"
         android:layout_height="match_parent"
@@ -403,7 +403,7 @@
 
             app:sv_withIndicatorLight="false" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
 
 
     <ImageView
@@ -420,7 +420,7 @@
         tools:ignore="ContentDescription"
         tools:visibility="gone" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintGraphCenter"
         android:layout_width="275dp"
         android:layout_height="0dp"
@@ -444,7 +444,7 @@
             app:layout_constraintStart_toStartOf="parent" />
 
 
-        <androidx.cardview.widget.CardView
+        <android.support.v7.widget.CardView
             android:id="@+id/center_layout"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -463,10 +463,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="0dp" />
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintGraphRight"
         android:layout_width="275dp"
         android:layout_height="0dp"
@@ -490,7 +490,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <android.support.v7.widget.CardView
             android:id="@+id/right_layout"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -513,10 +513,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="0dp" />
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintGraphLeft"
         android:layout_width="275dp"
         android:layout_height="0dp"
@@ -540,7 +540,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <androidx.cardview.widget.CardView
+        <android.support.v7.widget.CardView
             android:id="@+id/left_layout"
             android:layout_width="200dp"
             android:layout_height="200dp"
@@ -560,8 +560,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:elevation="0dp" />
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+    </android.support.constraint.ConstraintLayout>
 
     <TextView
         android:id="@+id/icon_Element1"
@@ -774,4 +774,4 @@
         app:layout_constraintStart_toStartOf="@+id/constraintClockRight" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</android.support.constraint.ConstraintLayout>
