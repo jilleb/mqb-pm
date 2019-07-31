@@ -19,11 +19,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
+import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -2027,7 +2027,7 @@ public class DashboardFragment extends CarFragment {
                 case "currentTorque":
                     Float mCurrentTorqueValue = (Float) mLastMeasurements.get(queryElement);
                     if (mCurrentTorqueValue != null) {
-                        value.setText(String.format(Locale.US, getText(R.string.format_decimals).toString(), mCurrentTorqueValue));
+                        value.setText(String.format(Locale.US, FORMAT_DECIMALS, mCurrentTorqueValue));
                     }
                     break;
 

@@ -316,25 +316,38 @@
             android:title="@string/pref_enginespeed_monitor" />
 
 
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dependency="engineSpeedMonitoringActive"
+            android:key="engineSpeedSoundActive"
+            android:summary="..."
+            android:title="Play Sound" />
+        <EditTextPreference
+            android:defaultValue="4"
+            android:dependency="engineSpeedSoundActive"
+            android:dialogTitle="@string/pref_oil_temp_threshold_title"
+            android:inputType="number"
+            android:key="engineSpeedSoundUpToGear"
+            android:title="Play sound up to gear x" />
 
         <EditTextPreference
             android:defaultValue="5500"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="RPM inform"
+            android:dialogTitle="@string/pref_oil_temp_threshold_title"
             android:inputType="number"
             android:key="engineSpeedESInform"
             android:title="RPM inform"/>
         <EditTextPreference
             android:defaultValue="5900"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="RPM hint"
+            android:dialogTitle="@string/pref_oil_temp_threshold_title"
             android:inputType="number"
             android:key="engineSpeedESHint"
             android:title="RPM hint" />
         <EditTextPreference
             android:defaultValue="6300"
             android:dependency="engineSpeedMonitoringActive"
-            android:dialogTitle="RPM warn"
+            android:dialogTitle="@string/pref_oil_temp_threshold_title"
             android:inputType="number"
             android:key="engineSpeedESWarn"
             android:title="RPM warn" />
