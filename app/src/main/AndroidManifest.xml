@@ -46,8 +46,8 @@
             </intent-filter>
         </service>
         <service
-            android:name=".GeocodeLocationService" android:exported="false"/>
-        <service android:name=".CarStatsService" />
+            android:name=".GeocodeLocationService" android:exported="false" android:enabled="true"/>
+        <service android:name=".CarStatsService" android:enabled="true"/>
         <service
             android:name=".LogUploadService"
             android:permission="android.permission.BIND_JOB_SERVICE" />

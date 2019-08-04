@@ -20,30 +20,22 @@ import java.util.TimerTask;
 
 public class GeocodeLocationService extends Service {
 
-    private static final String TAG = "GeocodeLocationService";
+    private static final String TAG = "Geocode";
 
-    // Minimum interval in ms between GPS location updates
-    private static final int LOCATION_INTERVAL = 250;
-    // Distance threshold in meters, above which GPS location update will be fired
-    private static final float LOCATION_DISTANCE = 3f;
     // Minimum Distance threshold in meters above which we will query geocoding (and update client)
-    private static final float DISTANCE_THRESHOLD = 12f;
+    private static final float DISTANCE_THRESHOLD = 13f;
     // Geocoding thread sleep time in ms, which means minimum interval time between geocoding query
-    private static final int GEOCODING_INTERVAL = 5000;
+    // It looks like minimum is 1 second
+    private static final int GEOCODING_INTERVAL = 1000;
     // Start delay in ms of geocoding thread,
     // I think it's not needed to start thread just after starting service
-    private static final int GEOCODING_DELAY = 250;
+    private static final int GEOCODING_DELAY = 500;
 
     private final IBinder mBinder = new LocalBinder();
     private IGeocodeResult mListener;
     private LocationManager mLocationManager = null;
     private Geocoder geocoder;
-    private LocationListener[] mLocationListeners = new LocationListener[]{
-            new LocationListener(LocationManager.GPS_PROVIDER),
-            new LocationListener(LocationManager.NETWORK_PROVIDER)
-    };
     private Timer geocodingTimer;
-    private Location mLastLocation;
     private Location mLastDecodedLocation;
 
     public interface IGeocodeResult {
@@ -56,36 +48,6 @@ public class GeocodeLocationService extends Service {
         }
     }
 
-    private class LocationListener implements android.location.LocationListener {
-
-        LocationListener(String provider) {
-            Log.e(TAG, "LocationListener " + provider);
-            mLastLocation = new Location(provider);
-            mLastDecodedLocation = new Location(provider);
-        }
-
-        @Override
-        public void onLocationChanged(Location location) {
-            Log.e(TAG, "onLocationChanged: " + location);
-            mLastLocation.set(location);
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-            Log.e(TAG, "onProviderDisabled: " + provider);
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-            Log.e(TAG, "onProviderEnabled: " + provider);
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-            Log.e(TAG, "onStatusChanged: " + provider);
-        }
-    }
-
     public GeocodeLocationService() {
         super();
     }
@@ -94,24 +56,7 @@ public class GeocodeLocationService extends Service {
     public void onCreate() {
         Log.e(TAG, "onCreate");
         initializeLocationManager();
-        try {
-            mLocationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
-                    mLocationListeners[1]);
-        } catch (java.lang.SecurityException ex) {
-            Log.i(TAG, "fail to request location update, ignore", ex);
-        } catch (IllegalArgumentException ex) {
-            Log.d(TAG, "network provider does not exist, " + ex.getMessage());
-        }
-        try {
-            mLocationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER, LOCATION_INTERVAL, LOCATION_DISTANCE,
-                    mLocationListeners[0]);
-        } catch (java.lang.SecurityException ex) {
-            Log.i(TAG, "fail to request location update, ignore", ex);
-        } catch (IllegalArgumentException ex) {
-            Log.d(TAG, "gps provider does not exist " + ex.getMessage());
-        }
+        mLastDecodedLocation = new Location(LocationManager.GPS_PROVIDER);
         geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
         initializeTimerTask();
         super.onCreate();
@@ -119,17 +64,8 @@ public class GeocodeLocationService extends Service {
 
     @Override
     public void onDestroy() {
-        Log.e(TAG, "onDestroy");
         geocodingTimer.cancel();
-        if (mLocationManager != null) {
-            for (LocationListener mLocationListener : mLocationListeners) {
-                try {
-                    mLocationManager.removeUpdates(mLocationListener);
-                } catch (Exception ex) {
-                    Log.i(TAG, "fail to remove location listners, ignore", ex);
-                }
-            }
-        }
+        geocodingTimer = null;
         super.onDestroy();
     }
 
@@ -141,12 +77,10 @@ public class GeocodeLocationService extends Service {
 
     @Override
     public IBinder onBind(Intent intent) {
-        Log.e(TAG, "onBind");
         return mBinder;
     }
 
     private void initializeLocationManager() {
-        Log.e(TAG, "initializeLocationManager");
         if (mLocationManager == null) {
             mLocationManager = (LocationManager)
                     getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
@@ -156,27 +90,41 @@ public class GeocodeLocationService extends Service {
     private void initializeTimerTask() {
         if (geocodingTimer == null) {
             geocodingTimer = new Timer();
-            geocodingTimer.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    if (mLastDecodedLocation.distanceTo(mLastLocation) > DISTANCE_THRESHOLD) {
-                        try {
-                            List<Address> addresses = geocoder.getFromLocation(
-                                    mLastLocation.getLatitude(), mLastLocation.getLongitude(), 1);
-                            Log.e(TAG, "mLastLocation " + mLastLocation + " listener: " + mListener);
-                            if (mListener != null && addresses != null && addresses.size() > 0) {
-                                mListener.onNewGeocodeResult(addresses.get(0));
-                                mLastDecodedLocation.set(mLastLocation);
-                                Log.e(TAG, "Sended location to client: " + mLastDecodedLocation);
-                            }
-                        } catch (IOException e) {
-                            Log.e(TAG, "Service Not Available");
-                        }
-                    }
-                }
-            }, GEOCODING_DELAY, GEOCODING_INTERVAL);
+            geocodingTimer.scheduleAtFixedRate(geocodingTimerTask, GEOCODING_DELAY, GEOCODING_INTERVAL);
         }
     }
+
+
+    // I know, that we can use requestLocationUpdates here to receive location in a event-based system
+    // But problem is that on some phones locationUpdates are getting stopped at random time after start
+    // With no info on logcat why actually phone stops delivering location updates
+    // I couldn't find why it behaves in a such way, so i decided to go that way.
+    private final TimerTask geocodingTimerTask = new TimerTask() {
+        @Override
+        public void run() {
+            Location lastLocation = null;
+            try {
+                lastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                Log.d(TAG,"Received location: " + lastLocation);
+            } catch (SecurityException ex) {
+                Log.e(TAG, "Security Exception while getting last known location?");
+            }
+            if (lastLocation != null
+                    && mLastDecodedLocation.distanceTo(lastLocation) > DISTANCE_THRESHOLD) {
+                try {
+                    List<Address> addresses = geocoder.getFromLocation(
+                            lastLocation.getLatitude(), lastLocation.getLongitude(), 1);
+                    if (mListener != null && addresses != null && addresses.size() > 0) {
+                        mListener.onNewGeocodeResult(addresses.get(0));
+                        mLastDecodedLocation.set(lastLocation);
+                        Log.d(TAG, "Sended location to client: " + mLastDecodedLocation);
+                    }
+                } catch (IOException e) {
+                    Log.e(TAG, "Service Not Available");
+                }
+            }
+        }
+    };
 
     public void setOnNewGeocodeListener(IGeocodeResult listener) {
         mListener = listener;

@@ -740,9 +740,11 @@ public class DashboardFragment extends CarFragment {
         startTorque();
         createAndStartUpdateTimer();
         if (useGoogleGeocoding) {
-            getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
+            if(!getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
                     mGeocodingServiceConnection,
-                    Context.BIND_AUTO_CREATE);
+                    Context.BIND_AUTO_CREATE)) {
+                Log.e("Geocode", "Cannot bind?!");
+            }
         }
 
         LocalBroadcastManager.getInstance(getContext())
@@ -751,38 +753,42 @@ public class DashboardFragment extends CarFragment {
                 .registerReceiver(onNoticeGoogleNavigationClosed, new IntentFilter("GoogleNavigationClosed"));
     }
 
+    private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
+        @Override
+        public void onNewGeocodeResult(Address result) {
+            StringBuilder sb = new StringBuilder();
+            String tmp = result.getThoroughfare();
+            if (tmp != null)
+                sb.append(tmp);
+            tmp = result.getSubThoroughfare();
+            if (tmp != null) {
+                sb.append(' ');
+                sb.append(tmp);
+            }
+            if (sb.length() != 0)
+                sb.append(", ");
+            tmp = result.getLocality();
+            if (tmp != null)
+                sb.append(tmp);
+            sb.append(' ');
+            tmp = result.getCountryCode();
+            if (tmp != null)
+                sb.append(tmp);
+            googleGeocodeLocationStr = sb.toString();
+        }
+    };
+
     private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
-            mGeocodingService.setOnNewGeocodeListener(new GeocodeLocationService.IGeocodeResult() {
-                @Override
-                public void onNewGeocodeResult(Address result) {
-                    StringBuilder sb = new StringBuilder();
-                    String tmp = result.getThoroughfare();
-                    if (tmp != null)
-                        sb.append(tmp);
-                    tmp = result.getSubThoroughfare();
-                    if (tmp != null) {
-                        sb.append(' ');
-                        sb.append(tmp);
-                    }
-                    if (sb.length() != 0)
-                        sb.append(", ");
-                    tmp = result.getLocality();
-                    if (tmp != null)
-                        sb.append(tmp);
-                    sb.append(' ');
-                    tmp = result.getCountryCode();
-                    if (tmp != null)
-                        sb.append(tmp);
-                    googleGeocodeLocationStr = sb.toString();
-                }
-            });
+            mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
+            Log.d("Geocode", "Service connected");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
+            Log.e("Geocode", "Service disconnected");
             mGeocodingService = null;
         }
     };
