@@ -29,7 +29,6 @@ public class MainCarActivity extends CarActivity {
     static final String MENU_READINGS = "readings";
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
-    static final String MENU_RESTART = "restart";
 
 
     // static final String MENU_DEBUG_LOG = "log";
@@ -65,10 +64,6 @@ public class MainCarActivity extends CarActivity {
                 case MENU_STOPWATCH:
                     switchToFragment(FRAGMENT_STOPWATCH);
                     break;
-                case MENU_RESTART:
-                    //apply settings
-                    Runtime.getRuntime().exit(0);
-                break;
                 case MENU_CREDITS:
                     switchToFragment(FRAGMENT_CREDITS);
                     break;
@@ -239,11 +234,6 @@ public class MainCarActivity extends CarActivity {
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))
-                .setType(MenuItem.Type.ITEM)
-                .build());
-
-        mainMenu.addMenuItem(MENU_RESTART, new MenuItem.Builder()
-                .setTitle("Restart")
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
