@@ -47,6 +47,7 @@ public class MainCarActivity extends CarActivity {
     private Boolean connectivityOn, batteryOn, clockOn, micOn;
     private SharedPreferences preferences;
     private String selectedBackground;
+    private Boolean d2Active;
 
     private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
         @Override
@@ -144,7 +145,11 @@ public class MainCarActivity extends CarActivity {
             carUiController.getStatusBarController().hideMicButton();
         }
 
-        boolean d2Active = preferences.getBoolean("d2_active", false);
+        boolean readedD2Active = preferences.getBoolean("d2_active", false);
+        if (d2Active == null || d2Active != readedD2Active) {
+            d2Active = readedD2Active;
+            getCarUiController().getMenuController().setRootMenuAdapter(createMenu(d2Active));
+        }
     }
 
     @Override
@@ -152,13 +157,8 @@ public class MainCarActivity extends CarActivity {
         super.onCreate(bundle);
         setLocalTheme("VW GTI");
         setContentView(R.layout.activity_car_main);
-
-
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferenceChangeHandler();
-
-
-
 
         CarUiController carUiController = getCarUiController();
         carUiController.getStatusBarController().showTitle();
@@ -182,18 +182,11 @@ public class MainCarActivity extends CarActivity {
 
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
-        FragmentTransaction transaction = fragmentManager.beginTransaction()
+        fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, carfragment1, FRAGMENT_CAR_1)
-                .detach(carfragment1);
-
-        // Check this
-        //if (carfragment2!=null) {
-            transaction
-                    .add(R.id.fragment_container, carfragment2, FRAGMENT_CAR_2)
-                    .detach(carfragment2);
-        //}
-
-        transaction
+                .detach(carfragment1)
+                .add(R.id.fragment_container, carfragment2, FRAGMENT_CAR_2)
+                .detach(carfragment2)
                 .add(R.id.fragment_container, readingsViewFragment, FRAGMENT_READINGS)
                 .detach(readingsViewFragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
@@ -209,6 +202,19 @@ public class MainCarActivity extends CarActivity {
         }
         switchToFragment(initialFragmentTag);
 
+        MenuController menuController = getCarUiController().getMenuController();
+        menuController.showMenuButton();
+        StatusBarController statusBarController = getCarUiController().getStatusBarController();
+
+        carfragment1.setupStatusBar(statusBarController);
+        carfragment2.setupStatusBar(statusBarController);
+
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
+                false);
+
+    }
+
+    private ListMenuAdapter createMenu(boolean withSecondDashboard) {
         ListMenuAdapter mainMenu = new ListMenuAdapter();
         mainMenu.setCallbacks(mMenuCallbacks);
 
@@ -219,13 +225,13 @@ public class MainCarActivity extends CarActivity {
                 .build());
 
         // TODO: make this remove
-        //if (d2Active) {
+        if (withSecondDashboard) {
             mainMenu.addMenuItem(MENU_DASHBOARD2, new MenuItem.Builder()
                     .setTitle(getString(R.string.activity_main_title) + " 2")
                     .setType(MenuItem.Type.ITEM)
                     .build());
-        //}
-        
+        }
+
         mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_readings_title))
                 .setType(MenuItem.Type.ITEM)
@@ -257,19 +263,7 @@ public class MainCarActivity extends CarActivity {
                 .build());*/
 
         //   mainMenu.addSubmenu(MENU_OTHER, otherMenu);
-
-        MenuController menuController = getCarUiController().getMenuController();
-        menuController.setRootMenuAdapter(mainMenu);
-        menuController.showMenuButton();
-        StatusBarController statusBarController = getCarUiController().getStatusBarController();
-
-        carfragment1.setupStatusBar(statusBarController);
-        //if (carfragment2!=null)
-            carfragment2.setupStatusBar(statusBarController);
-
-        getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
-                false);
-
+        return mainMenu;
     }
 
     @Override
