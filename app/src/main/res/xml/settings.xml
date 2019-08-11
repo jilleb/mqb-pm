@@ -74,12 +74,6 @@
             android:summaryOff="@string/pref_ambient_off"
             android:summaryOn="@string/pref_ambient_on"
             android:title="@string/pref_ambient" />
-            
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="micActive"
-            android:summary="@string/pref_showmic_summary"
-            android:title="@string/pref_showmic_title" />
     </PreferenceCategory>
     <PreferenceCategory
         android:singleLineTitle="false"
@@ -157,14 +151,6 @@
     <PreferenceCategory
         android:singleLineTitle="false"
         android:title="@string/pref_dataelementsettings">
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-
-            android:key="micActive"
-            android:summary="@string/pref_showmic_summary"
-            android:summaryOff="@string/pref_showmic_summary_off"
-            android:title="@string/pref_showmic_title" />
 
         <CheckBoxPreference
             android:defaultValue="true"

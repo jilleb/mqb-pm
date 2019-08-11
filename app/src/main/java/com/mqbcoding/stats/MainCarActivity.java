@@ -131,15 +131,6 @@ public class MainCarActivity extends CarActivity {
 
         }
 
-        // get user setting for mic on/of
-        CarUiController carUiController = getCarUiController();
-        micOn = preferences.getBoolean("micActive", true);
-        if (micOn) {
-            carUiController.getStatusBarController().showMicButton();
-        } else {
-            carUiController.getStatusBarController().hideMicButton();
-        }
-
         boolean readedD2Active = preferences.getBoolean("d2_active", false);
         if (d2Active == null || d2Active != readedD2Active) {
             d2Active = readedD2Active;
