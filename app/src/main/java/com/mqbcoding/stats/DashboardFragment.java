@@ -372,7 +372,6 @@ public class DashboardFragment extends CarFragment {
 
     private void setupListeners() {
         //click the
-        mTitleElement.setOnClickListener(resetMinMax);
         mGraphLeft.setOnClickListener(toggleView);
         mConstraintClockLeft.setOnClickListener(toggleView);
         mGraphCenter.setOnClickListener(toggleView);
@@ -1963,17 +1962,9 @@ public class DashboardFragment extends CarFragment {
 
     private void updateTitle() {
 
-        String currentTitleValue = mTitleElement.getText().toString();
+        //String currentTitleValue = mTitleElement.getText().toString();
         String currentRightTitleValue = mTitleElementRight.getText().toString();
         String currentLeftTitleValue = mTitleElementLeft.getText().toString();
-
-        // Display location in center of title bar:
-
-        String currentTime = getTime();
-
-        if (!Objects.equals(currentTitleValue, currentTime)) {
-            mTitleElement.setText(currentTime);
-        }
 
         // Display location in left side of Title  bar
         if (showStreetName) {

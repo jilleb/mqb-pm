@@ -156,16 +156,8 @@ public class MainCarActivity extends CarActivity {
         preferenceChangeHandler();
 
         CarUiController carUiController = getCarUiController();
-        carUiController.getStatusBarController().showTitle();
         //force night mode
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
-
-        // Show or hide Android Auto icons in the header
-        carUiController.getStatusBarController().hideConnectivityLevel();
-        carUiController.getStatusBarController().hideBatteryLevel();
-        carUiController.getStatusBarController().hideClock();
-        carUiController.getStatusBarController().hideMicButton();
-        carUiController.getStatusBarController().hideAppHeader();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
 
