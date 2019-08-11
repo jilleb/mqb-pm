@@ -121,7 +121,7 @@
     <string name="pref_pressureunit">Pressure unit</string>
     <string name="pref_providers">Telemetry providers</string>
     <string name="pref_providers_category_title">Telemetry providers</string>
-    <string name="pref_resettoapply">Apply settings by reconnecting phone to Android Auto.</string>
+    <string name="pref_resettoapply">Please connect to Android Auto to see results.</string>
     <string name="pref_rightclock">Right clock</string>
     <string name="pref_stats_logging_not_available">Logging not available: %1$s</string>
     <string name="pref_stats_logging_summary">Logs folder: %1$s</string>

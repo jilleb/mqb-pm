@@ -117,7 +117,7 @@
     <string name="pref_pressureunit">Jednostka ciśnienia</string>
     <string name="pref_providers">Dostawcy telemetrii</string>
     <string name="pref_providers_category_title">Dostawcy danych telemetrii</string>
-    <string name="pref_resettoapply">Zmiany będą widoczne po ponownym podłączeniu do Android Auto.</string>
+    <string name="pref_resettoapply">Podłącz telefon do samochodu, aby zobaczyć zmiany.</string>
     <string name="pref_rightclock">Prawy zegar</string>
     <string name="pref_stats_logging_not_available">Logowanie nie dostępne: %1$s</string>
     <string name="pref_stats_logging_summary">Folder z logami: %1$s</string>

@@ -1,5 +1,6 @@
 package com.mqbcoding.stats;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,7 +29,6 @@ public class MainCarActivity extends CarActivity {
     static final String MENU_READINGS = "readings";
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
-    static final String MENU_RESTART = "restart";
 
 
     // static final String MENU_DEBUG_LOG = "log";
@@ -44,6 +44,9 @@ public class MainCarActivity extends CarActivity {
     private static final int TEST_NOTIFICATION_ID = 1;
     private String mCurrentFragmentTag;
     private Boolean connectivityOn, batteryOn, clockOn, micOn;
+    private SharedPreferences preferences;
+    private String selectedBackground;
+    private Boolean d2Active;
 
     private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
         @Override
@@ -61,10 +64,6 @@ public class MainCarActivity extends CarActivity {
                 case MENU_STOPWATCH:
                     switchToFragment(FRAGMENT_STOPWATCH);
                     break;
-                case MENU_RESTART:
-                    //apply settings
-                    Runtime.getRuntime().exit(0);
-                break;
                 case MENU_CREDITS:
                     switchToFragment(FRAGMENT_CREDITS);
                     break;
@@ -89,35 +88,72 @@ public class MainCarActivity extends CarActivity {
         }
     };
     private Handler mHandler = new Handler();
+    private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            preferenceChangeHandler();
+        }
+    };
+    private String selectedTheme;
+
+    @Override
+    public void onResume() {
+        preferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
+    }
+
+    @Override
+    public void onPause() {
+        preferences.unregisterOnSharedPreferenceChangeListener(preferenceChangeListener);
+    }
+
+    private void preferenceChangeHandler() {
+        // Do we really need this looks like old code?
+        String readedBackground = preferences.getString("selectedBackground", "Black");
+        if (!readedBackground.equals(selectedBackground)) {
+            selectedBackground = readedBackground;
+            int resId = getResources().getIdentifier(selectedBackground, "drawable", this.getPackageName());
+            if (resId != 0) {
+                Drawable wallpaperImage = getResources().getDrawable(resId);
+                View container = findViewById(R.id.fragment_container);
+                container.setBackgroundResource(R.drawable.background_incar_black);
+                container.setBackground(wallpaperImage);
+            }
+        }
+
+        String readedTheme = preferences.getString("selectedTheme", "VW GTI");
+        if (!readedTheme.equals(selectedTheme)) {
+            selectedTheme = readedTheme;
+            setLocalTheme(selectedTheme);
+            FragmentManager manager = getSupportFragmentManager();
+            Fragment currentFragment = mCurrentFragmentTag == null ? null : manager.findFragmentByTag(mCurrentFragmentTag);
+            if (currentFragment != null)
+            manager.beginTransaction().detach(currentFragment).attach(currentFragment).commit();
+
+        }
+
+        // get user setting for mic on/of
+        CarUiController carUiController = getCarUiController();
+        micOn = preferences.getBoolean("micActive", true);
+        if (micOn) {
+            carUiController.getStatusBarController().showMicButton();
+        } else {
+            carUiController.getStatusBarController().hideMicButton();
+        }
+
+        boolean readedD2Active = preferences.getBoolean("d2_active", false);
+        if (d2Active == null || d2Active != readedD2Active) {
+            d2Active = readedD2Active;
+            getCarUiController().getMenuController().setRootMenuAdapter(createMenu(d2Active));
+        }
+    }
 
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-
-
-
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        String selectedTheme = sharedPreferences.getString("selectedTheme", "VW GTI");
-        String selectedBackground = sharedPreferences.getString("selectedBackground", "Black");
-
-        boolean d2Active = sharedPreferences.getBoolean("d2_active", false);
-
-        setLocalTheme(selectedTheme);
-
-        // get user setting for mic on/of
-        micOn = sharedPreferences.getBoolean("micActive", true);
-
+        setLocalTheme("VW GTI");
         setContentView(R.layout.activity_car_main);
-
-        // todo: make background user selectable:
-        View container = findViewById(R.id.fragment_container);
-        container.setBackgroundResource(R.drawable.background_incar_black);
-
-        int resId = getResources().getIdentifier(selectedBackground, "drawable", this.getPackageName());
-        if (resId != 0) {
-            Drawable wallpaperImage = getResources().getDrawable(resId);
-            container.setBackground(wallpaperImage);
-        }
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferenceChangeHandler();
 
         CarUiController carUiController = getCarUiController();
         carUiController.getStatusBarController().showTitle();
@@ -131,36 +167,21 @@ public class MainCarActivity extends CarActivity {
         carUiController.getStatusBarController().hideMicButton();
         carUiController.getStatusBarController().hideAppHeader();
 
-        //microphone
-        if (micOn) {
-            carUiController.getStatusBarController().showMicButton();
-        }
-
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         //set fragments:
         CarFragment carfragment1 = new DashboardFragment(1);
-
-
-        CarFragment carfragment2 = null;
-        if (d2Active)
-            carfragment2 = new DashboardFragment(2);
+        CarFragment carfragment2 = new DashboardFragment(2);
 
         ReadingsViewFragment readingsViewFragment = new ReadingsViewFragment();
 
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
-        FragmentTransaction transaction = fragmentManager.beginTransaction()
+        fragmentManager.beginTransaction()
                 .add(R.id.fragment_container, carfragment1, FRAGMENT_CAR_1)
-                .detach(carfragment1);
-
-        if (carfragment2!=null) {
-            transaction
-                    .add(R.id.fragment_container, carfragment2, FRAGMENT_CAR_2)
-                    .detach(carfragment2);
-        }
-
-        transaction
+                .detach(carfragment1)
+                .add(R.id.fragment_container, carfragment2, FRAGMENT_CAR_2)
+                .detach(carfragment2)
                 .add(R.id.fragment_container, readingsViewFragment, FRAGMENT_READINGS)
                 .detach(readingsViewFragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
@@ -176,6 +197,19 @@ public class MainCarActivity extends CarActivity {
         }
         switchToFragment(initialFragmentTag);
 
+        MenuController menuController = getCarUiController().getMenuController();
+        menuController.showMenuButton();
+        StatusBarController statusBarController = getCarUiController().getStatusBarController();
+
+        carfragment1.setupStatusBar(statusBarController);
+        carfragment2.setupStatusBar(statusBarController);
+
+        getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
+                false);
+
+    }
+
+    private ListMenuAdapter createMenu(boolean withSecondDashboard) {
         ListMenuAdapter mainMenu = new ListMenuAdapter();
         mainMenu.setCallbacks(mMenuCallbacks);
 
@@ -185,13 +219,14 @@ public class MainCarActivity extends CarActivity {
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
-        if (d2Active) {
+        // TODO: make this remove
+        if (withSecondDashboard) {
             mainMenu.addMenuItem(MENU_DASHBOARD2, new MenuItem.Builder()
                     .setTitle(getString(R.string.activity_main_title) + " 2")
                     .setType(MenuItem.Type.ITEM)
                     .build());
         }
-        
+
         mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_readings_title))
                 .setType(MenuItem.Type.ITEM)
@@ -199,11 +234,6 @@ public class MainCarActivity extends CarActivity {
 
         mainMenu.addMenuItem(MENU_STOPWATCH, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_stopwatch_title))
-                .setType(MenuItem.Type.ITEM)
-                .build());
-
-        mainMenu.addMenuItem(MENU_RESTART, new MenuItem.Builder()
-                .setTitle("Restart")
                 .setType(MenuItem.Type.ITEM)
                 .build());
 
@@ -223,19 +253,7 @@ public class MainCarActivity extends CarActivity {
                 .build());*/
 
         //   mainMenu.addSubmenu(MENU_OTHER, otherMenu);
-
-        MenuController menuController = getCarUiController().getMenuController();
-        menuController.setRootMenuAdapter(mainMenu);
-        menuController.showMenuButton();
-        StatusBarController statusBarController = getCarUiController().getStatusBarController();
-
-        carfragment1.setupStatusBar(statusBarController);
-        if (carfragment2!=null)
-            carfragment2.setupStatusBar(statusBarController);
-
-        getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
-                false);
-
+        return mainMenu;
     }
 
     @Override
@@ -248,8 +266,6 @@ public class MainCarActivity extends CarActivity {
     public void onStart() {
         super.onStart();
         switchToFragment(mCurrentFragmentTag);
-
-
     }
 
     private void setLocalTheme(String theme) {
@@ -321,6 +337,7 @@ public class MainCarActivity extends CarActivity {
                 setTheme(R.style.AppTheme_VolkswagenMIB2);
                 break;
         }
+
     }
 
     private void switchToFragment(String tag) {
