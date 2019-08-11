@@ -7,12 +7,14 @@
         style="@style/CarBody2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
         android:layout_marginStart="16dp" />
 
 
     <TextView
         android:id="@+id/tvValue"
         style="@style/CarBody2"
+        android:textColor="@android:color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvName"
@@ -24,6 +26,7 @@
     <TextView
         android:id="@+id/tvUnit"
         style="@style/CarBody2"
+        android:textColor="@android:color/white"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/tvName"
