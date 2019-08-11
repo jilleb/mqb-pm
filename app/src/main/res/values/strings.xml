@@ -148,7 +148,7 @@
     <string name="unit_bar">bar</string>
     <string name="unit_g">G</string>
     <string name="unit_kmh">km/h</string>
-    <string name="unit_kw">KW</string>
+    <string name="unit_kw">kW</string>
     <string name="unit_mph">mph</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_psi">psi</string>
@@ -163,12 +163,21 @@
 
     <string name="unknown">unknown</string>
     <string name="pref_showmic_summary">Show microphone icon in statusbar</string>
-
     <string name="pref_showmic_summary_off">Don\'t show microphone icon in statusbar</string>
     <string name="pref_showmic_title">Microphone icon</string>
     <string name="pref_staging_summary">Show clock Staging animation at startup</string>
     <string name="pref_staging_summary_off">Don\'t show staging animation at startup</string>
     <string name="pref_staging_title">Staging at start</string>
+    <string name="pref_location_category_title">Location</string>
+    <string name="pref_location_showstreet_title">Show street name on Title bar</string>
+    <string name="pref_location_showstreet_summary_off">Street name won\'t be shown on left of time clock</string>
+    <string name="pref_location_showstreet_summary_on">Street name will be shown on left of time clock</string>
+    <string name="pref_location_use_geocoding_summary">Use Google geocoding services if car doesn\'t provide street name</string>
+    <string name="pref_location_use_geocoding_title">Use Google Geocoding</string>
+    <string name="pref_location_force_geocoding_title">Force geocoding</string>
+    <string name="pref_location_force_geocoding_summary_on">Always use Google geocoding, even if car has Nav</string>
+    <string name="pref_location_force_geocoding_summary_off">If car has Nav, use his own geocoding</string>
+    <string name="location_permission_denied_toast">Location permission is needed for Google geocoding</string>
     <string name="label_tyreRR">RR</string>
     <string name="label_tyreRL">RL</string>
     <string name="label_tyreFR">FR</string>
@@ -260,7 +269,16 @@
     <string name="item_details_current">Current value:</string>
     <string name="item_details_desciption">Description:</string>
     <string name="item_details_go_back">Go Back</string>
+    <string name="pref_enginespeed_category_title">Monitor Engine Speed</string>
     <string name="pref_enginespeed_monitor">Enable RPM monitoring</string>
+    <string name="pref_enginespeed_rpm_inform">RPM inform</string>
+    <string name="pref_enginespeed_rpm_hint">RPM hint</string>
+    <string name="pref_enginespeed_rpm_warn">RPM warn</string>
+    <string name="pref_enginespeed_play_sound">Play sound</string>
+    <string name="pref_enginespeed_play_sound_summary">Play sound when shift is needed</string>
+    <string name="pref_enginespeed_play_sound_upto">Play sound up to gear</string>
+    <string name="pref_enginespeed_summary">Monitor engine speed to play sound when shift is needed</string>
+    <string name="pref_enginespeed_rpm_dialog_title">Engine RPMs</string>
 
 
 </resources>

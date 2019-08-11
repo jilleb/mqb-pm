@@ -9,7 +9,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.Settings;
@@ -20,6 +19,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+
+import android.widget.Toast;
 
 import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -36,10 +37,12 @@ public class SettingsActivity extends AppCompatActivity {
     private static final int REQUEST_GOOGLE_PLAY_SERVICES = 2;
     private static final int REQUEST_AUTHORIZATION = 3;
     private static final int REQUEST_ACCOUNT_PICKER = 4;
+    private static final int REQUEST_LOCATION_PERMISSION = 5;
 
     static final String EXTRA_AUTHORIZATION_INTENT = "authorizationRequest";
 
     private static final String PERMISSION_CAR_VENDOR_EXTENSION = "com.google.android.gms.permission.CAR_VENDOR_EXTENSION";
+    public static final String PREF_LOCATION = "useGoogleGeocoding";
 
     private GoogleAccountCredential mCredential;
     private Intent mCurrentAuthorizationIntent;
@@ -145,6 +148,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (checkGooglePlayServicesAvailable()) {
             haveGooglePlayServices();
         }
+        checkLocationPermissions();
     }
 
     void showGooglePlayServicesAvailabilityErrorDialog(final int connectionStatusCode) {
@@ -207,6 +211,17 @@ public class SettingsActivity extends AppCompatActivity {
                     editor.apply();
                 }
                 break;
+            case REQUEST_LOCATION_PERMISSION:
+                if (grantResults.length == 1 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(getApplicationContext(),
+                            R.string.location_permission_denied_toast, Toast.LENGTH_LONG).show();
+                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putBoolean(PREF_LOCATION, false);
+                    editor.apply();
+                    editor.commit();
+                }
+                break;
         }
     }
 
@@ -235,6 +250,22 @@ public class SettingsActivity extends AppCompatActivity {
         });
 
         chooseAccountIfNeeded();
+    }
+
+    void checkLocationPermissions() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getBoolean(PREF_LOCATION, false)) {
+            List<String> permissionsToRequest = new ArrayList<>();
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                permissionsToRequest.add(Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+            if (!permissionsToRequest.isEmpty()) {
+                ActivityCompat.requestPermissions(this,
+                        permissionsToRequest.toArray(new String[0]),
+                        REQUEST_LOCATION_PERMISSION);
+            }
+        }
     }
 
     void chooseAccount() {

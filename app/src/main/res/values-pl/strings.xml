@@ -39,7 +39,7 @@
     <string name="element_navHeading">Kierunek</string>
     <string name="element_navLatitude">Szerokość geograficzna GPS</string>
     <string name="element_navLongitude">Długość geograficzna GPS</string>
-    <string name="element_none">None</string>
+    <string name="element_none">Nic</string>
     <string name="element_odometer">Licznik kilometrów</string>
     <string name="element_oilTemperature">Temperatura oleju</string>
     <string name="element_outsideTemperature">Temperatura otoczenia</string>
@@ -56,8 +56,8 @@
     <string name="element_vehicleSpeed">Prędkość</string>
     <string name="element_wheelAngle">Kąt skręcenia kół</string>
     <string name="element_yawRate">Stopa odchylenia</string>
-    <string name="element_shortTermConsumptionPrimary">Short Term Consumption (primary fuel)</string>
-    <string name="element_shortTermConsumptionSecondary">Short Term Consumption (secondary fuel)</string>
+    <string name="element_shortTermConsumptionPrimary">Średnie spalanie (pierwsze paliwo)</string>
+    <string name="element_shortTermConsumptionSecondary">Średnie spalanie (drugie fuel)</string>
 
     <string name="font_audi" translatable="false">Audi Virtual Cockpit</string>
     <string name="font_frutiger" translatable="false">Frutiger</string>
@@ -74,7 +74,7 @@
 
     <string name="notification_channel_description">Powiadomienia wyświetlane w Android Auto.</string>
     <string name="notification_channel_name">Auto</string>
-    <string name="notification_oil_text">Temperatura oleju osiągnęła temperaturę roboczą.</string>
+    <string name="notification_oil_text">Olej osiągnął temperaturę roboczą.</string>
     <string name="notification_oil_title">Temperatura oleju</string>
     <string name="notification_service_text">Logowanie aktywne.</string>
 
@@ -93,11 +93,11 @@
     <string name="pref_bigquery_table_title">Nazwa tabeli</string>
     <string name="pref_centerclock">Środkowy zegar</string>
     <string name="pref_choose_account_title">Wybierz konto</string>
-    <string name="pref_dataelementsettings">Ustawienia elementu danych</string>
+    <string name="pref_dataelementsettings">Konfiguracja pulpitu</string>
     <string name="pref_font">Czcionka</string>
     <string name="pref_graphDelay">Rozdzielczość wykresu</string>
     <string name="pref_graphitem">Wykres</string>
-    <string name="pref_highlow">Największe/Najniższe wartości</string>
+    <string name="pref_highlow">Maks/Min wartości</string>
     <string name="pref_highlow_off">Nie pokazuj maks/min wartości</string>
     <string name="pref_highlow_on">Pokazuj maks/min wartości dla każdego zegara</string>
     <string name="pref_highlowmarks">Zaznacz maks/min wartości na zegarze</string>
@@ -111,7 +111,7 @@
     <string name="pref_list_providers_title">Lista dostawców danych</string>
     <string name="pref_logging_category_title">Logowanie zdarzeń</string>
     <string name="pref_notifications_category_title">Powiadomienia</string>
-    <string name="pref_oil_temp_monitoring_summary">Pokaż powiadomienie gdy temperatura oleju silnikowego osiągnie temperaturę roboczą</string>
+    <string name="pref_oil_temp_monitoring_summary">Pokaż powiadomienie gdy olej silnikowy osiągnie temperaturę roboczą</string>
     <string name="pref_oil_temp_monitoring_title">Sprawdzaj temperaturę oleju</string>
     <string name="pref_oil_temp_threshold_title">Temperatura robocza oleju</string>
     <string name="pref_omit_empty_readings_summary">Pomiń puste wartości w Odczytach</string>
@@ -138,21 +138,31 @@
     <string name="reupload_last_nothing_to_do">Nie ma nic do ponownego wysłania.</string>
     <string name="cancel_uploads_done">Wysyłanie anulowane.</string>
     <string name="pref_cancel_uploads_title">Anuluj wysyłanie</string>
+    <string name="pref_location_category_title">Lokalizacja</string>
+    <string name="pref_location_showstreet_title">Pokaż nazwę ulicy w górnej belce</string>
+    <string name="pref_location_showstreet_summary_off">Nazwa ulicy nie zostanie pokazana</string>
+    <string name="pref_location_showstreet_summary_on">Nazwa ulicy będzie widoczna</string>
+    <string name="pref_location_use_geocoding_summary">Użyj usług google dla nazwy ulic jeżeli auto nie ma nawigacji</string>
+    <string name="pref_location_use_geocoding_title">Użyj usług Google</string>
+    <string name="pref_location_force_geocoding_title">Wymuś usługi Google</string>
+    <string name="pref_location_force_geocoding_summary_on">Zawsze używaj usług Google, nawet jak auto ma nawigację</string>
+    <string name="pref_location_force_geocoding_summary_off">Jeżeli auto ma nawigację, to użyj jej w celu ustalenia nazwy ulicy</string>
+    <string name="location_permission_denied_toast">Uprawnienia do lokalizacji urządzenia są wymagane w celu skorzystania z usług Geolokalizacji Google.</string>
 
     <string name="testing">testing</string>
 
     <string name="unit_bar">bar</string>
     <string name="unit_g">G</string>
     <string name="unit_kmh">km/h</string>
-    <string name="unit_kw">KW</string>
+    <string name="unit_kw">kW</string>
     <string name="unit_mph">mph</string>
     <string name="unit_nm">Nm</string>
     <string name="unit_psi">psi</string>
     <string name="unit_rpm">RPM</string>
     <string name="unit_rpm1000">×1000</string>
     <string name="unit_volt">V</string>
-    <string name="unit_fahrenheit">Fahrenheit</string>
-    <string name="unit_celcius">Celcius</string>
+    <string name="unit_fahrenheit">Stopnie Fahrenheit\'a</string>
+    <string name="unit_celcius">Stopnie Celsjusza</string>
     <string name="unit_f">°F</string>
     <string name="unit_c">°C</string>
 
@@ -255,4 +265,18 @@
     <string name="pref_staging_summary">Pokazuj animacje startową na zegarach</string>
     <string name="pref_staging_title">Animacja startowa zegarów</string>
     <string name="pref_staging_summary_off">Nie pokazuj animacji startowej na zegarach</string>
+    <string name="pref_enable_2nd_dash">Włącz drugi pulpit</string>
+    <string name="pref_enginespeed_monitor">Włącz monitorowanie obrotów silnika</string>
+    <string name="pref_dataelementsettings2">Konfiguracja pulpitu</string>
+    <string name="pref_powerunit">Jednostki mocy</string>
+    <string name="unit_hp">KM</string>
+    <string name="pref_enginespeed_play_sound">Odtwórz dźwięk</string>
+    <string name="pref_enginespeed_play_sound_summary">Odtwórz dźwięk, kiedy potrzebna jest zmiana biegu</string>
+    <string name="pref_enginespeed_play_sound_upto">Ostatni bieg przy którym dźwięk będzie odtwarzany</string>
+    <string name="pref_enginespeed_rpm_dialog_title">Obroty silnika</string>
+    <string name="pref_enginespeed_rpm_hint">Obroty wskazówka</string>
+    <string name="pref_enginespeed_rpm_inform">Obroty informacja</string>
+    <string name="pref_enginespeed_rpm_warn">Obroty ostrzeżenie</string>
+    <string name="pref_enginespeed_summary">Monitoruj prędkość silnika w celu odtwarzania dźwięku</string>
+    <string name="pref_enginespeed_category_title">Monitorowanie obrotów silnika</string>
 </resources>

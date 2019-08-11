@@ -15,6 +15,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -104,6 +105,9 @@ public class DashboardFragment extends CarFragment {
     private View rootView;
     private String androidClockFormat = "hh:mm a";
     int dashboardNum=1;
+    private String googleGeocodeLocationStr = null;
+    private String googleMapsLocationStr = null;
+    private GeocodeLocationService mGeocodingService;
 
     // notation formats
     private static final String FORMAT_DECIMALS = "%.1f";
@@ -122,6 +126,7 @@ public class DashboardFragment extends CarFragment {
     private static final String FORMAT_VOLT = "%.1fV";
     private static final String FORMAT_VOLT0 = "-,-V";
     private boolean celsiusTempUnit;
+    private boolean showStreetName, useGoogleGeocoding, forceGoogleGeocoding;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -204,7 +209,7 @@ public class DashboardFragment extends CarFragment {
 
     };
 
-    private final ServiceConnection mServiceConnection = new ServiceConnection() {
+    private final ServiceConnection mVexServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
             CarStatsService.CarStatsBinder carStatsBinder = (CarStatsService.CarStatsBinder) iBinder;
@@ -311,6 +316,9 @@ public class DashboardFragment extends CarFragment {
         //todo: fix this. currently not very efficient, because this is already requested in MainCarActivity
         selectedBackground = sharedPreferences.getString("selectedBackground", "background_incar_black");
         stagingDone = !sharedPreferences.getBoolean("stagingActive",true);
+        showStreetName = sharedPreferences.getBoolean("showStreetNameInTitle", true);
+        useGoogleGeocoding = sharedPreferences.getBoolean("useGoogleGeocoding", false);
+        forceGoogleGeocoding = sharedPreferences.getBoolean("forceGoogleGeocoding", false);
 
         //Set wallpaper
         int resId = getResources().getIdentifier(selectedBackground, "drawable", getContext().getPackageName());
@@ -702,25 +710,18 @@ public class DashboardFragment extends CarFragment {
         return rootView;
     }
 
-    private String currentLocationFromGoogleMapsNotification = null;
-
     private BroadcastReceiver onNoticeGoogleNavigationUpdate = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String title = intent.getStringExtra("title");
-            String text = intent.getStringExtra("text");
-
-            currentLocationFromGoogleMapsNotification = title;
-
-            //updateTitle();
+            //String text = intent.getStringExtra("text"); // Not used right now
+            googleMapsLocationStr = title;
         }
     };
     private BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            currentLocationFromGoogleMapsNotification=null;
-
-            //updateTitle();
+            googleMapsLocationStr = null;
         }
     };
 
@@ -735,10 +736,62 @@ public class DashboardFragment extends CarFragment {
         super.onResume();
         Log.i(TAG, "onActivate");
         Intent serviceIntent = new Intent(getContext(), CarStatsService.class);
-        getContext().bindService(serviceIntent, mServiceConnection, Context.BIND_AUTO_CREATE);
+        getContext().bindService(serviceIntent, mVexServiceConnection, Context.BIND_AUTO_CREATE);
         startTorque();
         createAndStartUpdateTimer();
+        if (useGoogleGeocoding) {
+            if(!getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
+                    mGeocodingServiceConnection,
+                    Context.BIND_AUTO_CREATE)) {
+                Log.e("Geocode", "Cannot bind?!");
+            }
+        }
+
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(onNoticeGoogleNavigationUpdate, new IntentFilter("GoogleNavigationUpdate"));
+        LocalBroadcastManager.getInstance(getContext())
+                .registerReceiver(onNoticeGoogleNavigationClosed, new IntentFilter("GoogleNavigationClosed"));
     }
+
+    private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
+        @Override
+        public void onNewGeocodeResult(Address result) {
+            StringBuilder sb = new StringBuilder();
+            String tmp = result.getThoroughfare();
+            if (tmp != null)
+                sb.append(tmp);
+            tmp = result.getSubThoroughfare();
+            if (tmp != null) {
+                sb.append(' ');
+                sb.append(tmp);
+            }
+            if (sb.length() != 0)
+                sb.append(", ");
+            tmp = result.getLocality();
+            if (tmp != null)
+                sb.append(tmp);
+            sb.append(' ');
+            tmp = result.getCountryCode();
+            if (tmp != null)
+                sb.append(tmp);
+            googleGeocodeLocationStr = sb.toString();
+        }
+    };
+
+    private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
+            mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
+            Log.d("Geocode", "Service connected");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.e("Geocode", "Service disconnected");
+            mGeocodingService = null;
+        }
+    };
 
     private void startTorque() {
         Intent intent = new Intent();
@@ -783,8 +836,10 @@ public class DashboardFragment extends CarFragment {
         updateTimer.cancel();
 
         mStatsClient.unregisterListener(mCarStatsListener);
-        getContext().unbindService(mServiceConnection);
-        //getContext().unbindService(torqueConnection);
+        getContext().unbindService(mVexServiceConnection);
+        if (useGoogleGeocoding) {
+            getContext().unbindService(mGeocodingServiceConnection);
+        }
         if (torqueBind)
             try {
                 getContext().unbindService(torqueConnection);
@@ -1842,25 +1897,41 @@ public class DashboardFragment extends CarFragment {
         }
 
         // Display location in left side of Title  bar
-        String leftTitle;
+        if (showStreetName) {
+            String leftTitle;
+            if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) { // Google maps has always priority for now
+                leftTitle = googleMapsLocationStr;
+            } else if (forceGoogleGeocoding) {
+                leftTitle = googleGeocodeLocationStr;
+            } else {
+                String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
+                String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
 
-        //TODO: if no data -> get Data from Google Maps notification if available
+                if (location1 == null) {
+                    if (location2 == null) {
+                        leftTitle = "";
+                    } else {
+                        leftTitle = location2;
+                    }
+                } else {
+                    if (location2 == null) {
+                        leftTitle = location1;
+                    } else {
+                        if (location1.isEmpty()) {
+                            leftTitle = location2;
+                        } else {
+                            leftTitle = location1 + ", " + location2;
+                        }
+                    }
+                }
+                if (leftTitle.isEmpty() && useGoogleGeocoding) {
+                    leftTitle = googleGeocodeLocationStr;
+                }
+            }
 
-        String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
-        String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
-
-        if (location1==null && location2==null) {
-            leftTitle = currentLocationFromGoogleMapsNotification; // ="";
-        } else if (location1==null || location1.equals("")) {
-            leftTitle = location2;
-        } else if (location2==null || location2.equals("")) {
-            leftTitle = location1;
-        } else {
-            leftTitle = location1 + ", " + location2;
-        }
-
-        if (!Objects.equals(currentLeftTitleValue, leftTitle)) {
-            mTitleElementLeft.setText(leftTitle);
+            if (!currentLeftTitleValue.equals(leftTitle)) {
+                mTitleElementLeft.setText(leftTitle);
+            }
         }
 
         // Display temperature in right side of Title  bar
