@@ -400,6 +400,7 @@
         <item>@string/bg_test</item>
         <item>@string/bg_beetle</item>
         <item>@string/bg_dots</item>
+        <item>@string/bg_aa</item>
 
     </array>
 
@@ -424,6 +425,7 @@
         <item>background_incar_test</item>
         <item>background_incar_beetle</item>
         <item>background_incar_dots</item>
+        <item>background_incar_aa</item>
     </array>
 
 
@@ -448,6 +450,7 @@
         <item>@drawable/thumb_background_incar_test</item>
         <item>@drawable/thumb_background_incar_beetle</item>
         <item>@drawable/thumb_background_incar_dots</item>
+        <item>@drawable/thumb_background_incar_aa</item>
 
     </array>
 
