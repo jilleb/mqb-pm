@@ -8,8 +8,6 @@
     <string name="app_car_service_name">Performance Monitor</string>
     <string name="app_name">Performance Monitor</string>
 
-    <string name="app_version" translatable="false">0.7B</string>
-
     <string name="credits_author">This application was made by:</string>
     <string name="credits_basedon">Based on the SDK and demo App by:</string>
     <string name="credits_drivesafely">Drive Safely.</string>

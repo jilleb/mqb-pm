@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 
+def versionMajor = 0
+def versionMinor = 88
+def versionPatch = 0
+
 android {
     compileSdkVersion 28
     buildToolsVersion '27.0.3'
@@ -9,13 +13,20 @@ android {
         applicationId "com.mqbcoding.stats"
         minSdkVersion 22
         targetSdkVersion 28
-        versionCode 60
-        versionName "@string/app_version"
+        versionCode versionMajor * 100 + versionMinor * 10 + versionPatch
+        versionName "${versionMajor}.${versionMinor}.${versionPatch}"
     }
     buildTypes {
+        debug {
+            versionNameSuffix ".debug"
+            resValue "string", "app_version",
+                    "${defaultConfig.versionName}${versionNameSuffix}"
+        }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            resValue "string", "app_version",
+                    "${defaultConfig.versionName}"
         }
     }
 }
