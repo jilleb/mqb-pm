@@ -1558,7 +1558,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_eco", "", clock, false, "", 0, 100, "integer");
                 break;
             case "exlap-powermeter":
-                setupClock(icon, "ic_powermeter", "", clock, false, "%", 0, 5000, "integer");
+                setupClock(icon, "ic_powermeter", "", clock, false, "%", -1000, 5000, "integer");
                 break;
             case "exlap-acceleratorPosition":
                 setupClock(icon, "ic_pedalposition", "", clock, false, "%", 0, 100, "integer");
