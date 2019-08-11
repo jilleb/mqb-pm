@@ -31,7 +31,7 @@
     <style name="AppTheme.Seat" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks_seat</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_seat</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_seat</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_seat</item>
         <item name="themedCarBackground">@drawable/background_incar_seat</item>
         <item name="themedNeedle">@drawable/needle_seat</item>
         <item name="sv_markColor">@android:color/transparent</item>
@@ -58,7 +58,7 @@
     <style name="AppTheme.SeatCupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_seat2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_empty_seat2</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_seat2</item>
         <item name="themedCarBackground">@drawable/background_incar_seat2</item>
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedNeedle">@drawable/needle_seat</item>
@@ -85,7 +85,7 @@
     <style name="AppTheme.Cupra" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_cupra</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_cupra</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_empty_cupra</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_cupra</item>
         <item name="themedCarBackground">@drawable/background_incar_cupra</item>
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedNeedle">@drawable/needle_cupra</item>
@@ -205,7 +205,7 @@
     <style name="AppTheme.AudiTT" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi4</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi4</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_marks_audi4</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi4</item>
         <item name="themedCarBackground">@drawable/background_incar_plain</item>
         <item name="themedNeedle">@drawable/needle_audi4</item>
         <item name="sv_markColor">@android:color/transparent</item>
@@ -249,7 +249,7 @@
     <style name="AppTheme.Beetle" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_beetle</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_beetle</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_beetle</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_beetle</item>
         <item name="themedCarBackground">@drawable/background_incar_beetle</item>
         <item name="themedNeedle">@drawable/needle_beetle</item>
         <item name="sv_markColor">@android:color/transparent</item>
@@ -272,7 +272,7 @@
     <style name="AppTheme.Audi" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_marks_audi</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi</item>
         <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_audi_red</item>
         <item name="sv_markColor">@android:color/transparent</item>
@@ -294,7 +294,7 @@
     <style name="AppTheme.AudiVC" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi3</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_marks_audi3</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi3</item>
         <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_audi3</item>
         <item name="sv_markColor">@android:color/transparent</item>
@@ -394,8 +394,8 @@
     <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_marks_skoda3</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_marks_skoda3</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_marks_skoda3</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_skoda3</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_skoda3</item>
         <item name="themedNeedle">@drawable/needle_skoda_2</item>
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_skoda3</item>
@@ -465,9 +465,9 @@
     </style>
     <style name="AppTheme.Minimalistic" parent="AppTheme.Car">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
-        <item name="themedDialBackground">@drawable/dial_background_minimal</item>
+        <item name="themedDialBackground">@drawable/dial_background_marks_minimal</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_minimal</item>
-        <item name="themedBlankDialBackground">@drawable/dial_background_minimal</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_minimal</item>
         <item name="themedNeedle">@drawable/needle_mib2p</item>
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_empty_minimal</item>
