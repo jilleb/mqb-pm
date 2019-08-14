@@ -13,7 +13,10 @@ import android.content.res.AssetManager;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
+import android.graphics.LinearGradient;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -1433,17 +1436,26 @@ public class DashboardFragment extends CarFragment {
         graphViewport.setYAxisBoundsManual(true);
         graphViewport.setMinX(0);
         // set default max and min, these will be set dynamically later
-        graphViewport.setMaxX(120);
+        graphViewport.setMaxX(600);
 
         graphViewport.setScrollable(false);
         gridLabelRenderer.setVerticalLabelsVisible(true);
+        gridLabelRenderer.setHighlightZeroLines(false);
         gridLabelRenderer.setGridColor(Color.parseColor("#22FFFFFF"));
 
         gridLabelRenderer.setHorizontalLabelsVisible(false);
         gridLabelRenderer.setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
         graphViewport.setBackgroundColor(Color.argb(0, 255, 0, 0));
         serie.setDrawDataPoints(false);
-        serie.setThickness(2);
+        serie.setThickness(3);
+
+        Paint paint = new Paint();
+        paint.setStyle(Paint.Style.STROKE);
+        paint.setStrokeWidth(2);
+        paint.setAlpha(80);
+        paint.setShader(new LinearGradient(0, 0, 0, graph.getHeight(), Color.RED, Color.WHITE, Shader.TileMode.REPEAT));
+        serie.setCustomPaint(paint);
+
         serie.setColor(Color.argb(80, 255, 255, 255));
     }
 
@@ -1905,11 +1917,9 @@ public class DashboardFragment extends CarFragment {
 
 
             //TODO: Updates with a non fixed period could lead to strange graphs
-            series.appendData(new DataPoint(graphLastXValue, clockValue), true, 400);
+            series.appendData(new DataPoint(graphLastXValue, clockValue), true, 2400);
             String tempString = (String.format(Locale.US, FORMAT_DECIMALS, clockValue));
             graphValue.setText(tempString);
-
-
 
             // don't update when there's nothing to update
             // check if old value and new value (rounded to 1 decimal placed) are equal
