@@ -585,6 +585,10 @@ public class DashboardFragment extends CarFragment {
             maxMarksOn = readedMaxMarksOn;
             turnMinMaxMarksEnabled(maxMarksOn);
         }
+
+        turnRaysEnabled(raysOn);
+        turnMinMaxTextViewsEnabled(maxOn);
+        turnMinMaxMarksEnabled(maxMarksOn);
     }
 
     private void setupBackground(String newBackground) {
