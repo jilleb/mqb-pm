@@ -58,7 +58,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -586,7 +585,6 @@ public class DashboardFragment extends CarFragment {
             maxMarksOn = readedMaxMarksOn;
             turnMinMaxMarksEnabled(maxMarksOn);
         }
-
     }
 
     private void setupBackground(String newBackground) {
@@ -1445,13 +1443,14 @@ public class DashboardFragment extends CarFragment {
 
         gridLabelRenderer.setHorizontalLabelsVisible(false);
         gridLabelRenderer.setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
+
         graphViewport.setBackgroundColor(Color.argb(0, 255, 0, 0));
         serie.setDrawDataPoints(false);
         serie.setThickness(3);
 
         Paint paint = new Paint();
         paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(2);
+        paint.setStrokeWidth(3);
         paint.setAlpha(80);
         paint.setShader(new LinearGradient(0, 0, 0, graph.getHeight(), Color.RED, Color.WHITE, Shader.TileMode.REPEAT));
         serie.setCustomPaint(paint);
@@ -1753,7 +1752,6 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-batteryVoltage":
                     case "exlap-Nav_Altitude":
                     case "exlap-lateralAcceleration":
-                    case "exlap-longitudinalAcceleration":
                     case "exlap-yawRate":
                     case "exlap-EcoHMI_Score.AvgShort":
                     case "exlap-EcoHMI_Score.AvgTrip":
@@ -1761,6 +1759,9 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-currentTorque":
                         // all data that can be put on the clock without further modification:
                         break;
+                        // car reports longitudinal acceleration as m/s². This is a conversion to G's
+                    case "exlap-longitudinalAcceleration":
+                        clockValue = clockValue / (float) 9.80665;
                     case "exlap-currentOutputPower":
                         clockValue = clockValue * powerFactor;
 
@@ -2210,10 +2211,16 @@ public class DashboardFragment extends CarFragment {
                     value.setText(gearText);
                     break;
                 case "lateralAcceleration":
-                case "longitudinalAcceleration":
                     Float mAcceleration = (Float) mLastMeasurements.get(queryElement);
                     if (mAcceleration != null) {
                         value.setText(String.format(Locale.US, FORMAT_GFORCE, mAcceleration));
+                    }
+                    break;
+                case "longitudinalAcceleration":
+                    Float mAcceleration2 = (Float) mLastMeasurements.get(queryElement);
+                    if (mAcceleration2 != null) {
+                        mAcceleration2 = mAcceleration2 / (float) 9.80665;  //conversion from m/s² to G force
+                        value.setText(String.format(Locale.US, FORMAT_GFORCE, mAcceleration2));
                     }
                     break;
                 case "yawRate":
