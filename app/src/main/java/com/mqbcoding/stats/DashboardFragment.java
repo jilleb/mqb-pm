@@ -1448,13 +1448,6 @@ public class DashboardFragment extends CarFragment {
         serie.setDrawDataPoints(false);
         serie.setThickness(3);
 
-        Paint paint = new Paint();
-        paint.setStyle(Paint.Style.STROKE);
-        paint.setStrokeWidth(3);
-        paint.setAlpha(80);
-        paint.setShader(new LinearGradient(0, 0, 0, graph.getHeight(), Color.RED, Color.WHITE, Shader.TileMode.REPEAT));
-        serie.setCustomPaint(paint);
-
         serie.setColor(Color.argb(80, 255, 255, 255));
     }
 
