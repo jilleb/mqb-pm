@@ -52,8 +52,8 @@
     </style>
 
     <style name="AppTheme.Seat" parent="AppTheme.Car">
-        <item name="themedDialBackground">@drawable/dial_background_marks_seat</item>
-        <item name="themedEmptyDialBackground">@drawable/dial_background_seat</item>
+        <item name="themedDialBackground">@drawable/dial_background_seat</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_marks_seat</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_seat</item>
         <item name="themedNeedle">@drawable/needle_seat</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat</item>

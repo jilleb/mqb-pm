@@ -87,7 +87,7 @@
             android:id="@+id/dial_Right"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:background="?attr/themedDialBackground"
             android:padding="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -105,7 +105,7 @@
 
 
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:padding="10dp"
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -132,7 +132,7 @@
             android:id="@+id/dial_MinRight"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/dial_Right"
@@ -157,7 +157,7 @@
         <com.github.anastr.speedviewlib.RaySpeedometer
             android:id="@+id/rayRight"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:padding="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/dial_Right"
@@ -196,7 +196,7 @@
             android:id="@+id/dial_Center"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:background="?attr/themedDialBackground"
             android:padding="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -242,7 +242,7 @@
             android:id="@+id/dial_MinCenter"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:padding="10dp"
             app:layout_constraintHorizontal_bias="0.50"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -269,7 +269,7 @@
             android:id="@+id/dial_MaxCenter"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:padding="10dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -308,7 +308,7 @@
             android:id="@+id/dial_Left"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:background="?attr/themedDialBackground"
             android:elevation="0dp"
             android:padding="25dp"
@@ -325,7 +325,7 @@
         <com.github.anastr.speedviewlib.RaySpeedometer
             android:id="@+id/rayLeft"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:padding="40dp"
             app:layout_constraintBottom_toBottomOf="@+id/dial_Left"
             app:layout_constraintRight_toRightOf="parent"
@@ -356,7 +356,7 @@
             android:id="@+id/dial_MaxLeft"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:elevation="0dp"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -380,7 +380,7 @@
             android:id="@+id/dial_MinLeft"
             style="@style/AppTheme.Car.Speedometer"
             android:layout_width="275dp"
-            android:layout_height="wrap_content"
+            android:layout_height="275dp"
             android:elevation="0dp"
             android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -594,7 +594,7 @@
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="@+id/value_Element2"
         app:layout_constraintStart_toStartOf="@+id/value_Element2"
-        app:layout_constraintTop_toBottomOf="@+id/value_Element1" />
+        app:layout_constraintTop_toBottomOf="@+id/value_Element2" />
 
     <TextView
         android:id="@+id/icon_Element3"
@@ -630,8 +630,8 @@
 
     <TextView
         android:id="@+id/value_Element1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
@@ -644,8 +644,8 @@
 
     <TextView
         android:id="@+id/value_Element2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
@@ -658,8 +658,8 @@
 
     <TextView
         android:id="@+id/value_Element3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:ellipsize="end"
@@ -674,8 +674,8 @@
 
     <TextView
         android:id="@+id/value_Element4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:gravity="center"
@@ -689,12 +689,14 @@
 
     <TextView
         android:id="@+id/textMinLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
         android:layout_marginTop="265dp"
         android:drawableLeft="@drawable/ic_min"
         android:elevation="1dp"
+        android:gravity="top"
         android:text="0"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockLeft"
         app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"
@@ -702,13 +704,15 @@
 
     <TextView
         android:id="@+id/textMaxLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+
         android:layout_marginBottom="265dp"
         android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
+        android:gravity="center_horizontal"
         android:text="0"
-        android:textAlignment="textEnd"
+        android:textAlignment="gravity"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockLeft"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockLeft"
@@ -716,8 +720,10 @@
 
     <TextView
         android:id="@+id/textMinCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:gravity="top"
+        android:textAlignment="center"
         android:layout_marginStart="0dp"
         android:layout_marginTop="265dp"
         android:drawableLeft="@drawable/ic_min"
@@ -730,13 +736,14 @@
 
     <TextView
         android:id="@+id/textMaxCenter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:gravity="bottom"
         android:layout_marginBottom="265dp"
         android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
         android:text="0"
-        android:textAlignment="textEnd"
+        android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockCenter"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockCenter"
@@ -746,8 +753,10 @@
 
     <TextView
         android:id="@+id/textMinRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:gravity="top"
+        android:textAlignment="center"
         android:layout_marginStart="0dp"
         android:layout_marginTop="265dp"
         android:drawableLeft="@drawable/ic_min"
@@ -760,14 +769,15 @@
 
     <TextView
         android:id="@+id/textMaxRight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:gravity="bottom"
+        android:textAlignment="center"
         android:layout_marginBottom="265dp"
 
         android:drawableLeft="@drawable/ic_max"
         android:elevation="1dp"
         android:text="0"
-        android:textAlignment="textEnd"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockRight"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockRight"
