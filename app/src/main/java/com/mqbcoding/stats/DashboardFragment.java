@@ -470,18 +470,6 @@ public class DashboardFragment extends CarFragment {
 
         String readedTheme = sharedPreferences.getString("selectedTheme", "");
         if (!readedTheme.equals(selectedTheme)) {
-            if (readedTheme.equals("Beetle")) {
-                Typeface beetletypeface = Typeface.createFromAsset(getContext().getAssets(), "Schluber.ttf");
-                mClockLeft.setTextTypeface(beetletypeface);
-                mClockCenter.setTextTypeface(beetletypeface);
-                mClockRight.setTextTypeface(beetletypeface);
-                mClockMaxLeft.setWithTremble(false);
-                mClockMinLeft.setWithTremble(false);
-                mClockMaxCenter.setWithTremble(false);
-                mClockMinCenter.setWithTremble(false);
-                mClockMaxRight.setWithTremble(false);
-                mClockMinRight.setWithTremble(false);
-            }
             selectedTheme = readedTheme;
         }
         boolean readedTicksOn = sharedPreferences.getBoolean("ticksActive", false); // if true, it will display the value of each of the ticks
@@ -639,8 +627,6 @@ public class DashboardFragment extends CarFragment {
 
     private void turnTickEnabled(boolean enabled) {
         int tickNum = 9;
-        if (selectedTheme.equals("Beetle")) tickNum = 7; //special for Beetle theme
-
         mClockLeft.setTickNumber(enabled ? tickNum : 0);
         mClockLeft.setTextColor(Color.WHITE);
         mClockCenter.setTickNumber(enabled ? tickNum : 0);
@@ -661,7 +647,26 @@ public class DashboardFragment extends CarFragment {
 
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
 
+
         int color = mClockLeft.getIndicatorColor();
+        Log.i(TAG, "IndicatorColor: " + color);
+
+        if (color == 1996533487) {       // if indicator color in the style is @color:aqua, make it an imageindicator
+            mClockLeft.setIndicator(imageIndicator);
+            mClockCenter.setIndicator(imageIndicator);
+            mClockRight.setIndicator(imageIndicator);
+            mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+        } else {
+
+            // do something to get the other type of indicator
+
+        }
+
         // if rays on, turn off everything else.
         // it doesn't look too efficient at the moment, but that's to prevent the theme from adding an indicator to the rays.
         if (raysOn) {
@@ -691,6 +696,12 @@ public class DashboardFragment extends CarFragment {
             mClockLeft.setIndicator(imageIndicator);
             mClockCenter.setIndicator(imageIndicator);
             mClockRight.setIndicator(imageIndicator);
+            mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
+            mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
         }
     }
 

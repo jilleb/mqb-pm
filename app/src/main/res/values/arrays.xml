@@ -6,7 +6,6 @@
         <item>VW GTI</item>
         <item>VW R/GTE</item>
         <item>VW MIB2</item>
-        <item>Beetle</item>
         <item>Clubsport</item>
         <item>Seat</item>
         <item>Seat Cupra</item>
@@ -29,7 +28,6 @@
         <item>@drawable/ic_theme_vwgti</item>
         <item>@drawable/ic_theme_vwgte</item>
         <item>@drawable/ic_theme_vwmib2</item>
-        <item>@drawable/ic_theme_beetle</item>
         <item>@drawable/ic_theme_vwclubsport</item>
         <item>@drawable/ic_theme_seat</item>
         <item>@drawable/ic_theme_seatcupra</item>
