@@ -50,7 +50,6 @@ import org.jetbrains.annotations.NotNull;
 import org.prowl.torque.remote.ITorqueService;
 
 import java.math.BigInteger;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -77,7 +76,7 @@ public class DashboardFragment extends CarFragment {
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
     //values of the data elements. upper left, upper right, lower left, lower right.
-    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement, mTitleElementRight, mTitleElementLeft;
+    private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElementRight, mTitleElementLeft;
     private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
     private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
     private TextView mTextMinLeft, mTextMaxLeft;
@@ -1764,7 +1763,7 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-currentTorque":
                         // all data that can be put on the clock without further modification:
                         break;
-                        // car reports longitudinal acceleration as m/s². This is a conversion to G's
+                    // car reports longitudinal acceleration as m/s². This is a conversion to G's
                     case "exlap-longitudinalAcceleration":
                         clockValue = clockValue / (float) 9.80665;
                     case "exlap-currentOutputPower":
@@ -1935,26 +1934,32 @@ public class DashboardFragment extends CarFragment {
 
             // update clock with latest clockValue
             clock.speedTo(clockValue);
-            visray.speedTo(clockValue);
 
+            if (visray.isShown()) {
+                visray.speedTo(clockValue);
+            }
 
             // update the max clocks and text
-                float maxValue = clockmax.getSpeed();
-                float minValue = clockmin.getSpeed();
+            float maxValue = clockmax.getSpeed();
+            float minValue = clockmin.getSpeed();
 
-                if (clockValue > maxValue) {
+            if (clockValue > maxValue) {
+                if (clockmax.isShown()) {
                     clockmax.setSpeedAt(clockValue);
                     textmax.setText(String.format(Locale.US, FORMAT_DECIMALS, clockValue));
                 }
+            }
 
-                // update the min clocks and text
-                if (clockValue < minValue) {
+            // update the min clocks and text
+            if (clockValue < minValue) {
+                if (clockmin.isShown()) {
                     clockmin.setSpeedAt(clockValue);
                     textmin.setText(String.format(Locale.US, FORMAT_DECIMALS, clockValue));
                 }
             }
-
         }
+
+    }
 
     private void updateTitle() {
 
@@ -2363,7 +2368,6 @@ public class DashboardFragment extends CarFragment {
 
     };
 
-
     // fade out 1 view, fade the other in during 500ms.
     private void fadeOutfadeIn(final View oldView, final View newView) {
         oldView.animate()
@@ -2375,8 +2379,6 @@ public class DashboardFragment extends CarFragment {
                         oldView.setVisibility(View.INVISIBLE);
                         newView.setVisibility(View.VISIBLE);
                         newView.setAlpha(1f);
-
-
                     }
                 });
         newView.setAlpha(0f);
@@ -2387,11 +2389,7 @@ public class DashboardFragment extends CarFragment {
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-
                     }
                 });
     }
-
-
-
 }
