@@ -102,7 +102,6 @@ public class DashboardFragment extends CarFragment {
     //value displayed on graphlayout
     private TextView mGraphValueLeft, mGraphValueCenter, mGraphValueRight;
     private View rootView;
-    private String androidClockFormat = "hh:mm a";
     int dashboardNum=1;
     private String googleGeocodeLocationStr = null;
     private String googleMapsLocationStr = null;
@@ -348,7 +347,6 @@ public class DashboardFragment extends CarFragment {
         mValueElement4 = rootView.findViewById(R.id.value_Element4);
 
         //title text element
-        mTitleElement = rootView.findViewById(R.id.textTitleElement);
         mTitleElementRight = rootView.findViewById(R.id.textTitleElementRight);
         mTitleElementLeft = rootView.findViewById(R.id.textTitleElementLeft);
 
@@ -428,7 +426,6 @@ public class DashboardFragment extends CarFragment {
         mValueElement2.setTypeface(typeface);
         mValueElement3.setTypeface(typeface);
         mValueElement4.setTypeface(typeface);
-        mTitleElement.setTypeface(typeface);
         mTitleElementRight.setTypeface(typeface);
         mTitleElementLeft.setTypeface(typeface);
 
@@ -736,9 +733,6 @@ public class DashboardFragment extends CarFragment {
 
         });
 
-        androidClockFormat = android.text.format.DateFormat.is24HourFormat(getContext())
-                ? "HH:mm" : "hh:mm a";
-
         //update!
         doUpdate();
 
@@ -964,7 +958,6 @@ public class DashboardFragment extends CarFragment {
         mValueElement2 = null;
         mValueElement3 = null;
         mValueElement4 = null;
-        mTitleElement = null;
         mTitleElementRight = null;
         mIconElement1 = null;
         mIconElement2 = null;
@@ -1707,7 +1700,6 @@ public class DashboardFragment extends CarFragment {
             textmax, TextView textmin, Speedometer clockmax, Speedometer clockmin, GraphView graph, LineGraphSeries<DataPoint> series, Double graphLastXValue, TextView graphValue) {
         if (query != null && stagingDone) {
 
-            float randomClockVal = randFloat(0, 360);
             float speedFactor = 1f;
             pressureFactor = 1f;
 
@@ -1963,29 +1955,8 @@ public class DashboardFragment extends CarFragment {
 
         }
 
-    private String getTime() {
-        String clockFormat = "hh:mm a";
-
-        // If available, force car clock format
-        String carClockFormat = (String)mLastMeasurements.get("unitTimeFormat.clockFormat");
-        if (carClockFormat != null) {
-            switch (carClockFormat) {
-                case "format_24h":
-                    clockFormat = "HH:mm";
-                    break;
-                case "format_12h":
-                    clockFormat = "hh:mm a";
-                    break;
-            }
-        } else { // if not, set time format based on phone settings
-            clockFormat = androidClockFormat;
-        }
-        return new SimpleDateFormat(clockFormat, Locale.US).format(new Date());
-    }
-
     private void updateTitle() {
 
-        //String currentTitleValue = mTitleElement.getText().toString();
         String currentRightTitleValue = mTitleElementRight.getText().toString();
         String currentLeftTitleValue = mTitleElementLeft.getText().toString();
 

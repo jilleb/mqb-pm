@@ -1,58 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutDashboard"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="0dp"
-    tools:showIn="@layout/preview_dashboard">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/include"
         layout="@layout/layout_dashboard_gauges"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="60dp" />
 
-    <TextView
-        android:id="@+id/textTitleElement"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:textAppearance="@style/CarBody2"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal">
 
-    <!-- FIXME: Fix this layout! I can't get properly autosized textTitleElementLeft-->
-    <TextView
-        android:id="@+id/textTitleElementLeft"
-        android:layout_width="500dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:ellipsize="marquee"
-        android:singleLine="true"
-        android:textAppearance="@style/CarBody2"
-        android:textColor="@android:color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textTitleElementLeft"
+            android:layout_width="500dp"
+            android:layout_height="40dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textAppearance="@style/CarBody2"
+            android:textColor="@android:color/white" />
 
-    <TextView
-        android:id="@+id/textTitleElementRight"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginEnd="8dp"
-        android:text=""
-        android:textAppearance="@style/CarBody2"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
+        <TextView
+            android:id="@+id/textTitleElementRight"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textAppearance="@style/CarBody2"
+            android:textColor="@android:color/white" />
 
-</android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+</FrameLayout>
