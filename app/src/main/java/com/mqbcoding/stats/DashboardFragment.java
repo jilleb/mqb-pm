@@ -465,9 +465,17 @@ public class DashboardFragment extends CarFragment {
             setupTypeface(readedFont);
         }
 
+        //show high visible rays on, according to the setting
+        boolean readedRaysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
+        if (raysOn == null || readedRaysOn != raysOn) {
+            raysOn = readedRaysOn;
+            turnRaysEnabled(raysOn);
+        }
+
         String readedTheme = sharedPreferences.getString("selectedTheme", "");
         if (!readedTheme.equals(selectedTheme)) {
             selectedTheme = readedTheme;
+            turnRaysEnabled(raysOn);
         }
         boolean readedTicksOn = sharedPreferences.getBoolean("ticksActive", false); // if true, it will display the value of each of the ticks
         if(ticksOn == null || readedTicksOn != ticksOn) {
@@ -556,13 +564,6 @@ public class DashboardFragment extends CarFragment {
         if (maxOn == null || readedMaxOn != maxOn) {
             maxOn = readedMaxOn;
             turnMinMaxTextViewsEnabled(maxOn);
-        }
-
-        //show high visible rays on, according to the setting
-        boolean readedRaysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
-        if (raysOn == null || readedRaysOn != raysOn) {
-            raysOn = readedRaysOn;
-            turnRaysEnabled(raysOn);
         }
 
         boolean readedMaxMarksOn = sharedPreferences.getBoolean("maxMarksActive", false); //true = show max values as a mark on the clock, false = hide them
