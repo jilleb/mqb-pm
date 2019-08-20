@@ -212,19 +212,18 @@
         <item>@string/element_EcoHMI_Score.AvgTrip</item>
         <item>@string/element_navAltitude</item>
         <item>@string/element_navHeading</item>
-        <!--<item>@string/element_blinkingState</item>-->
-        <item>@string/element_navLongitude</item>
-        <item>@string/element_navLatitude</item>
         <item>@string/element_soundVolume</item>
-        <item>@string/element_odometer</item>
         <item>@string/element_tyreStateRR</item>
         <item>@string/element_tyreStateRL</item>
         <item>@string/element_tyreStateFR</item>
         <item>@string/element_tyreStateFL</item>
+        <item>@string/element_tyrePressureRR</item>
+        <item>@string/element_tyrePressureRL</item>
+        <item>@string/element_tyrePressureFR</item>
+        <item>@string/element_tyrePressureFL</item>
+
         <item>@string/element_shortTermConsumptionPrimary</item>
         <item>@string/element_shortTermConsumptionSecondary</item>
-        <item>@string/element_VIN</item>
-
         <!-- PIDs from Torque -->
         <item>@string/element_torque_rpm</item>
         <item>@string/element_torque_speed</item>
@@ -271,18 +270,20 @@
         <item>EcoHMI_Score.AvgTrip</item>
         <item>Nav_Altitude</item>
         <item>Nav_Heading</item>
-        <item>Nav_CurrentPosition.Longitude</item>
-        <item>Nav_CurrentPosition.Latitude</item>
         <item>Sound_Volume</item>
-        <item>totalDistance.distanceValue</item>
         <item>tyreStates.stateRearRight</item>
         <item>tyreStates.stateRearLeft</item>
         <item>tyreStates.stateFrontRight</item>
         <item>tyreStates.stateFrontLeft</item>
+
+        <item>tyrePressures.pressureRearRight</item>
+        <item>tyrePressures.pressureRearLeft</item>
+        <item>tyrePressures.pressureFrontRight</item>
+        <item>tyrePressures.pressureFrontLeft</item>
+
+
         <item>shortTermConsumptionPrimary</item>
         <item>shortTermConsumptionSecondary</item>
-
-        <item>vehicleIdenticationNumber.VIN</item>
         <!-- PIDs from Torque -->
         <!-- Use PIDs like this: torque_<description>_<pid> -->
         <item>torque_rpm_0x0c</item>

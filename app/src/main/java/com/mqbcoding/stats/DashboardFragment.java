@@ -13,10 +13,7 @@ import android.content.res.AssetManager;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
-import android.graphics.LinearGradient;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
-import android.graphics.Shader;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
@@ -662,6 +659,9 @@ public class DashboardFragment extends CarFragment {
             mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
         } else {
+            //mClockLeft.setIndicator(Indicator.Indicators.HalfLineIndicator);
+            //mClockCenter.setIndicator(Indicator.Indicators.HalfLineIndicator);
+            //mClockRight.setIndicator(Indicator.Indicators.HalfLineIndicator);
 
             // do something to get the other type of indicator
 
@@ -1200,6 +1200,10 @@ public class DashboardFragment extends CarFragment {
             case "tyreStates.stateRearLeft":
             case "tyreStates.stateFrontRight":
             case "tyreStates.stateFrontLeft":
+            case "tyrePressures.pressureRearRight":
+            case "tyrePressures.pressureRearLeft":
+            case "tyrePressures.pressureFrontRight":
+            case "tyrePressures.pressureFrontLeft":
             case "torque_fuelpressure_0x0a":
             case "torque_engineload_0x04":
             case "torque_timing_advance_0x0e":
@@ -1343,18 +1347,22 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_vin));
                 break;
             case "tyreStates.stateRearRight":
+            case "tyrePressures.pressureRearRight":
                 label.setText(getString(R.string.label_tyreRR));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateRearLeft":
+            case "tyrePressures.pressureRearLeft":
                 label.setText(getString(R.string.label_tyreRL));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateFrontRight":
+            case "tyrePressures.pressureFrontRight":
                 label.setText(getString(R.string.label_tyreFR));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateFrontLeft":
+            case "tyrePressures.pressureFrontLeft":
                 label.setText(getString(R.string.label_tyreFL));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
@@ -2105,7 +2113,6 @@ public class DashboardFragment extends CarFragment {
                                 torqueData3 = torqueData3 / 14.5037738f;
                                 unitText = "bar";
                             }
-
                             value.setText(String.format(Locale.US, FORMAT_DECIMALS_WITH_UNIT, torqueData3,unitText));
                         }
                     } catch (Exception e) {
@@ -2305,7 +2312,17 @@ public class DashboardFragment extends CarFragment {
                         //if (tyreState != "OK") value.setTextColor(Color.RED);
                     }
                     break;
-
+                case "tyrePressures.pressureRearRight":
+                case "tyrePressures.pressureRearLeft":
+                case "tyrePressures.pressureFrontRight":
+                case "tyrePressures.pressureFrontLeft":
+                    Float tyrePressure = (Float) mLastMeasurements.get(queryElement);
+                    if (tyrePressure != null) {
+                        tyrePressure = tyrePressure / 10; // value in bar
+                        tyrePressure = tyrePressure * pressureFactor; // convert to psi if needed.
+                        value.setText(String.format(Locale.US, FORMAT_DECIMALS_WITH_UNIT, tyrePressure, pressureUnit));
+                    }
+                    break;
             }
         }
     }
