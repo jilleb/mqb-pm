@@ -75,6 +75,14 @@
         <item>@string/element_tankLevelSecondary</item>
         <item>@string/element_navAltitude</item>
         <item>@string/element_navHeading</item>
+        <item>@string/element_tyrePressureRR</item>
+        <item>@string/element_tyrePressureRL</item>
+        <item>@string/element_tyrePressureFR</item>
+        <item>@string/element_tyrePressureFL</item>
+        <item>@string/element_tyreTemperatureRR</item>
+        <item>@string/element_tyreTemperatureRL</item>
+        <item>@string/element_tyreTemperatureFR</item>
+        <item>@string/element_tyreTemperatureFL</item>
 
         <!-- PIDs from Torque -->
         <item>@string/element_torque_rpm</item>
@@ -146,6 +154,14 @@
         <item>exlap-tankLevelSecondary</item>
         <item>exlap-Nav_Altitude</item>
         <item>exlap-Nav_Heading</item>
+        <item>exlap-tyrePressures.pressureRearRight</item>
+        <item>exlap-tyrePressures.pressureRearLeft</item>
+        <item>exlap-tyrePressures.pressureFrontRight</item>
+        <item>exlap-tyrePressures.pressureFrontLeft</item>
+        <item>exlap-tyreTemperatures.temperatureRearRight</item>
+        <item>exlap-tyreTemperatures.temperatureRearLeft</item>
+        <item>exlap-tyreTemperatures.temperatureFrontRight</item>
+        <item>exlap-tyreTemperatures.temperatureFrontLeft</item>
 
         <item>torque-rpm_0x0c</item>
         <item>torque-speed_0x0d</item>

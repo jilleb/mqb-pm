@@ -718,6 +718,7 @@ public class DashboardFragment extends CarFragment {
         //pressurefactor is used to calculate the right value for psi later
         // build ImageIndicator using the resourceId
         // get the size of the Clock, to make sure the imageindicator has the right size.
+
         mClockLeft.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -1501,25 +1502,29 @@ public class DashboardFragment extends CarFragment {
             }
         }
 
+        pressureUnit = "bar";
+        pressureMax = 5;
+        pressureMin = -1;
+
         //setupClock(icon, "ic_none", "", clock, false, "", 0, 100, "float");
 
         // setup each of the clocks:
         switch (queryLong) {
             case "none": // currently impossible to choose, maybe in the future?
-                setupClock(icon, "ic_none", "", clock, false, "", 0, 100, "float");
+                setupClock(icon, "ic_none", "", clock, false, "", 0, 100, "float", "float");
                 break;
             case "test":
-                setupClock(icon, "ic_measurement", "", clock, false, getString(R.string.testing), 0, 360, "float");
+                setupClock(icon, "ic_measurement", "", clock, false, getString(R.string.testing), 0, 360, "float", "integer");
                 break;
             case "exlap-vehicleSpeed":
             case "torque-speed_0x0d":
-                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kmh), 0, 300, "integer");
+                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_kmh), 0, 300, "integer", "integer");
                 break;
             case "exlap-Nav_Altitude":
-                setupClock(icon, "ic_altitude", "", clock, false, "m", -100, 3000, "integer");
+                setupClock(icon, "ic_altitude", "", clock, false, "m", -100, 3000, "integer", "integer");
                 break;
             case "exlap-Nav_Heading": // this is a compass, so a little bit more is needed to setup the clock
-                setupClock(icon, "ic_heading", "", clock, false, "°", 0, 360, "integer");
+                setupClock(icon, "ic_heading", "", clock, false, "°", 0, 360, "integer", "integer");
                 clock.setMarkColor(Color.parseColor("#00FFFFFF"));
 
                 //set the degrees so it functions as a circle
@@ -1536,153 +1541,178 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "exlap-engineSpeed":
             case "torque-rpm_0x0c":
-                setupClock(icon, "ic_none", getString(R.string.unit_rpm), clock, true, getString(R.string.unit_rpm1000), 0, 9, "float");
+                setupClock(icon, "ic_none", getString(R.string.unit_rpm), clock, true, getString(R.string.unit_rpm1000), 0, 9, "float", "integer");
                 clock.setTicks();
                 clock.setTickTextFormat(0);
                 break;
             case "torque-voltage_0xff1238":
             case "exlap-batteryVoltage":
             case "torque-voltagemodule_0x42":
-                setupClock(icon, "ic_battery", "", clock, false, getString(R.string.unit_volt), 0, 17, "float");
+                setupClock(icon, "ic_battery", "", clock, false, getString(R.string.unit_volt), 0, 17, "float", "integer");
                 break;
             case "exlap-oilTemperature":
-                setupClock(icon, "ic_oil", "", clock, true, "°", 0, 200, "float");
+                setupClock(icon, "ic_oil", "", clock, true, "°", 0, 200, "float", "integer");
                 break;
             case "exlap-coolantTemperature":
             case "torque-enginecoolanttemp_0x05":
-                setupClock(icon, "ic_water", "", clock, true, "°", 0, 200, "float");
+                setupClock(icon, "ic_water", "", clock, true, "°", 0, 200, "float", "integer");
                 break;
             case "exlap-outsideTemperature":
             case "torque-ambientairtemp_0x46":
-                setupClock(icon, "ic_outsidetemperature", "", clock, false, "°", -25, 50, "float");
+                setupClock(icon, "ic_outsidetemperature", "", clock, false, "°", -25, 50, "float", "integer");
                 break;
             case "torque-transmissiontemp_0x0105":
             case "exlap-gearboxOilTemperature":
-                setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float");
+                setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float", "integer");
                 break;
             case "torque-turboboost_0xff1202":
             case "exlap-absChargingAirPressure":
             case "exlap-relChargingAirPressure":
-                setupClock(icon, "ic_turbo", "", clock, true, pressureUnit, pressureMin, pressureMax, "float");
+                setupClock(icon, "ic_turbo", "", clock, true, pressureUnit, pressureMin, pressureMax, "float", "integer");
                 break;
             case "exlap-lateralAcceleration":
-                setupClock(icon, "ic_lateral", "", clock, false, getString(R.string.unit_g), -3, 3, "float");
+                setupClock(icon, "ic_lateral", "", clock, false, getString(R.string.unit_g), -3, 3, "float", "float");
                 break;
             case "exlap-longitudinalAcceleration":
-                setupClock(icon, "ic_longitudinal", "", clock, false, getString(R.string.unit_g), -3, 3, "float");
+                setupClock(icon, "ic_longitudinal", "", clock, false, getString(R.string.unit_g), -3, 3, "float", "float");
                 break;
             case "exlap-yawRate":
-                setupClock(icon, "ic_yaw", "", clock, false, "°/s", -1, 1, "float");
+                setupClock(icon, "ic_yaw", "", clock, false, "°/s", -1, 1, "float", "integer");
                 break;
             case "wheelAngle":
-                setupClock(icon, "ic_wheelangle", "", clock, false, "°", -45, 45, "float");
+                setupClock(icon, "ic_wheelangle", "", clock, false, "°", -45, 45, "float", "integer");
                 break;
             case "exlap-EcoHMI_Score.AvgShort":
             case "exlap-EcoHMI_Score.AvgTrip":
-                setupClock(icon, "ic_eco", "", clock, false, "", 0, 100, "integer");
+                setupClock(icon, "ic_eco", "", clock, false, "", 0, 100, "integer", "integer");
                 break;
             case "exlap-powermeter":
-                setupClock(icon, "ic_powermeter", "", clock, false, "%", -1000, 5000, "integer");
+                setupClock(icon, "ic_powermeter", "", clock, false, "%", -1000, 5000, "integer", "integer");
                 break;
             case "exlap-acceleratorPosition":
-                setupClock(icon, "ic_pedalposition", "", clock, false, "%", 0, 100, "integer");
+                setupClock(icon, "ic_pedalposition", "", clock, false, "%", 0, 100, "integer", "integer");
                 break;
             case "exlap-brakePressure":
-                setupClock(icon, "ic_brakepedalposition", "", clock, false, "%", 0, 100, "integer");
+                setupClock(icon, "ic_brakepedalposition", "", clock, false, "%", 0, 100, "integer", "integer");
                 break;
             case "exlap-currentTorque":
-                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_nm), 0, 500, "integer");
+                setupClock(icon, "ic_none", "", clock, false, getString(R.string.unit_nm), 0, 500, "integer", "integer");
                 break;
             case "exlap-currentOutputPower":
-                setupClock(icon, "ic_none", "", clock, false, powerUnits?getString(R.string.unit_kw):getString(R.string.unit_hp), 0, 500, "integer");
+                setupClock(icon, "ic_none", "", clock, false, powerUnits ? getString(R.string.unit_kw) : getString(R.string.unit_hp), 0, 500, "integer", "integer");
                 break;
             case "exlap-currentConsumptionPrimary":
             case "exlap-cycleConsumptionPrimary":
-                setupClock(icon, "ic_fuelprimary", "", clock, false, "l/h", 0, 100, "float");
+                setupClock(icon, "ic_fuelprimary", "", clock, false, "l/h", 0, 100, "float", "integer");
                 break;
             case "exlap-currentConsumptionSecondary":
             case "exlap-cycleConsumptionSecondary":
-                setupClock(icon, "ic_fuelsecondary", "", clock, false, "l/h", 0, 100, "float");
+                setupClock(icon, "ic_fuelsecondary", "", clock, false, "l/h", 0, 100, "float", "integer");
                 break;
             case "exlap-tankLevelPrimary":
             case "torque-fuellevel_0x2f":
-                setupClock(icon, "ic_fuelprimary", "", clock, false, "%", 0, 100, "float");
+                setupClock(icon, "ic_fuelprimary", "", clock, false, "%", 0, 100, "float", "integer");
                 break;
             case "exlap-tankLevelSecondary":
-                setupClock(icon, "ic_fuelsecondary", "", clock, false, "%", 0, 100, "float");
+                setupClock(icon, "ic_fuelsecondary", "", clock, false, "%", 0, 100, "float", "integer");
                 break;
             case "torque-fuelpressure_0x0a":
-                setupClock(icon, "ic_none", getString(R.string.label_fuel), clock, false, torqueUnit, 0, 800, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_fuel), clock, false, torqueUnit, 0, 800, "float", "integer");
                 break;
             case "torque-engineload_0x04":
             case "torque-engineloadabsolute_0x43":
-                setupClock(icon, "ic_none", getString(R.string.label_load), clock, false, torqueUnit, 0, 100, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_load), clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-timing_advance_0x0e":
-                setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, torqueUnit, -60, 60, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, torqueUnit, -60, 60, "float", "integer");
                 break;
             case "torque-intake_air_temperature_0x0f":
-                setupClock(icon, "ic_none", getString(R.string.label_iat), clock, false, torqueUnit, 0, 100, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_iat), clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-mass_air_flow_0x10":
-                setupClock(icon, "ic_none", getString(R.string.label_maf), clock, false, torqueUnit, 0, 700, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_maf), clock, false, torqueUnit, 0, 700, "float", "integer");
                 break;
             case "torque-AFR_0xff1249":
-                setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, torqueUnit, 0, 35, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, torqueUnit, 0, 35, "float", "integer");
                 break;
             case "torque-AFRc_0xff124d":
-                setupClock(icon, "ic_none", getString(R.string.label_afrc), clock, false, torqueUnit, 0, 35, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_afrc), clock, false, torqueUnit, 0, 35, "float", "integer");
                 break;
             case "torque-fueltrimshortterm1_0x06":
-                setupClock(icon, "ic_none", getString(R.string.label_ftst1), clock, false, torqueUnit, -20, 20, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_ftst1), clock, false, torqueUnit, -20, 20, "float", "integer");
                 break;
             case "torque-fueltrimlongterm1_0x07":
-                setupClock(icon, "ic_none", getString(R.string.label_ftlt1), clock, false, torqueUnit, -20, 20, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_ftlt1), clock, false, torqueUnit, -20, 20, "float", "integer");
                 break;
             case "torque-fueltrimshortterm2_0x08":
-                setupClock(icon, "ic_none", getString(R.string.label_ftst2), clock, false, torqueUnit, -20, 20, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_ftst2), clock, false, torqueUnit, -20, 20, "float", "integer");
                 break;
             case "torque-fueltrimlongterm2_0x09":
-                setupClock(icon, "ic_none", getString(R.string.label_ftlt2), clock, false, torqueUnit, -20, 20, "float");
+                setupClock(icon, "ic_none", getString(R.string.label_ftlt2), clock, false, torqueUnit, -20, 20, "float", "integer");
                 break;
             case "torque-accelerometer_total_0xff1223":
-                setupClock(icon, "ic_none", "", clock, false, "G", -3, 3, "float");
+                setupClock(icon, "ic_none", "", clock, false, "G", -3, 3, "float", "float");
                 break;
             case "torque-phonebatterylevel_0xff129a":
-                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "integer");
+                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "integer", "integer");
                 break;
             case "torque-phonebarometer_0xff1270":
-                setupClock(icon, "ic_none", "", clock, false, torqueUnit, 900, 1070, "float");
+                setupClock(icon, "ic_none", "", clock, false, torqueUnit, 900, 1070, "float", "integer");
                 break;
             case "torque-obdadaptervoltage_0xff1238":
-                setupClock(icon, "ic_obd2", "", clock, false, torqueUnit, 0, 17, "float");
+                setupClock(icon, "ic_obd2", "", clock, false, torqueUnit, 0, 17, "float", "integer");
                 break;
             case "torque-hybridbattlevel_0x5b":
-                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "float");
+                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "float", "integer");
                 break;
             case "torque-commandedequivalenceratiolambda_0x44":
-                setupClock(icon, "ic_none", "lambda", clock, false, torqueUnit, 0, 3, "float");
+                setupClock(icon, "ic_none", "lambda", clock, false, torqueUnit, 0, 3, "float", "float");
                 break;
             case "torque-catalysttemperature_0x3c":
-                setupClock(icon, "ic_catalyst", "", clock, false, torqueUnit, 0, 1000, "float");
+                setupClock(icon, "ic_catalyst", "", clock, false, torqueUnit, 0, 1000, "float", "integer");
                 break;
             case "torque-relativethrottleposition_0x45":
             case "torque-absolutethrottlepostion_0x47":
             case "torque-throttle_position_0x11":
-                setupClock(icon, "ic_throttle", "", clock, false, torqueUnit, 0, 100, "float");
+                setupClock(icon, "ic_throttle", "", clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-intakemanifoldpressure_0x0b":
-                setupClock(icon, "ic_manifold", "", clock, false, torqueUnit, 0, 200, "float");
+                setupClock(icon, "ic_manifold", "", clock, false, torqueUnit, 0, 200, "float", "integer");
                 break;
             case "torque-chargeaircoolertemperature_0x77":
-                setupClock(icon, "ic_cact", "", clock, false, torqueUnit, 0, 100, "float");
+                setupClock(icon, "ic_cact", "", clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-pressurecontrol_0x70":
-                setupClock(icon, "ic_turbo", "", clock, false, pressureUnit, pressureMin * 30, pressureMax * 30, "float");
+                setupClock(icon, "ic_turbo", "", clock, false, pressureUnit, pressureMin * 30, pressureMax * 30, "float", "integer");
                 break;
             case "torque-o2sensor1equivalenceratio_0x34":
-                setupClock(icon, "ic_none", "O2 sensor", clock, false, torqueUnit, 0, 3, "float");
+                setupClock(icon, "ic_none", "O2 sensor", clock, false, torqueUnit, 0, 3, "float", "float");
                 break;
+            case "exlap-tyrePressures.pressureRearRight":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreRR), clock, false, pressureUnit, 0, 4, "float", "float");
+                break;
+            case "exlap-tyrePressures.pressureRearLeft":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreRL), clock, false, pressureUnit, 0, 4, "float", "float");
+                break;
+            case "exlap-tyrePressures.pressureFrontRight":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreFR), clock, false, pressureUnit, 0, 4, "float", "float");
+                break;
+            case "exlap-tyrePressures.pressureFrontLeft":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreFL), clock, false, pressureUnit, 0, 4, "float", "float");
+                break;
+            case "exlap-tyreTemperatures.temperatureRearRight":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreRR), clock, false, temperatureUnit, 0, 100, "float", "integer");
+                break;
+            case "exlap-tyreTemperatures.temperatureRearLeft":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreRL), clock, false, temperatureUnit, 0, 100, "float", "integer");
+                break;
+            case "exlap-tyreTemperatures.temperatureFrontRight":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreFR), clock, false, temperatureUnit, 0, 100, "float", "integer");
+                break;
+            case "exlap-tyreTemperatures.temperatureFrontLeft":
+                setupClock(icon, "ic_tyre", getString(R.string.label_tyreFL), clock, false, temperatureUnit, 0, 100, "float", "integer");
+                break;
+
         }
 
         // make the icon appear in the color of unitTextColor
@@ -1724,7 +1754,6 @@ public class DashboardFragment extends CarFragment {
                 temperatureUnitExlap = "°";
             }
 
-
             // Get the value that should be put on the clock, depending on the query
             // exlap queries use mLastMeasurements.get(query)
             // torque pid queries use torqueService.getValueForPid(queryPid), queryPid is trimmed from the query string
@@ -1763,17 +1792,19 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-Nav_Heading":
                     case "exlap-batteryVoltage":
                     case "exlap-Nav_Altitude":
-                    case "exlap-lateralAcceleration":
                     case "exlap-yawRate":
                     case "exlap-EcoHMI_Score.AvgShort":
                     case "exlap-EcoHMI_Score.AvgTrip":
                     case "exlap-brakePressure":
                     case "exlap-currentTorque":
+                    case "exlap-lateralAcceleration":
+
                         // all data that can be put on the clock without further modification:
                         break;
                     // car reports longitudinal acceleration as m/s². This is a conversion to G's
                     case "exlap-longitudinalAcceleration":
                         clockValue = clockValue / (float) 9.80665;
+                        break;
                     case "exlap-currentOutputPower":
                         clockValue = clockValue * powerFactor;
 
@@ -1852,6 +1883,22 @@ public class DashboardFragment extends CarFragment {
                             clockValue = clockValue * speedFactor;
 
                         }
+                        break;
+                    case "exlap-tyrePressures.pressureRearRight":
+                    case "exlap-tyrePressures.pressureRearLeft":
+                    case "exlap-tyrePressures.pressureFrontRight":
+                    case "exlap-tyrePressures.pressureFrontLeft":
+                        clock.setUnit(pressureUnit);
+                        clockValue = (clockValue / 10) * pressureFactor;
+                        clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
+                        break;
+
+
+                    case "exlap-tyreTemperatures.temperatureRearRight":
+                    case "exlap-tyreTemperatures.temperatureRearLeft":
+                    case "exlap-tyreTemperatures.temperatureFrontRight":
+                    case "exlap-tyreTemperatures.temperatureFrontLeft":
+                        clock.setUnit(temperatureUnitExlap);
                         break;
                     // torque data elements:
                     case "torque-speed_0x0d":
@@ -2307,7 +2354,7 @@ public class DashboardFragment extends CarFragment {
     }
 
     // set clock label, units, etc.
-    private void setupClock(TextView icon, String iconDrawableName, String iconText, Speedometer clock, Boolean backgroundWithWarningArea, String unit, Integer minspeed, Integer maxspeed, String speedFormat) {
+    private void setupClock(TextView icon, String iconDrawableName, String iconText, Speedometer clock, Boolean backgroundWithWarningArea, String unit, Integer minspeed, Integer maxspeed, String speedFormat, String tickFormat) {
 
         Log.d(TAG, "icon: " + icon + " iconDrawableName: " + iconDrawableName);
 
@@ -2324,6 +2371,14 @@ public class DashboardFragment extends CarFragment {
         icon.setText(iconText);
         clock.setUnit(unit);
         clock.setMinMaxSpeed(minspeed, maxspeed);
+
+        if (tickFormat == "float") {
+            clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
+
+        } else {
+            clock.setTickTextFormat(Gauge.INTEGER_FORMAT);
+        }
+
 
         //dynamically scale the icon_space in case there's only an icon, and no text
         if (!iconText.equals("") && resId == resIdEmpty) {
