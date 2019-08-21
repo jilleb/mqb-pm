@@ -57,6 +57,10 @@
     <string name="element_tyrePressureFR">Tyrepressure front right</string>
     <string name="element_tyrePressureRL">Tyrepressure rear left</string>
     <string name="element_tyrePressureRR">Tyrepressure rear right</string>
+    <string name="element_tyreTemperatureFL">Tyre temperature front left</string>
+    <string name="element_tyreTemperatureFR">Tyre temperature front right</string>
+    <string name="element_tyreTemperatureRL">Tyre temperature rear left</string>
+    <string name="element_tyreTemperatureRR">Tyre temperature rear right</string>
     <string name="element_vehicleSpeed">Speed</string>
     <string name="element_wheelAngle">Wheel angle</string>
     <string name="element_yawRate">Yaw rate</string>

@@ -221,6 +221,10 @@
         <item>@string/element_tyrePressureRL</item>
         <item>@string/element_tyrePressureFR</item>
         <item>@string/element_tyrePressureFL</item>
+        <item>@string/element_tyreTemperatureRR</item>
+        <item>@string/element_tyreTemperatureRL</item>
+        <item>@string/element_tyreTemperatureFR</item>
+        <item>@string/element_tyreTemperatureFL</item>
 
         <item>@string/element_shortTermConsumptionPrimary</item>
         <item>@string/element_shortTermConsumptionSecondary</item>
@@ -280,6 +284,11 @@
         <item>tyrePressures.pressureRearLeft</item>
         <item>tyrePressures.pressureFrontRight</item>
         <item>tyrePressures.pressureFrontLeft</item>
+
+        <item>tyreTemperatures.temperatureRearRight</item>
+        <item>tyreTemperatures.temperatureRearLeft</item>
+        <item>tyreTemperatures.temperatureFrontRight</item>
+        <item>tyreTemperatures.temperatureFrontLeft</item>
 
 
         <item>shortTermConsumptionPrimary</item>
@@ -572,11 +581,6 @@
     oilLevel.warnings
     recuperationLevel.recupLevel
 
-    tyreTemperatures.temperatureRearRight (and other positions and SpareWheel)
-    tyreTemperatures.temperatureUnit
-    tyrePressures.pressureFrontLeft (and other positions and SpareWheel)
-    tyrePressures.pressureUnit
-    tyreRequiredPressures. (same options as tyrePressures)
     Car_vehicleInformation.Type (car derivate, e.g. 0203070200 for regular Golf 7)
     Car_vehicleInformation.StickerBits
 

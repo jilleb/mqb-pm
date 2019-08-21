@@ -1197,6 +1197,10 @@ public class DashboardFragment extends CarFragment {
             case "tyrePressures.pressureRearLeft":
             case "tyrePressures.pressureFrontRight":
             case "tyrePressures.pressureFrontLeft":
+            case "tyreTemperatures.TemperatureRearRight":
+            case "tyreTemperatures.TemperatureRearLeft":
+            case "tyreTemperatures.TemperatureFrontRight":
+            case "tyreTemperatures.TemperatureFrontLeft":
             case "torque_fuelpressure_0x0a":
             case "torque_engineload_0x04":
             case "torque_timing_advance_0x0e":
@@ -1341,21 +1345,25 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "tyreStates.stateRearRight":
             case "tyrePressures.pressureRearRight":
+            case "tyreTemperatures.temperatureRearRight":
                 label.setText(getString(R.string.label_tyreRR));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateRearLeft":
             case "tyrePressures.pressureRearLeft":
+            case "tyreTemperatures.temperatureRearLeft":
                 label.setText(getString(R.string.label_tyreRL));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateFrontRight":
             case "tyrePressures.pressureFrontRight":
+            case "tyreTemperatures.temperatureFrontRight":
                 label.setText(getString(R.string.label_tyreFR));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
             case "tyreStates.stateFrontLeft":
             case "tyrePressures.pressureFrontLeft":
+            case "tyreTemperatures.temperatureFrontLeft":
                 label.setText(getString(R.string.label_tyreFL));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
@@ -2264,21 +2272,6 @@ public class DashboardFragment extends CarFragment {
                         value.setText(String.format(Locale.US,FORMAT_DECIMALS, mshortConsumption));
                     }
                     break;
-                case "Nav_CurrentPosition.Longitude":
-                case "Nav_CurrentPosition.Latitude":
-                case "Nav_CurrentPosition.City":
-                case "Nav_CurrentPosition.State":
-                case "Nav_CurrentPosition.Country":
-                case "Nav_CurrentPosition.Street":
-                case "Radio_Tuner.Name":
-                case "Radio_Text":
-                case "totalDistance.distanceValue":
-                case "vehicleIdenticationNumber.VIN":
-                    String elementValue = (String) mLastMeasurements.get(queryElement);
-                    if (elementValue != null) value.setText(elementValue);
-                    break;
-                case "blinkingState":
-                    break;
                 case "tyreStates.stateRearRight":
                 case "tyreStates.stateRearLeft":
                 case "tyreStates.stateFrontRight":
@@ -2298,6 +2291,15 @@ public class DashboardFragment extends CarFragment {
                         tyrePressure = tyrePressure / 10; // value in bar
                         tyrePressure = tyrePressure * pressureFactor; // convert to psi if needed.
                         value.setText(String.format(Locale.US, FORMAT_DECIMALS_WITH_UNIT, tyrePressure, pressureUnit));
+                    }
+                    break;
+                case "tyreTemperatures.temperatureRearRight":
+                case "tyreTemperatures.temperatureRearLeft":
+                case "tyreTemperatures.temperatureFrontRight":
+                case "tyreTemperatures.temperatureFrontLeft":
+                    Float tyreTemp = (Float) mLastMeasurements.get(queryElement);
+                    if (tyreTemp != null) {
+                        value.setText(String.format(Locale.US, FORMAT_TEMPERATURE, tyreTemp));
                     }
                     break;
             }
