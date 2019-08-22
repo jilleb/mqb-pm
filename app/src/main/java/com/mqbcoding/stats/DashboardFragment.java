@@ -894,6 +894,12 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
+    private void stopTorque() {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction("org.prowl.torque.REQUEST_TORQUE_QUIT");
+        getContext().sendBroadcast(sendIntent);
+        Log.d(TAG, "Torque stop");
+    }
 
     private void createAndStartUpdateTimer() {
         updateTimer = new Timer();
@@ -931,6 +937,7 @@ public class DashboardFragment extends CarFragment {
             } catch (Exception E) {
                 throw E;
             }
+        stopTorque();
 
         LocalBroadcastManager.getInstance(getContext())
                 .unregisterReceiver(onNoticeGoogleNavigationUpdate);
@@ -1004,6 +1011,7 @@ public class DashboardFragment extends CarFragment {
         if (torqueBind)
             try {
                 //   getContext().unbindService(torqueConnection);
+                stopTorque();
             } catch (Exception E) {
                 throw E;
             }
