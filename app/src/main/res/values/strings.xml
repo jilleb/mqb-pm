@@ -240,6 +240,12 @@
     <string name="element_torque_catalysttemperature">Torque - Catalyst temperature</string>
     <string name="element_torque_fuellevel">Torque - Fuel level</string>
     <string name="element_torque_o2sensor1equivalenceratio">Torque - O2 sensor 1 equivalence ratio</string>
+    <string name="element_torque_fuelrailpressure">Torque - Fuel rail pressure</string>
+    <string name="element_torque_exhaustgastempbank1sensor1">Torque - Exhaust Gas temperature bank 1 sensor 1</string>
+    <string name="element_torque_exhaustgastempbank1sensor2">Torque - Exhaust Gas temperature bank 1 sensor 2</string>
+    <string name="element_torque_exhaustgastempbank1sensor3">Torque - Exhaust Gas temperature bank 1 sensor 3</string>
+    <string name="element_torque_exhaustgastempbank1sensor4">Torque - Exhaust Gas temperature bank 1 sensor 4</string>
+
     <string name="pref_unitprefs">Unit preferences</string>
     <string name="pref_graphOff">Clocks are displayed in regular mode</string>
     <string name="pref_graphOn">Clocks are displayed in graph-mode</string>

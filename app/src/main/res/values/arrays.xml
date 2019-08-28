@@ -120,6 +120,13 @@
         <item>@string/element_torque_enginecoolanttemp</item>
         <item>@string/element_torque_ambientairtemp</item>
         <item>@string/element_torque_catalysttemperature</item>
+
+        <item>@string/element_torque_fuelrailpressure</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor1</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor2</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor3</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor4</item>
+
         <item>@string/element_test</item>
     </string-array>
 
@@ -199,6 +206,11 @@
         <item>torque-ambientairtemp_0x46</item>
         <item>torque-catalysttemperature_0x3c</item>
 
+        <item>torque-fuelrailpressure_0x23</item>
+        <item>torque-exhaustgastempbank1sensor1_0x78</item>
+        <item>torque-exhaustgastempbank1sensor2_0xff1282</item>
+        <item>torque-exhaustgastempbank1sensor3_0xff1283</item>
+        <item>torque-exhaustgastempbank1sensor4_0xff1284</item>
 
         <item>test</item>
 
@@ -262,6 +274,13 @@
         <item>@string/element_torque_fueltrimshortterm2</item>
         <item>@string/element_torque_fueltrimlongterm2</item>
         <item>@string/element_torque_accelerometer_total</item>
+
+        <item>@string/element_torque_fuelrailpressure</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor1</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor2</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor3</item>
+        <item>@string/element_torque_exhaustgastempbank1sensor4</item>
+
         <item>@string/element_test</item>
     </string-array>
 
@@ -328,6 +347,12 @@
         <item>torque_fueltrimshortterm2_0x08</item>
         <item>torque_fueltrimlongterm2_0x09</item>
         <item>torque_accelerometer_total_0xff1223</item>
+
+        <item>torque_fuelrailpressure_0x23</item>
+        <item>torque_exhaustgastempbank1sensor1_0x78</item>
+        <item>torque_exhaustgastempbank1sensor2_0xff1282</item>
+        <item>torque_exhaustgastempbank1sensor3_0xff1283</item>
+        <item>torque_exhaustgastempbank1sensor4_0xff1284</item>
 
         <item>test</item>
     </string-array>
