@@ -894,6 +894,7 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
+
     private void stopTorque() {
         Intent sendIntent = new Intent();
         sendIntent.setAction("org.prowl.torque.REQUEST_TORQUE_QUIT");
@@ -933,10 +934,11 @@ public class DashboardFragment extends CarFragment {
         if (torqueBind)
             try {
                 getContext().unbindService(torqueConnection);
+                stopTorque();
             } catch (Exception E) {
                 throw E;
             }
-        stopTorque();
+
 
         LocalBroadcastManager.getInstance(getContext())
                 .unregisterReceiver(onNoticeGoogleNavigationUpdate);
@@ -1006,14 +1008,6 @@ public class DashboardFragment extends CarFragment {
         mGraphValueLeft = null;
         mGraphValueCenter = null;
         mGraphValueRight = null;
-
-        if (torqueBind)
-            try {
-                //   getContext().unbindService(torqueConnection);
-                stopTorque();
-            } catch (Exception E) {
-                throw E;
-            }
 
         super.onDestroyView();
     }
@@ -1223,10 +1217,10 @@ public class DashboardFragment extends CarFragment {
             case "torque_fueltrimshortterm2_0x08":
             case "torque_fueltrimlongterm2_0x09":
             case "torque-fuelrailpressure_0x23":
-            case "torque-exhaustgastempbank1sensor1_0x78":
-            case "torque-exhaustgastempbank1sensor2_0xff1282":
-            case "torque-exhaustgastempbank1sensor3_0xff1283":
-            case "torque-exhaustgastempbank1sensor4_0xff1284":
+            case "torque_exhaustgastempbank1sensor1_0x78":
+            case "torque_exhaustgastempbank1sensor2_0xff1282":
+            case "torque_exhaustgastempbank1sensor3_0xff1283":
+            case "torque_exhaustgastempbank1sensor4_0xff1284":
                 label.setText("");
                 value.setText("-");
                 break;
