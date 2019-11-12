@@ -295,6 +295,9 @@
     <string name="pref_enginespeed_play_sound_upto">Play sound up to gear</string>
     <string name="pref_enginespeed_summary">Monitor engine speed to play sound when shift is needed</string>
     <string name="pref_enginespeed_rpm_dialog_title">Engine RPMs</string>
+    <string name="pref_accurate_off">Smooth animation on clocks (less accurate but better looking)</string>
+    <string name="pref_accurate_on">Accurate values on clock (less smooth animation)</string>
+    <string name="pref_accurate">Accurate clocks (less smooth animation)</string>
 
 
 </resources>

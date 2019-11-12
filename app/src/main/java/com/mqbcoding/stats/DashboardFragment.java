@@ -86,7 +86,7 @@ public class DashboardFragment extends CarFragment {
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private Boolean pressureUnits, temperatureUnits,powerUnits;
     private Boolean stagingDone;
-    private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn;
+    private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
@@ -126,6 +126,7 @@ public class DashboardFragment extends CarFragment {
     private boolean showStreetName, useGoogleGeocoding, forceGoogleGeocoding;
     private String selectedFont;
     private boolean selectedPressureUnits;
+    private int updateSpeed = 2000;
 
     public DashboardFragment() {
         // Required empty public constructor
@@ -443,6 +444,13 @@ public class DashboardFragment extends CarFragment {
     private void onPreferencesChangeHandler() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
+        accurateOn = sharedPreferences.getBoolean("accurateActive", false);  //true = be accurate. false = have 2000ms of animation time
+        if (accurateOn) {
+            updateSpeed = 1;
+        } else {
+            updateSpeed = 2000;
+        }
+
         // Load this only on first run, then leave it alone
         if (stagingDone == null) {
             stagingDone = !sharedPreferences.getBoolean("stagingActive", true);
@@ -2033,10 +2041,10 @@ public class DashboardFragment extends CarFragment {
             }
 
             // update clock with latest clockValue
-            clock.speedTo(clockValue);
+            clock.speedTo(clockValue, updateSpeed);
 
             if (visray.isShown()) {
-                visray.speedTo(clockValue);
+                visray.speedTo(clockValue, updateSpeed);
             }
 
             // update the max clocks and text

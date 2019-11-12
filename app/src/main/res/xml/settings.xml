@@ -49,6 +49,14 @@
             android:summaryOn="@string/pref_highvis_on"
             android:title="@string/pref_highvis" />
         <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="accurateActive"
+            android:summaryOff="@string/pref_accurate_off"
+            android:summaryOn="@string/pref_accurate_on"
+            android:title="@string/pref_accurate" />
+        <CheckBoxPreference
             android:defaultValue="false"
             android:key="ticksActive"
             android:summaryOff="@string/pref_ticks_off"
