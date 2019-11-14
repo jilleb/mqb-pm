@@ -556,12 +556,12 @@ public class DashboardFragment extends CarFragment {
             temperatureUnit = getString(celsiusTempUnit ? R.string.unit_c : R.string.unit_f);
         }
 
-        boolean readedPowerUnits = sharedPreferences.getBoolean("selectPowerUnit", true);  //true = kw, false = ps
-        if (powerUnits == null || readedPowerUnits != powerUnits) {
-            powerUnits = readedPowerUnits;
-            powerFactor = powerUnits ? 1 : 1.35962f;
-        }
-
+        //boolean readedPowerUnits = sharedPreferences.getBoolean("selectPowerUnit", true);  //true = kw, false = ps
+        //if (powerUnits == null || readedPowerUnits != powerUnits) {
+        //    powerUnits = readedPowerUnits;
+        //    powerFactor = powerUnits ? 1 : 1.35962f;
+        //}
+//
 
         //show texts and backgrounds for max/min, according to the setting
         boolean readedMaxOn = sharedPreferences.getBoolean("maxValuesActive", false); //true = show max values, false = hide them
@@ -2269,10 +2269,10 @@ public class DashboardFragment extends CarFragment {
                 case "currentOutputPower":
                     Float mCurrentPowerValue = (Float) mLastMeasurements.get(queryElement);
                     if (mCurrentPowerValue != null) {
-                        if (!powerUnits) {
-                            // HP
-                            mCurrentPowerValue *= powerFactor;
-                        }
+                        // if (!powerUnits) {
+                        //     // HP
+                        //     mCurrentPowerValue *= powerFactor;
+                        // }
                         value.setText(String.format(Locale.US, FORMAT_DECIMALS, mCurrentPowerValue));
                         //label.setText(powerUnits?getString(R.string.unit_kw):getString(R.string.unit_hp));
                     }

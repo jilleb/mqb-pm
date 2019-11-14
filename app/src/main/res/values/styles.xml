@@ -117,6 +117,24 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
+
+    <style name="AppTheme.VolkswagenAID" parent="AppTheme.Car">
+        <item name="themedDialBackground">@drawable/dial_background_marks_aid</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_aid</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_aid</item>
+        <item name="themedCarBackground">@drawable/background_incar_vw</item>
+        <item name="themedNeedle">@drawable/needle_aid</item>
+        <item name="themedStopWatchBackground">@drawable/sw_background_aid</item>
+        <item name="themedNeedleColor">@color/white</item>
+        <item name="sv_withIndicatorLight">false</item>
+        <item name="sv_indicatorLightColor">@android:color/transparent</item>
+
+        <item name="sv_indicatorColor">@color/white</item>
+        <item name="sv_indicatorWidth">0dp</item>
+        <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickRotation">false</item>
+    </style>
+
     <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car">
         <item name="themedDialBackground">@drawable/dial_background_mib2p</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_mib2p</item>

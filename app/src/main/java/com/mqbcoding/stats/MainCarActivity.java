@@ -266,6 +266,9 @@ public class MainCarActivity extends CarActivity {
             case "VW MIB2":
                 setTheme(R.style.AppTheme_VolkswagenMIB2);
                 break;
+            case "VW AID":
+                setTheme(R.style.AppTheme_VolkswagenAID);
+                break;
             case "Seat Cupra":
                 setTheme(R.style.AppTheme_SeatCupra);
                 break;
