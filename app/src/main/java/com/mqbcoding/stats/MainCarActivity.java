@@ -18,6 +18,12 @@ import com.google.android.apps.auto.sdk.MenuController;
 import com.google.android.apps.auto.sdk.MenuItem;
 import com.google.android.apps.auto.sdk.StatusBarController;
 
+import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
+import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
+import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+import static android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+
 public class MainCarActivity extends CarActivity {
     private static final String TAG = "MainCarActivity";
 
@@ -127,10 +133,14 @@ public class MainCarActivity extends CarActivity {
             FragmentManager manager = getSupportFragmentManager();
             Fragment currentFragment = mCurrentFragmentTag == null ? null : manager.findFragmentByTag(mCurrentFragmentTag);
             if (currentFragment != null)
-            manager.beginTransaction().detach(currentFragment).attach(currentFragment).commit();
+                manager.beginTransaction().detach(currentFragment).attach(currentFragment).commit();
 
+            this.c().getDecorView().setSystemUiVisibility(
+                    SYSTEM_UI_FLAG_FULLSCREEN |
+                            SYSTEM_UI_FLAG_HIDE_NAVIGATION |
+                            SYSTEM_UI_FLAG_IMMERSIVE | SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+            setIgnoreConfigChanges(0xFFFF);
         }
-
         boolean readedD2Active = preferences.getBoolean("d2_active", false);
         if (d2Active == null || d2Active != readedD2Active) {
             d2Active = readedD2Active;
