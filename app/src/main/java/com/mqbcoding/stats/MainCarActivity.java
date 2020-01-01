@@ -9,6 +9,8 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.apps.auto.sdk.CarActivity;
@@ -29,9 +31,8 @@ public class MainCarActivity extends CarActivity {
 
     //menu stuff//
 
-    static final String MENU_DASHBOARD1 = "dashboard1";  // home
-    static final String MENU_DASHBOARD2 = "dashboard2";
-
+    static final String MENU_DASHBOARD = "dashboard";
+  //  static final String MENU_CARINFO = "carinfo";
     static final String MENU_READINGS = "readings";
     static final String MENU_CREDITS = "credits";
     static final String MENU_STOPWATCH = "stopwatch";
@@ -39,9 +40,7 @@ public class MainCarActivity extends CarActivity {
 
     // static final String MENU_DEBUG_LOG = "log";
     // static final String MENU_DEBUG_TEST_NOTIFICATION = "test_notification";
-
-    private static final String FRAGMENT_CAR_1 = "dashboard1";
-    private static final String FRAGMENT_CAR_2 = "dashboard2";
+    private static final String FRAGMENT_CAR = "dashboard";
     private static final String FRAGMENT_READINGS = "readings";
     private static final String FRAGMENT_CREDITS = "credits";
     private static final String FRAGMENT_STOPWATCH = "stopwatch";
@@ -52,17 +51,12 @@ public class MainCarActivity extends CarActivity {
     private Boolean connectivityOn, batteryOn, clockOn, micOn;
     private SharedPreferences preferences;
     private String selectedBackground;
-    private Boolean d2Active;
-
     private final ListMenuAdapter.MenuCallbacks mMenuCallbacks = new ListMenuAdapter.MenuCallbacks() {
         @Override
         public void onMenuItemClicked(String name) {
             switch (name) {
-                case MENU_DASHBOARD1:
-                    switchToFragment(FRAGMENT_CAR_1);
-                    break;
-                case MENU_DASHBOARD2:
-                    switchToFragment(FRAGMENT_CAR_2);
+                case MENU_DASHBOARD:
+                    switchToFragment(FRAGMENT_CAR);
                     break;
                 case MENU_READINGS:
                     switchToFragment(FRAGMENT_READINGS);
@@ -141,11 +135,8 @@ public class MainCarActivity extends CarActivity {
                             SYSTEM_UI_FLAG_IMMERSIVE | SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
             setIgnoreConfigChanges(0xFFFF);
         }
-        boolean readedD2Active = preferences.getBoolean("d2_active", false);
-        if (d2Active == null || d2Active != readedD2Active) {
-            d2Active = readedD2Active;
-            getCarUiController().getMenuController().setRootMenuAdapter(createMenu(d2Active));
-        }
+            getCarUiController().getMenuController().setRootMenuAdapter(createMenu());
+
     }
 
     @Override
@@ -155,26 +146,22 @@ public class MainCarActivity extends CarActivity {
         setContentView(R.layout.activity_car_main);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferenceChangeHandler();
-
+/*
         CarUiController carUiController = getCarUiController();
         //force night mode
         carUiController.getStatusBarController().setDayNightStyle(DayNightStyle.FORCE_NIGHT);
-
+*/
         FragmentManager fragmentManager = getSupportFragmentManager();
 
         //set fragments:
-        CarFragment carfragment1 = new DashboardFragment(1);
-        CarFragment carfragment2 = new DashboardFragment(2);
-
+        CarFragment carfragment = new DashboardFragment();
         ReadingsViewFragment readingsViewFragment = new ReadingsViewFragment();
 
         StopwatchFragment stopwatchfragment = new StopwatchFragment();
         CreditsFragment creditsfragment = new CreditsFragment();
         fragmentManager.beginTransaction()
-                .add(R.id.fragment_container, carfragment1, FRAGMENT_CAR_1)
-                .detach(carfragment1)
-                .add(R.id.fragment_container, carfragment2, FRAGMENT_CAR_2)
-                .detach(carfragment2)
+                .add(R.id.fragment_container, carfragment, FRAGMENT_CAR)
+                .detach(carfragment)
                 .add(R.id.fragment_container, readingsViewFragment, FRAGMENT_READINGS)
                 .detach(readingsViewFragment)
                 .add(R.id.fragment_container, stopwatchfragment, FRAGMENT_STOPWATCH)
@@ -184,7 +171,7 @@ public class MainCarActivity extends CarActivity {
                 .commitNow();
 
 
-        String initialFragmentTag = FRAGMENT_CAR_1;
+        String initialFragmentTag = FRAGMENT_CAR;
         if (bundle != null && bundle.containsKey(CURRENT_FRAGMENT_KEY)) {
             initialFragmentTag = bundle.getString(CURRENT_FRAGMENT_KEY);
         }
@@ -193,32 +180,21 @@ public class MainCarActivity extends CarActivity {
         MenuController menuController = getCarUiController().getMenuController();
         menuController.showMenuButton();
         StatusBarController statusBarController = getCarUiController().getStatusBarController();
-
-        carfragment1.setupStatusBar(statusBarController);
-        carfragment2.setupStatusBar(statusBarController);
-
+        carfragment.setupStatusBar(statusBarController);
         getSupportFragmentManager().registerFragmentLifecycleCallbacks(mFragmentLifecycleCallbacks,
                 false);
 
     }
 
-    private ListMenuAdapter createMenu(boolean withSecondDashboard) {
+    private ListMenuAdapter createMenu() {
         ListMenuAdapter mainMenu = new ListMenuAdapter();
         mainMenu.setCallbacks(mMenuCallbacks);
 
-        //set menu
-        mainMenu.addMenuItem(MENU_DASHBOARD1, new MenuItem.Builder()
+    //set menu
+        mainMenu.addMenuItem(MENU_DASHBOARD, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_main_title))
                 .setType(MenuItem.Type.ITEM)
                 .build());
-
-        // TODO: make this remove
-        if (withSecondDashboard) {
-            mainMenu.addMenuItem(MENU_DASHBOARD2, new MenuItem.Builder()
-                    .setTitle(getString(R.string.activity_main_title) + " 2")
-                    .setType(MenuItem.Type.ITEM)
-                    .build());
-        }
 
         mainMenu.addMenuItem(MENU_READINGS, new MenuItem.Builder()
                 .setTitle(getString(R.string.activity_readings_title))
@@ -330,7 +306,6 @@ public class MainCarActivity extends CarActivity {
                 setTheme(R.style.AppTheme_VolkswagenMIB2);
                 break;
         }
-
     }
 
     private void switchToFragment(String tag) {

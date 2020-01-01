@@ -17,8 +17,7 @@
         android:id="@+id/icon_ClockRight"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="75dp"
         android:alpha="1.0"
         android:background="@drawable/ic_oil"
         android:backgroundTint="@color/car_primary"
@@ -29,15 +28,13 @@
         app:layout_constraintBottom_toBottomOf="@id/constraintClockRight"
         app:layout_constraintEnd_toEndOf="@id/constraintClockRight"
         app:layout_constraintStart_toStartOf="@id/constraintClockRight"
-        app:layout_constraintTop_toTopOf="@id/constraintClockRight"
         app:layout_constraintVertical_bias="0.69" />
 
     <TextView
         android:id="@+id/icon_ClockCenter"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="75dp"
         android:alpha="1.0"
         android:background="@drawable/ic_oil"
         android:backgroundTint="@color/car_primary"
@@ -51,15 +48,13 @@
         app:layout_constraintLeft_toLeftOf="@+id/constraintClockCenter"
         app:layout_constraintRight_toRightOf="@+id/constraintClockCenter"
         app:layout_constraintStart_toStartOf="@+id/constraintClockCenter"
-        app:layout_constraintTop_toTopOf="@+id/constraintClockCenter"
         app:layout_constraintVertical_bias="0.69" />
 
     <TextView
         android:id="@+id/icon_ClockLeft"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="75dp"
         android:alpha="1.0"
         android:background="@drawable/ic_oil"
         android:backgroundTint="@color/car_primary"
@@ -69,19 +64,33 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockLeft"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockLeft"
-        app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"
-        app:layout_constraintTop_toTopOf="@+id/constraintClockLeft"
-        app:layout_constraintVertical_bias="0.69" />
-
+        app:layout_constraintVertical_bias="0.69"
+        app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"/>
+    <!--    app:layout_constraintTop_toTopOf="@+id/constraintClockLeft"
+    !-->
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintClockRight"
         android:layout_width="275dp"
-        android:layout_height="275dp"
+        android:layout_height="310dp"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textTitleLabel3"
+            android:layout_width="275dp"
+            android:layout_height="32dp"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text=""
+            android:textAppearance="@style/CarBody2"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.github.anastr.speedviewlib.SpeedView
             android:id="@+id/dial_Right"
@@ -93,7 +102,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleLabel3"
             app:sv_speedTextSize="36dp"
             app:sv_textColor="@android:color/transparent"
             app:sv_unitSpeedInterval="5dp"
@@ -105,7 +114,7 @@
 
 
             android:layout_width="275dp"
-            android:layout_height="275dp"
+            android:layout_height="310dp"
             android:padding="10dp"
 
             app:layout_constraintBottom_toBottomOf="@+id/dial_Right"
@@ -116,7 +125,6 @@
             app:sv_indicatorColor="@color/red"
             app:sv_markColor="@android:color/transparent"
             app:sv_speedTextColor="@android:color/transparent"
-
             app:sv_speedTextPadding="50dp"
             app:sv_speedTextSize="15dp"
             app:sv_textColor="@android:color/transparent"
@@ -149,7 +157,6 @@
             app:sv_unitTextColor="@android:color/white"
             app:sv_unitTextSize="0dp"
             app:sv_unitUnderSpeedText="false"
-
             app:sv_withIndicatorLight="false" />
 
         <com.github.anastr.speedviewlib.RaySpeedometer
@@ -158,8 +165,8 @@
             android:layout_height="275dp"
             android:padding="40dp"
             app:layout_constraintBottom_toBottomOf="@+id/dial_Right"
-            app:layout_constraintEnd_toEndOf="@+id/dial_Right"
-            app:layout_constraintLeft_toLeftOf="@+id/dial_Right"
+            app:layout_constraintRight_toRightOf="@+id/dial_Right"
+            app:layout_constraintStart_toStartOf="@+id/dial_Right"
             app:layout_constraintTop_toTopOf="@+id/dial_Right"
             app:sv_backgroundCircleColor="@android:color/transparent"
             app:sv_degreeBetweenMark="1"
@@ -184,12 +191,27 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintClockCenter"
         android:layout_width="275dp"
-        android:layout_height="275dp"
+        android:layout_height="310dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+
+        <TextView
+            android:id="@+id/textTitleLabel2"
+            android:layout_width="275dp"
+            android:layout_height="32dp"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text=""
+            android:textAppearance="@style/CarBody2"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.github.anastr.speedviewlib.SpeedView
             android:id="@+id/dial_Center"
@@ -201,7 +223,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleLabel2"
             app:sv_maxSpeed="2"
             app:sv_speedTextSize="36dp"
             app:sv_textColor="@android:color/transparent"
@@ -248,13 +270,11 @@
             app:layout_constraintLeft_toLeftOf="@+id/dial_Center"
             app:layout_constraintRight_toRightOf="@+id/dial_Center"
             app:layout_constraintTop_toTopOf="@+id/dial_Center"
-
             app:sv_indicator="QuarterLineIndicator"
             app:sv_indicatorColor="@color/red"
             app:sv_markColor="@android:color/transparent"
             app:sv_speedTextColor="@android:color/transparent"
             app:sv_speedTextPadding="50dp"
-
             app:sv_speedTextSize="15dp"
             app:sv_textColor="@android:color/transparent"
             app:sv_unitSpeedInterval="0dp"
@@ -291,12 +311,27 @@
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintClockLeft"
         android:layout_width="275dp"
-        android:layout_height="275dp"
+        android:layout_height="310dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/constraintClockCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="parent">
 
+
+        <TextView
+            android:id="@+id/textTitleLabel1"
+            android:layout_width="275dp"
+            android:layout_height="32dp"
+            android:ellipsize="marquee"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text=""
+            android:textAppearance="@style/CarBody2"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <com.github.anastr.speedviewlib.SpeedView
             android:id="@+id/dial_Left"
@@ -308,8 +343,7 @@
             android:padding="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleLabel1"
             app:sv_speedTextSize="36dp"
             app:sv_textColor="@android:color/transparent"
             app:sv_unit=""
@@ -342,9 +376,7 @@
             app:sv_unitTextColor="@android:color/transparent"
             app:sv_withEffects="false"
             app:sv_withTremble="false"
-
             />
-
 
         <com.github.anastr.speedviewlib.SpeedView
             android:id="@+id/dial_MaxLeft"
@@ -393,12 +425,11 @@
             app:sv_unitTextColor="@android:color/white"
             app:sv_unitTextSize="0dp"
             app:sv_unitUnderSpeedText="false"
-
-
             app:sv_withIndicatorLight="false" />
 
-    </android.support.constraint.ConstraintLayout>
 
+
+    </android.support.constraint.ConstraintLayout>
 
     <ImageView
         android:id="@+id/wheel_angle_image"
@@ -419,6 +450,7 @@
         android:layout_width="275dp"
         android:layout_height="275dp"
         android:visibility="invisible"
+        android:layout_marginTop="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockCenter"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockCenter"
         app:layout_constraintRight_toRightOf="@+id/constraintClockCenter"
@@ -432,11 +464,9 @@
             android:textAlignment="viewEnd"
             android:textAppearance="@style/CarBody2"
             android:textColor="@android:color/white"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
-
 
         <android.support.v7.widget.CardView
             android:id="@+id/center_layout"
@@ -464,7 +494,7 @@
         android:id="@+id/constraintGraphRight"
         android:layout_width="275dp"
         android:layout_height="275dp"
-
+        android:layout_marginTop="35dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockRight"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockRight"
@@ -479,7 +509,6 @@
             android:textAlignment="viewEnd"
             android:textAppearance="@style/CarBody2"
             android:textColor="@android:color/white"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -496,10 +525,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-
-            >
+            app:layout_constraintTop_toTopOf="parent">
 
 
             <com.jjoe64.graphview.GraphView
@@ -507,18 +533,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:elevation="0dp" />
+
         </android.support.v7.widget.CardView>
     </android.support.constraint.ConstraintLayout>
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintGraphLeft"
         android:layout_width="275dp"
-        android:layout_height="0dp"
+        android:layout_height="275dp"
         android:visibility="invisible"
+        android:layout_marginTop="35dp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockLeft"
         app:layout_constraintRight_toRightOf="@+id/constraintClockLeft"
         app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"
-
         app:layout_constraintTop_toTopOf="@+id/constraintClockLeft">
 
         <TextView
@@ -529,7 +556,6 @@
             android:textAlignment="viewEnd"
             android:textAppearance="@style/CarBody2"
             android:textColor="@android:color/white"
-
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
@@ -547,7 +573,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/chart_Left"
@@ -631,6 +656,7 @@
         android:gravity="center"
         android:textAppearance="@style/CarBody2"
         android:textColor="@android:color/white"
+        android:layout_marginTop="35dp"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockCenter"
         app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"
         app:layout_constraintTop_toTopOf="@+id/constraintClockLeft"
@@ -680,29 +706,13 @@
         app:layout_constraintStart_toStartOf="@+id/constraintClockCenter"
         tools:ignore="HardcodedText" />
 
-
-    <TextView
-        android:id="@+id/textMinLeft"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="265dp"
-        android:drawableLeft="@drawable/ic_min"
-        android:elevation="1dp"
-        android:gravity="top"
-        android:text="0"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/constraintClockLeft"
-        app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"
-        app:layout_constraintTop_toTopOf="@+id/constraintClockLeft" />
-
     <TextView
         android:id="@+id/textMaxLeft"
         android:layout_width="100dp"
         android:layout_height="30dp"
 
-        android:layout_marginBottom="265dp"
-        android:drawableLeft="@drawable/ic_max"
+        android:layout_marginBottom="17dp"
+        android:drawableLeft="@drawable/ic_max_text"
         android:elevation="1dp"
         android:gravity="center_horizontal"
         android:text="0"
@@ -712,28 +722,13 @@
         app:layout_constraintEnd_toEndOf="@+id/constraintClockLeft"
         app:layout_constraintStart_toStartOf="@+id/constraintClockLeft" />
 
-    <TextView
-        android:id="@+id/textMinCenter"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="265dp"
-        android:drawableLeft="@drawable/ic_min"
-        android:elevation="1dp"
-        android:gravity="top"
-        android:text="0"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/constraintClockCenter"
-        app:layout_constraintStart_toStartOf="@+id/constraintClockCenter"
-        app:layout_constraintTop_toTopOf="@+id/constraintClockCenter" />
 
     <TextView
         android:id="@+id/textMaxCenter"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="265dp"
-        android:drawableLeft="@drawable/ic_max"
+        android:layout_marginBottom="17dp"
+        android:drawableLeft="@drawable/ic_max_text"
         android:elevation="1dp"
         android:gravity="bottom"
         android:text="0"
@@ -745,30 +740,14 @@
 
         />
 
-    <TextView
-        android:id="@+id/textMinRight"
-        android:layout_width="100dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="265dp"
-        android:drawableLeft="@drawable/ic_min"
-        android:elevation="1dp"
-        android:gravity="top"
-        android:text="0"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/constraintClockRight"
-        app:layout_constraintStart_toStartOf="@+id/constraintClockRight"
-        app:layout_constraintTop_toTopOf="@+id/constraintClockRight" />
 
     <TextView
         android:id="@+id/textMaxRight"
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="265dp"
-        android:drawableLeft="@drawable/ic_max"
+        android:layout_marginBottom="17dp"
+        android:drawableLeft="@drawable/ic_max_text"
         android:elevation="1dp"
-
         android:gravity="bottom"
         android:text="0"
         android:textAlignment="center"

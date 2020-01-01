@@ -85,14 +85,22 @@
     </PreferenceCategory>
     <PreferenceCategory
         android:singleLineTitle="false"
-        android:title="@string/pref_dataelementsettings">
-        <!--TODO: Title Dashboard1 -->
+        android:title="@string/pref_dataelementsettings_1">
+
+        <EditTextPreference
+            android:key="performanceTitle1"
+            android:title="@string/pref_title_performance_1"
+            android:defaultValue="Performance monitor 1"
+            android:icon="@drawable/ic_settings_title"
+            android:inputType="text" />
 
         <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockl"
-            android:key="d1_selectedClockLeft"
+            android:key="selectedClockLeft1"
             android:summary="%s"
             android:title="@string/pref_leftclock" />
 
@@ -102,7 +110,7 @@
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockc"
-            android:key="d1_selectedClockCenter"
+            android:key="selectedClockCenter1"
             android:summary="%s"
             android:title="@string/pref_centerclock" />
 
@@ -113,7 +121,7 @@
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockr"
-            android:key="d1_selectedClockRight"
+            android:key="selectedClockRight1"
             android:summary="%s"
             android:title="@string/pref_rightclock" />
         <ListPreference
@@ -121,7 +129,7 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view1"
-            android:key="d1_selectedView1"
+            android:key="selectedView1_1"
             android:summary="%s"
             android:title="@string/pref_view1" />
         <ListPreference
@@ -131,7 +139,7 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view2"
-            android:key="d1_selectedView2"
+            android:key="selectedView2_1"
             android:summary="%s"
             android:title="@string/pref_view2" />
         <ListPreference
@@ -141,7 +149,7 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view3"
-            android:key="d1_selectedView3"
+            android:key="selectedView3_1"
             android:summary="%s"
             android:title="@string/pref_view3" />
         <ListPreference
@@ -151,14 +159,14 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view4"
-            android:key="d1_selectedView4"
+            android:key="selectedView4_1"
             android:summary="%s"
             android:title="@string/pref_view4" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:singleLineTitle="false"
-        android:title="@string/pref_dataelementsettings">
+        android:title="@string/pref_dataelementsettings_2">
 
         <CheckBoxPreference
             android:defaultValue="true"
@@ -172,46 +180,45 @@
             android:key="d2_active"
             android:title="@string/pref_enable_2nd_dash" />
 
+        <EditTextPreference
+            android:key="performanceTitle2"
+            android:title="@string/pref_title_performance_2"
+            android:defaultValue="Performance monitor 2"
+            android:icon="@drawable/ic_settings_title"
+            android:inputType="text" />
         <ListPreference
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockl"
-            android:key="d2_selectedClockLeft"
+            android:key="selectedClockLeft2"
             android:summary="%s"
-            android:title="@string/pref_leftclock"
-            android:dependency="d2_active" />
-
+            android:title="@string/pref_leftclock" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockc"
-            android:key="d2_selectedClockCenter"
+            android:key="selectedClockCenter2"
             android:summary="%s"
-            android:title="@string/pref_centerclock"
-            android:dependency="d2_active" />
-
-
+            android:title="@string/pref_centerclock" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:entries="@array/ClockDataElementsEntries"
             android:entryValues="@array/ClockDataElementsValues"
             android:icon="@drawable/ic_settings_clockr"
-            android:key="d2_selectedClockRight"
+            android:key="selectedClockRight2"
             android:summary="%s"
-            android:title="@string/pref_rightclock"
-            android:dependency="d2_active" />
+            android:title="@string/pref_rightclock" />
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view1"
-            android:key="d2_selectedView1"
+            android:key="selectedView1_2"
             android:summary="%s"
-            android:title="@string/pref_view1"
-            android:dependency="d2_active" />
+            android:title="@string/pref_view1" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -219,10 +226,9 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view2"
-            android:key="d2_selectedView2"
+            android:key="selectedView2_2"
             android:summary="%s"
-            android:title="@string/pref_view2"
-            android:dependency="d2_active" />
+            android:title="@string/pref_view2" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -230,10 +236,9 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view3"
-            android:key="d2_selectedView3"
+            android:key="selectedView3_2"
             android:summary="%s"
-            android:title="@string/pref_view3"
-            android:dependency="d2_active" />
+            android:title="@string/pref_view3" />
         <ListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -241,10 +246,86 @@
             android:entries="@array/TextDataElementsEntries"
             android:entryValues="@array/TextDataElementsValues"
             android:icon="@drawable/ic_settings_view4"
-            android:key="d2_selectedView4"
+            android:key="selectedView4_2"
             android:summary="%s"
-            android:title="@string/pref_view4"
-            android:dependency="d2_active" />
+            android:title="@string/pref_view4" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:singleLineTitle="false"
+        android:title="@string/pref_dataelementsettings_3">
+        <EditTextPreference
+            android:title="@string/pref_title_performance_3"
+            android:key="performanceTitle3"
+            android:defaultValue="Performance monitor 3"
+            android:icon="@drawable/ic_settings_title"
+            android:inputType="text" />
+
+        <ListPreference
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_clockl"
+            android:key="selectedClockLeft3"
+            android:summary="%s"
+            android:title="@string/pref_leftclock" />
+
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_clockc"
+            android:key="selectedClockCenter3"
+            android:summary="%s"
+            android:title="@string/pref_centerclock" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/ClockDataElementsEntries"
+            android:entryValues="@array/ClockDataElementsValues"
+            android:icon="@drawable/ic_settings_clockr"
+            android:key="selectedClockRight3"
+            android:summary="%s"
+            android:title="@string/pref_rightclock" />
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view1"
+            android:key="selectedView1_3"
+            android:summary="%s"
+            android:title="@string/pref_view1" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view2"
+            android:key="selectedView2_3"
+            android:summary="%s"
+            android:title="@string/pref_view2" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view3"
+            android:key="selectedView3_3"
+            android:summary="%s"
+            android:title="@string/pref_view3" />
+        <ListPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="1"
+            android:entries="@array/TextDataElementsEntries"
+            android:entryValues="@array/TextDataElementsValues"
+            android:icon="@drawable/ic_settings_view4"
+            android:key="selectedView4_3"
+            android:summary="%s"
+            android:title="@string/pref_view4" />
+
 
     </PreferenceCategory>
 
@@ -270,6 +351,12 @@
             android:title="@string/pref_location_force_geocoding_title" />
     </PreferenceCategory>
     <PreferenceCategory android:title="@string/pref_unitprefs">
+
+        <EditTextPreference
+            android:title="@string/pref_fuel_tank_size"
+            android:key="fueltanksize"
+            android:defaultValue="50"
+            android:inputType="number" />
 
         <SwitchPreference
             android:defaultValue="true"

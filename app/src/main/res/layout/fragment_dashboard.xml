@@ -1,39 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layoutDashboard"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:layout_margin="0dp">
 
     <include
         android:id="@+id/include"
         layout="@layout/layout_dashboard_gauges"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp" />
+        android:layout_marginTop="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+    <TextView
+        android:id="@+id/textTitleNAVDestinationAddress"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="6dp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text=""
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/titleIcon1"
+        app:layout_constraintStart_toEndOf="@+id/textTitleElement"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitleElement"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="0dp"
         android:layout_marginEnd="8dp"
-        android:orientation="horizontal">
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="28sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textTitleElementLeft"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="40dp"
-            android:ellipsize="marquee"
-            android:singleLine="true"
-            android:textAppearance="@style/CarBody2"
-            android:textColor="@android:color/white" />
+    <TextView
+        android:id="@+id/textTitleElementLeft"
+        android:layout_width="0dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="6dp"
+        android:ellipsize="marquee"
+        android:singleLine="true"
+        android:text=""
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@id/textTitleElement"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@id/titleIcon2"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textTitleElementRight"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:textAppearance="@style/CarBody2"
-            android:textColor="@android:color/white" />
 
-    </LinearLayout>
-</FrameLayout>
+
+    <TextView
+        android:id="@+id/textTitleElementRight"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:maxLines="1"
+        android:text=""
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitleNavDistance"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:maxLines="1"
+        android:text=""
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toRightOf="@id/titleIcon3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textTitleNavTime"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:maxLines="1"
+        android:text=""
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintLeft_toRightOf="@id/titleIcon4"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="580dp"
+        android:layout_height="75dp"
+        android:layout_marginTop="35dp"
+        android:maxLines="1"
+        android:text="@string/app_car_service_name"
+        android:textAlignment="center"
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleIcon1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_outsidetemperature"
+        android:visibility="invisible"
+        app:layout_constraintRight_toLeftOf="@id/textTitleElementRight"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleIcon2"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_world"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleIcon3"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_distance"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toRightOf="@id/textTitleElement"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleIcon4"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_measurement"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toRightOf="@id/textTitleNavDistance"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/imageButton2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="80dp"
+        android:background="@drawable/actions_go_previous_view_icon"
+        android:scaleType="centerCrop"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitleElementLeft"
+        app:srcCompat="@drawable/actions_go_previous_view_icon" />
+
+    <Button
+        android:id="@+id/imageButton3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="80dp"
+        android:background="@drawable/actions_go_next_view_icon"
+        android:scaleType="centerCrop"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textTitleElementLeft"
+        app:srcCompat="@drawable/actions_go_next_view_icon" />
+
+
+</android.support.constraint.ConstraintLayout>
