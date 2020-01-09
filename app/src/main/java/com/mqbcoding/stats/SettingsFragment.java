@@ -8,7 +8,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -222,7 +221,10 @@ public class SettingsFragment extends PreferenceFragment {
         bindPreferenceSummaryToValue(findPreference("bigqueryDataset"));
         bindPreferenceSummaryToValue(findPreference("bigqueryTable"));
         bindPreferenceSummaryToValue(findPreference("oilTempThreshold"));
-
+        bindPreferenceSummaryToValue(findPreference("fueltanksize"));
+        bindPreferenceSummaryToValue(findPreference("performanceTitle1"));
+        bindPreferenceSummaryToValue(findPreference("performanceTitle2"));
+        bindPreferenceSummaryToValue(findPreference("performanceTitle3"));
         bindPreferenceSummaryToValue(findPreference("engineSpeedSoundUpToGear"));
         bindPreferenceSummaryToValue(findPreference("engineSpeedESInform"));
         bindPreferenceSummaryToValue(findPreference("engineSpeedESHint"));
