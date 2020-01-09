@@ -66,7 +66,7 @@
         <item>@string/element_brakePressure</item>
         <item>@string/element_powermeter</item>
         <item>@string/element_currentTorque</item>
-        <item>@string/element_currentOutputPower</item>
+        <!-- <item>@string/element_currentOutputPower</item> -->
         <item>@string/element_EcoHMI_Score.AvgShort</item>
         <item>@string/element_EcoHMI_Score.AvgTrip</item>
         <item>@string/element_currentConsumptionPrimary</item>
@@ -152,7 +152,7 @@
         <item>exlap-brakePressure</item>
         <item>exlap-powermeter</item>
         <item>exlap-currentTorque</item>
-        <item>exlap-currentOutputPower</item>
+        <!-- <item>exlap-currentOutputPower</item> -->
         <item>exlap-EcoHMI_Score.AvgShort</item>
         <item>exlap-EcoHMI_Score.AvgTrip</item>
         <item>exlap-currentConsumptionPrimary</item>
