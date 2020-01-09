@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layoutDashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -15,6 +16,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="580dp"
+        android:layout_height="0dp"
+        android:gravity="center_vertical"
+        android:maxLines="1"
+        android:text="@string/app_car_service_name"
+        android:textAlignment="center"
+        android:textAppearance="@style/CarBody2"
+        android:textColor="@android:color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/include"
+        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+        app:layout_constraintStart_toEndOf="@+id/imageButton2"
+        app:layout_constraintTop_toBottomOf="@+id/textTitleElement" />
 
     <TextView
         android:id="@+id/textTitleNAVDestinationAddress"
@@ -107,21 +124,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="580dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="35dp"
-        android:maxLines="1"
-        android:text="@string/app_car_service_name"
-        android:textAlignment="center"
-        android:textAppearance="@style/CarBody2"
-        android:textColor="@android:color/white"
-        android:textSize="36sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-        app:layout_constraintStart_toEndOf="@+id/imageButton2"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/titleIcon1"
         android:layout_width="25dp"
         android:layout_height="25dp"
@@ -171,8 +173,9 @@
         android:background="@drawable/actions_go_previous_view_icon"
         android:scaleType="centerCrop"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textTitle"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleElementLeft"
+        app:layout_constraintTop_toTopOf="@+id/textTitle"
         app:srcCompat="@drawable/actions_go_previous_view_icon" />
 
     <Button
@@ -183,8 +186,9 @@
         android:background="@drawable/actions_go_next_view_icon"
         android:scaleType="centerCrop"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/textTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitleElementLeft"
+        app:layout_constraintTop_toTopOf="@+id/textTitle"
         app:srcCompat="@drawable/actions_go_next_view_icon" />
 
 

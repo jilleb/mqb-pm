@@ -190,16 +190,22 @@ public class DashboardFragment extends CarFragment {
         public void onClick(View v) {
             if (v==mConstraintClockLeft){
                 fadeOutfadeIn(v, mConstraintGraphLeft);
+                mTextMaxLeft.setVisibility(View.INVISIBLE);
             } else if (v==mConstraintClockCenter) {
                 fadeOutfadeIn(v, mConstraintGraphCenter);
+                mTextMaxCenter.setVisibility(View.INVISIBLE);
             } else if (v==mConstraintClockRight) {
                 fadeOutfadeIn(v, mConstraintGraphRight);
+                mTextMaxRight.setVisibility(View.INVISIBLE);
             } else if (v == mGraphLeft) {
                 fadeOutfadeIn(mConstraintGraphLeft, mConstraintClockLeft);
+                if (maxOn) mTextMaxLeft.setVisibility(View.VISIBLE);
             } else if (v == mGraphCenter) {
                 fadeOutfadeIn(mConstraintGraphCenter, mConstraintClockCenter);
+                if (maxOn) mTextMaxCenter.setVisibility(View.VISIBLE);
             } else if (v == mGraphRight) {
                 fadeOutfadeIn(mConstraintGraphRight, mConstraintClockRight);
+                if (maxOn) mTextMaxRight.setVisibility(View.VISIBLE);
             } else if (v == mBtnPrev) {
                 dashboardNum++;
                 Log.v(TAG,"Button Prev: "+dashboardNum);
@@ -484,6 +490,7 @@ public class DashboardFragment extends CarFragment {
         mTitleClockRight.setTypeface(typeface);
         mTitleElementNavDistance.setTypeface(typeface);
         mTitleElementNavTime.setTypeface(typeface);
+        mtextTitleMain.setTypeface(typeface);
 
         //max
         //mTextMinLeft.setTypeface(typeface);
@@ -1979,7 +1986,7 @@ public class DashboardFragment extends CarFragment {
                     //rpm data, needs to be divided by 1000 before displayed on the clock
                     case "exlap-engineSpeed":
                     case "torque-rpm_0x0c":
-                        clockValue = clockValue / 1;
+                        clockValue = clockValue / 1000;
                         break;
                     // temperatures
                     case "exlap-oilTemperature":
@@ -2326,7 +2333,7 @@ public class DashboardFragment extends CarFragment {
         if (currentNavDistance != null) {
             if (currentNavDistance != 0) {
                 currentNavDistance = currentNavDistance / 1000;
-                String NavDistance = String.format(Locale.US, "%.1f km".toString(), currentNavDistance);
+                String NavDistance = String.format(Locale.US, "%.1f km", currentNavDistance);
                 mTitleIcon3.setVisibility(View.VISIBLE);
                 mTitleElementNavDistance.setVisibility(View.VISIBLE);
                 if (NavDistance != currentNavDistanceTitleValue) {

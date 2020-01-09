@@ -128,10 +128,9 @@
         <item name="themedNeedleColor">@color/white</item>
         <item name="sv_withIndicatorLight">false</item>
         <item name="sv_indicatorLightColor">@android:color/transparent</item>
-
-        <item name="sv_indicatorColor">@color/white</item>
+        <item name="sv_indicatorColor">@color/aqua</item>
         <item name="sv_indicatorWidth">0dp</item>
-        <item name="sv_tickPadding">20dp</item>
+        <item name="sv_tickPadding">5dp</item>
         <item name="sv_tickRotation">false</item>
     </style>
 
