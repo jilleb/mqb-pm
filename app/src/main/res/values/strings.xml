@@ -298,6 +298,14 @@
     <string name="pref_accurate_off">Smooth animation on clocks (less accurate but better looking)</string>
     <string name="pref_accurate_on">Accurate values on clock (less smooth animation)</string>
     <string name="pref_accurate">Accurate clocks (less smooth animation)</string>
-
+    <string name="pref_dataelementsettings_1">Data element settings 1</string>
+    <string name="pref_dataelementsettings_2">Data element settings 2</string>
+    <string name="pref_dataelementsettings_3">Data element settings 3</string>
+    <string name="pref_fuel_tank_size">Fuel tank size</string>
+    <string name="pref_title_performance_1">Title 1</string>
+    <string name="pref_title_performance_2">Title 2</string>
+    <string name="pref_title_performance_3">Title 3</string>
+    <string name="pref_otherh_prefs">Other settings</string>
+    <string name="format_degreespersec">%.1f°/s</string>
 
 </resources>
