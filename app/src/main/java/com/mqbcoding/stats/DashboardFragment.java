@@ -545,12 +545,6 @@ public class DashboardFragment extends CarFragment {
         String mtextTitlePerformance = sharedPreferences.getString("performanceTitle" + dashboardId, "Performance monitor" + dashboardId);
 
         mtextTitleMain.setText(mtextTitlePerformance);
-        //determine what data the user wants to have on the 4 data views
-        mLabelClockL = getLabelClock(mClockLQuery);
-        mLabelClockC = getLabelClock(mClockCQuery);
-        mLabelClockR = getLabelClock(mClockRQuery);
-
-
 
         String readedBackground = sharedPreferences.getString("selectedBackground", "background_incar_black");
         if (!readedBackground.equals(selectedBackground)) {
@@ -634,6 +628,11 @@ public class DashboardFragment extends CarFragment {
         Log.d(TAG, "clock l selected:" + mClockLQuery);
         Log.d(TAG, "clock c selected:" + mClockCQuery);
         Log.d(TAG, "clock r selected:" + mClockRQuery);
+
+        //determine what data the user wants to have on the 4 data views
+        mLabelClockL = getLabelClock(mClockLQuery);
+        mLabelClockC = getLabelClock(mClockCQuery);
+        mLabelClockR = getLabelClock(mClockRQuery);
 
         boolean readedPressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
         if (readedPressureUnits != selectedPressureUnits) {
