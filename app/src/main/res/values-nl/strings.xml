@@ -22,7 +22,7 @@
     <string name="pref_appearance">Weergave</string>
     <string name="pref_highvis">Hoge contrast klokweergave</string>
     <string name="pref_theme">Thema</string>
-    <string name="pref_highlow">Hoogste/laagste waarden</string>
+    <string name="pref_highlow">Hoogste waarden</string>
 
     <string name="pref_choose_account_title">Kies account</string>
     <string name="pref_upload_to_bigquery_title">Upload logs naar BigQuery</string>
@@ -60,11 +60,11 @@
     <string name="pref_dataelementsettings">Data element instellingen</string>
     <string name="pref_highvis_off">Toon een wijzer op de klok</string>
     <string name="pref_highvis_on">Toon een hoog-contrast straal in plaats van een wijzer</string>
-    <string name="pref_highlow_off">Toon geen min/max waarden</string>
-    <string name="pref_highlow_on">Toon min/max waarden voor elke klok</string>
-    <string name="pref_highlowmarks">Markeer hoogste en laagste waarden op de klokken</string>
-    <string name="pref_highlowmarks_on">De hoogste en laagste waarden worden getoond op de klok</string>
-    <string name="pref_highlowmarks_off">De hoogste en laagste waarden worden niet getoond op de klok</string>
+    <string name="pref_highlow_off">Toon hoogste waarden niet</string>
+    <string name="pref_highlow_on">Toon hoogste waarden voor elke klok</string>
+    <string name="pref_highlowmarks">Markeer hoogste waarden op de klokken</string>
+    <string name="pref_highlowmarks_on">De hoogste waarden worden getoond op de klok</string>
+    <string name="pref_highlowmarks_off">De hoogste waarden worden niet getoond op de klok</string>
     <string name="pref_graphitem">Grafiek</string>
     <string name="pref_graphDelay">Graph Resolutie</string>
 
@@ -167,5 +167,48 @@
     <string name="pref_temperatureunit">Temperatuur eenheid</string>
     <string name="pref_title">Titelbalk</string>
     <string name="pref_unitprefs">Eenheid voorkeuren</string>
+    <string name="element_tyrePressureFL">Bandenspanning linksvoor</string>
+    <string name="element_tyrePressureFR">Bandenspanning rechtsvoor</string>
+    <string name="element_tyrePressureRL">Bandenspanning linksachter</string>
+    <string name="element_tyrePressureRR">Bandenspanning rechtachter</string>
+    <string name="element_tyreTemperatureFL">Temperatuur band linksvoor</string>
+    <string name="element_tyreTemperatureFR">Temperatuur band rechtsvoor</string>
+    <string name="element_tyreTemperatureRL">Temperatuur band linksachter</string>
+    <string name="element_tyreTemperatureRR">Temperatuur band rechtsachter</string>
+    <string name="label_fuel">Brandstof</string>
+    <string name="location_permission_denied_toast">Locatierechten zijn nodig om Google geocoding te kunnen gebruiken.</string>
+    <string name="pref_DataSource">Data bron</string>
+    <string name="pref_accurate">Accurate klokweergave</string>
+    <string name="pref_accurate_off">Vloeiende animaties (minder accuuraat)</string>
+    <string name="pref_accurate_on">Accurate klokweergave (minder vloeiende animatie)</string>
+    <string name="pref_dataelementsettings_1">Data element instellingen (1e dashboard)</string>
+    <string name="pref_dataelementsettings_2">Data element instellingen (2e dashboard)</string>
+    <string name="pref_dataelementsettings_3">Data element instellingen (3e dashboard)</string>
+    <string name="pref_enginespeed_category_title">Monitoring van toerental</string>
+    <string name="pref_enginespeed_monitor">Toerental monitoring ingeschakeld</string>
+    <string name="pref_enginespeed_play_sound">Speel geluid</string>
+    <string name="pref_enginespeed_play_sound_summary">Speel geluid wanneer geschakeld moet worden</string>
+    <string name="pref_enginespeed_play_sound_upto">Speel geluid tot versnelling</string>
+    <string name="pref_enginespeed_rpm_dialog_title">Toerental</string>
+    <string name="pref_enginespeed_rpm_hint">Toerental hint</string>
+    <string name="pref_enginespeed_rpm_inform">Toerental melding</string>
+    <string name="pref_enginespeed_rpm_warn">Toerental waarschuwing</string>
+    <string name="pref_enginespeed_summary">Monitor toerental om een melding te kunnen geven wanneer geschakeld dient te worden.</string>
+    <string name="pref_fuel_tank_size">Tankinhoud</string>
+    <string name="pref_location_category_title">Locatie</string>
+    <string name="pref_location_force_geocoding_summary_off">Wanneer de auto GPS heeft, gebruik eigen geocoding</string>
+    <string name="pref_location_force_geocoding_summary_on">Gebruikt altijd Google geocoding, ook wanneer de auto GPS heeft.</string>
+    <string name="pref_location_force_geocoding_title">Forceer Geocoding</string>
+    <string name="pref_location_showstreet_summary_off">Straatnaam wordt niet getoond aan de linkerkant.</string>
+    <string name="pref_location_showstreet_summary_on">Straatnaam wordt getoond aan de linkerkant.</string>
+    <string name="pref_location_showstreet_title">Toon straatnaam op titelbalk</string>
+    <string name="pref_location_use_geocoding_summary">Gebruik Google geocoding diensten wanneer de auto geen locatie verstrekt</string>
+    <string name="pref_location_use_geocoding_title">Gebruik Google geocoding</string>
+    <string name="pref_otherh_prefs">Overige instellingen</string>
+    <string name="pref_title_performance_1">Titel</string>
+    <string name="pref_title_performance_2">Titel</string>
+    <string name="pref_title_performance_3">Titel</string>
+    <string name="reupload_last_nothing_to_do">Niets om te heruploaden.</string>
+    <string name="label_timing">Timing</string>
 
 </resources>

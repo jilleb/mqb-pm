@@ -4,50 +4,44 @@
 
     <PreferenceCategory
         android:singleLineTitle="false"
-        android:summary="Apply changes by switching the lights on/off"
-        android:title="@string/pref_appearance">
+        android:title="@string/pref_appearance"
+        android:layout="@layout/prefcat">
+
 
         <com.austingreco.imagelistpreference.ImageListPreference
-            android:title="@string/pref_theme"
-            android:summary="%s"
-            android:key="selectedTheme"
             android:entries="@array/Themes"
             android:entryValues="@array/Themes"
-            app:ilp_entryImages="@array/ThemesThumbs"
-            app:ilp_backgroundTint="@android:color/transparent"
-            app:ilp_tint="#00FFFFFF"
-            />
-
-        <com.austingreco.imagelistpreference.ImageListPreference
-            android:title="@string/pref_font"
+            android:key="selectedTheme"
             android:summary="%s"
-            android:key="selectedFont"
+            android:title="@string/pref_theme"
+            app:ilp_backgroundTint="@android:color/transparent"
+            app:ilp_entryImages="@array/ThemesThumbs"
+            app:ilp_tint="#00FFFFFF" />
+        <com.austingreco.imagelistpreference.ImageListPreference
             android:entries="@array/fontEntries"
             android:entryValues="@array/fontValues"
-            app:ilp_entryImages="@array/FontThumbs"
-            app:ilp_backgroundTint="@color/white"
-            app:ilp_tint="#00FFFFFF"
-            />
-
-        <com.austingreco.imagelistpreference.ImageListPreference
-            android:title="@string/pref_background"
+            android:key="selectedFont"
             android:summary="%s"
-            android:key="selectedBackground"
+            android:title="@string/pref_font"
+            app:ilp_backgroundTint="@color/white"
+            app:ilp_entryImages="@array/FontThumbs"
+            app:ilp_tint="#00FFFFFF" />
+        <com.austingreco.imagelistpreference.ImageListPreference
             android:entries="@array/backgroundstrings"
             android:entryValues="@array/backgrounds"
-            app:ilp_entryImages="@array/thumbs_backgrounds"
+            android:key="selectedBackground"
+            android:summary="%s"
+            android:title="@string/pref_background"
             app:ilp_backgroundTint="@color/white"
-            app:ilp_tint="#00FFFFFF"
-            />
-
-
-
+            app:ilp_entryImages="@array/thumbs_backgrounds"
+            app:ilp_tint="#00FFFFFF" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="highVisActive"
             android:summaryOff="@string/pref_highvis_off"
             android:summaryOn="@string/pref_highvis_on"
             android:title="@string/pref_highvis" />
+
         <CheckBoxPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,12 +50,15 @@
             android:summaryOff="@string/pref_accurate_off"
             android:summaryOn="@string/pref_accurate_on"
             android:title="@string/pref_accurate" />
+
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="ticksActive"
             android:summaryOff="@string/pref_ticks_off"
             android:summaryOn="@string/pref_ticks_on"
             android:title="@string/pref_ticks" />
+
+
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="maxValuesActive"
@@ -82,10 +79,18 @@
             android:summaryOff="@string/pref_ambient_off"
             android:summaryOn="@string/pref_ambient_on"
             android:title="@string/pref_ambient" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="stagingActive"
+            android:summary="@string/pref_staging_summary"
+            android:summaryOff="@string/pref_staging_summary_off"
+            android:title="@string/pref_staging_title" />
+
     </PreferenceCategory>
     <PreferenceCategory
         android:singleLineTitle="false"
-        android:title="@string/pref_dataelementsettings_1">
+        android:title="@string/pref_dataelementsettings_1"
+        android:layout="@layout/prefcat">
 
         <EditTextPreference
             android:key="performanceTitle1"
@@ -166,19 +171,8 @@
 
     <PreferenceCategory
         android:singleLineTitle="false"
-        android:title="@string/pref_dataelementsettings_2">
-
-        <CheckBoxPreference
-            android:defaultValue="true"
-            android:key="stagingActive"
-            android:summary="@string/pref_staging_summary"
-            android:summaryOff="@string/pref_staging_summary_off"
-            android:title="@string/pref_staging_title" />
-
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="d2_active"
-            android:title="@string/pref_enable_2nd_dash" />
+        android:title="@string/pref_dataelementsettings_2"
+        android:layout="@layout/prefcat">
 
         <EditTextPreference
             android:key="performanceTitle2"
@@ -253,7 +247,8 @@
 
     <PreferenceCategory
         android:singleLineTitle="false"
-        android:title="@string/pref_dataelementsettings_3">
+        android:title="@string/pref_dataelementsettings_3"
+        android:layout="@layout/prefcat">
         <EditTextPreference
             android:title="@string/pref_title_performance_3"
             android:key="performanceTitle3"
@@ -329,7 +324,9 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_location_category_title">
+    <PreferenceCategory
+        android:title="@string/pref_location_category_title"
+        android:layout="@layout/prefcat">
         <SwitchPreference
             android:defaultValue="true"
             android:key="showStreetNameInTitle"
@@ -350,13 +347,15 @@
             android:dependency="useGoogleGeocoding"
             android:title="@string/pref_location_force_geocoding_title" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/pref_unitprefs">
+    <PreferenceCategory
+        android:title="@string/pref_unitprefs"
+        android:layout="@layout/prefcat">
 
         <EditTextPreference
-            android:title="@string/pref_fuel_tank_size"
-            android:key="fueltanksize"
             android:defaultValue="50"
-            android:inputType="number" />
+            android:inputType="number"
+            android:key="fueltanksize"
+            android:title="@string/pref_fuel_tank_size" />
 
         <SwitchPreference
             android:defaultValue="true"
@@ -391,7 +390,9 @@
             android:title="@string/pref_omit_empty_readings_title" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_notifications_category_title">
+    <PreferenceCategory
+        android:title="@string/pref_notifications_category_title"
+        android:layout="@layout/prefcat">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="oilTempMonitoringActive"
@@ -411,7 +412,9 @@
             android:title="@string/pref_wheel_state_monitoring_title" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_enginespeed_category_title">
+    <PreferenceCategory
+        android:title="@string/pref_enginespeed_category_title"
+        android:layout="@layout/prefcat">
         <!-- TODO: Localize and add summaries -->
         <CheckBoxPreference
             android:defaultValue="true"
@@ -456,13 +459,17 @@
             android:title="@string/pref_enginespeed_play_sound_upto" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_providers_category_title">
+    <PreferenceCategory
+        android:title="@string/pref_providers_category_title"
+        android:layout="@layout/prefcat">
         <Preference
             android:key="listProviders"
             android:title="@string/pref_list_providers_title" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/pref_logging_category_title">
+    <PreferenceCategory
+        android:title="@string/pref_logging_category_title"
+        android:layout="@layout/prefcat">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="statsLoggingActive"

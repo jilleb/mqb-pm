@@ -106,12 +106,12 @@
     <string name="pref_font">Font</string>
     <string name="pref_graphDelay">Graph Resolution</string>
     <string name="pref_graphitem">Graph</string>
-    <string name="pref_highlow">Highest/lowest values</string>
-    <string name="pref_highlow_off">Do not show max/min values</string>
-    <string name="pref_highlow_on">Show max/min values for each clock</string>
-    <string name="pref_highlowmarks">Mark high/low values on clocks</string>
-    <string name="pref_highlowmarks_off">A min and max mark is not shown on the clocks</string>
-    <string name="pref_highlowmarks_on">A min and max mark is shown on the clocks</string>
+    <string name="pref_highlow">Highest values</string>
+    <string name="pref_highlow_off">Do not show max values</string>
+    <string name="pref_highlow_on">Show max values for each clock</string>
+    <string name="pref_highlowmarks">Mark highest values on clocks</string>
+    <string name="pref_highlowmarks_off">A max mark is not shown on the clocks</string>
+    <string name="pref_highlowmarks_on">A max mark is shown on the clocks</string>
     <string name="pref_highvis">High visibility dials</string>
     <string name="pref_highvis_off">Display a needle on the clocks</string>
     <string name="pref_highvis_on">Display a highly visible ray instead of a needle</string>
@@ -272,7 +272,7 @@
     <string name="bg_test">Test</string>
     <string name="bg_beetle">Herbie</string>
     <string name="pref_background">Background</string>
-    <string name="font_ford">United Sans</string>
+    <string name="font_ford" translatable="false">United Sans</string>
     <string name="bg_dots">Dots</string>
     <string name="bg_aa">Android Auto</string>
 
@@ -295,8 +295,8 @@
     <string name="pref_enginespeed_play_sound_upto">Play sound up to gear</string>
     <string name="pref_enginespeed_summary">Monitor engine speed to play sound when shift is needed</string>
     <string name="pref_enginespeed_rpm_dialog_title">Engine RPMs</string>
-    <string name="pref_accurate_off">Smooth animation on clocks (less accurate but better looking)</string>
-    <string name="pref_accurate_on">Accurate values on clock (less smooth animation)</string>
+    <string name="pref_accurate_off">Smooth animation on clocks (less accuracy)</string>
+    <string name="pref_accurate_on">Accurate values on clock</string>
     <string name="pref_accurate">Accurate clocks (less smooth animation)</string>
     <string name="pref_dataelementsettings_1">Data element settings 1</string>
     <string name="pref_dataelementsettings_2">Data element settings 2</string>
