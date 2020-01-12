@@ -317,6 +317,7 @@
         <item>EcoHMI_Score.AvgTrip</item>
         <item>Nav_Altitude</item>
         <item>Nav_Heading</item>
+        <item>blinking_State</item>
         <item>Nav_CurrentPosition.Longitude</item>
         <item>Nav_CurrentPosition.Latitude</item>
         <item>Sound_Volume</item>

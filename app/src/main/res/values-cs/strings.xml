@@ -192,7 +192,7 @@
     <string name="pref_location_force_geocoding_title">Vynutit geocoding</string>
     <string name="pref_location_force_geocoding_summary_on">Vždy se použije Google zjišťování polohy, i když má auto Navigaci</string>
     <string name="pref_location_force_geocoding_summary_off">Pokud má auto navigaci, tak ji použije.</string>
-    <string name="location_permission_denied_toast">Pro zjitění polohy Google je třeba povolení přístup.</string>
+    <string name="location_permission_denied_toast">Pro zjitění polohy Google je třeba povolení přístupu.</string>
     <string name="pref_enginespeed_rpm_inform">Ot. inforovat</string>
     <string name="pref_enginespeed_rpm_hint">Ot. upozňit</string>
     <string name="pref_enginespeed_rpm_warn">Ot. varovat</string>

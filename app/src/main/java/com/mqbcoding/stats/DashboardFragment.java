@@ -649,11 +649,11 @@ public class DashboardFragment extends CarFragment {
             temperatureUnit = getString(celsiusTempUnit ? R.string.unit_c : R.string.unit_f);
         }
 
-        //boolean readedPowerUnits = sharedPreferences.getBoolean("selectPowerUnit", true);  //true = kw, false = ps
-        //if (powerUnits == null || readedPowerUnits != powerUnits) {
-        //    powerUnits = readedPowerUnits;
-        //    powerFactor = powerUnits ? 1 : 1.35962f;
-        //}
+        boolean readedPowerUnits = sharedPreferences.getBoolean("selectPowerUnit", true);  //true = kw, false = ps
+        if (powerUnits == null || readedPowerUnits != powerUnits) {
+            powerUnits = readedPowerUnits;
+            powerFactor = powerUnits ? 1 : 1.35962f;
+        }
 //
 
         //show texts and backgrounds for max/min, according to the setting
@@ -937,14 +937,14 @@ public class DashboardFragment extends CarFragment {
         getContext().bindService(serviceIntent, mVexServiceConnection, Context.BIND_AUTO_CREATE);
         startTorque();
         createAndStartUpdateTimer();
-        if (useGoogleGeocoding) {
+      /*  if (useGoogleGeocoding) {
             if(!getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
                     mGeocodingServiceConnection,
                     Context.BIND_AUTO_CREATE)) {
                 Log.e("Geocode", "Cannot bind?!");
             }
         }
-
+*/
         LocalBroadcastManager.getInstance(getContext())
                 .registerReceiver(onNoticeGoogleNavigationUpdate, new IntentFilter("GoogleNavigationUpdate"));
         LocalBroadcastManager.getInstance(getContext())
@@ -956,7 +956,7 @@ public class DashboardFragment extends CarFragment {
         turnMinMaxTextViewsEnabled(maxOn);
         turnMinMaxMarksEnabled(maxMarksOn);
     }
-
+/*
     private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
         @Override
         public void onNewGeocodeResult(Address result) {
@@ -964,20 +964,15 @@ public class DashboardFragment extends CarFragment {
             String tmp = result.getThoroughfare();
             if (tmp != null)
                 sb.append(tmp);
-            tmp = result.getSubThoroughfare();
-            if (tmp != null) {
-                sb.append(' ');
-                sb.append(tmp);
-            }
             if (sb.length() != 0)
                 sb.append(", ");
-            tmp = result.getLocality();
+            tmp = result.getSubAdminArea(); //Town
             if (tmp != null)
                 sb.append(tmp);
             sb.append(' ');
-            tmp = result.getCountryCode();
-            if (tmp != null)
-                sb.append(tmp);
+        //    tmp = result.getPostalCode();  //PostalCode
+        //    if (tmp != null)
+        //        sb.append("("+tmp+")");
             googleGeocodeLocationStr = sb.toString();
         }
     };
@@ -985,18 +980,18 @@ public class DashboardFragment extends CarFragment {
     private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
-            mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
+           // mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
+           // mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
             Log.d("Geocode", "Service connected");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             Log.e("Geocode", "Service disconnected");
-            mGeocodingService = null;
+          //  mGeocodingService = null;
         }
     };
-
+*/
     private void startTorque() {
         Intent intent = new Intent();
         intent.setClassName("org.prowl.torque", "org.prowl.torque.remote.TorqueService");
@@ -1048,8 +1043,9 @@ public class DashboardFragment extends CarFragment {
         mStatsClient.unregisterListener(mCarStatsListener);
         getContext().unbindService(mVexServiceConnection);
         if (useGoogleGeocoding) {
-            getContext().unbindService(mGeocodingServiceConnection);
+         //   getContext().unbindService(mGeocodingServiceConnection);
         }
+
         if (torqueBind)
             try {
                 getContext().unbindService(torqueConnection);
@@ -2264,41 +2260,25 @@ public class DashboardFragment extends CarFragment {
 
         // Display location in left side of Title  bar
         if (showStreetName) {
-            String leftTitle;
+            String leftTitle="";
             if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) { // Google maps has always priority for now
                 leftTitle = googleMapsLocationStr;
-            } else if (forceGoogleGeocoding) {
-                leftTitle = googleGeocodeLocationStr;
-            } else {
+            };
+            if (!forceGoogleGeocoding) {
                 String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
                 String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
 
-                if (location1 == null) {
-                    if (location2 == null) {
-                        leftTitle = "";
-                    } else {
-                        leftTitle = location2;
-                    }
-                } else {
-                    if (location2 == null) {
-                        leftTitle = location1;
-                    } else {
-                        if (location1.isEmpty()) {
-                            leftTitle = location2;
-                        } else {
-                            leftTitle = location1 + ", " + location2;
-                        }
-                    }
-                }
-                if (leftTitle.isEmpty() && useGoogleGeocoding) {
-                    leftTitle = googleGeocodeLocationStr;
-                }
-            }
+                if (location1 != null && checkTextNav(location1)) location1 = null;
+                if (location2 != null && checkTextNav(location2)) location2 = null;
+
+                if (location1 == null && location2 != null) leftTitle = location2;
+                if (location1 != null && location2 == null) leftTitle = location1;
+                if (location1 != null && location2 != null) leftTitle = location1 + ", " + location2;
+            };
 
             if (!currentLeftTitleValue.equals(leftTitle)) {
                 mTitleElementLeft.setText(leftTitle);
-            }
-
+            };
 
             if (leftTitle == "") {
                     mTitleIcon2.setVisibility(View.INVISIBLE);
@@ -2781,7 +2761,6 @@ public class DashboardFragment extends CarFragment {
         public void onServiceDisconnected(ComponentName name) {
             torqueService = null;
         }
-
     };
 
     // fade out 1 view, fade the other in during 500ms.
