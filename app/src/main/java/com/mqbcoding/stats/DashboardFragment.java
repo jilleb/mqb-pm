@@ -1279,23 +1279,22 @@ public class DashboardFragment extends CarFragment {
         switch (queryElement) {
             //todo: clean this up. This can be done much nicer.
             case "test":
-            case "torque_version":
             case "batteryVoltage":
-            case "torque_voltage_0xff1238":
+            case "torque-voltage_0xff1238":
             case "Nav_Altitude":
             case "Nav_Heading":
             case "coolantTemperature":
             case "oilTemperature":
             case "vehicleSpeed":
-            case "torque_speed_0x0d":
-            case "torque_rpm_0x0c":
+            case "torque-speed_0x0d":
+            case "torque-rpm_0x0c":
             case "engineSpeed":
             case "currentOutputPower":
             case "currentTorque":
             case "gearboxOilTemperature":
             case "outsideTemperature":
             case "currentGear":
-            case "torque_accelerometer_total_0xff1223":
+            case "torque-accelerometer_total_0xff1223":
             case "lateralAcceleration":
             case "longitudinalAcceleration":
             case "yawRate":
@@ -1331,24 +1330,24 @@ public class DashboardFragment extends CarFragment {
             case "tyreTemperatures.TemperatureRearLeft":
             case "tyreTemperatures.TemperatureFrontRight":
             case "tyreTemperatures.TemperatureFrontLeft":
-            case "torque_fuelpressure_0x0a":
-            case "torque_engineload_0x04":
-            case "torque_timing_advance_0x0e":
-            case "torque_intake_air_temperature_0x0f":
-            case "torque_mass_air_flow_0x10":
-            case "torque_throttle_position_0x11":
-            case "torque_turboboost_0xff1202":
-            case "torque_AFR_0xff1249":
+            case "torque-fuelpressure_0x0a":
+            case "torque-engineload_0x04":
+            case "torque-timing_advance_0x0e":
+            case "torque-intake_air_temperature_0x0f":
+            case "torque-mass_air_flow_0x10":
+            case "torque-throttle_position_0x11":
+            case "torque-turboboost_0xff1202":
+            case "torque-AFR_0xff1249":
             case "torque-AFRc_0xff124d":
-            case "torque_fueltrimshortterm1_0x06":
-            case "torque_fueltrimlongterm1_0x07":
-            case "torque_fueltrimshortterm2_0x08":
-            case "torque_fueltrimlongterm2_0x09":
+            case "torque-fueltrimshortterm1_0x06":
+            case "torque-fueltrimlongterm1_0x07":
+            case "torque-fueltrimshortterm2_0x08":
+            case "torque-fueltrimlongterm2_0x09":
             case "torque-fuelrailpressure_0x23":
-            case "torque_exhaustgastempbank1sensor1_0x78":
-            case "torque_exhaustgastempbank1sensor2_0xff1282":
-            case "torque_exhaustgastempbank1sensor3_0xff1283":
-            case "torque_exhaustgastempbank1sensor4_0xff1284":
+            case "torque-exhaustgastempbank1sensor1_0x78":
+            case "torque-exhaustgastempbank1sensor2_0xff1282":
+            case "torque-exhaustgastempbank1sensor3_0xff1283":
+            case "torque-exhaustgastempbank1sensor4_0xff1284":
                 label.setText("");
                 value.setText("-");
                 break;
@@ -1369,11 +1368,8 @@ public class DashboardFragment extends CarFragment {
             case "test":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_measurement));
                 break;
-            case "torque_version":
-                label.setBackground(getContext().getDrawable(R.drawable.ic_obd2));
-                break;
             case "batteryVoltage":
-            case "torque_voltage_0xff1238":
+            case "torque-voltage_0xff1238":
                 value.setText(FORMAT_VOLT0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_battery));
                 break;
@@ -1393,11 +1389,11 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
             case "vehicleSpeed":
-            case "torque_speed_0x0d":
+            case "torque-speed_0x0d":
                 label.setText(R.string.unit_kmh);
                 icon = "empty";
                 break;
-            case "torque_rpm_0x0c":
+            case "torque-rpm_0x0c":
             case "engineSpeed":
                 label.setText(R.string.unit_rpm);
                 icon = "empty";
@@ -1421,7 +1417,7 @@ public class DashboardFragment extends CarFragment {
             case "currentGear":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
-            case "torque_accelerometer_total_0xff1223":
+            case "torque-accelerometer_total_0xff1223":
             case "lateralAcceleration":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_lateral));
                 break;
@@ -1502,53 +1498,49 @@ public class DashboardFragment extends CarFragment {
                 label.setText(getString(R.string.label_tyreFL));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
-            case "torque_fuelpressure_0x0a":
-                label.setText(getString(R.string.label_fuel));
-                icon = "empty";
-                break;
-            case "torque_engineload_0x04":
+            case "torque-engineload_0x04":
                 label.setText(getString(R.string.label_load));
                 icon = "empty";
                 break;
-            case "torque_timing_advance_0x0e":
+            case "torque-timing_advance_0x0e":
                 label.setText(getString(R.string.label_timing));
                 icon = "empty";
                 break;
-            case "torque_intake_air_temperature_0x0f":
+            case "torque-intake_air_temperature_0x0f":
                 label.setText(getString(R.string.label_iat));
                 icon = "empty";
                 break;
-            case "torque_mass_air_flow_0x10":
+            case "torque-mass_air_flow_0x10":
                 label.setText(getString(R.string.label_maf));
                 icon = "empty";
                 break;
-            case "torque_throttle_position_0x11":
+            case "torque-throttle_position_0x11":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_throttle));
                 break;
-            case "torque_turboboost_0xff1202":
+            case "torque-turboboost_0xff1202":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
                 break;
-            case "torque_AFR_0xff1249":
+            case "torque-AFR_0xff1249":
                 label.setText(getString(R.string.label_afr));
                 icon = "empty";
                 break;
-            case "torque_AFRc_0xff124d":
+            case "torque-AFRc_0xff124d":
                 label.setText(getString(R.string.label_afrc));
                 icon = "empty";
                 break;
-            case "torque_fueltrimshortterm1_0x06":
+            case "torque-fueltrimshortterm1_0x06":
                 label.setText(getString(R.string.label_ftst1));
                 icon = "empty";
                 break;
-            case "torque_fueltrimlongterm1_0x07":
+            case "torque-fueltrimlongterm1_0x07":
                 label.setText(getString(R.string.label_ftlt1));
                 icon = "empty";
                 break;
-            case "torque_fueltrimshortterm2_0x08":
+            case "torque-fueltrimshortterm2_0x08":
                 label.setText(getString(R.string.label_ftst2));
                 icon = "empty";
                 break;
-            case "torque_fueltrimlongterm2_0x09":
+            case "torque-fueltrimlongterm2_0x09":
                 label.setText(getString(R.string.label_ftlt2));
                 icon = "empty";
                 break;
@@ -1705,6 +1697,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_battery", "", clock, false, getString(R.string.unit_volt), 0, 17, "float", "integer");
                 break;
             case "exlap-oilTemperature":
+            case "torque-oiltemperature_0x5c":
                 setupClock(icon, "ic_oil", "", clock, true, "°", 0, 200, "float", "integer");
                 break;
             case "exlap-coolantTemperature":
@@ -1716,6 +1709,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_outsidetemperature", "", clock, false, "°", -25, 50, "float", "integer");
                 break;
             case "torque-transmissiontemp_0x0105":
+            case "torque-transmissiontemp_0xfe1805":
             case "exlap-gearboxOilTemperature":
                 setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float", "integer");
                 break;
@@ -2111,6 +2105,8 @@ public class DashboardFragment extends CarFragment {
                         break;
                     case "torque-intake_air_temperature_0x0f":
                     case "torque-transmissiontemp_0x0105":
+                    case "torque-transmissiontemp_0xfe1805":
+                    case "torque-oiltemperature_0x5c":
                     case "torque-catalysttemperature_0x3c":
                     case "torque-chargeaircoolertemperature_0x77":
                     case "torque-enginecoolanttemp_0x05":
@@ -2405,32 +2401,20 @@ public class DashboardFragment extends CarFragment {
                 case "test":
                     value.setText(String.format(Locale.US, FORMAT_DECIMALS, randFloat(0, 100)));
                     break;
-                case "torque_version":
-                    try {
-                        if (torqueService != null) {
-                            String torqueVersion = Integer.toString(torqueService.getVersion());
-                            if (torqueVersion != null) {
-                                value.setText(torqueVersion);
-                            }
-                        }
-                    } catch (Exception e) {
-                        Log.e(TAG, "Torque connection error: " + e.getMessage());
-                    }
-                    break;
                 // the following are torque PIDs.
-                case "torque_fuelpressure_0x0a":
-                case "torque_engineload_0x04":
-                case "torque_timing_advance_0x0e":
-                case "torque_intake_air_temperature_0x0f":
-                case "torque_mass_air_flow_0x10":
-                case "torque_throttle_position_0x11":
-                case "torque_voltage_0xff1238":
-                case "torque_AFR_0xff1249":
-                case "torque_fueltrimshortterm1_0x06":
-                case "torque_fueltrimlongterm1_0x07":
-                case "torque_fueltrimshortterm2_0x08":
-                case "torque_fueltrimlongterm2_0x09":
-                case "torque_accelerometer_total_0xff1223":
+                case "torque-fuelpressure_0x0a":
+                case "torque-engineload_0x04":
+                case "torque-timing_advance_0x0e":
+                case "torque-intake_air_temperature_0x0f":
+                case "torque-mass_air_flow_0x10":
+                case "torque-throttle_position_0x11":
+                case "torque-voltage_0xff1238":
+                case "torque-AFR_0xff1249":
+                case "torque-fueltrimshortterm1_0x06":
+                case "torque-fueltrimlongterm1_0x07":
+                case "torque-fueltrimshortterm2_0x08":
+                case "torque-fueltrimlongterm2_0x09":
+                case "torque-accelerometer_total_0xff1223":
                 case "torque-fuelrailpressure_0x23":
                 case "torque-exhaustgastempbank1sensor1_0x78":
                 case "torque-exhaustgastempbank1sensor2_0xff1282":
@@ -2452,7 +2436,7 @@ public class DashboardFragment extends CarFragment {
                     }
                     break;
                 // the following torque values should have the unit as label
-                case "torque_turboboost_0xff1202":
+                case "torque-turboboost_0xff1202":
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
                     queryPid = new BigInteger(queryElement, 16).longValue();
@@ -2475,8 +2459,8 @@ public class DashboardFragment extends CarFragment {
                         Log.e(TAG, "Error: " + e.getMessage());
                     }
                     break;
-                case "torque_rpm_0x0c":
-                case "torque_speed_0x0d":
+                case "torque-rpm_0x0c":
+                case "torque-speed_0x0d":
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
                     queryPid = new BigInteger(queryElement, 16).longValue();

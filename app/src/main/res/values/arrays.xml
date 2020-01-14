@@ -112,7 +112,9 @@
         <item>@string/element_torque_obdadaptervoltage</item>
         <item>@string/element_torque_fuellevel</item>
         <item>@string/element_torque_voltagemodule</item>
+        <item>@string/element_torque_oiltemperature</item>
         <item>@string/element_torque_transmissiontemp</item>
+        <item>@string/element_torque_transmissiontemp2</item>
         <item>@string/element_torque_pressurecontrol</item>
 
         <item>@string/element_torque_intakemanifoldpressure</item>
@@ -198,7 +200,9 @@
         <item>torque-fuellevel_0x2f</item>
 
         <item>torque-voltagemodule_0x42</item>
+        <item>torque-oiltemperature_0x5c</item>
         <item>torque-transmissiontemp_0x0105</item>
+        <item>torque-transmissiontemp_0xfe1805</item>
         <item>torque-pressurecontrol_0x70</item>
         <item>torque-intakemanifoldpressure_0x0b</item>
         <item>torque-commandedequivalenceratiolambda_0x44</item>
