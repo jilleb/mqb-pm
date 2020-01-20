@@ -691,19 +691,12 @@ public class DashboardFragment extends CarFragment {
         mClockMaxLeft.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
         mClockMaxCenter.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
         mClockMaxRight.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-//        mClockMinLeft.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-//        mClockMinCenter.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-//        mClockMinRight.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void turnMinMaxTextViewsEnabled(boolean enabled) {
         mTextMaxLeft.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
         mTextMaxCenter.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
         mTextMaxRight.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-
-//        mTextMinLeft.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-//        mTextMinCenter.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
-//        mTextMinRight.setVisibility(enabled ? View.VISIBLE : View.INVISIBLE);
     }
 
     private void turnRaysEnabled(boolean enabled) {
@@ -1278,90 +1271,20 @@ public class DashboardFragment extends CarFragment {
         // set items to have a "-" as value.
         switch (queryElement) {
             //todo: clean this up. This can be done much nicer.
-            case "test":
-            case "batteryVoltage":
-            case "torque-voltage_0xff1238":
-            case "Nav_Altitude":
-            case "Nav_Heading":
-            case "coolantTemperature":
-            case "oilTemperature":
-            case "vehicleSpeed":
-            case "torque-speed_0x0d":
-            case "torque-rpm_0x0c":
-            case "engineSpeed":
-            case "currentOutputPower":
-            case "currentTorque":
-            case "gearboxOilTemperature":
-            case "outsideTemperature":
-            case "currentGear":
-            case "torque-accelerometer_total_0xff1223":
-            case "lateralAcceleration":
-            case "longitudinalAcceleration":
-            case "yawRate":
-            case "wheelAngle":
-            case "acceleratorPosition":
-            case "brakePressure":
-            case "powermeter":
-            case "EcoHMI_Score.AvgShort":
-            case "EcoHMI_Score.AvgTrip":
-            case "shortTermConsumptionPrimary":
-            case "shortTermConsumptionSecondary":
-            case "Nav_CurrentPosition.Longitude":
-            case "Nav_CurrentPosition.Latitude":
-            case "Nav_CurrentPosition.City":
-            case "Nav_CurrentPosition.State":
-            case "Nav_CurrentPosition.Country":
-            case "Nav_CurrentPosition.Street":
-            case "blinkingState":
-            case "Sound_Volume":
-            case "Radio_Tuner.Name":
-            case "Radio_Text":
-            case "totalDistance.distanceValue":
-            case "vehicleIdenticationNumber.VIN":
-            case "tyreStates.stateRearRight":
-            case "tyreStates.stateRearLeft":
-            case "tyreStates.stateFrontRight":
-            case "tyreStates.stateFrontLeft":
-            case "tyrePressures.pressureRearRight":
-            case "tyrePressures.pressureRearLeft":
-            case "tyrePressures.pressureFrontRight":
-            case "tyrePressures.pressureFrontLeft":
-            case "tyreTemperatures.TemperatureRearRight":
-            case "tyreTemperatures.TemperatureRearLeft":
-            case "tyreTemperatures.TemperatureFrontRight":
-            case "tyreTemperatures.TemperatureFrontLeft":
-            case "torque-fuelpressure_0x0a":
-            case "torque-engineload_0x04":
-            case "torque-timing_advance_0x0e":
-            case "torque-intake_air_temperature_0x0f":
-            case "torque-mass_air_flow_0x10":
-            case "torque-throttle_position_0x11":
-            case "torque-turboboost_0xff1202":
-            case "torque-AFR_0xff1249":
-            case "torque-AFRc_0xff124d":
-            case "torque-fueltrimshortterm1_0x06":
-            case "torque-fueltrimlongterm1_0x07":
-            case "torque-fueltrimshortterm2_0x08":
-            case "torque-fueltrimlongterm2_0x09":
-            case "torque-fuelrailpressure_0x23":
-            case "torque-exhaustgastempbank1sensor1_0x78":
-            case "torque-exhaustgastempbank1sensor2_0xff1282":
-            case "torque-exhaustgastempbank1sensor3_0xff1283":
-            case "torque-exhaustgastempbank1sensor4_0xff1284":
-                label.setText("");
-                value.setText("-");
-                break;
             case "none":
                 label.setText("");
                 value.setText("");
                 icon = "empty";
                 value.setVisibility(View.INVISIBLE);
                 break;
+            default:
+                label.setText("");
+                value.setText("-");
+                break;
         }
 
         // set the labels
         switch (queryElement) {
-            //todo: clean this up. maybe get the needed icons/labels from arrays.xml, so it's not needed here.
             case "none":
                 icon = "empty";
                 break;
@@ -1380,11 +1303,13 @@ public class DashboardFragment extends CarFragment {
                 label.setBackground(getContext().getDrawable(R.drawable.ic_heading));
                 break;
             case "coolantTemperature":
+            case "torque-enginecoolanttemp_0x05":
                 label.setText("");
                 value.setText(FORMAT_TEMPERATURE0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_water));
                 break;
             case "oilTemperature":
+            case "torque-oiltemperature_0x5c":
                 value.setText(FORMAT_TEMPERATURE0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_oil));
                 break;
@@ -1407,10 +1332,13 @@ public class DashboardFragment extends CarFragment {
                 icon = "empty";
                 break;
             case "gearboxOilTemperature":
+            case "torque-transmissiontemp_0x0105":
+            case "torque-transmissiontemp_0xfe1805":
                 value.setText(FORMAT_TEMPERATURE0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_gearbox));
                 break;
             case "outsideTemperature":
+            case "torque-ambientairtemp_0x46":
                 value.setText("-");//value.setText(R.string.format_temperature0);
                 label.setBackground(getContext().getDrawable(R.drawable.ic_outsidetemperature));
                 break;
@@ -1498,6 +1426,15 @@ public class DashboardFragment extends CarFragment {
                 label.setText(getString(R.string.label_tyreFL));
                 label.setBackground(getContext().getDrawable(R.drawable.ic_tyre));
                 break;
+            case "tankLevelPrimary":
+            case "torque-fuellevel_0x2f":
+                //label.setText("1");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                break;
+            case "tankLevelSecondary":
+                //label.setText("2");
+                label.setBackground(getContext().getDrawable(R.drawable.ic_fuel));
+                break;
             case "torque-engineload_0x04":
                 label.setText(getString(R.string.label_load));
                 icon = "empty";
@@ -1563,6 +1500,45 @@ public class DashboardFragment extends CarFragment {
             case "torque-fuelrailpressure_0x23":
             case "torque-fuelpressure_0x0a":
                 label.setBackground(getContext().getDrawable(R.drawable.ic_fuelpressure));
+                break;
+            case "torque-absolutethrottlepostion_0x47":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_throttle));
+                break;
+            case "torque-catalysttemperature_0x3c":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_catalyst));
+                break;
+            case "torque-chargeaircoolertemperature_0x77":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_cact));
+                break;
+            case "torque-commandedequivalenceratiolambda_0x44":
+                label.setText("λ");
+                break;
+            case "torque-o2sensor1equivalenceratio_0x34":
+                label.setText("O²");
+                break;
+            case "torque-phonebarometer_0xff1270":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_barometer));
+                break;
+            case "torque-engineloadabsolute_0x43":
+                label.setText("Load");
+                break;
+            case "torque-phonebatterylevel_0xff129a":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_phone));
+                break;
+            case "torque-obdadaptervoltage_0xff1238":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_obd2));
+                break;
+            case "torque-intakemanifoldpressure_0x0b":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_manifold));
+                break;
+            case "torque-pressurecontrol_0x70":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_turbo));
+                break;
+            case "torque-relativethrottleposition_0x45":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_throttle));
+                break;
+            case "torque-voltagemodule_0x42":
+                label.setBackground(getContext().getDrawable(R.drawable.ic_voltage));
                 break;
             default:
                 label.setText("");
@@ -1802,10 +1778,10 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_none", "", clock, false, "G", -3, 3, "float", "float");
                 break;
             case "torque-phonebatterylevel_0xff129a":
-                setupClock(icon, "ic_battery", "", clock, false, "%", 0, 100, "integer", "integer");
+                setupClock(icon, "ic_phone", "", clock, false, "%", 0, 100, "integer", "integer");
                 break;
             case "torque-phonebarometer_0xff1270":
-                setupClock(icon, "ic_none", "", clock, false, torqueUnit, 900, 1070, "float", "integer");
+                setupClock(icon, "ic_barometer", "", clock, false, torqueUnit, 900, 1070, "float", "integer");
                 break;
             case "torque-obdadaptervoltage_0xff1238":
                 setupClock(icon, "ic_obd2", "", clock, false, torqueUnit, 0, 17, "float", "integer");
@@ -2259,7 +2235,7 @@ public class DashboardFragment extends CarFragment {
             String leftTitle="";
             if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) { // Google maps has always priority for now
                 leftTitle = googleMapsLocationStr;
-            };
+            }
             if (!forceGoogleGeocoding) {
                 String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
                 String location2 = (String) mLastMeasurements.get("Nav_CurrentPosition.City");
@@ -2270,11 +2246,11 @@ public class DashboardFragment extends CarFragment {
                 if (location1 == null && location2 != null) leftTitle = location2;
                 if (location1 != null && location2 == null) leftTitle = location1;
                 if (location1 != null && location2 != null) leftTitle = location1 + ", " + location2;
-            };
+            }
 
             if (!currentLeftTitleValue.equals(leftTitle)) {
                 mTitleElementLeft.setText(leftTitle);
-            };
+            }
 
             if (leftTitle == "") {
                     mTitleIcon2.setVisibility(View.INVISIBLE);
@@ -2420,6 +2396,27 @@ public class DashboardFragment extends CarFragment {
                 case "torque-exhaustgastempbank1sensor2_0xff1282":
                 case "torque-exhaustgastempbank1sensor3_0xff1283":
                 case "torque-exhaustgastempbank1sensor4_0xff1284":
+                case "torque-absolutethrottlepostion_0x47":
+                case "torque-ambientairtemp_0x46":
+                case "torque-catalysttemperature_0x3c":
+                case "torque-chargeaircoolertemperature_0x77":
+                case "torque-commandedequivalenceratiolambda_0x44":
+                case "torque-enginecoolanttemp_0x05":
+                case "torque-engineloadabsolute_0x43":
+                case "torque-fuellevel_0x2f":
+                case "torque-intakemanifoldpressure_0x0b":
+                case "torque-o2sensor1equivalenceratio_0x34":
+                case "torque-obdadaptervoltage_0xff1238":
+                case "torque-oiltemperature_0x5c":
+                case "torque-phonebarometer_0xff1270":
+                case "torque-phonebatterylevel_0xff129a":
+                case "torque-pressurecontrol_0x70":
+                case "torque-relativethrottleposition_0x45":
+                case "torque-transmissiontemp_0x0105":
+                case "torque-transmissiontemp_0xfe1805":
+                case "torque-voltagemodule_0x42":
+
+
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
                     queryPid = new BigInteger(queryElement, 16).longValue();
@@ -2670,6 +2667,13 @@ public class DashboardFragment extends CarFragment {
                     Float tyreTemp = (Float) mLastMeasurements.get(queryElement);
                     if (tyreTemp != null) {
                         value.setText(String.format(Locale.US, FORMAT_TEMPERATURE, tyreTemp));
+                    }
+                    break;
+                case "tankLevelPrimary":
+                case "tankLevelSecondary":
+                    Float tankLevel = (Float) mLastMeasurements.get(queryElement);
+                    if (tankLevel != null) {
+                        value.setText(String.format(Locale.US, FORMAT_PERCENT, tankLevel));
                     }
                     break;
             }

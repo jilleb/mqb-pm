@@ -232,6 +232,8 @@
         <item>@string/element_outsideTemperature</item>
         <item>@string/element_currentOutputPower</item>
         <item>@string/element_currentTorque</item>
+        <item>@string/element_tankLevelPrimary</item>
+        <item>@string/element_tankLevelSecondary</item>
         <item>@string/element_engineSpeed</item>
         <item>@string/element_vehicleSpeed</item>
         <item>@string/element_currentGear</item>
@@ -293,6 +295,26 @@
         <item>@string/element_torque_exhaustgastempbank1sensor3</item>
         <item>@string/element_torque_exhaustgastempbank1sensor4</item>
 
+        <item>@string/element_torque_absolutethrottlepostion</item>
+        <item>@string/element_torque_ambientairtemp</item>
+        <item>@string/element_torque_catalysttemperature</item>
+        <item>@string/element_torque_chargeaircoolertemperature</item>
+        <item>@string/element_torque_commandedequivalenceratiolambda</item>
+        <item>@string/element_torque_enginecoolanttemp</item>
+        <item>@string/element_torque_engineloadabsolute</item>
+        <item>@string/element_torque_fuellevel</item>
+        <item>@string/element_torque_intakemanifoldpressure</item>
+        <item>@string/element_torque_o2sensor1equivalenceratio</item>
+        <item>@string/element_torque_obdadaptervoltage</item>
+        <item>@string/element_torque_oiltemperature</item>
+        <item>@string/element_torque_phonebarometer</item>
+        <item>@string/element_torque_phonebatterylevel</item>
+        <item>@string/element_torque_pressurecontrol</item>
+        <item>@string/element_torque_relativethrottleposition</item>
+        <item>@string/element_torque_transmissiontemp</item>
+        <item>@string/element_torque_transmissiontemp</item>
+        <item>@string/element_torque_voltagemodule</item>
+
         <item>@string/element_test</item>
     </string-array>
 
@@ -307,6 +329,8 @@
         <item>outsideTemperature</item>
         <item>currentOutputPower</item>
         <item>currentTorque</item>
+        <item>tankLevelPrimary</item>
+        <item>tankLevelSecondary</item>
         <item>engineSpeed</item>
         <item>vehicleSpeed</item>
         <item>currentGear</item>
@@ -371,6 +395,26 @@
         <item>torque-exhaustgastempbank1sensor2_0xff1282</item>
         <item>torque-exhaustgastempbank1sensor3_0xff1283</item>
         <item>torque-exhaustgastempbank1sensor4_0xff1284</item>
+
+        <item>torque-absolutethrottlepostion_0x47</item>
+        <item>torque-ambientairtemp_0x46</item>
+        <item>torque-catalysttemperature_0x3c</item>
+        <item>torque-chargeaircoolertemperature_0x77</item>
+        <item>torque-commandedequivalenceratiolambda_0x44</item>
+        <item>torque-enginecoolanttemp_0x05</item>
+        <item>torque-engineloadabsolute_0x43</item>
+        <item>torque-fuellevel_0x2f</item>
+        <item>torque-intakemanifoldpressure_0x0b</item>
+        <item>torque-o2sensor1equivalenceratio_0x34</item>
+        <item>torque-obdadaptervoltage_0xff1238</item>
+        <item>torque-oiltemperature_0x5c</item>
+        <item>torque-phonebarometer_0xff1270</item>
+        <item>torque-phonebatterylevel_0xff129a</item>
+        <item>torque-pressurecontrol_0x70</item>
+        <item>torque-relativethrottleposition_0x45</item>
+        <item>torque-transmissiontemp_0x0105</item>
+        <item>torque-transmissiontemp_0xfe1805</item>
+        <item>torque-voltagemodule_0x42</item>
 
         <item>test</item>
     </string-array>
