@@ -16,7 +16,6 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
-import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -71,7 +70,6 @@ public class DashboardFragment extends CarFragment {
     private CarStatsClient mStatsClient;
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
-    private Speedometer mClockMinLeft, mClockMinCenter, mClockMinRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private ImageView mSteeringWheelAngle;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
@@ -1102,9 +1100,6 @@ public class DashboardFragment extends CarFragment {
         mIconClockL = null;
         mIconClockC = null;
         mIconClockR = null;
-        mClockMinLeft = null;
-        mClockMinCenter = null;
-        mClockMinRight = null;
         mClockMaxLeft = null;
         mClockMaxCenter = null;
         mClockMaxRight = null;
@@ -2218,10 +2213,18 @@ public class DashboardFragment extends CarFragment {
             mTitleClockLeft.setText(mLabelClockL);
             mTitleClockCenter.setText(mLabelClockC);
             mTitleClockRight.setText(mLabelClockR);
+            mBtnNext.setVisibility(View.VISIBLE);
+            mBtnPrev.setVisibility(View.VISIBLE);
+            mtextTitleMain.setVisibility(View.VISIBLE);
+
+
         } else {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
+            mBtnNext.setVisibility(View.INVISIBLE);
+            mBtnPrev.setVisibility(View.INVISIBLE);
+            mtextTitleMain.setVisibility(View.INVISIBLE);
         }
 
         String currentTime = getTime();
