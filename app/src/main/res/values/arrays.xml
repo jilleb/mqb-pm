@@ -21,6 +21,7 @@
         <item>Minimalistic</item>
         <item>Dark</item>
         <item>Mustang GT</item>
+        <item>BMW</item>
         <item>Test</item>
     </string-array>
 
@@ -44,6 +45,7 @@
         <item>@drawable/ic_theme_minimalistic</item>
         <item>@drawable/ic_theme_dark</item>
         <item>@drawable/ic_theme_ford</item>
+        <item>@drawable/ic_theme_bmw</item>
         <item>@drawable/ic_theme_test</item>
     </array>
 
@@ -433,21 +435,6 @@
         <item>Clock</item>
     </string-array>
 
-    <string-array name="graphDelayEntries">
-        <item>0.1s</item>
-        <item>0.5s</item>
-        <item>1s</item>
-        <item>5s</item>
-        <item>60s</item>
-    </string-array>
-
-    <string-array name="graphDelayValues">
-        <item>100</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>5000</item>
-        <item>60000</item>
-    </string-array>
 
     <string-array name="fontEntries">
         <item>@string/font_segments</item>

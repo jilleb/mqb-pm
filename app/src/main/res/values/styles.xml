@@ -51,7 +51,7 @@
         <item name="sv_withTremble">false</item>
     </style>
 
-    <style name="AppTheme.Seat" parent="AppTheme.Car">
+    <style name="AppTheme.Seat" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_seat</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_seat</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_seat</item>
@@ -67,7 +67,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.SeatCupra" parent="AppTheme.Car">
+    <style name="AppTheme.SeatCupra" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_seat2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_seat2</item>
@@ -83,7 +83,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Cupra" parent="AppTheme.Car">
+    <style name="AppTheme.Cupra" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_cupra</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_cupra</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_cupra</item>
@@ -100,7 +100,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.VolkswagenGTI" parent="AppTheme.Car">
+    <style name="AppTheme.VolkswagenGTI" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
@@ -118,7 +118,7 @@
     </style>
 
 
-    <style name="AppTheme.VolkswagenAID" parent="AppTheme.Car">
+    <style name="AppTheme.VolkswagenAID" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks_aid</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_aid</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_aid</item>
@@ -134,7 +134,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car">
+    <style name="AppTheme.VolkswagenMIB2" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_mib2p</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_mib2p</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_mib2p</item>
@@ -151,7 +151,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.VolkswagenR" parent="AppTheme.Car">
+    <style name="AppTheme.VolkswagenR" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
@@ -163,7 +163,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.VolkswagenGTE" parent="AppTheme.Car">
+    <style name="AppTheme.VolkswagenGTE" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
@@ -175,7 +175,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.AudiTT" parent="AppTheme.Car">
+    <style name="AppTheme.AudiTT" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi4</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi4</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi4</item>
@@ -188,7 +188,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Volkswagen" parent="AppTheme.Car">
+    <style name="AppTheme.Volkswagen" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
@@ -200,7 +200,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Audi" parent="AppTheme.Car">
+    <style name="AppTheme.Audi" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi</item>
@@ -213,7 +213,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.AudiVC" parent="AppTheme.Car">
+    <style name="AppTheme.AudiVC" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi3</item>
@@ -226,7 +226,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Clubsport" parent="AppTheme.Car">
+    <style name="AppTheme.Clubsport" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_vw2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_vw2</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_vw2</item>
@@ -240,7 +240,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Skoda" parent="AppTheme.Car">
+    <style name="AppTheme.Skoda" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_skoda</item>
         <item name="themedDialBackground">@drawable/dial_background_skoda</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_skoda</item>
@@ -258,7 +258,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.SkodavRS" parent="AppTheme.Car">
+    <style name="AppTheme.SkodavRS" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_skoda2</item>
         <item name="themedDialBackground">@drawable/dial_background_empty_skoda2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_skoda2</item>
@@ -276,7 +276,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.SkodaVC" parent="AppTheme.Car">
+    <style name="AppTheme.SkodaVC" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_marks_skoda3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_skoda3</item>
@@ -289,7 +289,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.SkodaOneApp" parent="AppTheme.Car">
+    <style name="AppTheme.SkodaOneApp" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_skodaone</item>
         <item name="themedDialBackground">@drawable/dial_background_marks_skodaone</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_skodaone</item>
@@ -307,7 +307,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Testing" parent="AppTheme.Car">
+    <style name="AppTheme.Testing" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_test</item>
         <item name="themedDialBackground">@drawable/dial_background_test</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_test</item>
@@ -318,7 +318,8 @@
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_tickRotation">false</item>
     </style>
-    <style name="AppTheme.Minimalistic" parent="AppTheme.Car">
+
+    <style name="AppTheme.Minimalistic" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_marks_minimal</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_minimal</item>
@@ -345,7 +346,7 @@
         <item name="sv_unitSpeedInterval">4dp</item>
     </style>
 
-    <style name="AppTheme.Dark" parent="AppTheme.Car">
+    <style name="AppTheme.Dark" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_dark</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_dark</item>
@@ -364,7 +365,7 @@
     </style>
 
 
-    <style name="AppTheme.Ford" parent="AppTheme.Car">
+    <style name="AppTheme.Ford" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_ford</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_ford</item>
@@ -382,7 +383,25 @@
         <item name="sv_tickRotation">true</item>
     </style>
 
-    <style name="AppTheme.Car.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
+
+    <style name="AppTheme.BMW" parent="AppTheme">
+        <item name="themedDialBackground">@drawable/dial_background_bmw</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_bmw</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_bmw</item>
+        <item name="themedCarBackground">@drawable/background_incar_black</item>
+        <item name="themedNeedle">@drawable/needle_bmw</item>
+        <item name="themedStopWatchBackground">@drawable/sw_background_dark</item>
+        <item name="themedNeedleColor">@color/red</item>
+        <item name="sv_withIndicatorLight">false</item>
+        <item name="sv_indicatorLightColor">@android:color/transparent</item>
+        <item name="sv_indicatorColor">@color/aqua</item>
+        <item name="sv_indicatorWidth">0dp</item>
+        <item name="sv_tickPadding">0dp</item>
+        <item name="sv_tickRotation">false</item>
+    </style>
+
+
+    <style name="AppTheme.ProgressBar.Horizontal" parent="Widget.AppCompat.ProgressBar.Horizontal">
         <item name="android:progressDrawable">@drawable/progress_vertical_material_car</item>
         <item name="android:minWidth">@dimen/progress_bar_height_material_car</item>
         <item name="android:maxWidth">@dimen/progress_bar_height_material_car</item>

@@ -40,6 +40,7 @@ import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.google.android.apps.auto.sdk.StatusBarController;
+import com.google.gson.Gson;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.Viewport;
@@ -902,9 +903,8 @@ public class DashboardFragment extends CarFragment {
     private BroadcastReceiver onNoticeGoogleNavigationUpdate = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            String title = intent.getStringExtra("title");
             //String text = intent.getStringExtra("text"); // Not used right now
-            googleMapsLocationStr = title;
+            googleMapsLocationStr = intent.getStringExtra("title");
         }
     };
     private BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
@@ -1263,20 +1263,19 @@ public class DashboardFragment extends CarFragment {
         label.setText("");
         String icon = "";
 
+
         // set items to have a "-" as value.
-        switch (queryElement) {
-            //todo: clean this up. This can be done much nicer.
-            case "none":
-                label.setText("");
-                value.setText("");
-                icon = "empty";
-                value.setVisibility(View.INVISIBLE);
-                break;
-            default:
-                label.setText("");
-                value.setText("-");
-                break;
+        //todo: clean this up. This can be done much nicer.
+        if (queryElement.equals("none")) {
+            label.setText("");
+            value.setText("");
+            icon = "empty";
+            value.setVisibility(View.INVISIBLE);
+        } else {
+            label.setText("");
+            value.setText("-");
         }
+
 
         // set the labels
         switch (queryElement) {
@@ -1594,6 +1593,9 @@ public class DashboardFragment extends CarFragment {
         String queryTrim;
         String queryLong = queryClock;
         String torqueUnit = "";
+        int torqueMin = 0;
+        int torqueMax = 100;
+
 
         TypedArray typedArray2 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedStopWatchBackground});
         int swBackgroundResource = typedArray2.getResourceId(0, 0);
@@ -1613,11 +1615,24 @@ public class DashboardFragment extends CarFragment {
             try {
                 if (torqueService != null) {
                     torqueUnit = torqueService.getUnitForPid(queryPid);
+
+                    //todo: use torque min and max values to determine min/max values for torque elements
+                    torqueMin = Math.round(torqueService.getMinValueForPid(queryPid));
+                    torqueMax = Math.round(torqueService.getMaxValueForPid(queryPid));
+                    if (torqueMin == torqueMax) {
+                        torqueMin = torqueMax - 1;  // prevent min and max are equal. Speedview cannot handle this.
+                    }
                 }
             } catch (Exception e) {
                 Log.e(TAG, "Error: " + e.getMessage());
             }
+        } else {
+            torqueMin = 0;
+            torqueMax = 100;
         }
+
+
+        Log.d(TAG, "minmax speed: " + torqueMin + " " + torqueMax);
 
         pressureUnit = "bar";
         pressureMax = 5;
@@ -1685,6 +1700,8 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_gearbox", "", clock, false, "°", 0, 200, "float", "integer");
                 break;
             case "torque-turboboost_0xff1202":
+                setupClock(icon, "ic_turbo", "", clock, true, torqueUnit, torqueMin, torqueMax, "float", "float");
+                break;
             case "exlap-absChargingAirPressure":
             case "exlap-relChargingAirPressure":
                 setupClock(icon, "ic_turbo", "", clock, true, pressureUnit, pressureMin, pressureMax, "float", "integer");
@@ -1730,26 +1747,26 @@ public class DashboardFragment extends CarFragment {
                 break;
             case "exlap-tankLevelPrimary":
             case "torque-fuellevel_0x2f":
-                setupClock(icon, "ic_fuelprimary", "", clock, false, "l", 0, 50, "float", "integer");
+                setupClock(icon, "ic_fuelprimary", "", clock, false, "l", 0, 100, "float", "integer");
                 break;
             case "exlap-tankLevelSecondary":
                 setupClock(icon, "ic_fuelsecondary", "", clock, false, "%", 0, 100, "float", "integer");
                 break;
             case "torque-fuelpressure_0x0a":
-                setupClock(icon, "ic_fuelpressure", getString(R.string.label_fuel), clock, false, torqueUnit, 0, 800, "float", "integer");
+                setupClock(icon, "ic_fuelpressure", getString(R.string.label_fuel), clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
                 break;
             case "torque-engineload_0x04":
             case "torque-engineloadabsolute_0x43":
                 setupClock(icon, "ic_none", getString(R.string.label_load), clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-timing_advance_0x0e":
-                setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, torqueUnit, -60, 60, "float", "integer");
+                setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
                 break;
             case "torque-intake_air_temperature_0x0f":
                 setupClock(icon, "ic_none", getString(R.string.label_iat), clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-mass_air_flow_0x10":
-                setupClock(icon, "ic_none", getString(R.string.label_maf), clock, false, torqueUnit, 0, 700, "float", "integer");
+                setupClock(icon, "ic_none", getString(R.string.label_maf), clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
                 break;
             case "torque-AFR_0xff1249":
                 setupClock(icon, "ic_none", getString(R.string.label_afr), clock, false, torqueUnit, 0, 35, "float", "integer");
@@ -1776,7 +1793,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_phone", "", clock, false, "%", 0, 100, "integer", "integer");
                 break;
             case "torque-phonebarometer_0xff1270":
-                setupClock(icon, "ic_barometer", "", clock, false, torqueUnit, 900, 1070, "float", "integer");
+                setupClock(icon, "ic_barometer", "", clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
                 break;
             case "torque-obdadaptervoltage_0xff1238":
                 setupClock(icon, "ic_obd2", "", clock, false, torqueUnit, 0, 17, "float", "integer");
@@ -2419,7 +2436,7 @@ public class DashboardFragment extends CarFragment {
                 case "torque-transmissiontemp_0xfe1805":
                 case "torque-voltagemodule_0x42":
 
-
+// TODO: this seems useless, becuase we check the torqueQuery earlier than this
                     queryElement = queryElement.substring(queryElement.lastIndexOf('_') + 1);
                     queryElement = queryElement.substring(2);
                     queryPid = new BigInteger(queryElement, 16).longValue();
@@ -2778,4 +2795,6 @@ public class DashboardFragment extends CarFragment {
                     }
                 });
     }
+
+
 }
