@@ -27,8 +27,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@id/constraintClockRight"
         app:layout_constraintEnd_toEndOf="@id/constraintClockRight"
-        app:layout_constraintStart_toStartOf="@id/constraintClockRight"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintStart_toStartOf="@id/constraintClockRight" />
 
     <TextView
         android:id="@+id/icon_ClockCenter"
@@ -47,8 +46,7 @@
         app:layout_constraintEnd_toEndOf="@+id/constraintClockCenter"
         app:layout_constraintLeft_toLeftOf="@+id/constraintClockCenter"
         app:layout_constraintRight_toRightOf="@+id/constraintClockCenter"
-        app:layout_constraintStart_toStartOf="@+id/constraintClockCenter"
-        app:layout_constraintVertical_bias="0.69" />
+        app:layout_constraintStart_toStartOf="@+id/constraintClockCenter" />
 
     <TextView
         android:id="@+id/icon_ClockLeft"
@@ -64,8 +62,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockLeft"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockLeft"
-        app:layout_constraintVertical_bias="0.69"
-        app:layout_constraintStart_toStartOf="@+id/constraintClockLeft"/>
+        app:layout_constraintStart_toStartOf="@+id/constraintClockLeft" />
     <!--    app:layout_constraintTop_toTopOf="@+id/constraintClockLeft"
     !-->
     <android.support.constraint.ConstraintLayout

@@ -21,6 +21,7 @@
         <item>Minimalistic</item>
         <item>Dark</item>
         <item>Mustang GT</item>
+        <item>BMW</item>
         <item>Test</item>
     </string-array>
 
@@ -44,6 +45,7 @@
         <item>@drawable/ic_theme_minimalistic</item>
         <item>@drawable/ic_theme_dark</item>
         <item>@drawable/ic_theme_ford</item>
+        <item>@drawable/ic_theme_bmw</item>
         <item>@drawable/ic_theme_test</item>
     </array>
 
@@ -112,7 +114,9 @@
         <item>@string/element_torque_obdadaptervoltage</item>
         <item>@string/element_torque_fuellevel</item>
         <item>@string/element_torque_voltagemodule</item>
+        <item>@string/element_torque_oiltemperature</item>
         <item>@string/element_torque_transmissiontemp</item>
+        <item>@string/element_torque_transmissiontemp2</item>
         <item>@string/element_torque_pressurecontrol</item>
 
         <item>@string/element_torque_intakemanifoldpressure</item>
@@ -198,7 +202,9 @@
         <item>torque-fuellevel_0x2f</item>
 
         <item>torque-voltagemodule_0x42</item>
+        <item>torque-oiltemperature_0x5c</item>
         <item>torque-transmissiontemp_0x0105</item>
+        <item>torque-transmissiontemp_0xfe1805</item>
         <item>torque-pressurecontrol_0x70</item>
         <item>torque-intakemanifoldpressure_0x0b</item>
         <item>torque-commandedequivalenceratiolambda_0x44</item>
@@ -228,6 +234,8 @@
         <item>@string/element_outsideTemperature</item>
         <item>@string/element_currentOutputPower</item>
         <item>@string/element_currentTorque</item>
+        <item>@string/element_tankLevelPrimary</item>
+        <item>@string/element_tankLevelSecondary</item>
         <item>@string/element_engineSpeed</item>
         <item>@string/element_vehicleSpeed</item>
         <item>@string/element_currentGear</item>
@@ -289,6 +297,26 @@
         <item>@string/element_torque_exhaustgastempbank1sensor3</item>
         <item>@string/element_torque_exhaustgastempbank1sensor4</item>
 
+        <item>@string/element_torque_absolutethrottlepostion</item>
+        <item>@string/element_torque_ambientairtemp</item>
+        <item>@string/element_torque_catalysttemperature</item>
+        <item>@string/element_torque_chargeaircoolertemperature</item>
+        <item>@string/element_torque_commandedequivalenceratiolambda</item>
+        <item>@string/element_torque_enginecoolanttemp</item>
+        <item>@string/element_torque_engineloadabsolute</item>
+        <item>@string/element_torque_fuellevel</item>
+        <item>@string/element_torque_intakemanifoldpressure</item>
+        <item>@string/element_torque_o2sensor1equivalenceratio</item>
+        <item>@string/element_torque_obdadaptervoltage</item>
+        <item>@string/element_torque_oiltemperature</item>
+        <item>@string/element_torque_phonebarometer</item>
+        <item>@string/element_torque_phonebatterylevel</item>
+        <item>@string/element_torque_pressurecontrol</item>
+        <item>@string/element_torque_relativethrottleposition</item>
+        <item>@string/element_torque_transmissiontemp</item>
+        <item>@string/element_torque_transmissiontemp</item>
+        <item>@string/element_torque_voltagemodule</item>
+
         <item>@string/element_test</item>
     </string-array>
 
@@ -303,6 +331,8 @@
         <item>outsideTemperature</item>
         <item>currentOutputPower</item>
         <item>currentTorque</item>
+        <item>tankLevelPrimary</item>
+        <item>tankLevelSecondary</item>
         <item>engineSpeed</item>
         <item>vehicleSpeed</item>
         <item>currentGear</item>
@@ -344,29 +374,49 @@
         <item>vehicleIdenticationNumber.VIN</item>
         <!-- PIDs from Torque -->
         <!-- Use PIDs like this: torque_<description>_<pid> -->
-        <item>torque_rpm_0x0c</item>
-        <item>torque_speed_0x0d</item>
-        <item>torque_fuelpressure_0x0a</item>
-        <item>torque_engineload_0x04</item>
-        <item>torque_timing_advance_0x0e</item>
-        <item>torque_intake_air_temperature_0x0f</item>
-        <item>torque_mass_air_flow_0x10</item>
-        <item>torque_throttle_position_0x11</item>
-        <item>torque_turboboost_0xff1202</item>
-        <item>torque_voltage_0xff1238</item>
-        <item>torque_AFR_0xff1249</item>
-        <item>torque_AFRc_0xff124d</item>
-        <item>torque_fueltrimshortterm1_0x06</item>
-        <item>torque_fueltrimlongterm1_0x07</item>
-        <item>torque_fueltrimshortterm2_0x08</item>
-        <item>torque_fueltrimlongterm2_0x09</item>
-        <item>torque_accelerometer_total_0xff1223</item>
+        <item>torque-rpm_0x0c</item>
+        <item>torque-speed_0x0d</item>
+        <item>torque-fuelpressure_0x0a</item>
+        <item>torque-engineload_0x04</item>
+        <item>torque-timing_advance_0x0e</item>
+        <item>torque-intake_air_temperature_0x0f</item>
+        <item>torque-mass_air_flow_0x10</item>
+        <item>torque-throttle_position_0x11</item>
+        <item>torque-turboboost_0xff1202</item>
+        <item>torque-voltage_0xff1238</item>
+        <item>torque-AFR_0xff1249</item>
+        <item>torque-AFRc_0xff124d</item>
+        <item>torque-fueltrimshortterm1_0x06</item>
+        <item>torque-fueltrimlongterm1_0x07</item>
+        <item>torque-fueltrimshortterm2_0x08</item>
+        <item>torque-fueltrimlongterm2_0x09</item>
+        <item>torque-accelerometer_total_0xff1223</item>
 
-        <item>torque_fuelrailpressure_0x23</item>
-        <item>torque_exhaustgastempbank1sensor1_0x78</item>
-        <item>torque_exhaustgastempbank1sensor2_0xff1282</item>
-        <item>torque_exhaustgastempbank1sensor3_0xff1283</item>
-        <item>torque_exhaustgastempbank1sensor4_0xff1284</item>
+        <item>torque-fuelrailpressure_0x23</item>
+        <item>torque-exhaustgastempbank1sensor1_0x78</item>
+        <item>torque-exhaustgastempbank1sensor2_0xff1282</item>
+        <item>torque-exhaustgastempbank1sensor3_0xff1283</item>
+        <item>torque-exhaustgastempbank1sensor4_0xff1284</item>
+
+        <item>torque-absolutethrottlepostion_0x47</item>
+        <item>torque-ambientairtemp_0x46</item>
+        <item>torque-catalysttemperature_0x3c</item>
+        <item>torque-chargeaircoolertemperature_0x77</item>
+        <item>torque-commandedequivalenceratiolambda_0x44</item>
+        <item>torque-enginecoolanttemp_0x05</item>
+        <item>torque-engineloadabsolute_0x43</item>
+        <item>torque-fuellevel_0x2f</item>
+        <item>torque-intakemanifoldpressure_0x0b</item>
+        <item>torque-o2sensor1equivalenceratio_0x34</item>
+        <item>torque-obdadaptervoltage_0xff1238</item>
+        <item>torque-oiltemperature_0x5c</item>
+        <item>torque-phonebarometer_0xff1270</item>
+        <item>torque-phonebatterylevel_0xff129a</item>
+        <item>torque-pressurecontrol_0x70</item>
+        <item>torque-relativethrottleposition_0x45</item>
+        <item>torque-transmissiontemp_0x0105</item>
+        <item>torque-transmissiontemp_0xfe1805</item>
+        <item>torque-voltagemodule_0x42</item>
 
         <item>test</item>
     </string-array>
@@ -385,21 +435,6 @@
         <item>Clock</item>
     </string-array>
 
-    <string-array name="graphDelayEntries">
-        <item>0.1s</item>
-        <item>0.5s</item>
-        <item>1s</item>
-        <item>5s</item>
-        <item>60s</item>
-    </string-array>
-
-    <string-array name="graphDelayValues">
-        <item>100</item>
-        <item>500</item>
-        <item>1000</item>
-        <item>5000</item>
-        <item>60000</item>
-    </string-array>
 
     <string-array name="fontEntries">
         <item>@string/font_segments</item>

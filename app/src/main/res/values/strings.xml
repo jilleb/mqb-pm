@@ -245,6 +245,8 @@
     <string name="element_torque_exhaustgastempbank1sensor2">Torque - Exhaust Gas temperature bank 1 sensor 2</string>
     <string name="element_torque_exhaustgastempbank1sensor3">Torque - Exhaust Gas temperature bank 1 sensor 3</string>
     <string name="element_torque_exhaustgastempbank1sensor4">Torque - Exhaust Gas temperature bank 1 sensor 4</string>
+    <string name="element_torque_oiltemperature">Torque - Oil temperature</string>
+    <string name="element_torque_transmissiontemp2">Torque - Transmission temperature (method 2)</string>
 
     <string name="pref_unitprefs">Unit preferences</string>
     <string name="pref_graphOff">Clocks are displayed in regular mode</string>
@@ -307,5 +309,6 @@
     <string name="pref_title_performance_3">Title 3</string>
     <string name="pref_otherh_prefs">Other settings</string>
     <string name="format_degreespersec">%.1f°/s</string>
+
 
 </resources>
