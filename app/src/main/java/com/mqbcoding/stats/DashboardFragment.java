@@ -39,8 +39,8 @@ import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
+import com.github.martoreto.aauto.vex.FieldSchema;
 import com.google.android.apps.auto.sdk.StatusBarController;
-import com.google.gson.Gson;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.Viewport;
@@ -96,7 +96,7 @@ public class DashboardFragment extends CarFragment {
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private Boolean pressureUnits, temperatureUnits, powerUnits;
     private Boolean stagingDone;
-    private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn;
+    private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn, proximityOn;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
@@ -119,6 +119,8 @@ public class DashboardFragment extends CarFragment {
 
     private Button mBtnNext, mBtnPrev;
     private String mLabelClockL, mLabelClockC, mLabelClockR;
+    private HashMap<String, FieldSchema> mSchema;
+
 
     // notation formats
     private static final String FORMAT_DECIMALS = "%.1f";
@@ -368,7 +370,6 @@ public class DashboardFragment extends CarFragment {
         mSpeedSeriesCenter = new LineGraphSeries<>();
         mSpeedSeriesRight = new LineGraphSeries<>();
 
-        //set max/min values to 0
 
         //icons on the clocks
         mIconClockL = rootView.findViewById(R.id.icon_ClockLeft);
@@ -480,6 +481,10 @@ public class DashboardFragment extends CarFragment {
         mValueElement2.setTypeface(typeface);
         mValueElement3.setTypeface(typeface);
         mValueElement4.setTypeface(typeface);
+        mIconElement1.setTypeface(typeface);
+        mIconElement2.setTypeface(typeface);
+        mIconElement3.setTypeface(typeface);
+        mIconElement4.setTypeface(typeface);
         mTitleElement.setTypeface(typeface);
         mTitleElementRight.setTypeface(typeface);
         mTitleElementLeft.setTypeface(typeface);
@@ -507,10 +512,17 @@ public class DashboardFragment extends CarFragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         accurateOn = sharedPreferences.getBoolean("accurateActive", false);  //true = be accurate. false = have 2000ms of animation time
+        proximityOn = sharedPreferences.getBoolean("proximityActive", false);  //true = be accurate. false = have 2000ms of animation time
         if (accurateOn) {
             updateSpeed = 1;
         } else {
             updateSpeed = 2000;
+        }
+
+        if (!proximityOn) {
+            mBtnNext.setVisibility(View.VISIBLE);
+            mBtnPrev.setVisibility(View.VISIBLE);
+            mtextTitleMain.setVisibility(View.VISIBLE);
         }
 
         // Load this only on first run, then leave it alone
@@ -1434,8 +1446,7 @@ public class DashboardFragment extends CarFragment {
                 icon = "empty";
                 break;
             case "torque-timing_advance_0x0e":
-                label.setText(getString(R.string.label_timing));
-                icon = "empty";
+                label.setBackground(getContext().getDrawable(R.drawable.ic_timing));
                 break;
             case "torque-intake_air_temperature_0x0f":
                 label.setText(getString(R.string.label_iat));
@@ -1577,6 +1588,7 @@ public class DashboardFragment extends CarFragment {
         gridLabelRenderer.setVerticalLabelsVisible(true);
         gridLabelRenderer.setHighlightZeroLines(false);
         gridLabelRenderer.setGridColor(Color.parseColor("#22FFFFFF"));
+        gridLabelRenderer.setVerticalLabelsColor(Color.parseColor("#22FFFFFF"));
 
         gridLabelRenderer.setHorizontalLabelsVisible(false);
         gridLabelRenderer.setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
@@ -1589,6 +1601,10 @@ public class DashboardFragment extends CarFragment {
     }
 
     private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray,  Speedometer max) {
+
+
+        //todo: get all the min/max unit stuff for exlap items from schema.json
+
 
         String queryTrim;
         String queryLong = queryClock;
@@ -1760,7 +1776,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_none", getString(R.string.label_load), clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-timing_advance_0x0e":
-                setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
+                setupClock(icon, "ic_timing", "", clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
                 break;
             case "torque-intake_air_temperature_0x0f":
                 setupClock(icon, "ic_none", getString(R.string.label_iat), clock, false, torqueUnit, 0, 100, "float", "integer");
@@ -2059,6 +2075,7 @@ public class DashboardFragment extends CarFragment {
                     case "torque-mass_air_flow_0x10":
                     case "torque-throttle_position_0x11":
                     case "torque-AFR_0xff1249":
+                    case "torque-AFRc_0xff124d":
                     case "torque-fueltrimshortterm1_0x06":
                     case "torque-fueltrimlongterm1_0x07":
                     case "torque-fueltrimshortterm2_0x08":
@@ -2226,15 +2243,20 @@ public class DashboardFragment extends CarFragment {
 
 
         //mProximity = true;
-        if (mProximity != null && mProximity) {
+        if (mProximity != null && mProximity && proximityOn) {
             mTitleClockLeft.setText(mLabelClockL);
             mTitleClockCenter.setText(mLabelClockC);
             mTitleClockRight.setText(mLabelClockR);
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
             mtextTitleMain.setVisibility(View.VISIBLE);
-
-
+        } else if (!proximityOn) {
+            mTitleClockLeft.setText("");
+            mTitleClockCenter.setText("");
+            mTitleClockRight.setText("");
+            mBtnNext.setVisibility(View.VISIBLE);
+            mBtnPrev.setVisibility(View.VISIBLE);
+            mtextTitleMain.setVisibility(View.VISIBLE);
         } else {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
@@ -2406,6 +2428,7 @@ public class DashboardFragment extends CarFragment {
                 case "torque-throttle_position_0x11":
                 case "torque-voltage_0xff1238":
                 case "torque-AFR_0xff1249":
+                case "torque-AFRc_0xff124d":
                 case "torque-fueltrimshortterm1_0x06":
                 case "torque-fueltrimlongterm1_0x07":
                 case "torque-fueltrimshortterm2_0x08":
@@ -2796,5 +2819,13 @@ public class DashboardFragment extends CarFragment {
                 });
     }
 
-
+    // get min/max/units from exlap schema
+    private void getExlapDataElementDetails(String query) {
+        if (mSchema.containsKey(query)) {
+            FieldSchema field = mSchema.get(query);
+            float minValue = field.getMin();
+            float maxValue = field.getMax();
+            String unit = field.getUnit();
+        }
+    }
 }
