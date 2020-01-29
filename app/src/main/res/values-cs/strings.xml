@@ -206,4 +206,9 @@
     <string name="pref_accurate">Přesné budíky (méně plynulá animace)</string>
     <string name="pref_accurate_off">Hladká animace na budících (méně přesná, ale lépe vypadající)</string>
     <string name="pref_accurate_on">Přesné hodnoty na budících (méně plynulá animace)</string>
+    <string name="pref_dataelementsettings_4">Dashboard spotřeba</string>
+    <string name="pref_dataelementsettings_5">Dashboard servis</string>
+    <string name="pref_enable_3nd_dash">Povolit dashboard o spotřebě</string>
+    <string name="pref_enable_4nd_dash">Povolit dashboard o spotřebě</string>
+    <string name="pref_enable_5nd_dash">Povolit dashboard servis</string>
 </resources>

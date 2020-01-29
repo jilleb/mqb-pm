@@ -39,8 +39,8 @@ import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
+import com.github.martoreto.aauto.vex.FieldSchema;
 import com.google.android.apps.auto.sdk.StatusBarController;
-import com.google.gson.Gson;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.Viewport;
@@ -62,6 +62,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -89,6 +90,7 @@ public class DashboardFragment extends CarFragment {
     private TextView mTitleIcon1, mTitleIcon2, mTitleIcon3, mTitleIcon4, mTitleClockLeft, mTitleClockCenter, mTitleClockRight;
     private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
     private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
+    private ConstraintLayout mConstraintElementLeft, mConstraintElementRight, mConstraintElementCenter;
     private TextView mTextMinLeft, mTextMaxLeft;
     private TextView mTextMinCenter, mTextMaxCenter;
     private TextView mTextMinRight, mTextMaxRight;
@@ -96,7 +98,8 @@ public class DashboardFragment extends CarFragment {
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private Boolean pressureUnits, temperatureUnits, powerUnits;
     private Boolean stagingDone;
-    private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn;
+    private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn, proximityOn;
+    private Boolean Dashboard2_On,Dashboard3_On,Dashboard4_On,Dashboard5_On;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
@@ -119,6 +122,8 @@ public class DashboardFragment extends CarFragment {
 
     private Button mBtnNext, mBtnPrev;
     private String mLabelClockL, mLabelClockC, mLabelClockR;
+    private HashMap<String, FieldSchema> mSchema;
+
 
     // notation formats
     private static final String FORMAT_DECIMALS = "%.1f";
@@ -145,8 +150,9 @@ public class DashboardFragment extends CarFragment {
     private float[] MaxspeedLeft;
     private float[] MaxspeedCenter;
     private float[] MaxspeedRight;
-
-
+    private TextView mValueLeftElement1,mValueLeftElement2,mValueLeftElement3,mValueLeftElement4,mValueLeftElement5,mValueLeftElement6;
+    private TextView mValueCenterElement1,mValueCenterElement2,mValueCenterElement3,mValueCenterElement4,mValueCenterElement5,mValueCenterElement6;
+    private TextView mValueRightElement1,mValueRightElement2,mValueRightElement3,mValueRightElement4,mValueRightElement5,mValueRightElement6;
     @Override
     protected void setupStatusBar(StatusBarController sc) {
         sc.hideTitle();
@@ -168,18 +174,12 @@ public class DashboardFragment extends CarFragment {
             float speedRight = MaxspeedRight[dashboardNum]; //mClockRight.getSpeed();
 
             mClockMaxLeft.speedTo(speedLeft);
-            //    mClockMinLeft.speedTo(speedLeft);
-            //    mClockMinCenter.speedTo(speedCenter);
             mClockMaxCenter.speedTo(speedCenter);
             mClockMaxRight.speedTo(speedRight);
-            //    mClockMinRight.speedTo(speedRight);
 
             mTextMaxLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
-            //           mTextMinLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
             mTextMaxCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
-            //           mTextMinCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
             mTextMaxRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
-//            mTextMinRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
 
         }
     };
@@ -207,17 +207,27 @@ public class DashboardFragment extends CarFragment {
                 if (maxOn) mTextMaxRight.setVisibility(View.VISIBLE);
             } else if (v == mBtnPrev) {
                 dashboardNum++;
+                if (dashboardNum==2 && !Dashboard2_On) dashboardNum++;
+                if (dashboardNum==3 && !Dashboard3_On) dashboardNum++;
+                if (dashboardNum==4 && !Dashboard4_On) dashboardNum++;
+                if (dashboardNum==5 && !Dashboard5_On) dashboardNum++;
                 Log.v(TAG,"Button Prev: "+dashboardNum);
-                if (dashboardNum > 3) dashboardNum = 1;
+                if (dashboardNum > 4) dashboardNum = 1;
                 onPreferencesChangeHandler();
             } else if (v == mBtnNext) {
                 dashboardNum--;
                 Log.v(TAG,"Button Next: "+dashboardNum);
-                if (dashboardNum < 1) dashboardNum = 3;
+                if (dashboardNum < 1) dashboardNum = 4;
+                if (dashboardNum==5 && !Dashboard5_On) dashboardNum--;
+                if (dashboardNum==4 && !Dashboard4_On) dashboardNum--;
+                if (dashboardNum==3 && !Dashboard3_On) dashboardNum--;
+                if (dashboardNum==2 && !Dashboard2_On) dashboardNum--;
                 onPreferencesChangeHandler();
             }
         }
     };
+
+
 
     private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
         @Override
@@ -330,6 +340,14 @@ public class DashboardFragment extends CarFragment {
         mConstraintGraphCenter = rootView.findViewById(R.id.constraintGraphCenter);
         mConstraintGraphRight = rootView.findViewById(R.id.constraintGraphRight);
 
+        mConstraintElementLeft = rootView.findViewById(R.id.constraintElementLeft);
+        mConstraintElementCenter = rootView.findViewById(R.id.constraintElementCenter );
+        mConstraintElementRight = rootView.findViewById(R.id.constraintElementRight);
+
+        mConstraintElementLeft.setVisibility(View.INVISIBLE);
+        mConstraintElementCenter.setVisibility(View.INVISIBLE);
+        mConstraintElementRight.setVisibility(View.INVISIBLE);
+
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
         mClockCenter = rootView.findViewById(R.id.dial_Center);
@@ -339,18 +357,15 @@ public class DashboardFragment extends CarFragment {
         mClockMaxLeft = rootView.findViewById(R.id.dial_MaxLeft);
         mClockMaxCenter = rootView.findViewById(R.id.dial_MaxCenter);
         mClockMaxRight = rootView.findViewById(R.id.dial_MaxRight);
-        //      mClockMinLeft = rootView.findViewById(R.id.dial_MinLeft);
-        //      mClockMinCenter = rootView.findViewById(R.id.dial_MinCenter);
-        //      mClockMinRight = rootView.findViewById(R.id.dial_MinRight);
 
         mtextTitleMain = rootView.findViewById(R.id.textTitle);
         //reset value max
         MaxspeedLeft = null;
         MaxspeedCenter = null;
         MaxspeedRight = null;
-        MaxspeedLeft = new float[4];
-        MaxspeedCenter = new float[4];
-        MaxspeedRight = new float[4];
+        MaxspeedLeft = new float[5];
+        MaxspeedCenter = new float[5];
+        MaxspeedRight = new float[5];
 
         mBtnNext = rootView.findViewById(R.id.imageButton2);
         mBtnPrev = rootView.findViewById(R.id.imageButton3);
@@ -368,7 +383,6 @@ public class DashboardFragment extends CarFragment {
         mSpeedSeriesCenter = new LineGraphSeries<>();
         mSpeedSeriesRight = new LineGraphSeries<>();
 
-        //set max/min values to 0
 
         //icons on the clocks
         mIconClockL = rootView.findViewById(R.id.icon_ClockLeft);
@@ -408,13 +422,33 @@ public class DashboardFragment extends CarFragment {
         mIconElement3 = rootView.findViewById(R.id.icon_Element3);
         mIconElement4 = rootView.findViewById(R.id.icon_Element4);
 
-        //minmax texts:
+        //max texts:
         mTextMaxLeft = rootView.findViewById(R.id.textMaxLeft);
         mTextMaxCenter = rootView.findViewById(R.id.textMaxCenter);
         mTextMaxRight = rootView.findViewById(R.id.textMaxRight);
-       // mTextMinLeft = rootView.findViewById(R.id.textMinLeft);
-       // mTextMinCenter = rootView.findViewById(R.id.textMinCenter);
-       // mTextMinRight = rootView.findViewById(R.id.textMinRight);
+
+        //the elements for new dashboard (consumption, service)
+        mValueLeftElement1 = rootView.findViewById(R.id.valueLeftElement1);
+        mValueLeftElement2 = rootView.findViewById(R.id.valueLeftElement2);
+        mValueLeftElement3 = rootView.findViewById(R.id.valueLeftElement3);
+        mValueLeftElement4 = rootView.findViewById(R.id.valueLeftElement4);
+        mValueLeftElement5 = rootView.findViewById(R.id.valueLeftElement5);
+        mValueLeftElement6 = rootView.findViewById(R.id.valueLeftElement6);
+
+        mValueCenterElement1 = rootView.findViewById(R.id.valueCenterElement1);
+        mValueCenterElement2 = rootView.findViewById(R.id.valueCenterElement2);
+        mValueCenterElement3 = rootView.findViewById(R.id.valueCenterElement3);
+        mValueCenterElement4 = rootView.findViewById(R.id.valueCenterElement4);
+        mValueCenterElement5 = rootView.findViewById(R.id.valueCenterElement5);
+        mValueCenterElement6 = rootView.findViewById(R.id.valueCenterElement6);
+
+        mValueRightElement1 = rootView.findViewById(R.id.valueRightElement1);
+        mValueRightElement2 = rootView.findViewById(R.id.valueRightElement2);
+        mValueRightElement3 = rootView.findViewById(R.id.valueRightElement3);
+        mValueRightElement4 = rootView.findViewById(R.id.valueRightElement4);
+        mValueRightElement5 = rootView.findViewById(R.id.valueRightElement5);
+        mValueRightElement6 = rootView.findViewById(R.id.valueRightElement6);
+
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
         setupListeners();
     }
@@ -480,6 +514,10 @@ public class DashboardFragment extends CarFragment {
         mValueElement2.setTypeface(typeface);
         mValueElement3.setTypeface(typeface);
         mValueElement4.setTypeface(typeface);
+        mIconElement1.setTypeface(typeface);
+        mIconElement2.setTypeface(typeface);
+        mIconElement3.setTypeface(typeface);
+        mIconElement4.setTypeface(typeface);
         mTitleElement.setTypeface(typeface);
         mTitleElementRight.setTypeface(typeface);
         mTitleElementLeft.setTypeface(typeface);
@@ -507,10 +545,17 @@ public class DashboardFragment extends CarFragment {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         ambientOn = sharedPreferences.getBoolean("ambientActive", false);  //true = use ambient colors, false = don't use.
         accurateOn = sharedPreferences.getBoolean("accurateActive", false);  //true = be accurate. false = have 2000ms of animation time
+        proximityOn = sharedPreferences.getBoolean("proximityActive", false);  //true = be accurate. false = have 2000ms of animation time
         if (accurateOn) {
             updateSpeed = 1;
         } else {
             updateSpeed = 2000;
+        }
+
+        if (!proximityOn) {
+            mBtnNext.setVisibility(View.VISIBLE);
+            mBtnPrev.setVisibility(View.VISIBLE);
+            mtextTitleMain.setVisibility(View.VISIBLE);
         }
 
         // Load this only on first run, then leave it alone
@@ -527,18 +572,12 @@ public class DashboardFragment extends CarFragment {
         float speedRight = MaxspeedRight[dashboardNum];
 
         mClockMaxLeft.speedTo(speedLeft);
-        //    mClockMinLeft.speedTo(speedLeft);
-        //    mClockMinCenter.speedTo(speedCenter);
         mClockMaxCenter.speedTo(speedCenter);
         mClockMaxRight.speedTo(speedRight);
-        //    mClockMinRight.speedTo(speedRight);
 
         mTextMaxLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
-        //           mTextMinLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
         mTextMaxCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
-        //           mTextMinCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
         mTextMaxRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
-        //            mTextMinRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
 
         String dashboardId = String.valueOf(dashboardNum);
         String mtextTitlePerformance = sharedPreferences.getString("performanceTitle" + dashboardId, "Performance monitor" + dashboardId);
@@ -572,8 +611,6 @@ public class DashboardFragment extends CarFragment {
             ticksOn = readedTicksOn;
             turnTickEnabled(ticksOn);
         }
-
-
 
         //determine what data the user wants to have on the 4 data views
         String readedElement1Query = sharedPreferences.getString("selectedView1_" + dashboardId, "none");
@@ -946,6 +983,12 @@ public class DashboardFragment extends CarFragment {
         turnRaysEnabled(raysOn);
         turnMinMaxTextViewsEnabled(maxOn);
         turnMinMaxMarksEnabled(maxMarksOn);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Dashboard2_On = sharedPreferences.getBoolean("d2_active", false);  //Enabled dasboard2.
+        Dashboard3_On = sharedPreferences.getBoolean("d3_active", false);  //Enabled dasboard3
+        Dashboard4_On = sharedPreferences.getBoolean("d4_active", false);  //Enabled dasboard4
+        //Dashboard5_On = sharedPreferences.getBoolean("d5_active", false);  //Enabled dasboard5
+        Dashboard5_On = false;
     }
 /*
     private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
@@ -1121,6 +1164,9 @@ public class DashboardFragment extends CarFragment {
         mConstraintGraphLeft = null;
         mConstraintGraphRight = null;
         mConstraintGraphCenter = null;
+        mConstraintElementLeft = null;
+        mConstraintElementRight = null;
+        mConstraintElementCenter = null;
         mGraphValueLeft = null;
         mGraphValueCenter = null;
         mGraphValueRight = null;
@@ -1150,18 +1196,6 @@ public class DashboardFragment extends CarFragment {
     private final static int UPDATE_AFTER = 200; //ms
     private long lastUpdate = -1;
     private void postUpdate() {
-
-        /*
-        mTimer1 = new Runnable() {
-            public void run() {
-                doUpdate();
-            }
-        };
-        //experimental delay .. but why?? -> 5ms
-        mHandler.postDelayed(mTimer1, 100);
-        */
-
-
         if (lastUpdate<0 || (System.currentTimeMillis()-lastUpdate) > UPDATE_AFTER) {
             lastUpdate = System.currentTimeMillis();
             mHandler.post(new Runnable() {
@@ -1169,10 +1203,76 @@ public class DashboardFragment extends CarFragment {
                     doUpdate();
                 }
             });
-
         }
-
     }
+
+    private void SetLayoutElements(TextView mValueElement, String mMeasurements, String mUnit, String mFormat) {
+        Float mGetMeasurement;
+        if (mMeasurements == null || mMeasurements.isEmpty()) {
+            mValueElement.setText("");
+        } else {
+            mGetMeasurement = (Float) mLastMeasurements.get(mMeasurements);
+            if (mGetMeasurement == null) mGetMeasurement = Float.valueOf(0);
+            if (mMeasurements=="tankLevelPrimary") mGetMeasurement = mGetMeasurement * fueltanksize;
+            if (mMeasurements=="driving distance") {
+                mGetMeasurement = (Float) mLastMeasurements.get("tankLevelPrimary");
+                if (mGetMeasurement==null) mGetMeasurement= Float.valueOf(0);
+                mGetMeasurement = mGetMeasurement * fueltanksize;
+                Float mShortCons = (Float) mLastMeasurements.get("shortTermConsumptionPrimary");
+                Float mLongCons = (Float) mLastMeasurements.get("shortTermConsumptionPrimary");
+                if (mShortCons==null || mShortCons==0){
+                    if (mLongCons==null || mLongCons==0){
+                        mGetMeasurement = Float.valueOf(0);
+                    } else {
+                        mGetMeasurement = mLongCons * mGetMeasurement;
+                    }
+                } else {
+                    mGetMeasurement = mShortCons * mGetMeasurement;
+                }
+            }
+            if (mFormat == "FORMAT_SHORTTIME") {
+                mValueElement.setText(ConvertMinutesTime(mGetMeasurement.intValue()) + " " + mUnit);
+            } else {
+                mValueElement.setText(String.format(mFormat, mGetMeasurement) + " " + mUnit);
+            }
+        }
+    };
+
+    private static String ConvertMinutesTime(int minutesTime) {
+        TimeZone timeZone = TimeZone.getTimeZone("UTC");
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        df.setTimeZone(timeZone);
+        String time = df.format(new Date(minutesTime * 60 * 1000L));
+        return time;
+    }
+
+    private void UpdateLayoutElements() {
+        //Left elements
+        SetLayoutElements(mValueLeftElement1,"consumptionShortTermGeneral.distanceValue"," km",FORMAT_DECIMALS);
+        SetLayoutElements(mValueLeftElement2,"consumptionShortTermGeneral.speedValue"," km/h",FORMAT_DECIMALS);
+        SetLayoutElements(mValueLeftElement3,"consumptionShortTermGeneral.time","","FORMAT_SHORTTIME");
+        SetLayoutElements(mValueLeftElement5,"","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueLeftElement5,"","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueLeftElement6,"shortTermConsumptionPrimary"," l/100km",FORMAT_DECIMALS );
+
+        //Center elements
+        SetLayoutElements(mValueCenterElement1,"consumptionLongTermGeneral.distanceValue"," km",FORMAT_DECIMALS);
+        SetLayoutElements(mValueCenterElement2,"consumptionLongTermGeneral.speedValue"," km/h",FORMAT_DECIMALS);
+        SetLayoutElements(mValueCenterElement3,"consumptionLongTermGeneral.time","","FORMAT_SHORTTIME");
+        SetLayoutElements(mValueCenterElement5,"","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueCenterElement5,"","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueCenterElement6,"longTermConsumptionPrimary"," l/100km",FORMAT_DECIMALS );
+
+        //Right elements
+        SetLayoutElements(mValueRightElement1,"tankLevelPrimary"," l",FORMAT_DECIMALS);
+        SetLayoutElements(mValueRightElement2,"driving distance"," km",FORMAT_NO_DECIMALS);
+        SetLayoutElements(mValueRightElement3,"","","");
+        SetLayoutElements(mValueRightElement5,"","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueRightElement5,"","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueRightElement6,"currentConsumptionPrimary"," l/100km",FORMAT_DECIMALS );
+
+    };
+
 
     private void doUpdate() {
 
@@ -1185,6 +1285,18 @@ public class DashboardFragment extends CarFragment {
             Log.d(TAG,"Staging not done yet");
             return;
         }
+        // Update Title - always!!!
+        updateTitle();
+
+        // Visiblle layout_dashboard_gauges or layouu_dashboard_consumption
+        if (dashboardNum < 4) {
+            // settings
+            mConstraintElementLeft.setVisibility(View.INVISIBLE);
+            mConstraintElementCenter.setVisibility(View.INVISIBLE);
+            mConstraintElementRight.setVisibility(View.INVISIBLE);
+            mConstraintClockLeft.setVisibility(View.VISIBLE);
+            mConstraintClockCenter.setVisibility(View.VISIBLE);
+            mConstraintClockRight.setVisibility(View.VISIBLE);
 
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
@@ -1199,7 +1311,6 @@ public class DashboardFragment extends CarFragment {
         updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mClockMaxCenter, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue, mGraphValueCenter, MaxspeedCenter);
         updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight,  mClockMaxRight,  mGraphRight, mSpeedSeriesRight, graphRightLastXValue, mGraphValueRight, MaxspeedRight);
 
-        updateTitle();
 
         // get ambient color, change color of some elements to match the ambient color.
         // this can't be done during setup, because then the ambientColor is probably not received yet.
@@ -1242,7 +1353,17 @@ public class DashboardFragment extends CarFragment {
                 }
             }
         }
+        } else {
+            mConstraintElementLeft.setVisibility(View.VISIBLE);
+            mConstraintElementCenter.setVisibility(View.VISIBLE);
+            mConstraintElementRight.setVisibility(View.VISIBLE);
+            mConstraintClockLeft.setVisibility(View.INVISIBLE);
+            mConstraintClockCenter.setVisibility(View.INVISIBLE);
+            mConstraintClockRight.setVisibility(View.INVISIBLE);
 
+         //TODO: Refresh elements
+            UpdateLayoutElements();
+        }
 
         // wheel angle monitor
         Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
@@ -1434,8 +1555,7 @@ public class DashboardFragment extends CarFragment {
                 icon = "empty";
                 break;
             case "torque-timing_advance_0x0e":
-                label.setText(getString(R.string.label_timing));
-                icon = "empty";
+                label.setBackground(getContext().getDrawable(R.drawable.ic_timing));
                 break;
             case "torque-intake_air_temperature_0x0f":
                 label.setText(getString(R.string.label_iat));
@@ -1577,6 +1697,7 @@ public class DashboardFragment extends CarFragment {
         gridLabelRenderer.setVerticalLabelsVisible(true);
         gridLabelRenderer.setHighlightZeroLines(false);
         gridLabelRenderer.setGridColor(Color.parseColor("#22FFFFFF"));
+        gridLabelRenderer.setVerticalLabelsColor(Color.parseColor("#22FFFFFF"));
 
         gridLabelRenderer.setHorizontalLabelsVisible(false);
         gridLabelRenderer.setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
@@ -1589,6 +1710,10 @@ public class DashboardFragment extends CarFragment {
     }
 
     private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray,  Speedometer max) {
+
+
+        //todo: get all the min/max unit stuff for exlap items from schema.json
+
 
         String queryTrim;
         String queryLong = queryClock;
@@ -1760,7 +1885,7 @@ public class DashboardFragment extends CarFragment {
                 setupClock(icon, "ic_none", getString(R.string.label_load), clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
             case "torque-timing_advance_0x0e":
-                setupClock(icon, "ic_none", getString(R.string.label_timing), clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
+                setupClock(icon, "ic_timing", "", clock, false, torqueUnit, torqueMin, torqueMax, "float", "integer");
                 break;
             case "torque-intake_air_temperature_0x0f":
                 setupClock(icon, "ic_none", getString(R.string.label_iat), clock, false, torqueUnit, 0, 100, "float", "integer");
@@ -2059,6 +2184,7 @@ public class DashboardFragment extends CarFragment {
                     case "torque-mass_air_flow_0x10":
                     case "torque-throttle_position_0x11":
                     case "torque-AFR_0xff1249":
+                    case "torque-AFRc_0xff124d":
                     case "torque-fueltrimshortterm1_0x06":
                     case "torque-fueltrimlongterm1_0x07":
                     case "torque-fueltrimshortterm2_0x08":
@@ -2226,22 +2352,27 @@ public class DashboardFragment extends CarFragment {
 
 
         //mProximity = true;
-        if (mProximity != null && mProximity) {
+        if (mProximity != null && mProximity && proximityOn) {
             mTitleClockLeft.setText(mLabelClockL);
             mTitleClockCenter.setText(mLabelClockC);
             mTitleClockRight.setText(mLabelClockR);
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
-          //  mtextTitleMain.setVisibility(View.VISIBLE);
-
-
+            mtextTitleMain.setVisibility(View.VISIBLE);
+        } else if (!proximityOn) {
+            mTitleClockLeft.setText("");
+            mTitleClockCenter.setText("");
+            mTitleClockRight.setText("");
+            mBtnNext.setVisibility(View.VISIBLE);
+            mBtnPrev.setVisibility(View.VISIBLE);
+            mtextTitleMain.setVisibility(View.VISIBLE);
         } else {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
             mBtnNext.setVisibility(View.INVISIBLE);
             mBtnPrev.setVisibility(View.INVISIBLE);
-          //  mtextTitleMain.setVisibility(View.INVISIBLE);
+            mtextTitleMain.setVisibility(View.INVISIBLE);
         }
 
         String currentTime = getTime();
@@ -2406,6 +2537,7 @@ public class DashboardFragment extends CarFragment {
                 case "torque-throttle_position_0x11":
                 case "torque-voltage_0xff1238":
                 case "torque-AFR_0xff1249":
+                case "torque-AFRc_0xff124d":
                 case "torque-fueltrimshortterm1_0x06":
                 case "torque-fueltrimlongterm1_0x07":
                 case "torque-fueltrimshortterm2_0x08":
@@ -2796,5 +2928,13 @@ public class DashboardFragment extends CarFragment {
                 });
     }
 
-
+    // get min/max/units from exlap schema
+    private void getExlapDataElementDetails(String query) {
+        if (mSchema.containsKey(query)) {
+            FieldSchema field = mSchema.get(query);
+            float minValue = field.getMin();
+            float maxValue = field.getMax();
+            String unit = field.getUnit();
+        }
+    }
 }

@@ -224,6 +224,87 @@
 
     </string-array>
 
+    <string-array name="ClockDataElementsIcons">
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_none</item>
+    </string-array>
+
     <!-- Names of each of the Entries for dashboard elements settings -->
     <string-array name="TextDataElementsEntries">
         <item>@string/element_none</item>
@@ -319,6 +400,7 @@
 
         <item>@string/element_test</item>
     </string-array>
+
 
     <!-- Values/query strings for each of the Entries for dashboard elements settings -->
     <!-- These NEED TO be aligned with TextDataElementsEntries!-->
@@ -420,6 +502,96 @@
 
         <item>test</item>
     </string-array>
+
+    <string-array name="TextDataElementsIcons">
+        <item>@drawable/ic_none</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_torque</item>
+        <item>@drawable/ic_none</item>
+    </string-array>
+
 
     <string-array name="TitleDataElementsEntries">
         <item>@string/element_none</item>
