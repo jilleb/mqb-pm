@@ -91,6 +91,7 @@
             android:summaryOff="@string/pref_proximity_off"
             android:summaryOn="@string/pref_proximity_on"
             android:title="@string/pref_proximity" />
+
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -451,6 +452,9 @@
             android:defaultValue="false"
             android:key="d5_active"
             android:title="@string/pref_enable_5nd_dash" />
+            app:ilp_backgroundTint="@android:color/transparent"
+            app:ilp_entryImages="@array/TextDataElementsIcons"
+            app:ilp_tint="#00FFFFFF" />
     </PreferenceCategory>
 
     <PreferenceCategory
