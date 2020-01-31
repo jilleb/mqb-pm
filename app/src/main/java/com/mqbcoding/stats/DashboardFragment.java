@@ -1224,10 +1224,10 @@ public class DashboardFragment extends CarFragment {
                     if (mLongCons==null || mLongCons==0){
                         mGetMeasurement = Float.valueOf(0);
                     } else {
-                        mGetMeasurement = mLongCons * mGetMeasurement;
+                        mGetMeasurement = (mGetMeasurement/mLongCons) * 100 ;
                     }
                 } else {
-                    mGetMeasurement = mShortCons * mGetMeasurement;
+                    mGetMeasurement = (mGetMeasurement/mShortCons)*100;
                 }
             }
             if (mFormat == "FORMAT_SHORTTIME") {

@@ -319,6 +319,22 @@
     <string name="pref_enable_4nd_dash">Enable dashboard conspumtion</string>
     <string name="pref_enable_5nd_dash">Enable dashboard service</string>
     <string name="pref_enable_3nd_dash">Enable 3 dashboard</string>
-
-
+    <string name="dash4_titleRight">Actual data</string>
+    <string name="dash4_elementRight1">Fuel in tank:</string>
+    <string name="dash4_elementRight2">Driving distance:</string>
+    <string name="dash4_elementRight3"></string>
+    <string name="dash4_elementRight4"></string>
+    <string name="dash4_elementRight5">Current consumption:</string>
+    <string name="dash4_titleLeft">Consumption since start</string>
+    <string name="dash4_elementLeft1">Distance:</string>
+    <string name="dash4_elementLeft2">Avg speed:</string>
+    <string name="dash4_elementLeft3">Traveling time:</string>
+    <string name="dash4_elementLeft4"></string>
+    <string name="dash4_elementLeft5">Avg consumption:</string>
+    <string name="dash4_titleCenter">Long-Term consumption</string>
+    <string name="dash4_elementCenter1">Distance:</string>
+    <string name="dash4_elementCenter2">Avg speed:</string>
+    <string name="dash4_elementCenter3">Traveling time:</string>
+    <string name="dash4_elementCenter4"></string>
+    <string name="dash4_elementCenter5">Avg consumption:</string>
 </resources>

@@ -211,4 +211,18 @@
     <string name="pref_enable_3nd_dash">Povolit dashboard o spotřebě</string>
     <string name="pref_enable_4nd_dash">Povolit dashboard o spotřebě</string>
     <string name="pref_enable_5nd_dash">Povolit dashboard servis</string>
+    <string name="dash4_elementLeft1">Ujetá vzdálenost:</string>
+    <string name="dash4_elementRight1">Palivo v nádrži:</string>
+    <string name="dash4_elementRight2">Dojezdová vzdálenost:</string>
+    <string name="dash4_elementRight5">Aktuální spotřeba:</string>
+    <string name="dash4_elementLeft5">Průměrná spotřeba:</string>
+    <string name="dash4_elementLeft3">Doba jízdy:</string>
+    <string name="dash4_elementCenter3">Doba jízdy:</string>
+    <string name="dash4_elementLeft2">Průměrná rychlost:</string>
+    <string name="dash4_elementCenter2">Průměrná rychlost:</string>
+    <string name="dash4_elementCenter1">Ujetá vzdálenost:</string>
+    <string name="dash4_elementCenter5">Průměrná spotřeba:</string>
+    <string name="dash4_titleCenter">Dlouhodobá spotřeba</string>
+    <string name="dash4_titleLeft">Spotřeba od startu</string>
+    <string name="dash4_titleRight">Aktuální data</string>
 </resources>
