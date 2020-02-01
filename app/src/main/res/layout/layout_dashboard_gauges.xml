@@ -9,7 +9,7 @@
     android:layout_marginRight="0dp"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    app:layout_constraintTop_toTopOf="parent">
+    app:layout_constraintTop_toTopOf="parent"
     tools:showIn="@layout/fragment_dashboard">
 
 
@@ -108,12 +108,9 @@
         <com.github.anastr.speedviewlib.SpeedView
             android:id="@+id/dial_MaxRight"
             style="@style/AppTheme.Car.Speedometer"
-
-
             android:layout_width="275dp"
             android:layout_height="310dp"
             android:padding="10dp"
-
             app:layout_constraintBottom_toBottomOf="@+id/dial_Right"
             app:layout_constraintEnd_toEndOf="@+id/dial_Right"
             app:layout_constraintStart_toStartOf="@+id/dial_Right"
@@ -130,6 +127,7 @@
             app:sv_unitTextSize="0dp"
             app:sv_unitUnderSpeedText="false"
             app:sv_withIndicatorLight="false" />
+
 
         <com.github.anastr.speedviewlib.RaySpeedometer
             android:id="@+id/rayRight"
@@ -634,14 +632,14 @@
         android:id="@+id/textMaxLeft"
         android:layout_width="100dp"
         android:layout_height="30dp"
-
         android:layout_marginBottom="17dp"
         android:drawableLeft="@drawable/ic_max_text"
         android:elevation="1dp"
         android:gravity="bottom"
-        android:text="0"
+        android:text=""
         android:textAlignment="center"
         android:textSize="24sp"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockLeft"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockLeft"
         app:layout_constraintStart_toStartOf="@+id/constraintClockLeft" />
@@ -655,9 +653,10 @@
         android:drawableLeft="@drawable/ic_max_text"
         android:elevation="1dp"
         android:gravity="bottom"
-        android:text="0"
+        android:text=""
         android:textAlignment="center"
         android:textSize="24sp"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockCenter"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockCenter"
         app:layout_constraintStart_toStartOf="@+id/constraintClockCenter"
@@ -673,9 +672,10 @@
         android:drawableLeft="@drawable/ic_max_text"
         android:elevation="1dp"
         android:gravity="bottom"
-        android:text="0"
+        android:text=""
         android:textAlignment="center"
         android:textSize="24sp"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="@+id/constraintClockRight"
         app:layout_constraintEnd_toEndOf="@+id/constraintClockRight"
         app:layout_constraintStart_toStartOf="@+id/constraintClockRight" />

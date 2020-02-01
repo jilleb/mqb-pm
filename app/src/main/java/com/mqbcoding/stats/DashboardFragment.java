@@ -91,9 +91,7 @@ public class DashboardFragment extends CarFragment {
     private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
     private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
     private ConstraintLayout mConstraintElementLeft, mConstraintElementRight, mConstraintElementCenter;
-    private TextView mTextMinLeft, mTextMaxLeft;
-    private TextView mTextMinCenter, mTextMaxCenter;
-    private TextView mTextMinRight, mTextMaxRight;
+    private TextView  mTextMaxLeft,mTextMaxCenter,mTextMaxRight;
     //icons on the clocks
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private Boolean pressureUnits, temperatureUnits, powerUnits;
@@ -917,17 +915,11 @@ public class DashboardFragment extends CarFragment {
                 public void run() {
                     if (mClockLeft != null) {
                         mClockMaxLeft.speedTo(mClockLeft.getSpeed(), 1000);
-//                        mClockMinLeft.speedTo(mClockLeft.getSpeed(), 1000);
-//                        mClockMinCenter.speedTo(mClockCenter.getSpeed(), 1000);
                         mClockMaxCenter.speedTo(mClockCenter.getSpeed(), 1000);
                         mClockMaxRight.speedTo(mClockRight.getSpeed(), 1000);
- //                       mClockMinRight.speedTo(mClockRight.getSpeed(), 1000);
 
                         mTextMaxLeft.setText("-");
-                       // mTextMinLeft.setText("-");
                         mTextMaxCenter.setText("-");
-                        //mTextMinCenter.setText("-");
-                        //mTextMinRight.setText("-");
                         mTextMaxRight.setText("-");
                         stagingDone = true;
 
@@ -1206,8 +1198,9 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-    private void SetLayoutElements(TextView mValueElement, String mMeasurements, String mUnit, String mFormat) {
+    private void SetLayoutElements(TextView mValueElement, String mMeasurements, String mUnit, String mDefUnit,  String mFormat) {
         Float mGetMeasurement;
+        String mGetUnit;
         if (mMeasurements == null || mMeasurements.isEmpty()) {
             mValueElement.setText("");
         } else {
@@ -1230,10 +1223,20 @@ public class DashboardFragment extends CarFragment {
                     mGetMeasurement = (mGetMeasurement/mShortCons)*100;
                 }
             }
-            if (mFormat == "FORMAT_SHORTTIME") {
-                mValueElement.setText(ConvertMinutesTime(mGetMeasurement.intValue()) + " " + mUnit);
+
+            if (mUnit == null || mUnit.isEmpty()) {
+                mGetUnit=mDefUnit;
             } else {
-                mValueElement.setText(String.format(mFormat, mGetMeasurement) + " " + mUnit);
+                mGetUnit = (String) mLastMeasurements.get(mUnit);
+                if (mGetUnit == null || mGetUnit.isEmpty()) {
+                    mGetUnit = mDefUnit;
+                }
+            }
+
+            if (mFormat == "FORMAT_SHORTTIME") {
+                mValueElement.setText(ConvertMinutesTime(mGetMeasurement.intValue()) + " " + mGetUnit);
+            } else {
+                mValueElement.setText(String.format(mFormat, mGetMeasurement) + " " + mGetUnit);
             }
         }
     };
@@ -1248,28 +1251,28 @@ public class DashboardFragment extends CarFragment {
 
     private void UpdateLayoutElements() {
         //Left elements
-        SetLayoutElements(mValueLeftElement1,"consumptionShortTermGeneral.distanceValue"," km",FORMAT_DECIMALS);
-        SetLayoutElements(mValueLeftElement2,"consumptionShortTermGeneral.speedValue"," km/h",FORMAT_DECIMALS);
-        SetLayoutElements(mValueLeftElement3,"consumptionShortTermGeneral.time","","FORMAT_SHORTTIME");
-        SetLayoutElements(mValueLeftElement5,"","",FORMAT_DECIMALS );
-        SetLayoutElements(mValueLeftElement5,"","",FORMAT_DECIMALS );
-        SetLayoutElements(mValueLeftElement6,"shortTermConsumptionPrimary"," l/100km",FORMAT_DECIMALS );
+        SetLayoutElements(mValueLeftElement1,"consumptionShortTermGeneral.distanceValue","consumptionShortTermGeneral.distanceUnit","km",FORMAT_DECIMALS);
+        SetLayoutElements(mValueLeftElement2,"consumptionShortTermGeneral.speedValue","consumptionShortTermGeneral.speedUnit","km/h",FORMAT_DECIMALS);
+        SetLayoutElements(mValueLeftElement3,"consumptionShortTermGeneral.time","","","FORMAT_SHORTTIME");
+        SetLayoutElements(mValueLeftElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueLeftElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueLeftElement6,"shortTermConsumptionPrimary","shortTermConsumptionPrimary.unit","l/100km",FORMAT_DECIMALS );
 
         //Center elements
-        SetLayoutElements(mValueCenterElement1,"consumptionLongTermGeneral.distanceValue"," km",FORMAT_DECIMALS);
-        SetLayoutElements(mValueCenterElement2,"consumptionLongTermGeneral.speedValue"," km/h",FORMAT_DECIMALS);
-        SetLayoutElements(mValueCenterElement3,"consumptionLongTermGeneral.time","","FORMAT_SHORTTIME");
-        SetLayoutElements(mValueCenterElement5,"","",FORMAT_DECIMALS );
-        SetLayoutElements(mValueCenterElement5,"","",FORMAT_DECIMALS );
-        SetLayoutElements(mValueCenterElement6,"longTermConsumptionPrimary"," l/100km",FORMAT_DECIMALS );
+        SetLayoutElements(mValueCenterElement1,"consumptionLongTermGeneral.distanceValue","consumptionLongTermGeneral.distanceUnit","km",FORMAT_DECIMALS);
+        SetLayoutElements(mValueCenterElement2,"consumptionLongTermGeneral.speedValue","consumptionLongTermGeneral.speedUnit","km/h",FORMAT_DECIMALS);
+        SetLayoutElements(mValueCenterElement3,"consumptionLongTermGeneral.time","","","FORMAT_SHORTTIME");
+        SetLayoutElements(mValueCenterElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueCenterElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueCenterElement6,"longTermConsumptionPrimary","longTermConsumptionPrimary.unit","l/100km",FORMAT_DECIMALS );
 
         //Right elements
-        SetLayoutElements(mValueRightElement1,"tankLevelPrimary"," l",FORMAT_DECIMALS);
-        SetLayoutElements(mValueRightElement2,"driving distance"," km",FORMAT_NO_DECIMALS);
-        SetLayoutElements(mValueRightElement3,"","","");
-        SetLayoutElements(mValueRightElement5,"","",FORMAT_DECIMALS );
-        SetLayoutElements(mValueRightElement5,"","",FORMAT_DECIMALS );
-        SetLayoutElements(mValueRightElement6,"currentConsumptionPrimary"," l/100km",FORMAT_DECIMALS );
+        SetLayoutElements(mValueRightElement1,"tankLevelPrimary","","l",FORMAT_DECIMALS);
+        SetLayoutElements(mValueRightElement2,"driving distance","consumptionShortTermGeneral.distanceUnit","km",FORMAT_NO_DECIMALS);
+        SetLayoutElements(mValueRightElement3,"","", "","");
+        SetLayoutElements(mValueRightElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueRightElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueRightElement6,"currentConsumptionPrimary","currentConsumptionPrimary.unit","l/100km",FORMAT_DECIMALS );
 
     };
 
@@ -2255,9 +2258,9 @@ public class DashboardFragment extends CarFragment {
 
             // get the speed from the clock and have the high-visibility rays move to this speed as well
 
-            boolean noNewData = clockValue==null;
+            boolean noNewData = clockValue == null;
             if (noNewData)
-                clockValue=oldValue;
+                clockValue = oldValue;
 
 
             //TODO: Updates with a non fixed period could lead to strange graphs
@@ -2266,10 +2269,9 @@ public class DashboardFragment extends CarFragment {
             graphValue.setText(tempString);
 
 
-
             // don't update when there's nothing to update
             // check if old value and new value (rounded to 1 decimal placed) are equal
-            if (noNewData || Math.round(clockValue*10) == Math.round(oldValue*10)) {
+            if (noNewData || Math.round(clockValue * 10) == Math.round(oldValue * 10)) {
                 return;
             }
 
@@ -2282,16 +2284,19 @@ public class DashboardFragment extends CarFragment {
 
             // update the max clocks and text
             float maxValue = clockmax.getSpeed();
-      //          float minValue = clockmin.getSpeed();
 
             if (clockValue > maxValue) {
                 if (clockmax.isShown()) {
                     clockmax.setSpeedAt(clockValue);
-                    textmax.setText(String.format(Locale.US, FORMAT_DECIMALS, clockValue));
-                    // Save max Value
-                    MaxSpeed[dashboardNum] = clockValue;
                 }
             }
+            // Max Value update
+            if (maxOn && clockValue > MaxSpeed[dashboardNum]) {
+                textmax.setText(String.format(Locale.US, FORMAT_DECIMALS, clockValue));
+            // Save max Value
+            MaxSpeed[dashboardNum] = clockValue;
+            }
+        }
 
      /*           // update the min clocks and text
                 if (clockValueToGraph < minValue) {
@@ -2299,8 +2304,8 @@ public class DashboardFragment extends CarFragment {
                     textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
                 }
       */
-            }
-        }
+    }
+
 
     private String getTime() {
         String clockFormat = "hh:mm a";
