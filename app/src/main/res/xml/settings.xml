@@ -479,6 +479,15 @@
             android:summaryOn="@string/pref_location_force_geocoding_summary_on"
             android:dependency="useGoogleGeocoding"
             android:title="@string/pref_location_force_geocoding_title" />
+        <ListPreference
+            android:defaultValue="Google Maps"
+            android:entries="@array/LocationDataSource"
+            android:entryValues="@array/LocationValueSource"
+            android:key="locationSourceData"
+            android:summary="%s"
+            android:title="@string/pref_location_DataSource" />
+        pref_location_DataSource
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_unitprefs"

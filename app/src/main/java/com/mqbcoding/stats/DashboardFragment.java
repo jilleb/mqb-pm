@@ -16,6 +16,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -88,6 +89,7 @@ public class DashboardFragment extends CarFragment {
     private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement,
             mTitleElementRight, mTitleElementLeft, mTitleElementNavDistance, mTitleElementNavTime, mTitleNAVDestinationAddress;
     private TextView mTitleIcon1, mTitleIcon2, mTitleIcon3, mTitleIcon4, mTitleClockLeft, mTitleClockCenter, mTitleClockRight;
+    private TextView mTitleConsumptionLeft, mTitleConsumptionCenter, mTitleConsumptionRight;
     private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
     private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
     private ConstraintLayout mConstraintElementLeft, mConstraintElementRight, mConstraintElementCenter;
@@ -141,6 +143,7 @@ public class DashboardFragment extends CarFragment {
     private static final String FORMAT_VOLT0 = "-,-V";
     private boolean celsiusTempUnit;
     private boolean showStreetName, useGoogleGeocoding, forceGoogleGeocoding;
+    private String sourceLocation;
     private String selectedFont;
     private boolean selectedPressureUnits;
     private int updateSpeed = 2000;
@@ -406,7 +409,9 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft = rootView.findViewById(R.id.textTitleLabel1);
         mTitleClockCenter = rootView.findViewById(R.id.textTitleLabel2);
         mTitleClockRight = rootView.findViewById(R.id.textTitleLabel3);
-
+        mTitleConsumptionLeft = rootView.findViewById(R.id.textTitleConsumptionLeft);
+        mTitleConsumptionCenter = rootView.findViewById(R.id.textTitleConsumptionCenter);
+        mTitleConsumptionRight = rootView.findViewById(R.id.textTitleConsumptionRight);
         mTitleElementNavDistance = rootView.findViewById(R.id.textTitleNavDistance);
         mTitleElementNavTime = rootView.findViewById(R.id.textTitleNavTime);
 
@@ -523,16 +528,16 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft.setTypeface(typeface);
         mTitleClockCenter.setTypeface(typeface);
         mTitleClockRight.setTypeface(typeface);
+        mTitleConsumptionLeft.setTypeface(typeface);
+        mTitleConsumptionCenter.setTypeface(typeface);
+        mTitleConsumptionRight.setTypeface(typeface);
         mTitleElementNavDistance.setTypeface(typeface);
         mTitleElementNavTime.setTypeface(typeface);
         mtextTitleMain.setTypeface(typeface);
 
         //max
-        //mTextMinLeft.setTypeface(typeface);
         mTextMaxLeft.setTypeface(typeface);
-        //mTextMinCenter.setTypeface(typeface);
         mTextMaxCenter.setTypeface(typeface);
-        //mTextMinRight.setTypeface(typeface);
         mTextMaxRight.setTypeface(typeface);
 
         Log.d(TAG, "font: " + typeface);
@@ -554,6 +559,7 @@ public class DashboardFragment extends CarFragment {
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
             mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.WHITE);
         }
 
         // Load this only on first run, then leave it alone
@@ -563,6 +569,7 @@ public class DashboardFragment extends CarFragment {
         showStreetName = sharedPreferences.getBoolean("showStreetNameInTitle", true);
         useGoogleGeocoding = sharedPreferences.getBoolean("useGoogleGeocoding", false);
         forceGoogleGeocoding = sharedPreferences.getBoolean("forceGoogleGeocoding", false);
+        sourceLocation = sharedPreferences.getString("locationSourceData","Geocoding");
         fueltanksize = Float.parseFloat(sharedPreferences.getString("fueltanksize", "50"));
 
         float speedLeft = MaxspeedLeft[dashboardNum];
@@ -578,7 +585,12 @@ public class DashboardFragment extends CarFragment {
         mTextMaxRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
 
         String dashboardId = String.valueOf(dashboardNum);
-        String mtextTitlePerformance = sharedPreferences.getString("performanceTitle" + dashboardId, "Performance monitor" + dashboardId);
+        String mtextTitlePerformance;
+        if (dashboardNum<4) {
+            mtextTitlePerformance = sharedPreferences.getString("performanceTitle" + dashboardId, "Performance monitor" + dashboardId);
+        } else {
+            mtextTitlePerformance = getResources().getString(R.string.pref_title_performance_4);
+        }
 
         mtextTitleMain.setText(mtextTitlePerformance);
 
@@ -957,14 +969,14 @@ public class DashboardFragment extends CarFragment {
         getContext().bindService(serviceIntent, mVexServiceConnection, Context.BIND_AUTO_CREATE);
         startTorque();
         createAndStartUpdateTimer();
-      /*  if (useGoogleGeocoding) {
+        if (useGoogleGeocoding) {
             if(!getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
                     mGeocodingServiceConnection,
                     Context.BIND_AUTO_CREATE)) {
                 Log.e("Geocode", "Cannot bind?!");
             }
         }
-*/
+
         LocalBroadcastManager.getInstance(getContext())
                 .registerReceiver(onNoticeGoogleNavigationUpdate, new IntentFilter("GoogleNavigationUpdate"));
         LocalBroadcastManager.getInstance(getContext())
@@ -982,7 +994,7 @@ public class DashboardFragment extends CarFragment {
         //Dashboard5_On = sharedPreferences.getBoolean("d5_active", false);  //Enabled dasboard5
         Dashboard5_On = false;
     }
-/*
+
     private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
         @Override
         public void onNewGeocodeResult(Address result) {
@@ -999,6 +1011,10 @@ public class DashboardFragment extends CarFragment {
         //    tmp = result.getPostalCode();  //PostalCode
         //    if (tmp != null)
         //        sb.append("("+tmp+")");
+            tmp = result.getUrl();  //URL -> Altitude
+            if (tmp != null)
+            sb.append("("+tmp+")");
+
             googleGeocodeLocationStr = sb.toString();
         }
     };
@@ -1006,18 +1022,18 @@ public class DashboardFragment extends CarFragment {
     private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-           // mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
-           // mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
+            mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
+            mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
             Log.d("Geocode", "Service connected");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             Log.e("Geocode", "Service disconnected");
-          //  mGeocodingService = null;
+            mGeocodingService = null;
         }
     };
-*/
+
     private void startTorque() {
         Intent intent = new Intent();
         intent.setClassName("org.prowl.torque", "org.prowl.torque.remote.TorqueService");
@@ -1069,7 +1085,7 @@ public class DashboardFragment extends CarFragment {
         mStatsClient.unregisterListener(mCarStatsListener);
         getContext().unbindService(mVexServiceConnection);
         if (useGoogleGeocoding) {
-         //   getContext().unbindService(mGeocodingServiceConnection);
+            getContext().unbindService(mGeocodingServiceConnection);
         }
 
         if (torqueBind)
@@ -1115,6 +1131,9 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft = null;
         mTitleClockCenter = null;
         mTitleClockRight = null;
+        mTitleConsumptionLeft = null;
+        mTitleConsumptionCenter = null;
+        mTitleConsumptionRight = null;
         mTitleElementNavDistance = null;
         mTitleElementNavTime = null;
         mTitleIcon1 = null;
@@ -1212,7 +1231,7 @@ public class DashboardFragment extends CarFragment {
                 if (mGetMeasurement==null) mGetMeasurement= Float.valueOf(0);
                 mGetMeasurement = mGetMeasurement * fueltanksize;
                 Float mShortCons = (Float) mLastMeasurements.get("shortTermConsumptionPrimary");
-                Float mLongCons = (Float) mLastMeasurements.get("shortTermConsumptionPrimary");
+                Float mLongCons = (Float) mLastMeasurements.get("LongTermConsumptionPrimary");
                 if (mShortCons==null || mShortCons==0){
                     if (mLongCons==null || mLongCons==0){
                         mGetMeasurement = Float.valueOf(0);
@@ -1364,7 +1383,6 @@ public class DashboardFragment extends CarFragment {
             mConstraintClockCenter.setVisibility(View.INVISIBLE);
             mConstraintClockRight.setVisibility(View.INVISIBLE);
 
-         //TODO: Refresh elements
             UpdateLayoutElements();
         }
 
@@ -2363,21 +2381,34 @@ public class DashboardFragment extends CarFragment {
             mTitleClockRight.setText(mLabelClockR);
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
-            mtextTitleMain.setVisibility(View.VISIBLE);
+            //mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.WHITE);
+            mTitleConsumptionRight.setVisibility(View.VISIBLE);
+            mTitleConsumptionLeft.setVisibility(View.VISIBLE);
+            mTitleConsumptionCenter.setVisibility(View.VISIBLE);
         } else if (!proximityOn) {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
-            mtextTitleMain.setVisibility(View.VISIBLE);
+            //mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.WHITE);
+            mTitleConsumptionRight.setVisibility(View.INVISIBLE);
+            mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
+            mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
         } else {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
             mBtnNext.setVisibility(View.INVISIBLE);
             mBtnPrev.setVisibility(View.INVISIBLE);
-            mtextTitleMain.setVisibility(View.INVISIBLE);
+            //mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.DKGRAY);
+            mTitleConsumptionRight.setVisibility(View.INVISIBLE);
+            mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
+            mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
+
         }
 
         String currentTime = getTime();
@@ -2389,8 +2420,13 @@ public class DashboardFragment extends CarFragment {
         // Display location in left side of Title  bar
         if (showStreetName) {
             String leftTitle="";
-            if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) { // Google maps has always priority for now
-                leftTitle = googleMapsLocationStr;
+            Log.v(TAG,"SourceLocation: "+sourceLocation+"!!!");
+            if (sourceLocation.equals("Geocoding")) {
+                leftTitle = googleGeocodeLocationStr;
+            } else {
+                if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) {
+                    leftTitle = googleMapsLocationStr;
+                }
             }
             if (!forceGoogleGeocoding) {
                 String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
@@ -2644,6 +2680,11 @@ public class DashboardFragment extends CarFragment {
                     Float mTemperature = (Float) mLastMeasurements.get(queryElement);
                     if (mTemperature != null && mTemperature > 0) {
                         value.setText(String.format(Locale.US, FORMAT_DEGREES, mTemperature));
+                        if (mTemperature < 70) {
+                            value.setTextColor(Color.RED);
+                        } else {
+                            value.setTextColor(Color.WHITE);
+                        }
                     }
                     break;
                 case "outsideTemperature":

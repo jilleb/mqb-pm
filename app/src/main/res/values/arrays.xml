@@ -607,6 +607,15 @@
         <item>Clock</item>
     </string-array>
 
+    <string-array name="LocationDataSource">
+        <item>@string/locationSource_googlemaps</item>
+        <item>@string/locationSource_geocoding</item>
+    </string-array>
+
+    <string-array name="LocationValueSource">
+        <item>Google Maps</item>
+        <item>Geocoding</item>
+    </string-array>
 
     <string-array name="fontEntries">
         <item>@string/font_segments</item>

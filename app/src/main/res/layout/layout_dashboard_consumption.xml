@@ -34,11 +34,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitleLabelRight"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleConsumptionRight"
             />
 
         <TextView
-            android:id="@+id/textTitleLabelRight"
+            android:id="@+id/textTitleConsumptionRight"
             android:layout_width="275dp"
             android:layout_height="32dp"
             android:ellipsize="marquee"
@@ -63,7 +63,7 @@
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitleLabelRight" />
+            app:layout_constraintTop_toBottomOf="@+id/textTitleConsumptionRight" />
 
         <TextView
             android:id="@+id/valueRightElement1"
@@ -216,11 +216,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitleLabelCenter"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleConsumptionCenter"
             />
 
         <TextView
-            android:id="@+id/textTitleLabelCenter"
+            android:id="@+id/textTitleConsumptionCenter"
             android:layout_width="275dp"
             android:layout_height="32dp"
             android:ellipsize="marquee"
@@ -246,7 +246,7 @@
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textTitleLabelCenter" />
+            app:layout_constraintTop_toBottomOf="@id/textTitleConsumptionCenter" />
 
         <TextView
             android:id="@+id/valueCenterElement1"
@@ -400,11 +400,11 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textTitleLabelLeft"
+            app:layout_constraintTop_toBottomOf="@+id/textTitleConsumptionLeft"
             />
 
         <TextView
-            android:id="@+id/textTitleLabelLeft"
+            android:id="@+id/textTitleConsumptionLeft"
             android:layout_width="275dp"
             android:layout_height="32dp"
             android:ellipsize="marquee"
@@ -431,7 +431,7 @@
             android:textColor="@android:color/white"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textTitleLabelLeft"
+            app:layout_constraintTop_toBottomOf="@id/textTitleConsumptionLeft"
             tools:ignore="HardcodedText" />
 
         <TextView

@@ -179,11 +179,12 @@
     <string name="pref_location_showstreet_title">Show street name on Title bar</string>
     <string name="pref_location_showstreet_summary_off">Street name won\'t be shown on left of time clock</string>
     <string name="pref_location_showstreet_summary_on">Street name will be shown on left of time clock</string>
-    <string name="pref_location_use_geocoding_summary">Use Google geocoding services if car doesn\'t provide street name</string>
-    <string name="pref_location_use_geocoding_title">Use Google Geocoding</string>
+    <string name="pref_location_use_geocoding_summary">Use Location data for your phone if car doesn\'t provide street name</string>
+    <string name="pref_location_use_geocoding_title">Use GPS data from your phone</string>
     <string name="pref_location_force_geocoding_title">Force geocoding</string>
-    <string name="pref_location_force_geocoding_summary_on">Always use Google geocoding, even if car has Nav</string>
+    <string name="pref_location_force_geocoding_summary_on">Always use data Locatin your phone, even if car has Nav</string>
     <string name="pref_location_force_geocoding_summary_off">If car has Nav, use his own geocoding</string>
+    <string name="pref_location_DataSource">Source Location data from phone</string>
     <string name="location_permission_denied_toast">Location permission is needed for Google geocoding</string>
     <string name="label_tyreRR">RR</string>
     <string name="label_tyreRL">RL</string>
@@ -309,8 +310,8 @@
     <string name="pref_title_performance_1">Title 1</string>
     <string name="pref_title_performance_2">Title 2</string>
     <string name="pref_title_performance_3">Title 3</string>
-    <string name="pref_title_performance_4">Title 2</string>
-    <string name="pref_title_performance_5">Title 3</string>
+    <string name="pref_title_performance_4">Consumption</string>
+    <string name="pref_title_performance_5">Service</string>
     <string name="pref_otherh_prefs">Other settings</string>
     <string name="format_degreespersec">%.1f°/s</string>
     <string name="pref_proximity_off">No proximity features</string>
@@ -337,4 +338,6 @@
     <string name="dash4_elementCenter3">Traveling time:</string>
     <string name="dash4_elementCenter4"></string>
     <string name="dash4_elementCenter5">Avg consumption:</string>
+    <string name="locationSource_googlemaps">Google Maps</string>
+    <string name="locationSource_geocoding">Geocoding</string>
 </resources>
