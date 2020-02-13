@@ -2,6 +2,7 @@ package com.mqbcoding.stats;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -114,6 +115,8 @@ public class DashboardFragment extends CarFragment {
     //value displayed on graphlayout
     private TextView mGraphValueLeft, mGraphValueCenter, mGraphValueRight;
     private View rootView;
+    private View mDashboard_gaudes, mDashboard_consumption;
+
     private String androidClockFormat = "hh:mm a";
     int dashboardNum=1;
     private String googleGeocodeLocationStr = null;
@@ -333,6 +336,9 @@ public class DashboardFragment extends CarFragment {
 
     private void setupViews(View rootView) {
         //layouts/constrains:
+        mDashboard_gaudes = rootView.findViewById(R.id.include);
+        mDashboard_consumption = rootView.findViewById(R.id.include_consumption);
+
         mConstraintClockLeft = rootView.findViewById(R.id.constraintClockLeft);
         mConstraintClockCenter = rootView.findViewById(R.id.constraintClockCenter);
         mConstraintClockRight = rootView.findViewById(R.id.constraintClockRight);
@@ -559,7 +565,6 @@ public class DashboardFragment extends CarFragment {
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
             mtextTitleMain.setVisibility(View.VISIBLE);
-            mtextTitleMain.setTextColor(Color.WHITE);
         }
 
         // Load this only on first run, then leave it alone
@@ -2276,9 +2281,9 @@ public class DashboardFragment extends CarFragment {
 
             // get the speed from the clock and have the high-visibility rays move to this speed as well
 
-            boolean noNewData = clockValue == null;
+            boolean noNewData = clockValue==null;
             if (noNewData)
-                clockValue = oldValue;
+                clockValue=oldValue;
 
 
             //TODO: Updates with a non fixed period could lead to strange graphs
@@ -2289,7 +2294,7 @@ public class DashboardFragment extends CarFragment {
 
             // don't update when there's nothing to update
             // check if old value and new value (rounded to 1 decimal placed) are equal
-            if (noNewData || Math.round(clockValue * 10) == Math.round(oldValue * 10)) {
+            if (noNewData || Math.round(clockValue*10) == Math.round(oldValue*10)) {
                 return;
             }
 
@@ -2376,39 +2381,57 @@ public class DashboardFragment extends CarFragment {
 
         //mProximity = true;
         if (mProximity != null && mProximity && proximityOn) {
+            ObjectAnimator animation;
+            if (dashboardNum<4) animation = ObjectAnimator.ofFloat(mDashboard_gaudes, "y", 90);
+                else animation = ObjectAnimator.ofFloat(mDashboard_consumption, "y", 90);
+
+            animation.setDuration(200);
+            animation.start();
             mTitleClockLeft.setText(mLabelClockL);
             mTitleClockCenter.setText(mLabelClockC);
             mTitleClockRight.setText(mLabelClockR);
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
-            //mtextTitleMain.setVisibility(View.VISIBLE);
-            mtextTitleMain.setTextColor(Color.WHITE);
+            mtextTitleMain.setVisibility(View.VISIBLE);
+            // mtextTitleMain.setTextColor(Color.WHITE);
             mTitleConsumptionRight.setVisibility(View.VISIBLE);
             mTitleConsumptionLeft.setVisibility(View.VISIBLE);
             mTitleConsumptionCenter.setVisibility(View.VISIBLE);
+
+
         } else if (!proximityOn) {
+            ObjectAnimator animation;
+            if (dashboardNum<4) animation = ObjectAnimator.ofFloat(mDashboard_gaudes, "y", 90);
+                else animation = ObjectAnimator.ofFloat(mDashboard_consumption, "y", 90);
+            animation.setDuration(200);
+            animation.start();
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
-            //mtextTitleMain.setVisibility(View.VISIBLE);
-            mtextTitleMain.setTextColor(Color.WHITE);
+            mtextTitleMain.setVisibility(View.VISIBLE);
+            //mtextTitleMain.setTextColor(Color.WHITE);
             mTitleConsumptionRight.setVisibility(View.INVISIBLE);
             mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
             mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
+
         } else {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
             mBtnNext.setVisibility(View.INVISIBLE);
             mBtnPrev.setVisibility(View.INVISIBLE);
-            //mtextTitleMain.setVisibility(View.VISIBLE);
-            mtextTitleMain.setTextColor(Color.DKGRAY);
+            mtextTitleMain.setVisibility(View.INVISIBLE);
+            //mtextTitleMain.setTextColor(Color.DKGRAY);
             mTitleConsumptionRight.setVisibility(View.INVISIBLE);
             mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
             mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
-
+            ObjectAnimator animation;
+            if (dashboardNum<4) animation = ObjectAnimator.ofFloat(mDashboard_gaudes, "y", 45);
+                else animation = ObjectAnimator.ofFloat(mDashboard_consumption, "y", 45);
+            animation.setDuration(200);
+            animation.start();
         }
 
         String currentTime = getTime();
@@ -2420,7 +2443,6 @@ public class DashboardFragment extends CarFragment {
         // Display location in left side of Title  bar
         if (showStreetName) {
             String leftTitle="";
-            Log.v(TAG,"SourceLocation: "+sourceLocation+"!!!");
             if (sourceLocation.equals("Geocoding")) {
                 leftTitle = googleGeocodeLocationStr;
             } else {

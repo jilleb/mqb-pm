@@ -106,7 +106,7 @@ public class GeocodeLocationService extends Service {
             int lastAltitude = 0;
             try {
                 lastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                lastAltitude = (int) mLastDecodedLocation.getAltitude();
+                lastAltitude = (int) lastLocation.getAltitude();
                 Log.d(TAG,"Received location: " + lastLocation);
                 Log.d(TAG,"Received Altitude: " + lastAltitude);
             } catch (SecurityException ex) {
