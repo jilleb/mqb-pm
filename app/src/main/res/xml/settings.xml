@@ -93,6 +93,7 @@
             android:title="@string/pref_proximity" />
 
     </PreferenceCategory>
+
     <PreferenceCategory
         android:singleLineTitle="false"
         android:title="@string/pref_dataelementsettings_1"
@@ -202,12 +203,19 @@
         android:title="@string/pref_dataelementsettings_2"
         android:layout="@layout/prefcat">
 
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="d2_active"
+            android:title="@string/pref_enable_2nd_dash" />
+
         <EditTextPreference
             android:key="performanceTitle2"
             android:title="@string/pref_title_performance_2"
             android:defaultValue="Performance monitor 2"
             android:icon="@drawable/ic_settings_title"
+            android:dependency="d2_active"
             android:inputType="text" />
+
         <com.austingreco.imagelistpreference.ImageListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -217,6 +225,7 @@
             android:key="selectedClockLeft2"
             android:summary="%s"
             android:title="@string/pref_leftclock"
+            android:dependency="d2_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/ClockDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -230,6 +239,7 @@
             android:key="selectedClockCenter2"
             android:summary="%s"
             android:title="@string/pref_centerclock"
+            android:dependency="d2_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/ClockDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -244,6 +254,7 @@
             android:key="selectedClockRight2"
             android:summary="%s"
             android:title="@string/pref_rightclock"
+            android:dependency="d2_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/ClockDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -255,6 +266,7 @@
             android:key="selectedView1_2"
             android:summary="%s"
             android:title="@string/pref_view1"
+            android:dependency="d2_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -268,6 +280,7 @@
             android:key="selectedView2_2"
             android:summary="%s"
             android:title="@string/pref_view2"
+            android:dependency="d2_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -281,6 +294,7 @@
             android:key="selectedView3_2"
             android:summary="%s"
             android:title="@string/pref_view3"
+            android:dependency="d2_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -294,6 +308,7 @@
             android:key="selectedView4_2"
             android:summary="%s"
             android:title="@string/pref_view4"
+            android:dependency="d2_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -303,11 +318,18 @@
         android:singleLineTitle="false"
         android:title="@string/pref_dataelementsettings_3"
         android:layout="@layout/prefcat">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="d3_active"
+            android:title="@string/pref_enable_3nd_dash" />
+
         <EditTextPreference
             android:title="@string/pref_title_performance_3"
             android:key="performanceTitle3"
             android:defaultValue="Performance monitor 3"
             android:icon="@drawable/ic_settings_title"
+            android:dependency="d3_active"
             android:inputType="text" />
 
         <com.austingreco.imagelistpreference.ImageListPreference
@@ -318,6 +340,7 @@
             android:icon="@drawable/ic_settings_clockl"
             android:key="selectedClockLeft3"
             android:summary="%s"
+            android:dependency="d3_active"
             android:title="@string/pref_leftclock"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/ClockDataElementsIcons"
@@ -332,6 +355,7 @@
             android:key="selectedClockCenter3"
             android:summary="%s"
             android:title="@string/pref_centerclock"
+            android:dependency="d3_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/ClockDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -346,6 +370,7 @@
             android:key="selectedClockRight3"
             android:summary="%s"
             android:title="@string/pref_rightclock"
+            android:dependency="d3_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/ClockDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -359,6 +384,7 @@
             android:key="selectedView1_3"
             android:summary="%s"
             android:title="@string/pref_view1"
+            android:dependency="d3_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -372,6 +398,7 @@
             android:key="selectedView2_3"
             android:summary="%s"
             android:title="@string/pref_view2"
+            android:dependency="d3_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -385,6 +412,7 @@
             android:key="selectedView3_3"
             android:summary="%s"
             android:title="@string/pref_view3"
+            android:dependency="d3_active"
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -398,6 +426,32 @@
             android:key="selectedView4_3"
             android:summary="%s"
             android:title="@string/pref_view4"
+            android:dependency="d3_active"
+            app:ilp_backgroundTint="@android:color/transparent"
+            app:ilp_entryImages="@array/TextDataElementsIcons"
+            app:ilp_tint="#00FFFFFF" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:singleLineTitle="false"
+        android:title="@string/pref_dataelementsettings_4"
+        android:layout="@layout/prefcat">
+
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="d4_active"
+        android:title="@string/pref_enable_4nd_dash" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:singleLineTitle="false"
+        android:title="@string/pref_dataelementsettings_5"
+        android:layout="@layout/prefcat">
+
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="d5_active"
+            android:title="@string/pref_enable_5nd_dash" />
             app:ilp_backgroundTint="@android:color/transparent"
             app:ilp_entryImages="@array/TextDataElementsIcons"
             app:ilp_tint="#00FFFFFF" />
@@ -425,6 +479,15 @@
             android:summaryOn="@string/pref_location_force_geocoding_summary_on"
             android:dependency="useGoogleGeocoding"
             android:title="@string/pref_location_force_geocoding_title" />
+        <ListPreference
+            android:defaultValue="Google Maps"
+            android:entries="@array/LocationDataSource"
+            android:entryValues="@array/LocationValueSource"
+            android:key="locationSourceData"
+            android:summary="%s"
+            android:title="@string/pref_location_DataSource" />
+        pref_location_DataSource
+
     </PreferenceCategory>
     <PreferenceCategory
         android:title="@string/pref_unitprefs"

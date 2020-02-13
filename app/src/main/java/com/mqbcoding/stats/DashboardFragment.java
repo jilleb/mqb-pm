@@ -16,6 +16,7 @@ import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
@@ -62,6 +63,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Random;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -87,16 +89,17 @@ public class DashboardFragment extends CarFragment {
     private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement,
             mTitleElementRight, mTitleElementLeft, mTitleElementNavDistance, mTitleElementNavTime, mTitleNAVDestinationAddress;
     private TextView mTitleIcon1, mTitleIcon2, mTitleIcon3, mTitleIcon4, mTitleClockLeft, mTitleClockCenter, mTitleClockRight;
+    private TextView mTitleConsumptionLeft, mTitleConsumptionCenter, mTitleConsumptionRight;
     private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
     private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
-    private TextView mTextMinLeft, mTextMaxLeft;
-    private TextView mTextMinCenter, mTextMaxCenter;
-    private TextView mTextMinRight, mTextMaxRight;
+    private ConstraintLayout mConstraintElementLeft, mConstraintElementRight, mConstraintElementCenter;
+    private TextView  mTextMaxLeft,mTextMaxCenter,mTextMaxRight;
     //icons on the clocks
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private Boolean pressureUnits, temperatureUnits, powerUnits;
     private Boolean stagingDone;
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn, proximityOn;
+    private Boolean Dashboard2_On,Dashboard3_On,Dashboard4_On,Dashboard5_On;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
@@ -140,6 +143,7 @@ public class DashboardFragment extends CarFragment {
     private static final String FORMAT_VOLT0 = "-,-V";
     private boolean celsiusTempUnit;
     private boolean showStreetName, useGoogleGeocoding, forceGoogleGeocoding;
+    private String sourceLocation;
     private String selectedFont;
     private boolean selectedPressureUnits;
     private int updateSpeed = 2000;
@@ -147,8 +151,9 @@ public class DashboardFragment extends CarFragment {
     private float[] MaxspeedLeft;
     private float[] MaxspeedCenter;
     private float[] MaxspeedRight;
-
-
+    private TextView mValueLeftElement1,mValueLeftElement2,mValueLeftElement3,mValueLeftElement4,mValueLeftElement5,mValueLeftElement6;
+    private TextView mValueCenterElement1,mValueCenterElement2,mValueCenterElement3,mValueCenterElement4,mValueCenterElement5,mValueCenterElement6;
+    private TextView mValueRightElement1,mValueRightElement2,mValueRightElement3,mValueRightElement4,mValueRightElement5,mValueRightElement6;
     @Override
     protected void setupStatusBar(StatusBarController sc) {
         sc.hideTitle();
@@ -170,18 +175,12 @@ public class DashboardFragment extends CarFragment {
             float speedRight = MaxspeedRight[dashboardNum]; //mClockRight.getSpeed();
 
             mClockMaxLeft.speedTo(speedLeft);
-            //    mClockMinLeft.speedTo(speedLeft);
-            //    mClockMinCenter.speedTo(speedCenter);
             mClockMaxCenter.speedTo(speedCenter);
             mClockMaxRight.speedTo(speedRight);
-            //    mClockMinRight.speedTo(speedRight);
 
             mTextMaxLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
-            //           mTextMinLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
             mTextMaxCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
-            //           mTextMinCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
             mTextMaxRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
-//            mTextMinRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
 
         }
     };
@@ -209,17 +208,27 @@ public class DashboardFragment extends CarFragment {
                 if (maxOn) mTextMaxRight.setVisibility(View.VISIBLE);
             } else if (v == mBtnPrev) {
                 dashboardNum++;
+                if (dashboardNum==2 && !Dashboard2_On) dashboardNum++;
+                if (dashboardNum==3 && !Dashboard3_On) dashboardNum++;
+                if (dashboardNum==4 && !Dashboard4_On) dashboardNum++;
+                if (dashboardNum==5 && !Dashboard5_On) dashboardNum++;
                 Log.v(TAG,"Button Prev: "+dashboardNum);
-                if (dashboardNum > 3) dashboardNum = 1;
+                if (dashboardNum > 4) dashboardNum = 1;
                 onPreferencesChangeHandler();
             } else if (v == mBtnNext) {
                 dashboardNum--;
                 Log.v(TAG,"Button Next: "+dashboardNum);
-                if (dashboardNum < 1) dashboardNum = 3;
+                if (dashboardNum < 1) dashboardNum = 4;
+                if (dashboardNum==5 && !Dashboard5_On) dashboardNum--;
+                if (dashboardNum==4 && !Dashboard4_On) dashboardNum--;
+                if (dashboardNum==3 && !Dashboard3_On) dashboardNum--;
+                if (dashboardNum==2 && !Dashboard2_On) dashboardNum--;
                 onPreferencesChangeHandler();
             }
         }
     };
+
+
 
     private final CarStatsClient.Listener mCarStatsListener = new CarStatsClient.Listener() {
         @Override
@@ -332,6 +341,14 @@ public class DashboardFragment extends CarFragment {
         mConstraintGraphCenter = rootView.findViewById(R.id.constraintGraphCenter);
         mConstraintGraphRight = rootView.findViewById(R.id.constraintGraphRight);
 
+        mConstraintElementLeft = rootView.findViewById(R.id.constraintElementLeft);
+        mConstraintElementCenter = rootView.findViewById(R.id.constraintElementCenter );
+        mConstraintElementRight = rootView.findViewById(R.id.constraintElementRight);
+
+        mConstraintElementLeft.setVisibility(View.INVISIBLE);
+        mConstraintElementCenter.setVisibility(View.INVISIBLE);
+        mConstraintElementRight.setVisibility(View.INVISIBLE);
+
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
         mClockCenter = rootView.findViewById(R.id.dial_Center);
@@ -341,18 +358,15 @@ public class DashboardFragment extends CarFragment {
         mClockMaxLeft = rootView.findViewById(R.id.dial_MaxLeft);
         mClockMaxCenter = rootView.findViewById(R.id.dial_MaxCenter);
         mClockMaxRight = rootView.findViewById(R.id.dial_MaxRight);
-        //      mClockMinLeft = rootView.findViewById(R.id.dial_MinLeft);
-        //      mClockMinCenter = rootView.findViewById(R.id.dial_MinCenter);
-        //      mClockMinRight = rootView.findViewById(R.id.dial_MinRight);
 
         mtextTitleMain = rootView.findViewById(R.id.textTitle);
         //reset value max
         MaxspeedLeft = null;
         MaxspeedCenter = null;
         MaxspeedRight = null;
-        MaxspeedLeft = new float[4];
-        MaxspeedCenter = new float[4];
-        MaxspeedRight = new float[4];
+        MaxspeedLeft = new float[5];
+        MaxspeedCenter = new float[5];
+        MaxspeedRight = new float[5];
 
         mBtnNext = rootView.findViewById(R.id.imageButton2);
         mBtnPrev = rootView.findViewById(R.id.imageButton3);
@@ -395,7 +409,9 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft = rootView.findViewById(R.id.textTitleLabel1);
         mTitleClockCenter = rootView.findViewById(R.id.textTitleLabel2);
         mTitleClockRight = rootView.findViewById(R.id.textTitleLabel3);
-
+        mTitleConsumptionLeft = rootView.findViewById(R.id.textTitleConsumptionLeft);
+        mTitleConsumptionCenter = rootView.findViewById(R.id.textTitleConsumptionCenter);
+        mTitleConsumptionRight = rootView.findViewById(R.id.textTitleConsumptionRight);
         mTitleElementNavDistance = rootView.findViewById(R.id.textTitleNavDistance);
         mTitleElementNavTime = rootView.findViewById(R.id.textTitleNavTime);
 
@@ -409,13 +425,33 @@ public class DashboardFragment extends CarFragment {
         mIconElement3 = rootView.findViewById(R.id.icon_Element3);
         mIconElement4 = rootView.findViewById(R.id.icon_Element4);
 
-        //minmax texts:
+        //max texts:
         mTextMaxLeft = rootView.findViewById(R.id.textMaxLeft);
         mTextMaxCenter = rootView.findViewById(R.id.textMaxCenter);
         mTextMaxRight = rootView.findViewById(R.id.textMaxRight);
-       // mTextMinLeft = rootView.findViewById(R.id.textMinLeft);
-       // mTextMinCenter = rootView.findViewById(R.id.textMinCenter);
-       // mTextMinRight = rootView.findViewById(R.id.textMinRight);
+
+        //the elements for new dashboard (consumption, service)
+        mValueLeftElement1 = rootView.findViewById(R.id.valueLeftElement1);
+        mValueLeftElement2 = rootView.findViewById(R.id.valueLeftElement2);
+        mValueLeftElement3 = rootView.findViewById(R.id.valueLeftElement3);
+        mValueLeftElement4 = rootView.findViewById(R.id.valueLeftElement4);
+        mValueLeftElement5 = rootView.findViewById(R.id.valueLeftElement5);
+        mValueLeftElement6 = rootView.findViewById(R.id.valueLeftElement6);
+
+        mValueCenterElement1 = rootView.findViewById(R.id.valueCenterElement1);
+        mValueCenterElement2 = rootView.findViewById(R.id.valueCenterElement2);
+        mValueCenterElement3 = rootView.findViewById(R.id.valueCenterElement3);
+        mValueCenterElement4 = rootView.findViewById(R.id.valueCenterElement4);
+        mValueCenterElement5 = rootView.findViewById(R.id.valueCenterElement5);
+        mValueCenterElement6 = rootView.findViewById(R.id.valueCenterElement6);
+
+        mValueRightElement1 = rootView.findViewById(R.id.valueRightElement1);
+        mValueRightElement2 = rootView.findViewById(R.id.valueRightElement2);
+        mValueRightElement3 = rootView.findViewById(R.id.valueRightElement3);
+        mValueRightElement4 = rootView.findViewById(R.id.valueRightElement4);
+        mValueRightElement5 = rootView.findViewById(R.id.valueRightElement5);
+        mValueRightElement6 = rootView.findViewById(R.id.valueRightElement6);
+
         mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
         setupListeners();
     }
@@ -492,16 +528,16 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft.setTypeface(typeface);
         mTitleClockCenter.setTypeface(typeface);
         mTitleClockRight.setTypeface(typeface);
+        mTitleConsumptionLeft.setTypeface(typeface);
+        mTitleConsumptionCenter.setTypeface(typeface);
+        mTitleConsumptionRight.setTypeface(typeface);
         mTitleElementNavDistance.setTypeface(typeface);
         mTitleElementNavTime.setTypeface(typeface);
         mtextTitleMain.setTypeface(typeface);
 
         //max
-        //mTextMinLeft.setTypeface(typeface);
         mTextMaxLeft.setTypeface(typeface);
-        //mTextMinCenter.setTypeface(typeface);
         mTextMaxCenter.setTypeface(typeface);
-        //mTextMinRight.setTypeface(typeface);
         mTextMaxRight.setTypeface(typeface);
 
         Log.d(TAG, "font: " + typeface);
@@ -523,6 +559,7 @@ public class DashboardFragment extends CarFragment {
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
             mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.WHITE);
         }
 
         // Load this only on first run, then leave it alone
@@ -532,6 +569,7 @@ public class DashboardFragment extends CarFragment {
         showStreetName = sharedPreferences.getBoolean("showStreetNameInTitle", true);
         useGoogleGeocoding = sharedPreferences.getBoolean("useGoogleGeocoding", false);
         forceGoogleGeocoding = sharedPreferences.getBoolean("forceGoogleGeocoding", false);
+        sourceLocation = sharedPreferences.getString("locationSourceData","Geocoding");
         fueltanksize = Float.parseFloat(sharedPreferences.getString("fueltanksize", "50"));
 
         float speedLeft = MaxspeedLeft[dashboardNum];
@@ -539,21 +577,20 @@ public class DashboardFragment extends CarFragment {
         float speedRight = MaxspeedRight[dashboardNum];
 
         mClockMaxLeft.speedTo(speedLeft);
-        //    mClockMinLeft.speedTo(speedLeft);
-        //    mClockMinCenter.speedTo(speedCenter);
         mClockMaxCenter.speedTo(speedCenter);
         mClockMaxRight.speedTo(speedRight);
-        //    mClockMinRight.speedTo(speedRight);
 
         mTextMaxLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
-        //           mTextMinLeft.setText(String.format(Locale.US, FORMAT_DECIMALS, speedLeft));
         mTextMaxCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
-        //           mTextMinCenter.setText(String.format(Locale.US, FORMAT_DECIMALS, speedCenter));
         mTextMaxRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
-        //            mTextMinRight.setText(String.format(Locale.US, FORMAT_DECIMALS, speedRight));
 
         String dashboardId = String.valueOf(dashboardNum);
-        String mtextTitlePerformance = sharedPreferences.getString("performanceTitle" + dashboardId, "Performance monitor" + dashboardId);
+        String mtextTitlePerformance;
+        if (dashboardNum<4) {
+            mtextTitlePerformance = sharedPreferences.getString("performanceTitle" + dashboardId, "Performance monitor" + dashboardId);
+        } else {
+            mtextTitlePerformance = getResources().getString(R.string.pref_title_performance_4);
+        }
 
         mtextTitleMain.setText(mtextTitlePerformance);
 
@@ -584,8 +621,6 @@ public class DashboardFragment extends CarFragment {
             ticksOn = readedTicksOn;
             turnTickEnabled(ticksOn);
         }
-
-
 
         //determine what data the user wants to have on the 4 data views
         String readedElement1Query = sharedPreferences.getString("selectedView1_" + dashboardId, "none");
@@ -892,17 +927,11 @@ public class DashboardFragment extends CarFragment {
                 public void run() {
                     if (mClockLeft != null) {
                         mClockMaxLeft.speedTo(mClockLeft.getSpeed(), 1000);
-//                        mClockMinLeft.speedTo(mClockLeft.getSpeed(), 1000);
-//                        mClockMinCenter.speedTo(mClockCenter.getSpeed(), 1000);
                         mClockMaxCenter.speedTo(mClockCenter.getSpeed(), 1000);
                         mClockMaxRight.speedTo(mClockRight.getSpeed(), 1000);
- //                       mClockMinRight.speedTo(mClockRight.getSpeed(), 1000);
 
                         mTextMaxLeft.setText("-");
-                       // mTextMinLeft.setText("-");
                         mTextMaxCenter.setText("-");
-                        //mTextMinCenter.setText("-");
-                        //mTextMinRight.setText("-");
                         mTextMaxRight.setText("-");
                         stagingDone = true;
 
@@ -940,14 +969,14 @@ public class DashboardFragment extends CarFragment {
         getContext().bindService(serviceIntent, mVexServiceConnection, Context.BIND_AUTO_CREATE);
         startTorque();
         createAndStartUpdateTimer();
-      /*  if (useGoogleGeocoding) {
+        if (useGoogleGeocoding) {
             if(!getContext().bindService(new Intent(getContext(), GeocodeLocationService.class),
                     mGeocodingServiceConnection,
                     Context.BIND_AUTO_CREATE)) {
                 Log.e("Geocode", "Cannot bind?!");
             }
         }
-*/
+
         LocalBroadcastManager.getInstance(getContext())
                 .registerReceiver(onNoticeGoogleNavigationUpdate, new IntentFilter("GoogleNavigationUpdate"));
         LocalBroadcastManager.getInstance(getContext())
@@ -958,8 +987,14 @@ public class DashboardFragment extends CarFragment {
         turnRaysEnabled(raysOn);
         turnMinMaxTextViewsEnabled(maxOn);
         turnMinMaxMarksEnabled(maxMarksOn);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        Dashboard2_On = sharedPreferences.getBoolean("d2_active", false);  //Enabled dasboard2.
+        Dashboard3_On = sharedPreferences.getBoolean("d3_active", false);  //Enabled dasboard3
+        Dashboard4_On = sharedPreferences.getBoolean("d4_active", false);  //Enabled dasboard4
+        //Dashboard5_On = sharedPreferences.getBoolean("d5_active", false);  //Enabled dasboard5
+        Dashboard5_On = false;
     }
-/*
+
     private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
         @Override
         public void onNewGeocodeResult(Address result) {
@@ -976,6 +1011,10 @@ public class DashboardFragment extends CarFragment {
         //    tmp = result.getPostalCode();  //PostalCode
         //    if (tmp != null)
         //        sb.append("("+tmp+")");
+            tmp = result.getUrl();  //URL -> Altitude
+            if (tmp != null)
+            sb.append("("+tmp+")");
+
             googleGeocodeLocationStr = sb.toString();
         }
     };
@@ -983,18 +1022,18 @@ public class DashboardFragment extends CarFragment {
     private final ServiceConnection mGeocodingServiceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-           // mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
-           // mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
+            mGeocodingService = ((GeocodeLocationService.LocalBinder)service).getService();
+            mGeocodingService.setOnNewGeocodeListener(geocodeResultListener);
             Log.d("Geocode", "Service connected");
         }
 
         @Override
         public void onServiceDisconnected(ComponentName name) {
             Log.e("Geocode", "Service disconnected");
-          //  mGeocodingService = null;
+            mGeocodingService = null;
         }
     };
-*/
+
     private void startTorque() {
         Intent intent = new Intent();
         intent.setClassName("org.prowl.torque", "org.prowl.torque.remote.TorqueService");
@@ -1046,7 +1085,7 @@ public class DashboardFragment extends CarFragment {
         mStatsClient.unregisterListener(mCarStatsListener);
         getContext().unbindService(mVexServiceConnection);
         if (useGoogleGeocoding) {
-         //   getContext().unbindService(mGeocodingServiceConnection);
+            getContext().unbindService(mGeocodingServiceConnection);
         }
 
         if (torqueBind)
@@ -1092,6 +1131,9 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft = null;
         mTitleClockCenter = null;
         mTitleClockRight = null;
+        mTitleConsumptionLeft = null;
+        mTitleConsumptionCenter = null;
+        mTitleConsumptionRight = null;
         mTitleElementNavDistance = null;
         mTitleElementNavTime = null;
         mTitleIcon1 = null;
@@ -1133,6 +1175,9 @@ public class DashboardFragment extends CarFragment {
         mConstraintGraphLeft = null;
         mConstraintGraphRight = null;
         mConstraintGraphCenter = null;
+        mConstraintElementLeft = null;
+        mConstraintElementRight = null;
+        mConstraintElementCenter = null;
         mGraphValueLeft = null;
         mGraphValueCenter = null;
         mGraphValueRight = null;
@@ -1162,18 +1207,6 @@ public class DashboardFragment extends CarFragment {
     private final static int UPDATE_AFTER = 200; //ms
     private long lastUpdate = -1;
     private void postUpdate() {
-
-        /*
-        mTimer1 = new Runnable() {
-            public void run() {
-                doUpdate();
-            }
-        };
-        //experimental delay .. but why?? -> 5ms
-        mHandler.postDelayed(mTimer1, 100);
-        */
-
-
         if (lastUpdate<0 || (System.currentTimeMillis()-lastUpdate) > UPDATE_AFTER) {
             lastUpdate = System.currentTimeMillis();
             mHandler.post(new Runnable() {
@@ -1181,10 +1214,87 @@ public class DashboardFragment extends CarFragment {
                     doUpdate();
                 }
             });
-
         }
-
     }
+
+    private void SetLayoutElements(TextView mValueElement, String mMeasurements, String mUnit, String mDefUnit,  String mFormat) {
+        Float mGetMeasurement;
+        String mGetUnit;
+        if (mMeasurements == null || mMeasurements.isEmpty()) {
+            mValueElement.setText("");
+        } else {
+            mGetMeasurement = (Float) mLastMeasurements.get(mMeasurements);
+            if (mGetMeasurement == null) mGetMeasurement = Float.valueOf(0);
+            if (mMeasurements=="tankLevelPrimary") mGetMeasurement = mGetMeasurement * fueltanksize;
+            if (mMeasurements=="driving distance") {
+                mGetMeasurement = (Float) mLastMeasurements.get("tankLevelPrimary");
+                if (mGetMeasurement==null) mGetMeasurement= Float.valueOf(0);
+                mGetMeasurement = mGetMeasurement * fueltanksize;
+                Float mShortCons = (Float) mLastMeasurements.get("shortTermConsumptionPrimary");
+                Float mLongCons = (Float) mLastMeasurements.get("LongTermConsumptionPrimary");
+                if (mShortCons==null || mShortCons==0){
+                    if (mLongCons==null || mLongCons==0){
+                        mGetMeasurement = Float.valueOf(0);
+                    } else {
+                        mGetMeasurement = (mGetMeasurement/mLongCons) * 100 ;
+                    }
+                } else {
+                    mGetMeasurement = (mGetMeasurement/mShortCons)*100;
+                }
+            }
+
+            if (mUnit == null || mUnit.isEmpty()) {
+                mGetUnit=mDefUnit;
+            } else {
+                mGetUnit = (String) mLastMeasurements.get(mUnit);
+                if (mGetUnit == null || mGetUnit.isEmpty()) {
+                    mGetUnit = mDefUnit;
+                }
+            }
+
+            if (mFormat == "FORMAT_SHORTTIME") {
+                mValueElement.setText(ConvertMinutesTime(mGetMeasurement.intValue()) + " " + mGetUnit);
+            } else {
+                mValueElement.setText(String.format(mFormat, mGetMeasurement) + " " + mGetUnit);
+            }
+        }
+    };
+
+    private static String ConvertMinutesTime(int minutesTime) {
+        TimeZone timeZone = TimeZone.getTimeZone("UTC");
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        df.setTimeZone(timeZone);
+        String time = df.format(new Date(minutesTime * 60 * 1000L));
+        return time;
+    }
+
+    private void UpdateLayoutElements() {
+        //Left elements
+        SetLayoutElements(mValueLeftElement1,"consumptionShortTermGeneral.distanceValue","consumptionShortTermGeneral.distanceUnit","km",FORMAT_DECIMALS);
+        SetLayoutElements(mValueLeftElement2,"consumptionShortTermGeneral.speedValue","consumptionShortTermGeneral.speedUnit","km/h",FORMAT_DECIMALS);
+        SetLayoutElements(mValueLeftElement3,"consumptionShortTermGeneral.time","","","FORMAT_SHORTTIME");
+        SetLayoutElements(mValueLeftElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueLeftElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueLeftElement6,"shortTermConsumptionPrimary","shortTermConsumptionPrimary.unit","l/100km",FORMAT_DECIMALS );
+
+        //Center elements
+        SetLayoutElements(mValueCenterElement1,"consumptionLongTermGeneral.distanceValue","consumptionLongTermGeneral.distanceUnit","km",FORMAT_DECIMALS);
+        SetLayoutElements(mValueCenterElement2,"consumptionLongTermGeneral.speedValue","consumptionLongTermGeneral.speedUnit","km/h",FORMAT_DECIMALS);
+        SetLayoutElements(mValueCenterElement3,"consumptionLongTermGeneral.time","","","FORMAT_SHORTTIME");
+        SetLayoutElements(mValueCenterElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueCenterElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueCenterElement6,"longTermConsumptionPrimary","longTermConsumptionPrimary.unit","l/100km",FORMAT_DECIMALS );
+
+        //Right elements
+        SetLayoutElements(mValueRightElement1,"tankLevelPrimary","","l",FORMAT_DECIMALS);
+        SetLayoutElements(mValueRightElement2,"driving distance","consumptionShortTermGeneral.distanceUnit","km",FORMAT_NO_DECIMALS);
+        SetLayoutElements(mValueRightElement3,"","", "","");
+        SetLayoutElements(mValueRightElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueRightElement5,"","","",FORMAT_DECIMALS );
+        SetLayoutElements(mValueRightElement6,"currentConsumptionPrimary","currentConsumptionPrimary.unit","l/100km",FORMAT_DECIMALS );
+
+    };
+
 
     private void doUpdate() {
 
@@ -1197,6 +1307,18 @@ public class DashboardFragment extends CarFragment {
             Log.d(TAG,"Staging not done yet");
             return;
         }
+        // Update Title - always!!!
+        updateTitle();
+
+        // Visiblle layout_dashboard_gauges or layouu_dashboard_consumption
+        if (dashboardNum < 4) {
+            // settings
+            mConstraintElementLeft.setVisibility(View.INVISIBLE);
+            mConstraintElementCenter.setVisibility(View.INVISIBLE);
+            mConstraintElementRight.setVisibility(View.INVISIBLE);
+            mConstraintClockLeft.setVisibility(View.VISIBLE);
+            mConstraintClockCenter.setVisibility(View.VISIBLE);
+            mConstraintClockRight.setVisibility(View.VISIBLE);
 
         //update each of the elements:
         updateElement(mElement1Query, mValueElement1, mIconElement1);
@@ -1211,7 +1333,6 @@ public class DashboardFragment extends CarFragment {
         updateClock(mClockCQuery, mClockCenter, mRayCenter, mTextMaxCenter, mClockMaxCenter, mGraphCenter, mSpeedSeriesCenter, graphCenterLastXValue, mGraphValueCenter, MaxspeedCenter);
         updateClock(mClockRQuery, mClockRight, mRayRight, mTextMaxRight,  mClockMaxRight,  mGraphRight, mSpeedSeriesRight, graphRightLastXValue, mGraphValueRight, MaxspeedRight);
 
-        updateTitle();
 
         // get ambient color, change color of some elements to match the ambient color.
         // this can't be done during setup, because then the ambientColor is probably not received yet.
@@ -1254,7 +1375,16 @@ public class DashboardFragment extends CarFragment {
                 }
             }
         }
+        } else {
+            mConstraintElementLeft.setVisibility(View.VISIBLE);
+            mConstraintElementCenter.setVisibility(View.VISIBLE);
+            mConstraintElementRight.setVisibility(View.VISIBLE);
+            mConstraintClockLeft.setVisibility(View.INVISIBLE);
+            mConstraintClockCenter.setVisibility(View.INVISIBLE);
+            mConstraintClockRight.setVisibility(View.INVISIBLE);
 
+            UpdateLayoutElements();
+        }
 
         // wheel angle monitor
         Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
@@ -2146,9 +2276,9 @@ public class DashboardFragment extends CarFragment {
 
             // get the speed from the clock and have the high-visibility rays move to this speed as well
 
-            boolean noNewData = clockValue==null;
+            boolean noNewData = clockValue == null;
             if (noNewData)
-                clockValue=oldValue;
+                clockValue = oldValue;
 
 
             //TODO: Updates with a non fixed period could lead to strange graphs
@@ -2157,10 +2287,9 @@ public class DashboardFragment extends CarFragment {
             graphValue.setText(tempString);
 
 
-
             // don't update when there's nothing to update
             // check if old value and new value (rounded to 1 decimal placed) are equal
-            if (noNewData || Math.round(clockValue*10) == Math.round(oldValue*10)) {
+            if (noNewData || Math.round(clockValue * 10) == Math.round(oldValue * 10)) {
                 return;
             }
 
@@ -2173,16 +2302,19 @@ public class DashboardFragment extends CarFragment {
 
             // update the max clocks and text
             float maxValue = clockmax.getSpeed();
-      //          float minValue = clockmin.getSpeed();
 
             if (clockValue > maxValue) {
                 if (clockmax.isShown()) {
                     clockmax.setSpeedAt(clockValue);
-                    textmax.setText(String.format(Locale.US, FORMAT_DECIMALS, clockValue));
-                    // Save max Value
-                    MaxSpeed[dashboardNum] = clockValue;
                 }
             }
+            // Max Value update
+            if (maxOn && clockValue > MaxSpeed[dashboardNum]) {
+                textmax.setText(String.format(Locale.US, FORMAT_DECIMALS, clockValue));
+            // Save max Value
+            MaxSpeed[dashboardNum] = clockValue;
+            }
+        }
 
      /*           // update the min clocks and text
                 if (clockValueToGraph < minValue) {
@@ -2190,8 +2322,8 @@ public class DashboardFragment extends CarFragment {
                     textmin.setText(String.format(Locale.US, getContext().getText(R.string.format_decimals).toString(), clockValueToGraph));
                 }
       */
-            }
-        }
+    }
+
 
     private String getTime() {
         String clockFormat = "hh:mm a";
@@ -2249,21 +2381,34 @@ public class DashboardFragment extends CarFragment {
             mTitleClockRight.setText(mLabelClockR);
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
-            mtextTitleMain.setVisibility(View.VISIBLE);
+            //mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.WHITE);
+            mTitleConsumptionRight.setVisibility(View.VISIBLE);
+            mTitleConsumptionLeft.setVisibility(View.VISIBLE);
+            mTitleConsumptionCenter.setVisibility(View.VISIBLE);
         } else if (!proximityOn) {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
             mBtnNext.setVisibility(View.VISIBLE);
             mBtnPrev.setVisibility(View.VISIBLE);
-            mtextTitleMain.setVisibility(View.VISIBLE);
+            //mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.WHITE);
+            mTitleConsumptionRight.setVisibility(View.INVISIBLE);
+            mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
+            mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
         } else {
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
             mBtnNext.setVisibility(View.INVISIBLE);
             mBtnPrev.setVisibility(View.INVISIBLE);
-            mtextTitleMain.setVisibility(View.INVISIBLE);
+            //mtextTitleMain.setVisibility(View.VISIBLE);
+            mtextTitleMain.setTextColor(Color.DKGRAY);
+            mTitleConsumptionRight.setVisibility(View.INVISIBLE);
+            mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
+            mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
+
         }
 
         String currentTime = getTime();
@@ -2275,8 +2420,13 @@ public class DashboardFragment extends CarFragment {
         // Display location in left side of Title  bar
         if (showStreetName) {
             String leftTitle="";
-            if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) { // Google maps has always priority for now
-                leftTitle = googleMapsLocationStr;
+            Log.v(TAG,"SourceLocation: "+sourceLocation+"!!!");
+            if (sourceLocation.equals("Geocoding")) {
+                leftTitle = googleGeocodeLocationStr;
+            } else {
+                if (googleMapsLocationStr != null && !googleMapsLocationStr.isEmpty()) {
+                    leftTitle = googleMapsLocationStr;
+                }
             }
             if (!forceGoogleGeocoding) {
                 String location1 = (String) mLastMeasurements.get("Nav_CurrentPosition.Street");
@@ -2530,6 +2680,11 @@ public class DashboardFragment extends CarFragment {
                     Float mTemperature = (Float) mLastMeasurements.get(queryElement);
                     if (mTemperature != null && mTemperature > 0) {
                         value.setText(String.format(Locale.US, FORMAT_DEGREES, mTemperature));
+                        if (mTemperature < 70) {
+                            value.setTextColor(Color.RED);
+                        } else {
+                            value.setTextColor(Color.WHITE);
+                        }
                     }
                     break;
                 case "outsideTemperature":

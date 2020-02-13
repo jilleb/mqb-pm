@@ -103,9 +103,12 @@ public class GeocodeLocationService extends Service {
         @Override
         public void run() {
             Location lastLocation = null;
+            int lastAltitude = 0;
             try {
                 lastLocation = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                lastAltitude = (int) mLastDecodedLocation.getAltitude();
                 Log.d(TAG,"Received location: " + lastLocation);
+                Log.d(TAG,"Received Altitude: " + lastAltitude);
             } catch (SecurityException ex) {
                 Log.e(TAG, "Security Exception while getting last known location?");
             }
@@ -115,6 +118,7 @@ public class GeocodeLocationService extends Service {
                     List<Address> addresses = geocoder.getFromLocation(
                             lastLocation.getLatitude(), lastLocation.getLongitude(), 1);
                     if (mListener != null && addresses != null && addresses.size() > 0) {
+                        addresses.set(0,addresses.get(0)).setUrl(String.valueOf(lastAltitude)+" m");
                         mListener.onNewGeocodeResult(addresses.get(0));
                         mLastDecodedLocation.set(lastLocation);
                         Log.d(TAG, "Sended location to client: " + mLastDecodedLocation);
