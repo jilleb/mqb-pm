@@ -104,5 +104,8 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - VW 1367
 - Skoda 1440
 
+**MIB3***
+MIB3 has no exlap channel, so it won't show any data.
+
 [1]: https://github.com/jilleb/mqb-pm/workflows/ci/badge.svg
 [2]: https://github.com/jilleb/mqb-pm/actions
