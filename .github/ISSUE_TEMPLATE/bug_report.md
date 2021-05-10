@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Create a report to help me improve
+about: Please read the Readme and search for similar issues before posting!
 title: "[BUG]"
 labels: ''
 assignees: ''
