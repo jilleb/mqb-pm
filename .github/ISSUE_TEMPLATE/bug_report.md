@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Please read the Readme and search for similar issues before posting!
+about: Please read the Readme and search for similar issues before posting! ISSUES NOY IN ENGLISH WILL BE CLOSED AND IGNORED.
 title: "[BUG]"
 labels: ''
 assignees: ''
