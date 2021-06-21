@@ -70,10 +70,12 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - VW 0430 
 - VW 0613
 - VW 0617
-- VW 0755
-- VW 1156
 - VW 0751
 - VW 0753
+- VW 0755
+- VW 1156
+- VW 1427
+
 
 **MIB2 Std**
 - Seat 0351
@@ -96,6 +98,7 @@ Some phones kill the datafeed as soon as the screen is locked. This doesn't happ
 - Seat 1308
 - Seat 1338
 - Seat 1409
+- Seat 1447
 - Skoda 0468
 - Skoda 1433
 
