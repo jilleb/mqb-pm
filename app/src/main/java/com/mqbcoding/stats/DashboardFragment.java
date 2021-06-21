@@ -19,6 +19,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -987,7 +988,11 @@ public class DashboardFragment extends CarFragment {
     private void startTorque() {
         Intent intent = new Intent();
         intent.setClassName("org.prowl.torque", "org.prowl.torque.remote.TorqueService");
-        getContext().startService(intent);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            getContext().startForegroundService(intent);
+        } else {
+            getContext().startService(intent);
+        }
         Log.d(TAG, "Torque start");
 
         boolean successfulBind = getContext().bindService(intent, torqueConnection, 0);
