@@ -104,6 +104,7 @@
     <string name="pref_dataelementsettings">Data element settings</string>
     <string name="pref_dataelementsettings2">Data element settings (2nd dashboard)</string>
     <string name="pref_font">Font</string>
+    <string name="pref_font_titles">Title font</string>
     <string name="pref_graphDelay">Graph Resolution</string>
     <string name="pref_graphitem">Graph</string>
     <string name="pref_highlow">Highest values</string>

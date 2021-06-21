@@ -20,9 +20,18 @@
         <com.austingreco.imagelistpreference.ImageListPreference
             android:entries="@array/fontEntries"
             android:entryValues="@array/fontValues"
-            android:key="selectedFont"
+            android:key="selectedFont1"
             android:summary="%s"
             android:title="@string/pref_font"
+            app:ilp_backgroundTint="@color/white"
+            app:ilp_entryImages="@array/FontThumbs"
+            app:ilp_tint="#00FFFFFF" />
+        <com.austingreco.imagelistpreference.ImageListPreference
+            android:entries="@array/fontEntries"
+            android:entryValues="@array/fontValues"
+            android:key="selectedFont2"
+            android:summary="%s"
+            android:title="@string/pref_font_titles"
             app:ilp_backgroundTint="@color/white"
             app:ilp_entryImages="@array/FontThumbs"
             app:ilp_tint="#00FFFFFF" />

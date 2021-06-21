@@ -82,7 +82,6 @@ public class DashboardFragment extends CarFragment {
     private int pressureMin, pressureMax;
     //icons/labels of the data elements. upper left, upper right, lower left, lower right.
     private TextView mIconElement1, mIconElement2, mIconElement3, mIconElement4;
-
     private TextView mtextTitleMain;
     //values of the data elements. upper left, upper right, lower left, lower right.
     private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement,
@@ -141,7 +140,7 @@ public class DashboardFragment extends CarFragment {
     private boolean celsiusTempUnit;
     private boolean showStreetName, useGoogleGeocoding, forceGoogleGeocoding;
     private String sourceLocation;
-    private String selectedFont;
+    private String selectedFont1, selectedFont2;
     private boolean selectedPressureUnits;
     private int updateSpeed = 2000;
 
@@ -426,77 +425,47 @@ public class DashboardFragment extends CarFragment {
         mBtnNext.setOnClickListener(toggleView);
     }
 
-    private void setupTypeface(String selectedFont) {
+
+    private void setupTypeface(String selectedFont1, String selectedFont2) {
         AssetManager assetsMgr = getContext().getAssets();
-        Typeface typeface = Typeface.createFromAsset(assetsMgr, "digital.ttf");
-        switch (selectedFont) {
-            case "segments":
-                typeface = Typeface.createFromAsset(assetsMgr, "digital.ttf");
-                break;
-            case "seat":
-                typeface = Typeface.createFromAsset(assetsMgr, "SEAT_MetaStyle_MonoDigit_Regular.ttf");
-                break;
-            case "audi":
-                typeface = Typeface.createFromAsset(assetsMgr, "AudiTypeDisplayHigh.ttf");
-                break;
-            case "vw":
-                typeface = Typeface.createFromAsset(assetsMgr, "VWTextCarUI-Regular.ttf");
-                break;
-            case "vw2":
-                typeface = Typeface.createFromAsset(assetsMgr, "VWThesis_MIB_Regular.ttf");
-                break;
-            case "frutiger":
-                typeface = Typeface.createFromAsset(assetsMgr, "Frutiger.otf");
-                break;
-            case "vw3":
-                typeface = Typeface.createFromAsset(assetsMgr, "VW_Digit_Reg.otf");
-                break;
-            case "skoda":
-                typeface = Typeface.createFromAsset(assetsMgr, "Skoda.ttf");
-                break;
-            case "larabie":
-                typeface = Typeface.createFromAsset(assetsMgr, "Larabie.ttf");
-                break;
-            case "ford":
-                typeface = Typeface.createFromAsset(assetsMgr, "UnitedSans.otf");
-                break;
-        }
         //-------------------------------------------------------------
         //Give them all the right custom typeface
         //clocks
-        mClockLeft.setSpeedTextTypeface(typeface);
-        mClockCenter.setSpeedTextTypeface(typeface);
-        mClockRight.setSpeedTextTypeface(typeface);
-        mGraphValueLeft.setTypeface(typeface);
-        mGraphValueCenter.setTypeface(typeface);
-        mGraphValueRight.setTypeface(typeface);
+        mClockLeft.setSpeedTextTypeface(determineTypeFace(selectedFont1));
+        mClockCenter.setSpeedTextTypeface(determineTypeFace(selectedFont1));
+        mClockRight.setSpeedTextTypeface(determineTypeFace(selectedFont1));
+        mGraphValueLeft.setTypeface(determineTypeFace(selectedFont1));
+        mGraphValueCenter.setTypeface(determineTypeFace(selectedFont1));
+        mGraphValueRight.setTypeface(determineTypeFace(selectedFont1));
         //elements
-        mValueElement1.setTypeface(typeface);
-        mValueElement2.setTypeface(typeface);
-        mValueElement3.setTypeface(typeface);
-        mValueElement4.setTypeface(typeface);
-        mIconElement1.setTypeface(typeface);
-        mIconElement2.setTypeface(typeface);
-        mIconElement3.setTypeface(typeface);
-        mIconElement4.setTypeface(typeface);
-        mTitleElement.setTypeface(typeface);
-        mTitleElementRight.setTypeface(typeface);
-        mTitleElementLeft.setTypeface(typeface);
-        mTitleNAVDestinationAddress.setTypeface(typeface);
-        mTitleClockLeft.setTypeface(typeface);
-        mTitleClockCenter.setTypeface(typeface);
-        mTitleClockRight.setTypeface(typeface);
-        mTitleElementNavDistance.setTypeface(typeface);
-        mTitleElementNavTime.setTypeface(typeface);
-        mtextTitleMain.setTypeface(typeface);
+        mValueElement1.setTypeface(determineTypeFace(selectedFont1));
+        mValueElement2.setTypeface(determineTypeFace(selectedFont1));
+        mValueElement3.setTypeface(determineTypeFace(selectedFont1));
+        mValueElement4.setTypeface(determineTypeFace(selectedFont1));
+        mIconElement1.setTypeface(determineTypeFace(selectedFont1));
+        mIconElement2.setTypeface(determineTypeFace(selectedFont1));
+        mIconElement3.setTypeface(determineTypeFace(selectedFont1));
+        mIconElement4.setTypeface(determineTypeFace(selectedFont1));
+
+        //title
+        mTitleElement.setTypeface(determineTypeFace(selectedFont2));
+        mTitleElementRight.setTypeface(determineTypeFace(selectedFont2));
+        mTitleElementLeft.setTypeface(determineTypeFace(selectedFont2));
+        mTitleNAVDestinationAddress.setTypeface(determineTypeFace(selectedFont2));
+
+        mTitleElementNavDistance.setTypeface(determineTypeFace(selectedFont2));
+        mTitleElementNavTime.setTypeface(determineTypeFace(selectedFont2));
+        mtextTitleMain.setTypeface(determineTypeFace(selectedFont2));
 
         //max
-        mTextMaxLeft.setTypeface(typeface);
-        mTextMaxCenter.setTypeface(typeface);
-        mTextMaxRight.setTypeface(typeface);
+        mTextMaxLeft.setTypeface(determineTypeFace(selectedFont1));
+        mTextMaxCenter.setTypeface(determineTypeFace(selectedFont1));
+        mTextMaxRight.setTypeface(determineTypeFace(selectedFont1));
 
-        Log.d(TAG, "font: " + typeface);
-        this.selectedFont = selectedFont;
+        Log.d(TAG, "font: " + determineTypeFace(selectedFont1) + " font title: " + determineTypeFace(selectedFont2));
+        this.selectedFont1 = selectedFont1;
+        this.selectedFont2 = selectedFont2;
+
     }
 
     private void onPreferencesChangeHandler() {
@@ -553,9 +522,10 @@ public class DashboardFragment extends CarFragment {
             setupBackground(readedBackground);
         }
 
-        String readedFont = sharedPreferences.getString("selectedFont", "segments");
-        if (!readedBackground.equals(selectedFont)) {
-            setupTypeface(readedFont);
+        String readedFont1 = sharedPreferences.getString("selectedFont1", "segments");
+        String readedFont2 = sharedPreferences.getString("selectedFont2", "segments");
+        if (!readedBackground.equals(selectedFont1) || (!readedBackground.equals(selectedFont2))){
+            setupTypeface(readedFont1,readedFont2);
         }
 
         //show high visible rays on, according to the setting
@@ -720,7 +690,6 @@ public class DashboardFragment extends CarFragment {
         mClockCenter.setTextColor(tickColor);
         mClockRight.setTickNumber(enabled ? tickNum : 0);
         mClockRight.setTextColor(tickColor);
-        mClockLeft.setTextColor(tickColor);
     }
 
     private void setupIndicators() {
@@ -1111,7 +1080,8 @@ public class DashboardFragment extends CarFragment {
         mRayLeft = null;
         mRayCenter = null;
         mRayRight = null;
-        selectedFont = null;
+        selectedFont1 = null;
+        selectedFont2 = null;
         pressureUnit = null;
         //stagingDone = false;
         mGraphCenter = null;
@@ -2488,6 +2458,43 @@ public class DashboardFragment extends CarFragment {
 
     }
 
+    private Typeface determineTypeFace(String selectedFont) {
+        AssetManager assetsMgr = getContext().getAssets();
+        Typeface typeface = Typeface.createFromAsset(assetsMgr, "digital.ttf");
+        switch (selectedFont) {
+            case "segments":
+                typeface = Typeface.createFromAsset(assetsMgr, "digital.ttf");
+                break;
+            case "seat":
+                typeface = Typeface.createFromAsset(assetsMgr, "SEAT_MetaStyle_MonoDigit_Regular.ttf");
+                break;
+            case "audi":
+                typeface = Typeface.createFromAsset(assetsMgr, "AudiTypeDisplayHigh.ttf");
+                break;
+            case "vw":
+                typeface = Typeface.createFromAsset(assetsMgr, "VWTextCarUI-Regular.ttf");
+                break;
+            case "vw2":
+                typeface = Typeface.createFromAsset(assetsMgr, "VWThesis_MIB_Regular.ttf");
+                break;
+            case "frutiger":
+                typeface = Typeface.createFromAsset(assetsMgr, "Frutiger.otf");
+                break;
+            case "vw3":
+                typeface = Typeface.createFromAsset(assetsMgr, "VW_Digit_Reg.otf");
+                break;
+            case "skoda":
+                typeface = Typeface.createFromAsset(assetsMgr, "Skoda.ttf");
+                break;
+            case "larabie":
+                typeface = Typeface.createFromAsset(assetsMgr, "Larabie.ttf");
+                break;
+            case "ford":
+                typeface = Typeface.createFromAsset(assetsMgr, "UnitedSans.otf");
+                break;
+        }
+        return typeface;
+    }
 
     //update the elements
     private void updateElement(String queryElement, TextView value, TextView label) {

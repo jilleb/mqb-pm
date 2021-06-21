@@ -279,5 +279,6 @@
     <string name="dash4_elementCenter5">Gem. verbruik:</string>
     <string name="locationSource_googlemaps">Google Maps</string>
     <string name="locationSource_geocoding">Geocoding</string>
+    <string name="pref_font_titles">Titel lettertype</string>
 
 </resources>
