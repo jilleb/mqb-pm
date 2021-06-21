@@ -1,2 +1,2 @@
 adb forward tcp:5277 tcp:5277
-desktop-head-unit
+%USERPROFILE%\AppData\Local\Android\Sdk\extras\google\auto\desktop-head-unit
