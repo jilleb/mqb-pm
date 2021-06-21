@@ -76,7 +76,7 @@ public class DashboardFragment extends CarFragment {
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
     private String selectedTheme, selectedBackground;
-    private String mClockLQuery, mClockCQuery, mClockRQuery;
+    private String mClockLQuery, mClockCQuery, mClockRQuery, mCustomPID;
     private String pressureUnit, temperatureUnit;
     private float pressureFactor, speedFactor, powerFactor, fueltanksize;
     private int pressureMin, pressureMax;
@@ -524,7 +524,7 @@ public class DashboardFragment extends CarFragment {
 
         String readedFont1 = sharedPreferences.getString("selectedFont1", "segments");
         String readedFont2 = sharedPreferences.getString("selectedFont2", "segments");
-        if (!readedBackground.equals(selectedFont1) || (!readedBackground.equals(selectedFont2))){
+        if (!readedFont1.equals(selectedFont1) || (!readedFont2.equals(selectedFont2))){
             setupTypeface(readedFont1,readedFont2);
         }
 
@@ -586,6 +586,15 @@ public class DashboardFragment extends CarFragment {
             mClockRQuery = readedClockRQuery;
             setupClocks(mClockRQuery, mClockRight, mIconClockR, mRayRight,mClockMaxRight);
         }
+
+        String readedCustomPID = sharedPreferences.getString("readedCustomPID","none");
+        if (!readedCustomPID.equals(mCustomPID)) {
+            mCustomPID = readedCustomPID;
+            setupClocks(mClockRQuery, mClockRight, mIconClockR, mRayRight,mClockMaxRight);
+        }
+
+
+
         //debug logging of each of the chosen elements
         Log.d(TAG, "element 1 selected:" + mElement1Query);
         Log.d(TAG, "element 2 selected:" + mElement2Query);
@@ -601,7 +610,7 @@ public class DashboardFragment extends CarFragment {
         mLabelClockC = getLabelClock(mClockCQuery);
         mLabelClockR = getLabelClock(mClockRQuery);
 
-        boolean readedPressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
+         boolean readedPressureUnits = sharedPreferences.getBoolean("selectPressureUnit", true);  //true = bar, false = psi
         if (readedPressureUnits != selectedPressureUnits) {
             selectedPressureUnits = readedPressureUnits;
             pressureFactor = selectedPressureUnits ? 1 : (float) 14.5037738;
@@ -1639,6 +1648,7 @@ public class DashboardFragment extends CarFragment {
     }
 
     private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray,  Speedometer max) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
 
 
         //todo: get all the min/max unit stuff for exlap items from schema.json
@@ -1665,6 +1675,13 @@ public class DashboardFragment extends CarFragment {
             queryClock = queryClock.substring(queryClock.lastIndexOf('_') + 1);
             queryClock = queryClock.substring(2);
             long queryPid = new BigInteger(queryClock, 16).longValue();
+
+            if (queryPid == 2236463){ //if query == 22202f, this means the custom PID is used.
+                String mQueryTemp = sharedPreferences.getString("customPID", "22202f");
+                assert mQueryTemp != null;
+                queryPid = Long.decode("0x" + mQueryTemp);
+                Log.e(TAG, "queryPid: " + queryPid);
+            }
 
             try {
                 if (torqueService != null) {
@@ -1917,6 +1934,9 @@ public class DashboardFragment extends CarFragment {
             case "torque-fuelrailpressure_0x23":
                 setupClock(icon, "ic_fuelpressure", "", clock, false, torqueUnit, 0, 100, "float", "integer");
                 break;
+            case "torque-customPID_0x22202f":
+                setupClock(icon, "ic_obd2", "", clock, false, torqueUnit, 0, 100, "float", "integer");
+                break;
         }
 
         // make the icon appear in the color of unitTextColor
@@ -2136,6 +2156,7 @@ public class DashboardFragment extends CarFragment {
                     case "torque-engineloadabsolute_0x43":
                     case "torque-fuellevel_0x2f":
                     case "torque-fuelrailpressure_0x23":
+                    case "torque-customPID_0x22202f":
                         clock.setUnit(unitText); // use the units Torque is providing
                         break;
                     case "torque-turboboost_0xff1202":
@@ -2143,7 +2164,6 @@ public class DashboardFragment extends CarFragment {
                             clockValue = clockValue / 14.5037738f;
                             unitText = "bar";
                         }
-
                         clock.setUnit(unitText);
                         break;
                     case "torque-intake_air_temperature_0x0f":

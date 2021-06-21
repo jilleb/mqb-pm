@@ -14,6 +14,7 @@
     <string name="credits_basedon">Based on the SDK and demo App by:</string>
     <string name="credits_drivesafely">Drive Safely.</string>
     <string name="credits_thanks">Special thanks to:</string>
+    <string name="element_customPID">Custom PID</string>
 
     <string name="element_EcoHMI_Score.AvgShort">Eco score</string>
     <string name="element_EcoHMI_Score.AvgTrip">Eco score average</string>
@@ -278,6 +279,9 @@
     <string name="font_ford" translatable="false">United Sans</string>
     <string name="bg_dots">Dots</string>
     <string name="bg_aa">Android Auto</string>
+    <string name="bg_porsche">Porsche</string>
+
+
 
 
 

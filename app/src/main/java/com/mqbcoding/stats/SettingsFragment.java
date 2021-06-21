@@ -32,7 +32,7 @@ public class SettingsFragment extends PreferenceFragment {
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
-            Log.d(TAG, "Pereference change: " + preference.getKey());
+            Log.d(TAG, "Preference change: " + preference.getKey());
 
             String stringValue = value == null ? "" : value.toString();
 

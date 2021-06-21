@@ -641,5 +641,14 @@
             android:title="@string/pref_cancel_uploads_title" />
 
     </PreferenceCategory>
+    <PreferenceCategory android:title="Test features">
+
+        <EditTextPreference
+            android:defaultValue="false"
+            android:key="customPID"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Custom Torque PID" />
+    </PreferenceCategory>
 
 </PreferenceScreen>

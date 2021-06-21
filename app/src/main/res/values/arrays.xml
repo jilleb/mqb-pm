@@ -133,6 +133,9 @@
         <item>@string/element_torque_exhaustgastempbank1sensor3</item>
         <item>@string/element_torque_exhaustgastempbank1sensor4</item>
 
+        <item>@string/element_customPID</item>
+
+
         <item>@string/element_test</item>
     </string-array>
 
@@ -220,6 +223,8 @@
         <item>torque-exhaustgastempbank1sensor3_0xff1283</item>
         <item>torque-exhaustgastempbank1sensor4_0xff1284</item>
 
+        <item>torque-customPID_0x22202f</item>
+
         <item>test</item>
 
     </string-array>
@@ -261,6 +266,7 @@
         <item>@drawable/ic_exlap</item>
         <item>@drawable/ic_exlap</item>
         <item>@drawable/ic_exlap</item>
+        <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
         <item>@drawable/ic_torque</item>
@@ -680,6 +686,8 @@
         <item>@string/bg_beetle</item>
         <item>@string/bg_dots</item>
         <item>@string/bg_aa</item>
+        <item>@string/bg_porsche</item>
+
 
     </array>
 
@@ -705,6 +713,7 @@
         <item>background_incar_beetle</item>
         <item>background_incar_dots</item>
         <item>background_incar_aa</item>
+        <item>background_incar_porsche</item>
     </array>
 
 
@@ -730,6 +739,7 @@
         <item>@drawable/thumb_background_incar_beetle</item>
         <item>@drawable/thumb_background_incar_dots</item>
         <item>@drawable/thumb_background_incar_aa</item>
+        <item>@drawable/thumb_background_incar_porsche</item>
 
     </array>
 
