@@ -2,7 +2,6 @@ package com.mqbcoding.stats;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.animation.ObjectAnimator;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -32,7 +31,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Gauge;
@@ -75,7 +73,6 @@ public class DashboardFragment extends CarFragment {
     private Speedometer mClockLeft, mClockCenter, mClockRight;
     private Speedometer mClockMaxLeft, mClockMaxCenter, mClockMaxRight;
     private RaySpeedometer mRayLeft, mRayCenter, mRayRight;
-    private ImageView mSteeringWheelAngle;
     private String mElement1Query, mElement2Query, mElement3Query, mElement4Query;
     private String selectedTheme, selectedBackground;
     private String mClockLQuery, mClockCQuery, mClockRQuery;
@@ -90,17 +87,15 @@ public class DashboardFragment extends CarFragment {
     private TextView mValueElement1, mValueElement2, mValueElement3, mValueElement4, mTitleElement,
             mTitleElementRight, mTitleElementLeft, mTitleElementNavDistance, mTitleElementNavTime, mTitleNAVDestinationAddress;
     private TextView mTitleIcon1, mTitleIcon2, mTitleIcon3, mTitleIcon4, mTitleClockLeft, mTitleClockCenter, mTitleClockRight;
-    private TextView mTitleConsumptionLeft, mTitleConsumptionCenter, mTitleConsumptionRight;
     private ConstraintLayout mConstraintClockLeft, mConstraintClockRight, mConstraintClockCenter;
     private ConstraintLayout mConstraintGraphLeft, mConstraintGraphRight, mConstraintGraphCenter;
-    private ConstraintLayout mConstraintElementLeft, mConstraintElementRight, mConstraintElementCenter;
     private TextView  mTextMaxLeft,mTextMaxCenter,mTextMaxRight;
     //icons on the clocks
     private TextView mIconClockL, mIconClockC, mIconClockR;
     private Boolean pressureUnits, temperatureUnits, powerUnits;
     private Boolean stagingDone;
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn, proximityOn;
-    private Boolean Dashboard2_On,Dashboard3_On,Dashboard4_On,Dashboard5_On;
+    private Boolean Dashboard2_On,Dashboard3_On;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
     private Handler mHandler = new Handler();
     private ITorqueService torqueService;
@@ -115,8 +110,6 @@ public class DashboardFragment extends CarFragment {
     //value displayed on graphlayout
     private TextView mGraphValueLeft, mGraphValueCenter, mGraphValueRight;
     private View rootView;
-    private View mDashboard_gaudes, mDashboard_consumption;
-
     private String androidClockFormat = "hh:mm a";
     int dashboardNum=1;
     private String googleGeocodeLocationStr = null;
@@ -213,17 +206,13 @@ public class DashboardFragment extends CarFragment {
                 dashboardNum++;
                 if (dashboardNum==2 && !Dashboard2_On) dashboardNum++;
                 if (dashboardNum==3 && !Dashboard3_On) dashboardNum++;
-                if (dashboardNum==4 && !Dashboard4_On) dashboardNum++;
-                if (dashboardNum==5 && !Dashboard5_On) dashboardNum++;
                 Log.v(TAG,"Button Prev: "+dashboardNum);
-                if (dashboardNum > 4) dashboardNum = 1;
+                if (dashboardNum > 3) dashboardNum = 1;
                 onPreferencesChangeHandler();
             } else if (v == mBtnNext) {
                 dashboardNum--;
                 Log.v(TAG,"Button Next: "+dashboardNum);
-                if (dashboardNum < 1) dashboardNum = 4;
-                if (dashboardNum==5 && !Dashboard5_On) dashboardNum--;
-                if (dashboardNum==4 && !Dashboard4_On) dashboardNum--;
+                if (dashboardNum < 1) dashboardNum = 3;
                 if (dashboardNum==3 && !Dashboard3_On) dashboardNum--;
                 if (dashboardNum==2 && !Dashboard2_On) dashboardNum--;
                 onPreferencesChangeHandler();
@@ -336,9 +325,6 @@ public class DashboardFragment extends CarFragment {
 
     private void setupViews(View rootView) {
         //layouts/constrains:
-        mDashboard_gaudes = rootView.findViewById(R.id.include);
-        mDashboard_consumption = rootView.findViewById(R.id.include_consumption);
-
         mConstraintClockLeft = rootView.findViewById(R.id.constraintClockLeft);
         mConstraintClockCenter = rootView.findViewById(R.id.constraintClockCenter);
         mConstraintClockRight = rootView.findViewById(R.id.constraintClockRight);
@@ -346,14 +332,6 @@ public class DashboardFragment extends CarFragment {
         mConstraintGraphLeft = rootView.findViewById(R.id.constraintGraphLeft);
         mConstraintGraphCenter = rootView.findViewById(R.id.constraintGraphCenter);
         mConstraintGraphRight = rootView.findViewById(R.id.constraintGraphRight);
-
-        mConstraintElementLeft = rootView.findViewById(R.id.constraintElementLeft);
-        mConstraintElementCenter = rootView.findViewById(R.id.constraintElementCenter );
-        mConstraintElementRight = rootView.findViewById(R.id.constraintElementRight);
-
-        mConstraintElementLeft.setVisibility(View.INVISIBLE);
-        mConstraintElementCenter.setVisibility(View.INVISIBLE);
-        mConstraintElementRight.setVisibility(View.INVISIBLE);
 
         //clocks:
         mClockLeft = rootView.findViewById(R.id.dial_Left);
@@ -415,9 +393,6 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft = rootView.findViewById(R.id.textTitleLabel1);
         mTitleClockCenter = rootView.findViewById(R.id.textTitleLabel2);
         mTitleClockRight = rootView.findViewById(R.id.textTitleLabel3);
-        mTitleConsumptionLeft = rootView.findViewById(R.id.textTitleConsumptionLeft);
-        mTitleConsumptionCenter = rootView.findViewById(R.id.textTitleConsumptionCenter);
-        mTitleConsumptionRight = rootView.findViewById(R.id.textTitleConsumptionRight);
         mTitleElementNavDistance = rootView.findViewById(R.id.textTitleNavDistance);
         mTitleElementNavTime = rootView.findViewById(R.id.textTitleNavTime);
 
@@ -436,34 +411,10 @@ public class DashboardFragment extends CarFragment {
         mTextMaxCenter = rootView.findViewById(R.id.textMaxCenter);
         mTextMaxRight = rootView.findViewById(R.id.textMaxRight);
 
-        //the elements for new dashboard (consumption, service)
-        mValueLeftElement1 = rootView.findViewById(R.id.valueLeftElement1);
-        mValueLeftElement2 = rootView.findViewById(R.id.valueLeftElement2);
-        mValueLeftElement3 = rootView.findViewById(R.id.valueLeftElement3);
-        mValueLeftElement4 = rootView.findViewById(R.id.valueLeftElement4);
-        mValueLeftElement5 = rootView.findViewById(R.id.valueLeftElement5);
-        mValueLeftElement6 = rootView.findViewById(R.id.valueLeftElement6);
-
-        mValueCenterElement1 = rootView.findViewById(R.id.valueCenterElement1);
-        mValueCenterElement2 = rootView.findViewById(R.id.valueCenterElement2);
-        mValueCenterElement3 = rootView.findViewById(R.id.valueCenterElement3);
-        mValueCenterElement4 = rootView.findViewById(R.id.valueCenterElement4);
-        mValueCenterElement5 = rootView.findViewById(R.id.valueCenterElement5);
-        mValueCenterElement6 = rootView.findViewById(R.id.valueCenterElement6);
-
-        mValueRightElement1 = rootView.findViewById(R.id.valueRightElement1);
-        mValueRightElement2 = rootView.findViewById(R.id.valueRightElement2);
-        mValueRightElement3 = rootView.findViewById(R.id.valueRightElement3);
-        mValueRightElement4 = rootView.findViewById(R.id.valueRightElement4);
-        mValueRightElement5 = rootView.findViewById(R.id.valueRightElement5);
-        mValueRightElement6 = rootView.findViewById(R.id.valueRightElement6);
-
-        mSteeringWheelAngle = rootView.findViewById(R.id.wheel_angle_image);
         setupListeners();
     }
 
     private void setupListeners() {
-        //click the
         mGraphLeft.setOnClickListener(toggleView);
         mConstraintClockLeft.setOnClickListener(toggleView);
         mGraphCenter.setOnClickListener(toggleView);
@@ -534,9 +485,6 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft.setTypeface(typeface);
         mTitleClockCenter.setTypeface(typeface);
         mTitleClockRight.setTypeface(typeface);
-        mTitleConsumptionLeft.setTypeface(typeface);
-        mTitleConsumptionCenter.setTypeface(typeface);
-        mTitleConsumptionRight.setTypeface(typeface);
         mTitleElementNavDistance.setTypeface(typeface);
         mTitleElementNavTime.setTypeface(typeface);
         mtextTitleMain.setTypeface(typeface);
@@ -993,11 +941,8 @@ public class DashboardFragment extends CarFragment {
         turnMinMaxTextViewsEnabled(maxOn);
         turnMinMaxMarksEnabled(maxMarksOn);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        Dashboard2_On = sharedPreferences.getBoolean("d2_active", false);  //Enabled dasboard2.
-        Dashboard3_On = sharedPreferences.getBoolean("d3_active", false);  //Enabled dasboard3
-        Dashboard4_On = sharedPreferences.getBoolean("d4_active", false);  //Enabled dasboard4
-        //Dashboard5_On = sharedPreferences.getBoolean("d5_active", false);  //Enabled dasboard5
-        Dashboard5_On = false;
+        Dashboard2_On = sharedPreferences.getBoolean("d2_active", false);  //Enabled dashboard2.
+        Dashboard3_On = sharedPreferences.getBoolean("d3_active", false);  //Enabled dashboard3
     }
 
     private final GeocodeLocationService.IGeocodeResult geocodeResultListener = new GeocodeLocationService.IGeocodeResult() {
@@ -1124,7 +1069,6 @@ public class DashboardFragment extends CarFragment {
         mClockLeft = null;
         mClockCenter = null;
         mClockRight = null;
-        mSteeringWheelAngle = null;
         mValueElement1 = null;
         mValueElement2 = null;
         mValueElement3 = null;
@@ -1136,9 +1080,6 @@ public class DashboardFragment extends CarFragment {
         mTitleClockLeft = null;
         mTitleClockCenter = null;
         mTitleClockRight = null;
-        mTitleConsumptionLeft = null;
-        mTitleConsumptionCenter = null;
-        mTitleConsumptionRight = null;
         mTitleElementNavDistance = null;
         mTitleElementNavTime = null;
         mTitleIcon1 = null;
@@ -1180,9 +1121,7 @@ public class DashboardFragment extends CarFragment {
         mConstraintGraphLeft = null;
         mConstraintGraphRight = null;
         mConstraintGraphCenter = null;
-        mConstraintElementLeft = null;
-        mConstraintElementRight = null;
-        mConstraintElementCenter = null;
+
         mGraphValueLeft = null;
         mGraphValueCenter = null;
         mGraphValueRight = null;
@@ -1315,12 +1254,8 @@ public class DashboardFragment extends CarFragment {
         // Update Title - always!!!
         updateTitle();
 
-        // Visiblle layout_dashboard_gauges or layouu_dashboard_consumption
         if (dashboardNum < 4) {
             // settings
-            mConstraintElementLeft.setVisibility(View.INVISIBLE);
-            mConstraintElementCenter.setVisibility(View.INVISIBLE);
-            mConstraintElementRight.setVisibility(View.INVISIBLE);
             mConstraintClockLeft.setVisibility(View.VISIBLE);
             mConstraintClockCenter.setVisibility(View.VISIBLE);
             mConstraintClockRight.setVisibility(View.VISIBLE);
@@ -1381,22 +1316,12 @@ public class DashboardFragment extends CarFragment {
             }
         }
         } else {
-            mConstraintElementLeft.setVisibility(View.VISIBLE);
-            mConstraintElementCenter.setVisibility(View.VISIBLE);
-            mConstraintElementRight.setVisibility(View.VISIBLE);
             mConstraintClockLeft.setVisibility(View.INVISIBLE);
             mConstraintClockCenter.setVisibility(View.INVISIBLE);
             mConstraintClockRight.setVisibility(View.INVISIBLE);
 
             UpdateLayoutElements();
         }
-
-        // wheel angle monitor
-        Float currentWheelAngle = (Float) mLastMeasurements.get("wheelAngle");
-        mSteeringWheelAngle.setRotation(currentWheelAngle == null ? 0.0f :
-                Math.min(Math.max(-WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG, -currentWheelAngle),
-                        WheelStateMonitor.WHEEL_CENTER_THRESHOLD_DEG));
-        mSteeringWheelAngle.setVisibility(View.INVISIBLE);
 
     }
 
@@ -1706,6 +1631,7 @@ public class DashboardFragment extends CarFragment {
         graph.addSeries(serie);
 
         graph.setTitle(clock.getUnit());
+        graph.setTitleColor(Color.parseColor("#AAFFFFFF"));
 
         constraint.setBackgroundResource(blankBackgroundResource); // put blank background
         serie.setAnimated(true);
@@ -1724,6 +1650,8 @@ public class DashboardFragment extends CarFragment {
         gridLabelRenderer.setHighlightZeroLines(false);
         gridLabelRenderer.setGridColor(Color.parseColor("#22FFFFFF"));
         gridLabelRenderer.setVerticalLabelsColor(Color.parseColor("#22FFFFFF"));
+
+
 
         gridLabelRenderer.setHorizontalLabelsVisible(false);
         gridLabelRenderer.setGridStyle(GridLabelRenderer.GridStyle.HORIZONTAL);
@@ -2381,12 +2309,6 @@ public class DashboardFragment extends CarFragment {
 
         //mProximity = true;
         if (mProximity != null && mProximity && proximityOn) {
-            ObjectAnimator animation;
-            if (dashboardNum<4) animation = ObjectAnimator.ofFloat(mDashboard_gaudes, "y", 90);
-                else animation = ObjectAnimator.ofFloat(mDashboard_consumption, "y", 90);
-
-            animation.setDuration(200);
-            animation.start();
             mTitleClockLeft.setText(mLabelClockL);
             mTitleClockCenter.setText(mLabelClockC);
             mTitleClockRight.setText(mLabelClockR);
@@ -2394,17 +2316,10 @@ public class DashboardFragment extends CarFragment {
             mBtnPrev.setVisibility(View.VISIBLE);
             mtextTitleMain.setVisibility(View.VISIBLE);
             // mtextTitleMain.setTextColor(Color.WHITE);
-            mTitleConsumptionRight.setVisibility(View.VISIBLE);
-            mTitleConsumptionLeft.setVisibility(View.VISIBLE);
-            mTitleConsumptionCenter.setVisibility(View.VISIBLE);
+
 
 
         } else if (!proximityOn) {
-            ObjectAnimator animation;
-            if (dashboardNum<4) animation = ObjectAnimator.ofFloat(mDashboard_gaudes, "y", 90);
-                else animation = ObjectAnimator.ofFloat(mDashboard_consumption, "y", 90);
-            animation.setDuration(200);
-            animation.start();
             mTitleClockLeft.setText("");
             mTitleClockCenter.setText("");
             mTitleClockRight.setText("");
@@ -2412,9 +2327,7 @@ public class DashboardFragment extends CarFragment {
             mBtnPrev.setVisibility(View.VISIBLE);
             mtextTitleMain.setVisibility(View.VISIBLE);
             //mtextTitleMain.setTextColor(Color.WHITE);
-            mTitleConsumptionRight.setVisibility(View.INVISIBLE);
-            mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
-            mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
+
 
         } else {
             mTitleClockLeft.setText("");
@@ -2423,15 +2336,6 @@ public class DashboardFragment extends CarFragment {
             mBtnNext.setVisibility(View.INVISIBLE);
             mBtnPrev.setVisibility(View.INVISIBLE);
             mtextTitleMain.setVisibility(View.INVISIBLE);
-            //mtextTitleMain.setTextColor(Color.DKGRAY);
-            mTitleConsumptionRight.setVisibility(View.INVISIBLE);
-            mTitleConsumptionLeft.setVisibility(View.INVISIBLE);
-            mTitleConsumptionCenter.setVisibility(View.INVISIBLE);
-            ObjectAnimator animation;
-            if (dashboardNum<4) animation = ObjectAnimator.ofFloat(mDashboard_gaudes, "y", 45);
-                else animation = ObjectAnimator.ofFloat(mDashboard_consumption, "y", 45);
-            animation.setDuration(200);
-            animation.start();
         }
 
         String currentTime = getTime();

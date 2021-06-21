@@ -353,20 +353,6 @@
 
     </android.support.constraint.ConstraintLayout>
 
-    <ImageView
-        android:id="@+id/wheel_angle_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/ic_steering"
-        android:tint="@color/car_primary"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintClockCenter"
-        app:layout_constraintLeft_toLeftOf="@+id/constraintClockCenter"
-        app:layout_constraintRight_toRightOf="@+id/constraintClockCenter"
-        app:layout_constraintTop_toTopOf="@+id/constraintClockRight"
-        tools:ignore="ContentDescription"
-        tools:visibility="gone" />
-
     <android.support.constraint.ConstraintLayout
         android:id="@+id/constraintGraphCenter"
         android:layout_width="275dp"

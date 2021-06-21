@@ -160,12 +160,12 @@
     <string name="unit_nm">Nm</string>
     <string name="unit_psi">psi</string>
     <string name="unit_rpm">RPM</string>
-    <string name="unit_rpm1000">×1000</string>
+    <string name="unit_rpm1000" translatable="false">×1000</string>
     <string name="unit_volt">V</string>
     <string name="unit_fahrenheit">Fahrenheit</string>
     <string name="unit_celcius">Celcius</string>
-    <string name="unit_f">°F</string>
-    <string name="unit_c">°C</string>
+    <string name="unit_f" translatable="false">°F</string>
+    <string name="unit_c" translatable="false">°C</string>
     <string name="unit_hp">HP</string>
 
     <string name="unknown">unknown</string>
@@ -221,7 +221,6 @@
     <string name="label_ftlt1">FTlt1</string>
     <string name="element_torque_phonebatterylevel">Phone battery level</string>
     <string name="element_torque_phonebarometer">Phone barometer</string>
-    <string name="element_torque_obdadaptervoltage">OBD voltage</string>
     <string name="element_torque_AFRc">AFR(commanded)</string>
     <string name="label_afrc">AFR(c)</string>
     <string name="pref_temperatureunit">Temperature unit</string>
@@ -317,16 +316,16 @@
     <string name="pref_proximity_off">No proximity features</string>
     <string name="pref_proximity_on">Titles and dashboard selection buttons show on proximity</string>
     <string name="pref_proximity">Proximity features</string>
-    <string name="pref_enable_4nd_dash">Enable dashboard conspumtion</string>
-    <string name="pref_enable_5nd_dash">Enable dashboard service</string>
-    <string name="pref_enable_3nd_dash">Enable 3 dashboard</string>
+    <string name="pref_enable_4nd_dash">Enable consumption dashboard</string>
+    <string name="pref_enable_5nd_dash">Enable service dashboard</string>
+    <string name="pref_enable_3nd_dash">Enable dashboard 3</string>
     <string name="dash4_titleRight">Actual data</string>
     <string name="dash4_elementRight1">Fuel in tank:</string>
     <string name="dash4_elementRight2">Driving distance:</string>
     <string name="dash4_elementRight3"></string>
     <string name="dash4_elementRight4"></string>
     <string name="dash4_elementRight5">Current consumption:</string>
-    <string name="dash4_titleLeft">Consumption since start</string>
+    <string name="dash4_titleLeft">Consumption since start:</string>
     <string name="dash4_elementLeft1">Distance:</string>
     <string name="dash4_elementLeft2">Avg speed:</string>
     <string name="dash4_elementLeft3">Traveling time:</string>
@@ -340,4 +339,5 @@
     <string name="dash4_elementCenter5">Avg consumption:</string>
     <string name="locationSource_googlemaps">Google Maps</string>
     <string name="locationSource_geocoding">Geocoding</string>
+    <string name="element_torque_obdadaptervoltage">Voltage (OBD)</string>
 </resources>

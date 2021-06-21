@@ -132,7 +132,6 @@
     <string name="reupload_last_nothing_to_do">Nic k odeslání.</string>
     <string name="cancel_uploads_done">Ukončení odesílání.</string>
     <string name="pref_cancel_uploads_title">Ukončení všech odeslání.</string>
-    <string name="unit_rpm1000">x1000</string>
     <string name="label_tyreFR">PP</string>
     <string name="label_tyreFL">LP</string>
     <string name="label_tyreRR">PZ</string>
@@ -141,8 +140,6 @@
     <string name="element_shortTermConsumptionSecondary">Spotřeba od startu (sekundární palivo)</string>
     <string name="unit_fahrenheit">Fahrenheita</string>
     <string name="unit_celcius">Celsia</string>
-    <string name="unit_f">°F</string>
-    <string name="unit_c">°C</string>
     <string name="label_fuel">Palivo</string>
     <string name="pref_temperatureunit">Jednotka teploty</string>
     <string name="pref_title">Stavový řádek</string>
