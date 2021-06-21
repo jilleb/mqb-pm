@@ -605,19 +605,16 @@ public class DashboardFragment extends CarFragment {
         if (!readedClockLQuery.equals(mClockLQuery)) {
             mClockLQuery = readedClockLQuery;
             setupClocks(mClockLQuery, mClockLeft, mIconClockL, mRayLeft, mClockMaxLeft);
-            turnTickEnabled(ticksOn); // Due to bug in SpeedView, we need to re-enable ticks
         }
         String readedClockCQuery = sharedPreferences.getString("selectedClockCenter"+dashboardId, "exlap-oilTemperature");
         if (!readedClockCQuery.equals(mClockCQuery)) {
             mClockCQuery = readedClockCQuery;
             setupClocks(mClockCQuery, mClockCenter, mIconClockC, mRayCenter, mClockMaxCenter);
-            turnTickEnabled(ticksOn); // Due to bug in SpeedView, we need to re-enable ticks
         }
         String readedClockRQuery = sharedPreferences.getString("selectedClockRight"+dashboardId, "exlap-engineSpeed");
         if (!readedClockRQuery.equals(mClockRQuery)) {
             mClockRQuery = readedClockRQuery;
             setupClocks(mClockRQuery, mClockRight, mIconClockR, mRayRight,mClockMaxRight);
-            turnTickEnabled(ticksOn); // Due to bug in SpeedView, we need to re-enable ticks
         }
         //debug logging of each of the chosen elements
         Log.d(TAG, "element 1 selected:" + mElement1Query);
@@ -715,12 +712,15 @@ public class DashboardFragment extends CarFragment {
 
     private void turnTickEnabled(boolean enabled) {
         int tickNum = 9;
+        int tickColor = Color.TRANSPARENT;
+        if (enabled) tickColor = Color.WHITE;
         mClockLeft.setTickNumber(enabled ? tickNum : 0);
-        mClockLeft.setTextColor(Color.WHITE);
+        mClockLeft.setTextColor(tickColor);
         mClockCenter.setTickNumber(enabled ? tickNum : 0);
-        mClockCenter.setTextColor(Color.WHITE);
+        mClockCenter.setTextColor(tickColor);
         mClockRight.setTickNumber(enabled ? tickNum : 0);
-        mClockRight.setTextColor(Color.WHITE);
+        mClockRight.setTextColor(tickColor);
+        mClockLeft.setTextColor(tickColor);
     }
 
     private void setupIndicators() {
