@@ -225,11 +225,12 @@ public class SettingsFragment extends PreferenceFragment {
         bindPreferenceSummaryToValue(findPreference("performanceTitle1"));
         bindPreferenceSummaryToValue(findPreference("performanceTitle2"));
         bindPreferenceSummaryToValue(findPreference("performanceTitle3"));
+        /*
         bindPreferenceSummaryToValue(findPreference("engineSpeedSoundUpToGear"));
         bindPreferenceSummaryToValue(findPreference("engineSpeedESInform"));
         bindPreferenceSummaryToValue(findPreference("engineSpeedESHint"));
         bindPreferenceSummaryToValue(findPreference("engineSpeedESWarn"));
-
+        */
         Preference statsLoggerPref = findPreference(CarStatsLogger.PREF_ENABLED);
         try {
             statsLoggerPref.setSummary(
