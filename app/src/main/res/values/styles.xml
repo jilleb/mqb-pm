@@ -371,7 +371,7 @@
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_sport</item>
         <item name="themedNeedle">@drawable/needle_sport_red</item>
         <item name="sv_markWidth">20dp</item>
-        <item name="themedStopWatchBackground">@drawable/sw_background_sport</item>
+        <item name="themedStopWatchBackground">@drawable/dial_background_blank_sport</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_withIndicatorLight">false</item>
         <item name="sv_indicatorLightColor">#000066ff</item>

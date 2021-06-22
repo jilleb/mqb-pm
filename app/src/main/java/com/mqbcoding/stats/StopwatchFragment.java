@@ -19,7 +19,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.github.anastr.speedviewlib.Speedometer;
-import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
+import com.github.anastr.speedviewlib.components.indicators.ImageIndicator;
 import com.google.android.apps.auto.sdk.StatusBarController;
 
 import java.util.ArrayList;

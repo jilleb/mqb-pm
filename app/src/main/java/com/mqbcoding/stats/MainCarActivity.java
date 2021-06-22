@@ -1,21 +1,18 @@
 package com.mqbcoding.stats;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.util.Log;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.appcompat.app.ActionBar;
+
 import android.view.View;
 
 import com.google.android.apps.auto.sdk.CarActivity;
-import com.google.android.apps.auto.sdk.CarUiController;
-import com.google.android.apps.auto.sdk.DayNightStyle;
 import com.google.android.apps.auto.sdk.MenuController;
 import com.google.android.apps.auto.sdk.MenuItem;
 import com.google.android.apps.auto.sdk.StatusBarController;
@@ -24,7 +21,6 @@ import static android.view.View.SYSTEM_UI_FLAG_FULLSCREEN;
 import static android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE;
 import static android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-import static android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
 
 public class MainCarActivity extends CarActivity {
     private static final String TAG = "MainCarActivity";

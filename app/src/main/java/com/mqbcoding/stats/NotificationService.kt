@@ -6,7 +6,7 @@ import android.service.notification.StatusBarNotification
 import android.graphics.Bitmap
 import android.os.Build
 import android.service.notification.NotificationListenerService
-import android.support.v4.content.LocalBroadcastManager
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import android.text.SpannableString
 
 
@@ -50,7 +50,7 @@ class NotificationService : NotificationListenerService() {
                 msgrcv.putExtra("text", text)
                 //msgrcv.putExtra("icon", icon)
 
-                LocalBroadcastManager.getInstance(this).sendBroadcast(msgrcv)
+                androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this).sendBroadcast(msgrcv)
 
             }
         }catch (e: Exception) {
@@ -63,7 +63,7 @@ class NotificationService : NotificationListenerService() {
         try {
             if (sbn.packageName == "com.google.android.apps.maps" && sbn.notification?.group == "navigation_status_notification_group") {
 
-                LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("GoogleNavigationClosed"))
+                androidx.localbroadcastmanager.content.LocalBroadcastManager.getInstance(this).sendBroadcast(Intent("GoogleNavigationClosed"))
 
             }
         } catch (e:Exception) {

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Preference
+        android:key="screen_preference"
+        android:summary="Shows another screen of preferences"
+        android:title="Screen preference"
+        android:fragment="com.mqbcoding.stats.SettingsFragment"/>
+
+</PreferenceScreen>
