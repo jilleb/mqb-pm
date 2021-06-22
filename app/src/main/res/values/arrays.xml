@@ -22,6 +22,7 @@
         <item>Dark</item>
         <item>Mustang GT</item>
         <item>BMW</item>
+        <item>Sport</item>
         <item>Test</item>
     </string-array>
 
@@ -46,6 +47,7 @@
         <item>@drawable/ic_theme_dark</item>
         <item>@drawable/ic_theme_ford</item>
         <item>@drawable/ic_theme_bmw</item>
+        <item>@drawable/ic_theme_sport</item>
         <item>@drawable/ic_theme_test</item>
     </array>
 

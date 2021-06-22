@@ -364,6 +364,28 @@
 
     </style>
 
+    <style name="AppTheme.Sport" parent="AppTheme">
+        <item name="themedCarBackground">@drawable/background_incar_black</item>
+        <item name="themedDialBackground">@drawable/dial_background_sport</item>
+        <item name="themedEmptyDialBackground">@drawable/dial_background_empty_sport</item>
+        <item name="themedBlankDialBackground">@drawable/dial_background_blank_sport</item>
+        <item name="themedNeedle">@drawable/needle_sport_red</item>
+        <item name="sv_markWidth">20dp</item>
+        <item name="themedStopWatchBackground">@drawable/sw_background_sport</item>
+        <item name="themedNeedleColor">@color/red</item>
+        <item name="sv_withIndicatorLight">false</item>
+        <item name="sv_indicatorLightColor">#000066ff</item>
+        <item name="sv_indicator">HalfLineIndicator</item>
+        <item name="sv_indicatorWidth">2dp</item>
+        <item name="sv_markColor">@color/primary_dark</item>
+        <item name="sv_tickPadding">12dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_indicatorColor">@color/aqua</item>
+        <item name="sv_textColor">@color/primary_dark</item>
+
+    </style>
+
+
 
     <style name="AppTheme.Ford" parent="AppTheme">
         <item name="themedCarBackground">@drawable/background_incar_black</item>

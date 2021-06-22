@@ -289,6 +289,9 @@ public class MainCarActivity extends CarActivity {
             case "BMW":
                 setTheme(R.style.AppTheme_BMW);
                 break;
+            case "Sport":
+                setTheme(R.style.AppTheme_Sport);
+                break;
 
             default:
                 // set default theme:

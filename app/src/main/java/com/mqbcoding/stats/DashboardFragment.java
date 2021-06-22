@@ -692,7 +692,14 @@ public class DashboardFragment extends CarFragment {
     private void turnTickEnabled(boolean enabled) {
         int tickNum = 9;
         int tickColor = Color.TRANSPARENT;
-        if (enabled) tickColor = Color.WHITE;
+        if (enabled) {
+            if (selectedTheme.contains("Sport"))
+                tickColor = Color.BLACK;
+            else
+                tickColor = Color.WHITE;
+        }
+        Log.i(TAG, "tickColor: " + tickColor + " selectedTheme: " + selectedTheme);
+
         mClockLeft.setTickNumber(enabled ? tickNum : 0);
         mClockLeft.setTextColor(tickColor);
         mClockCenter.setTickNumber(enabled ? tickNum : 0);
@@ -942,7 +949,7 @@ public class DashboardFragment extends CarFragment {
         //        sb.append("("+tmp+")");
             tmp = result.getUrl();  //URL -> Altitude
             if (tmp != null)
-            sb.append("("+tmp+")");
+            sb.append("(").append(tmp).append(")");
 
             googleGeocodeLocationStr = sb.toString();
         }
@@ -1152,17 +1159,17 @@ public class DashboardFragment extends CarFragment {
             mValueElement.setText("");
         } else {
             mGetMeasurement = (Float) mLastMeasurements.get(mMeasurements);
-            if (mGetMeasurement == null) mGetMeasurement = Float.valueOf(0);
-            if (mMeasurements=="tankLevelPrimary") mGetMeasurement = mGetMeasurement * fueltanksize;
-            if (mMeasurements=="driving distance") {
+            if (mGetMeasurement == null) mGetMeasurement = (float) 0;
+            if (mMeasurements.equals("tankLevelPrimary")) mGetMeasurement = mGetMeasurement * fueltanksize;
+            if (mMeasurements.equals("driving distance")) {
                 mGetMeasurement = (Float) mLastMeasurements.get("tankLevelPrimary");
-                if (mGetMeasurement==null) mGetMeasurement= Float.valueOf(0);
+                if (mGetMeasurement==null) mGetMeasurement= (float) 0;
                 mGetMeasurement = mGetMeasurement * fueltanksize;
                 Float mShortCons = (Float) mLastMeasurements.get("shortTermConsumptionPrimary");
                 Float mLongCons = (Float) mLastMeasurements.get("LongTermConsumptionPrimary");
                 if (mShortCons==null || mShortCons==0){
                     if (mLongCons==null || mLongCons==0){
-                        mGetMeasurement = Float.valueOf(0);
+                        mGetMeasurement = (float) 0;
                     } else {
                         mGetMeasurement = (mGetMeasurement/mLongCons) * 100 ;
                     }
@@ -1180,13 +1187,13 @@ public class DashboardFragment extends CarFragment {
                 }
             }
 
-            if (mFormat == "FORMAT_SHORTTIME") {
+            if (mFormat.equals("FORMAT_SHORTTIME")) {
                 mValueElement.setText(ConvertMinutesTime(mGetMeasurement.intValue()) + " " + mGetUnit);
             } else {
                 mValueElement.setText(String.format(mFormat, mGetMeasurement) + " " + mGetUnit);
             }
         }
-    };
+    }
 
     private static String ConvertMinutesTime(int minutesTime) {
         TimeZone timeZone = TimeZone.getTimeZone("UTC");
@@ -1221,7 +1228,7 @@ public class DashboardFragment extends CarFragment {
         SetLayoutElements(mValueRightElement5,"","","",FORMAT_DECIMALS );
         SetLayoutElements(mValueRightElement6,"currentConsumptionPrimary","currentConsumptionPrimary.unit","l/100km",FORMAT_DECIMALS );
 
-    };
+    }
 
 
     private void doUpdate() {
@@ -1238,7 +1245,7 @@ public class DashboardFragment extends CarFragment {
         // Update Title - always!!!
         updateTitle();
 
-        if (dashboardNum < 4) {
+        if (dashboardNum < 3) {
             // settings
             mConstraintClockLeft.setVisibility(View.VISIBLE);
             mConstraintClockCenter.setVisibility(View.VISIBLE);
@@ -1610,12 +1617,23 @@ public class DashboardFragment extends CarFragment {
 
         TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedBlankDialBackground});
         int blankBackgroundResource = typedArray.getResourceId(0, 0);
+        int graphColor1 = 0;
+        int graphColor2 = 0;
         typedArray.recycle();
+
+            if (selectedTheme.contains("Sport")){
+                graphColor1 = Color.BLACK;
+                graphColor2 = Color.GRAY;}
+
+            else {
+                graphColor1 = Color.parseColor("#AAFFFFFF");
+                graphColor2 = Color.parseColor("#22FFFFFF");
+            }
 
         graph.addSeries(serie);
 
         graph.setTitle(clock.getUnit());
-        graph.setTitleColor(Color.parseColor("#AAFFFFFF"));
+        graph.setTitleColor(graphColor1);
 
         constraint.setBackgroundResource(blankBackgroundResource); // put blank background
         serie.setAnimated(true);
@@ -1632,8 +1650,8 @@ public class DashboardFragment extends CarFragment {
         graphViewport.setScrollable(false);
         gridLabelRenderer.setVerticalLabelsVisible(true);
         gridLabelRenderer.setHighlightZeroLines(false);
-        gridLabelRenderer.setGridColor(Color.parseColor("#22FFFFFF"));
-        gridLabelRenderer.setVerticalLabelsColor(Color.parseColor("#22FFFFFF"));
+        gridLabelRenderer.setGridColor(graphColor2);
+        gridLabelRenderer.setVerticalLabelsColor(graphColor2);
 
 
 
@@ -1642,9 +1660,9 @@ public class DashboardFragment extends CarFragment {
 
         graphViewport.setBackgroundColor(Color.argb(0, 255, 0, 0));
         serie.setDrawDataPoints(false);
-        serie.setThickness(3);
+        serie.setThickness(2);
 
-        serie.setColor(Color.argb(80, 255, 255, 255));
+        serie.setColor(graphColor1);
     }
 
     private void setupClocks(String queryClock, Speedometer clock, TextView icon, RaySpeedometer ray,  Speedometer max) {
@@ -1698,7 +1716,6 @@ public class DashboardFragment extends CarFragment {
                 Log.e(TAG, "Error: " + e.getMessage());
             }
         } else {
-            torqueMin = 0;
             torqueMax = 100;
         }
 
@@ -2044,6 +2061,10 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-coolantTemperature":
                     case "exlap-outsideTemperature":
                     case "exlap-gearboxOilTemperature":
+                    case "exlap-tyreTemperatures.temperatureRearRight":
+                    case "exlap-tyreTemperatures.temperatureRearLeft":
+                    case "exlap-tyreTemperatures.temperatureFrontRight":
+                    case "exlap-tyreTemperatures.temperatureFrontLeft":
                         clock.setUnit(temperatureUnitExlap);
                         break;
                     // pressures
@@ -2116,14 +2137,6 @@ public class DashboardFragment extends CarFragment {
                         clock.setUnit(pressureUnit);
                         clockValue = (clockValue / 10) * pressureFactor;
                         clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
-                        break;
-
-
-                    case "exlap-tyreTemperatures.temperatureRearRight":
-                    case "exlap-tyreTemperatures.temperatureRearLeft":
-                    case "exlap-tyreTemperatures.temperatureFrontRight":
-                    case "exlap-tyreTemperatures.temperatureFrontLeft":
-                        clock.setUnit(temperatureUnitExlap);
                         break;
                     // torque data elements:
                     case "torque-speed_0x0d":
@@ -2365,7 +2378,7 @@ public class DashboardFragment extends CarFragment {
                 mTitleElementLeft.setText(leftTitle);
             }
 
-            if (leftTitle == "") {
+            if (leftTitle.equals("")) {
                     mTitleIcon2.setVisibility(View.INVISIBLE);
                 } else {
                     mTitleIcon2.setVisibility(View.VISIBLE);
@@ -2400,7 +2413,7 @@ public class DashboardFragment extends CarFragment {
                 String NavDistance = String.format(Locale.US, "%.1f km", currentNavDistance);
                 mTitleIcon3.setVisibility(View.VISIBLE);
                 mTitleElementNavDistance.setVisibility(View.VISIBLE);
-                if (NavDistance != currentNavDistanceTitleValue) {
+                if (!NavDistance.equals(currentNavDistanceTitleValue)) {
                     mTitleElementNavDistance.setText(NavDistance);
                 }
             } else if (currentNavDistance == 0) {
@@ -2435,7 +2448,7 @@ public class DashboardFragment extends CarFragment {
 
                 mTitleIcon4.setVisibility(View.VISIBLE);
                 mTitleElementNavTime.setVisibility(View.VISIBLE);
-                if (NAVTime != currentNavTimeTitleValue) {
+                if (!NAVTime.equals(currentNavTimeTitleValue)) {
                     mTitleElementNavTime.setText(NAVTime);
                 }
             } else if (currentNavTime == 0) {
@@ -2855,7 +2868,7 @@ public class DashboardFragment extends CarFragment {
         clock.setUnit(unit);
         clock.setMinMaxSpeed(minspeed, maxspeed);
 
-        if (tickFormat == "float") {
+        if (tickFormat.equals("float")) {
             clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
 
         } else {
