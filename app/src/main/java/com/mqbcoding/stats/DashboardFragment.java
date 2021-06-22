@@ -17,15 +17,11 @@ import android.graphics.PorterDuff;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Build;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
-import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,11 +30,16 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
 import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
-import com.github.anastr.speedviewlib.components.indicators.ImageIndicator;
-import com.github.anastr.speedviewlib.components.indicators.Indicator;
+import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
+import com.github.anastr.speedviewlib.components.Indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.github.martoreto.aauto.vex.FieldSchema;
 import com.google.android.apps.auto.sdk.StatusBarController;
@@ -97,7 +98,7 @@ public class DashboardFragment extends CarFragment {
     private Boolean raysOn, maxOn, maxMarksOn, ticksOn, ambientOn, accurateOn, proximityOn;
     private Boolean Dashboard2_On,Dashboard3_On;
     private Map<String, Object> mLastMeasurements = new HashMap<>();
-    private Handler mHandler = new Handler();
+    private final Handler mHandler = new Handler();
     private ITorqueService torqueService;
     private boolean torqueBind = false;
     private GraphView mGraphLeft, mGraphCenter, mGraphRight;
@@ -181,16 +182,16 @@ public class DashboardFragment extends CarFragment {
         }
     };
 
-    private View.OnClickListener toggleView = new View.OnClickListener() {
+    private final View.OnClickListener toggleView = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            if (v==mConstraintClockLeft){
+            if (v == mConstraintClockLeft) {
                 fadeOutfadeIn(v, mConstraintGraphLeft);
                 mTextMaxLeft.setVisibility(View.INVISIBLE);
-            } else if (v==mConstraintClockCenter) {
+            } else if (v == mConstraintClockCenter) {
                 fadeOutfadeIn(v, mConstraintGraphCenter);
                 mTextMaxCenter.setVisibility(View.INVISIBLE);
-            } else if (v==mConstraintClockRight) {
+            } else if (v == mConstraintClockRight) {
                 fadeOutfadeIn(v, mConstraintGraphRight);
                 mTextMaxRight.setVisibility(View.INVISIBLE);
             } else if (v == mGraphLeft) {
@@ -538,7 +539,6 @@ public class DashboardFragment extends CarFragment {
         String readedTheme = sharedPreferences.getString("selectedTheme", "");
         if (!readedTheme.equals(selectedTheme)) {
             selectedTheme = readedTheme;
-            turnRaysEnabled(raysOn);
         }
         boolean readedTicksOn = sharedPreferences.getBoolean("ticksActive", false); // if true, it will display the value of each of the ticks
         if(ticksOn == null || readedTicksOn != ticksOn) {
@@ -655,7 +655,7 @@ public class DashboardFragment extends CarFragment {
         selectedBackground = newBackground;
     }
 
-    private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+    private final SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             onPreferencesChangeHandler();
@@ -880,14 +880,14 @@ public class DashboardFragment extends CarFragment {
         }
     }
 
-    private BroadcastReceiver onNoticeGoogleNavigationUpdate = new BroadcastReceiver() {
+    private final BroadcastReceiver onNoticeGoogleNavigationUpdate = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             //String text = intent.getStringExtra("text"); // Not used right now
             googleMapsLocationStr = intent.getStringExtra("title");
         }
     };
-    private BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
+    private final BroadcastReceiver onNoticeGoogleNavigationClosed = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             googleMapsLocationStr = null;

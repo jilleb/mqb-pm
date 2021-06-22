@@ -5,12 +5,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.view.View;
+
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.appcompat.app.ActionBar;
-
-import android.view.View;
 
 import com.google.android.apps.auto.sdk.CarActivity;
 import com.google.android.apps.auto.sdk.MenuController;
@@ -77,8 +76,8 @@ public class MainCarActivity extends CarActivity {
             updateStatusBarTitle();
         }
     };
-    private Handler mHandler = new Handler();
-    private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+    private final Handler mHandler = new Handler();
+    private final SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             preferenceChangeHandler();
@@ -219,7 +218,7 @@ public class MainCarActivity extends CarActivity {
         switchToFragment(mCurrentFragmentTag);
     }
 
-    private void setLocalTheme(String theme) {
+    public void setLocalTheme(String theme) {
 
         switch (theme) {
             case "VW GTI":

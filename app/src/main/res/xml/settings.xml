@@ -14,8 +14,8 @@
             android:key="selectedTheme"
             android:summary="%s"
             android:title="@string/pref_theme"
-            
             app:entryImages="@array/ThemesThumbs"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:entries="@array/fontEntries"
@@ -24,6 +24,7 @@
             android:summary="%s"
             android:title="@string/pref_font"
             app:entryImages="@array/FontThumbs"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:entries="@array/fontEntries"
@@ -32,6 +33,7 @@
             android:summary="%s"
             android:title="@string/pref_font_titles"
             app:entryImages="@array/FontThumbs"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:entries="@array/backgroundstrings"
@@ -40,6 +42,7 @@
             android:summary="%s"
             android:title="@string/pref_background"
             app:entryImages="@array/thumbs_backgrounds"
+            app:roundedImage="false"
              />
         <CheckBoxPreference
             android:defaultValue="false"
@@ -121,8 +124,9 @@
             android:key="selectedClockLeft1"
             android:summary="%s"
             android:title="@string/pref_leftclock"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
@@ -134,8 +138,9 @@
             android:key="selectedClockCenter1"
             android:summary="%s"
             android:title="@string/pref_centerclock"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
 
@@ -148,8 +153,9 @@
             android:key="selectedClockRight1"
             android:summary="%s"
             android:title="@string/pref_rightclock"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
@@ -160,9 +166,11 @@
             android:key="selectedView1_1"
             android:summary="%s"
             android:title="@string/pref_view1"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
+
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -173,8 +181,9 @@
             android:key="selectedView2_1"
             android:summary="%s"
             android:title="@string/pref_view2"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -186,8 +195,9 @@
             android:key="selectedView3_1"
             android:summary="%s"
             android:title="@string/pref_view3"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -199,8 +209,9 @@
             android:key="selectedView4_1"
             android:summary="%s"
             android:title="@string/pref_view4"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
     </PreferenceCategory>
 
@@ -232,8 +243,9 @@
             android:summary="%s"
             android:title="@string/pref_leftclock"
             android:dependency="d2_active"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
@@ -246,8 +258,9 @@
             android:summary="%s"
             android:title="@string/pref_centerclock"
             android:dependency="d2_active"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
 
@@ -261,8 +274,9 @@
             android:summary="%s"
             android:title="@string/pref_rightclock"
             android:dependency="d2_active"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:defaultValue="1"
@@ -273,8 +287,9 @@
             android:summary="%s"
             android:title="@string/pref_view1"
             android:dependency="d2_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -287,8 +302,9 @@
             android:summary="%s"
             android:title="@string/pref_view2"
             android:dependency="d2_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -301,8 +317,9 @@
             android:summary="%s"
             android:title="@string/pref_view3"
             android:dependency="d2_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -315,8 +332,9 @@
             android:summary="%s"
             android:title="@string/pref_view4"
             android:dependency="d2_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
     </PreferenceCategory>
 
@@ -348,8 +366,9 @@
             android:summary="%s"
             android:dependency="d3_active"
             android:title="@string/pref_leftclock"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
@@ -362,8 +381,9 @@
             android:summary="%s"
             android:title="@string/pref_centerclock"
             android:dependency="d3_active"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
 
@@ -377,8 +397,9 @@
             android:summary="%s"
             android:title="@string/pref_rightclock"
             android:dependency="d3_active"
-            
+
             app:entryImages="@array/ClockDataElementsIcons"
+            app:roundedImage="false"
              />
 
 
@@ -391,8 +412,9 @@
             android:summary="%s"
             android:title="@string/pref_view1"
             android:dependency="d3_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -405,8 +427,9 @@
             android:summary="%s"
             android:title="@string/pref_view2"
             android:dependency="d3_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -419,8 +442,9 @@
             android:summary="%s"
             android:title="@string/pref_view3"
             android:dependency="d3_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
         <tk.arnabjportfolio.preference.imagelist.ImageListPreference
             android:layout_width="wrap_content"
@@ -433,8 +457,9 @@
             android:summary="%s"
             android:title="@string/pref_view4"
             android:dependency="d3_active"
-            
+
             app:entryImages="@array/TextDataElementsIcons"
+            app:roundedImage="false"
              />
     </PreferenceCategory>
 
