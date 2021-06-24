@@ -10,11 +10,14 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.os.Build;
@@ -23,6 +26,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,16 +34,16 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
-import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
-import com.github.anastr.speedviewlib.components.Indicators.Indicator;
+import com.github.anastr.speedviewlib.components.indicators.ImageIndicator;
+import com.github.anastr.speedviewlib.components.indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
 import com.github.martoreto.aauto.vex.FieldSchema;
 import com.google.android.apps.auto.sdk.StatusBarController;
@@ -718,10 +722,18 @@ public class DashboardFragment extends CarFragment {
         int resourceId = typedArray.getResourceId(0, 0);
         typedArray.recycle();
 
-        ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
+        Drawable indicatorImageUnScaled = ContextCompat.getDrawable(getContext(), resourceId);
+        Bitmap bitmap = ((BitmapDrawable) indicatorImageUnScaled).getBitmap();
+        Drawable indicatorImage = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 250, 250, true));
+        //indicatorImage.setBounds(50, 50, 250, 250);
 
+        ImageIndicator imageIndicator = new ImageIndicator(getContext(), indicatorImage);
 
-        int color = mClockLeft.getIndicatorColor();
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getContext().getTheme();
+        theme.resolveAttribute(R.attr.sv_indicatorColor, typedValue, true);
+        @ColorInt int color = typedValue.data;
+
         Log.i(TAG, "IndicatorColor: " + color);
 
         if (color == 1996533487) {       // if indicator color in the style is @color:aqua, make it an imageindicator
@@ -1275,18 +1287,15 @@ public class DashboardFragment extends CarFragment {
             if (ambientColor != null && !ambientColor.equals("")) {
                 int parsedColor = Color.parseColor(ambientColor);
 
-                if ((parsedColor != mClockLeft.getIndicatorColor()) || ((parsedColor != mRayLeft.getLowSpeedColor()))){
+                if ((/*parsedColor != mClockLeft.getIndicatorColor()) || */((parsedColor != mRayLeft.getRayColor())))) {
                     if (raysOn) {
-                        mRayLeft.setLowSpeedColor(parsedColor);
-                        mRayCenter.setLowSpeedColor(parsedColor);
-                        mRayRight.setLowSpeedColor(parsedColor);
-                        mRayLeft.setMediumSpeedColor(parsedColor);
-                        mRayCenter.setMediumSpeedColor(parsedColor);
-                        mRayRight.setMediumSpeedColor(parsedColor);
+                        mRayLeft.setRayColor(parsedColor);
+                        mRayCenter.setRayColor(parsedColor);
+                        mRayRight.setRayColor(parsedColor);
                     } else {
-                        mClockLeft.setIndicatorColor(parsedColor);
-                        mClockCenter.setIndicatorColor(parsedColor);
-                        mClockRight.setIndicatorColor(parsedColor);
+                        //mClockLeft.setIndicatorColor(parsedColor);
+                        //mClockCenter.setIndicatorColor(parsedColor);
+                        //mClockRight.setIndicatorColor(parsedColor);
                         mClockLeft.setIndicatorLightColor(parsedColor);
                         mClockCenter.setIndicatorLightColor(parsedColor);
                         mClockRight.setIndicatorLightColor(parsedColor);
@@ -1677,7 +1686,9 @@ public class DashboardFragment extends CarFragment {
         String torqueUnit = "";
         int torqueMin = 0;
         int torqueMax = 100;
-
+        clock.clearSections();
+        max.clearSections();
+        ray.clearSections();
 
         TypedArray typedArray2 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedStopWatchBackground});
         int swBackgroundResource = typedArray2.getResourceId(0, 0);
@@ -1762,8 +1773,8 @@ public class DashboardFragment extends CarFragment {
             case "exlap-engineSpeed":
             case "torque-rpm_0x0c":
                 setupClock(icon, "ic_none", getString(R.string.unit_rpm), clock, true, getString(R.string.unit_rpm1000), 0, 9, "float", "integer");
-                clock.setTicks();
-                clock.setTickTextFormat(0);
+                //clock.setTicks();
+                //clock.setTickTextFormat(0);
                 break;
             case "torque-voltage_0xff1238":
             case "exlap-batteryVoltage":
@@ -2136,7 +2147,7 @@ public class DashboardFragment extends CarFragment {
                     case "exlap-tyrePressures.pressureFrontLeft":
                         clock.setUnit(pressureUnit);
                         clockValue = (clockValue / 10) * pressureFactor;
-                        clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
+                        //clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
                         break;
                     // torque data elements:
                     case "torque-speed_0x0d":
@@ -2853,7 +2864,6 @@ public class DashboardFragment extends CarFragment {
     private void setupClock(TextView icon, String iconDrawableName, String iconText, Speedometer clock, Boolean backgroundWithWarningArea, String unit, Integer minspeed, Integer maxspeed, String speedFormat, String tickFormat) {
 
         Log.d(TAG, "icon: " + icon + " iconDrawableName: " + iconDrawableName);
-
         int resId = getResources().getIdentifier(iconDrawableName, "drawable", getContext().getPackageName());
         Drawable iconDrawable = ContextCompat.getDrawable(getContext(),resId);
         int resIdEmpty = getResources().getIdentifier("ic_none", "drawable", getContext().getPackageName());
@@ -2868,12 +2878,12 @@ public class DashboardFragment extends CarFragment {
         clock.setUnit(unit);
         clock.setMinMaxSpeed(minspeed, maxspeed);
 
-        if (tickFormat.equals("float")) {
-            clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
-
-        } else {
-            clock.setTickTextFormat(Gauge.INTEGER_FORMAT);
-        }
+        //  if (tickFormat.equals("float")) {
+        //      clock.setTickTextFormat(Gauge.FLOAT_FORMAT);
+//
+        //  } else {
+        //      clock.setTickTextFormat(Gauge.INTEGER_FORMAT);
+        //  }
 
 
         //dynamically scale the icon_space in case there's only an icon, and no text
@@ -2889,13 +2899,13 @@ public class DashboardFragment extends CarFragment {
             clock.setBackgroundResource(emptyBackgroundResource);
         }
 
-        //determine the clock format
-        if (speedFormat.equals("float")) {
-            clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
-
-        } else if (speedFormat.equals("integer")) {
-            clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
-        }
+        //  //determine the clock format
+        //  if (speedFormat.equals("float")) {
+        //      clock.setSpeedTextFormat(Gauge.FLOAT_FORMAT);
+//
+        //  } else if (speedFormat.equals("integer")) {
+        //      clock.setSpeedTextFormat(Gauge.INTEGER_FORMAT);
+        //  }
 
     }
 

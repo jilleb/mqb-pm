@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
@@ -18,8 +19,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.github.anastr.speedviewlib.Speedometer;
-import com.github.anastr.speedviewlib.components.Indicators.ImageIndicator;
+import com.github.anastr.speedviewlib.components.indicators.ImageIndicator;
 import com.google.android.apps.auto.sdk.StatusBarController;
 
 import java.util.ArrayList;
@@ -144,15 +147,16 @@ public class StopwatchFragment extends CarFragment {
             public void onGlobalLayout() {
                 mStopwatch.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 int clockSize = mStopwatch.getHeight();
-                if (clockSize==0){
-                    clockSize=250;
+                if (clockSize == 0) {
+                    clockSize = 250;
                 }
                 //this is to enable an image as indicator.
                 TypedArray typedArray = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedNeedle});
                 int resourceId = typedArray.getResourceId(0, 0);
                 typedArray.recycle();
 
-                ImageIndicator imageIndicator = new ImageIndicator(getContext(), resourceId, clockSize, clockSize);
+                Drawable indicatorImage = ContextCompat.getDrawable(getContext(), resourceId);
+                ImageIndicator imageIndicator = new ImageIndicator(getContext(), indicatorImage);
 
                 //give clocks a custom image indicator
                 mStopwatch.setIndicator(imageIndicator);

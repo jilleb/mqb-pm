@@ -8,30 +8,36 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeBackground">@color/accent</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="android:forceDarkAllowed">true</item>
-
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:forceDarkAllowed">true</item>
+
     </style>
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:forceDarkAllowed">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:forceDarkAllowed">true</item>
+    </style>
 
     <style name="AppTheme.Car" parent="@style/CarAppTheme" tools:ignore="PrivateResource">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
+        <item name="android:forceDarkAllowed">false</item>
+
 
     </style>
 
     <style name="AppTheme.Car.Speedometer">
-        <item name="android:padding">25dp</item>
-
+        <item name="android:forceDarkAllowed">false</item>
         <item name="sv_backgroundCircleColor">@android:color/transparent</item>
         <item name="sv_centerCircleColor">@android:color/transparent</item>
-
-        <!-- Marks on the dial background are done on the png itself, not rendered dynamiccaly. -->
+        <!-- Marks on the dial background are done on the png itself, not rendered dynamicaly. -->
         <item name="sv_markColor">@android:color/transparent</item>
-
         <item name="sv_speedTextColor">@color/car_primary</item>
         <item name="sv_speedTextPadding">50dp</item>
         <item name="sv_speedTextPosition">CENTER</item>
@@ -44,7 +50,20 @@
         <item name="sv_unitTextSize">20sp</item>
         <item name="sv_unitUnderSpeedText">true</item>
         <item name="sv_withTremble">false</item>
+
     </style>
+
+    <style name="AppTheme.Car.Speedometer.Clock" parent="AppTheme.Car.Speedometer">
+        <item name="sv_image">?attr/themedDialBackground</item>
+        <item name="sv_speedTextSize">36dp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_unitSpeedInterval">5dp</item>
+        <item name="sv_unit" />
+        <item name="sv_unitTextSize">20sp</item>
+        <item name="android:elevation">0dp</item>
+        <item name="sv_withTremble">false</item>
+    </style>
+
 
     <style name="AppTheme.Seat" parent="AppTheme">
         <item name="themedDialBackground">@drawable/dial_background_seat</item>
@@ -208,7 +227,7 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.AudiVC" parent="AppTheme">
+    <style name="AppTheme.AudiVC" parent="AppTheme.Car.Speedometer.Clock">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi3</item>
@@ -312,6 +331,7 @@
         <item name="themedNeedleColor">@color/green</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_tickRotation">false</item>
+        <item name="android:forceDarkAllowed">false</item>
     </style>
 
     <style name="AppTheme.Minimalistic" parent="AppTheme">
@@ -325,7 +345,7 @@
         <item name="sv_withIndicatorLight">true</item>
         <item name="sv_indicatorLightColor">#44FF0000</item>
         <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#FFFF0000</item>
+        <item name="sv_indicatorColor">@color/aqua</item>
         <item name="sv_indicatorWidth">3dp</item>
         <item name="sv_tickPadding">15dp</item>
         <item name="sv_tickRotation">false</item>
@@ -339,6 +359,8 @@
         <item name="sv_textColor">@android:color/transparent</item>
         <item name="sv_textSize">12sp</item>
         <item name="sv_unitSpeedInterval">4dp</item>
+        <item name="android:forceDarkAllowed">false</item>
+
     </style>
 
     <style name="AppTheme.Dark" parent="AppTheme">
@@ -356,6 +378,7 @@
         <item name="sv_indicatorWidth">2dp</item>
         <item name="sv_tickPadding">0dp</item>
         <item name="sv_tickRotation">false</item>
+        <item name="android:forceDarkAllowed">false</item>
 
     </style>
 
@@ -377,12 +400,13 @@
         <item name="sv_tickRotation">false</item>
         <item name="sv_indicatorColor">@color/aqua</item>
         <item name="sv_textColor">@color/primary_dark</item>
+        <item name="android:forceDarkAllowed">false</item>
+
 
     </style>
 
 
-
-    <style name="AppTheme.Ford" parent="AppTheme">
+    <style name="AppTheme.Ford" parent="AppTheme.Car.Speedometer.Clock">
         <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedDialBackground">@drawable/dial_background_ford</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_ford</item>
@@ -398,6 +422,8 @@
         <item name="sv_indicatorWidth">2dp</item>
         <item name="sv_tickPadding">12dp</item>
         <item name="sv_tickRotation">true</item>
+        <item name="android:forceDarkAllowed">false</item>
+
     </style>
 
 
