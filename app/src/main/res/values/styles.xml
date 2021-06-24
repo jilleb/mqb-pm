@@ -53,11 +53,41 @@
         <item name="sv_withTremble">false</item>
         <item name="android:elevation">0dp</item>
         <item name="sv_indicator">NormalIndicator</item>
-        <item name="sv_indicatorColor">@color/aqua</item>
+        <item name="sv_indicatorColor">@android:color/transparent</item>
         <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">45dp</item>
         <item name="sv_tickRotation">false</item>
         <item name="sv_markHeight">10dp</item>
+    </style>
+
+    <style name="AppTheme.Car.Speedometer.Max" parent="AppTheme.Car.Speedometer">
+        <item name="sv_indicator">QuarterLineIndicator</item>
+        <item name="sv_indicatorColor">@color/red</item>
+        <item name="sv_markColor">@android:color/transparent</item>
+        <item name="sv_speedTextColor">@android:color/transparent</item>
+        <item name="sv_speedTextPadding">10dp</item>
+        <item name="sv_speedTextSize">15dp</item>
+        <item name="sv_unitSpeedInterval">0dp</item>
+        <item name="sv_unitTextColor">@android:color/transparent</item>
+        <item name="sv_unitTextSize">0dp</item>
+        <item name="sv_unitUnderSpeedText">false</item>
+        <item name="sv_withIndicatorLight">false</item>
+    </style>
+
+    <style name="AppTheme.Car.Speedometer.Ray" parent="AppTheme.Car.Speedometer">
+        <item name="sv_backgroundCircleColor">@android:color/transparent</item>
+        <item name="sv_degreeBetweenMark">1</item>
+        <item name="sv_indicatorLightColor">@android:color/transparent</item>
+        <item name="sv_markColor">@android:color/transparent</item>
+        <item name="sv_markWidth">5dp</item>
+        <item name="sv_rayColor">@android:color/transparent</item>
+        <item name="sv_speedBackgroundColor">@android:color/transparent</item>
+        <item name="sv_speedTextColor">@android:color/transparent</item>
+        <item name="sv_speedometerWidth">20dp</item>
+        <item name="sv_textColor">@android:color/transparent</item>
+        <item name="sv_unitTextColor">@android:color/transparent</item>
+        <item name="sv_withEffects">false</item>
+        <item name="sv_withTremble">false</item>
     </style>
 
 

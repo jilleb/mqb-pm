@@ -41,6 +41,7 @@
         <com.github.anastr.speedviewlib.SpeedView
             android:id="@+id/dial_Center"
             style="@style/AppTheme.Car.Speedometer"
+            android:background="?attr/themedDialBackground"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -50,29 +51,17 @@
 
         <com.github.anastr.speedviewlib.SpeedView
             android:id="@+id/dial_MaxCenter"
-            style="@style/AppTheme.Car.Speedometer"
+            style="@style/AppTheme.Car.Speedometer.Max"
             android:layout_width="275dp"
             android:layout_height="275dp"
             android:padding="10dp"
             app:layout_constraintLeft_toLeftOf="@+id/dial_Center"
             app:layout_constraintRight_toRightOf="@+id/dial_Center"
-            app:layout_constraintTop_toTopOf="@+id/dial_Center"
-            app:sv_indicator="QuarterLineIndicator"
-            app:sv_indicatorColor="@color/red"
-            app:sv_markColor="@android:color/transparent"
-
-            app:sv_speedTextColor="@android:color/transparent"
-            app:sv_speedTextPadding="50dp"
-            app:sv_speedTextSize="15dp"
-            app:sv_textColor="@android:color/transparent"
-            app:sv_unitSpeedInterval="0dp"
-            app:sv_unitTextColor="@android:color/white"
-            app:sv_unitTextSize="0dp"
-            app:sv_unitUnderSpeedText="false"
-            app:sv_withIndicatorLight="false" />
+            app:layout_constraintTop_toTopOf="@+id/dial_Center" />
 
         <com.github.anastr.speedviewlib.RaySpeedometer
             android:id="@+id/rayCenter"
+            style="@style/AppTheme.Car.Speedometer.Ray"
             android:layout_width="275dp"
             android:layout_height="275dp"
             android:padding="40dp"
@@ -80,21 +69,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/dial_Center"
             app:layout_constraintRight_toRightOf="@+id/dial_Center"
             app:layout_constraintTop_toTopOf="@+id/dial_Center"
-            app:layout_constraintVertical_weight="0.0"
-            app:sv_backgroundCircleColor="@android:color/transparent"
-            app:sv_degreeBetweenMark="1"
-            app:sv_indicatorColor="@android:color/transparent"
-            app:sv_indicatorLightColor="@android:color/transparent"
-            app:sv_markColor="@android:color/transparent"
-            app:sv_markWidth="5dp"
-            app:sv_rayColor="@android:color/transparent"
-            app:sv_speedBackgroundColor="@android:color/transparent"
-            app:sv_speedTextColor="@android:color/transparent"
-            app:sv_speedometerWidth="20dp"
-            app:sv_textColor="@android:color/transparent"
-            app:sv_unitTextColor="@android:color/transparent"
-            app:sv_withEffects="false"
-            app:sv_withTremble="false" />
+            app:layout_constraintVertical_weight="0.0" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -224,6 +199,7 @@
             <com.github.anastr.speedviewlib.SpeedView
                 android:id="@+id/dial_Right"
                 style="@style/AppTheme.Car.Speedometer"
+                android:background="?attr/themedDialBackground"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -233,29 +209,18 @@
 
             <com.github.anastr.speedviewlib.SpeedView
                 android:id="@+id/dial_MaxRight"
-                style="@style/AppTheme.Car.Speedometer"
+                style="@style/AppTheme.Car.Speedometer.Max"
                 android:layout_width="275dp"
                 android:layout_height="275dp"
                 android:padding="10dp"
                 app:layout_constraintLeft_toLeftOf="@+id/dial_Right"
                 app:layout_constraintRight_toRightOf="@+id/dial_Right"
-                app:layout_constraintTop_toTopOf="@+id/dial_Right"
-                app:sv_indicator="QuarterLineIndicator"
-                app:sv_indicatorColor="@color/red"
-                app:sv_markColor="@android:color/transparent"
-                app:sv_speedTextColor="@android:color/transparent"
-                app:sv_speedTextPadding="50dp"
-                app:sv_speedTextSize="15dp"
-                app:sv_textColor="@android:color/transparent"
-                app:sv_unitSpeedInterval="0dp"
-                app:sv_unitTextColor="@android:color/white"
-                app:sv_unitTextSize="0dp"
-                app:sv_unitUnderSpeedText="false"
-                app:sv_withIndicatorLight="false" />
+                app:layout_constraintTop_toTopOf="@+id/dial_Right" />
 
 
             <com.github.anastr.speedviewlib.RaySpeedometer
                 android:id="@+id/rayRight"
+                style="@style/AppTheme.Car.Speedometer.Ray"
                 android:layout_width="275dp"
                 android:layout_height="275dp"
                 android:padding="40dp"
@@ -263,21 +228,7 @@
                 app:layout_constraintRight_toRightOf="@+id/dial_Right"
                 app:layout_constraintStart_toStartOf="@+id/dial_Right"
                 app:layout_constraintTop_toTopOf="@+id/dial_Right"
-                app:layout_constraintVertical_weight="0.0"
-                app:sv_backgroundCircleColor="@android:color/transparent"
-                app:sv_degreeBetweenMark="1"
-                app:sv_indicatorColor="@android:color/transparent"
-                app:sv_indicatorLightColor="@android:color/transparent"
-                app:sv_markColor="@android:color/transparent"
-                app:sv_markWidth="5dp"
-                app:sv_rayColor="@android:color/transparent"
-                app:sv_speedBackgroundColor="@android:color/transparent"
-                app:sv_speedTextColor="@android:color/transparent"
-                app:sv_speedometerWidth="20dp"
-                app:sv_textColor="@android:color/transparent"
-                app:sv_unitTextColor="@android:color/transparent"
-                app:sv_withEffects="false"
-                app:sv_withTremble="false" />
+                app:layout_constraintVertical_weight="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -383,6 +334,7 @@
             <com.github.anastr.speedviewlib.SpeedView
                 android:id="@+id/dial_Left"
                 style="@style/AppTheme.Car.Speedometer"
+                android:background="?attr/themedDialBackground"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -392,29 +344,18 @@
 
             <com.github.anastr.speedviewlib.SpeedView
                 android:id="@+id/dial_MaxLeft"
-                style="@style/AppTheme.Car.Speedometer"
+                style="@style/AppTheme.Car.Speedometer.Max"
                 android:layout_width="275dp"
                 android:layout_height="275dp"
                 android:padding="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/dial_Left"
                 app:layout_constraintRight_toRightOf="@+id/dial_Left"
                 app:layout_constraintStart_toStartOf="@+id/dial_Left"
-                app:layout_constraintTop_toTopOf="@+id/dial_Left"
-                app:sv_indicator="QuarterLineIndicator"
-                app:sv_indicatorColor="@color/red"
-                app:sv_markColor="@android:color/transparent"
-                app:sv_speedTextColor="@android:color/transparent"
-                app:sv_speedTextPadding="50dp"
-                app:sv_speedTextSize="15dp"
-                app:sv_textColor="@android:color/transparent"
-                app:sv_unitSpeedInterval="0dp"
-                app:sv_unitTextColor="@android:color/white"
-                app:sv_unitTextSize="0dp"
-                app:sv_unitUnderSpeedText="false"
-                app:sv_withIndicatorLight="false" />
+                app:layout_constraintTop_toTopOf="@+id/dial_Left" />
 
             <com.github.anastr.speedviewlib.RaySpeedometer
                 android:id="@+id/rayLeft"
+                style="@style/AppTheme.Car.Speedometer.Ray"
                 android:layout_width="275dp"
                 android:layout_height="275dp"
                 android:padding="40dp"
@@ -422,20 +363,7 @@
                 app:layout_constraintLeft_toLeftOf="@+id/dial_Left"
                 app:layout_constraintRight_toRightOf="@+id/dial_Left"
                 app:layout_constraintTop_toTopOf="@+id/dial_Left"
-                app:layout_constraintVertical_weight="0.0"
-                app:sv_backgroundCircleColor="@android:color/transparent"
-                app:sv_degreeBetweenMark="1"
-                app:sv_indicatorLightColor="@android:color/transparent"
-                app:sv_markColor="@android:color/transparent"
-                app:sv_markWidth="5dp"
-                app:sv_rayColor="@android:color/transparent"
-                app:sv_speedBackgroundColor="@android:color/transparent"
-                app:sv_speedTextColor="@android:color/transparent"
-                app:sv_speedometerWidth="20dp"
-                app:sv_textColor="@android:color/transparent"
-                app:sv_unitTextColor="@android:color/transparent"
-                app:sv_withEffects="false"
-                app:sv_withTremble="false" />
+                app:layout_constraintVertical_weight="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
