@@ -42,6 +42,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.github.anastr.speedviewlib.RaySpeedometer;
 import com.github.anastr.speedviewlib.Speedometer;
+import com.github.anastr.speedviewlib.components.Section;
 import com.github.anastr.speedviewlib.components.indicators.ImageIndicator;
 import com.github.anastr.speedviewlib.components.indicators.Indicator;
 import com.github.martoreto.aauto.vex.CarStatsClient;
@@ -529,21 +530,27 @@ public class DashboardFragment extends CarFragment {
 
         String readedFont1 = sharedPreferences.getString("selectedFont1", "segments");
         String readedFont2 = sharedPreferences.getString("selectedFont2", "segments");
-        if (!readedFont1.equals(selectedFont1) || (!readedFont2.equals(selectedFont2))){
-            setupTypeface(readedFont1,readedFont2);
+        if (!readedFont1.equals(selectedFont1) || (!readedFont2.equals(selectedFont2))) {
+            setupTypeface(readedFont1, readedFont2);
         }
 
+
+        // todo: make the themes update nicely again when changing the theme.
         //show high visible rays on, according to the setting
         boolean readedRaysOn = sharedPreferences.getBoolean("highVisActive", false);  //true = show high vis rays, false = don't show them.
         if (raysOn == null || readedRaysOn != raysOn) {
             raysOn = readedRaysOn;
             turnRaysEnabled(raysOn);
+
         }
 
         String readedTheme = sharedPreferences.getString("selectedTheme", "");
         if (!readedTheme.equals(selectedTheme)) {
             selectedTheme = readedTheme;
+            turnRaysEnabled(raysOn);
         }
+
+
         boolean readedTicksOn = sharedPreferences.getBoolean("ticksActive", false); // if true, it will display the value of each of the ticks
         if(ticksOn == null || readedTicksOn != ticksOn) {
             ticksOn = readedTicksOn;
@@ -724,8 +731,12 @@ public class DashboardFragment extends CarFragment {
 
         Drawable indicatorImageUnScaled = ContextCompat.getDrawable(getContext(), resourceId);
         Bitmap bitmap = ((BitmapDrawable) indicatorImageUnScaled).getBitmap();
+
+        //int indicatorColor = 1996533487; //(test value,makes indicator aqua)
+        int indicatorColor = 0;
+        //Drawable indicatorImage = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(colorize(bitmap, indicatorColor), 250, 250, true));
         Drawable indicatorImage = new BitmapDrawable(getResources(), Bitmap.createScaledBitmap(bitmap, 250, 250, true));
-        //indicatorImage.setBounds(50, 50, 250, 250);
+        // todo: Make Image indicator Ambient colored!
 
         ImageIndicator imageIndicator = new ImageIndicator(getContext(), indicatorImage);
 
@@ -736,24 +747,9 @@ public class DashboardFragment extends CarFragment {
 
         Log.i(TAG, "IndicatorColor: " + color);
 
-        if (color == 1996533487) {       // if indicator color in the style is @color:aqua, make it an imageindicator
-            mClockLeft.setIndicator(imageIndicator);
-            mClockCenter.setIndicator(imageIndicator);
-            mClockRight.setIndicator(imageIndicator);
-            mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-        } else {
-            //mClockLeft.setIndicator(Indicator.Indicators.HalfLineIndicator);
-            //mClockCenter.setIndicator(Indicator.Indicators.HalfLineIndicator);
-            //mClockRight.setIndicator(Indicator.Indicators.HalfLineIndicator);
-
-            // do something to get the other type of indicator
-
-        }
+        mClockLeft.setIndicator(imageIndicator);
+        mClockCenter.setIndicator(imageIndicator);
+        mClockRight.setIndicator(imageIndicator);
 
         // if rays on, turn off everything else.
         // it doesn't look too efficient at the moment, but that's to prevent the theme from adding an indicator to the rays.
@@ -768,28 +764,10 @@ public class DashboardFragment extends CarFragment {
             mRayRight.setIndicator(Indicator.Indicators.NoIndicator);
             mRayCenter.setIndicator(Indicator.Indicators.NoIndicator);
 
-            //make indicatorlight color transparent if you don't need it:
-            mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-//
             mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
             mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
 
-
-        } else if (color == -14575885) {
-            //if theme has transparent indicator color, give clocks a custom image indicator
-            //todo: do this on other fragments as well
-            mClockLeft.setIndicator(imageIndicator);
-            mClockCenter.setIndicator(imageIndicator);
-            mClockRight.setIndicator(imageIndicator);
-            mClockLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mClockCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mClockRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mRayLeft.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mRayRight.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
-            mRayCenter.setIndicatorLightColor(Color.parseColor("#00FFFFFF"));
         }
     }
 
@@ -1690,6 +1668,20 @@ public class DashboardFragment extends CarFragment {
         max.clearSections();
         ray.clearSections();
 
+        //add sections:
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getContext().getTheme();
+        theme.resolveAttribute(R.attr.themedNeedleColor, typedValue, true);
+        @ColorInt int color = typedValue.data;
+
+        ray.addSections(
+                new Section(0f, .75f, color)
+                , new Section(.76f, .99f, Color.RED)
+
+        );
+
+        //ray.clearSections();
+
         TypedArray typedArray2 = getContext().getTheme().obtainStyledAttributes(new int[]{R.attr.themedStopWatchBackground});
         int swBackgroundResource = typedArray2.getResourceId(0, 0);
         typedArray2.recycle();
@@ -1984,6 +1976,7 @@ public class DashboardFragment extends CarFragment {
         ray.setMinMaxSpeed(minimum, maximum);
         max.setMinMaxSpeed(minimum, maximum);
     }
+
 
     //update clock with data
     private void updateClock(String query, Speedometer clock, RaySpeedometer visray, TextView
@@ -2954,6 +2947,33 @@ public class DashboardFragment extends CarFragment {
                     }
                 });
     }
+
+    public Bitmap colorize(Bitmap srcBmp, int dstColor) {
+
+        int width = srcBmp.getWidth();
+        int height = srcBmp.getHeight();
+
+        float[] srcHSV = new float[3];
+        float[] dstHSV = new float[3];
+
+        Bitmap dstBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        for (int row = 0; row < height; row++) {
+            for (int col = 0; col < width; col++) {
+                int pixel = srcBmp.getPixel(col, row);
+                int alpha = Color.alpha(pixel);
+                Color.colorToHSV(pixel, srcHSV);
+                Color.colorToHSV(dstColor, dstHSV);
+
+                // If it area to be painted set only value of original image
+                dstHSV[2] = srcHSV[2];  // value
+                dstBitmap.setPixel(col, row, Color.HSVToColor(alpha, dstHSV));
+            }
+        }
+
+        return dstBitmap;
+    }
+
 
     // get min/max/units from exlap schema
     private void getExlapDataElementDetails(String query) {

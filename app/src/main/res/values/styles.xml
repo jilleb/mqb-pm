@@ -8,13 +8,14 @@
         <item name="windowActionModeOverlay">true</item>
         <item name="actionModeBackground">@color/accent</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="themedCarBackground">@drawable/background_incar_black</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:forceDarkAllowed">true</item>
-
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -33,10 +34,10 @@
     </style>
 
     <style name="AppTheme.Car.Speedometer">
+        <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="android:forceDarkAllowed">false</item>
         <item name="sv_backgroundCircleColor">@android:color/transparent</item>
         <item name="sv_centerCircleColor">@android:color/transparent</item>
-        <!-- Marks on the dial background are done on the png itself, not rendered dynamicaly. -->
         <item name="sv_markColor">@android:color/transparent</item>
         <item name="sv_speedTextColor">@color/car_primary</item>
         <item name="sv_speedTextPadding">50dp</item>
@@ -50,175 +51,121 @@
         <item name="sv_unitTextSize">20sp</item>
         <item name="sv_unitUnderSpeedText">true</item>
         <item name="sv_withTremble">false</item>
-
-    </style>
-
-    <style name="AppTheme.Car.Speedometer.Clock" parent="AppTheme.Car.Speedometer">
-        <item name="sv_image">?attr/themedDialBackground</item>
-        <item name="sv_speedTextSize">36dp</item>
-        <item name="sv_textColor">@android:color/transparent</item>
-        <item name="sv_unitSpeedInterval">5dp</item>
-        <item name="sv_unit" />
-        <item name="sv_unitTextSize">20sp</item>
         <item name="android:elevation">0dp</item>
-        <item name="sv_withTremble">false</item>
+        <item name="sv_indicator">NormalIndicator</item>
+        <item name="sv_indicatorColor">@color/aqua</item>
+        <item name="sv_indicatorWidth">4dp</item>
+        <item name="sv_tickPadding">45dp</item>
+        <item name="sv_tickRotation">false</item>
+        <item name="sv_markHeight">10dp</item>
     </style>
 
 
-    <style name="AppTheme.Seat" parent="AppTheme">
+    <style name="AppTheme.Seat" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_seat</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_seat</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_seat</item>
-        <item name="themedNeedle">@drawable/needle_seat</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat</item>
+        <item name="themedNeedle">@drawable/needle_seat</item>
         <item name="themedNeedleColor">@color/yellow</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">@color/yellow</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#fecc00</item>
-        <item name="sv_indicatorWidth">4dp</item>
-        <item name="sv_tickPadding">15dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.SeatCupra" parent="AppTheme">
+    <style name="AppTheme.SeatCupra" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_seat2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_seat2</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_seat2</item>
-        <item name="themedNeedle">@drawable/needle_seat</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat2</item>
+        <item name="themedNeedle">@drawable/needle_seat</item>
         <item name="themedNeedleColor">@color/yellow</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">@color/yellow</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#fecc00</item>
-        <item name="sv_indicatorWidth">4dp</item>
-        <item name="sv_tickPadding">20dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Cupra" parent="AppTheme">
+    <style name="AppTheme.Cupra" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_cupra</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_cupra</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_cupra</item>
-        <item name="themedCarBackground">@drawable/background_incar_cupra</item>
-        <item name="themedNeedle">@drawable/needle_cupra</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_seat2</item>
+        <item name="themedNeedle">@drawable/needle_cupra</item>
         <item name="themedNeedleColor">@color/white</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">#44FFFFFF</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#FFFFFFFF</item>
-        <item name="sv_indicatorWidth">4dp</item>
-        <item name="sv_tickPadding">20dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.VolkswagenGTI" parent="AppTheme">
+    <style name="AppTheme.VolkswagenGTI" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw</item>
         <item name="themedNeedle">@drawable/needle</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/red</item>
-        <item name="sv_withIndicatorLight">false</item>
-        <item name="sv_indicatorLightColor">@android:color/transparent</item>
 
-        <item name="sv_indicatorColor">@color/aqua</item>
-        <item name="sv_indicatorWidth">0dp</item>
-        <item name="sv_tickPadding">20dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
 
-    <style name="AppTheme.VolkswagenAID" parent="AppTheme">
+    <style name="AppTheme.VolkswagenAID" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks_aid</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_aid</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_aid</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw</item>
         <item name="themedNeedle">@drawable/needle_aid</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_aid</item>
         <item name="themedNeedleColor">@color/white</item>
-        <item name="sv_withIndicatorLight">false</item>
-        <item name="sv_indicatorLightColor">@android:color/transparent</item>
-        <item name="sv_indicatorColor">@color/aqua</item>
-        <item name="sv_indicatorWidth">0dp</item>
         <item name="sv_tickPadding">5dp</item>
-        <item name="sv_tickRotation">false</item>
+
     </style>
 
-    <style name="AppTheme.VolkswagenMIB2" parent="AppTheme">
+    <style name="AppTheme.VolkswagenMIB2" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_mib2p</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_mib2p</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_mib2p</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_mib2p</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_mib2p</item>
-        <item name="themedNeedleColor">@color/red</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">@color/white</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#ffffff</item>
-        <item name="sv_indicatorWidth">4dp</item>
-        <item name="sv_tickPadding">20dp</item>
-        <item name="sv_tickRotation">false</item>
+        <item name="themedNeedleColor">@color/white</item>
+        <item name="sv_withIndicatorLight">false</item>
     </style>
 
-    <style name="AppTheme.VolkswagenR" parent="AppTheme">
+    <style name="AppTheme.VolkswagenR" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw2</item>
         <item name="themedNeedle">@drawable/needle_vw_blue</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
-        <item name="sv_tickPadding">20dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.VolkswagenGTE" parent="AppTheme">
+    <style name="AppTheme.VolkswagenGTE" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
-        <item name="themedCarBackground">@drawable/background_incar_gte</item>
         <item name="themedNeedle">@drawable/needle_vw_blue</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/blue</item>
-        <item name="sv_tickPadding">20dp</item>
-        <item name="sv_tickRotation">false</item>
+
     </style>
 
-    <style name="AppTheme.AudiTT" parent="AppTheme">
+    <style name="AppTheme.AudiTT" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi4</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi4</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi4</item>
-        <item name="themedCarBackground">@drawable/background_incar_plain</item>
         <item name="themedNeedle">@drawable/needle_audi4</item>
         <item name="sv_indicatorColor">@color/aqua</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_audi4</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">5dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Volkswagen" parent="AppTheme">
+    <style name="AppTheme.Volkswagen" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_empty</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_vw_white</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_vw</item>
         <item name="themedNeedleColor">@color/white</item>
+        <item name="sv_indicatorLightColor">@color/white</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Audi" parent="AppTheme">
+    <style name="AppTheme.Audi" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_audi_red</item>
         <item name="sv_indicatorColor">@color/aqua</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_audi</item>
@@ -227,71 +174,50 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.AudiVC" parent="AppTheme.Car.Speedometer.Clock">
+    <style name="AppTheme.AudiVC" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_audi3</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_audi3</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw3</item>
         <item name="themedNeedle">@drawable/needle_audi3</item>
-        <item name="sv_indicatorColor">@color/aqua</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_audi3</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">5dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Clubsport" parent="AppTheme">
+    <style name="AppTheme.Clubsport" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_vw2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_vw2</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_vw2</item>
-        <item name="themedCarBackground">@drawable/background_incar_vw_plaid</item>
         <item name="themedNeedle">@drawable/needle_vw3</item>
         <item name="sv_indicatorColor">@color/aqua</item>
-
         <item name="themedStopWatchBackground">@drawable/sw_background_vw2</item>
         <item name="themedNeedleColor">@color/red</item>
         <item name="sv_tickPadding">0dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Skoda" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_skoda</item>
+    <style name="AppTheme.Skoda" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_skoda</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_skoda</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_skoda</item>
         <item name="themedNeedle">@drawable/needle_skoda</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_skoda</item>
         <item name="themedNeedleColor">@color/green</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">#4462e81c</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#FF62e81c</item>
-        <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-        <item name="sv_speedometerWidth">40dp</item>
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.SkodavRS" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_skoda2</item>
+    <style name="AppTheme.SkodavRS" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_empty_skoda2</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_skoda2</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_skoda2</item>
         <item name="themedNeedle">@drawable/needle_skoda</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_skoda2</item>
         <item name="themedNeedleColor">@color/green</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">#4462e81c</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#FF62e81c</item>
-        <item name="sv_indicatorWidth">4dp</item>
         <item name="sv_tickPadding">20dp</item>
-        <item name="sv_speedometerWidth">40dp</item>
-        <item name="sv_tickRotation">false</item>
+
     </style>
 
-    <style name="AppTheme.SkodaVC" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_black</item>
+    <style name="AppTheme.SkodaVC" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks_skoda3</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_skoda3</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_skoda3</item>
@@ -303,26 +229,16 @@
         <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.SkodaOneApp" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_skodaone</item>
+    <style name="AppTheme.SkodaOneApp" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks_skodaone</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_marks_skodaone</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_marks_skodaone</item>
         <item name="themedNeedle">@drawable/needle_mib2p</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_skodaone</item>
         <item name="themedNeedleColor">@color/green</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">#44FFFFFF</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">#FFFFFFFF</item>
-        <item name="sv_indicatorWidth">4dp</item>
-        <item name="sv_tickPadding">0dp</item>
-        <item name="sv_speedometerWidth">400dp</item>
-        <item name="sv_tickRotation">false</item>
     </style>
 
-    <style name="AppTheme.Testing" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_test</item>
+    <style name="AppTheme.Testing" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_test</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_test</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_test</item>
@@ -331,59 +247,28 @@
         <item name="themedNeedleColor">@color/green</item>
         <item name="sv_tickPadding">20dp</item>
         <item name="sv_tickRotation">false</item>
-        <item name="android:forceDarkAllowed">false</item>
     </style>
 
-    <style name="AppTheme.Minimalistic" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_black</item>
+    <style name="AppTheme.Minimalistic" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_marks_minimal</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_minimal</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_minimal</item>
         <item name="themedNeedle">@drawable/needle_cupra</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_empty_minimal</item>
         <item name="themedNeedleColor">@color/red</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">#44FF0000</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">@color/aqua</item>
-        <item name="sv_indicatorWidth">3dp</item>
-        <item name="sv_tickPadding">15dp</item>
-        <item name="sv_tickRotation">false</item>
-        <item name="sv_speedTextPadding">50dp</item>
-        <item name="sv_withTremble">false</item>
-        <item name="sv_speedTextColor">@color/car_primary</item>
-        <item name="sv_speedTextSize">32sp</item>
-        <item name="sv_unitTextColor">@color/car_primary</item>
-        <item name="sv_speedTextPosition">CENTER</item>
-        <item name="sv_unitTextSize">20sp</item>
-        <item name="sv_textColor">@android:color/transparent</item>
-        <item name="sv_textSize">12sp</item>
-        <item name="sv_unitSpeedInterval">4dp</item>
-        <item name="android:forceDarkAllowed">false</item>
-
     </style>
 
-    <style name="AppTheme.Dark" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_black</item>
+    <style name="AppTheme.Dark" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_dark</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_dark</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_dark</item>
         <item name="themedNeedle">@drawable/needle_dark</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_dark</item>
         <item name="themedNeedleColor">@color/red</item>
-        <item name="sv_indicatorColor">@color/aqua</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">#00FF0000</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorWidth">2dp</item>
-        <item name="sv_tickPadding">0dp</item>
-        <item name="sv_tickRotation">false</item>
-        <item name="android:forceDarkAllowed">false</item>
 
     </style>
 
-    <style name="AppTheme.Sport" parent="AppTheme">
-        <item name="themedCarBackground">@drawable/background_incar_black</item>
+    <style name="AppTheme.Sport" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_sport</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_sport</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_sport</item>
@@ -391,56 +276,35 @@
         <item name="sv_markWidth">20dp</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_blank_sport</item>
         <item name="themedNeedleColor">@color/red</item>
-        <item name="sv_withIndicatorLight">false</item>
-        <item name="sv_indicatorLightColor">#000066ff</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorWidth">2dp</item>
-        <item name="sv_markColor">@color/primary_dark</item>
-        <item name="sv_tickPadding">12dp</item>
-        <item name="sv_tickRotation">false</item>
-        <item name="sv_indicatorColor">@color/aqua</item>
-        <item name="sv_textColor">@color/primary_dark</item>
         <item name="android:forceDarkAllowed">false</item>
 
 
     </style>
 
 
-    <style name="AppTheme.Ford" parent="AppTheme.Car.Speedometer.Clock">
-        <item name="themedCarBackground">@drawable/background_incar_black</item>
+    <style name="AppTheme.Ford" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_ford</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_ford</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_ford</item>
-        <item name="themedNeedle">@drawable/needle_mib2p</item>
-        <item name="sv_markWidth">20dp</item>
         <item name="themedStopWatchBackground">@drawable/dial_background_blank_ford</item>
+        <item name="themedNeedle">@drawable/needle_mib2p</item>
         <item name="themedNeedleColor">@color/fordblue</item>
-        <item name="sv_withIndicatorLight">true</item>
-        <item name="sv_indicatorLightColor">#880066ff</item>
-        <item name="sv_indicator">HalfLineIndicator</item>
-        <item name="sv_indicatorColor">@android:color/white</item>
-        <item name="sv_indicatorWidth">2dp</item>
+        <item name="sv_markWidth">20dp</item>
         <item name="sv_tickPadding">12dp</item>
         <item name="sv_tickRotation">true</item>
-        <item name="android:forceDarkAllowed">false</item>
+
 
     </style>
 
 
-    <style name="AppTheme.BMW" parent="AppTheme">
+    <style name="AppTheme.BMW" parent="AppTheme.Car.Speedometer">
         <item name="themedDialBackground">@drawable/dial_background_bmw</item>
         <item name="themedEmptyDialBackground">@drawable/dial_background_empty_bmw</item>
         <item name="themedBlankDialBackground">@drawable/dial_background_blank_bmw</item>
-        <item name="themedCarBackground">@drawable/background_incar_black</item>
         <item name="themedNeedle">@drawable/needle_bmw</item>
         <item name="themedStopWatchBackground">@drawable/sw_background_dark</item>
         <item name="themedNeedleColor">@color/red</item>
-        <item name="sv_withIndicatorLight">false</item>
-        <item name="sv_indicatorLightColor">@android:color/transparent</item>
-        <item name="sv_indicatorColor">@color/aqua</item>
-        <item name="sv_indicatorWidth">0dp</item>
-        <item name="sv_tickPadding">0dp</item>
-        <item name="sv_tickRotation">false</item>
+
     </style>
 
 
